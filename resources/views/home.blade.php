@@ -12,5 +12,5 @@ header("Pragma: no-cache");
 @stop
 
 @section('content')
-    <p>You are logged in!</p>
+    <p>You are logged in {{ Auth::user()->name }}!</p>
 @stop
