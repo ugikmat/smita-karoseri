@@ -5,7 +5,7 @@ header("Pragma: no-cache");
 ?>
 @extends('adminlte::page')
 
-@section('title', 'AdminLTE')
+@section('title', 'Sistem Inventori')
 
 @section('content_header')
     <h1>Dashboard</h1>
