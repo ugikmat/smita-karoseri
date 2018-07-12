@@ -18,3 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('penjualan/dompul', 'Penjualan\DompulController@index');
+Route::get('penjualan/dompul-data', 'Penjualan\DompulController@data');
+
+Route::get('list/users', 'UsersController@index');
+Route::get('list/users-data', 'UsersController@data');

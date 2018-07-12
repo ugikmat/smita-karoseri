@@ -121,6 +121,16 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
+        [
+            'text'        => 'Daftar Pengguna',
+            'url'         => 'list/users',
+            'icon'        => 'file',
+        ],
+        [
+            'text'        => 'Penjualan Dompul',
+            'url'         => 'penjualan/dompul',
+            'icon'        => 'file',
+        ],
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',
