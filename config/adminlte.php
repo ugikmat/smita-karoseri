@@ -110,27 +110,81 @@ return [
     'menu' => [
         'MAIN NAVIGATION',
         [
-            'text' => 'Blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'Pages',
-            'url'         => 'admin/pages',
+            'text'        => 'Dashboard',
+            'url'         => 'home',
             'icon'        => 'file',
             'label'       => 4,
             'label_color' => 'success',
         ],
         [
-            'text'        => 'Daftar Pengguna',
+            'text'        => 'XL',
             'url'         => 'list/users',
             'icon'        => 'file',
+            'submenu'     => [
+              [
+                'text'    => 'Penjualan',
+                'icon'    => 'money',
+                'submenu' => [
+                  [
+                      'text'    => 'Penjualan Dompul',
+                      'icon'    => 'share',
+                      'submenu' => [
+                        [
+                            'text'  => 'Invoice Dompul',
+                            'url'   => '#',
+                        ],
+                        [
+                            'text'  => 'List Invoice Dompul',
+                            'url'   => '#',
+                        ],
+                      ],
+                  ],
+                  [
+                      'text'    => 'Monitoring Upload',
+                      'url'     => '#',
+                  ],
+                  [
+                    'text'    => 'Laporan Penjualan',
+                    'icon'    => 'share',
+                    'submenu' => [
+                      [
+                        'text'  => 'Dompet Pulsa',
+                        'url'   => '#',
+                      ],
+                      [
+                        'text'  => 'Pemjualan Dompul Head',
+                        'url'   => '#',
+                      ],
+                    ],
+                  ],
+                ],
+              ],
+              [
+                'text'    => 'Persediaan',
+                'submenu' => [
+                  [
+                    'text'  => 'MutasiDompul',
+                    'url'   => '#',
+                  ],
+                ],
+              ],
+            ],
         ],
         [
-            'text'        => 'Penjualan Dompul',
+            'text'        => 'Karoseri',
             'url'         => 'penjualan/dompul',
             'icon'        => 'file',
         ],
+        [
+            'text'        => 'Master',
+            'submenu'     => [
+              [
+                'text'  => '',
+                'url'   => '',
+              ],
+            ],
+        ],
+
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',
@@ -179,19 +233,6 @@ return [
                     'url'  => '#',
                 ],
             ],
-        ],
-        'LABELS',
-        [
-            'text'       => 'Important',
-            'icon_color' => 'red',
-        ],
-        [
-            'text'       => 'Warning',
-            'icon_color' => 'yellow',
-        ],
-        [
-            'text'       => 'Information',
-            'icon_color' => 'aqua',
         ],
     ],
 
