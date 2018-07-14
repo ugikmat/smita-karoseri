@@ -26,6 +26,35 @@
         </script>
     </div>
 </div>
+<!-- <table id="users-table" class="table table-bordered">
+    <tr>
+      <td>ID canvaser</td>
+      <td>:</td>
+      <td>
+        <form class="" action="index.html" method="post">
+
+        </form>
+      </td>
+    </tr>
+    <tr>
+      <td>No Penjualan</td>
+      <td>:</td>
+      <td>
+        <input type="text" name="" value="">
+      </td>
+    </tr>
+    <tr>
+      <td>Tgl Penjualan</td>
+      <td>:</td>
+      <td>
+        <div class="input-append date" id="dp3" data-date="" data-date-format="">
+          <input class="span2" size="16" type="text" value="">
+        </div>
+      </td>
+    </tr>
+    <input type="button" name="" value="Kosongkan">
+    <input type="button" name="" value="Rekap Penjualan">
+</table> -->
 @stop
 
 @section('js')

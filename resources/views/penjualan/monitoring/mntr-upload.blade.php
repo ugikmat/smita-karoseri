@@ -1,25 +1,17 @@
 @extends('adminlte::page')
 
-@section('title', 'Penjualan Dompul')
+@section('title', 'Monitoring Upload')
 
 @section('content_header')
-    <h1>Penjualan Dompul</h1>
+    <h1>Monitoring Penjualan Upload Dompul</h1>
 @stop
 
 @section('content')
 <table id="users-table" class="table table-bordered">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>HP Kios</th>
-        <th>Tanggal Penjualan</th>
-        <th>Tanggal Input</th>
-        <th>Total</th>
-        <th>Bayar Tunai</th>
-        <th>Catatan</th>
-        <th>Action</th>
-    </tr>
-    </thead>
+  <tr>
+    <td>Pilih Tanggal</td>
+    <td>: <input type="datetime-local" name="" value=""> </td>
+  </tr>
 </table>
 @stop
 
@@ -31,14 +23,7 @@
             processing: true,
             ajax: '',
             columns: [
-                {data: 'id_penjualan_dompul'},
-                {data: 'hp_kios'},
-                {data: 'tanggal_penjualan_dompul'},
-                {data: 'tanggal_input'},
-                {data: 'grand_total'},
-                {data: 'bayar_tunai'},
-                {data: 'catatan'},
-                {data: 'action', orderable: false, searchable: false}
+                {data: 'date'},
             ]
         });
     });
