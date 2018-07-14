@@ -131,11 +131,11 @@ return [
                       'submenu' => [
                         [
                             'text'  => 'Invoice Dompul',
-                            'url'   => '#',
+                            'url'   => '/penjualan/dompul/invoice-dompul',
                         ],
                         [
                             'text'  => 'List Invoice Dompul',
-                            'url'   => '#',
+                            'url'   => '/penjualan/dompul/list-invoice',
                         ],
                       ],
                   ],
@@ -183,8 +183,8 @@ return [
             'text'        => 'Master',
             'submenu'     => [
               [
-                'text'  => '',
-                'url'   => '',
+                'text'  => 'bank',
+                'url'   => '/master/bank',
               ],
             ],
         ],
