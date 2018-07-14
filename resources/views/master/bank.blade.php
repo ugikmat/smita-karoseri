@@ -28,7 +28,7 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
+        <h4 class="modal-title">Tambah Bank</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
@@ -46,6 +46,57 @@
       <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal">Tambah</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--Modal Tambah-->
+<div class="modal fade" id="editModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Bank</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="fa fa-bank"></i>
+            </span>
+            <input id="nama" name="nama" type="text" class="form-control" placeholder="Bank Name">
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--Modal Hapus-->
+<div class="modal fade" id="deleteModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Hapus</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
       </div>
 
     </div>
