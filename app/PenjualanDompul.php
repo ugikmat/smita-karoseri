@@ -14,7 +14,7 @@ class PenjualanDompul extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'id_penjualan_dompul','hp_kios', 'tanggal_penjualan_dompul', 'tanggal_input','grand_total','bayar_tunai','catatan'
-    ];
+    // protected $fillable = [
+    //     'id_penjualan_dompul','hp_kios', 'tanggal_penjualan_dompul', 'tanggal_input','grand_total','bayar_tunai','catatan'
+    // ];
 }
