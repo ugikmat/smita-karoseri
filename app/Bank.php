@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bank extends Model
 {
-    public $timestapms=false;
+    public $timestamps=false;
 }
