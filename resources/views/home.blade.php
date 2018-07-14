@@ -8,4 +8,5 @@
 
 @section('content')
     <p>You are logged in {{ Auth::user()->name }}!</p>
+    <!-- Button to Open the Modal -->
 @stop

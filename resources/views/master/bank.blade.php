@@ -1,9 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'Penjualan Dompul')
+@section('title', 'Bank')
 
 @section('content_header')
-    <h1>Penjualan Dompul</h1>
+    <h1>Daftar Bank</h1>
+    
 @stop
 
 @section('content')
@@ -16,6 +17,40 @@
     </tr>
     </thead>
 </table>
+<!-- Button to Open the Modal -->
+<button type="button" class="btn btn-primary btn-flat align-right" data-toggle="modal" data-target="#myModal">
+    Tambah
+</button>
+<!--Modal Tambah-->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="fa fa-bank"></i>
+            </span>
+            <input id="nama" name="nama" type="text" class="form-control" placeholder="Bank Name">
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Tambah</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 @stop
 
 @section('js')
@@ -24,10 +59,10 @@
         $('#users-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '',
+            ajax: '/bank-data',
             columns: [
-                {data: 'id_bank'},
-                {data: 'nama_bank'},
+                {data: 'id'},
+                {data: 'nama'},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });
