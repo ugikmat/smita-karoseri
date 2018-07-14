@@ -24,3 +24,6 @@ Route::get('penjualan/dompul-data', 'Penjualan\DompulController@data');
 
 Route::get('list/users', 'UsersController@index');
 Route::get('list/users-data', 'UsersController@data');
+
+Route::get('bank', 'BankController@index');
+Route::get('bank-data', 'BankController@data');
