@@ -21,6 +21,7 @@
 <button type="button" class="btn btn-primary btn-flat align-right" data-toggle="modal" data-target="#myModal">
     Tambah
 </button>
+
 <!--Modal Tambah-->
 <div class="modal fade" id="myModal">
   <div class="modal-dialog">
@@ -47,11 +48,6 @@
           <input type="submit" class="btn btn-primary" value="Tambah">
           {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
         <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>        <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
       </div>
       </form>
     </div>
