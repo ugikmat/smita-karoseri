@@ -81,9 +81,15 @@ class BankController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update($id,Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'bail|required|unique:banks|max:255',
+        ]);
+        $bank = Bank::find($id);
+        $bank->nama = $request->get('nama');
+        $bank->save();
+        return redirect('/bank');
     }
 
     /**
@@ -94,7 +100,7 @@ class BankController extends Controller
      */
     public function destroy($id)
     {
-        $bank = App\Bank::find($id);
+        $bank = Bank::find($id);
         $bank->delete();
         return redirect('/bank');
     }
@@ -113,7 +119,6 @@ class BankController extends Controller
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$bank->id.'" data-name="'.$bank->nama.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                               <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$bank->id.'" data-name="'.$bank->nama.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
-
                           ->make(true);
     }
 }
