@@ -1,30 +1,23 @@
 @extends('adminlte::page')
 
-@section('title', 'Produk')
+@section('title', 'Lokasi')
 
 @section('content_header')
-    <h1>Daftar Produk</h1>
+    <h1>Master Lokasi</h1>
 
 @stop
 
 @section('content')
-
-<!-- tambah data -->
-
-<!-- data tabel -->
 <table id="users-table" class="table table-bordered">
     <thead>
     <tr>
-        <th>Id</th>
-        <th>Nama Produk</th>
-        <th>Tipe Produk</th>
-        <th>Status Produk</th>
-        <th>action</th>
+        <th>Id Lokasi</th>
+        <th>Nama Lokasi</th>
+        <th>Action</th>
     </tr>
     </thead>
 </table>
-
-<!-- tambah data -->
+<!-- Modal Tambah -->
 <section class="content-header">
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">Tambah</button>
       <div class="modal fade bs-example-modal-lg" id='modal1' tabindex="-1" role="dialog" aria-hidden="true">
@@ -34,7 +27,7 @@
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
               </button>
-              <h4 class="modal-title" id="myModalLabel">Tambah Produk</h4>
+              <h4 class="modal-title" id="myModalLabel">Tambah Lokasi</h4>
             </div>
             <div class="modal-body">
                <div class="clearfix"></div>
@@ -49,7 +42,7 @@
 
         <form id="tambah-lokasi" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
            <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Produk<span class="required">*</span>
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Lokasi<span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <input type="text" id="first-name" required="required" name="idcs" class="form-control col-md-7 col-xs-12" value="">
@@ -57,28 +50,12 @@
           </div>
 
           <div class="form-group">
-           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Produk<span class="required">*</span>
+           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Lokasi<span class="required">*</span>
            </label>
            <div class="col-md-6 col-sm-6 col-xs-12">
              <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
            </div>
          </div>
-
-         <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Produk<span class="required">*</span>
-          </label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="first-name" required="required" name="alamat" class="form-control col-md-7 col-xs-12" value="">
-          </div>
-        </div>
-
-        <div class="form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status Produk<span class="required">*</span>
-         </label>
-         <div class="col-md-6 col-sm-6 col-xs-12">
-           <input type="text" id="first-name" required="required" name="alamat" class="form-control col-md-7 col-xs-12" value="">
-         </div>
-       </div>
 
           <div class="ln_solid"></div>
           <div class="form-group">
@@ -111,7 +88,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Edit Produk</h4>
+        <h4 class="modal-title" id="myModalLabel">Edit Lokasi</h4>
       </div>
       <div class="modal-body">
          <div class="clearfix"></div>
@@ -126,7 +103,7 @@
 
   <form id="tambah-lokasi" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
      <div class="form-group">
-      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Produk<span class="required">*</span>
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Lokasi<span class="required">*</span>
       </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
         <input type="text" id="first-name" required="required" name="idcs" class="form-control col-md-7 col-xs-12" value="">
@@ -134,28 +111,12 @@
     </div>
 
     <div class="form-group">
-     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Produk<span class="required">*</span>
+     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Lokasi<span class="required">*</span>
      </label>
      <div class="col-md-6 col-sm-6 col-xs-12">
        <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
      </div>
    </div>
-
-   <div class="form-group">
-    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Status<span class="required">*</span>
-    </label>
-    <div class="col-md-6 col-sm-6 col-xs-12">
-      <input type="text" id="first-name" required="required" name="alamat" class="form-control col-md-7 col-xs-12" value="">
-    </div>
-  </div>
-
-  <div class="form-group">
-   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status Produk<span class="required">*</span>
-   </label>
-   <div class="col-md-6 col-sm-6 col-xs-12">
-     <input type="text" id="first-name" required="required" name="alamat" class="form-control col-md-7 col-xs-12" value="">
-   </div>
- </div>
 
     <div class="ln_solid"></div>
     <div class="form-group">
@@ -177,6 +138,7 @@
     </div>
   </div>
 </div>
+
 
 <!--Modal Hapus-->
 <div class="modal fade" id="deleteModal">
@@ -205,12 +167,10 @@
         $('#users-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/produk-data',
+            ajax: '/lokasi-data',
             columns: [
-                {data: 'id'},
-                {data: 'nama'},
-                {data: 'tipe'},
-                {data: 'status'},
+                {data: 'id_lokasi'},
+                {data: 'nm_lokasi'},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });

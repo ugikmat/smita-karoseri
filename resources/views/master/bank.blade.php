@@ -4,7 +4,7 @@
 
 @section('content_header')
     <h1>Daftar Bank</h1>
-    
+
 @stop
 
 @section('content')
