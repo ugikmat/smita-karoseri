@@ -26,7 +26,7 @@
         </script>
     </div>
 </div>
-<!-- <table id="users-table" class="table table-bordered">
+<table id="users-table" class="table table-bordered">
     <tr>
       <td>ID canvaser</td>
       <td>:</td>
@@ -54,7 +54,7 @@
     </tr>
     <input type="button" name="" value="Kosongkan">
     <input type="button" name="" value="Rekap Penjualan">
-</table> -->
+</table>
 @stop
 
 @section('js')
