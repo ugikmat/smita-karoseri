@@ -31,11 +31,10 @@
         <h4 class="modal-title">Tambah Bank</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-    <form action="/bank" method="POST">
-      @csrf
+
       <!-- Modal body -->
       <div class="modal-body">
-          <div class="input-group">
+        <div class="input-group">
             <span class="input-group-addon">
                 <i class="fa fa-bank"></i>
             </span>
@@ -45,27 +44,28 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-          <input type="submit" class="btn btn-primary" value="Tambah">
-          {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Tambah</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
       </div>
-      </form>
+
     </div>
   </div>
 </div>
 
-<!--Modal Edit-->
+<!--Modal Tambah-->
 <div class="modal fade" id="editModal">
   <div class="modal-dialog">
     <div class="modal-content">
+
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Edit Bank</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
+
       <!-- Modal body -->
       <div class="modal-body">
-          <div class="input-group">
+        <div class="input-group">
             <span class="input-group-addon">
                 <i class="fa fa-bank"></i>
             </span>
@@ -75,10 +75,10 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-          <input type="submit" class="btn btn-primary" value="Simpan">
-          {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
       </div>
+
     </div>
   </div>
 </div>
@@ -87,6 +87,7 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
+
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -94,9 +95,10 @@
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">
-          <input type="submit" class="btn btn-danger delete-user" value="Delete user">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Hapus</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
       </div>
+
     </div>
   </div>
 </div>
@@ -116,26 +118,5 @@
             ]
         });
     });
-</script>
-<script>
-  $('#editModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var name = button.data('name')
-  var id = button.data('id') // Extract info from data-* attributes
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  var modal = $(this)
-  modal.find('.modal-body input').val(name)
-  })
-</script>
-<script>
-  $('#deleteModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var name = button.data('name')
-  var id = button.data('id') // Extract info from data-* attributes
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  var modal = $(this)
-  })
 </script>
 @stop
