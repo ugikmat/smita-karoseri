@@ -74,3 +74,7 @@ Route::get('/master/lokasi', function() {
 Route::get('/master/sales', function() {
   return view ('/master/sales');
 }) -> name('master-sales');
+
+Route::get('/master/suplier', function() {
+  return view ('/master/suplier');
+}) -> name('master-suplier');
