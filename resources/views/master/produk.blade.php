@@ -205,7 +205,7 @@
         $('#users-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/produk-data',
+            ajax: '/master/produk-data',
             columns: [
                 {data: 'id'},
                 {data: 'nama'},
