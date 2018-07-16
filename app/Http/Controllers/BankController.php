@@ -96,6 +96,7 @@ class BankController extends Controller
     {
         $bank = App\Bank::find($id);
         $bank->delete();
+        return redirect('/bank');
     }
 
     /**

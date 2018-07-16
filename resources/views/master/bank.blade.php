@@ -58,14 +58,11 @@
 <div class="modal fade" id="editModal">
   <div class="modal-dialog">
     <div class="modal-content">
-
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Edit Bank</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      <form action="/bank" method="POST">
-      @csrf
       <!-- Modal body -->
       <div class="modal-body">
           <div class="input-group">
@@ -82,7 +79,6 @@
           {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
         <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
       </div>
-      </form>
     </div>
   </div>
 </div>
@@ -101,7 +97,6 @@
           <input type="submit" class="btn btn-danger delete-user" value="Delete user">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
       </div>
-
     </div>
   </div>
 </div>
@@ -125,12 +120,22 @@
 <script>
   $('#editModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
-  var recipient = button.data('name') // Extract info from data-* attributes
+  var name = button.data('name')
+  var id = button.data('id') // Extract info from data-* attributes
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
-
-  modal.find('.modal-body input').val(recipient)
-})
+  modal.find('.modal-body input').val(name)
+  })
+</script>
+<script>
+  $('#deleteModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var name = button.data('name')
+  var id = button.data('id') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  })
 </script>
 @stop
