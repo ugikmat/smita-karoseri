@@ -112,7 +112,7 @@ return [
         [
             'text'        => 'Dashboard',
             'url'         => 'home',
-            'icon'        => 'file',\
+            'icon'        => 'file',
         ],
         [
             'text'        => 'XL',
@@ -195,6 +195,22 @@ return [
               [
                 'text'  => 'suplier',
                 'url'   => '/master/suplier',
+              ],
+              [
+                'text'  => 'customer',
+                'url'   => '/master/customer',
+              ],
+              [
+                'text'  => 'gudang',
+                'url'   => '/master/gudang',
+              ],
+              [
+                'text'  => 'lokasi',
+                'url'   => '/master/lokasi',
+              ],
+              [
+                'text'  => 'sales',
+                'url'   => '/master/sales',
               ],
             ],
         ],

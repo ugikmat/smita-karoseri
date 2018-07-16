@@ -59,3 +59,19 @@ Route::get('/master/satuan', function() {
 Route::get('/master/bank', function() {
   return view ('/master/bank');
 }) -> name('master-suplier');
+
+Route::get('/master/customer', function() {
+  return view ('/master/customer');
+}) -> name('master-customer');
+
+Route::get('/master/gudang', function() {
+  return view ('/master/gudang');
+}) -> name('master-gudang');
+
+Route::get('/master/lokasi', function() {
+  return view ('/master/lokasi');
+}) -> name('master-lokasi');
+
+Route::get('/master/sales', function() {
+  return view ('/master/sales');
+}) -> name('master-sales');
