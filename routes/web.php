@@ -33,6 +33,10 @@ Route::get('/penjualan/dompul/invoice-dompul', function() {
   return view ('/penjualan/dompul/invoice-dompul');
 }) -> name('invoice-dompul');
 
+Route::get('/penjualan/dompul/list-invoice', function() {
+  return view ('/penjualan/dompul/list-invoice');
+}) -> name('list-invoice');
+
 //monitoring
 Route::get('/penjualan/dompul/list-invoice', function() {
   return view ('/penjualan/dompul/list-invoice');
@@ -43,3 +47,15 @@ Route::get('/penjualan/dompul/list-invoice', function() {
 Route::get('/master/bank', function() {
   return view ('/master/bank');
 }) -> name('master-bank');
+
+Route::get('/master/produk', function() {
+  return view ('/master/produk');
+}) -> name('master-produk');
+
+Route::get('/master/satuan', function() {
+  return view ('/master/satuan');
+}) -> name('master-satuan');
+
+Route::get('/master/bank', function() {
+  return view ('/master/bank');
+}) -> name('master-suplier');

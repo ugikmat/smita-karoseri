@@ -112,9 +112,7 @@ return [
         [
             'text'        => 'Dashboard',
             'url'         => 'home',
-            'icon'        => 'file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'icon'        => 'file',\
         ],
         [
             'text'        => 'XL',
@@ -185,6 +183,18 @@ return [
               [
                 'text'  => 'bank',
                 'url'   => '/master/bank',
+              ],
+              [
+                'text'  => 'produk',
+                'url'   => '/master/produk'
+              ],
+              [
+                'text'  => 'satuan',
+                'url'   => '/master/satuan',
+              ],
+              [
+                'text'  => 'suplier',
+                'url'   => '/master/suplier',
               ],
             ],
         ],
