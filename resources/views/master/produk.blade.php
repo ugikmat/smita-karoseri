@@ -191,12 +191,12 @@
         $('#produk-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/produk-data',
+            ajax: '/master/produk-data',
             columns: [
-                {data: 'id_produk'},
-                {data: 'nama_produk'},
-                {data: 'tipe_produk'},
-                {data: 'status_produk'},
+                {data: 'id'},
+                {data: 'nama'},
+                {data: 'tipe'},
+                {data: 'status'},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });

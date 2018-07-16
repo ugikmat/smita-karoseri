@@ -25,16 +25,16 @@
 <div class="modal fade" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content">
-
+    <form action="/bank" method="POST">
+      @csrf
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Tambah Bank</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-
       <!-- Modal body -->
       <div class="modal-body">
-        <div class="input-group">
+          <div class="input-group">
             <span class="input-group-addon">
                 <i class="fa fa-bank"></i>
             </span>
@@ -44,41 +44,14 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Tambah</button>
+          <input type="submit" class="btn btn-primary" value="Tambah">
+          {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
         <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
       </div>
-
+      </form>
     </div>
   </div>
-</div>
-
-<!--Modal Tambah-->
-<div class="modal fade" id="editModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form id="editForm" action="" method="POST">
-        @csrf
-        @method('put')
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Edit Bank</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        <div class="input-group">
-            <span class="input-group-addon">
-                <i class="fa fa-bank"></i>
-            </span>
-            <input id="nama" name="nama" type="text" class="form-control" placeholder="Bank Name">
-        </div>
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+</div>        <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
       </div>
       </form>
     </div>

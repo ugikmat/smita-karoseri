@@ -48,9 +48,8 @@ Route::get('/master/bank', function() {
   return view ('/master/bank');
 }) -> name('master-bank');
 
-Route::get('/master/produk', function() {
-  return view ('/master/produk');
-}) -> name('master-produk');
+Route::resource('master/produk', 'ProdukController');
+Route::get('/master/produk-data', 'ProdukController@data');
 
 Route::get('/master/satuan', function() {
   return view ('/master/satuan');
