@@ -18,16 +18,18 @@
 
 <!-- tambah data -->
 <section class="content-header">
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">Tambah</button>
-      <div class="modal fade bs-example-modal-lg" id='modalTambah' tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTambah">Tambah</button>
 
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-              </button>
-              <h4 class="modal-title" id="myModalLabel">Tambah Produk</h4>
-            </div>
+  <div class="modal fade bs-example-modal-lg" id='modalTambah' tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Tambah Produk</h4>
+        </div>
         <div class="modal-body">
           <div class="clearfix"></div>
           <div class="row">
@@ -39,32 +41,33 @@
                 <div class="x_content">
                   <br />
 
-                  <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+                  <form id="tambahForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/master/produk">
+                    @csrf
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Produk
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Nama Produk
                         <span class="required">*</span>
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                      <div class="col-md-6 col-sm-6 col-xs-12" >
+                        <input type="text" id="nama" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Produk
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipe">Tipe Produk
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="alamat" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="tipe" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status Produk
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Status Produk
                         <span class="required">*</span>
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="alamat" class="form-control col-md-7 col-xs-12" value="">
+                      <div class="col-md-6 col-sm-6 col-xs-12 alamat">
+                        <input type="text" id="status" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
@@ -92,7 +95,7 @@
 
 
 <!--Modal Edit-->
-<div class="modal fade bs-example-modal-lg" id='modalEdit' tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
@@ -113,32 +116,34 @@
               <div class="x_content">
                 <br />
 
-                <form id="edit" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+                <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+                  @csrf
+                  @method('put')
 
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Produk
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Nama Produk
                       <span class="required">*</span>
                     </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                    <div class="col-md-6 col-sm-6 col-xs-12 nama">
+                      <input type="text" id="nama" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Status
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipe">Tipe Status
                       <span class="required">*</span>
                     </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="alamat" class="form-control col-md-7 col-xs-12" value="">
+                    <div class="col-md-6 col-sm-6 col-xs-12 alamat">
+                      <input type="text" id="tipe" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status Produk
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status">Status Produk
                       <span class="required">*</span>
                     </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="alamat" class="form-control col-md-7 col-xs-12" value="">
+                    <div class="col-md-6 col-sm-6 col-xs-12 status">
+                      <input type="text" id="status" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 
@@ -168,18 +173,18 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <form action="" method="POST" id="deleteForm">
-        @csrf
+        @csrf 
         @method('delete')
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <input type="submit" class="btn btn-danger" value="Hapus">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
-      </div>
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-danger" value="Hapus">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
+        </div>
       </form>
     </div>
   </div>
@@ -228,23 +233,23 @@
 </script>
 <script>
   $('#editModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var name = button.data('name')// Extract info from data-* attributes
-  var id = button.data('id')
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  var modal = $(this)
-  $('#editForm').attr('action', `/master/produk/${id}`);
-  modal.find('.modal-body input').val(name)
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var name = button.data('name') // Extract info from data-* attributes
+    var id = button.data('id')
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    $('#editForm').attr('action', `/master/produk/${id}`);
+    modal.find('.modal-body .nama input').val(name)
   })
 </script>
 <script>
   $('#deleteModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var id = button.data('id')// Extract info from data-* attributes
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  $('#deleteForm').attr('action', `/master/produk/${id}`);
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    $('#deleteForm').attr('action', `/master/produk/${id}`);
   })
 </script>
 @stop

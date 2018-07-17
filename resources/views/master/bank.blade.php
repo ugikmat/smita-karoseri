@@ -16,6 +16,12 @@
         <th>action</th>
     </tr>
     </thead>
+    <tfoot>
+    <tr>
+        <th>Id</th>
+        <th>Nama Bank</th>
+    </tr>
+    </tfoot>
 </table>
 <!-- Button to Open the Modal -->
 <button type="button" class="btn btn-primary btn-flat align-right" data-toggle="modal" data-target="#modalTambah">
@@ -121,7 +127,17 @@
                 {data: 'id'},
                 {data: 'nama'},
                 {data: 'action', orderable: false, searchable: false}
-            ]
+            ],
+      initComplete: function () {
+        this.api().columns().every(function () {
+          var column = this;
+          var input = document.createElement("input");
+          $(input).appendTo($(column.footer()).empty())
+            .on('change', function () {
+              column.search($(this).val(), false, false, true).draw();
+            });
+        });
+      }
         });
     });
 </script>
