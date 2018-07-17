@@ -22,7 +22,7 @@
 </table>
 <!-- Modal Tambah -->
 <section class="content-header">
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">Tambah</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTambah">Tambah</button>
       <div class="modal fade bs-example-modal-lg" id='modalTambah' tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -206,9 +206,9 @@ Karoseri
 
     </div>
   </div>
+</div>
 
-
-</div><!--Modal Hapus-->
+<!--Modal Hapus-->
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
