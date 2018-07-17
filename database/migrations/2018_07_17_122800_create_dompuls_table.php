@@ -19,7 +19,7 @@ class CreateDompulsTable extends Migration
             $table->string('id_gudang');
             $table->string('nama_sub_master_dompul');
             $table->string('tipe_dompul');
-            $table->string('status__sub_master_dompul');
+            $table->string('status_sub_master_dompul');
         });
     }
 
