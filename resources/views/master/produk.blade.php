@@ -170,7 +170,6 @@
       <form action="" method="POST" id="deleteForm">
         @csrf
         @method('delete')
-      
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -235,7 +234,7 @@
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
-  $('#editForm').attr('action', `/bank/${id}`);
+  $('#editForm').attr('action', `/master/produk/${id}`);
   modal.find('.modal-body input').val(name)
   })
 </script>
@@ -245,7 +244,7 @@
   var id = button.data('id')// Extract info from data-* attributes
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  $('#deleteForm').attr('action', `/bank/${id}`);
+  $('#deleteForm').attr('action', `/master/produk/${id}`);
   })
 </script>
 @stop
