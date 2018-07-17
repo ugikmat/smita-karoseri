@@ -126,7 +126,7 @@ class ProdukController extends Controller
      */
     public function data(Datatables $datatables)
     {   
-        return $datatables->eloquent(produk::where('status', "tersedia"))
+        return $datatables->eloquent(produk::where('status_produk', "tersedia"))
                           ->addColumn('action', function ($produk) {
                               return 
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$produk->id.'" data-name="'.$produk->nama.'" data-tipe="'.$produk->tipe.'" data-status="'.$produk->status.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>

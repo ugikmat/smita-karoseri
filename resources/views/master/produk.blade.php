@@ -8,8 +8,16 @@
   <thead>
     <tr>
       <th>Id</th>
+      <th>Kode Produk</th>
       <th>Nama Produk</th>
-      <th>Tipe Produk</th>
+      <th>Kategori Produk</th>
+      <th>Satuan</th>
+      <th>Jenis</th>
+      <th>BOM</th>
+      <th>Harga Jual</th>
+      <th>Tarif Pajak</th>
+      <th>Diskon</th>
+      <th>Komisi</th>
       <th>Status Produk</th>
       <th>action</th>
     </tr>
@@ -190,13 +198,37 @@
       processing: true,
       ajax: '/master/produk-data',
       columns: [{
-          data: 'id'
+          data: 'id_produk'
         },
         {
-          data: 'nama'
+          data: 'kode_produk'
         },
         {
-          data: 'tipe'
+          data: 'nama_produk'
+        },
+        {
+          data: 'kategori_produk'
+        },
+        {
+          data: 'satuan'
+        },
+        {
+          data: 'jenis'
+        },
+        {
+          data: 'BOM'
+        },
+        {
+          data: 'harga_jual'
+        },
+        {
+          data: 'tarif_pajak'
+        },
+        {
+          data: 'diskon'
+        },
+        {
+          data: 'komisi'
         },
         {
           data: 'status_produk'
