@@ -41,6 +41,7 @@
       <div class="x_content">
         <br />
 
+<<<<<<< HEAD
         <form  method="post" data-parsley-validate class="form-horizontal form-label-left" action="/gudang">
           @csrf
            <div class="form-group">
@@ -50,6 +51,9 @@
               <input type="text" id="id_gudang" required="required" name="id_gudang" class="form-control col-md-7 col-xs-12" value="">
             </div>
           </div>
+=======
+        <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+>>>>>>> upstream/front
 
           <div class="form-group">
            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Lokasi<span class="required">*</span>
@@ -112,14 +116,7 @@
 <div class="x_content">
   <br />
 
-  <form id="tambah-lokasi" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
-     <div class="form-group">
-      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Gudang<span class="required">*</span>
-      </label>
-      <div class="col-md-6 col-sm-6 col-xs-12">
-        <input type="text" id="first-name" required="required" name="idcs" class="form-control col-md-7 col-xs-12" value="">
-      </div>
-    </div>
+  <form id="edit" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
 
     <div class="form-group">
      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Lokasi<span class="required">*</span>
@@ -182,7 +179,11 @@
 @section('js')
 <script>
     $(function () {
+<<<<<<< HEAD
         $('#gdg-table').DataTable({
+=======
+        $('#gudang-table').DataTable({
+>>>>>>> upstream/front
             serverSide: true,
             processing: true,
             ajax: '/master-gudang',
