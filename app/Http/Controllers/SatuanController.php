@@ -47,15 +47,12 @@ class SatuanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'bail|required|unique:produks|max:255',
-            'jumlah' => 'required',
-            'status' => 'required',
-        ]);
         $satuan = new Satuan();
         $satuan->nama_satuan = $request->get('nama');
-        $satuan->tipe_satuan = $request->get('jumlah');
-        $satuan->status_satuan = $request->get('status');
+        $satuan->tipe_satuan = $request->get('tipe');
+        $satuan->induk_satuan = $request->get('induk');
+        $satuan->nilai_konversi = $request->get('nilai');
+        $satuan->status_satuan = "tersedia";
         $satuan->save();
         return redirect('master/satuan');
     }
