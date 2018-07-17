@@ -14,11 +14,12 @@ class CreateMasterCustomersTable extends Migration
     public function up()
     {
         Schema::create('master_customers', function (Blueprint $table) {
-            $table->string('id_cust')->primary();
+            $table->increments('id_cust');
             $table->string('nm_cust');
             $table->string('alamat_cust');
             $table->string('no_hp');
             $table->string('jabatan');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

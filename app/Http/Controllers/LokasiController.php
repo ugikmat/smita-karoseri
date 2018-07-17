@@ -48,7 +48,6 @@ class LokasiController extends Controller
     {
       $lok = new Lokasi;
 
-      $lok->id_lokasi = $request->get('id_lokasi');
       $lok->nm_lokasi = $request->get('nm_lokasi');
       $lok->save();
 
@@ -97,12 +96,13 @@ class LokasiController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $lok = Lokasi::where('id_lokasi', $id)->update(['status' => 0]);
+      return redirect('/lokasi');
     }
 
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(Lokasi::query())
+        return $datatables->eloquent(Lokasi::where('status', '1'))
                           ->addColumn('action', function ($lok) {
                               return
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$lok->id_lokasi.'" data-name="'.$lok->nm_lokasi.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>

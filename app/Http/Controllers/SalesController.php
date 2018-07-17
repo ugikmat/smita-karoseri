@@ -49,7 +49,6 @@ class SalesController extends Controller
     {
       $sales = new Sales;
 
-      $sales->id_sales = $request->get('id_sales');
       $sales->nm_sales = $request->get('nm_sales');
       $sales->alamat_sales = $request->get('alamat_sales');
       $sales->no_hp = $request->get('no_hp');
@@ -100,12 +99,13 @@ class SalesController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $sales = Sales::where('id_sales', $id)->update(['status' => 0]);
+      return redirect('/sales');
     }
 
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(Sales::query())
+        return $datatables->eloquent(Sales::where('status', '1'))
                           ->addColumn('action', function ($sales) {
                               return
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$sales->id_sales.'" data-name="'.$sales->nm_sales.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>

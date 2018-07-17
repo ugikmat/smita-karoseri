@@ -47,17 +47,14 @@ class GudangController extends Controller
      */
     public function store(Request $request)
     {
-      /*$customer = new Customer;
+      $gdg = new Gudang;
 
-      $customer->id_cust = $request->get('id_cust');
-      $customer->nm_cust = $request->get('nm_cust');
-      $customer->alamat_cust = $request->get('alamat_cust');
-      $customer->no_hp = $request->get('no_hp');
-      $customer->jabatan = $request->get('jabatan');
-      $customer->save();
+      $gdg->id_lokasi = $request->get('id_lokasi');
+      $gdg->alamat_gudang = $request->get('alamat_gudang');
+      $gdg->save();
 
-      return redirect('/customer');
-      */
+      return redirect('/gudang');
+
     }
 
     /**
@@ -102,16 +99,19 @@ class GudangController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $gdg = Gudang::where('id_gudang', $id)->update(['status' => 0]);
+      return redirect('/gudang');
     }
 
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(Gudang::query())
+        return $datatables->eloquent(Gudang::join('master_lokasis', 'master_lokasis.id_lokasi', '=', 'master_gudangs.id_lokasi')
+                          ->select('master_gudangs.id_gudang', 'master_lokasis.nm_lokasi', 'master_gudangs.alamat_gudang')
+                          ->where('master_gudangs.status', '1'))
                           ->addColumn('action', function ($gdg) {
                               return
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$gdg->id_gudang.'" data-name="'.$gdg->nm_gudang.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$gdg->id_gudang.'" data-name="'.$gdg->nm_gudang.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$gdg->id_gudang.'" data-name="'.$gdg->alamat_gudang.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$gdg->id_gudang.'" data-name="'.$gdg->alamat_gudang.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
 
                           ->make(true);

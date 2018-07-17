@@ -14,9 +14,10 @@ class CreateMasterGudangsTable extends Migration
     public function up()
     {
         Schema::create('master_gudangs', function (Blueprint $table) {
-            $table->string('id_gudang')->primary();
+            $table->increments('id_gudang');
             $table->string('id_lokasi');
             $table->string('alamat_gudang');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
 

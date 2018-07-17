@@ -89,3 +89,11 @@ Route::get('/master/sales', function() {
 Route::get('/master/suplier', function() {
   return view ('/master/suplier');
 }) -> name('master-suplier');
+
+Route::get('/master/pemborong', function() {
+  return view ('/master/pemborong');
+}) -> name('master-pemborong');
+
+Route::get('/master/supervisor', function() {
+  return view ('/master/supervisor');
+}) -> name('master-supervisor');

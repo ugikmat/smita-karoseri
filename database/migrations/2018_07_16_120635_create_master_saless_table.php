@@ -14,10 +14,11 @@ class CreateMasterSalessTable extends Migration
     public function up()
     {
         Schema::create('master_saless', function (Blueprint $table) {
-            $table->string('id_sales')->primary();
+            $table->increments('id_sales');
             $table->string('nm_sales');
             $table->string('alamat_sales');
             $table->string('no_hp');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

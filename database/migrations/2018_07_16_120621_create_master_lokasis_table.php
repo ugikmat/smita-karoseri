@@ -14,8 +14,9 @@ class CreateMasterLokasisTable extends Migration
     public function up()
     {
         Schema::create('master_lokasis', function (Blueprint $table) {
-            $table->string('id_lokasi')->primary();
+            $table->increments('id_lokasi');
             $table->string('nm_lokasi');
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

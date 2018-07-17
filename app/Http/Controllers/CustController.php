@@ -47,8 +47,6 @@ class CustController extends Controller
     public function store(Request $request)
     {
         $customer = new Customer;
-
-        $customer->id_cust = $request->get('id_cust');
         $customer->nm_cust = $request->get('nm_cust');
         $customer->alamat_cust = $request->get('alamat_cust');
         $customer->no_hp = $request->get('no_hp');
@@ -101,14 +99,13 @@ class CustController extends Controller
      */
     public function destroy($id)
     {
-        $cust = App\Customer::find($id);
-        $cust->delete();
+        $cust = Customer::where('id_cust', $id)->update(['status' => 0]);
         return redirect('/customer');
     }
 
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(Customer::query())
+        return $datatables->eloquent(Customer::where('status', '1'))
                           ->addColumn('action', function ($cust) {
                               return
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$cust->id_cust.'" data-name="'.$cust->nm_cust.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>

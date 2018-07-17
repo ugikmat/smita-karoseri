@@ -1,20 +1,21 @@
 @extends('adminlte::page')
 
-@section('title', 'Gudang')
+@section('title', 'supervisor')
 
 @section('content_header')
-    <h1>Master Gudang</h1>
+    <h1>Daftar Supervisor</h1>
 
 @stop
 
 @section('content')
-<table id="gdg-table" class="table table-bordered">
+<table id="users-table" class="table table-bordered">
     <thead>
     <tr>
-        <th>Id Gudang</th>
-        <th>Nama Gudang</th>
-        <th>Lokasi</th>
-        <th>Action</th>
+      <th>Id</th>
+      <th>Nama Supervisor</th>
+      <th>Alamat</th>
+      <th>No. Telp</th>
+      <th>action</th>
     </tr>
     </thead>
 </table>
@@ -28,7 +29,7 @@
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
               </button>
-              <h4 class="modal-title" id="myModalLabel">Tambah Gudang</h4>
+              <h4 class="modal-title" id="myModalLabel">Tambah Supervisor</h4>
             </div>
             <div class="modal-body">
                <div class="clearfix"></div>
@@ -40,36 +41,38 @@
       </div>
       <div class="x_content">
         <br />
-        <form  method="post" data-parsley-validate class="form-horizontal form-label-left" action="/gudang">
-          @csrf
+
+        <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
 
           <div class="form-group">
-           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Lokasi<span class="required">*</span>
+           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Supervisor<span class="required">*</span>
            </label>
            <div class="col-md-6 col-sm-6 col-xs-12">
-             <select id="id_lokasi" required="required" name="id_lokasi" placeholder="Pilih Lokasi" class="form-control col-md-7 col-xs-12">
-               <option value="" selected disabled>Pilih Lokasi</option>
-               @foreach ($lokasiarray as $data)
-                <option value="{{ $data->id_lokasi }}">{{ $data->nm_lokasi }}</option>
-               @endforeach
-             </select>
+             <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
            </div>
          </div>
 
          <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Gudang<span class="required">*</span>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Alamat<span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="alamat_gudang" required="required" name="alamat_gudang" class="form-control col-md-7 col-xs-12" value="">
+            <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
           </div>
         </div>
+
+        <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No. Telp<span class="required">*</span>
+         </label>
+         <div class="col-md-6 col-sm-6 col-xs-12">
+           <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+         </div>
+       </div>
 
           <div class="ln_solid"></div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-              <button class="btn btn-primary" type="reset">Reset</button>
-              <input type="submit" class="btn btn-success" Value="Submit">
-              {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
+  <button class="btn btn-primary" type="reset">Reset</button>
+              <button type="submit" class="btn btn-success">Submit</button>
             </div>
           </div>
         </form>
@@ -96,7 +99,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Edit Gudang</h4>
+        <h4 class="modal-title" id="myModalLabel">Edit Sales</h4>
       </div>
       <div class="modal-body">
          <div class="clearfix"></div>
@@ -112,7 +115,7 @@
   <form id="edit" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
 
     <div class="form-group">
-     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Lokasi<span class="required">*</span>
+     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Sales<span class="required">*</span>
      </label>
      <div class="col-md-6 col-sm-6 col-xs-12">
        <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
@@ -120,12 +123,20 @@
    </div>
 
    <div class="form-group">
-    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Gudang<span class="required">*</span>
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Alamat Sales<span class="required">*</span>
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
       <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
     </div>
   </div>
+
+  <div class="form-group">
+   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No Telepon<span class="required">*</span>
+   </label>
+   <div class="col-md-6 col-sm-6 col-xs-12">
+     <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+   </div>
+ </div>
 
     <div class="ln_solid"></div>
     <div class="form-group">
@@ -152,40 +163,52 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="deleteForm" action="" method="POST">
-        @csrf
-        @method('delete')
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <!-- Modal footer -->
-        <div class="modal-footer">
-            <input type="submit" class="btn btn-danger delete-user" value="Hapus">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
-        </div>
-        </form>
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Hapus</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
+      </div>
+
     </div>
   </div>
 </div>
+
 @stop
 
 @section('js')
 <script>
     $(function () {
-        $('#gdg-table').DataTable({
+        $('#users-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/master-gudang',
+            ajax: '/bank-data',
             columns: [
-                {data: 'id_gudang'},
-                {data: 'alamat_gudang'},
-                {data: 'nm_lokasi'},
+                {data: 'id'},
+                {data: 'nama'},
+                {data: 'jenis'},
+                {data: 'jumlah'},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });
     });
+</script>
+<script>
+  $('#editModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var name = button.data('name')// Extract info from data-* attributes
+  var id = button.data('id')
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  $('#editForm').attr('action', `/bank/${id}`);
+  modal.find('.modal-body input').val(name)
+  })
 </script>
 <script>
   $('#deleteModal').on('show.bs.modal', function (event) {
@@ -193,7 +216,7 @@
   var id = button.data('id')// Extract info from data-* attributes
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  $('#deleteForm').attr('action', `/gudang/${id}`);
+  $('#deleteForm').attr('action', `/bank/${id}`);
   })
 </script>
 @stop
