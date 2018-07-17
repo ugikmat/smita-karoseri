@@ -21,10 +21,10 @@ class CreateProduksTable extends Migration
             $table->string('satuan');
             $table->string('jenis');
             $table->string('BOM');
-            $table->string('harga_jual');
-            $table->string('tarif_pajak');
-            $table->string('diskon');
-            $table->string('komisi');
+            $table->double('harga_jual');
+            $table->double('tarif_pajak');
+            $table->int('diskon');
+            $table->int('komisi');
             $table->string('status_produk');
         });
     }

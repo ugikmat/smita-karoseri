@@ -19,10 +19,10 @@ class ProdukSeeder extends Seeder
         $sp1->satuan='PCS';
         $sp1->jenis='GOODS';
         $sp1->BOM='YA';
-        $sp1->harga_jual='20000';
-        $sp1->tarif_pajak='5%';
-        $sp1->diskon='0.15%';
-        $sp1->komisi='0.10%';
+        $sp1->harga_jual=20000;
+        $sp1->tarif_pajak=5;
+        $sp1->diskon=0.15;
+        $sp1->komisi=0.10;
         $sp1->status_produk='tersedia';
         $sp1->save();
 
@@ -33,10 +33,10 @@ class ProdukSeeder extends Seeder
         $sp2->satuan='PCS';
         $sp2->jenis='GOODS';
         $sp2->BOM='YA';
-        $sp2->harga_jual='35000';
-        $sp2->tarif_pajak='10%';
-        $sp2->diskon='0.15%';
-        $sp2->komisi='0.10%';
+        $sp2->harga_jual=35000;
+        $sp2->tarif_pajak=10;
+        $sp2->diskon=0.15;
+        $sp2->komisi=0.10;
         $sp2->status_produk='tersedia';
         $sp2->save();
 
@@ -47,10 +47,10 @@ class ProdukSeeder extends Seeder
         $dompul->satuan='PCS';
         $dompul->jenis='GOODS';
         $dompul->BOM='YA';
-        $dompul->harga_jual='100000';
-        $dompul->tarif_pajak='10%';
-        $dompul->diskon='0.15%';
-        $dompul->komisi='0.10%';
+        $dompul->harga_jual=100000;
+        $dompul->tarif_pajak=10;
+        $dompul->diskon=0.15;
+        $dompul->komisi=0.10;
         $dompul->status_produk='tersedia';
         $dompul->save();
 
@@ -61,10 +61,10 @@ class ProdukSeeder extends Seeder
         $dompul2->satuan='PCS';
         $dompul2->jenis='GOODS';
         $dompul2->BOM='YA';
-        $dompul2->harga_jual='5000';
-        $dompul2->tarif_pajak='10%';
-        $dompul2->diskon='0.15%';
-        $dompul2->komisi='0.10%';
+        $dompul2->harga_jual=5000;
+        $dompul2->tarif_pajak=10;
+        $dompul2->diskon=0.15;
+        $dompul2->komisi=0.10;
         $dompul2->status_produk='tersedia';
         $dompul2->save();
 
@@ -75,10 +75,10 @@ class ProdukSeeder extends Seeder
         $dompul3->satuan='PCS';
         $dompul3->jenis='GOODS';
         $dompul3->BOM='YA';
-        $dompul3->harga_jual='10000';
-        $dompul3->tarif_pajak='10%';
-        $dompul3->diskon='0.15%';
-        $dompul3->komisi='0.10%';
+        $dompul3->harga_jual=10000;
+        $dompul3->tarif_pajak=10;
+        $dompul3->diskon=0.15;
+        $dompul3->komisi=0.10;
         $dompul3->status_produk='tersedia';
         $dompul3->save();
     }
