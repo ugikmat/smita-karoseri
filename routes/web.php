@@ -54,9 +54,8 @@ Route::get('/master/produk-data', 'ProdukController@data');
 Route::resource('master/satuan', 'SatuanController');
 Route::get('/master/satuan-data', 'SatuanController@data');
 
-Route::get('/master/bank', function() {
-  return view ('/master/bank');
-}) -> name('master-suplier');
+Route::resource('master/supplier', 'SupplierController');
+Route::get('master/supplier-data', 'SupplierController@data');
 
 Route::get('/master/customer', function() {
   return view ('/master/customer');
@@ -73,7 +72,3 @@ Route::get('/master/lokasi', function() {
 Route::get('/master/sales', function() {
   return view ('/master/sales');
 }) -> name('master-sales');
-
-Route::get('/master/suplier', function() {
-  return view ('/master/suplier');
-}) -> name('master-suplier');

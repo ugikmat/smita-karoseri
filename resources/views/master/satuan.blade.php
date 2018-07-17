@@ -177,7 +177,8 @@
     </div>
   </div>
 </div>
-@stop @section('js')
+@stop 
+@section('js')
 <script>
   $(function () {
     $('#satuan-table').DataTable({

@@ -194,7 +194,7 @@ return [
               ],
               [
                 'text'  => 'suplier',
-                'url'   => '/master/suplier',
+                'url'   => '/master/supplier',
               ],
               [
                 'text'  => 'customer',
