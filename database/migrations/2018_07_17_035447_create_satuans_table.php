@@ -16,6 +16,9 @@ class CreateSatuansTable extends Migration
         Schema::create('satuans', function (Blueprint $table) {
             $table->increments('id_satuan');
             $table->string('nama_satuan');
+            $table->string('tipe_satuan');
+            $table->string('induk_satuan');
+            $table->string('nilai_konversi');
             $table->string('status_satuan');
         });
     }
