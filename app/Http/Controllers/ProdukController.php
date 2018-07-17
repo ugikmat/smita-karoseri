@@ -47,15 +47,18 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'bail|required|unique:produks|max:255',
-            'tipe' => 'required',
-            'status' => 'required',
-        ]);
         $produk = new produk();
-        $produk->nama = $request->get('nama');
-        $produk->tipe = $request->get('tipe');
-        $produk->status = $request->get('status');
+        $produk->nama_produk = $request->get('nama');
+        $produk->kode_produk = $request->get('kode');
+        $produk->kategori_produk = $request->get('kategori');
+        $produk->satuan = $request->get('satuan');
+        $produk->jenis = $request->get('jenis');
+        $produk->BOM = $request->get('bom');
+        $produk->harga_jual = $request->get('jual');
+        $produk->tarif_pajak = $request->get('pajak');
+        $produk->diskon = $request->get('diskon');
+        $produk->komisi = $request->get('komisi');
+        $produk->status_produk = "tersedia";
         $produk->save();
         return redirect('master/produk');
     }
@@ -96,11 +99,19 @@ class ProdukController extends Controller
         //     'tipe' => 'required',
         //     'status' => 'required',
         // ]);
-        $produk = produk::find($id);
-        $produk->nama = $request->get('nama');
-        $produk->tipe = $request->get('tipe');
-        $produk->status = $request->get('status');
+        $produk = produk::where('id_produk',$id)->first();
+        $produk->nama_produk = $request->get('nama');
+        $produk->kode_produk = $request->get('kode');
+        $produk->kategori_produk = $request->get('kategori');
+        $produk->satuan = $request->get('satuan');
+        $produk->jenis = $request->get('jenis');
+        $produk->BOM = $request->get('bom');
+        $produk->harga_jual = $request->get('jual');
+        $produk->tarif_pajak = $request->get('pajak');
+        $produk->diskon = $request->get('diskon');
+        $produk->komisi = $request->get('komisi');
         $produk->save();
+        return redirect('master/produk');
         return redirect('master/produk');
     }
 
@@ -129,7 +140,7 @@ class ProdukController extends Controller
         return $datatables->eloquent(produk::where('status_produk', "tersedia"))
                           ->addColumn('action', function ($produk) {
                               return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$produk->id_produk.'" data-name="'.$produk->nama.'" data-tipe="'.$produk->tipe.'" data-status="'.$produk->status.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$produk->id_produk.'" data-name="'.$produk->nama_produk.'" data-kode="'.$produk->kode_produk.'" data-status="'.$produk->status_produk.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                               <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$produk->id_produk.'" data-name="'.$produk->nama.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
                           ->make(true);
