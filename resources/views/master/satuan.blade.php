@@ -7,6 +7,9 @@
     <tr>
       <th>Id</th>
       <th>Nama Satuan</th>
+      <th>Tipe</th>
+      <th>Induk Satuan</th>
+      <th>Nilai Konversi</th>
       <th>Status</th>
       <th>action</th>
     </tr>
@@ -190,6 +193,15 @@
         },
         {
           data: 'nama_satuan'
+        },
+        {
+          data: 'tipe_satuan'
+        },
+        {
+          data: 'induk_satuan'
+        },
+        {
+          data: 'nilai_konversi'
         },
         {
           data: 'status_satuan'
