@@ -14,6 +14,7 @@
         <th>Id</th>
         <th>Kode Bank</th>
         <th>Nama Bank</th>
+        <th>Status Bank</th>
         <th>action</th>
     </tr>
     </thead>
@@ -139,6 +140,7 @@
                 {data: 'id_bank'},
                 {data: 'kode_bank'},
                 {data: 'nama_bank'},
+                {data: 'status_bank'},
                 {data: 'action', orderable: false, searchable: false}
             ],
       initComplete: function () {

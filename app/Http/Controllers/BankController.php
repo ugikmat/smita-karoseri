@@ -51,6 +51,7 @@ class BankController extends Controller
         $bank = new Bank();
         $bank->nama_bank = $request->get('nama');
         $bank->kode_bank = $request->get('kode');
+        $bank->status_bank = "Aktif";
         $bank->save();
         return redirect('/bank');
     }
@@ -92,6 +93,7 @@ class BankController extends Controller
         $bank = Bank::find($id);
         $bank->nama_bank = $request->get('nama');
         $bank->kode_bank = $request->get('kode');
+        $bank->status_bank = $request->get('status');
         $bank->save();
         return redirect('/bank');
     }
@@ -105,7 +107,7 @@ class BankController extends Controller
     public function destroy($id)
     {
         $bank = Bank::where('id_bank',$id)->first();
-        $bank->nama_bank="Deleted";
+        $bank->status_bank = "non Aktif";
         $bank->save();
         return redirect('/bank');
     }
@@ -118,7 +120,7 @@ class BankController extends Controller
      */
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(Bank::query())
+        return $datatables->eloquent(Bank::where('status_bank','Aktif'))
                           ->addColumn('action', function ($bank) {
                               return 
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$bank->id_bank.'" data-name="'.$bank->nama_bank.'" data-kode="'.$bank->kode_bank.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
