@@ -40,6 +40,12 @@ Route::get('master-gudang', 'GudangController@data');
 Route::resource('lokasi', 'LokasiController');
 Route::get('master-lokasi', 'LokasiController@data');
 
+Route::resource('pemborong', 'PemborongController');
+Route::get('master-pemborong', 'PemborongController@data');
+
+Route::resource('supervisor', 'SupervisorController');
+Route::get('master-supervisor', 'SupervisorController@data');
+
 // penjualan
 Route::get('/penjualan/dompul/invoice-dompul', function() {
   return view ('/penjualan/dompul/invoice-dompul');

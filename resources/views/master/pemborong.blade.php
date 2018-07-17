@@ -8,7 +8,7 @@
 @stop
 
 @section('content')
-<table id="users-table" class="table table-bordered">
+<table id="pb-table" class="table table-bordered">
     <thead>
     <tr>
       <th>Id</th>
@@ -42,13 +42,14 @@
       <div class="x_content">
         <br />
 
-        <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+        <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/pemborong">
+          @csrf
 
           <div class="form-group">
            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Pemborong<span class="required">*</span>
            </label>
            <div class="col-md-6 col-sm-6 col-xs-12">
-             <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+             <input type="text" id="nm_pb" required="required" name="nm_pb" class="form-control col-md-7 col-xs-12" value="">
            </div>
          </div>
 
@@ -56,13 +57,12 @@
            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jabatan Pemborong <span class="required">*</span>
            </label>
              <div class="col-md-6 col-sm-6 col-xs-12">
-                       <select id="heard" class="form-control" required>
-                           <option selected disabled value="sby">Pilih Jabatan Pemborong</option>
-                           <option value="rakit">Pemborong Rakit</option>
-                           <option value="catk">Pemborong Cat</option>
-                           <option value="fit">Pemborong Fitting</option>
-                         </select>
-                     </select>
+                      <select id="jenis_pb" name="jenis_pb" class="form-control col-md-7 col-xs-12" required>
+                           <option selected disabled value="">Pilih Jabatan Pemborong</option>
+                           <option value="Pemborong Rakit">Pemborong Rakit</option>
+                           <option value="Pemborong Cat">Pemborong Cat</option>
+                           <option value="Pemborong Fitting">Pemborong Fitting</option>
+                      </select>
                    </div>
                  </div>
 
@@ -71,15 +71,16 @@
          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jumlah Anggota<span class="required">*</span>
          </label>
          <div class="col-md-6 col-sm-6 col-xs-12">
-           <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+           <input type="number" id="jml_ang" required="required" name="jml_ang" class="form-control col-md-7 col-xs-12" value="">
          </div>
        </div>
 
           <div class="ln_solid"></div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-  <button class="btn btn-primary" type="reset">Reset</button>
-              <button type="submit" class="btn btn-success">Submit</button>
+              <button class="btn btn-primary" type="reset">Reset</button>
+              <input type="submit" class="btn btn-success" value="Submit">
+              {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
             </div>
           </div>
         </form>
@@ -99,7 +100,7 @@
 
 
 <!--Modal Edit-->
-<div class="modal fade bs-example-modal-lg" id='modal1' tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
@@ -119,37 +120,45 @@
 <div class="x_content">
   <br />
 
-  <form id="edit" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+  <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+    @csrf
+    @method('put')
 
-    <div class="form-group">
-     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Sales<span class="required">*</span>
+    <div class="form-group nama_pb">
+     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Pemborong<span class="required">*</span>
      </label>
      <div class="col-md-6 col-sm-6 col-xs-12">
-       <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+       <input type="text" id="nm_pb_upt" required="required" name="nm_pb_upt" class="form-control col-md-7 col-xs-12" value="">
      </div>
    </div>
 
-   <div class="form-group">
-    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Alamat Sales<span class="required">*</span>
-    </label>
-    <div class="col-md-6 col-sm-6 col-xs-12">
-      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
-    </div>
-  </div>
+   <div class="form-group jenis_pb">
+     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jabatan Pemborong <span class="required">*</span>
+     </label>
+       <div class="col-md-6 col-sm-6 col-xs-12">
+                <select id="jenis_pb_upt" name="jenis_pb_upt" class="form-control col-md-7 col-xs-12" required>
+                     <option class="mark" selected disabled value=""></option>
+                     <option value="Pemborong Rakit">Pemborong Rakit</option>
+                     <option value="Pemborong Cat">Pemborong Cat</option>
+                     <option value="Pemborong Fitting">Pemborong Fitting</option>
+                </select>
+             </div>
+           </div>
 
-  <div class="form-group">
-   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No Telepon<span class="required">*</span>
+
+  <div class="form-group jml">
+   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jumlah Anggota<span class="required">*</span>
    </label>
    <div class="col-md-6 col-sm-6 col-xs-12">
-     <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+     <input type="number" id="jml_ang_upt" required="required" name="jml_ang_upt" class="form-control col-md-7 col-xs-12" value="">
    </div>
  </div>
 
     <div class="ln_solid"></div>
     <div class="form-group">
       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-<button class="btn btn-primary" type="reset">Reset</button>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <input type="submit" class="btn btn-success" value="Submit">
+        {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
       </div>
     </div>
   </form>
@@ -170,7 +179,9 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-
+      <form id="deleteForm" action="" method="POST">
+      @csrf
+      @method('delete')
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -178,10 +189,10 @@
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Hapus</button>
+          <input type="submit" class="btn btn-danger delete-user" value="Hapus">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
       </div>
-
+      </form>
     </div>
   </div>
 </div>
@@ -191,15 +202,15 @@
 @section('js')
 <script>
     $(function () {
-        $('#users-table').DataTable({
+        $('#pb-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/bank-data',
+            ajax: '/master-pemborong',
             columns: [
-                {data: 'id'},
-                {data: 'nama'},
-                {data: 'jenis'},
-                {data: 'jumlah'},
+                {data: 'id_pb'},
+                {data: 'nm_pb'},
+                {data: 'jenis_pb'},
+                {data: 'jml_ang'},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });
@@ -209,12 +220,16 @@
   $('#editModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
   var name = button.data('name')// Extract info from data-* attributes
+  var jenis = button.data('jenis')
+  var jml = button.data('jml')
   var id = button.data('id')
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
-  $('#editForm').attr('action', `/bank/${id}`);
-  modal.find('.modal-body input').val(name)
+  $('#editForm').attr('action', `/pemborong/${id}`);
+  modal.find('.modal-body .nama_pb input').val(name)
+  modal.find('.modal-body .jenis_pb .mark option').val(jenis)
+  modal.find('.modal-body .jml input').val(jml)
   })
 </script>
 <script>
@@ -223,7 +238,7 @@
   var id = button.data('id')// Extract info from data-* attributes
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  $('#deleteForm').attr('action', `/bank/${id}`);
+  $('#deleteForm').attr('action', `/pemborong/${id}`);
   })
 </script>
 @stop
