@@ -8,7 +8,7 @@
 @stop
 
 @section('content')
-<table id="users-table" class="table table-bordered">
+<table id="sales-table" class="table table-bordered">
     <thead>
     <tr>
         <th>Id Sales</th>
@@ -42,12 +42,13 @@
       <div class="x_content">
         <br />
 
-        <form id="tambah-lokasi" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+        <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/sales">
+          @csrf
            <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Sales<span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" id="first-name" required="required" name="idcs" class="form-control col-md-7 col-xs-12" value="">
+              <input type="text" id="id_sales" required="required" name="id_sales" class="form-control col-md-7 col-xs-12" value="">
             </div>
           </div>
 
@@ -55,7 +56,7 @@
            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Sales<span class="required">*</span>
            </label>
            <div class="col-md-6 col-sm-6 col-xs-12">
-             <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+             <input type="text" id="nm_sales" required="required" name="nm_sales" class="form-control col-md-7 col-xs-12" value="">
            </div>
          </div>
 
@@ -63,7 +64,7 @@
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Alamat Sales<span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+            <input type="text" id="alamat_sales" required="required" name="alamat_sales" class="form-control col-md-7 col-xs-12" value="">
           </div>
         </div>
 
@@ -71,15 +72,16 @@
          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No Telepon<span class="required">*</span>
          </label>
          <div class="col-md-6 col-sm-6 col-xs-12">
-           <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+           <input type="text" id="no_hp" required="required" name="no_hp" class="form-control col-md-7 col-xs-12" value="">
          </div>
        </div>
 
           <div class="ln_solid"></div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-  <button class="btn btn-primary" type="reset">Reset</button>
-              <button type="submit" class="btn btn-success">Submit</button>
+              <button class="btn btn-primary" type="reset">Reset</button>
+              <input type="submit" class="btn btn-success" value="Submit">
+              {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
             </div>
           </div>
         </form>
@@ -197,10 +199,10 @@
 @section('js')
 <script>
     $(function () {
-        $('#users-table').DataTable({
+        $('#sales-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/sales-data',
+            ajax: '/master-sales',
             columns: [
                 {data: 'id_sales'},
                 {data: 'nm_sales'},

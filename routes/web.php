@@ -28,6 +28,18 @@ Route::get('list/users-data', 'UsersController@data');
 Route::resource('bank', 'BankController');
 Route::get('bank-data', 'BankController@data');
 
+Route::resource('customer', 'CustController');
+Route::get('master-customer', 'CustController@data');
+
+Route::resource('sales', 'SalesController');
+Route::get('master-sales', 'SalesController@data');
+
+Route::resource('gudang', 'GudangController');
+Route::get('master-gudang', 'GudangController@data');
+
+Route::resource('lokasi', 'LokasiController');
+Route::get('master-lokasi', 'LokasiController@data');
+
 // penjualan
 Route::get('/penjualan/dompul/invoice-dompul', function() {
   return view ('/penjualan/dompul/invoice-dompul');

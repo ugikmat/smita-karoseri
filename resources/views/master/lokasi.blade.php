@@ -8,7 +8,7 @@
 @stop
 
 @section('content')
-<table id="users-table" class="table table-bordered">
+<table id="lokasi-table" class="table table-bordered">
     <thead>
     <tr>
         <th>Id Lokasi</th>
@@ -40,12 +40,13 @@
       <div class="x_content">
         <br />
 
-        <form id="tambah-lokasi" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+        <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/lokasi">
+          @csrf
            <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Lokasi<span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" id="first-name" required="required" name="idcs" class="form-control col-md-7 col-xs-12" value="">
+              <input type="text" id="id_lokasi" required="required" name="id_lokasi" class="form-control col-md-7 col-xs-12" value="">
             </div>
           </div>
 
@@ -53,15 +54,16 @@
            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Lokasi<span class="required">*</span>
            </label>
            <div class="col-md-6 col-sm-6 col-xs-12">
-             <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+             <input type="text" id="nm_lokasi" required="required" name="nm_lokasi" class="form-control col-md-7 col-xs-12" value="">
            </div>
          </div>
 
           <div class="ln_solid"></div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-  <button class="btn btn-primary" type="reset">Reset</button>
-              <button type="submit" class="btn btn-success">Submit</button>
+              <button class="btn btn-primary" type="reset">Reset</button>
+              <input type="submit" class="btn btn-success" value="Submit">
+              {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
             </div>
           </div>
         </form>
@@ -164,10 +166,10 @@
 @section('js')
 <script>
     $(function () {
-        $('#users-table').DataTable({
+        $('#lokasi-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/lokasi-data',
+            ajax: '/master-lokasi',
             columns: [
                 {data: 'id_lokasi'},
                 {data: 'nm_lokasi'},

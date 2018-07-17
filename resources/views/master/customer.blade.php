@@ -8,7 +8,7 @@
 @stop
 
 @section('content')
-<table id="users-table" class="table table-bordered">
+<table id="customers-table" class="table table-bordered">
     <thead>
     <tr>
         <th>Id</th>
@@ -43,12 +43,13 @@
       <div class="x_content">
         <br />
 
-        <form id="tambah-lokasi" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+        <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/customer">
+          @csrf
            <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Customer<span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" id="first-name" required="required" name="idcs" class="form-control col-md-7 col-xs-12" value="">
+              <input type="text" id="id_cust" required="required" name="id_cust" class="form-control col-md-7 col-xs-12" value="">
             </div>
           </div>
 
@@ -56,7 +57,7 @@
            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Customer<span class="required">*</span>
            </label>
            <div class="col-md-6 col-sm-6 col-xs-12">
-             <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+             <input type="text" id="nm_cust" required="required" name="nm_cust" class="form-control col-md-7 col-xs-12" value="">
            </div>
          </div>
 
@@ -64,7 +65,7 @@
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Alamat Customer<span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+            <input type="text" id="alamat_cust" required="required" name="alamat_cust" class="form-control col-md-7 col-xs-12" value="">
           </div>
         </div>
 
@@ -72,7 +73,7 @@
          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No Telepon<span class="required">*</span>
          </label>
          <div class="col-md-6 col-sm-6 col-xs-12">
-           <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+           <input type="text" id="no_hp" required="required" name="no_hp" class="form-control col-md-7 col-xs-12" value="">
          </div>
        </div>
 
@@ -80,11 +81,11 @@
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jabatan Customer<span class="required">*</span>
         </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-          <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+          <input type="text" id="jabatan" required="required" name="jabatan" class="form-control col-md-7 col-xs-12" value="">
         </div>
       </div>
 
-      <div class="form-group">
+<!--<div class="form-group">
   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">User<span class="required">*</span>
   </label>
  <div class="radio">
@@ -97,14 +98,15 @@
      <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
      Karoseri
    </label>
- </div>
+ </div>-->
 </div>
 
           <div class="ln_solid"></div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-  <button class="btn btn-primary" type="reset">Reset</button>
-              <button type="submit" class="btn btn-success">Submit</button>
+              <button class="btn btn-primary" type="reset">Reset</button>
+              <input type="submit" class="btn btn-success" value="Submit">
+              {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
             </div>
           </div>
         </form>
@@ -112,10 +114,11 @@
     </div>
   </div>
 </div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+</div>
+
 
           </div>
         </div>
@@ -185,7 +188,7 @@
   </div>
 </div>
 
-<div class="form-group">
+<!--<div class="form-group">
 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">User<span class="required">*</span>
 </label>
 <div class="radio">
@@ -199,7 +202,7 @@ XL
 Karoseri
 </label>
 </div>
-</div>
+</div>-->
 
     <div class="ln_solid"></div>
     <div class="form-group">
@@ -246,10 +249,10 @@ Karoseri
 @section('js')
 <script>
     $(function () {
-        $('#users-table').DataTable({
+        $('#customers-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/customer-data',
+            ajax: '/master-customer',
             columns: [
                 {data: 'id_cust'},
                 {data: 'nm_cust'},
