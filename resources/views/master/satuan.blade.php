@@ -15,18 +15,16 @@
 </table>
 <!-- Modal Tambah -->
 <section class="content-header">
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">Tambah</button>
-  
-  <div class="modal fade bs-example-modal-lg" id='modal1' tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">Tambah</button>
+      <div class="modal fade bs-example-modal-lg" id='modalTambah' tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
 
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true">×</span>
-          </button>
-          <h4 class="modal-title" id="myModalLabel">Tambah Satuan</h4>
-        </div>
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel">Tambah Satuan</h4>
+            </div>
         <div class="modal-body">
           <div class="clearfix"></div>
           <div class="row">
@@ -77,6 +75,7 @@
                   </form>
                 </div>
               </div>
+>>>>>>> upstream/front
             </div>
           </div>
         </div>
@@ -91,7 +90,7 @@
 
 
 <!--Modal Edit-->
-<div class="modal fade bs-example-modal-lg" id='modal1' tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bs-example-modal-lg" id='modalEdit' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
