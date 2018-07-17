@@ -84,10 +84,12 @@ class BankController extends Controller
     public function update($id,Request $request)
     {
         $request->validate([
-            'nama' => 'bail|required|unique:banks|max:255',
+            'nama' => 'required',
+            'kode' => 'required',
         ]);
         $bank = Bank::find($id);
-        $bank->nama = $request->get('nama');
+        $bank->nama_bank = $request->get('nama');
+        $bank->kode_bank = $request->get('kode');
         $bank->save();
         return redirect('/bank');
     }
@@ -117,7 +119,7 @@ class BankController extends Controller
         return $datatables->eloquent(Bank::query())
                           ->addColumn('action', function ($bank) {
                               return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$bank->id_bank.'" data-name="'.$bank->nama_bank.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$bank->id_bank.'" data-name="'.$bank->nama_bank.'" data-kode="'.$bank->kode_bank.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                               <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$bank->id_bank.'" data-name="'.$bank->nama_bank.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
                           ->make(true);
