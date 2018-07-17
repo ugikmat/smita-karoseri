@@ -199,7 +199,7 @@
           data: 'tipe'
         },
         {
-          data: 'status'
+          data: 'status_produk'
         },
         {
           data: 'action',
