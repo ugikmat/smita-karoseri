@@ -52,7 +52,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="first-name" required="required" name="jumlah" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
@@ -61,7 +61,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="first-name" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
@@ -127,7 +127,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                      <input type="text" id="first-name" required="required" name="jumlah" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 
@@ -136,7 +136,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                      <input type="text" id="first-name" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 

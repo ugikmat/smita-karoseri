@@ -10,7 +10,7 @@
 @section('css')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/u/bs-3.3.6/jq-2.2.3,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.12,b-1.2.0,b-colvis-1.2.0,b-html5-1.2.0,b-print-1.2.0,fh-3.1.2,se-1.2.0/datatables.min.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker.min.css"/>
-    @stop
+@stop
 
 @section('content')
 <table id="suplier-table" class="table table-bordered">
@@ -65,7 +65,7 @@
           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Alamat Suplier<span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+            <input type="text" id="first-name" required="required" name="alamat" class="form-control col-md-7 col-xs-12" value="">
           </div>
         </div>
 
@@ -73,7 +73,7 @@
          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No Telepon<span class="required">*</span>
          </label>
          <div class="col-md-6 col-sm-6 col-xs-12">
-           <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+           <input type="text" id="first-name" required="required" name="telepon" class="form-control col-md-7 col-xs-12" value="">
          </div>
        </div>
 
@@ -81,7 +81,7 @@
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Email Suplier<span class="required">*</span>
         </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-          <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+          <input type="text" id="first-name" required="required" name="email" class="form-control col-md-7 col-xs-12" value="">
         </div>
       </div>
 
@@ -97,7 +97,7 @@
        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status Suplier<span class="required">*</span>
        </label>
        <div class="col-md-6 col-sm-6 col-xs-12">
-         <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+         <input type="text" id="first-name" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
        </div>
      </div>
 
@@ -158,7 +158,7 @@
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Alamat Suplier<span class="required">*</span>
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+      <input type="text" id="first-name" required="required" name="alamat" class="form-control col-md-7 col-xs-12" value="">
     </div>
   </div>
 
@@ -166,7 +166,7 @@
    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No Telepon<span class="required">*</span>
    </label>
    <div class="col-md-6 col-sm-6 col-xs-12">
-     <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+     <input type="text" id="first-name" required="required" name="telepon" class="form-control col-md-7 col-xs-12" value="">
    </div>
  </div>
 
@@ -174,7 +174,7 @@
   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Email Suplier<span class="required">*</span>
   </label>
   <div class="col-md-6 col-sm-6 col-xs-12">
-    <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+    <input type="text" id="first-name" required="required" name="email" class="form-control col-md-7 col-xs-12" value="">
   </div>
 </div>
 
@@ -190,7 +190,7 @@
  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status Suplier<span class="required">*</span>
  </label>
  <div class="col-md-6 col-sm-6 col-xs-12">
-   <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+   <input type="text" id="first-name" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
  </div>
 </div>
 
@@ -257,9 +257,9 @@
     });
 </script>
 <script type="text/javascript" src="https://cdn.datatables.net/u/bs-3.3.6/jq-2.2.3,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.12,b-1.2.0,b-colvis-1.2.0,b-html5-1.2.0,b-print-1.2.0,fh-3.1.2,se-1.2.0/datatables.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/locales/bootstrap-datepicker.en.min.js"></script>
-    <script type="text/javascript">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/locales/bootstrap-datepicker.en.min.js"></script>
+<script type="text/javascript">
         $('.date_picker input').datepicker({
           format: "dd.mm.yyyy",
           todayBtn: "linked",
