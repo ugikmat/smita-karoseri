@@ -12,8 +12,8 @@ class ProdukSeeder extends Seeder
      */
     public function run()
     {
-        $sp1 = new produk()
-        $sp1->nama='BRONET 2GB';
+        $sp1 = new produk();
+        $sp1->nama = "BRONET 2GB";
         $sp1->tipe='SP';
         $sp1->status='tersedia';
         $sp1->save();
@@ -25,7 +25,7 @@ class ProdukSeeder extends Seeder
         $sp2->save();
 
         $dompul = new produk();
-        $dpmpul->nama='Dompul';
+        $dompul->nama='Dompul';
         $dompul->tipe='dompul';
         $dompul->status='tersedia';
         $dompul->save();

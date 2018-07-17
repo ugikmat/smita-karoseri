@@ -7,7 +7,6 @@
     <tr>
       <th>Id</th>
       <th>Nama Satuan</th>
-      <th>Jumlah Satuan</th>
       <th>Status</th>
       <th>action</th>
     </tr>
@@ -75,7 +74,6 @@
                   </form>
                 </div>
               </div>
->>>>>>> upstream/front
             </div>
           </div>
         </div>
@@ -191,9 +189,6 @@
         },
         {
           data: 'nama_satuan'
-        },
-        {
-          data: 'jumlah_satuan'
         },
         {
           data: 'status_satuan'
