@@ -16,6 +16,14 @@
       <th>action</th>
     </tr>
   </thead>
+  <tfoot>
+    <tr>
+      <th>Id</th>
+      <th>Nama Produk</th>
+      <th>Tipe Produk</th>
+      <th>Status Produk</th>
+    </tr>
+  </tfoot>
 </table>
 
 <!-- tambah data -->
@@ -193,23 +201,37 @@
       processing: true,
       ajax: '/master/produk-data',
       columns: [{
-          data: 'id'
+          data: 'id',
+          name: 'id'
         },
         {
-          data: 'nama'
+          data: 'nama',
+          name: 'nama'
         },
         {
-          data: 'tipe'
+          data: 'tipe',
+          name: 'tipe'
         },
         {
-          data: 'status'
+          data: 'status',
+          name: 'status'
         },
         {
           data: 'action',
           orderable: false,
           searchable: false
         }
-      ]
+      ],
+      initComplete: function () {
+        this.api().columns().every(function () {
+          var column = this;
+          var input = document.createElement("input");
+          $(input).appendTo($(column.footer()).empty())
+            .on('change', function () {
+              column.search($(this).val(), false, false, true).draw();
+            });
+        });
+      }
     });
   });
 </script>

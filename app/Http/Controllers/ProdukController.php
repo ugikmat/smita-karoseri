@@ -124,8 +124,8 @@ class ProdukController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function data(Datatables $datatables)
-    {
-        return $datatables->eloquent(produk::query())
+    {   
+        return $datatables->eloquent(produk::where('status', "tersedia"))
                           ->addColumn('action', function ($produk) {
                               return 
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$produk->id.'" data-name="'.$produk->nama.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
