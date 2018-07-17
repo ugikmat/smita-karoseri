@@ -1,9 +1,17 @@
-@extends('adminlte::page') @section('title', 'Suplier') @section('content_header')
-<h1>Daftar Suplier</h1>
+@extends('adminlte::page')
 
-@stop @section('css')
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker.min.css"/> 
-@stop 
+@section('title', 'Suplier')
+
+@section('content_header')
+    <h1>Daftar Suplier</h1>
+
+@stop
+
+@section('css')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/u/bs-3.3.6/jq-2.2.3,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.12,b-1.2.0,b-colvis-1.2.0,b-html5-1.2.0,b-print-1.2.0,fh-3.1.2,se-1.2.0/datatables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker.min.css"/>
+@stop
+
 @section('content')
 <table id="suplier-table" class="table table-bordered">
   <thead>
@@ -23,10 +31,10 @@
 
 <!-- Button to Open the Modal -->
 <section class="content-header">
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">Tambah</button>
-  <div class="modal fade bs-example-modal-lg" id='modalTambah' tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTambah">Tambah</button>
+      <div class="modal fade bs-example-modal-lg" id='modalTambah' tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
 
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">
@@ -56,32 +64,29 @@
                       </div>
                     </div>
 
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Alamat Suplier
-                        <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
-                      </div>
-                    </div>
+         <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Alamat Suplier<span class="required">*</span>
+          </label>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <input type="text" id="first-name" required="required" name="alamat" class="form-control col-md-7 col-xs-12" value="">
+          </div>
+        </div>
 
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No Telepon
-                        <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
-                      </div>
-                    </div>
+        <div class="form-group">
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No Telepon<span class="required">*</span>
+         </label>
+         <div class="col-md-6 col-sm-6 col-xs-12">
+           <input type="text" id="first-name" required="required" name="telepon" class="form-control col-md-7 col-xs-12" value="">
+         </div>
+       </div>
 
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Email Suplier
-                        <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
-                      </div>
-                    </div>
+       <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Email Suplier<span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <input type="text" id="first-name" required="required" name="email" class="form-control col-md-7 col-xs-12" value="">
+        </div>
+      </div>
 
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Input
@@ -92,14 +97,13 @@
                       </div>
                     </div>
 
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status Suplier
-                        <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
-                      </div>
-                    </div>
+      <div class="form-group">
+       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status Suplier<span class="required">*</span>
+       </label>
+       <div class="col-md-6 col-sm-6 col-xs-12">
+         <input type="text" id="first-name" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
+       </div>
+     </div>
 
                     <div class="ln_solid"></div>
                     <div class="form-group">
@@ -156,32 +160,29 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Alamat Suplier
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
-                  </div>
+   <div class="form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Alamat Suplier<span class="required">*</span>
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <input type="text" id="first-name" required="required" name="alamat" class="form-control col-md-7 col-xs-12" value="">
+    </div>
+  </div>
 
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No Telepon
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
-                  </div>
+  <div class="form-group">
+   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No Telepon<span class="required">*</span>
+   </label>
+   <div class="col-md-6 col-sm-6 col-xs-12">
+     <input type="text" id="first-name" required="required" name="telepon" class="form-control col-md-7 col-xs-12" value="">
+   </div>
+ </div>
 
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Email Suplier
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
-                  </div>
+ <div class="form-group">
+  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Email Suplier<span class="required">*</span>
+  </label>
+  <div class="col-md-6 col-sm-6 col-xs-12">
+    <input type="text" id="first-name" required="required" name="email" class="form-control col-md-7 col-xs-12" value="">
+  </div>
+</div>
 
                   <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Input
@@ -192,14 +193,13 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status Suplier
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
-                  </div>
+<div class="form-group">
+ <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status Suplier<span class="required">*</span>
+ </label>
+ <div class="col-md-6 col-sm-6 col-xs-12">
+   <input type="text" id="first-name" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
+ </div>
+</div>
 
                   <div class="ln_solid"></div>
                   <div class="form-group">
@@ -241,7 +241,8 @@
     </div>
   </div>
 </div>
-@stop @section('js')
+@stop 
+@section('js')
 <script>
   $(function () {
     $('#suplier-table').DataTable({

@@ -14,7 +14,7 @@
 </table>
 <!-- Modal Tambah -->
 <section class="content-header">
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">Tambah</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTambah">Tambah</button>
       <div class="modal fade bs-example-modal-lg" id='modalTambah' tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -51,7 +51,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="first-name" required="required" name="jumlah" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
@@ -60,7 +60,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="first-name" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
@@ -125,7 +125,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                      <input type="text" id="first-name" required="required" name="jumlah" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 
@@ -134,7 +134,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                      <input type="text" id="first-name" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 
