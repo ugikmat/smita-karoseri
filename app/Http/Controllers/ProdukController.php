@@ -112,7 +112,7 @@ class ProdukController extends Controller
      */
     public function destroy($id)
     {
-        $produk = produk::find($id);
+        $produk = produk::where('id',$id)->first();
         $produk->status = "tidak tersedia";
         $produk->save();
         return redirect('master/produk');
