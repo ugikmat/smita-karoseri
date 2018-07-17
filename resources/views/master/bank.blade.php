@@ -142,9 +142,9 @@
             processing: true,
             ajax: '/bank-data',
             columns: [
-                {data: 'id'},
-                {data: 'kode'},
-                {data: 'nama'},
+                {data: 'id_bank'},
+                {data: 'kode_bank'},
+                {data: 'nama_bank'},
                 {data: 'action', orderable: false, searchable: false}
             ],
       initComplete: function () {
