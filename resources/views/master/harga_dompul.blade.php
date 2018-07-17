@@ -16,9 +16,9 @@
 <table id="harga-dompul-table" class="table table-bordered">
     <thead>
     <tr>
-        <th>Id Dompul</th>
-        <th>Nama Dompul</th>
-        <th>Tipe Doumpul</th>
+        <th>Id Harga Dompul</th>
+        <th>Nama Harga Dompul</th>
+        <th>Tipe Harga Dompul</th>
         <th>Harga Dompul</th>
         <th>Tanggal Update</th>
         <th>Status</th>
@@ -52,7 +52,7 @@
         <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
 
           <div class="form-group">
-           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Dompul<span class="required">*</span>
+           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Harga Dompul<span class="required">*</span>
            </label>
            <div class="col-md-6 col-sm-6 col-xs-12">
              <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value="">
@@ -60,7 +60,7 @@
          </div>
 
          <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Dompul<span class="required">*</span>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Harga Dompul<span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
             <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
@@ -68,7 +68,7 @@
         </div>
 
         <div class="form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul<span class="required">*</span>
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Harga Dompul<span class="required">*</span>
          </label>
          <div class="col-md-6 col-sm-6 col-xs-12">
            <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
@@ -146,7 +146,7 @@
   <form id="edit" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
 
     <div class="form-group">
-     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Dompul<span class="required">*</span>
+     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Harga Dompul<span class="required">*</span>
      </label>
      <div class="col-md-6 col-sm-6 col-xs-12">
        <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value="">
@@ -154,7 +154,7 @@
    </div>
 
    <div class="form-group">
-    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Dompul<span class="required">*</span>
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Harga Dompul<span class="required">*</span>
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
       <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
@@ -162,7 +162,7 @@
   </div>
 
   <div class="form-group">
-   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul<span class="required">*</span>
+   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Harga Dompul<span class="required">*</span>
    </label>
    <div class="col-md-6 col-sm-6 col-xs-12">
      <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">

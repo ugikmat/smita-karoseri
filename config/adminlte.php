@@ -212,6 +212,10 @@ return [
                 'text'  => 'sales',
                 'url'   => '/master/sales',
               ],
+              [
+                'text'  => 'dompul',
+                'url'   => '/master/dompul',
+              ],
             ],
         ],
 
