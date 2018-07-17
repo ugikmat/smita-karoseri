@@ -3,9 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Supplier;
+use Yajra\Datatables\Datatables;
 
 class SupplierController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +25,7 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        //
+        return view('master.suplier');
     }
 
     /**
@@ -79,6 +91,23 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+    }
+
+        /**
+     * Process dataTable ajax response.
+     *
+     * @param \Yajra\Datatables\Datatables $datatables
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function data(Datatables $datatables)
+    {
+        return $datatables->eloquent(Supplier::query())
+                          ->addColumn('action', function ($supplier) {
+                              return 
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$supplier->id_supplier.'" data-name="'.$supplier->nama_supplier.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$supplier->id_supplier.'" data-name="'.$supplier->nama_supplier.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+                            })
+                          ->make(true);
     }
 }

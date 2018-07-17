@@ -12,7 +12,7 @@ class ProdukSeeder extends Seeder
      */
     public function run()
     {
-        $sp1 = new produk()
+        $sp1 = new produk();
         $sp1->kode_produk='SP1';
         $sp1->nama_produk='BRONET 2GB';
         $sp1->kategori_produk='SP';
@@ -23,7 +23,7 @@ class ProdukSeeder extends Seeder
         $sp1->tarif_pajak='5%';
         $sp1->diskon='0.15%';
         $sp1->komisi='0.10%';
-        $sp1->status='tersedia';
+        $sp1->status_produk='tersedia';
         $sp1->save();
 
         $sp2 = new produk();
@@ -37,7 +37,7 @@ class ProdukSeeder extends Seeder
         $sp2->tarif_pajak='10%';
         $sp2->diskon='0.15%';
         $sp2->komisi='0.10%';
-        $sp2->status='tersedia';
+        $sp2->status_produk='tersedia';
         $sp2->save();
 
         $dompul = new produk();
@@ -51,7 +51,7 @@ class ProdukSeeder extends Seeder
         $dompul->tarif_pajak='10%';
         $dompul->diskon='0.15%';
         $dompul->komisi='0.10%';
-        $dompul->status='tersedia';
+        $dompul->status_produk='tersedia';
         $dompul->save();
 
         $dompul2 = new produk();
@@ -65,7 +65,7 @@ class ProdukSeeder extends Seeder
         $dompul2->tarif_pajak='10%';
         $dompul2->diskon='0.15%';
         $dompul2->komisi='0.10%';
-        $dompul2->status='tersedia';
+        $dompul2->status_produk='tersedia';
         $dompul2->save();
 
         $dompul3 = new produk();
@@ -79,7 +79,7 @@ class ProdukSeeder extends Seeder
         $dompul3->tarif_pajak='10%';
         $dompul3->diskon='0.15%';
         $dompul3->komisi='0.10%';
-        $dompul3->status='tersedia';
+        $dompul3->status_produk='tersedia';
         $dompul3->save();
     }
 }

@@ -113,7 +113,8 @@ class SatuanController extends Controller
     public function destroy($id)
     {
         $satuan = Satuan::find($id);
-        $satuan->delete();
+        $satuan->status_satuan="tidak tersedia";
+        $satuan->save();
         return redirect('master/satuan');
     }
 
@@ -125,11 +126,11 @@ class SatuanController extends Controller
      */
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(Satuan::query())
+        return $datatables->eloquent(Satuan::where('status_satuan','tersedia'))
                           ->addColumn('action', function ($satuan) {
                               return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$satuan->id.'" data-name="'.$satuan->nama.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$satuan->id.'" data-name="'.$satuan->nama.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$satuan->id_satuan.'" data-name="'.$satuan->nama_satuan.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$satuan->id_satuan.'" data-name="'.$satuan->nama_satuan.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
                           ->make(true);
     }

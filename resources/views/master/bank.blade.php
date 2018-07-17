@@ -43,22 +43,19 @@
       </div>
       <!-- Modal body -->
       <div class="modal-body">
-          <div class="input-group">
+        <div class="input-group kode">
+            <span class="input-group-addon">
+                <i class="fa fa-bank"></i>
+            </span>
+            <input id="kode" name="kode" type="text" class="form-control" placeholder="Kode Bank">
+        </div>
+          <div class="input-group nama">
             <span class="input-group-addon">
                 <i class="fa fa-bank"></i>
             </span>
             <input id="nama" name="nama" type="text" class="form-control" placeholder="Bank Name">
         </div>
       </div>
-      <div class="modal-body">
-          <div class="input-group">
-            <span class="input-group-addon">
-                <i class="fa fa-bank"></i>
-            </span>
-            <input id="nama" name="kode" type="text" class="form-control" placeholder="Kode Bank">
-        </div>
-      </div>
-
       <!-- Modal footer -->
       <div class="modal-footer">
           <input type="submit" class="btn btn-primary" value="Tambah">
@@ -84,22 +81,19 @@
       </div>
       <!-- Modal body -->
       <div class="modal-body">
-          <div class="input-group">
+        <div class="input-group kode">
+            <span class="input-group-addon">
+                <i class="fa fa-bank"></i>
+            </span>
+            <input id="kode" name="kode" type="text" class="form-control" placeholder="Kode Bank">
+        </div>
+          <div class="input-group nama">
             <span class="input-group-addon">
                 <i class="fa fa-bank"></i>
             </span>
             <input id="nama" name="nama" type="text" class="form-control" placeholder="Bank Name">
         </div>
       </div>
-      <div class="modal-body">
-          <div class="input-group">
-            <span class="input-group-addon">
-                <i class="fa fa-bank"></i>
-            </span>
-            <input id="nama" name="kode" type="text" class="form-control" placeholder="Kode Bank">
-        </div>
-      </div>
-
       <!-- Modal footer -->
       <div class="modal-footer">
           <input type="submit" class="btn btn-primary" value="Simpan">
@@ -142,9 +136,9 @@
             processing: true,
             ajax: '/bank-data',
             columns: [
-                {data: 'id'},
-                {data: 'kode'},
-                {data: 'nama'},
+                {data: 'id_bank'},
+                {data: 'kode_bank'},
+                {data: 'nama_bank'},
                 {data: 'action', orderable: false, searchable: false}
             ],
       initComplete: function () {
@@ -165,11 +159,13 @@
   var button = $(event.relatedTarget) // Button that triggered the modal
   var name = button.data('name')// Extract info from data-* attributes
   var id = button.data('id')
+  var kode = button.data('kode')
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
   $('#editForm').attr('action', `/bank/${id}`);
-  modal.find('.modal-body input').val(name)
+  modal.find('.modal-body .nama input').val(name)
+  modal.find('.modal-body .kode input').val(kode)
   })
 </script>
 <script>

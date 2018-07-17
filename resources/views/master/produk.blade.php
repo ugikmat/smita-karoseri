@@ -8,8 +8,16 @@
   <thead>
     <tr>
       <th>Id</th>
+      <th>Kode Produk</th>
       <th>Nama Produk</th>
-      <th>Tipe Produk</th>
+      <th>Kategori Produk</th>
+      <th>Satuan</th>
+      <th>Jenis</th>
+      <th>BOM</th>
+      <th>Harga Jual</th>
+      <th>Tarif Pajak</th>
+      <th>Diskon</th>
+      <th>Komisi</th>
       <th>Status Produk</th>
       <th>action</th>
     </tr>
@@ -40,7 +48,7 @@
                   <br />
 
                   <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
-
+                    @csrf
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Produk
                         <span class="required">*</span>
@@ -92,7 +100,7 @@
 
 
 <!--Modal Edit-->
-<div class="modal fade bs-example-modal-lg" id='modalEdit' tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
@@ -167,7 +175,9 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-
+      <form action="" id="deleteForm" method="POST">
+        @csrf
+        @method('delete')
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -175,10 +185,10 @@
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Hapus</button>
+        <input type="submit" class="btn btn-danger" value="Hapus">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
       </div>
-
+      </form>
     </div>
   </div>
 </div>
@@ -190,16 +200,40 @@
       processing: true,
       ajax: '/master/produk-data',
       columns: [{
-          data: 'id'
+          data: 'id_produk'
         },
         {
-          data: 'nama'
+          data: 'kode_produk'
         },
         {
-          data: 'tipe'
+          data: 'nama_produk'
         },
         {
-          data: 'status'
+          data: 'kategori_produk'
+        },
+        {
+          data: 'satuan'
+        },
+        {
+          data: 'jenis'
+        },
+        {
+          data: 'BOM'
+        },
+        {
+          data: 'harga_jual'
+        },
+        {
+          data: 'tarif_pajak'
+        },
+        {
+          data: 'diskon'
+        },
+        {
+          data: 'komisi'
+        },
+        {
+          data: 'status_produk'
         },
         {
           data: 'action',
@@ -209,5 +243,28 @@
       ]
     });
   });
+</script>
+<script>
+  $('#editModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var name = button.data('name')// Extract info from data-* attributes
+  var id = button.data('id')
+  var kode = button.data('kode')
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  $('#editForm').attr('action', `/master/produk/${id}`);
+  modal.find('.modal-body .nama input').val(name)
+  modal.find('.modal-body .kode input').val(kode)
+  })
+</script>
+<script>
+  $('#deleteModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var id = button.data('id')// Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  $('#deleteForm').attr('action', `/master/produk/${id}`);
+  })
 </script>
 @stop
