@@ -23,8 +23,8 @@ class CreateProduksTable extends Migration
             $table->string('BOM');
             $table->double('harga_jual');
             $table->double('tarif_pajak');
-            $table->integer('diskon');
-            $table->integer('komisi');
+            $table->double('diskon');
+            $table->double('komisi');
             $table->string('status_produk');
         });
     }
