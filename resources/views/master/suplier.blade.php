@@ -18,7 +18,7 @@
     <tr>
         <th>Id</th>
         <th>Nama Suplier</th>
-        <th>Amalat Suplier</th>
+        <th>Alamat Suplier</th>
         <th>Telepon Suplier</th>
         <th>Email Suplier</th>
         <th>Tanggal Input</th>

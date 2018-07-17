@@ -12,20 +12,39 @@ class BanksTableSeder extends Seeder
      */
     public function run()
     {
-        $bca = new Bank();
-        $bca->nama='BCA';
-        $bca->save();
-
         $bri = new Bank();
-        $bri->nama='BRI';
+        $bri->id='BNK-1';
+        $bri->nama='Bank BRI';
         $bri->save();
 
+        $mandiri = new Bank();
+        $mandiri->id='BNK-2';
+        $mandiri->nama='Bank Mandiri';
+        $mandiri->save();
+
         $bni = new Bank();
-        $bni->nama='BNI';
+        $bni->id='BNK-3';
+        $bni->nama='Bank BNI';
         $bni->save();
 
-        $mandiri = new Bank();
-        $mandiri->nama='Mandiri';
-        $mandiri->save();
+        $bca = new Bank();
+        $bca->id='BNK-4';
+        $bca->nama='Bank BCA (Pusat)';
+        $bca->save();
+
+        $bcas = new Bank();
+        $bcas->id='BNK-5';
+        $bcas->nama='Bank BCA Cabang Sidoarjo';
+        $bcas->save();
+
+        $bcami = new Bank();
+        $bcami->id='BNK-6';
+        $bcami->nama='Bank BCA Cabang Madiun';
+        $bcami->save();
+
+        $bcamu = new Bank();
+        $bcamu->id='BNK-7';
+        $bcamu->nama='Bank BCA Cabang Madura';
+        $bcamu->save();
     }
 }
