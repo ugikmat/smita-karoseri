@@ -133,7 +133,7 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipe">Tipe Status
                       <span class="required">*</span>
                     </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12 alamat">
+                    <div class="col-md-6 col-sm-6 col-xs-12 tipe">
                       <input type="text" id="tipe" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
@@ -236,11 +236,15 @@
     var button = $(event.relatedTarget) // Button that triggered the modal
     var name = button.data('name') // Extract info from data-* attributes
     var id = button.data('id')
+    var tipe = button.data('tipe')
+    var status = button.data('status')
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
     $('#editForm').attr('action', `/master/produk/${id}`);
     modal.find('.modal-body .nama input').val(name)
+    modal.find('.modal-body .tipe input').val(tipe)
+    modal.find('.modal-body .status input').val(status)
   })
 </script>
 <script>
