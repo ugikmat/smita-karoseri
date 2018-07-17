@@ -91,11 +91,11 @@ class ProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama' => 'bail|required|unique:produks|max:255',
-            'tipe' => 'required',
-            'status' => 'required',
-        ]);
+        // $request->validate([
+        //     'nama' => 'bail|required|unique:produks|max:255',
+        //     'tipe' => 'required',
+        //     'status' => 'required',
+        // ]);
         $produk = produk::find($id);
         $produk->nama = $request->get('nama');
         $produk->tipe = $request->get('tipe');
