@@ -13,38 +13,38 @@ class BanksTableSeder extends Seeder
     public function run()
     {
         $bri = new Bank();
-        $bri->id='BNK-1';
-        $bri->nama='Bank BRI';
+        $bri->kode_bank='BNK-1';
+        $bri->nama_bank='Bank BRI';
         $bri->save();
 
         $mandiri = new Bank();
-        $mandiri->id='BNK-2';
-        $mandiri->nama='Bank Mandiri';
+        $mandiri->kode_bank='BNK-2';
+        $mandiri->nama_bank='Bank Mandiri';
         $mandiri->save();
 
         $bni = new Bank();
-        $bni->id='BNK-3';
-        $bni->nama='Bank BNI';
+        $bni->kode_bank='BNK-3';
+        $bni->nama_bank='Bank BNI';
         $bni->save();
 
         $bca = new Bank();
-        $bca->id='BNK-4';
-        $bca->nama='Bank BCA (Pusat)';
+        $bca->kode_bank='BNK-4';
+        $bca->nama_bank='Bank BCA (Pusat)';
         $bca->save();
 
         $bcas = new Bank();
-        $bcas->id='BNK-5';
-        $bcas->nama='Bank BCA Cabang Sidoarjo';
+        $bcas->kode_bank='BNK-5';
+        $bcas->nama_bank='Bank BCA Cabang Sidoarjo';
         $bcas->save();
 
         $bcami = new Bank();
-        $bcami->id='BNK-6';
-        $bcami->nama='Bank BCA Cabang Madiun';
+        $bcami->kode_bank='BNK-6';
+        $bcami->nama_bank='Bank BCA Cabang Madiun';
         $bcami->save();
 
         $bcamu = new Bank();
-        $bcamu->id='BNK-7';
-        $bcamu->nama='Bank BCA Cabang Madura';
+        $bcamu->kode_bank='BNK-7';
+        $bcamu->nama_bank='Bank BCA Cabang Madura';
         $bcamu->save();
     }
 }

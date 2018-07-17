@@ -7,20 +7,14 @@
 
 @stop
 
-@section('css')
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/u/bs-3.3.6/jq-2.2.3,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.12,b-1.2.0,b-colvis-1.2.0,b-html5-1.2.0,b-print-1.2.0,fh-3.1.2,se-1.2.0/datatables.min.css"/>
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker.min.css"/>
-@stop
-
 @section('content')
 <table id="harga-produk-table" class="table table-bordered">
     <thead>
     <tr>
+        <th>Id Harga Produk</th>
         <th>Id Produk</th>
-        <th>Nama Produk</th>
-        <th>Tipe Produk</th>
+        <th>Tipe Harga Produk</th>
         <th>Harga Produk</th>
-        <th>Tanggal Update</th>
         <th>Status</th>
         <th>Action</th>
     </tr>
@@ -52,23 +46,23 @@
         <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
 
           <div class="form-group">
-           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Produk<span class="required">*</span>
+           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Harga Produk<span class="required">*</span>
            </label>
            <div class="col-md-6 col-sm-6 col-xs-12">
-             <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value="">
+             <input type="text" id="first-name" required="required" name="id-harga" class="form-control col-md-7 col-xs-12" value="">
            </div>
          </div>
 
          <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Produk<span class="required">*</span>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Produk<span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+            <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value="">
           </div>
         </div>
 
         <div class="form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Produk<span class="required">*</span>
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Harga Produk<span class="required">*</span>
          </label>
          <div class="col-md-6 col-sm-6 col-xs-12">
            <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
@@ -82,14 +76,6 @@
           <input type="text" id="first-name" required="required" name="harga" class="form-control col-md-7 col-xs-12" value="">
         </div>
       </div>
-
-      <div class="form-group">
-       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Update<span class="required">*</span>
-       </label>
-       <div class="col-md-6 col-sm-6 col-xs-12 date_picker">
-         <input type="text" id="update_time" class="form-control" name="update_time" placeholder="Pick Date">
-       </div>
-     </div>
 
      <div class="form-group">
       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status<span class="required">*</span>
@@ -146,23 +132,23 @@
   <form id="edit" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
 
     <div class="form-group">
-     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Produk<span class="required">*</span>
+     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Harga Produk<span class="required">*</span>
      </label>
      <div class="col-md-6 col-sm-6 col-xs-12">
-       <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value="">
+       <input type="text" id="first-name" required="required" name="id-harga" class="form-control col-md-7 col-xs-12" value="">
      </div>
    </div>
 
    <div class="form-group">
-    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Produk<span class="required">*</span>
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Produk<span class="required">*</span>
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+      <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value="">
     </div>
   </div>
 
   <div class="form-group">
-   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Produk<span class="required">*</span>
+   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Harga Produk<span class="required">*</span>
    </label>
    <div class="col-md-6 col-sm-6 col-xs-12">
      <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
@@ -175,14 +161,6 @@
   <div class="col-md-6 col-sm-6 col-xs-12">
     <input type="text" id="first-name" required="required" name="harga" class="form-control col-md-7 col-xs-12" value="">
   </div>
-</div>
-
-<div class="form-group">
- <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Update<span class="required">*</span>
- </label>
- <div class="col-md-6 col-sm-6 col-xs-12 date_picker">
-   <input type="text" id="update_time" class="form-control" name="update_time" placeholder="Pick Date">
- </div>
 </div>
 
 <div class="form-group">
@@ -236,7 +214,7 @@
 @stop
 
 @section('js')
-<script>
+<!-- <script>
     $(function () {
         $('#harga-produk-table').DataTable({
             serverSide: true,
@@ -247,21 +225,10 @@
                 {data: 'nama_Produk'},
                 {data: 'tipe_produk'},
                 {data: 'harga_produk'},
-                {data: 'tanggal_update'},
                 {data: 'status_produk'},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });
     });
-</script>
-<script type="text/javascript" src="https://cdn.datatables.net/u/bs-3.3.6/jq-2.2.3,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.12,b-1.2.0,b-colvis-1.2.0,b-html5-1.2.0,b-print-1.2.0,fh-3.1.2,se-1.2.0/datatables.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/locales/bootstrap-datepicker.en.min.js"></script>
-<script type="text/javascript">
-        $('.date_picker input').datepicker({
-          format: "dd.mm.yyyy",
-          todayBtn: "linked",
-          language: "en"
-        });
-    </script>
+</script> -->
 @stop
