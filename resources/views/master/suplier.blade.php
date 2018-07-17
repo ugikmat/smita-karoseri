@@ -30,7 +30,7 @@
 
 <!-- Button to Open the Modal -->
 <section class="content-header">
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">Tambah</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTambah">Tambah</button>
       <div class="modal fade bs-example-modal-lg" id='modalTambah' tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -244,13 +244,13 @@
             processing: true,
             ajax: '/suplier-data',
             columns: [
-                {data: 'id_suplier'},
-                {data: 'nama_suplier'},
-                {data: 'alamat_suplier'},
-                {data: 'telepon_suplier'},
-                {data: 'email_suplier'},
+                {data: 'id_supplier'},
+                {data: 'nama_supplier'},
+                {data: 'alamat_supplier'},
+                {data: 'telepon_supplier'},
+                {data: 'email_supplier'},
                 {data: 'tanggal'},
-                {data: 'status_suplier'},
+                {data: 'status_supplier'},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });
