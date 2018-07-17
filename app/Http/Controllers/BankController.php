@@ -100,8 +100,9 @@ class BankController extends Controller
      */
     public function destroy($id)
     {
-        $bank = Bank::find($id);
-        $bank->delete();
+        $bank = Bank::where('id_bank',$id)->first();
+        $bank->nama_bank="Deleted";
+        $bank->save();
         return redirect('/bank');
     }
 
