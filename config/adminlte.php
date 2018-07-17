@@ -112,12 +112,12 @@ return [
         [
             'text'        => 'Dashboard',
             'url'         => 'home',
-            'icon'        => 'file',
+            'icon'        => 'home',
         ],
         [
             'text'        => 'XL',
             'url'         => 'list/users',
-            'icon'        => 'file',
+            'icon'        => 'phone-square',
             'submenu'     => [
               [
                 'text'    => 'Penjualan',
@@ -175,14 +175,16 @@ return [
         [
             'text'        => 'Karoseri',
             'url'         => 'penjualan/dompul',
-            'icon'        => 'file',
+            'icon'        => 'truck',
         ],
         [
             'text'        => 'Master',
+            'icon'        => 'tasks',
             'submenu'     => [
               [
                 'text'  => 'bank',
                 'url'   => '/master/bank',
+                'icon'  => 'bank',
               ],
               [
                 'text'  => 'produk',
@@ -199,6 +201,7 @@ return [
               [
                 'text'  => 'customer',
                 'url'   => '/master/customer',
+                'icon'  => 'user',
               ],
               [
                 'text'  => 'gudang',
@@ -207,10 +210,22 @@ return [
               [
                 'text'  => 'lokasi',
                 'url'   => '/master/lokasi',
+                'icon'  => 'location-arrow',
               ],
               [
                 'text'  => 'sales',
                 'url'   => '/master/sales',
+                'icon'  => 'user',
+              ],
+              [
+                'text'  => 'pemborong',
+                'url'   => '/master/pemborong',
+                'icon'  => 'users',
+              ],
+              [
+                'text'  => 'supervisor',
+                'url'   => '/master/supervisor',
+                'icon'  => 'user',
               ],
             ],
         ],

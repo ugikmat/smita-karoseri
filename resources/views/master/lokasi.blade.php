@@ -8,7 +8,7 @@
 @stop
 
 @section('content')
-<table id="users-table" class="table table-bordered">
+<table id="lokasi-table" class="table table-bordered">
     <thead>
     <tr>
         <th>Id Lokasi</th>
@@ -40,28 +40,23 @@
       <div class="x_content">
         <br />
 
-        <form id="tambah-lokasi" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
-           <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Lokasi<span class="required">*</span>
-            </label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" id="first-name" required="required" name="idcs" class="form-control col-md-7 col-xs-12" value="">
-            </div>
-          </div>
+        <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/lokasi">
+          @csrf
 
           <div class="form-group">
            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Lokasi<span class="required">*</span>
            </label>
            <div class="col-md-6 col-sm-6 col-xs-12">
-             <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+             <input type="text" id="nm_lokasi" required="required" name="nm_lokasi" class="form-control col-md-7 col-xs-12" value="">
            </div>
          </div>
 
           <div class="ln_solid"></div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-  <button class="btn btn-primary" type="reset">Reset</button>
-              <button type="submit" class="btn btn-success">Submit</button>
+              <button class="btn btn-primary" type="reset">Reset</button>
+              <input type="submit" class="btn btn-success" value="Submit">
+              {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
             </div>
           </div>
         </form>
@@ -81,7 +76,7 @@
 
 
 <!--Modal Edit-->
-<div class="modal fade bs-example-modal-lg" id='modal1' tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
@@ -101,28 +96,23 @@
 <div class="x_content">
   <br />
 
-  <form id="tambah-lokasi" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
-     <div class="form-group">
-      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Lokasi<span class="required">*</span>
-      </label>
-      <div class="col-md-6 col-sm-6 col-xs-12">
-        <input type="text" id="first-name" required="required" name="idcs" class="form-control col-md-7 col-xs-12" value="">
-      </div>
-    </div>
+  <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/lokasi">
+    @csrf
+    @method('put')
 
-    <div class="form-group">
+    <div class="form-group nama_lokasi">
      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Lokasi<span class="required">*</span>
      </label>
      <div class="col-md-6 col-sm-6 col-xs-12">
-       <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+       <input type="text" id="nm_lokasi_upt" required="required" name="nm_lokasi_upt" class="form-control col-md-7 col-xs-12" value="">
      </div>
    </div>
 
     <div class="ln_solid"></div>
     <div class="form-group">
       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-<button class="btn btn-primary" type="reset">Reset</button>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <input type="submit" class="btn btn-success" value="Submit">
+        {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
       </div>
     </div>
   </form>
@@ -144,7 +134,9 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-
+      <form id="deleteForm" action="" method="POST">
+      @csrf
+      @method('delete')
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -152,10 +144,10 @@
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Hapus</button>
+          <input type="submit" class="btn btn-danger delete-user" value="Hapus">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
       </div>
-
+      </form>
     </div>
   </div>
 </div>
@@ -164,10 +156,10 @@
 @section('js')
 <script>
     $(function () {
-        $('#users-table').DataTable({
+        $('#lokasi-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/lokasi-data',
+            ajax: '/master-lokasi',
             columns: [
                 {data: 'id_lokasi'},
                 {data: 'nm_lokasi'},
@@ -175,5 +167,28 @@
             ]
         });
     });
+</script>
+
+<script>
+  $('#editModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var name = button.data('name')// Extract info from data-* attributes
+  var id = button.data('id')
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  $('#editForm').attr('action', `/lokasi/${id}`);
+  modal.find('.modal-body .nama_lokasi input').val(name)
+  })
+</script>
+
+<script>
+  $('#deleteModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var id = button.data('id')// Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  $('#deleteForm').attr('action', `/lokasi/${id}`);
+  })
 </script>
 @stop
