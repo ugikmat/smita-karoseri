@@ -91,10 +91,13 @@
 
 
 <!--Modal Edit-->
-<div class="modal fade bs-example-modal-lg" id='modalEdit' tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-
+      <form action="" id="editForm" method="POST">
+        @csrf
+        @method('put')
+      
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
           <span aria-hidden="true">×</span>
@@ -157,7 +160,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
-
+    </form>
     </div>
   </div>
 </div>
