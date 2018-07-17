@@ -27,7 +27,7 @@
 <!-- tambah data -->
 <section class="content-header">
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTambah">Tambah</button>
-  
+
   <div class="modal fade bs-example-modal-lg" id='modalTambah' tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -188,7 +188,7 @@
                 <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="">
                   @csrf
 
-                  <div class="form-group">
+                  <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kode Produk
                       <span class="required">*</span>
                     </label>
@@ -197,7 +197,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group nama">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Produk
                       <span class="required">*</span>
                     </label>
@@ -206,7 +206,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group kategori">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kategori Produk
                       <span class="required">*</span>
                     </label>
@@ -215,7 +215,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group satuan">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Satuan
                       <span class="required">*</span>
                     </label>
@@ -224,7 +224,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group jenis">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jenis
                       <span class="required">*</span>
                     </label>
@@ -233,7 +233,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group bom">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">BOM
                       <span class="required">*</span>
                     </label>
@@ -242,7 +242,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group jual">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Harga Jual
                       <span class="required">*</span>
                     </label>
@@ -251,7 +251,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group pajak">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tarif Pajak
                       <span class="required">*</span>
                     </label>
@@ -260,7 +260,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group diskon">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Diskon
                       <span class="required">*</span>
                     </label>
@@ -269,7 +269,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group komisi">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Komisi
                       <span class="required">*</span>
                     </label>
@@ -377,12 +377,31 @@
     var name = button.data('name') // Extract info from data-* attributes
     var id = button.data('id')
     var kode = button.data('kode')
+    var kategori = button.data('kategori')
+    var satuan = button.data('satuan')
+    var jenis = button.data('jenis')
+    var bom = button.data('bom')
+    var jual = button.data('jual')
+    var pajak = button.data('pajak')
+    var diskon = button.data('diskon')
+    var komisi = button.data('komisi')
+    var status = button.data('status')
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
     $('#editForm').attr('action', `/master/produk/${id}`);
     modal.find('.modal-body .nama input').val(name)
+    modal.find('.modal-body .id input').val(id)
     modal.find('.modal-body .kode input').val(kode)
+    modal.find('.modal-body .kategori input').val(kategori)
+    modal.find('.modal-body .satuan input').val(satuan)
+    modal.find('.modal-body .jenis input').val(jenis)
+    modal.find('.modal-body .bom input').val(bom)
+    modal.find('.modal-body .jual input').val(jual)
+    modal.find('.modal-body .pajak input').val(pajak)
+    modal.find('.modal-body .diskon input').val(diskon)
+    modal.find('.modal-body .komisi input').val(komisi)
+    modal.find('.modal-body .status input').val(status)
   })
 </script>
 <script>

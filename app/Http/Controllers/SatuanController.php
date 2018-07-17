@@ -125,8 +125,9 @@ class SatuanController extends Controller
     {
         return $datatables->eloquent(Satuan::where('status_satuan','tersedia'))
                           ->addColumn('action', function ($satuan) {
-                              return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$satuan->id_satuan.'" data-name="'.$satuan->nama_satuan.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              return
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$satuan->id_satuan.'" data-name="'.$satuan->nama_satuan.'"
+                              data-tipe="'.$satuan->tipe_satuan.'" data-induk="'.$satuan->induk_satuan.'" data-nilai="'.$satuan->nilai_konversi.'" data-status="'.$satuan->status_satuan.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                               <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$satuan->id_satuan.'" data-name="'.$satuan->nama_satuan.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
                           ->make(true);
