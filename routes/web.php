@@ -77,3 +77,7 @@ Route::get('/master/sales', function() {
 Route::get('/master/suplier', function() {
   return view ('/master/suplier');
 }) -> name('master-suplier');
+
+Route::get('/master/dompul', function() {
+  return view ('/master/dompul');
+}) -> name('master-dompul');

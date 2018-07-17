@@ -14,16 +14,17 @@
 
 @section('content')
 <table id="dompul-table" class="table table-bordered">
-    <thead>
-    <tr>
-        <th>Id Dompul</th>
-        <th>Nama Dompul</th>
-        <th>Tipe Doumpul</th>
-        <th>Harga Dompul</th>
-        <th>Status</th>
-        <th>Action</th>
-    </tr>
-    </thead>
+  <thead>
+  <tr>
+      <th>No HP Master Dompul</th>
+      <th>No HP Sub Dompul</th>
+      <th>ID Gudang</th>
+      <th>Nama Sub Master Dompul</th>
+      <th>Tipe Dompul</th>
+      <th>Status</th>
+      <th>Action</th>
+  </tr>
+  </thead>
 </table>
 <!-- Modal Tambah -->
 <section class="content-header">
@@ -51,36 +52,43 @@
         <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
 
           <div class="form-group">
-           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Dompul<span class="required">*</span>
+           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No HP Master Dompul<span class="required">*</span>
            </label>
            <div class="col-md-6 col-sm-6 col-xs-12">
-             <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value="">
+             <input type="text" id="first-name" required="required" name="master" class="form-control col-md-7 col-xs-12" value="">
            </div>
          </div>
 
          <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Dompul<span class="required">*</span>
+          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No HP Sub Dompul<span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+            <input type="text" id="first-name" required="required" name="sub" class="form-control col-md-7 col-xs-12" value="">
           </div>
         </div>
-
         <div class="form-group">
-         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul<span class="required">*</span>
+         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Gudang<span class="required">*</span>
          </label>
          <div class="col-md-6 col-sm-6 col-xs-12">
-           <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
+           <input type="text" id="first-name" required="required" name="gudang" class="form-control col-md-7 col-xs-12" value="">
          </div>
        </div>
 
        <div class="form-group">
-        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Harga Dompul<span class="required">*</span>
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Sub Master Dompul<span class="required">*</span>
         </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-          <input type="text" id="first-name" required="required" name="harga" class="form-control col-md-7 col-xs-12" value="">
+          <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
         </div>
       </div>
+
+      <div class="form-group">
+       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul<span class="required">*</span>
+       </label>
+       <div class="col-md-6 col-sm-6 col-xs-12">
+         <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
+       </div>
+     </div>
 
      <div class="form-group">
       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status<span class="required">*</span>
@@ -134,38 +142,45 @@
 <div class="x_content">
   <br />
 
-  <form id="edit" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+  <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
 
     <div class="form-group">
-     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Dompul<span class="required">*</span>
+     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No HP Master Dompul<span class="required">*</span>
      </label>
      <div class="col-md-6 col-sm-6 col-xs-12">
-       <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value="">
+       <input type="text" id="first-name" required="required" name="master" class="form-control col-md-7 col-xs-12" value="">
      </div>
    </div>
 
    <div class="form-group">
-    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Dompul<span class="required">*</span>
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No HP Sub Dompul<span class="required">*</span>
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+      <input type="text" id="first-name" required="required" name="sub" class="form-control col-md-7 col-xs-12" value="">
     </div>
   </div>
-
   <div class="form-group">
-   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul<span class="required">*</span>
+   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Gudang<span class="required">*</span>
    </label>
    <div class="col-md-6 col-sm-6 col-xs-12">
-     <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
+     <input type="text" id="first-name" required="required" name="gudang" class="form-control col-md-7 col-xs-12" value="">
    </div>
  </div>
 
  <div class="form-group">
-  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Harga Dompul<span class="required">*</span>
+  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Sub Master Dompul<span class="required">*</span>
   </label>
   <div class="col-md-6 col-sm-6 col-xs-12">
-    <input type="text" id="first-name" required="required" name="harga" class="form-control col-md-7 col-xs-12" value="">
+    <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
   </div>
+</div>
+
+<div class="form-group">
+ <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul<span class="required">*</span>
+ </label>
+ <div class="col-md-6 col-sm-6 col-xs-12">
+   <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
+ </div>
 </div>
 
 <div class="form-group">
@@ -220,30 +235,20 @@
 
 @section('js')
 <script>
-    $(function () {
-        $('#dompul-table').DataTable({
-            serverSide: true,
-            processing: true,
-            ajax: '/dompul-data',
-            columns: [
-                {data: 'id_dompul'},
-                {data: 'nama_dompul'},
-                {data: 'tipe_dompul'},
-                {data: 'harga_dompul'},
-                {data: 'status_dompul'},
-                {data: 'action', orderable: false, searchable: false}
-            ]
-        });
-    });
+    // $(function () {
+    //     $('#dompul-table').DataTable({
+    //         serverSide: true,
+    //         processing: true,
+    //         ajax: '/dompul-data',
+    //         columns: [
+    //             {data: 'id_dompul'},
+    //             {data: 'nama_dompul'},
+    //             {data: 'tipe_dompul'},
+    //             {data: 'harga_dompul'},
+    //             {data: 'status_dompul'},
+    //             {data: 'action', orderable: false, searchable: false}
+    //         ]
+    //     });
+    // });
 </script>
-<script type="text/javascript" src="https://cdn.datatables.net/u/bs-3.3.6/jq-2.2.3,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.12,b-1.2.0,b-colvis-1.2.0,b-html5-1.2.0,b-print-1.2.0,fh-3.1.2,se-1.2.0/datatables.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/locales/bootstrap-datepicker.en.min.js"></script>
-<script type="text/javascript">
-        $('.date_picker input').datepicker({
-          format: "dd.mm.yyyy",
-          todayBtn: "linked",
-          language: "en"
-        });
-    </script>
 @stop

@@ -8,10 +8,11 @@
 @stop
 
 @section('content')
-<table id="users-table" class="table table-bordered">
+<table id="bank-table" class="table table-bordered">
     <thead>
     <tr>
         <th>Id</th>
+        <th>Kode Bank</th>
         <th>Nama Bank</th>
         <th>action</th>
     </tr>
@@ -19,6 +20,7 @@
     <tfoot>
     <tr>
         <th>Id</th>
+        <th>Kode Bank</th>
         <th>Nama Bank</th>
     </tr>
     </tfoot>
@@ -46,6 +48,14 @@
                 <i class="fa fa-bank"></i>
             </span>
             <input id="nama" name="nama" type="text" class="form-control" placeholder="Bank Name">
+        </div>
+      </div>
+      <div class="modal-body">
+          <div class="input-group">
+            <span class="input-group-addon">
+                <i class="fa fa-bank"></i>
+            </span>
+            <input id="nama" name="kode" type="text" class="form-control" placeholder="Kode Bank">
         </div>
       </div>
 
@@ -79,6 +89,14 @@
                 <i class="fa fa-bank"></i>
             </span>
             <input id="nama" name="nama" type="text" class="form-control" placeholder="Bank Name">
+        </div>
+      </div>
+      <div class="modal-body">
+          <div class="input-group">
+            <span class="input-group-addon">
+                <i class="fa fa-bank"></i>
+            </span>
+            <input id="nama" name="kode" type="text" class="form-control" placeholder="Kode Bank">
         </div>
       </div>
 
@@ -119,12 +137,13 @@
 @section('js')
 <script>
     $(function () {
-        $('#users-table').DataTable({
+        $('#bank-table').DataTable({
             serverSide: true,
             processing: true,
             ajax: '/bank-data',
             columns: [
                 {data: 'id'},
+                {data: 'kode'},
                 {data: 'nama'},
                 {data: 'action', orderable: false, searchable: false}
             ],
