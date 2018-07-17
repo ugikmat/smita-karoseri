@@ -17,6 +17,7 @@ class CreateBanksTable extends Migration
             $table->increments('id_bank');
             $table->string('kode_bank')
             $table->string('nama_bank');
+            $table->string('status_bank');
         });
     }
 
