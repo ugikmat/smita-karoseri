@@ -92,8 +92,7 @@ class BankController extends Controller
         ]);
         $bank = Bank::find($id);
         $bank->nama_bank = $request->get('nama');
-        $bank->kode_bank = $request->get('kode');
-        $bank->status_bank = $request->get('status');
+        $bank->kode_bank = $request->get('kode');;
         $bank->save();
         return redirect('master/bank');
     }

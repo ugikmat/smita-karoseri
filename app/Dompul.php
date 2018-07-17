@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dompul extends Model
 {
+    protected $primaryKey = 'id_dompul';
     public $timestamps = false;
 }

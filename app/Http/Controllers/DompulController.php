@@ -102,11 +102,11 @@ class DompulController extends Controller
      */
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(Dompul::where('status_sub_master_dompul','Aktif'))
+        return $datatables->eloquent(Dompul::query())
                           ->addColumn('action', function ($dompul) {
                               return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$dompul->id_bank.'" data-name="'.$dompul->nama_bank.'" data-kode="'.$dompul->kode_bank.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$dompul->id_bank.'" data-name="'.$dompul->nama_bank.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" ><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" ><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
                           ->make(true);
     }
