@@ -136,11 +136,14 @@ class ProdukController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function data(Datatables $datatables)
-    {   
+    {
         return $datatables->eloquent(produk::where('status_produk', "tersedia"))
                           ->addColumn('action', function ($produk) {
-                              return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$produk->id_produk.'" data-name="'.$produk->nama_produk.'" data-kode="'.$produk->kode_produk.'" data-status="'.$produk->status_produk.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              return
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$produk->id_produk.'" data-name="'.$produk->nama_produk.'"
+                              data-kode="'.$produk->kode_produk.'" data-status="'.$produk->status_produk.'" data-kategori="'.$produk->kategori_produk.'" data-satuan="'.$produk->satuan.'"
+                              data-jenis="'.$produk->jenis.'" data-bom="'.$produk->BOM.'" data-jual="'.$produk->harga_jual.'" data-pajak="'.$produk->tarif_pajak.'"
+                              data-diskon="'.$produk->diskon.'" data-komisi="'.$produk->komisi.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                               <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$produk->id_produk.'" data-name="'.$produk->nama.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
                           ->make(true);
