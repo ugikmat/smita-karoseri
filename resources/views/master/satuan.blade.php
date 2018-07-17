@@ -50,20 +50,38 @@
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jumlah Satuan
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Satuan
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="jumlah" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status Satuan
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Induk Satuan
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="first-name" required="required" name="induk" class="form-control col-md-7 col-xs-12" value="">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nilai Satuan
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="first-name" required="required" name="nilai" class="form-control col-md-7 col-xs-12" value="">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="first-name" required="required" name="Status" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
@@ -94,75 +112,89 @@
 <div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <form action="" id="editForm" method="POST">
-        @csrf
-        @method('put')
-      
+
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Edit Satuan</h4>
+        <h4 class="modal-title" id="myModalLabel">Tambah Satuan</h4>
       </div>
-      <div class="modal-body">
-        <div class="clearfix"></div>
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <div class="clearfix"></div>
+  <div class="modal-body">
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <br />
+
+            <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Satuan
+                  <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                </div>
               </div>
-              <div class="x_content">
-                <br />
 
-                <form id="edit" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Satuan
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jumlah Satuan
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="jumlah" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status Satuan
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
-                  </div>
-
-                  <div class="ln_solid"></div>
-                  <div class="form-group">
-                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                      <button class="btn btn-primary" type="reset">Reset</button>
-                      <button type="submit" class="btn btn-success">Submit</button>
-                    </div>
-                  </div>
-                </form>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Satuan
+                  <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
+                </div>
               </div>
-            </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Induk Satuan
+                  <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input type="text" id="first-name" required="required" name="induk" class="form-control col-md-7 col-xs-12" value="">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nilai Satuan
+                  <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input type="text" id="first-name" required="required" name="nilai" class="form-control col-md-7 col-xs-12" value="">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status
+                  <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input type="text" id="first-name" required="required" name="Status" class="form-control col-md-7 col-xs-12" value="">
+                </div>
+              </div>
+
+              <div class="ln_solid"></div>
+              <div class="form-group">
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                  <button class="btn btn-primary" type="reset">Reset</button>
+                  <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </form>
     </div>
   </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  </div>
+
+</div>
+</div>
 </div>
 <!--Modal Hapus-->
 <div class="modal fade" id="deleteModal">
@@ -171,7 +203,7 @@
       <form action="" method="POST" id="deleteForm">
         @csrf
         @method('delete')
-      
+
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -186,7 +218,7 @@
     </div>
   </div>
 </div>
-@stop 
+@stop
 @section('js')
 <script>
   $(function () {
