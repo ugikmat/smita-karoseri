@@ -53,7 +53,7 @@ class CustController extends Controller
         $customer->jabatan = $request->get('jabatan');
         $customer->save();
 
-        return redirect('/customer');
+        return redirect('/customer')->with('alert', 'Berhasil Tambah Customer');
 
     }
 
@@ -88,7 +88,15 @@ class CustController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $customer = Customer::where('id_cust', $id)->first();
+        $customer->nm_cust = $request->get('nm_cust_upt');
+        $customer->alamat_cust = $request->get('alamat_cust_upt');
+        $customer->no_hp = $request->get('no_hp_upt');
+        $customer->jabatan = $request->get('jabatan_upt');
+        $customer->save();
+
+        return redirect('/customer');
+
     }
 
     /**
@@ -108,7 +116,12 @@ class CustController extends Controller
         return $datatables->eloquent(Customer::where('status', '1'))
                           ->addColumn('action', function ($cust) {
                               return
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$cust->id_cust.'" data-name="'.$cust->nm_cust.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"
+                              data-id="'.$cust->id_cust.'"
+                              data-name="'.$cust->nm_cust.'"
+                              data-alamat="'.$cust->alamat_cust.'"
+                              data-nohp="'.$cust->no_hp.'"
+                              data-jabatan="'.$cust->jabatan.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                               <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$cust->id_cust.'" data-name="'.$cust->nm_cust.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
 

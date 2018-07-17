@@ -119,7 +119,7 @@
 
 
 <!--Modal Edit-->
-<div class="modal fade bs-example-modal-lg" id='modal1' tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
@@ -130,46 +130,48 @@
       </div>
       <div class="modal-body">
          <div class="clearfix"></div>
-<div class="row">
-<div class="col-md-12 col-sm-12 col-xs-12">
-<div class="x_panel">
-<div class="x_title">
-  <div class="clearfix"></div>
-</div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <div class="clearfix"></div>
+                </div>
 <div class="x_content">
   <br />
 
-  <form id="edit" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
-
-    <div class="form-group">
+<!--Modal EDIT-->
+  <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/customer">
+    @csrf
+    @method('put')
+    <div class="form-group nama_cust">
      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Customer<span class="required">*</span>
      </label>
      <div class="col-md-6 col-sm-6 col-xs-12">
-       <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+       <input type="text" id="nm_cust_upt" required="required" name="nm_cust_upt" class="form-control col-md-7 col-xs-12" value="">
      </div>
    </div>
 
-   <div class="form-group">
+   <div class="form-group alamat_cust">
     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Alamat Customer<span class="required">*</span>
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+      <input type="text" id="alamat_cust_upt" required="required" name="alamat_cust_upt" class="form-control col-md-7 col-xs-12" value="">
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group no_hp">
    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No Telepon<span class="required">*</span>
    </label>
    <div class="col-md-6 col-sm-6 col-xs-12">
-     <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+     <input type="text" id="no_hp_upt" required="required" name="no_hp_upt" class="form-control col-md-7 col-xs-12" value="">
    </div>
  </div>
 
- <div class="form-group">
+ <div class="form-group jabatan">
   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jabatan Customer<span class="required">*</span>
   </label>
   <div class="col-md-6 col-sm-6 col-xs-12">
-    <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+    <input type="text" id="jabatan_upt" required="required" name="jabatan_upt" class="form-control col-md-7 col-xs-12" value="">
   </div>
 </div>
 
@@ -192,8 +194,8 @@ Karoseri
     <div class="ln_solid"></div>
     <div class="form-group">
       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-<button class="btn btn-primary" type="reset">Reset</button>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <input type="submit" class="btn btn-success" value="Submit">
+        {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
       </div>
     </div>
   </form>
@@ -210,7 +212,8 @@ Karoseri
   </div>
 
 
-</div><!--Modal Hapus-->
+</div>
+<!--Modal Hapus-->
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -251,6 +254,26 @@ Karoseri
         });
     });
 </script>
+
+<script>
+  $('#editModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var name = button.data('name')// Extract info from data-* attributes
+  var alamat = button.data('alamat')
+  var nohp= button.data('nohp')
+  var jabatan = button.data('jabatan')
+  var id = button.data('id')
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  $('#editForm').attr('action', `/customer/${id}`);
+  modal.find('.modal-body .nama_cust input').val(name)
+  modal.find('.modal-body .alamat_cust input').val(alamat)
+  modal.find('.modal-body .no_hp input').val(nohp)
+  modal.find('.modal-body .jabatan input').val(jabatan)
+  })
+</script>
+
 <script>
   $('#deleteModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal

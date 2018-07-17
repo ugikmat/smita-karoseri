@@ -88,7 +88,13 @@ class SalesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $sales = Sales::where('id_sales', $id)->first();
+      $sales->nm_sales = $request->get('nm_sales_upt');
+      $sales->alamat_sales = $request->get('alamat_sales_upt');
+      $sales->no_hp = $request->get('no_hp_upt');
+      $sales->save();
+
+      return redirect('/sales');
     }
 
     /**
@@ -108,7 +114,12 @@ class SalesController extends Controller
         return $datatables->eloquent(Sales::where('status', '1'))
                           ->addColumn('action', function ($sales) {
                               return
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$sales->id_sales.'" data-name="'.$sales->nm_sales.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"
+                              data-id="'.$sales->id_sales.'"
+                              data-name="'.$sales->nm_sales.'"
+                              data-alamat="'.$sales->alamat_sales.'"
+                              data-nohp="'.$sales->no_hp.'"
+                              ><i class="glyphicon glyphicon-edit"></i> Edit</a>
                               <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$sales->id_sales.'" data-name="'.$sales->nm_sales.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
 

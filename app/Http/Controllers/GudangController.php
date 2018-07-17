@@ -88,7 +88,12 @@ class GudangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $gdg = Gudang::where('id_gudang', $id)->first();
+      $gdg->id_lokasi = $request->get('id_lokasi_upt');
+      $gdg->alamat_gudang = $request->get('alamat_gudang_upt');
+      $gdg->save();
+
+      return redirect('/gudang');
     }
 
     /**
@@ -110,7 +115,11 @@ class GudangController extends Controller
                           ->where('master_gudangs.status', '1'))
                           ->addColumn('action', function ($gdg) {
                               return
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$gdg->id_gudang.'" data-name="'.$gdg->alamat_gudang.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"
+                              data-id="'.$gdg->id_gudang.'"
+                              data-name="'.$gdg->alamat_gudang.'"
+                              data-lokasi="'.$gdg->nm_lokasi.'"
+                              ><i class="glyphicon glyphicon-edit"></i> Edit</a>
                               <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$gdg->id_gudang.'" data-name="'.$gdg->alamat_gudang.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
 

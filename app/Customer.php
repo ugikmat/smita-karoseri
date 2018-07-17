@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
   protected $table = 'master_customers';
-  protected $fillable = ['status'];
+  protected $primaryKey = 'id_cust';
+  //protected $fillable = ['status'];
 }

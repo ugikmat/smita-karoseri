@@ -85,7 +85,11 @@ class LokasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $lok = Lokasi::where('id_lokasi', $id)->first();
+      $lok->nm_lokasi = $request->get('nm_lokasi_upt');
+      $lok->save();
+
+      return redirect('/lokasi');
     }
 
     /**
