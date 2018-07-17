@@ -3,9 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Dompul;
+use Yajra\Datatables\Datatables;
 
 class DompulController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +25,7 @@ class DompulController extends Controller
      */
     public function index()
     {
-        //
+        return view('master.dompul');
     }
 
     /**
@@ -80,5 +92,22 @@ class DompulController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+     /**
+     * Process dataTable ajax response.
+     *
+     * @param \Yajra\Datatables\Datatables $datatables
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function data(Datatables $datatables)
+    {
+        return $datatables->eloquent(Dompul::where('status_sub_master_dompul','Aktif'))
+                          ->addColumn('action', function ($dompul) {
+                              return 
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$dompul->id_bank.'" data-name="'.$dompul->nama_bank.'" data-kode="'.$dompul->kode_bank.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$dompul->id_bank.'" data-name="'.$dompul->nama_bank.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+                            })
+                          ->make(true);
     }
 }

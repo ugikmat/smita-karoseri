@@ -57,6 +57,9 @@ Route::get('/master/satuan-data', 'SatuanController@data');
 Route::resource('master/supplier', 'SupplierController');
 Route::get('master/supplier-data', 'SupplierController@data');
 
+Route::resource('master/dompul', 'DompulController');
+Route::get('master/dompul-data', 'DompulController@data');
+
 Route::get('/master/customer', function() {
   return view ('/master/customer');
 }) -> name('master-customer');
@@ -72,7 +75,3 @@ Route::get('/master/lokasi', function() {
 Route::get('/master/sales', function() {
   return view ('/master/sales');
 }) -> name('master-sales');
-
-Route::get('/master/dompul', function() {
-  return view ('/master/dompul');
-}) -> name('master-dompul');
