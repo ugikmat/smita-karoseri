@@ -22,7 +22,6 @@ class CreateSuppliersTable extends Migration
             $table->string('bank_supplier');
             $table->string('norek_supplier');
             $table->string('status_supplier');
-
         });
     }
 
