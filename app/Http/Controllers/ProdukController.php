@@ -91,11 +91,11 @@ class ProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama' => 'bail|required|unique:produks|max:255',
-            'tipe' => 'required',
-            'status' => 'required',
-        ]);
+        // $request->validate([
+        //     'nama' => 'bail|required|unique:produks|max:255',
+        //     'tipe' => 'required',
+        //     'status' => 'required',
+        // ]);
         $produk = produk::find($id);
         $produk->nama = $request->get('nama');
         $produk->tipe = $request->get('tipe');
@@ -113,7 +113,8 @@ class ProdukController extends Controller
     public function destroy($id)
     {
         $produk = produk::find($id);
-        $produk->delete();
+        $produk->status = "tidak tersedia";
+        $produk->save();
         return redirect('master/produk');
     }
 
@@ -124,11 +125,11 @@ class ProdukController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function data(Datatables $datatables)
-    {
-        return $datatables->eloquent(produk::query())
+    {   
+        return $datatables->eloquent(produk::where('status', "tersedia"))
                           ->addColumn('action', function ($produk) {
                               return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$produk->id.'" data-name="'.$produk->nama.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$produk->id.'" data-name="'.$produk->nama.'" data-tipe="'.$produk->tipe.'" data-status="'.$produk->status.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                               <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$produk->id.'" data-name="'.$produk->nama.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
                           ->make(true);
