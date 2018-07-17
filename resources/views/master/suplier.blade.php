@@ -7,11 +7,6 @@
 
 @stop
 
-@section('css')
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/u/bs-3.3.6/jq-2.2.3,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.12,b-1.2.0,b-colvis-1.2.0,b-html5-1.2.0,b-print-1.2.0,fh-3.1.2,se-1.2.0/datatables.min.css"/>
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker.min.css"/>
-@stop
-
 @section('content')
 <table id="suplier-table" class="table table-bordered">
   <thead>
@@ -88,15 +83,6 @@
         </div>
       </div>
 
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Input
-                        <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12 date_picker">
-                        <input type="text" id="update_time" class="form-control" name="update_time" placeholder="Pick Date">
-                      </div>
-                    </div>
-
       <div class="form-group">
        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status Suplier<span class="required">*</span>
        </label>
@@ -128,7 +114,7 @@
 </section>
 
 <!--Edit-->
-<div class="modal fade bs-example-modal-lg" id='modalEdit' tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
@@ -184,15 +170,6 @@
   </div>
 </div>
 
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Input
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12 date_picker">
-                      <input type="text" id="update_time" class="form-control" name="update_time" placeholder="Pick Date">
-                    </div>
-                  </div>
-
 <div class="form-group">
  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status Suplier<span class="required">*</span>
  </label>
@@ -241,7 +218,7 @@
     </div>
   </div>
 </div>
-@stop 
+@stop
 @section('js')
 <script>
   $(function () {
@@ -280,15 +257,6 @@
         }
       ]
     });
-  });
-</script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/locales/bootstrap-datepicker.en.min.js"></script>
-<script type="text/javascript">
-  $('.date_picker input').datepicker({
-    format: "dd.mm.yyyy",
-    todayBtn: "linked",
-    language: "en"
   });
 </script>
 @stop
