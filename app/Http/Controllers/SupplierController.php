@@ -46,7 +46,16 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $supplier = new Supplier();
+        $supplier->nama_supplier = $request->get('nama');
+        $supplier->alamat_supplier = $request->get('alamat');
+        $supplier->telepon_supplier = $request->get('telepon');
+        $supplier->email_supplier = $request->get('email');
+        $supplier->bank_supplier = $request->get('bank');
+        $supplier->norek_supplier = $request->get('norek');
+        $supplier->status_supplier = "Aktif";
+        $supplier->save();
+        return redirect('master/supplier');
     }
 
     /**
@@ -91,7 +100,10 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
-        
+        $supplier = Supplier::where('id_supplier',$id)->first();
+        $supplier->status_supplier="tidak Aktif";
+        $supplier->save();
+        return redirect('master/supplier');
     }
 
         /**
@@ -102,7 +114,7 @@ class SupplierController extends Controller
      */
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(Supplier::query())
+        return $datatables->eloquent(Supplier::where('status_supplier','Aktif'))
                           ->addColumn('action', function ($supplier) {
                               return 
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$supplier->id_supplier.'" data-name="'.$supplier->nama_supplier.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
