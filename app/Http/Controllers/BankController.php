@@ -45,10 +45,12 @@ class BankController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'bail|required|unique:banks|max:255',
+            'nama' => 'required',
+            'kode' => 'required',
         ]);
         $bank = new Bank();
-        $bank->nama = $request->get('nama');
+        $bank->nama_bank = $request->get('nama');
+        $bank->kode_bank = $request->get('kode');
         $bank->save();
         return redirect('/bank');
     }
