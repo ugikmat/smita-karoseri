@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Supplier;
+use App\Dompul;
 use Yajra\Datatables\Datatables;
 
-class SupplierController extends Controller
+class DompulController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -25,7 +25,7 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        return view('master.suplier');
+        return view('master.dompul');
     }
 
     /**
@@ -46,16 +46,7 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        $supplier = new Supplier();
-        $supplier->nama_supplier = $request->get('nama');
-        $supplier->alamat_supplier = $request->get('alamat');
-        $supplier->telepon_supplier = $request->get('telepon');
-        $supplier->email_supplier = $request->get('email');
-        $supplier->bank_supplier = $request->get('bank');
-        $supplier->norek_supplier = $request->get('norek');
-        $supplier->status_supplier = "Aktif";
-        $supplier->save();
-        return redirect('master/supplier');
+        //
     }
 
     /**
@@ -100,13 +91,10 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
-        $supplier = Supplier::where('id_supplier',$id)->first();
-        $supplier->status_supplier="tidak Aktif";
-        $supplier->save();
-        return redirect('master/supplier');
+        //
     }
 
-        /**
+     /**
      * Process dataTable ajax response.
      *
      * @param \Yajra\Datatables\Datatables $datatables
@@ -114,13 +102,11 @@ class SupplierController extends Controller
      */
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(Supplier::where('status_supplier','Aktif'))
-                          ->addColumn('action', function ($supplier) {
-                              return
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$supplier->id_supplier.'" data-name="'.$supplier->nama_supplier.'"
-                              data-alamat="'.$supplier->alamat_supplier.'" data-telepon="'.$supplier->telepon_supplier.'" data-email="'.$supplier->email_supplier.'" data-bank="'.$supplier->bank_supplier.'"
-                              data-norek="'.$supplier->norek_supplier.'" data-status="'.$supplier->status_supplier.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$supplier->id_supplier.'" data-name="'.$supplier->nama_supplier.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+        return $datatables->eloquent(Dompul::query())
+                          ->addColumn('action', function ($dompul) {
+                              return 
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" ><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" ><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
                           ->make(true);
     }

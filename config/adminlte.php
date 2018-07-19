@@ -167,8 +167,8 @@ return [
                 ],
               ],
               [
-                'text'    => 'Bank',
-                'url'     => '/bank',
+                'text'    => 'Upload',
+                'url'     => '/upload',
               ],
             ],
         ],

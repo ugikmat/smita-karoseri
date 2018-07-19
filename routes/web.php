@@ -25,9 +25,6 @@ Route::get('penjualan/dompul-data', 'Penjualan\DompulController@data');
 Route::get('list/users', 'UsersController@index');
 Route::get('list/users-data', 'UsersController@data');
 
-Route::resource('bank', 'BankController');
-Route::get('bank-data', 'BankController@data');
-
 // penjualan
 Route::get('/penjualan/dompul/invoice-dompul', function() {
   return view ('/penjualan/dompul/invoice-dompul');
@@ -44,18 +41,20 @@ Route::get('/penjualan/dompul/list-invoice', function() {
 
 
 //Master
-Route::get('/master/bank', function() {
-  return view ('/master/bank');
-}) -> name('master-bank');
+Route::resource('master/bank', 'BankController');
+Route::get('bank-data', 'BankController@data');
 
 Route::resource('master/produk', 'ProdukController');
-Route::get('/master/produk-data', 'ProdukController@data');
+Route::get('/produk-data', 'ProdukController@data');
 
 Route::resource('master/satuan', 'SatuanController');
-Route::get('/master/satuan-data', 'SatuanController@data');
+Route::get('/satuan-data', 'SatuanController@data');
 
 Route::resource('master/supplier', 'SupplierController');
-Route::get('master/supplier-data', 'SupplierController@data');
+Route::get('/supplier-data', 'SupplierController@data');
+
+Route::resource('master/dompul', 'DompulController');
+Route::get('/dompul-data', 'DompulController@data');
 
 Route::get('/master/customer', function() {
   return view ('/master/customer');
@@ -72,7 +71,3 @@ Route::get('/master/lokasi', function() {
 Route::get('/master/sales', function() {
   return view ('/master/sales');
 }) -> name('master-sales');
-
-Route::get('/master/dompul', function() {
-  return view ('/master/dompul');
-}) -> name('master-dompul');

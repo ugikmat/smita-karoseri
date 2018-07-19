@@ -2,7 +2,7 @@
 <h1>Daftar Suplier</h1>
 
 @stop @section('content')
-<table id="suplier-table" class="table table-bordered">
+<table id="suplier-table" class="table responsive" width="100%">
   <thead>
     <tr>
       <th>Id</th>
@@ -90,7 +90,6 @@
                       </div>
                     </div>
 
-
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No. Rekening
                         <span class="required">*</span>
@@ -146,7 +145,7 @@
 
                 <form id="edit" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
 
-                  <div class="form-group">
+                  <div class="form-group nama">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Suplier
                       <span class="required">*</span>
                     </label>
@@ -155,7 +154,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group alamat">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Alamat Suplier
                       <span class="required">*</span>
                     </label>
@@ -164,7 +163,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group telepon">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No Telepon
                       <span class="required">*</span>
                     </label>
@@ -173,7 +172,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group email">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Email Suplier
                       <span class="required">*</span>
                     </label>
@@ -182,7 +181,25 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group bank">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Bank
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="bank" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+
+                  <div class="form-group norek">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No. Rekening
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="norek" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+
+                  <div class="form-group status">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status Suplier
                       <span class="required">*</span>
                     </label>
@@ -238,7 +255,7 @@
     $('#suplier-table').DataTable({
       serverSide: true,
       processing: true,
-      ajax: '/master/supplier-data',
+      ajax: '/supplier-data',
       columns: [{
           data: 'id_supplier'
         },
@@ -268,7 +285,17 @@
           orderable: false,
           searchable: false
         }
-      ]
+      ],
+      initComplete: function () {
+        this.api().columns().every(function () {
+          var column = this;
+          var input = document.createElement("input");
+          $(input).appendTo($(column.footer()).empty())
+            .on('change', function () {
+              column.search($(this).val(), false, false, true).draw();
+            });
+        });
+      }
     });
   });
 </script>
@@ -277,13 +304,24 @@
     var button = $(event.relatedTarget) // Button that triggered the modal
     var name = button.data('name') // Extract info from data-* attributes
     var id = button.data('id')
-    var kode = button.data('kode')
+    var alamat = button.data('alamat')
+    var telepon = button.data('telepon')
+    var email = button.data('email')
+    var bank = button.data('bank')
+    var norek = button.data('norek')
+    var status = button.data('status')
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
     $('#editForm').attr('action', `/master/supplier/${id}`);
     modal.find('.modal-body .nama input').val(name)
-    modal.find('.modal-body .kode input').val(kode)
+    modal.find('.modal-body .id input').val(id)
+    modal.find('.modal-body .alamat input').val(alamat)
+    modal.find('.modal-body .telepon input').val(telepon)
+    modal.find('.modal-body .email input').val(email)
+    modal.find('.modal-body .bank input').val(bank)
+    modal.find('.modal-body .norek input').val(norek)
+    modal.find('.modal-body .status input').val(status)
   })
 </script>
 <script>
