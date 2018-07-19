@@ -58,7 +58,7 @@ Route::resource('master/supplier', 'SupplierController');
 Route::get('master/supplier-data', 'SupplierController@data');
 
 Route::resource('master/dompul', 'DompulController');
-Route::get('master/dompul-data', 'DompulController@data');
+Route::get('/dompul-data', 'DompulController@data');
 
 Route::get('/master/customer', function() {
   return view ('/master/customer');

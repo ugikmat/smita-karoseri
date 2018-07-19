@@ -242,7 +242,7 @@
       $('#dompul-table').DataTable({
           serverSide: true,
           processing: true,
-          ajax: 'master/dompul-data',
+          ajax: '/dompul-data',
           columns: [
               {data: 'id_dompul'},
               {data: 'no_hp_master_dompul'},
