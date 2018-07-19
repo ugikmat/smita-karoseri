@@ -45,7 +45,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="nama_satuan" required="required" name="nama_satuan" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="nama_satuan" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
@@ -80,8 +80,8 @@
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         <button class="btn btn-primary" type="reset">Reset</button>
-                        <input type="submit" class="btn btn-success" value="Submit">
-                        {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
+                        <input type="submit" class="btn btn-success" value="Submit"> {{--
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
                       </div>
                     </div>
                   </form>
@@ -122,58 +122,49 @@
               <div class="x_content">
                 <br />
 
-                <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+                <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+                  @csrf @method('put')
 
-              <div class="form-group nama">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Satuan
-                  <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
-                </div>
-              </div>
+                  <div class="form-group nama">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Satuan
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
 
-              <div class="form-group tipe">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Satuan
-                  <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
-                </div>
-              </div>
+                  <div class="form-group tipe">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Satuan
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
 
-              <div class="form-group induk">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Induk Satuan
-                  <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" id="first-name" required="required" name="induk" class="form-control col-md-7 col-xs-12" value="">
-                </div>
-              </div>
+                  <div class="form-group induk">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Induk Satuan
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="induk" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
 
-              <div class="form-group nilai">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nilai Satuan
-                  <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" id="first-name" required="required" name="nilai" class="form-control col-md-7 col-xs-12" value="">
-                </div>
-              </div>
-
-              <div class="form-group status">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status
-                  <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" id="first-name" required="required" name="Status" class="form-control col-md-7 col-xs-12" value="">
-                </div>
-              </div>
-
+                  <div class="form-group nilai">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nilai Satuan
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="nilai" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
                   <div class="ln_solid"></div>
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                      <input type="submit" class="btn btn-success" value="Submit">
-                    {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
+                      <input type="submit" class="btn btn-success" value="Submit"> {{--
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
                     </div>
                   </div>
                 </form>
@@ -210,8 +201,7 @@
     </div>
   </div>
 </div>
-@stop
-@section('js')
+@stop @section('js')
 <script>
   $(function () {
     $('#satuan-table').DataTable({
@@ -244,23 +234,23 @@
 </script>
 <script>
   $('#editModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var name = button.data('name')// Extract info from data-* attributes
-  var id = button.data('id')
-  var tipe = button.data('tipe')
-  var induk = button.data('induk')
-  var nilai = button.data('nilai')
-  var status = button.data('status')
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  var modal = $(this)
-  $('#editForm').attr('action', `/master/satuan/${id}`);
-  modal.find('.modal-body .nama input').val(name)
-  modal.find('.modal-body .id input').val(id)
-  modal.find('.modal-body .tipe input').val(tipe)
-  modal.find('.modal-body .induk input').val(induk)
-  modal.find('.modal-body .nilai input').val(nilai)
-  modal.find('.modal-body .status input').val(status)
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var name = button.data('name') // Extract info from data-* attributes
+    var id = button.data('id')
+    var tipe = button.data('tipe')
+    var induk = button.data('induk')
+    var nilai = button.data('nilai')
+    var status = button.data('status')
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    $('#editForm').attr('action', `/master/satuan/${id}`);
+    modal.find('.modal-body .nama input').val(name)
+    modal.find('.modal-body .id input').val(id)
+    modal.find('.modal-body .tipe input').val(tipe)
+    modal.find('.modal-body .induk input').val(induk)
+    modal.find('.modal-body .nilai input').val(nilai)
+    modal.find('.modal-body .status input').val(status)
   })
 </script>
 <script>

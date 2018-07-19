@@ -90,8 +90,10 @@ class SatuanController extends Controller
     {
 
         $satuan = Satuan::where('id_satuan', $id)->first();
-        $satuan->nama_satuan = $request->get('nama_satuan_upt');
-        $satuan->jumlah_satuan = $request->get('jumlah_satuan_upt');
+        $satuan->nama_satuan = $request->get('nama');
+        $satuan->tipe_satuan = $request->get('tipe');
+        $satuan->induk_satuan = $request->get('induk');
+        $satuan->nilai_konversi = $request->get('nilai');
         $satuan->save();
         return redirect('master/satuan');
     }
