@@ -2,7 +2,7 @@
 <h1>Master Gudang</h1>
 
 @stop @section('content')
-<table id="gdg-table" class="table table-bordered">
+<table id="gdg-table" class="table responsive" width="100%">
   <thead>
     <tr>
       <th>Id Gudang</th>

@@ -8,7 +8,7 @@
 @stop
 
 @section('content')
-<table id="sales-table" class="table table-bordered">
+<table id="sales-table" class="table responsive" width="100%">
     <thead>
     <tr>
         <th>Id Sales</th>

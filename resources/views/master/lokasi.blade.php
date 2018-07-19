@@ -2,7 +2,7 @@
 <h1>Master Lokasi</h1>
 
 @stop @section('content')
-<table id="lokasi-table" class="table table-bordered">
+<table id="lokasi-table" class="table responsive" width="100%">
   <thead>
     <tr>
       <th>Id Lokasi</th>

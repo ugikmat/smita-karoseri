@@ -2,7 +2,7 @@
 <h1>Master Customer</h1>
 
 @stop @section('content')
-<table id="customers-table" class="table table-bordered">
+<table id="customers-table" class="table responsive" width="100%">
   <thead>
     <tr>
       <th>Id</th>
