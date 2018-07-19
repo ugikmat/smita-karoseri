@@ -216,7 +216,7 @@
     $('#satuan-table').DataTable({
       serverSide: true,
       processing: true,
-      ajax: '/master/satuan-data',
+      ajax: '/satuan-data',
       columns: [{
           data: 'id_satuan'
         },
