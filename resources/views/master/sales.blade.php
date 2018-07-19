@@ -21,8 +21,8 @@
 </table>
 <!-- Modal Tambah -->
 <section class="content-header">
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">Tambah</button>
-      <div class="modal fade bs-example-modal-lg" id='modal1' tabindex="-1" role="dialog" aria-hidden="true">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTambah">Tambah</button>
+      <div class="modal fade bs-example-modal-lg" id='modalTambah' tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
 
@@ -94,7 +94,7 @@
 
 
 <!--Modal Edit-->
-<div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bs-example-modal-lg" id='modalEdit' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 

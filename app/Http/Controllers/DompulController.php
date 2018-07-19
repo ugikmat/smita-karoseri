@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Satuan;
+use App\Dompul;
 use Yajra\Datatables\Datatables;
 
-class SatuanController extends Controller
+class DompulController extends Controller
 {
-
     /**
      * Create a new controller instance.
      *
@@ -26,7 +25,7 @@ class SatuanController extends Controller
      */
     public function index()
     {
-        return view('master.satuan');
+        return view('master.dompul');
     }
 
     /**
@@ -47,14 +46,7 @@ class SatuanController extends Controller
      */
     public function store(Request $request)
     {
-        $satuan = new Satuan();
-        $satuan->nama_satuan = $request->get('nama');
-        $satuan->tipe_satuan = $request->get('tipe');
-        $satuan->induk_satuan = $request->get('induk');
-        $satuan->nilai_konversi = $request->get('nilai');
-        $satuan->status_satuan = "tersedia";
-        $satuan->save();
-        return redirect('/satuan');
+        //
     }
 
     /**
@@ -88,12 +80,7 @@ class SatuanController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $satuan = Satuan::where('id_satuan', $id)->first();
-        $satuan->nama_satuan = $request->get('nama_satuan_upt');
-        $satuan->jumlah_satuan = $request->get('jumlah_satuan_upt');
-        $satuan->save();
-        return redirect('master/satuan');
+        //
     }
 
     /**
@@ -104,13 +91,10 @@ class SatuanController extends Controller
      */
     public function destroy($id)
     {
-        $satuan = Satuan::find($id);
-        $satuan->status_satuan="tidak tersedia";
-        $satuan->save();
-        return redirect('master/satuan');
+        //
     }
 
-    /**
+     /**
      * Process dataTable ajax response.
      *
      * @param \Yajra\Datatables\Datatables $datatables
@@ -118,12 +102,11 @@ class SatuanController extends Controller
      */
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(Satuan::where('status_satuan','tersedia'))
-                          ->addColumn('action', function ($satuan) {
-                              return
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$satuan->id_satuan.'" data-name="'.$satuan->nama_satuan.'"
-                              data-tipe="'.$satuan->tipe_satuan.'" data-induk="'.$satuan->induk_satuan.'" data-nilai="'.$satuan->nilai_konversi.'" data-status="'.$satuan->status_satuan.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$satuan->id_satuan.'" data-name="'.$satuan->nama_satuan.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+        return $datatables->eloquent(Dompul::query())
+                          ->addColumn('action', function ($dompul) {
+                              return 
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" ><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" ><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
                           ->make(true);
     }
