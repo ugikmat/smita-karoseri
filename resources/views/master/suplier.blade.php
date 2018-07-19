@@ -143,7 +143,8 @@
               <div class="x_content">
                 <br />
 
-                <form id="edit" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+                <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+                  @csrf @method('put')
 
                   <div class="form-group nama">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Suplier
@@ -198,16 +199,6 @@
                       <input type="text" id="first-name" required="required" name="norek" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
-
-                  <div class="form-group status">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status Suplier
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
-                  </div>
-
                   <div class="ln_solid"></div>
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
