@@ -1,8 +1,9 @@
 @extends('adminlte::page') @section('title', 'Bank') @section('content_header')
 <h1>Daftar Bank</h1>
 
-@stop @section('content')
-<table id="bank-table" class="table table-bordered">
+@stop
+@section('content')
+<table id="bank-table" class="table responsive" width="100%">
   <thead>
     <tr>
       <th>Id</th>
@@ -120,11 +121,13 @@
   </div>
 </div>
 @stop @section('js')
+
 <script>
   $(function () {
     $('#bank-table').DataTable({
       serverSide: true,
       processing: true,
+      responsive: true,
       ajax: '/bank-data',
       columns: [{
           data: 'id_bank'

@@ -4,7 +4,7 @@
 @stop @section('content')
 
 <!-- data tabel -->
-<table id="produk-table" class="table table-bordered">
+<table id="produk-table" class="table table-bordered table-responsive">
   <thead>
     <tr>
       <th>Id</th>
