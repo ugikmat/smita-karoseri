@@ -1,6 +1,24 @@
 
 window._ = require('lodash');
 window.Popper = require('popper.js').default;
+require('jszip');
+require('jquery');
+require('datatables.net')();
+require('datatables.net-bs')();
+require('datatables.net-bs4')();
+require('datatables.net-buttons-bs4')();
+require('datatables.net-buttons/js/buttons.html5.js')();
+require('datatables.net-responsive-bs4')();
+require('datatables.net-responsive-bs')();
+require('datatables.net-responsive')();
+
+import 'jquery/dist/jquery.min.js';
+import 'datatables.net/js/jquery.dataTables.min.js';
+import 'datatables.net-bs/js/dataTables.bootstrap.min.js';
+import 'datatables.net-bs4/js/dataTables.bootstrap4.min.js';
+import 'datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js';
+import 'datatables.net-responsive-bs/js/responsive.bootstrap.min.js';
+import 'datatables.net-responsive/js/dataTables.responsive.min.js';
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support

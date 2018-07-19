@@ -1,9 +1,8 @@
 @extends('adminlte::page') @section('title', 'Dompul') @section('content_header')
 <h1>Master Dompul</h1>
 
-@stop
-@section('content')
-<table id="dompul-table" class="table table-bordered">
+@stop @section('content')
+<table id="dompul-table" class="table responsive" width="100%">
   <thead>
     <tr>
       <th>ID</th>
@@ -239,21 +238,48 @@
 @stop @section('js')
 <script>
   $(function () {
-      $('#dompul-table').DataTable({
-          serverSide: true,
-          processing: true,
-          ajax: '/dompul-data',
-          columns: [
-              {data: 'id_dompul'},
-              {data: 'no_hp_master_dompul'},
-              {data: 'no_hp_sub_master_dompul'},
-              {data: 'id_gudang'},
-              {data: 'nama_sub_master_dompul'},
-              {data: 'tipe_dompul'},
-              {data: 'status_sub_master_dompul'},
-              {data: 'action', orderable: false, searchable: false}
-          ]
-      });
+    $('#dompul-table').DataTable({
+      serverSide: true,
+      processing: true,
+      ajax: '/dompul-data',
+      columns: [{
+          data: 'id_dompul'
+        },
+        {
+          data: 'no_hp_master_dompul'
+        },
+        {
+          data: 'no_hp_sub_master_dompul'
+        },
+        {
+          data: 'id_gudang'
+        },
+        {
+          data: 'nama_sub_master_dompul'
+        },
+        {
+          data: 'tipe_dompul'
+        },
+        {
+          data: 'status_sub_master_dompul'
+        },
+        {
+          data: 'action',
+          orderable: false,
+          searchable: false
+        }
+      ],
+      initComplete: function () {
+        this.api().columns().every(function () {
+          var column = this;
+          var input = document.createElement("input");
+          $(input).appendTo($(column.footer()).empty())
+            .on('change', function () {
+              column.search($(this).val(), false, false, true).draw();
+            });
+        });
+      }
+    });
   });
 </script>
 @stop

@@ -2,7 +2,7 @@
 <h1>Daftar Satuan</h1>
 
 @stop @section('content')
-<table id="satuan-table" class="table table-bordered">
+<table id="satuan-table" class="table responsive" width="100%">
   <thead>
     <tr>
       <th>Id</th>
@@ -216,7 +216,7 @@
     $('#satuan-table').DataTable({
       serverSide: true,
       processing: true,
-      ajax: '/master/satuan-data',
+      ajax: '/satuan-data',
       columns: [{
           data: 'id_satuan'
         },

@@ -2,7 +2,7 @@
 <h1>Daftar Suplier</h1>
 
 @stop @section('content')
-<table id="suplier-table" class="table table-bordered">
+<table id="suplier-table" class="table responsive" width="100%">
   <thead>
     <tr>
       <th>Id</th>
@@ -255,7 +255,7 @@
     $('#suplier-table').DataTable({
       serverSide: true,
       processing: true,
-      ajax: '/master/supplier-data',
+      ajax: '/supplier-data',
       columns: [{
           data: 'id_supplier'
         },
@@ -285,7 +285,17 @@
           orderable: false,
           searchable: false
         }
-      ]
+      ],
+      initComplete: function () {
+        this.api().columns().every(function () {
+          var column = this;
+          var input = document.createElement("input");
+          $(input).appendTo($(column.footer()).empty())
+            .on('change', function () {
+              column.search($(this).val(), false, false, true).draw();
+            });
+        });
+      }
     });
   });
 </script>

@@ -4,7 +4,7 @@
 @stop @section('content')
 
 <!-- data tabel -->
-<table id="produk-table" class="table table-bordered">
+<table id="produk-table" class="table responsive" width="100%">
   <thead>
     <tr>
       <th>Id</th>
@@ -325,7 +325,7 @@
     $('#produk-table').DataTable({
       serverSide: true,
       processing: true,
-      ajax: '/master/produk-data',
+      ajax: '/produk-data',
       columns: [{
           data: 'id_produk'
         },
@@ -367,7 +367,17 @@
           orderable: false,
           searchable: false
         }
-      ]
+      ],
+      initComplete: function () {
+        this.api().columns().every(function () {
+          var column = this;
+          var input = document.createElement("input");
+          $(input).appendTo($(column.footer()).empty())
+            .on('change', function () {
+              column.search($(this).val(), false, false, true).draw();
+            });
+        });
+      }
     });
   });
 </script>
