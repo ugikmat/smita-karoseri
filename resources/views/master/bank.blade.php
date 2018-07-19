@@ -17,7 +17,7 @@
         <th>Status Bank</th>
         <th>action</th>
     </tr>
-    </thead>
+  </thead>
     <tfoot>
     <tr>
         <th>Id</th>
