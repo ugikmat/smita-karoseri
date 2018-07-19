@@ -3,95 +3,105 @@
 @section('title', 'Penjualan Dompul')
 
 @section('content_header')
-    <h1>Penjualan Dompul</h1>
-@stop
-
-@section('css')
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/u/bs-3.3.6/jq-2.2.3,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.12,b-1.2.0,b-colvis-1.2.0,b-html5-1.2.0,b-print-1.2.0,fh-3.1.2,se-1.2.0/datatables.min.css"/>
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker.min.css"/>
+    <h1>Detail Penjualan Dompul</h1>
 @stop
 
 @section('content')
-<form class="form-horizontal">
-    <div class="form-group form-group-sm">
-      <label class="col-sm-2 control-label" for="lg">ID canvaser</label>
-      <div class="col-sm-4">
-        <input class="form-control" type="text" id="sm" placeholder="masukkan ID canvaser">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+        Tanggal Penjualan
+      </div>
+      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
+        : tanggalan
       </div>
     </div>
-    <div class="form-group form-group-sm">
-      <label class="col-sm-2 control-label" for="sm">No Penjualan</label>
-      <div class="col-sm-4">
-        <input class="form-control" type="text" id="sm" placeholder="masukkan no penjualan">
-      </div>
-    </div>
-    <div class="form-group form-group-sm">
-      <label class="col-sm-2 control-label" for="sm">Tgl Penjualan</label>
-      <div class="col-sm-4" date_picker>
-          <input type="text" id="update_time" class="form-control" name="update_time" placeholder="Pick Date">
-      </div>
-    </div>
-  </form>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
-<!-- <table>
-    <tr>
-      <td>ID canvaser</td>
-      <td>:</td>
-      <td>
-        <form class="" action="index.html" method="post">
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 pull-right">
+      <span class="pull-right"><button type="button" name="button">hai</button></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+        Nama Kasir
+      </div>
+      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
+        : joni
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+        Nama Logistik
+      </div>
+      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
+        : john
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+        Nama PIC
+      </div>
+      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
+        : pras
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+        ID Canvaser
+      </div>
+      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
+        : 123123123
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+        Nama Canvaser
+      </div>
+      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
+        : qwerty
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+        Tanggal Cetak Penjualan
+      </div>
+      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
+        : tanggalan
+      </div>
+    </div>
+  </div>
 
-        </form>
-      </td>
-    </tr>
+<table id="invoice-dompul-table" class="table table-bordered">
+    <thead>
     <tr>
-      <td>No Penjualan</td>
-      <td>:</td>
-      <td>
-        <input type="text" name="" value="">
-      </td>
+        <th>No.</th>
+        <th>Nama RO</th>
+        <th>Qty Penjualan</th>
     </tr>
-    <tr>
-      <td>Tgl Penjualan</td>
-      <td>:</td>
-      <td>
-        <div class="col-md-10 col-sm-6 col-xs-8 date_picker">
-          <input type="text" id="update_time" class="form-control" name="update_time" placeholder="Pick Date">
-        </div>
-      </td>
-    </tr>
-</table> -->
-<button class="btn btn-primary" type="reset">Kosongkan</button>
-<button type="submit" class="btn btn-success">Rekap Penjualan</button>
+    </thead>
+</table>
 @stop
 
 @section('js')
 <script>
     $(function () {
-        $('#users-table').DataTable({
+        $('#invoice-dompul-table').DataTable({
             serverSide: true,
             processing: true,
             ajax: '',
             columns: [
-                {data: 'id_penjualan_dompul'},
-                {data: 'hp_kios'},
-                {data: 'tanggal_penjualan_dompul'},
-                {data: 'tanggal_input'},
-                {data: 'grand_total'},
-                {data: 'bayar_tunai'},
-                {data: 'catatan'},
+                {data: 'no'},
+                {data: 'nama-ro'},
+                {data: 'qty-penjualan'},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });
     });
 </script>
-<script type="text/javascript" src="https://cdn.datatables.net/u/bs-3.3.6/jq-2.2.3,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.12,b-1.2.0,b-colvis-1.2.0,b-html5-1.2.0,b-print-1.2.0,fh-3.1.2,se-1.2.0/datatables.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/locales/bootstrap-datepicker.en.min.js"></script>
-<script type="text/javascript">
-        $('.date_picker input').datepicker({
-          format: "dd.mm.yyyy",
-          todayBtn: "linked",
-          language: "en"
-        });
-    </script>
 @stop
