@@ -50,12 +50,10 @@ class ProdukController extends Controller
         $request->validate([
             'nama' => 'bail|required|unique:produks|max:255',
             'tipe' => 'required',
-            'status' => 'required',
         ]);
         $produk = new produk();
         $produk->nama = $request->get('nama');
         $produk->tipe = $request->get('tipe');
-        $produk->status = $request->get('status');
         $produk->save();
         return redirect('master/produk');
     }
@@ -91,15 +89,10 @@ class ProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama' => 'bail|required|unique:produks|max:255',
-            'tipe' => 'required',
-            'status' => 'required',
-        ]);
-        $produk = produk::find($id);
-        $produk->nama = $request->get('nama');
-        $produk->tipe = $request->get('tipe');
-        $produk->status = $request->get('status');
+        
+        $produk = produk::where('id', $id)->first();
+        $produk->nama = $request->get('nama_upt');
+        $produk->tipe = $request->get('tipe_upt');
         $produk->save();
         return redirect('master/produk');
     }
@@ -112,8 +105,7 @@ class ProdukController extends Controller
      */
     public function destroy($id)
     {
-        $produk = produk::find($id);
-        $produk->delete();
+        $produk = produk::where('id', $id)->update(['status' => 0]);
         return redirect('master/produk');
     }
 
@@ -125,10 +117,13 @@ class ProdukController extends Controller
      */
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(produk::query())
+        return $datatables->eloquent(produk::where('status', 1))
                           ->addColumn('action', function ($produk) {
-                              return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$produk->id.'" data-name="'.$produk->nama.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              return
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"
+                              data-id="'.$produk->id.'"
+                              data-name="'.$produk->nama.'"
+                              data-tipe="'.$produk->tipe.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                               <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$produk->id.'" data-name="'.$produk->nama.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
                           ->make(true);

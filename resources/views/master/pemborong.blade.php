@@ -13,7 +13,7 @@
     <tr>
       <th>Id</th>
       <th>Nama Pemborong</th>
-      <th>Jenis Pemborong</th>
+      <th>Jabatan Pemborong</th>
       <th>Jumlah Anggota</th>
       <th>action</th>
     </tr>

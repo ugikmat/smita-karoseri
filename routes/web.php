@@ -28,6 +28,12 @@ Route::get('list/users-data', 'UsersController@data');
 Route::resource('bank', 'BankController');
 Route::get('bank-data', 'BankController@data');
 
+Route::resource('produk', 'ProdukController');
+Route::get('master-produk', 'ProdukController@data');
+
+Route::resource('satuan', 'SatuanController');
+Route::get('master-satuan', 'SatuanController@data');
+
 Route::resource('customer', 'CustController');
 Route::get('master-customer', 'CustController@data');
 
@@ -103,3 +109,7 @@ Route::get('/master/pemborong', function() {
 Route::get('/master/supervisor', function() {
   return view ('/master/supervisor');
 }) -> name('master-supervisor');
+
+Route::get('/master/satuan', function() {
+  return view ('/master/satuan');
+}) -> name('master-satuan');

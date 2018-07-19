@@ -17,7 +17,7 @@ class CreateSatuansTable extends Migration
             $table->increments('id_satuan');
             $table->string('nama_satuan');
             $table->integer('jumlah_satuan');
-            $table->string('status_satuan');
+            $table->tinyInteger('status')->default(1);
         });
     }
 

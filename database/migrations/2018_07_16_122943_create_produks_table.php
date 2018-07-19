@@ -17,7 +17,7 @@ class CreateProduksTable extends Migration
             $table->increments('id');
             $table->string('nama');
             $table->string('tipe');
-            $table->string('status');
+            $table->tinyInteger('status')-default(1);
         });
     }
 

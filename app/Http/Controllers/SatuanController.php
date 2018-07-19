@@ -47,17 +47,11 @@ class SatuanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'bail|required|unique:produks|max:255',
-            'jumlah' => 'required',
-            'status' => 'required',
-        ]);
         $satuan = new Satuan();
-        $satuan->nama_satuan = $request->get('nama');
-        $satuan->tipe_satuan = $request->get('jumlah');
-        $satuan->status_satuan = $request->get('status');
+        $satuan->nama_satuan = $request->get('nama_satuan');
+        $satuan->jumlah_satuan = $request->get('jumlah_satuan');
         $satuan->save();
-        return redirect('master/satuan');
+        return redirect('/satuan');
     }
 
     /**
@@ -91,15 +85,10 @@ class SatuanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama' => 'bail|required|unique:produks|max:255',
-            'jumlah' => 'required',
-            'status' => 'required',
-        ]);
-        $satuan = Satuan::find($id);
-        $satuan->nama_satuan = $request->get('nama');
-        $satuan->tipe_satuan = $request->get('jumlah');
-        $satuan->status_satuan = $request->get('status');
+
+        $satuan = Satuan::where('id_satuan', $id)->first();
+        $satuan->nama_satuan = $request->get('nama_satuan_upt');
+        $satuan->jumlah_satuan = $request->get('jumlah_satuan_upt');
         $satuan->save();
         return redirect('master/satuan');
     }
@@ -112,8 +101,7 @@ class SatuanController extends Controller
      */
     public function destroy($id)
     {
-        $satuan = Satuan::find($id);
-        $satuan->delete();
+        $satuan = Satuan::where('id_satuan', $id)->update(['status' => 0]);
         return redirect('master/satuan');
     }
 
@@ -125,11 +113,14 @@ class SatuanController extends Controller
      */
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(Satuan::query())
+        return $datatables->eloquent(Satuan::where('status', '1'))
                           ->addColumn('action', function ($satuan) {
-                              return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$satuan->id.'" data-name="'.$satuan->nama.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$satuan->id.'" data-name="'.$satuan->nama.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+                              return
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"
+                              data-id="'.$satuan->id_satuan.'"
+                              data-name="'.$satuan->nama_satuan.'"
+                              data-jumlah="'.$satuan->jumlah_satuan.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$satuan->id_satuan.'" data-name="'.$satuan->nama_satuan.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
                           ->make(true);
     }
