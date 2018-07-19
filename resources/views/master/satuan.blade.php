@@ -10,7 +10,6 @@
       <th>Tipe</th>
       <th>Induk Satuan</th>
       <th>Nilai Konversi</th>
-      <th>Status</th>
       <th>action</th>
     </tr>
   </thead>
