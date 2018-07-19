@@ -45,9 +45,11 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select id="id_lokasi" required="required" name="id_lokasi" placeholder="Pilih Lokasi" class="form-control col-md-7 col-xs-12">
                           <option value="" selected disabled>Pilih Lokasi</option>
-                          @foreach ($lokasiarray as $data)
-                          <option value="{{ $data->id_lokasi }}">{{ $data->nm_lokasi }}</option>
-                          @endforeach
+                          @isset($lokasiarray)
+                            @foreach ($lokasiarray as $data)
+                              <option value="{{ $data->id_lokasi }}">{{ $data->nm_lokasi }}</option>
+                            @endforeach
+                          @endisset
                         </select>
                       </div>
                     </div>
@@ -118,9 +120,11 @@
                       <select id="id_lokasi_upt" required="required" name="id_lokasi_upt" placeholder="Pilih Lokasi" class="form-control col-md-7 col-xs-12">
 
                         <option class="lok_awal" value="" selected disabled>Pilih Lokasi Baru</option>
-                        @foreach ($lokasiarray as $data)
-                        <option value="{{ $data->id_lokasi }}">{{ $data->nm_lokasi }}</option>
-                        @endforeach
+                        @isset($lokasiarray)
+                            @foreach ($lokasiarray as $data)
+                              <option value="{{ $data->id_lokasi }}">{{ $data->nm_lokasi }}</option>
+                            @endforeach
+                        @endisset
                       </select>
                     </div>
                   </div>
