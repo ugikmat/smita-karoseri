@@ -13,8 +13,7 @@ class CreateDompulsTable extends Migration
      */
     public function up()
     {
-        Schema::create('dompuls', function (Blueprint $table) {
-            $table->increments('id_dompul');
+        Schema::create('master_dompuls', function (Blueprint $table) {
             $table->string('no_hp_master_dompul');
             $table->string('no_hp_sub_master_dompul');
             $table->string('id_gudang');
@@ -31,6 +30,6 @@ class CreateDompulsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dompuls');
+        Schema::dropIfExists('master_dompuls');
     }
 }
