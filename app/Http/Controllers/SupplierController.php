@@ -116,8 +116,10 @@ class SupplierController extends Controller
     {
         return $datatables->eloquent(Supplier::where('status_supplier','Aktif'))
                           ->addColumn('action', function ($supplier) {
-                              return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$supplier->id_supplier.'" data-name="'.$supplier->nama_supplier.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              return
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$supplier->id_supplier.'" data-name="'.$supplier->nama_supplier.'"
+                              data-alamat="'.$supplier->alamat_supplier.'" data-telepon="'.$supplier->telepon_supplier.'" data-email="'.$supplier->email_supplier.'" data-bank="'.$supplier->bank_supplier.'"
+                              data-norek="'.$supplier->norek_supplier.'" data-status="'.$supplier->status_supplier.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                               <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$supplier->id_supplier.'" data-name="'.$supplier->nama_supplier.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
                           ->make(true);
