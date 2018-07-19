@@ -13,7 +13,7 @@ class CreateSatuansTable extends Migration
      */
     public function up()
     {
-        Schema::create('satuans', function (Blueprint $table) {
+        Schema::create('master_satuans', function (Blueprint $table) {
             $table->increments('id_satuan');
             $table->string('nama_satuan');
             $table->string('tipe_satuan');
@@ -30,6 +30,6 @@ class CreateSatuansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('satuans');
+        Schema::dropIfExists('master_satuans');
     }
 }
