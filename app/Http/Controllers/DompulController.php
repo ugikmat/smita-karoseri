@@ -46,7 +46,15 @@ class DompulController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dompul = new Dompul();
+        $dompul->no_hp_master_dompul =$request->get('hp-master');
+        $dompul->no_hp_sub_master_dompul =$request->get('hp-sub');
+        $dompul->id_gudang =$request->get('id-gudang');
+        $dompul->nama_sub_master_dompul =$request->get('nama-sub');
+        $dompul->tipe_dompul =$request->get('tipe');
+        $dompul->status_sub_master_dompul ="Aktif";
+        $dompul->save();
+        return redirect('master/dompul');
     }
 
     /**
@@ -68,7 +76,7 @@ class DompulController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -80,7 +88,14 @@ class DompulController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dompul = Dompul::where('id_dompul',$id)->first();
+        $dompul->no_hp_master_dompul =$request->get('hp-master');
+        $dompul->no_hp_sub_master_dompul =$request->get('hp-sub');
+        $dompul->id_gudang =$request->get('id-gudang');
+        $dompul->nama_sub_master_dompul =$request->get('nama-sub');
+        $dompul->tipe_dompul =$request->get('tipe');
+        $dompul->save();
+        return redirect('master/dompul');
     }
 
     /**
@@ -91,7 +106,11 @@ class DompulController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dompul = Dompul::where('id_dompul',$id)->first();
+        $dompul->status_sub_master_dompul="Non Aktif";
+        $dompul->save();
+        return redirect('master/dompul');
+
     }
 
      /**
@@ -102,11 +121,11 @@ class DompulController extends Controller
      */
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(Dompul::query())
+        return $datatables->eloquent(Dompul::where('status_sub_master_dompul',"Aktif"))
                           ->addColumn('action', function ($dompul) {
                               return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" ><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" ><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$dompul->id_dompul.'" data-hp-master="'.$dompul->no_hp_master_dompul.'" data-hp-sub="'.$dompul->no_hp_sub_master_dompul.'" data-gudang="'.$dompul->id_gudang.'" data-nama-sub="'.$dompul->nama_sub_master_dompul.'" data-tipe="'.$dompul->tipe_dompul.'" data-status="'.$dompul->status_sub_master_dompul.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$dompul->id_dompul.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
                           ->make(true);
     }
