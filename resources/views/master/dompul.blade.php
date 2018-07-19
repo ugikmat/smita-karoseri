@@ -2,7 +2,7 @@
 <h1>Master Dompul</h1>
 
 @stop @section('content')
-<table id="dompul-table" class="table table-bordered">
+<table id="dompul-table" class="table responsive" width="100%">
   <thead>
     <tr>
       <th>ID</th>

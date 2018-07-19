@@ -1,8 +1,15 @@
 @extends('adminlte::page') @section('title', 'Bank') @section('content_header')
 <h1>Daftar Bank</h1>
 
-@stop
-@section('content')
+@stop @section('css')
+<style>
+  tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+  }
+</style>
+@stop @section('content')
 <table id="bank-table" class="table responsive" width="100%">
   <thead>
     <tr>

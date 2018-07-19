@@ -2,7 +2,7 @@
 <h1>Daftar Suplier</h1>
 
 @stop @section('content')
-<table id="suplier-table" class="table table-bordered">
+<table id="suplier-table" class="table responsive" width="100%">
   <thead>
     <tr>
       <th>Id</th>
