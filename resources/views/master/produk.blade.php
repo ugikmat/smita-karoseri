@@ -187,8 +187,7 @@
                 <br />
 
                 <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="">
-                  @csrf
-
+                  @csrf @method('put')
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kode Produk
                       <span class="required">*</span>
@@ -221,7 +220,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="Satuan" class="form-control col-md-7 col-xs-12" value="">
+                      <input type="text" id="first-name" required="required" name="satuan" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 
