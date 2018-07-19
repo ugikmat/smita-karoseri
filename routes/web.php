@@ -28,6 +28,12 @@ Route::get('list/users-data', 'UsersController@data');
 Route::resource('bank', 'BankController');
 Route::get('bank-data', 'BankController@data');
 
+Route::resource('produk', 'ProdukController');
+Route::get('master-produk', 'ProdukController@data');
+
+Route::resource('satuan', 'SatuanController');
+Route::get('master-satuan', 'SatuanController@data');
+
 Route::resource('customer', 'CustController');
 Route::get('master-customer', 'CustController@data');
 
@@ -39,6 +45,12 @@ Route::get('master-gudang', 'GudangController@data');
 
 Route::resource('lokasi', 'LokasiController');
 Route::get('master-lokasi', 'LokasiController@data');
+
+Route::resource('pemborong', 'PemborongController');
+Route::get('master-pemborong', 'PemborongController@data');
+
+Route::resource('supervisor', 'SupervisorController');
+Route::get('master-supervisor', 'SupervisorController@data');
 
 // penjualan
 Route::get('/penjualan/dompul/invoice-dompul', function() {
@@ -97,3 +109,7 @@ Route::get('/master/pemborong', function() {
 Route::get('/master/supervisor', function() {
   return view ('/master/supervisor');
 }) -> name('master-supervisor');
+
+Route::get('/master/satuan', function() {
+  return view ('/master/satuan');
+}) -> name('master-satuan');

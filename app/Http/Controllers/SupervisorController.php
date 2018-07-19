@@ -4,29 +4,28 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Satuan;
+use App\Supervisor;
 use Yajra\Datatables\Datatables;
 
-class SatuanController extends Controller
+class SupervisorController extends Controller
 {
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+     public function __construct()
+     {
+         $this->middleware('auth');
+     }
+     /**
+      * Display index page.
+      *
+      * @return \BladeView|bool|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+      */
     public function index()
     {
-        return view('master.satuan');
+        return view('master.supervisor');
     }
 
     /**
@@ -47,11 +46,13 @@ class SatuanController extends Controller
      */
     public function store(Request $request)
     {
-        $satuan = new Satuan();
-        $satuan->nama_satuan = $request->get('nama_satuan');
-        $satuan->jumlah_satuan = $request->get('jumlah_satuan');
-        $satuan->save();
-        return redirect('/satuan');
+      $spv = new Supervisor;
+      $spv->nm_spv = $request->get('nm_spv');
+      $spv->alamat_spv = $request->get('alamat_spv');
+      $spv->no_hp = $request->get('no_hp');
+      $spv->save();
+
+      return redirect('/supervisor');
     }
 
     /**
@@ -85,12 +86,13 @@ class SatuanController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $spv = Supervisor::where('id_spv', $id)->first();
+        $spv->nm_spv = $request->get('nm_spv_upt');
+        $spv->alamat_spv = $request->get('alamat_spv_upt');
+        $spv->no_hp = $request->get('no_hp_upt');
+        $spv->save();
 
-        $satuan = Satuan::where('id_satuan', $id)->first();
-        $satuan->nama_satuan = $request->get('nama_satuan_upt');
-        $satuan->jumlah_satuan = $request->get('jumlah_satuan_upt');
-        $satuan->save();
-        return redirect('master/satuan');
+        return redirect('/supervisor');
     }
 
     /**
@@ -101,27 +103,23 @@ class SatuanController extends Controller
      */
     public function destroy($id)
     {
-        $satuan = Satuan::where('id_satuan', $id)->update(['status' => 0]);
-        return redirect('master/satuan');
+      $spv = Supervisor::where('id_spv', $id)->update(['status' => 0]);
+      return redirect('/supervisor');
     }
 
-    /**
-     * Process dataTable ajax response.
-     *
-     * @param \Yajra\Datatables\Datatables $datatables
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(Satuan::where('status', '1'))
-                          ->addColumn('action', function ($satuan) {
+        return $datatables->eloquent(Supervisor::where('status', '1'))
+                          ->addColumn('action', function ($spv) {
                               return
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"
-                              data-id="'.$satuan->id_satuan.'"
-                              data-name="'.$satuan->nama_satuan.'"
-                              data-jumlah="'.$satuan->jumlah_satuan.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$satuan->id_satuan.'" data-name="'.$satuan->nama_satuan.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+                              data-id="'.$spv->id_spv.'"
+                              data-name="'.$spv->nm_spv.'"
+                              data-alamat="'.$spv->alamat_spv.'"
+                              data-nohp="'.$spv->no_hp.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$spv->id_spv.'" data-name="'.$spv->nm_spv.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
+
                           ->make(true);
     }
 }

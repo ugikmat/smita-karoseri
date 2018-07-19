@@ -4,29 +4,28 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Satuan;
+use App\Pemborong;
 use Yajra\Datatables\Datatables;
 
-class SatuanController extends Controller
+class PemborongController extends Controller
 {
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+     public function __construct()
+     {
+         $this->middleware('auth');
+     }
+     /**
+      * Display index page.
+      *
+      * @return \BladeView|bool|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+      */
     public function index()
     {
-        return view('master.satuan');
+        return view('master.pemborong');
     }
 
     /**
@@ -47,11 +46,13 @@ class SatuanController extends Controller
      */
     public function store(Request $request)
     {
-        $satuan = new Satuan();
-        $satuan->nama_satuan = $request->get('nama_satuan');
-        $satuan->jumlah_satuan = $request->get('jumlah_satuan');
-        $satuan->save();
-        return redirect('/satuan');
+      $pb = new Pemborong;
+      $pb->nm_pb = $request->get('nm_pb');
+      $pb->jenis_pb = $request->get('jenis_pb');
+      $pb->jml_ang = $request->get('jml_ang');
+      $pb->save();
+
+      return redirect('/pemborong');
     }
 
     /**
@@ -85,12 +86,13 @@ class SatuanController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $pb = Pemborong::where('id_pb', $id)->first();
+        $pb->nm_pb = $request->get('nm_pb_upt');
+        $pb->jenis_pb = $request->get('jenis_pb_upt');
+        $pb->jml_ang = $request->get('jml_ang_upt');
+        $pb->save();
 
-        $satuan = Satuan::where('id_satuan', $id)->first();
-        $satuan->nama_satuan = $request->get('nama_satuan_upt');
-        $satuan->jumlah_satuan = $request->get('jumlah_satuan_upt');
-        $satuan->save();
-        return redirect('master/satuan');
+        return redirect('/pemborong');
     }
 
     /**
@@ -101,27 +103,23 @@ class SatuanController extends Controller
      */
     public function destroy($id)
     {
-        $satuan = Satuan::where('id_satuan', $id)->update(['status' => 0]);
-        return redirect('master/satuan');
+      $pb = Pemborong::where('id_pb', $id)->update(['status' => 0]);
+      return redirect('/pemborong');
     }
 
-    /**
-     * Process dataTable ajax response.
-     *
-     * @param \Yajra\Datatables\Datatables $datatables
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(Satuan::where('status', '1'))
-                          ->addColumn('action', function ($satuan) {
+        return $datatables->eloquent(Pemborong::where('status', '1'))
+                          ->addColumn('action', function ($pb) {
                               return
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"
-                              data-id="'.$satuan->id_satuan.'"
-                              data-name="'.$satuan->nama_satuan.'"
-                              data-jumlah="'.$satuan->jumlah_satuan.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$satuan->id_satuan.'" data-name="'.$satuan->nama_satuan.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+                              data-id="'.$pb->id_pb.'"
+                              data-name="'.$pb->nm_pb.'"
+                              data-jenis="'.$pb->jenis_pb.'"
+                              data-jml="'.$pb->jml_ang.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$pb->id_pb.'" data-name="'.$pb->nm_pb.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
+
                           ->make(true);
     }
 }

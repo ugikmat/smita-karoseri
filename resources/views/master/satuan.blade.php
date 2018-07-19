@@ -1,14 +1,14 @@
 @extends('adminlte::page') @section('title', 'Satuan') @section('content_header')
 <h1>Daftar Satuan</h1>
 
-@stop @section('content')
+@stop
+@section('content')
 <table id="satuan-table" class="table table-bordered">
   <thead>
     <tr>
       <th>Id</th>
       <th>Nama Satuan</th>
       <th>Jumlah Satuan</th>
-      <th>Status</th>
       <th>action</th>
     </tr>
   </thead>
@@ -16,7 +16,7 @@
 <!-- Modal Tambah -->
 <section class="content-header">
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">Tambah</button>
-  
+
   <div class="modal fade bs-example-modal-lg" id='modal1' tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -38,14 +38,15 @@
                 <div class="x_content">
                   <br />
 
-                  <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+                  <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/satuan">
+                    @csrf
 
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Satuan
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="nama_satuan" required="required" name="nama_satuan" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
@@ -54,16 +55,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status Satuan
-                        <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="number" id="jumlah_satuan" required="required" name="jumlah_satuan" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
@@ -71,7 +63,8 @@
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         <button class="btn btn-primary" type="reset">Reset</button>
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <input type="submit" class="btn btn-success" value="Submit">
+                        {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
                       </div>
                     </div>
                   </form>
@@ -91,7 +84,7 @@
 
 
 <!--Modal Edit-->
-<div class="modal fade bs-example-modal-lg" id='modal1' tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
@@ -112,40 +105,33 @@
               <div class="x_content">
                 <br />
 
-                <form id="edit" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+                <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+                  @csrf
+                  @method('put')
 
-                  <div class="form-group">
+                  <div class="form-group nama_st">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Satuan
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                      <input type="text" id="nama_satuan_upt" required="required" name="nama_satuan_upt" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group jumlah_st">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jumlah Satuan
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status Satuan
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                      <input type="number" id="jumlah_satuan_upt" required="required" name="jumlah_satuan_upt" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 
                   <div class="ln_solid"></div>
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                      <button class="btn btn-primary" type="reset">Reset</button>
-                      <button type="submit" class="btn btn-success">Submit</button>
+                      <input type="submit" class="btn btn-success" value="Submit">
+                    {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
                     </div>
                   </div>
                 </form>
@@ -165,7 +151,9 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-
+      <form id="deleteForm" action="" method="POST">
+      @csrf
+      @method('delete')
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -173,20 +161,21 @@
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Hapus</button>
+          <input type="submit" class="btn btn-danger delete-user" value="Hapus">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
       </div>
-
+      </form>
     </div>
   </div>
 </div>
-@stop @section('js')
+@stop
+@section('js')
 <script>
   $(function () {
     $('#satuan-table').DataTable({
       serverSide: true,
       processing: true,
-      ajax: '/master/satuan-data',
+      ajax: '/master-satuan',
       columns: [{
           data: 'id_satuan'
         },
@@ -197,9 +186,6 @@
           data: 'jumlah_satuan'
         },
         {
-          data: 'status_satuan'
-        },
-        {
           data: 'action',
           orderable: false,
           searchable: false
@@ -207,5 +193,30 @@
       ]
     });
   });
+</script>
+
+<script>
+  $('#editModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var name = button.data('name')// Extract info from data-* attributes
+  var jumlah = button.data('jumlah')
+  var id = button.data('id')
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  $('#editForm').attr('action', `/satuan/${id}`);
+  modal.find('.modal-body .nama_st input').val(name)
+  modal.find('.modal-body .jumlah_st input').val(jumlah)
+  })
+</script>
+
+<script>
+  $('#deleteModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var id = button.data('id')// Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  $('#deleteForm').attr('action', `/satuan/${id}`);
+  })
 </script>
 @stop
