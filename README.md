@@ -4,13 +4,15 @@ An Aplication Build with Laravel and AdminLTE, please read Configuration section
 ### Step 1. Clone and Install
 After Clone or download this project, in your cli run command `composer install`
 ### Step 2. Get .env file
-Don't forget to add your `.env` file, you can copy from your another laravel project. or you can just use command 'php -r "copy('.env.example', '.env');"'.
+Don't forget to add your `.env` file, you can copy from your another laravel project. or you can just use command `php -r "copy('.env.example', '.env');`.
 ### Step 3. Setup database
 Setup your database as mentioned in '.env'. if database in '.env' not exist, create before run a migrate.
 ### Step 4. Generate Key
-Run Command 'php artisan key:generate'
+Run Command `php artisan key:generate`
 ### Step 5. Run migrate
-After that run migrate with command `php artisan migrate`
+After that run migrate with command `php artisan migrate --seed`
+</br>
+or if you want to a fresh migrate you can use command `php artisan migrate:fresh --seed`
 ### Step 6. Project Ready!
 Project is Ready!, you can serve with command `php artisan serve`
 ## Contribute

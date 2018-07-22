@@ -3,79 +3,102 @@
 @section('title', 'Penjualan Dompul')
 
 @section('content_header')
-    <h1>Penjualan Dompul</h1>
+    <h1>Detail Penjualan Dompul</h1>
 @stop
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class='col-sm-6'>
-            <div class="form-group">
-                <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
-        </script>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+        Tanggal Penjualan
+      </div>
+      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
+        : tanggalan
+      </div>
     </div>
-</div>
-<table id="users-table" class="table table-bordered">
-    <tr>
-      <td>ID canvaser</td>
-      <td>:</td>
-      <td>
-        <form class="" action="index.html" method="post">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 
-        </form>
-      </td>
-    </tr>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 pull-right">
+      <span class="pull-right"><button type="button" name="button">hai</button></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+        Nama Kasir
+      </div>
+      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
+        : joni
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+        Nama Logistik
+      </div>
+      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
+        : john
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+        Nama PIC
+      </div>
+      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
+        : pras
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+        ID Canvaser
+      </div>
+      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
+        : 123123123
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+        Nama Canvaser
+      </div>
+      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
+        : qwerty
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+        Tanggal Cetak Penjualan
+      </div>
+      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
+        : tanggalan
+      </div>
+    </div>
+  </div>
+
+<table id="invoice-dompul-table" class="table table-bordered">
+    <thead>
     <tr>
-      <td>No Penjualan</td>
-      <td>:</td>
-      <td>
-        <input type="text" name="" value="">
-      </td>
+        <th>No.</th>
+        <th>Nama RO</th>
+        <th>Qty Penjualan</th>
     </tr>
-    <tr>
-      <td>Tgl Penjualan</td>
-      <td>:</td>
-      <td>
-        <div class="input-append date" id="dp3" data-date="" data-date-format="">
-          <input class="span2" size="16" type="text" value="">
-        </div>
-      </td>
-    </tr>
-    <input type="button" name="" value="Kosongkan">
-    <input type="button" name="" value="Rekap Penjualan">
+    </thead>
 </table>
 @stop
 
 @section('js')
-<script src="js/google-code-prettify/prettify.js"></script>
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap-datepicker.js"></script>
-
 <script>
     $(function () {
-        $('#users-table').DataTable({
+        $('#invoice-dompul-table').DataTable({
             serverSide: true,
             processing: true,
             ajax: '',
             columns: [
-                {data: 'id_penjualan_dompul'},
-                {data: 'hp_kios'},
-                {data: 'tanggal_penjualan_dompul'},
-                {data: 'tanggal_input'},
-                {data: 'grand_total'},
-                {data: 'bayar_tunai'},
-                {data: 'catatan'},
+                {data: 'no'},
+                {data: 'nama-ro'},
+                {data: 'qty-penjualan'},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });

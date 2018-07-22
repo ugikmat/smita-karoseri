@@ -1,24 +1,40 @@
-@extends('adminlte::page') @section('title', 'Suplier') @section('content_header')
-<h1>Daftar Suplier</h1>
+@extends('adminlte::page') @section('title', 'Dompul') @section('content_header')
+<h1>Master Dompul</h1>
 
+@stop @section('css')
+<style>
+  tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+  }
+</style>
 @stop @section('content')
-<table id="suplier-table" class="table responsive" width="100%">
+<table id="dompul-table" class="table responsive" width="100%">
   <thead>
     <tr>
-      <th>Id</th>
-      <th>Nama Suplier</th>
-      <th>Alamat Suplier</th>
-      <th>Telepon Suplier</th>
-      <th>Email Suplier</th>
-      <th>Bank</th>
-      <th>No. Rekening</th>
-      <th>Status Suplier</th>
-      <th>action</th>
+      <th>ID</th>
+      <th>No HP Master Dompul</th>
+      <th>No HP Sub Dompul</th>
+      <th>ID Gudang</th>
+      <th>Nama Sub Master Dompul</th>
+      <th>Tipe Dompul</th>
+      <th>Status</th>
+      <th>Action</th>
     </tr>
   </thead>
+  <tfoot>
+    <tr>
+      <th>ID</th>
+      <th>No HP Master Dompul</th>
+      <th>No HP Sub Dompul</th>
+      <th>ID Gudang</th>
+      <th>Nama Sub Master Dompul</th>
+      <th>Tipe Dompul</th>
+    </tr>
+  </tfoot>
 </table>
-
-<!-- Button to Open the Modal -->
+<!-- Modal Tambah -->
 <section class="content-header">
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTambah">Tambah</button>
   <div class="modal fade bs-example-modal-lg" id='modalTambah' tabindex="-1" role="dialog" aria-hidden="true">
@@ -29,7 +45,7 @@
           <button type="button" class="close" data-dismiss="modal">
             <span aria-hidden="true">×</span>
           </button>
-          <h4 class="modal-title" id="myModalLabel">Tambah Suplier</h4>
+          <h4 class="modal-title" id="myModalLabel">Tambah Dompul</h4>
         </div>
         <div class="modal-body">
           <div class="clearfix"></div>
@@ -42,63 +58,51 @@
                 <div class="x_content">
                   <br />
 
-                  <form id="tambahForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/master/supplier">
+                  <form id="tambahForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/master/dompul">
                     @csrf
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Suplier
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No HP Master Dompul
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="first-name" required="required" name="hp-master" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Alamat Suplier
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No HP Sub Dompul
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="alamat" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="first-name" required="required" name="hp-sub" class="form-control col-md-7 col-xs-12" value="">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Gudang
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="first-name" required="required" name="id-gudang" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No Telepon
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Sub Master Dompul
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="telepon" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="first-name" required="required" name="nama-sub" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Email Suplier
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="email" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
-
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Bank
-                        <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="bank" class="form-control col-md-7 col-xs-12" value="">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No. Rekening
-                        <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="norek" class="form-control col-md-7 col-xs-12" value="">
-                      </div>
-                    </div>
-
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -121,7 +125,8 @@
   </div>
 </section>
 
-<!--Edit-->
+
+<!--Modal Edit-->
 <div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -130,7 +135,7 @@
         <button type="button" class="close" data-dismiss="modal">
           <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Edit Suplier</h4>
+        <h4 class="modal-title" id="myModalLabel">Edit Dompul</h4>
       </div>
       <div class="modal-body">
         <div class="clearfix"></div>
@@ -145,60 +150,49 @@
 
                 <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
                   @csrf @method('put')
-
-                  <div class="form-group nama">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Suplier
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                  <div class="form-group hp-master">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No HP Master Dompul
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="first-name" required="required" name="hp-master" class="form-control col-md-7 col-xs-12" value="">
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="form-group alamat">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Alamat Suplier
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="alamat" class="form-control col-md-7 col-xs-12" value="">
+                    <div class="form-group hp-sub">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No HP Sub Dompul
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="first-name" required="required" name="hp-sub" class="form-control col-md-7 col-xs-12" value="">
+                      </div>
                     </div>
-                  </div>
+                    <div class="form-group id-gudang">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Gudang
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="first-name" required="required" name="id-gudang" class="form-control col-md-7 col-xs-12" value="">
+                      </div>
+                    </div>
 
-                  <div class="form-group telepon">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No Telepon
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="telepon" class="form-control col-md-7 col-xs-12" value="">
+                    <div class="form-group nama-sub">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Sub Master Dompul
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="first-name" required="required" name="nama-sub" class="form-control col-md-7 col-xs-12" value="">
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="form-group email">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Email Suplier
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="email" class="form-control col-md-7 col-xs-12" value="">
+                    <div class="form-group tipe">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
+                      </div>
                     </div>
-                  </div>
-
-                  <div class="form-group bank">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Bank
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="bank" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
-                  </div>
-
-                  <div class="form-group norek">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No. Rekening
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="norek" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
-                  </div>
                   <div class="ln_solid"></div>
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -233,7 +227,7 @@
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
-          <input type="submit" class="btn btn-danger" value="Hapus">
+          <button type="submit" class="btn btn-danger">Hapus</button>
           <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
         </div>
       </form>
@@ -243,33 +237,30 @@
 @stop @section('js')
 <script>
   $(function () {
-    $('#suplier-table').DataTable({
+    $('#dompul-table').DataTable({
       serverSide: true,
       processing: true,
-      ajax: '/supplier-data',
+      ajax: '/dompul-data',
       columns: [{
-          data: 'id_supplier'
+          data: 'id_dompul'
         },
         {
-          data: 'nama_supplier'
+          data: 'no_hp_master_dompul'
         },
         {
-          data: 'alamat_supplier'
+          data: 'no_hp_sub_master_dompul'
         },
         {
-          data: 'telepon_supplier'
+          data: 'id_gudang'
         },
         {
-          data: 'email_supplier'
+          data: 'nama_sub_master_dompul'
         },
         {
-          data: 'bank_supplier'
+          data: 'tipe_dompul'
         },
         {
-          data: 'norek_supplier'
-        },
-        {
-          data: 'status_supplier'
+          data: 'status_sub_master_dompul'
         },
         {
           data: 'action',
@@ -293,26 +284,21 @@
 <script>
   $('#editModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
-    var name = button.data('name') // Extract info from data-* attributes
+    var hp_master = button.data('hp-master')
     var id = button.data('id')
-    var alamat = button.data('alamat')
-    var telepon = button.data('telepon')
-    var email = button.data('email')
-    var bank = button.data('bank')
-    var norek = button.data('norek')
-    var status = button.data('status')
+    var hp_sub = button.data('hp-sub')
+    var id_gudang = button.data('gudang')
+    var nama_sub = button.data('nama-sub')
+    var tipe = button.data('tipe')
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    $('#editForm').attr('action', `/master/supplier/${id}`);
-    modal.find('.modal-body .nama input').val(name)
-    modal.find('.modal-body .id input').val(id)
-    modal.find('.modal-body .alamat input').val(alamat)
-    modal.find('.modal-body .telepon input').val(telepon)
-    modal.find('.modal-body .email input').val(email)
-    modal.find('.modal-body .bank input').val(bank)
-    modal.find('.modal-body .norek input').val(norek)
-    modal.find('.modal-body .status input').val(status)
+    $('#editForm').attr('action', `/master/dompul/${id}`);
+    modal.find('.modal-body .hp-master input').val(hp_master)
+    modal.find('.modal-body .hp-sub input').val(hp_sub)
+    modal.find('.modal-body .id-gudang input').val(id_gudang)
+    modal.find('.modal-body .nama-sub input').val(nama_sub)
+    modal.find('.modal-body .tipe input').val(tipe)
   })
 </script>
 <script>
@@ -321,7 +307,7 @@
     var id = button.data('id') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/master/supplier/${id}`);
+    $('#deleteForm').attr('action', `/master/dompul/${id}`);
   })
 </script>
 @stop

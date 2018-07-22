@@ -13,9 +13,11 @@ class CreateBanksTable extends Migration
      */
     public function up()
     {
-        Schema::create('banks', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nama');
+        Schema::create('master_banks', function (Blueprint $table) {
+            $table->increments('id_bank');
+            $table->string('kode_bank');
+            $table->string('nama_bank');
+            $table->string('status_bank');
         });
     }
 
@@ -26,6 +28,6 @@ class CreateBanksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('banks');
+        Schema::dropIfExists('master_banks');
     }
 }

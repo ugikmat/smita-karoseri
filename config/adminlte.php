@@ -167,8 +167,8 @@ return [
                 ],
               ],
               [
-                'text'    => 'Bank',
-                'url'     => '/bank',
+                'text'    => 'Upload',
+                'url'     => '/upload',
               ],
             ],
         ],
@@ -214,7 +214,7 @@ return [
               ],
               [
                 'text'  => 'suplier',
-                'url'   => '/master/suplier',
+                'url'   => '/master/supplier',
               ],
               [
                 'text'  => 'customer',
@@ -244,6 +244,10 @@ return [
                 'text'  => 'supervisor',
                 'url'   => '/master/supervisor',
                 'icon'  => 'user',
+              ],
+              [
+                'text'  => 'dompul',
+                'url'   => '/master/dompul',
               ],
             ],
         ],
@@ -293,8 +297,8 @@ return [
     */
 
     'plugins' => [
-        'datatables' => true,
-        'select2'    => true,
-        'chartjs'    => true,
+        'datatables' => false,
+        'select2'    => false,
+        'chartjs'    => false,
     ],
 ];

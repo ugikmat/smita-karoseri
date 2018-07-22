@@ -48,8 +48,11 @@ class SatuanController extends Controller
     public function store(Request $request)
     {
         $satuan = new Satuan();
-        $satuan->nama_satuan = $request->get('nama_satuan');
-        $satuan->jumlah_satuan = $request->get('jumlah_satuan');
+        $satuan->nama_satuan = $request->get('nama');
+        $satuan->tipe_satuan = $request->get('tipe');
+        $satuan->induk_satuan = $request->get('induk');
+        $satuan->nilai_konversi = $request->get('nilai');
+        $satuan->status_satuan = "tersedia";
         $satuan->save();
         return redirect('/satuan');
     }
@@ -87,8 +90,10 @@ class SatuanController extends Controller
     {
 
         $satuan = Satuan::where('id_satuan', $id)->first();
-        $satuan->nama_satuan = $request->get('nama_satuan_upt');
-        $satuan->jumlah_satuan = $request->get('jumlah_satuan_upt');
+        $satuan->nama_satuan = $request->get('nama');
+        $satuan->tipe_satuan = $request->get('tipe');
+        $satuan->induk_satuan = $request->get('induk');
+        $satuan->nilai_konversi = $request->get('nilai');
         $satuan->save();
         return redirect('master/satuan');
     }
@@ -101,7 +106,9 @@ class SatuanController extends Controller
      */
     public function destroy($id)
     {
-        $satuan = Satuan::where('id_satuan', $id)->update(['status' => 0]);
+        $satuan = Satuan::find($id);
+        $satuan->status_satuan="tidak tersedia";
+        $satuan->save();
         return redirect('master/satuan');
     }
 
@@ -113,13 +120,11 @@ class SatuanController extends Controller
      */
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(Satuan::where('status', '1'))
+        return $datatables->eloquent(Satuan::where('status_satuan','tersedia'))
                           ->addColumn('action', function ($satuan) {
                               return
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"
-                              data-id="'.$satuan->id_satuan.'"
-                              data-name="'.$satuan->nama_satuan.'"
-                              data-jumlah="'.$satuan->jumlah_satuan.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$satuan->id_satuan.'" data-name="'.$satuan->nama_satuan.'"
+                              data-tipe="'.$satuan->tipe_satuan.'" data-induk="'.$satuan->induk_satuan.'" data-nilai="'.$satuan->nilai_konversi.'" data-status="'.$satuan->status_satuan.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                               <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$satuan->id_satuan.'" data-name="'.$satuan->nama_satuan.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
                           ->make(true);

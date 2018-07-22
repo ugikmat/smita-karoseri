@@ -13,11 +13,13 @@ class CreateSatuansTable extends Migration
      */
     public function up()
     {
-        Schema::create('satuans', function (Blueprint $table) {
+        Schema::create('master_satuans', function (Blueprint $table) {
             $table->increments('id_satuan');
             $table->string('nama_satuan');
-            $table->integer('jumlah_satuan');
-            $table->tinyInteger('status')->default(1);
+            $table->string('tipe_satuan');
+            $table->string('induk_satuan');
+            $table->string('nilai_konversi');
+            $table->string('status_satuan');
         });
     }
 
@@ -28,6 +30,6 @@ class CreateSatuansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('satuans');
+        Schema::dropIfExists('master_satuans');
     }
 }

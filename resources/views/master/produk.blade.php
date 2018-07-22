@@ -3,24 +3,32 @@
 
 @stop @section('content')
 
-<!-- tambah data -->
-
 <!-- data tabel -->
-<table id="produk-table" class="table table-bordered">
+<table id="produk-table" class="table responsive" width="100%">
   <thead>
     <tr>
       <th>Id</th>
+      <th>Kode Produk</th>
       <th>Nama Produk</th>
-      <th>Tipe Produk</th>
-      <th>Action</th>
+      <th>Kategori Produk</th>
+      <th>Satuan</th>
+      <th>Jenis</th>
+      <th>BOM</th>
+      <th>Harga Jual</th>
+      <th>Tarif Pajak</th>
+      <th>Diskon</th>
+      <th>Komisi</th>
+      <th>Status Produk</th>
+      <th>action</th>
     </tr>
   </thead>
 </table>
 
 <!-- tambah data -->
 <section class="content-header">
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">Tambah</button>
-  <div class="modal fade bs-example-modal-lg" id='modal1' tabindex="-1" role="dialog" aria-hidden="true">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalTambah">Tambah</button>
+
+  <div class="modal fade bs-example-modal-lg" id='modalTambah' tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
@@ -41,8 +49,16 @@
                 <div class="x_content">
                   <br />
 
-                  <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/produk">
+                  <form id="tambahForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/master/produk">
                     @csrf
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kode Produk
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="kode" required="required" name="kode" class="form-control col-md-7 col-xs-12" value="">
+                      </div>
+                    </div>
 
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Produk
@@ -54,14 +70,76 @@
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Produk
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kategori Produk
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="tipe" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="kategori" required="required" name="kategori" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Satuan
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="satuan" required="required" name="satuan" class="form-control col-md-7 col-xs-12" value="">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jenis
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="jenis" required="required" name="jenis" class="form-control col-md-7 col-xs-12" value="">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">BOM
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="bom" required="required" name="bom" class="form-control col-md-7 col-xs-12" value="">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Harga Jual
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="jual" required="required" name="jual" class="form-control col-md-7 col-xs-12" value="">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tarif Pajak
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="pajak" required="required" name="pajak" class="form-control col-md-7 col-xs-12" value="">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Diskon
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="diskon" required="required" name="diskon" class="form-control col-md-7 col-xs-12" value="">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Komisi
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="komisi" required="required" name="komisi" class="form-control col-md-7 col-xs-12" value="">
+                      </div>
+                    </div>
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -108,25 +186,95 @@
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
-                  @csrf
-                  @method('put')
+                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="">
+                  @csrf @method('put')
+                  <div class="form-group kode">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kode Produk
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="kode" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
 
-                  <div class="form-group nama_pd">
+                  <div class="form-group nama">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Produk
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="nama_upt" required="required" name="nama_upt" class="form-control col-md-7 col-xs-12" value="">
+                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 
-                  <div class="form-group tipe">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Produk
+                  <div class="form-group kategori">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kategori Produk
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="tipe_upt" required="required" name="tipe_upt" class="form-control col-md-7 col-xs-12" value="">
+                      <input type="text" id="first-name" required="required" name="kategori" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+
+                  <div class="form-group satuan">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Satuan
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="satuan" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+
+                  <div class="form-group jenis">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jenis
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="jenis" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+
+                  <div class="form-group bom">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">BOM
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="bom" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+
+                  <div class="form-group jual">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Harga Jual
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="jual" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+
+                  <div class="form-group pajak">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tarif Pajak
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="pajak" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+
+                  <div class="form-group diskon">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Diskon
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="diskon" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+
+                  <div class="form-group komisi">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Komisi
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="komisi" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
                   <div class="ln_solid"></div>
@@ -154,9 +302,8 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="deleteForm" action="" method="POST">
-        @csrf
-        @method('delete')
+      <form action="" id="deleteForm" method="POST">
+        @csrf @method('delete')
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -164,10 +311,10 @@
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
-            <input type="submit" class="btn btn-danger delete-user" value="Hapus">
+          <input type="submit" class="btn btn-danger" value="Hapus">
           <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
         </div>
-        </form>
+      </form>
     </div>
   </div>
 </div>
@@ -177,48 +324,102 @@
     $('#produk-table').DataTable({
       serverSide: true,
       processing: true,
-      ajax: '/master-produk',
+      ajax: '/produk-data',
       columns: [{
-          data: 'id'
+          data: 'id_produk'
         },
         {
-          data: 'nama'
+          data: 'kode_produk'
         },
         {
-          data: 'tipe'
+          data: 'nama_produk'
+        },
+        {
+          data: 'kategori_produk'
+        },
+        {
+          data: 'satuan'
+        },
+        {
+          data: 'jenis'
+        },
+        {
+          data: 'BOM'
+        },
+        {
+          data: 'harga_jual'
+        },
+        {
+          data: 'tarif_pajak'
+        },
+        {
+          data: 'diskon'
+        },
+        {
+          data: 'komisi'
+        },
+        {
+          data: 'status_produk'
         },
         {
           data: 'action',
           orderable: false,
           searchable: false
         }
-      ]
+      ],
+      initComplete: function () {
+        this.api().columns().every(function () {
+          var column = this;
+          var input = document.createElement("input");
+          $(input).appendTo($(column.footer()).empty())
+            .on('change', function () {
+              column.search($(this).val(), false, false, true).draw();
+            });
+        });
+      }
     });
   });
 </script>
-
 <script>
   $('#editModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var name = button.data('name')// Extract info from data-* attributes
-  var tipe = button.data('tipe')
-  var id = button.data('id')
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  var modal = $(this)
-  $('#editForm').attr('action', `/produk/${id}`);
-  modal.find('.modal-body .nama_pd input').val(name)
-  modal.find('.modal-body .tipe input').val(tipe)
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var name = button.data('name') // Extract info from data-* attributes
+    var id = button.data('id')
+    var kode = button.data('kode')
+    var kategori = button.data('kategori')
+    var satuan = button.data('satuan')
+    var jenis = button.data('jenis')
+    var bom = button.data('bom')
+    var jual = button.data('jual')
+    var pajak = button.data('pajak')
+    var diskon = button.data('diskon')
+    var komisi = button.data('komisi')
+    var status = button.data('status')
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    $('#editForm').attr('action', `/master/produk/${id}`);
+    modal.find('.modal-body .nama input').val(name)
+    modal.find('.modal-body .id input').val(id)
+    modal.find('.modal-body .kode input').val(kode)
+    modal.find('.modal-body .kategori input').val(kategori)
+    modal.find('.modal-body .satuan input').val(satuan)
+    modal.find('.modal-body .jenis input').val(jenis)
+    modal.find('.modal-body .bom input').val(bom)
+    modal.find('.modal-body .jual input').val(jual)
+    modal.find('.modal-body .pajak input').val(pajak)
+    modal.find('.modal-body .diskon input').val(diskon)
+    modal.find('.modal-body .komisi input').val(komisi)
+    modal.find('.modal-body .status input').val(status)
   })
 </script>
-
 <script>
   $('#deleteModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var id = button.data('id')// Extract info from data-* attributes
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  $('#deleteForm').attr('action', `/produk/${id}`);
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    $('#deleteForm').attr('action', `/master/produk/${id}`);
   })
 </script>
 @stop
