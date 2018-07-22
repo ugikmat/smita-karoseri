@@ -85,6 +85,10 @@ Route::get('/penjualan/dompul/list-invoice', function() {
   return view ('/penjualan/dompul/list-invoice');
 }) -> name('list-invoice');
 
+//upload
+Route::get('/upload/upload', function() {
+  return view ('/upload/upload');
+}) -> name('upload');
 
 //Master
 Route::resource('master/bank', 'BankController');
@@ -102,38 +106,6 @@ Route::get('/supplier-data', 'SupplierController@data');
 Route::resource('master/dompul', 'DompulController');
 Route::get('/dompul-data', 'DompulController@data');
 
-Route::get('/master/customer', function() {
-  return view ('/master/customer');
-}) -> name('master-customer');
-
-Route::get('/master/gudang', function() {
-  return view ('/master/gudang');
-}) -> name('master-gudang');
-
-Route::get('/master/lokasi', function() {
-  return view ('/master/lokasi');
-}) -> name('master-lokasi');
-
-Route::get('/master/sales', function() {
-  return view ('/master/sales');
-}) -> name('master-sales');
-
-Route::get('/master/suplier', function() {
-  return view ('/master/suplier');
-}) -> name('master-suplier');
-
-Route::get('/master/pemborong', function() {
-  return view ('/master/pemborong');
-}) -> name('master-pemborong');
-
-Route::get('/master/supervisor', function() {
-  return view ('/master/supervisor');
-}) -> name('master-supervisor');
-
-Route::get('/master/satuan', function() {
-  return view ('/master/satuan');
-}) -> name('master-satuan');
-
 //transaction
 Route::get('/karoseri/minta_karoseri', function() {
   return view ('/karoseri/minta_karoseri');
@@ -150,3 +122,4 @@ Route::get('/karoseri/print_spkc', function() {
 Route::get('/karoseri/viewprint_spkc', function() {
   return view ('/karoseri/viewprint_spkc');
 }) -> name('karoseri-viewprint_spkc');
+>>>>>>> upstream/front
