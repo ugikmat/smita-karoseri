@@ -106,22 +106,6 @@ Route::get('/supplier-data', 'SupplierController@data');
 Route::resource('master/dompul', 'DompulController');
 Route::get('/dompul-data', 'DompulController@data');
 
-Route::get('/master/customer', function() {
-  return view ('/master/customer');
-}) -> name('master-customer');
-
-Route::get('/master/gudang', function() {
-  return view ('/master/gudang');
-}) -> name('master-gudang');
-
-Route::get('/master/lokasi', function() {
-  return view ('/master/lokasi');
-}) -> name('master-lokasi');
-
-Route::get('/master/sales', function() {
-  return view ('/master/sales');
-}) -> name('master-sale('master-satuan');
-
 //transaction
 Route::get('/karoseri/minta_karoseri', function() {
   return view ('/karoseri/minta_karoseri');
