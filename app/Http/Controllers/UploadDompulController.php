@@ -51,11 +51,10 @@ class UploadDompulController extends Controller
 				}
 				if(!empty($insert)){
 					DB::table('upload_dompuls')->insert($insert);
-					dd('Insert Record successfully.');
 				}
 			}
 		}
-		return back();
+		return redirect('/upload/dompul');
 
     }
     /**

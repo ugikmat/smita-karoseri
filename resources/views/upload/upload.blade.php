@@ -124,9 +124,9 @@
         {
           data: 'balance'
         },
-        // {
-        //   data: 'diskon'
-        // },
+        {
+          data: 'diskon'
+        },
         {
           data: 'no_hp_downline'
         },
