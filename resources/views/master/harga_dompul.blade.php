@@ -57,17 +57,8 @@
                 <div class="x_content">
                   <br />
 
-                  <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Harga Dompul
-                        <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value="">
-                      </div>
-                    </div>
-
+                  <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/master/harga_dompul">
+                    @csrf
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Harga Dompul
                         <span class="required">*</span>
@@ -95,24 +86,14 @@
                       </div>
                     </div>
 
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Update
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12 date_picker">
                         <input type="text" id="update_time" class="form-control" name="update_time" placeholder="Pick Date">
                       </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status
-                        <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
-                      </div>
-                    </div>
-
+                    </div> --}}
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -158,18 +139,9 @@
               <div class="x_content">
                 <br />
 
-                <form id="edit" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Harga Dompul
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
-                  </div>
-
-                  <div class="form-group">
+                <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+                  @csrf @method('put')
+                  <div class="form-group nama">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Harga Dompul
                       <span class="required">*</span>
                     </label>
@@ -178,7 +150,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group tipe">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Harga Dompul
                       <span class="required">*</span>
                     </label>
@@ -187,7 +159,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group harga">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Harga Dompul
                       <span class="required">*</span>
                     </label>
@@ -196,23 +168,14 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  {{-- <div class="form-group tanggal">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Update
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12 date_picker">
                       <input type="text" id="update_time" class="form-control" name="update_time" placeholder="Pick Date">
                     </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
-                  </div>
+                  </div> --}}
 
                   <div class="ln_solid"></div>
                   <div class="form-group">
@@ -230,7 +193,6 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
-
     </div>
   </div>
 </div>
@@ -239,7 +201,9 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-
+      <form action="" method="POST" id="deleteForm">
+        @csrf @method('delete')
+      
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -247,10 +211,10 @@
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Hapus</button>
+        <button type="submit" class="btn btn-danger" >Hapus</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
       </div>
-
+      </form>
     </div>
   </div>
 </div>
@@ -301,13 +265,22 @@
 <script>
   $('#editModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
-    var hp_master = button.data('hp-master')
     var id = button.data('id')
+    var nama = button.data('nama')
+    var tipe = button.data('tipe')
+    var harga = button.data('harga')
+    // var tanggal = button.data('tanggal')
+    // var status = button.data('status')
+
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
     $('#editForm').attr('action', `/master/harga_dompul/${id}`);
-    modal.find('.modal-body .hp-master input').val(hp_master)
+    modal.find('.modal-body .nama input').val(nama)
+    modal.find('.modal-body .tipe input').val(tipe)
+    modal.find('.modal-body .harga input').val(harga)
+    // modal.find('.modal-body .tanggal input').val(tanggal)
+    // modal.find('.modal-body .status input').val(status)
   })
 </script>
 <script>
