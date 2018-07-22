@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Customer;
+use App\View\ViewCustomer;
 use Yajra\Datatables\Datatables;
 
 class CustController extends Controller

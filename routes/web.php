@@ -52,6 +52,25 @@ Route::get('master-pemborong', 'PemborongController@data');
 Route::resource('supervisor', 'SupervisorController');
 Route::get('master-supervisor', 'SupervisorController@data');
 
+Route::resource('permintaan', 'PermintaanPenjualanController');
+Route::get('karoseri-permintaan', 'PermintaanPenjualanController@data');
+Route::post('getData','PermintaanPenjualanController@getData');
+Route::post('accept/{id}', 'PermintaanPenjualanController@accept')->name('accept');
+
+
+Route::resource('spkc', 'SPKCController');
+Route::get('karoseri-spkc', 'SPKCController@data');
+
+Route::resource('print', 'PrintSPKCController');
+Route::get('karoseri-print_spkc', 'PrintSPKCController@data');
+Route::post('getDataPrint','PrintSPKCController@getData');
+Route::get('printKu/{id}', 'PrintSPKCController@print');
+
+Route::resource('printview', 'ViewPrintController');
+Route::get('karoseri-viewprint_spkc', 'ViewPrintController@data');
+Route::post('getDataView','ViewPrintController@getData');
+Route::get('viewprint/{id}', 'ViewPrintController@print');
+
 // penjualan
 Route::get('/penjualan/dompul/invoice-dompul', function() {
   return view ('/penjualan/dompul/invoice-dompul');
@@ -114,3 +133,20 @@ Route::get('/master/supervisor', function() {
 Route::get('/master/satuan', function() {
   return view ('/master/satuan');
 }) -> name('master-satuan');
+
+//transaction
+Route::get('/karoseri/minta_karoseri', function() {
+  return view ('/karoseri/minta_karoseri');
+}) -> name('karoseri-permintaan');
+
+Route::get('/karoseri/spkc', function() {
+  return view ('/karoseri/spkc');
+}) -> name('karoseri-spkc');
+
+Route::get('/karoseri/print_spkc', function() {
+  return view ('/karoseri/print_spkc');
+}) -> name('karoseri-print_spkc');
+
+Route::get('/karoseri/viewprint_spkc', function() {
+  return view ('/karoseri/viewprint_spkc');
+}) -> name('karoseri-viewprint_spkc');
