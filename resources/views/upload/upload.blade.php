@@ -30,6 +30,7 @@
 <table id="upload-table" class="table responsive" width="100%">
   <thead>
     <tr>
+      <th>ID</th>
       <th>Nama Sub Master</th>
       <th>Tanggal TRX</th>
       <th>No Faktur</th>
