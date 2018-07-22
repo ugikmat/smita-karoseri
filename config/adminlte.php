@@ -168,7 +168,7 @@ return [
               ],
               [
                 'text'    => 'Upload',
-                'url'     => '/upload',
+                'url'     => '/upload/upload',
               ],
             ],
         ],
