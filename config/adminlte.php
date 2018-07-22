@@ -249,6 +249,16 @@ return [
                 'text'  => 'dompul',
                 'url'   => '/master/dompul',
               ],
+              [
+                'text'  => 'harga dompul',
+                'url'   => '/master/harga_dompul',
+                'icon'  => 'money',
+              ],
+              [
+                'text'  => 'harga_produk',
+                'url'   => '/master/harga_produk',
+                'icon'  => 'money',
+              ],
             ],
         ],
 
