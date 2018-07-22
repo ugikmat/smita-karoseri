@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\UploadDompul;
 use DB;
 use Excel;
+use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 
 class UploadDompulController extends Controller
@@ -57,6 +58,22 @@ class UploadDompulController extends Controller
 		}
 		return back();
 
-	}
+    }
+    /**
+     * Process dataTable ajax response.
+     *
+     * @param \Yajra\Datatables\Datatables $datatables
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function data(Datatables $datatables)
+    {
+        return $datatables->eloquent(UploadDompul::query())
+                          ->addColumn('action', function ($uploadDompul) {
+                              return
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$uploadDompul->id_upload.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$uploadDompul->id_upload.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+                            })
+                          ->make(true);
+    }
 
 }
