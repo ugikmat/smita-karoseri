@@ -8,4 +8,5 @@ class Supplier extends Model
 {
     public $timestamps =false;
     protected $primaryKey = 'id_supplier';
+    protected $table = 'master_suppliers';
 }

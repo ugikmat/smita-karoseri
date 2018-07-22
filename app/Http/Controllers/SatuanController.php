@@ -54,7 +54,7 @@ class SatuanController extends Controller
         $satuan->nilai_konversi = $request->get('nilai');
         $satuan->status_satuan = "tersedia";
         $satuan->save();
-        return redirect('master/satuan');
+        return redirect('/satuan');
     }
 
     /**
@@ -88,15 +88,12 @@ class SatuanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama' => 'bail|required|unique:produks|max:255',
-            'jumlah' => 'required',
-            'status' => 'required',
-        ]);
-        $satuan = Satuan::find($id);
+
+        $satuan = Satuan::where('id_satuan', $id)->first();
         $satuan->nama_satuan = $request->get('nama');
-        $satuan->tipe_satuan = $request->get('jumlah');
-        $satuan->status_satuan = $request->get('status');
+        $satuan->tipe_satuan = $request->get('tipe');
+        $satuan->induk_satuan = $request->get('induk');
+        $satuan->nilai_konversi = $request->get('nilai');
         $satuan->save();
         return redirect('master/satuan');
     }

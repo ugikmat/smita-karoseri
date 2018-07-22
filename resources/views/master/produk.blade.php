@@ -1,6 +1,13 @@
 @extends('adminlte::page') @section('title', 'Produk') @section('content_header')
 <h1>Daftar Produk</h1>
 
+@stop @section('css')
+<style>
+  tfoot input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+</style>
 @stop @section('content')
 
 <!-- data tabel -->
@@ -22,6 +29,21 @@
       <th>action</th>
     </tr>
   </thead>
+  <tfoot>
+    <tr>
+      <th>Id</th>
+      <th>Kode Produk</th>
+      <th>Nama Produk</th>
+      <th>Kategori Produk</th>
+      <th>Satuan</th>
+      <th>Jenis</th>
+      <th>BOM</th>
+      <th>Harga Jual</th>
+      <th>Tarif Pajak</th>
+      <th>Diskon</th>
+      <th>Komisi</th>
+    </tr>
+  </tfoot>
 </table>
 
 <!-- tambah data -->
@@ -144,7 +166,8 @@
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         <button class="btn btn-primary" type="reset">Reset</button>
-                        <button type="submit" class="btn btn-success">Submit</button>
+                        <input type="submit" class="btn btn-success" value="Submit">
+                        {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
                       </div>
                     </div>
                   </form>
@@ -186,8 +209,7 @@
                 <br />
 
                 <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="">
-                  @csrf
-
+                  @csrf @method('put')
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kode Produk
                       <span class="required">*</span>
@@ -220,7 +242,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="Satuan" class="form-control col-md-7 col-xs-12" value="">
+                      <input type="text" id="first-name" required="required" name="satuan" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 
@@ -277,12 +299,11 @@
                       <input type="text" id="first-name" required="required" name="komisi" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
-
                   <div class="ln_solid"></div>
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                      <button class="btn btn-primary" type="reset">Reset</button>
-                      <button type="submit" class="btn btn-success">Submit</button>
+                      <input type="submit" class="btn btn-success" value="Submit">
+                      {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
                     </div>
                   </div>
                 </form>
