@@ -86,9 +86,13 @@ Route::get('/penjualan/dompul/list-invoice', function() {
 }) -> name('list-invoice');
 
 //upload
-Route::get('/upload/upload', function() {
-  return view ('/upload/upload');
-}) -> name('upload');
+// Route::get('/upload/upload', function() {
+//   return view ('/upload/upload');
+// }) -> name('upload');
+
+Route::get('upload/dompul', 'UploadDompulController@index');
+Route::get('downloadExcel/{type}', 'UploadDompulController@downloadExcel');
+Route::post('importExcel', 'UploadDompulController@importExcel');
 
 //Master
 Route::resource('master/bank', 'BankController');
@@ -122,4 +126,3 @@ Route::get('/karoseri/print_spkc', function() {
 Route::get('/karoseri/viewprint_spkc', function() {
   return view ('/karoseri/viewprint_spkc');
 }) -> name('karoseri-viewprint_spkc');
->>>>>>> upstream/front

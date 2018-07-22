@@ -11,12 +11,20 @@
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadModal">Upload</button>
+        <a href="{{ URL::to('downloadExcel/xls') }}">
+            <button class="btn btn-success">Download Excel xls</button>
+        </a>
+        <a href="{{ URL::to('downloadExcel/xlsx') }}">
+            <button class="btn btn-success">Download Excel xlsx</button>
+        </a>
+        <a href="{{ URL::to('downloadExcel/csv') }}">
+            <button class="btn btn-success">Download CSV</button>
+        </a>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       Tanggal :
     </div>
   </div>
-
 </div>
 
 <table id="upload-table" class="table responsive" width="100%">
@@ -43,7 +51,6 @@
 <!-- Modal -->
 <div id="uploadModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -53,16 +60,17 @@
       <div class="modal-body">
         <!-- Form -->
         <form method='post' action='' enctype="multipart/form-data">
-          Select file : <input type='file' name='file' id='file' class='form-control' ><br>
-          <input type='button' class='btn btn-info' value='Upload' id='upload'>
+           @csrf
+            <div class="form-group">
+                <label for="file_import">File</label>
+                <input type='file' name='file_import' id='file_import' class='form-control' ><br>
+                <input type='submit' class='btn btn-info' value='Upload' id='upload'>
+            </div>
         </form>
-
         <!-- Preview-->
         <div id='preview'></div>
       </div>
-
     </div>
-
   </div>
 </div>
 
