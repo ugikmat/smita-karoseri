@@ -12,8 +12,25 @@
     box-sizing: border-box;
   }
 </style>
-@stop @section('content')
+<style>
+.scrolling table {
+  table-layout: inherit;
+}
+.scrolling td, th {
+  vertical-align: top;
+padding: 10px;
+min-width: 100px;
+}
+.outer {
+position: relative
+}
+.inner {
+overflow-x: auto;
+overflow-y: visible;
+}
 
+</style>
+@stop @section('content')
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -31,6 +48,34 @@
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
       Tanggal :
     </div>
+  </div>
+</div>
+<div class="scrolling outer">
+  <div class="inner">
+    <table id="upload-table" class="table responsive" width="100%" >
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>HP Sub Master</th>
+          <th>Nama Sub Master</th>
+          <th>Tanggal TRX</th>
+          <th>No Faktur</th>
+          <th>Produk</th>
+          <th>Qty</th>
+          <th>Balance</th>
+          <th>Diskon</th>
+          <th>HP Downline</th>
+          <th>Nama Downline</th>
+          <th>Status</th>
+          <th>HP Kanvacer</th>
+          <th>Nama Kanvacer</th>
+          <th>Print</th>
+          <th>Bayar</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+    </table>
+
   </div>
 </div>
 
