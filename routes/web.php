@@ -110,6 +110,15 @@ Route::get('/supplier-data', 'SupplierController@data');
 Route::resource('master/dompul', 'DompulController');
 Route::get('/dompul-data', 'DompulController@data');
 
+Route::get('/master/harga_dompul', function() {
+  return view ('/master/harga_dompul');
+}) -> name('harga_dompul');
+
+Route::get('/master/harga_produk', function() {
+  return view ('/master/harga_produk');
+}) -> name('harga_produk');
+
+
 //transaction
 Route::get('/karoseri/minta_karoseri', function() {
   return view ('/karoseri/minta_karoseri');

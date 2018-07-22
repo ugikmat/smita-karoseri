@@ -214,7 +214,7 @@
 @stop
 
 @section('js')
-<!-- <script>
+<script>
     $(function () {
         $('#harga-produk-table').DataTable({
             serverSide: true,
@@ -230,5 +230,5 @@
             ]
         });
     });
-</script> -->
+</script>
 @stop

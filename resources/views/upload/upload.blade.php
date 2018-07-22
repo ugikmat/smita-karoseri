@@ -9,7 +9,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadModal">Upload</button>
         <a href="{{ URL::to('downloadExcel/xls') }}">
             <button class="btn btn-success">Download Excel xls</button>
@@ -21,7 +21,7 @@
             <button class="btn btn-success">Download CSV</button>
         </a>
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
       Tanggal :
     </div>
   </div>
@@ -63,19 +63,35 @@
            @csrf
             <div class="form-group">
                 <label for="file_import">File</label>
-                <input type='file' name='file_import' id='file_import' class='form-control' ><br>
+                <input type='file' name='file_import' id='file_import' class='form-control' accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"><br>
                 <input type='submit' class='btn btn-info' value='Upload' id='upload'>
             </div>
         </form>
         <!-- Preview-->
         <div id='preview'></div>
       </div>
+
     </div>
   </div>
 </div>
 
 @stop @section('js')
-<!-- <script>
+<script type="text/javascript">
+//    validasi form (hanya file .xls yang diijinkan)
+    function validateForm()
+    {
+        function hasExtension(inputID, exts) {
+            var fileName = document.getElementById(inputID).value;
+            return (new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$')).test(fileName);
+        }
+
+        if(!hasExtension('dompul', ['.xls'])){
+            alert("Hanya file XLS yang diijinkan.");
+            return false;
+        }
+    }
+</script>
+<script>
   $(function () {
     $('#upload-table').DataTable({
       serverSide: true,
@@ -107,7 +123,7 @@
       ]
     });
   });
-</script> -->
+</script>
 
 
 <script>
