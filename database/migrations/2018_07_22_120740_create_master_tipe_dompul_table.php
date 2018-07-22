@@ -16,6 +16,7 @@ class CreateMasterTipeDompulTable extends Migration
         Schema::create('master_tipe_dompul', function (Blueprint $table) {
             $table->increments('id_tipe_dompul');
             $table->string('tipe_dompul');
+            $table->string('status_tipe_dompul')->default('Aktif');
         });
     }
 

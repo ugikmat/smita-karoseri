@@ -11,7 +11,7 @@
     box-sizing: border-box;
   }
 </style>
-<table id="harga-dompul-table" class="table table-bordered">
+<table id="harga-dompul-table" class="table responsive" width="100%">
   <thead>
     <tr>
       <th>Id Harga Dompul</th>

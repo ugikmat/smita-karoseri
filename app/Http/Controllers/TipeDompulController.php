@@ -97,6 +97,9 @@ class TipeDompulController extends Controller
      */
     public function destroy($id)
     {
+        $tipeDompul = TipeDompul::where('id_tipe_dompul',$id)->first();
+        $tipeDompul->status_tipe_dompul = "Non Aktif";
+        $tipeDompul->save();
         return redirect('/master/tipe_dompul');
     }
        /**
@@ -107,7 +110,7 @@ class TipeDompulController extends Controller
      */
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(TipeDompul::query())
+        return $datatables->eloquent(TipeDompul::where('status_tipe_dompul','Aktif'))
                           ->addColumn('action', function ($tipeDompul) {
                               return
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$tipeDompul->id_tipe_dompul.'" data-tipe="'.$tipeDompul->tipe_dompul.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
