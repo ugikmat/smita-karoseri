@@ -44,7 +44,6 @@ class UploadDompulController extends Controller
                     'status' => $value->status ,
                     'no_hp_canvasser' => $value->hp_kanvacer ,
                     'nama_canvasser' => $value->nama_kanvacer ,
-                    'inbox' => '1' ,
                     'print' => $value->print,
                     'bayar' => $value->bayar 
                 ];
