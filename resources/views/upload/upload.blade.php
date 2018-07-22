@@ -59,11 +59,11 @@
       </div>
       <div class="modal-body">
         <!-- Form -->
-        <form method='post' action='' enctype="multipart/form-data">
+        <form method='post' action='/importExcel' enctype="multipart/form-data">
            @csrf
             <div class="form-group">
-                <label for="file_import">File</label>
-                <input type='file' name='file_import' id='file_import' class='form-control' accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"><br>
+                <label for="import_file">File</label>
+                <input type='file' name='import_file' id='import_file' class='form-control' accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"><br>
                 <input type='submit' class='btn btn-info' value='Upload' id='upload'>
             </div>
         </form>

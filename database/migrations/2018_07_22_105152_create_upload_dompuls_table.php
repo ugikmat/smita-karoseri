@@ -17,11 +17,11 @@ class CreateUploadDompulsTable extends Migration
             $table->increments('id_upload');
             $table->string('no_hp_sub_master_dompul');
             $table->string('nama_sub_master_dompul');
-            $table->timestamp('tanggal_transfer');
+            $table->date('tanggal_transfer');
             $table->string('no_faktur');
             $table->string('produk');
             $table->bigInteger('qty');
-            $table->bigInteger('balance');
+            $table->string('balance');
             $table->double('diskon');
             $table->string('no_hp_downline');
             $table->string('nama_downline');
@@ -29,7 +29,7 @@ class CreateUploadDompulsTable extends Migration
             $table->string('no_hp_canvasser');
             $table->string('nama_canvasser');
             $table->string('inbox');
-            $table->string('print');
+            $table->string('print')->nullable();
             $table->string('bayar');
         });
     }
