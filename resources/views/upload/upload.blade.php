@@ -30,6 +30,7 @@
 <table id="upload-table" class="table responsive" width="100%">
   <thead>
     <tr>
+      <th>ID</th>
       <th>Nama Sub Master</th>
       <th>Tanggal TRX</th>
       <th>No Faktur</th>
@@ -44,6 +45,7 @@
       <th>Nama Kanvacer</th>
       <th>Print</th>
       <th>Bayar</th>
+      <th>Action</th>
     </tr>
   </thead>
 </table>
@@ -98,22 +100,52 @@
       processing: true,
       ajax: '/upload-data',
       columns: [{
-          data: 'id_satuan'
+          data: 'id_upload'
         },
         {
-          data: 'nama_satuan'
+          data: 'no_hp_sub_master_dompul'
         },
         {
-          data: 'tipe_satuan'
+          data: 'nama_sub_master_dompul'
         },
         {
-          data: 'induk_satuan'
+          data: 'tanggal_transfer'
         },
         {
-          data: 'nilai_konversi'
+          data: 'no_faktur'
         },
         {
-          data: 'status_satuan'
+          data: 'produk'
+        },
+        {
+          data: 'qty'
+        },
+        {
+          data: 'balance'
+        },
+        {
+          data: 'diskon'
+        },
+        {
+          data: 'no_hp_downline'
+        },
+        {
+          data: 'nama_downline'
+        },
+        {
+          data: 'status'
+        },
+        {
+          data: 'no_hp_canvasser'
+        },
+        {
+          data: 'nama_canvasser'
+        },
+        {
+          data: 'print'
+        },
+        {
+          data: 'bayar'
         },
         {
           data: 'action',
