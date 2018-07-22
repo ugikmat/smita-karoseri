@@ -117,6 +117,11 @@ Route::get('/harga-dompul-data', 'HargaDompulController@data');
 Route::resource('master/harga_produk', 'HargaProdukController');
 Route::get('/harga-produk-data', 'HargaProdukController@data');
 
+Route::get('/master/tipe_dompul', function() {
+  return view ('/master/tipe_dompul');
+}) -> name('tipe_dompul');
+
+
 //transaction
 Route::get('/karoseri/minta_karoseri', function() {
   return view ('/karoseri/minta_karoseri');

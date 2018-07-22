@@ -255,8 +255,13 @@ return [
                 'icon'  => 'money',
               ],
               [
-                'text'  => 'harga_produk',
+                'text'  => 'harga produk',
                 'url'   => '/master/harga_produk',
+                'icon'  => 'money',
+              ],
+              [
+                'text'  => 'tipe dompul',
+                'url'   => '/master/tipe_dompul',
                 'icon'  => 'money',
               ],
             ],
