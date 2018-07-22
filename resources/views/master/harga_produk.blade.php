@@ -221,11 +221,11 @@
             processing: true,
             ajax: '/harga-produk-data',
             columns: [
+                {data: 'id_harga_sp'},
                 {data: 'id_produk'},
-                {data: 'nama_Produk'},
-                {data: 'tipe_produk'},
-                {data: 'harga_produk'},
-                {data: 'status_produk'},
+                {data: 'tipe_harga_sp'},
+                {data: 'harga_sp'},
+                {data: 'status_harga_sp'},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });
