@@ -18,6 +18,7 @@
     <tr>
       <th>ID</th>
       <th>Nama Tipe Dompul</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tfoot>
@@ -163,12 +164,12 @@
     $('#dompul-table').DataTable({
       serverSide: true,
       processing: true,
-      ajax: '/dompul-data',
+      ajax: '/tipe-dompul-data',
       columns: [{
-          data: 'id_dompul'
+          data: 'id_tipe_dompul'
         },
         {
-          data: 'no_hp_master_dompul'
+          data: 'tipe_dompul'
         },
         {
           data: 'action',
