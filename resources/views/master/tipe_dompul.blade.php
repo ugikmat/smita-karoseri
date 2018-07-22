@@ -190,7 +190,7 @@
     });
   });
 </script>
-<!-- <script>
+<script>
   $('#editModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var hp_master = button.data('hp-master')
@@ -198,7 +198,7 @@
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    $('#editForm').attr('action', `/master/dompul/${id}`);
+    $('#editForm').attr('action', `/master/tipe_dompul/${id}`);
     modal.find('.modal-body .hp-master input').val(hp_master)
   })
 </script>
@@ -208,7 +208,7 @@
     var id = button.data('id') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/master/dompul/${id}`);
+    $('#deleteForm').attr('action', `/master/tipe_dompul/${id}`);
   })
-</script> -->
+</script>
 @stop
