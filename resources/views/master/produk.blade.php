@@ -1,6 +1,13 @@
 @extends('adminlte::page') @section('title', 'Produk') @section('content_header')
 <h1>Daftar Produk</h1>
 
+@stop @section('css')
+<style>
+  tfoot input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+</style>
 @stop @section('content')
 
 <!-- data tabel -->
@@ -22,6 +29,21 @@
       <th>action</th>
     </tr>
   </thead>
+  <tfoot>
+    <tr>
+      <th>Id</th>
+      <th>Kode Produk</th>
+      <th>Nama Produk</th>
+      <th>Kategori Produk</th>
+      <th>Satuan</th>
+      <th>Jenis</th>
+      <th>BOM</th>
+      <th>Harga Jual</th>
+      <th>Tarif Pajak</th>
+      <th>Diskon</th>
+      <th>Komisi</th>
+    </tr>
+  </tfoot>
 </table>
 
 <!-- tambah data -->

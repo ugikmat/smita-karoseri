@@ -1,6 +1,13 @@
 @extends('adminlte::page') @section('title', 'Satuan') @section('content_header')
 <h1>Daftar Satuan</h1>
 
+@stop @section('css')
+<style>
+  tfoot input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+</style>
 @stop @section('content')
 <table id="satuan-table" class="table responsive" width="100%">
   <thead>
@@ -13,6 +20,15 @@
       <th>action</th>
     </tr>
   </thead>
+  <tfoot>
+    <tr>
+      <th>Id</th>
+      <th>Nama Satuan</th>
+      <th>Tipe</th>
+      <th>Induk Satuan</th>
+      <th>Nilai Konversi</th>
+    </tr>
+  </tfoot>
 </table>
 <!-- Modal Tambah -->
 <section class="content-header">
@@ -228,7 +244,17 @@
           orderable: false,
           searchable: false
         }
-      ]
+      ],
+      initComplete: function () {
+        this.api().columns().every(function () {
+          var column = this;
+          var input = document.createElement("input");
+          $(input).appendTo($(column.footer()).empty())
+            .on('change', function () {
+              column.search($(this).val(), false, false, true).draw();
+            });
+        });
+      }
     });
   });
 </script>

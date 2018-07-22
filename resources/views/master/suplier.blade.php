@@ -1,6 +1,13 @@
 @extends('adminlte::page') @section('title', 'Suplier') @section('content_header')
 <h1>Daftar Suplier</h1>
 
+@stop @section('css')
+<style>
+  tfoot input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+</style>
 @stop @section('content')
 <table id="suplier-table" class="table responsive" width="100%">
   <thead>
@@ -16,6 +23,17 @@
       <th>action</th>
     </tr>
   </thead>
+  <tfoot>
+    <tr>
+      <th>Id</th>
+      <th>Nama Suplier</th>
+      <th>Alamat Suplier</th>
+      <th>Telepon Suplier</th>
+      <th>Email Suplier</th>
+      <th>Bank</th>
+      <th>No. Rekening</th>
+    </tr>
+  </tfoot>
 </table>
 
 <!-- Button to Open the Modal -->
