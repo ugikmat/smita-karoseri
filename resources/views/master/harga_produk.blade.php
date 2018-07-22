@@ -273,4 +273,25 @@
     });
   });
 </script>
+<script>
+  $('#editModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var hp_master = button.data('hp-master')
+    var id = button.data('id')
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    $('#editForm').attr('action', `/master/harga_produk/${id}`);
+    modal.find('.modal-body .hp-master input').val(hp_master)
+  })
+</script>
+<script>
+  $('#deleteModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    $('#deleteForm').attr('action', `/master/harga_produk/${id}`);
+  })
+</script>
 @stop
