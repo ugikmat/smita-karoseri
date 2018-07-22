@@ -86,9 +86,13 @@ Route::get('/penjualan/dompul/list-invoice', function() {
 }) -> name('list-invoice');
 
 //upload
-Route::get('/upload/upload', function() {
-  return view ('/upload/upload');
-}) -> name('upload');
+// Route::get('/upload/upload', function() {
+//   return view ('/upload/upload');
+// }) -> name('upload');
+
+Route::get('upload/dompul', 'UploadDompulController@index');
+Route::get('downloadExcel/{type}', 'UploadDompulController@downloadExcel');
+Route::post('importExcel', 'UploadDompulController@importExcel');
 
 //Master
 Route::resource('master/bank', 'BankController');
@@ -105,22 +109,6 @@ Route::get('/supplier-data', 'SupplierController@data');
 
 Route::resource('master/dompul', 'DompulController');
 Route::get('/dompul-data', 'DompulController@data');
-
-Route::get('/master/customer', function() {
-  return view ('/master/customer');
-}) -> name('master-customer');
-
-Route::get('/master/gudang', function() {
-  return view ('/master/gudang');
-}) -> name('master-gudang');
-
-Route::get('/master/lokasi', function() {
-  return view ('/master/lokasi');
-}) -> name('master-lokasi');
-
-Route::get('/master/sales', function() {
-  return view ('/master/sales');
-}) -> name('master-satuan');
 
 //transaction
 Route::get('/karoseri/minta_karoseri', function() {
