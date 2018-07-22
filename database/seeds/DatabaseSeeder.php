@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SatuanTableSeeder::class);
         $this->call(SupplierTableSeeder::class);
         $this->call(DompulTableSeeder::class);
+        $this->call(MasterHargaDompulTableSeeder::class);
+        $this->call(MasterHargaSPTableSeeder::class);
         // $this->call(UploadDompulTableSeeder::class);
     }
 }

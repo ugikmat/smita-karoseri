@@ -218,31 +218,31 @@ return [
               ],
               [
                 'text'  => 'customer',
-                'url'   => '/master/customer',
+                'url'   => '/customer',
                 'icon'  => 'user',
               ],
               [
                 'text'  => 'gudang',
-                'url'   => '/master/gudang',
+                'url'   => '/gudang',
               ],
               [
                 'text'  => 'lokasi',
-                'url'   => '/master/lokasi',
+                'url'   => '/lokasi',
                 'icon'  => 'location-arrow',
               ],
               [
                 'text'  => 'sales',
-                'url'   => '/master/sales',
+                'url'   => '/sales',
                 'icon'  => 'user',
               ],
               [
                 'text'  => 'pemborong',
-                'url'   => '/master/pemborong',
+                'url'   => '/pemborong',
                 'icon'  => 'users',
               ],
               [
                 'text'  => 'supervisor',
-                'url'   => '/master/supervisor',
+                'url'   => '/supervisor',
                 'icon'  => 'user',
               ],
               [
