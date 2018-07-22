@@ -9,7 +9,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadModal">Upload</button>
         <a href="{{ URL::to('downloadExcel/xls') }}">
             <button class="btn btn-success">Download Excel xls</button>
@@ -21,7 +21,7 @@
             <button class="btn btn-success">Download CSV</button>
         </a>
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
       Tanggal :
     </div>
   </div>
