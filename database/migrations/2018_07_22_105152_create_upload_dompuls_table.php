@@ -28,7 +28,6 @@ class CreateUploadDompulsTable extends Migration
             $table->string('status');
             $table->string('no_hp_canvasser');
             $table->string('nama_canvasser');
-            $table->string('inbox');
             $table->string('print');
             $table->string('bayar');
         });
