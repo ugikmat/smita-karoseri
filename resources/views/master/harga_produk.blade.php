@@ -9,7 +9,7 @@
   }
 </style>
 @stop @section('content')
-<table id="harga-produk-table" class="table table-bordered">
+<table id="harga-produk-table" class="table responsive" width='100%'>
   <thead>
     <tr>
       <th>Id Harga Produk</th>
@@ -53,32 +53,23 @@
                 <div class="x_content">
                   <br />
 
-                  <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Harga Produk
+                  <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/master/harga_produk">
+                    @csrf
+                    <div class="form-group id-produk">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id-produk">ID Produk
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="id-harga" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="id-produk" required="required" name="id" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Produk
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipe">Tipe Harga Produk
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value="">
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Harga Produk
-                        <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="tipe" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
@@ -90,16 +81,6 @@
                         <input type="text" id="first-name" required="required" name="harga" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status
-                        <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
-                      </div>
-                    </div>
-
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -124,7 +105,7 @@
 
 
 <!--Modal Edit-->
-<div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bs-example-modal-lg" id='editModal' aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
@@ -145,18 +126,10 @@
               <div class="x_content">
                 <br />
 
-                <form id="edit" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+                <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+                  @csrf @method('put')
 
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Harga Produk
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="id-harga" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
-                  </div>
-
-                  <div class="form-group">
+                  <div class="form-group id">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Produk
                       <span class="required">*</span>
                     </label>
@@ -165,7 +138,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group tipe">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Harga Produk
                       <span class="required">*</span>
                     </label>
@@ -174,7 +147,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group harga">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Harga Produk
                       <span class="required">*</span>
                     </label>
@@ -182,16 +155,6 @@
                       <input type="text" id="first-name" required="required" name="harga" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
-                  </div>
-
                   <div class="ln_solid"></div>
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -217,7 +180,8 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-
+      <form action="" method="POST" id="deleteForm">
+        @csrf @method('delete')
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -225,10 +189,10 @@
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Hapus</button>
+        <button type="submit" class="btn btn-danger">Submit</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
       </div>
-
+    </form>
     </div>
   </div>
 </div>
@@ -276,13 +240,17 @@
 <script>
   $('#editModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
-    var hp_master = button.data('hp-master')
     var id = button.data('id')
+    var id_produk = button.data('id_produk')
+    var tipe = button.data('tipe')
+    var harga = button.data('harga')
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
     $('#editForm').attr('action', `/master/harga_produk/${id}`);
-    modal.find('.modal-body .hp-master input').val(hp_master)
+    modal.find('.modal-body .id input').val(id_produk);
+    modal.find('.modal-body .tipe input').val(tipe);
+    modal.find('.modal-body .harga input').val(harga);
   })
 </script>
 <script>
