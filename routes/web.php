@@ -39,6 +39,10 @@ Route::get('/penjualan/dompul/list-invoice', function() {
   return view ('/penjualan/dompul/list-invoice');
 }) -> name('list-invoice');
 
+//upload
+Route::get('/upload/upload', function() {
+  return view ('/upload/upload');
+}) -> name('upload');
 
 //Master
 Route::resource('master/bank', 'BankController');
