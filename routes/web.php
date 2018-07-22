@@ -120,7 +120,7 @@ Route::get('/master/lokasi', function() {
 
 Route::get('/master/sales', function() {
   return view ('/master/sales');
-}) -> name('master-sale('master-satuan');
+}) -> name('master-satuan');
 
 //transaction
 Route::get('/karoseri/minta_karoseri', function() {
@@ -138,4 +138,3 @@ Route::get('/karoseri/print_spkc', function() {
 Route::get('/karoseri/viewprint_spkc', function() {
   return view ('/karoseri/viewprint_spkc');
 }) -> name('karoseri-viewprint_spkc');
->>>>>>> upstream/front

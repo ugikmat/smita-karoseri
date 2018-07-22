@@ -53,12 +53,14 @@
       <div class="modal-body">
         <!-- Form -->
         <form method='post' action='' enctype="multipart/form-data">
-          Select file : <input type='file' name='file' id='file' class='form-control' ><br>
-          <input type='button' class='btn btn-info' value='Upload' id='upload'>
+          Select file : <input type='file' name='dompul' id='dompul' class='form-control' accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"><br>
         </form>
 
         <!-- Preview-->
         <div id='preview'></div>
+      </div>
+      <div class="modal-footer">
+          <input type='button' class='btn btn-info' value='Upload' id='upload'>
       </div>
 
     </div>
@@ -67,7 +69,22 @@
 </div>
 
 @stop @section('js')
-<!-- <script>
+<script type="text/javascript">
+//    validasi form (hanya file .xls yang diijinkan)
+    function validateForm()
+    {
+        function hasExtension(inputID, exts) {
+            var fileName = document.getElementById(inputID).value;
+            return (new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$')).test(fileName);
+        }
+
+        if(!hasExtension('dompul', ['.xls'])){
+            alert("Hanya file XLS yang diijinkan.");
+            return false;
+        }
+    }
+</script>
+<script>
   $(function () {
     $('#upload-table').DataTable({
       serverSide: true,
@@ -99,7 +116,7 @@
       ]
     });
   });
-</script> -->
+</script>
 
 
 <script>
