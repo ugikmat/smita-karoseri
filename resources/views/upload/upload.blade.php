@@ -62,11 +62,11 @@
       </div>
       <div class="modal-body">
         <!-- Form -->
-        <form method='post' action='' enctype="multipart/form-data">
+        <form method='post' action='/importExcel' enctype="multipart/form-data">
            @csrf
             <div class="form-group">
-                <label for="file_import">File</label>
-                <input type='file' name='file_import' id='file_import' class='form-control' accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"><br>
+                <label for="import_file">File</label>
+                <input type='file' name='import_file' id='import_file' class='form-control' accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"><br>
                 <input type='submit' class='btn btn-info' value='Upload' id='upload'>
             </div>
         </form>
@@ -79,7 +79,7 @@
 </div>
 
 @stop @section('js')
-<script type="text/javascript">
+{{-- <script type="text/javascript">
 //    validasi form (hanya file .xls yang diijinkan)
     function validateForm()
     {
@@ -93,13 +93,13 @@
             return false;
         }
     }
-</script>
+</script> --}}
 <script>
   $(function () {
     $('#upload-table').DataTable({
       serverSide: true,
       processing: true,
-      ajax: '/upload-data',
+      ajax: '/upload',
       columns: [{
           data: 'id_upload'
         },
@@ -124,9 +124,9 @@
         {
           data: 'balance'
         },
-        {
-          data: 'diskon'
-        },
+        // {
+        //   data: 'diskon'
+        // },
         {
           data: 'no_hp_downline'
         },
@@ -156,6 +156,67 @@
       ]
     });
   });
+  // $(function () {
+  //   $('#upload-table').DataTable({
+  //     serverSide: true,
+  //     processing: true,
+  //     ajax: '/upload',
+  //     columns: [{
+  //         data: 'id_upload'
+  //       },
+  //       {
+  //         data: 'no_hp_sub_master_dompul'
+  //       },
+  //       {
+  //         data: 'nama_sub_master_dompul'
+  //       },
+  //       {
+  //         data: 'tanggal_transfer'
+  //       },
+  //       {
+  //         data: 'no_faktur'
+  //       },
+  //       {
+  //         data: 'produk'
+  //       },
+  //       {
+  //         data: 'qty'
+  //       },
+  //       {
+  //         data: 'balance'
+  //       },
+  //       {
+  //         data: 'diskon'
+  //       },
+  //       {
+  //         data: 'no_hp_downline'
+  //       },
+  //       {
+  //         data: 'nama_downline'
+  //       },
+  //       {
+  //         data: 'status'
+  //       },
+  //       {
+  //         data: 'no_hp_canvasser'
+  //       },
+  //       {
+  //         data: 'nama_canvasser'
+  //       },
+  //       {
+  //         data: 'print'
+  //       },
+  //       {
+  //         data: 'bayar'
+  //       },
+  //       {
+  //         data: 'action',
+  //         orderable: false,
+  //         searchable: false
+  //       }
+  //     ]
+  //   });
+  // });
 </script>
 
 

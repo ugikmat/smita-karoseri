@@ -93,6 +93,7 @@ Route::get('/penjualan/dompul/list-invoice', function() {
 Route::get('upload/dompul', 'UploadDompulController@index');
 Route::get('downloadExcel/{type}', 'UploadDompulController@downloadExcel');
 Route::post('importExcel', 'UploadDompulController@importExcel');
+Route::get('/upload', 'UploadDompulController@data');
 
 //Master
 Route::resource('master/bank', 'BankController');
