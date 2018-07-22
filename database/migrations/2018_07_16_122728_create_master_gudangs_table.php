@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class CreateMasterGudangsTable extends Migration
 {
@@ -21,9 +22,13 @@ class CreateMasterGudangsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('master_gudangs', function (Blueprint $table) {
-            $table->foreign('id_lokasi')->references('id_lokasi')->on('master_lokasis')->onUpdate('cascade')->onDelete('cascade');
-        });
+        //Schema::table('master_gudangs', function (Blueprint $table) {
+          //  $table->foreign('id_lokasi')->references('id_lokasi')->on('master_lokasis')->onUpdate('cascade')->onDelete('cascade');
+        //});
+
+        DB::statement( 'CREATE VIEW view_gudang AS
+        SELECT id_gudang, master_lokasis.nm_lokasi, alamat_gudang, master_gudangs.status
+        FROM master_gudangs INNER join master_lokasis on master_gudangs.id_lokasi = master_lokasis.id_lokasi' );
     }
 
     /**
@@ -34,5 +39,7 @@ class CreateMasterGudangsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('master_gudangs');
+
+        DB::statement( 'DROP VIEW view_gudang' );
     }
 }

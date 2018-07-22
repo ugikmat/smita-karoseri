@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Gudang;
-use App\View\ViewGudang;
+use App\SPKC;
+use App\PrintSPKC;
 use Yajra\Datatables\Datatables;
+use App\Customer;
+use DB;
 
-
-class GudangController extends Controller
+class PrintSPKCController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +28,7 @@ class GudangController extends Controller
       */
     public function index()
     {
-        return view('master.gudang');
+        return view('karoseri.print_spkc');
     }
 
     /**
@@ -40,6 +41,15 @@ class GudangController extends Controller
         //
     }
 
+    public function print($id)
+    {
+      $data = SPKC::select(DB::raw('spkcs.*, master_customers.nm_cust, master_customers.jabatan, master_customers.alamat_cust, master_customers.no_hp, banks.nama'))
+                        ->join('master_customers', 'spkcs.id_cust', '=', 'master_customers.id_cust')
+                        ->join('banks', 'spkcs.id_bank', '=', 'banks.id')
+                        ->where('spkcs.id_spkc', $id)->first();
+      return view('karoseri.print_spkc', ['data' =>  $data]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -48,14 +58,13 @@ class GudangController extends Controller
      */
     public function store(Request $request)
     {
-      $gdg = new Gudang;
 
-      $gdg->id_lokasi = $request->get('id_lokasi');
-      $gdg->alamat_gudang = $request->get('alamat_gudang');
-      $gdg->save();
+    }
 
-      return redirect('/gudang');
-
+    public function getData(Request $req)
+    {
+      $data = SPKC::where('id_spkc','=',$req->get('id'))->first();
+      return $data;
     }
 
     /**
@@ -89,12 +98,7 @@ class GudangController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $gdg = Gudang::where('id_gudang', $id)->first();
-      $gdg->id_lokasi = $request->get('id_lokasi_upt');
-      $gdg->alamat_gudang = $request->get('alamat_gudang_upt');
-      $gdg->save();
-
-      return redirect('/gudang');
+        //
     }
 
     /**
@@ -105,23 +109,6 @@ class GudangController extends Controller
      */
     public function destroy($id)
     {
-      $gdg = Gudang::where('id_gudang', $id)->update(['status' => 0]);
-      return redirect('/gudang');
-    }
-
-    public function data(Datatables $datatables)
-    {
-        return $datatables->eloquent(ViewGudang::where('status', '1'))
-                          ->addColumn('action', function ($gdg) {
-                              return
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"
-                              data-id="'.$gdg->id_gudang.'"
-                              data-name="'.$gdg->alamat_gudang.'"
-                              data-lokasi="'.$gdg->nm_lokasi.'"
-                              ><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$gdg->id_gudang.'" data-name="'.$gdg->alamat_gudang.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
-                            })
-
-                          ->make(true);
+        //
     }
 }

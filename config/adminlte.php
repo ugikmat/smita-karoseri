@@ -174,9 +174,27 @@ return [
         ],
         [
             'text'        => 'Karoseri',
-            'url'         => 'penjualan/dompul',
             'icon'        => 'truck',
+            'submenu'     => [
+              [
+                'text'    => 'SPKC',
+                'icon'    => 'user',
+                'submenu' => [
+                  [
+                      'text'    => 'Permintaan Karoseri',
+                      'url'   => 'karoseri/minta_karoseri',
+                      'icon'    => 'truck',
+                  ],
+                  [
+                      'text'  => 'SPKC',
+                      'url'   => 'karoseri/spkc',
+                      'icon'    => 'user-plus',
+                  ],
+                ],
+              ],
+            ],
         ],
+
         [
             'text'        => 'Master',
             'icon'        => 'tasks',

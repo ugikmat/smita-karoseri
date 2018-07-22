@@ -119,7 +119,7 @@
      <div class="col-md-6 col-sm-6 col-xs-12">
        <select id="id_lokasi_upt" required="required" name="id_lokasi_upt" placeholder="Pilih Lokasi" class="form-control col-md-7 col-xs-12">
 
-         <option class="lok_awal" value="" selected disabled>Pilih Lokasi Baru</option>
+         <option class="lok_awal" value="" disabled>Pilih Lokasi Baru</option>
          @foreach ($lokasiarray as $data)
           <option value="{{ $data->id_lokasi }}">{{ $data->nm_lokasi }}</option>
          @endforeach
@@ -194,9 +194,6 @@
             ]
         });
     });
-</script>
-
-<script>
   $('#editModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
   var name = button.data('name')// Extract info from data-* attributes
@@ -205,13 +202,12 @@
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
+  $('#id_lokasi_upt').val(id)
   $('#editForm').attr('action', `/gudang/${id}`);
   modal.find('.modal-body .nama_gudang input').val(name)
   modal.find('.modal-body .nama_lokasi .lok_awal option').val(lokasi)
   })
-</script>
 
-<script>
   $('#deleteModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
   var id = button.data('id')// Extract info from data-* attributes

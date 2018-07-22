@@ -1,6 +1,8 @@
 <?php
 namespace App\Providers;
 use App\Lokasi;
+use App\Customer;
+use App\Bank;
 use Illuminate\Support\ServiceProvider;
 class DynamicServiceProvider extends ServiceProvider
 {
@@ -8,6 +10,14 @@ class DynamicServiceProvider extends ServiceProvider
     {
         view()->composer('*',function($view){
             $view->with('lokasiarray', Lokasi::all());
+        });
+
+        view()->composer('*',function($view){
+            $view->with('customerarray', Customer::all());
+        });
+
+        view()->composer('*',function($view){
+            $view->with('bankarray', Bank::all());
         });
     }
 }
