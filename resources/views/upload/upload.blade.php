@@ -31,6 +31,7 @@
   <thead>
     <tr>
       <th>ID</th>
+      <th>HP Sub Master</th>
       <th>Nama Sub Master</th>
       <th>Tanggal TRX</th>
       <th>No Faktur</th>

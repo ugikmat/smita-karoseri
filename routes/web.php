@@ -118,6 +118,10 @@ Route::get('/master/harga_produk', function() {
   return view ('/master/harga_produk');
 }) -> name('harga_produk');
 
+Route::get('/master/tipe_dompul', function() {
+  return view ('/master/tipe_dompul');
+}) -> name('tipe_dompul');
+
 
 //transaction
 Route::get('/karoseri/minta_karoseri', function() {
