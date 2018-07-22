@@ -14,6 +14,7 @@ class CreateDompulsTable extends Migration
     public function up()
     {
         Schema::create('master_dompuls', function (Blueprint $table) {
+            $table->increments('id_dompul');
             $table->string('no_hp_master_dompul');
             $table->string('no_hp_sub_master_dompul');
             $table->string('id_gudang');

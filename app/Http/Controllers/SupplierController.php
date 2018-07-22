@@ -89,7 +89,15 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $supplier = Supplier::where('id_supplier',$id)->first();
+        $supplier->nama_supplier = $request->get('nama');
+        $supplier->alamat_supplier = $request->get('alamat');
+        $supplier->telepon_supplier = $request->get('telepon');
+        $supplier->email_supplier = $request->get('email');
+        $supplier->bank_supplier = $request->get('bank');
+        $supplier->norek_supplier = $request->get('norek');
+        $supplier->save();
+        return redirect('master/supplier');
     }
 
     /**

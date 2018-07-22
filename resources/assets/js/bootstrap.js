@@ -1,13 +1,13 @@
 
 window._ = require('lodash');
 window.Popper = require('popper.js').default;
-require('jszip');
+// require('jszip');
 require('jquery');
 require('datatables.net')();
 require('datatables.net-bs')();
 require('datatables.net-bs4')();
-require('datatables.net-buttons-bs4')();
-require('datatables.net-buttons/js/buttons.html5.js')();
+// // require('datatables.net-buttons-bs4')();
+// // require('datatables.net-buttons/js/buttons.html5.js')();
 require('datatables.net-responsive-bs4')();
 require('datatables.net-responsive-bs')();
 require('datatables.net-responsive')();

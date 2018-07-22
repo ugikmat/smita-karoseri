@@ -85,7 +85,7 @@ class DompulTableSeeder extends Seeder
         $subdompul8->save();
 
         $subdompul9 = new Dompul();
-        $subdompul9>no_hp_master_dompul='081938063342';
+        $subdompul9->no_hp_master_dompul='081938063342';
         $subdompul9->no_hp_sub_master_dompul='081938063363';
         $subdompul9->id_gudang='3';
         $subdompul9->nama_sub_master_dompul='SD GRT-MDN-SRV';
@@ -103,7 +103,7 @@ class DompulTableSeeder extends Seeder
         $subdompul10->save();
 
         $subdompul11 = new Dompul();
-        $subdompuL11->no_hp_master_dompul='081938063342';
+        $subdompul11->no_hp_master_dompul='081938063342';
         $subdompul11->no_hp_sub_master_dompul='081938063371';
         $subdompul11->id_gudang='3';
         $subdompul11->nama_sub_master_dompul='SD PCT-PNR';

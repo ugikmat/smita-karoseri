@@ -25,6 +25,52 @@ Route::get('penjualan/dompul-data', 'Penjualan\DompulController@data');
 Route::get('list/users', 'UsersController@index');
 Route::get('list/users-data', 'UsersController@data');
 
+Route::resource('bank', 'BankController');
+Route::get('bank-data', 'BankController@data');
+
+Route::resource('produk', 'ProdukController');
+Route::get('master-produk', 'ProdukController@data');
+
+Route::resource('satuan', 'SatuanController');
+Route::get('master-satuan', 'SatuanController@data');
+
+Route::resource('customer', 'CustController');
+Route::get('master-customer', 'CustController@data');
+
+Route::resource('sales', 'SalesController');
+Route::get('master-sales', 'SalesController@data');
+
+Route::resource('gudang', 'GudangController');
+Route::get('master-gudang', 'GudangController@data');
+
+Route::resource('lokasi', 'LokasiController');
+Route::get('master-lokasi', 'LokasiController@data');
+
+Route::resource('pemborong', 'PemborongController');
+Route::get('master-pemborong', 'PemborongController@data');
+
+Route::resource('supervisor', 'SupervisorController');
+Route::get('master-supervisor', 'SupervisorController@data');
+
+Route::resource('permintaan', 'PermintaanPenjualanController');
+Route::get('karoseri-permintaan', 'PermintaanPenjualanController@data');
+Route::post('getData','PermintaanPenjualanController@getData');
+Route::post('accept/{id}', 'PermintaanPenjualanController@accept')->name('accept');
+
+
+Route::resource('spkc', 'SPKCController');
+Route::get('karoseri-spkc', 'SPKCController@data');
+
+Route::resource('print', 'PrintSPKCController');
+Route::get('karoseri-print_spkc', 'PrintSPKCController@data');
+Route::post('getDataPrint','PrintSPKCController@getData');
+Route::get('printKu/{id}', 'PrintSPKCController@print');
+
+Route::resource('printview', 'ViewPrintController');
+Route::get('karoseri-viewprint_spkc', 'ViewPrintController@data');
+Route::post('getDataView','ViewPrintController@getData');
+Route::get('viewprint/{id}', 'ViewPrintController@print');
+
 // penjualan
 Route::get('/penjualan/dompul/invoice-dompul', function() {
   return view ('/penjualan/dompul/invoice-dompul');
@@ -39,6 +85,14 @@ Route::get('/penjualan/dompul/list-invoice', function() {
   return view ('/penjualan/dompul/list-invoice');
 }) -> name('list-invoice');
 
+//upload
+// Route::get('/upload/upload', function() {
+//   return view ('/upload/upload');
+// }) -> name('upload');
+
+Route::get('upload/dompul', 'UploadDompulController@index');
+Route::get('downloadExcel/{type}', 'UploadDompulController@downloadExcel');
+Route::post('importExcel', 'UploadDompulController@importExcel');
 
 //Master
 Route::resource('master/bank', 'BankController');
@@ -56,18 +110,19 @@ Route::get('/supplier-data', 'SupplierController@data');
 Route::resource('master/dompul', 'DompulController');
 Route::get('/dompul-data', 'DompulController@data');
 
-Route::get('/master/customer', function() {
-  return view ('/master/customer');
-}) -> name('master-customer');
+//transaction
+Route::get('/karoseri/minta_karoseri', function() {
+  return view ('/karoseri/minta_karoseri');
+}) -> name('karoseri-permintaan');
 
-Route::get('/master/gudang', function() {
-  return view ('/master/gudang');
-}) -> name('master-gudang');
+Route::get('/karoseri/spkc', function() {
+  return view ('/karoseri/spkc');
+}) -> name('karoseri-spkc');
 
-Route::get('/master/lokasi', function() {
-  return view ('/master/lokasi');
-}) -> name('master-lokasi');
+Route::get('/karoseri/print_spkc', function() {
+  return view ('/karoseri/print_spkc');
+}) -> name('karoseri-print_spkc');
 
-Route::get('/master/sales', function() {
-  return view ('/master/sales');
-}) -> name('master-sales');
+Route::get('/karoseri/viewprint_spkc', function() {
+  return view ('/karoseri/viewprint_spkc');
+}) -> name('karoseri-viewprint_spkc');
