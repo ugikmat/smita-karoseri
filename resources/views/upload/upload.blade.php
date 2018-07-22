@@ -5,6 +5,13 @@
 @section('content_header')
 <h1>Upload File</h1>
 
+@stop @section('css')
+<style>
+  tfoot input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+</style>
 @stop @section('content')
 
 <div class="container-fluid">
@@ -49,6 +56,26 @@
       <th>Action</th>
     </tr>
   </thead>
+  <tfoot>
+    <tr>
+      <th>ID</th>
+      <th>HP Sub Master</th>
+      <th>Nama Sub Master</th>
+      <th>Tanggal TRX</th>
+      <th>No Faktur</th>
+      <th>Produk</th>
+      <th>Qty</th>
+      <th>Balance</th>
+      <th>Diskon</th>
+      <th>HP Downline</th>
+      <th>Nama Downline</th>
+      <th>Status</th>
+      <th>HP Kanvacer</th>
+      <th>Nama Kanvacer</th>
+      <th>Print</th>
+      <th>Bayar</th>
+    </tr>
+  </tfoot>
 </table>
 
 <!-- Modal -->
@@ -153,70 +180,19 @@
           orderable: false,
           searchable: false
         }
-      ]
+      ],
+      initComplete: function () {
+        this.api().columns().every(function () {
+          var column = this;
+          var input = document.createElement("input");
+          $(input).appendTo($(column.footer()).empty())
+            .on('change', function () {
+              column.search($(this).val(), false, false, true).draw();
+            });
+        });
+      }
     });
   });
-  // $(function () {
-  //   $('#upload-table').DataTable({
-  //     serverSide: true,
-  //     processing: true,
-  //     ajax: '/upload',
-  //     columns: [{
-  //         data: 'id_upload'
-  //       },
-  //       {
-  //         data: 'no_hp_sub_master_dompul'
-  //       },
-  //       {
-  //         data: 'nama_sub_master_dompul'
-  //       },
-  //       {
-  //         data: 'tanggal_transfer'
-  //       },
-  //       {
-  //         data: 'no_faktur'
-  //       },
-  //       {
-  //         data: 'produk'
-  //       },
-  //       {
-  //         data: 'qty'
-  //       },
-  //       {
-  //         data: 'balance'
-  //       },
-  //       {
-  //         data: 'diskon'
-  //       },
-  //       {
-  //         data: 'no_hp_downline'
-  //       },
-  //       {
-  //         data: 'nama_downline'
-  //       },
-  //       {
-  //         data: 'status'
-  //       },
-  //       {
-  //         data: 'no_hp_canvasser'
-  //       },
-  //       {
-  //         data: 'nama_canvasser'
-  //       },
-  //       {
-  //         data: 'print'
-  //       },
-  //       {
-  //         data: 'bayar'
-  //       },
-  //       {
-  //         data: 'action',
-  //         orderable: false,
-  //         searchable: false
-  //       }
-  //     ]
-  //   });
-  // });
 </script>
 
 

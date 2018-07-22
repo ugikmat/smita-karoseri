@@ -1,6 +1,13 @@
 @extends('adminlte::page') @section('title', 'Harga Produk') @section('content_header')
 <h1>Master Harga Produk</h1>
 
+@stop @section('css')
+<style>
+  tfoot input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+</style>
 @stop @section('content')
 <table id="harga-produk-table" class="table table-bordered">
   <thead>
@@ -13,6 +20,14 @@
       <th>Action</th>
     </tr>
   </thead>
+  <tfoot>
+    <tr>
+      <th>Id Harga Produk</th>
+      <th>Id Produk</th>
+      <th>Tipe Harga Produk</th>
+      <th>Harga Produk</th>
+    </tr>
+  </tfoot>
 </table>
 <!-- Modal Tambah -->
 <section class="content-header">
@@ -244,7 +259,17 @@
           orderable: false,
           searchable: false
         }
-      ]
+      ],
+      initComplete: function () {
+        this.api().columns().every(function () {
+          var column = this;
+          var input = document.createElement("input");
+          $(input).appendTo($(column.footer()).empty())
+            .on('change', function () {
+              column.search($(this).val(), false, false, true).draw();
+            });
+        });
+      }
     });
   });
 </script>
