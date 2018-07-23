@@ -1,14 +1,19 @@
 @extends('adminlte::page') @section('title', 'Upload') @section('content_header')
 <h1>Upload File</h1>
 
-@stop @section('css')
+@stop
+@section('css')
+<style>
+
+</style>
+<link rel="stylesheet" href="{{ asset('/datepicker/css/bootstrap-datepicker.min.css') }}">
 <style>
   tfoot input {
     width: 100%;
     box-sizing: border-box;
   }
 </style>
-<style>
+<!-- <style>
   .scrolling table {
     table-layout: inherit;
   }
@@ -28,7 +33,7 @@
     overflow-x: auto;
     overflow-y: visible;
   }
-</style>
+</style> -->
 @stop @section('content')
 <div class="container-fluid">
   <div class="row">
@@ -126,6 +131,197 @@
   </div>
 </div>
 
+<!--Modal Edit-->
+<div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Edit Data</h4>
+      </div>
+      <div class="modal-body">
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <br />
+
+                <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+                  @csrf @method('put')
+
+                  <div class="form-group nama">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No HP Sub Master Dompul
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="hpsub" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+
+                  <div class="form-group tipe">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Sub Master Dompul
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="namasub" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+
+                  <div class="form-group induk">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Transfer
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input class="datepicker col-md-7 col-xs-12" data-date-format="mm/dd/yyyy">
+                    </div>
+                  </div>
+
+                  <div class="form-group nilai">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No Faktur
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="faktur" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+                  <div class="form-group nilai">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Produk
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="produk" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+                  <div class="form-group nilai">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Qty
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="qty" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+                  <div class="form-group nilai">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Balance
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="balance" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+                  <div class="form-group nilai">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Diskon
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="diskon" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+                  <div class="form-group nilai">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No HP Downline
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="nodl" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+                  <div class="form-group nilai">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Downline
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="namadl" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+                  <div class="form-group nilai">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+                  <div class="form-group nilai">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No HP Kanvacer
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="nokvc" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+                  <div class="form-group nilai">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Kanvacer
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="namakvc" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+                  <div class="form-group nilai">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Print
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="print" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+                  <div class="form-group nilai">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Bayar
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="text" id="first-name" required="required" name="bayar" class="form-control col-md-7 col-xs-12" value="">
+                    </div>
+                  </div>
+                  <div class="ln_solid"></div>
+                  <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                      <input type="submit" class="btn btn-success" value="Submit"> {{--
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--Modal Hapus-->
+<div class="modal fade" id="deleteModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="" method="POST" id="deleteForm">
+        @csrf @method('delete')
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger">Hapus</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
 @stop @section('js') {{--
 <script type="text/javascript">
   //    validasi form (hanya file .xls yang diijinkan)
@@ -141,6 +337,13 @@
     }
   }
 </script> --}}
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-ui/jquery-ui.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.input-tanggal').datepicker();
+    });
+</script>
 <script>
   $(function () {
     $('#upload-table').DataTable({
@@ -214,9 +417,13 @@
     });
   });
 </script>
-
-
+<script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <script>
+$('.datepicker').datepicker({
+});
+</script>
+
+<!-- <script>
   $('#editModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var name = button.data('name') // Extract info from data-* attributes
@@ -245,5 +452,5 @@
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     $('#deleteForm').attr('action', `/master/satuan/${id}`);
   })
-</script>
+</script> -->
 @stop
