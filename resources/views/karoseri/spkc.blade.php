@@ -29,7 +29,7 @@
             <div class="modal-body">
                <div class="clearfix"></div>
 
-<div class="row">
+<!--<div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
@@ -76,7 +76,7 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
-          </div>
+          </div>-->
         </div>
       </div>
       </section>
@@ -125,6 +125,14 @@
       <div class="x_content">
         <br />
         <form action="#" class="form-horizontal form-label-left">
+
+          <div class="form-group tanggalacc">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal<span class="required"></span></label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="tanggal_acc" name="tanggal_acc" type="date" class="ferry ferry-from" readonly>
+              </div>
+            </div>
+
           <div class="form-group namacustomeracc">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Customer <span class="required"></span>
             </label>
@@ -203,12 +211,7 @@
             </div>
           </div>
 
-          <div class="form-group tanggalacc">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal<span class="required"></span></label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="tanggal_acc" name="tanggal_acc" type="date" class="ferry ferry-from" readonly>
-              </div>
-            </div>
+
 
           <div class="ln_solid"></div>
           <!-- BUAT ACC ATAU TIDAK -->

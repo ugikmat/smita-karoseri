@@ -42,6 +42,13 @@
           @csrf
 
           <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal<span class="required"></span></label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="tanggal" name="tanggal" type="date" class="ferry ferry-from">
+              </div>
+            </div>
+
+          <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Customer <span class="required"></span>
             </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
@@ -61,6 +68,13 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="text" id="nm_perusahaan" required="required" name="nm_perusahaan" class="form-control col-md-7 col-xs-12">
                 </div>
+            </div>
+
+            <div class="form-group">
+              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Alamat <span class="required"></span></label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="alamat_cust" class="form-control col-md-7 col-xs-12" name="alamat_cust" type="text" readonly>
+              </div>
             </div>
 
           <div class="form-group">
@@ -147,19 +161,15 @@
                 </div>
               </div>
 
-          <div class="form-group">
-            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Alamat <span class="required"></span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <input id="alamat_cust" class="form-control col-md-7 col-xs-12" name="alamat_cust" type="text" readonly>
-            </div>
-          </div>
+
 
           <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal<span class="required"></span></label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="tanggal" name="tanggal" type="date" class="ferry ferry-from">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Upload File <span class="required"></span>
+              </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input id="file" name="file" type="file">
+                </div>
               </div>
-            </div>
 
           <div class="ln_solid"></div>
           <div class="form-group">
@@ -196,6 +206,7 @@
         <th>No ID</th><!-- /.sebagai ID -->
         <th>Nama Customer</th>
         <th>Tanggal Permintaan</th>
+        <th>Dokumen</th>
         <th>Status</th>
         <th>Action</th>
     </tr>
@@ -229,6 +240,12 @@
         <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
           @csrf
           @method('put')
+          <div class="form-group tanggal">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal<span class="required"></span></label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="tanggal_upt" name="tanggal_upt" type="date" class="ferry ferry-from">
+              </div>
+            </div>
 
           <div class="form-group namacustomer">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Customer <span class="required"></span>
@@ -244,6 +261,13 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="text" id="nm_perusahaan_upt" required="required" name="nm_perusahaan_upt" class="form-control col-md-7 col-xs-12">
                 </div>
+            </div>
+
+            <div class="form-group alamat">
+              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Alamat <span class="required"></span></label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="alamat_cust_upt" class="form-control col-md-7 col-xs-12" name="alamat_cust_upt" type="text" readonly>
+              </div>
             </div>
 
           <div class="form-group jabatan">
@@ -331,19 +355,15 @@
                 </div>
               </div>
 
-          <div class="form-group alamat">
-            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Alamat <span class="required"></span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <input id="alamat_cust_upt" class="form-control col-md-7 col-xs-12" name="alamat_cust_upt" type="text" readonly>
-            </div>
-          </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">File <span class="required"></span>
+                  </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input id="file_upt" name="file_upt" type="file">
+                    </div>
+                  </div>
 
-          <div class="form-group tanggal">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal<span class="required"></span></label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="tanggal_upt" name="tanggal_upt" type="date" class="ferry ferry-from">
-              </div>
-            </div>
+
 
           <div class="ln_solid"></div>
           <div class="form-group">
@@ -389,6 +409,12 @@
 
         <form id="accForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
           @csrf
+          <div class="form-group tanggalacc">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal<span class="required"></span></label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="tanggal_acc" name="tanggal_acc" type="date" class="ferry ferry-from" readonly>
+              </div>
+            </div>
 
           <div class="form-group namacustomeracc">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Customer <span class="required"></span>
@@ -468,12 +494,7 @@
             </div>
           </div>
 
-          <div class="form-group tanggalacc">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal<span class="required"></span></label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="tanggal_acc" name="tanggal_acc" type="date" class="ferry ferry-from" readonly>
-              </div>
-            </div>
+
 
           <div class="ln_solid"></div>
           <!-- BUAT ACC ATAU TIDAK -->
@@ -534,6 +555,7 @@
                 {data: 'id_spkc'},
                 {data: 'nm_cust'},
                 {data: 'tanggal'},
+                {data: 'dokumen'},
                 {data: 'status'},
                 {data: 'action', orderable: false, searchable: false}
             ]
