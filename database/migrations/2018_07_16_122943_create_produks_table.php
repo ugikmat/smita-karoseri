@@ -13,11 +13,19 @@ class CreateProduksTable extends Migration
      */
     public function up()
     {
-        Schema::create('produks', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nama');
-            $table->string('tipe');
-            $table->tinyInteger('status')->default(1);
+        Schema::create('master_produks', function (Blueprint $table) {
+            $table->increments('id_produk');
+            $table->string('kode_produk');
+            $table->string('nama_produk');
+            $table->string('kategori_produk');
+            $table->string('satuan');
+            $table->string('jenis');
+            $table->string('BOM');
+            $table->double('harga_jual');
+            $table->double('tarif_pajak');
+            $table->double('diskon');
+            $table->double('komisi');
+            $table->string('status_produk');
         });
     }
 
@@ -28,6 +36,6 @@ class CreateProduksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produks');
+        Schema::dropIfExists('master_produks');
     }
 }

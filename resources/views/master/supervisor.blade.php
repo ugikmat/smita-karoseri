@@ -6,7 +6,14 @@
     <h1>Daftar Supervisor</h1>
 
 @stop
-
+@section('css')
+<style>
+  tfoot input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+</style>
+@stop 
 @section('content')
 <table id="spv-table" class="table table-bordered">
     <thead>
@@ -18,6 +25,14 @@
       <th>action</th>
     </tr>
     </thead>
+    <tfoot>
+    <tr>
+      <th>Id</th>
+      <th>Nama Supervisor</th>
+      <th>Alamat</th>
+      <th>No. Telp</th>
+    </tr>
+    </tfoot>
 </table>
 <!-- Modal Tambah -->
 <section class="content-header">
@@ -199,7 +214,17 @@
                 {data: 'alamat_spv'},
                 {data: 'no_hp'},
                 {data: 'action', orderable: false, searchable: false}
-            ]
+            ],
+      initComplete: function () {
+        this.api().columns().every(function () {
+          var column = this;
+          var input = document.createElement("input");
+          $(input).appendTo($(column.footer()).empty())
+            .on('change', function () {
+              column.search($(this).val(), false, false, true).draw();
+            });
+        });
+      }
         });
     });
 </script>

@@ -85,53 +85,40 @@ Route::get('/penjualan/dompul/list-invoice', function() {
   return view ('/penjualan/dompul/list-invoice');
 }) -> name('list-invoice');
 
+//upload
+// Route::get('/upload/upload', function() {
+//   return view ('/upload/upload');
+// }) -> name('upload');
+
+Route::get('upload/dompul', 'UploadDompulController@index');
+Route::get('downloadExcel/{type}', 'UploadDompulController@downloadExcel');
+Route::post('importExcel', 'UploadDompulController@importExcel');
+Route::get('/upload', 'UploadDompulController@data');
 
 //Master
-Route::get('/master/bank', function() {
-  return view ('/master/bank');
-}) -> name('master-bank');
+Route::resource('master/bank', 'BankController');
+Route::get('bank-data', 'BankController@data');
 
 Route::resource('master/produk', 'ProdukController');
-Route::get('/master/produk-data', 'ProdukController@data');
+Route::get('/produk-data', 'ProdukController@data');
 
 Route::resource('master/satuan', 'SatuanController');
-Route::get('/master/satuan-data', 'SatuanController@data');
+Route::get('/satuan-data', 'SatuanController@data');
 
-Route::get('/master/bank', function() {
-  return view ('/master/bank');
-}) -> name('master-suplier');
+Route::resource('master/supplier', 'SupplierController');
+Route::get('/supplier-data', 'SupplierController@data');
 
-Route::get('/master/customer', function() {
-  return view ('/master/customer');
-}) -> name('master-customer');
+Route::resource('master/dompul', 'DompulController');
+Route::get('/dompul-data', 'DompulController@data');
 
-Route::get('/master/gudang', function() {
-  return view ('/master/gudang');
-}) -> name('master-gudang');
+Route::resource('master/harga_dompul', 'HargaDompulController');
+Route::get('/harga-dompul-data', 'HargaDompulController@data');
 
-Route::get('/master/lokasi', function() {
-  return view ('/master/lokasi');
-}) -> name('master-lokasi');
+Route::resource('master/harga_produk', 'HargaProdukController');
+Route::get('/harga-produk-data', 'HargaProdukController@data');
 
-Route::get('/master/sales', function() {
-  return view ('/master/sales');
-}) -> name('master-sales');
-
-Route::get('/master/suplier', function() {
-  return view ('/master/suplier');
-}) -> name('master-suplier');
-
-Route::get('/master/pemborong', function() {
-  return view ('/master/pemborong');
-}) -> name('master-pemborong');
-
-Route::get('/master/supervisor', function() {
-  return view ('/master/supervisor');
-}) -> name('master-supervisor');
-
-Route::get('/master/satuan', function() {
-  return view ('/master/satuan');
-}) -> name('master-satuan');
+Route::resource('master/tipe_dompul', 'TipeDompulController');
+Route::get('/tipe-dompul-data', 'TipeDompulController@data');
 
 //transaction
 Route::get('/karoseri/minta_karoseri', function() {

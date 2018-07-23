@@ -167,8 +167,8 @@ return [
                 ],
               ],
               [
-                'text'    => 'Bank',
-                'url'     => '/bank',
+                'text'    => 'Upload',
+                'url'     => '/upload/dompul',
               ],
             ],
         ],
@@ -214,51 +214,70 @@ return [
               ],
               [
                 'text'  => 'suplier',
-                'url'   => '/master/suplier',
+                'url'   => '/master/supplier',
               ],
               [
                 'text'  => 'customer',
-                'url'   => '/master/customer',
+                'url'   => '/customer',
                 'icon'  => 'user',
               ],
               [
                 'text'  => 'gudang',
-                'url'   => '/master/gudang',
+                'url'   => '/gudang',
               ],
               [
                 'text'  => 'lokasi',
-                'url'   => '/master/lokasi',
+                'url'   => '/lokasi',
                 'icon'  => 'location-arrow',
               ],
               [
                 'text'  => 'sales',
-                'url'   => '/master/sales',
+                'url'   => '/sales',
                 'icon'  => 'user',
               ],
               [
                 'text'  => 'pemborong',
-                'url'   => '/master/pemborong',
+                'url'   => '/pemborong',
                 'icon'  => 'users',
               ],
               [
                 'text'  => 'supervisor',
-                'url'   => '/master/supervisor',
+                'url'   => '/supervisor',
                 'icon'  => 'user',
+              ],
+              [
+                'text'  => 'dompul',
+                'url'   => '/master/dompul',
+              ],
+              [
+                'text'  => 'harga dompul',
+                'url'   => '/master/harga_dompul',
+                'icon'  => 'money',
+              ],
+              [
+                'text'  => 'harga produk',
+                'url'   => '/master/harga_produk',
+                'icon'  => 'money',
+              ],
+              [
+                'text'  => 'tipe dompul',
+                'url'   => '/master/tipe_dompul',
+                'icon'  => 'money',
               ],
             ],
         ],
 
-        'ACCOUNT SETTINGS',
-        [
-            'text' => 'Profile',
-            'url'  => 'admin/settings',
-            'icon' => 'user',
-        ],
-        [
-            'text' => 'Change Password',
-            'url'  => 'admin/settings',
-            'icon' => 'lock',
-        ],
+        // 'ACCOUNT SETTINGS',
+        // [
+        //     'text' => 'Profile',
+        //     'url'  => 'admin/settings',
+        //     'icon' => 'user',
+        // ],
+        // [
+        //     'text' => 'Change Password',
+        //     'url'  => 'admin/settings',
+        //     'icon' => 'lock',
+        // ],
     ],
 
     /*
@@ -294,7 +313,7 @@ return [
 
     'plugins' => [
         'datatables' => true,
-        'select2'    => true,
-        'chartjs'    => true,
+        'select2'    => false,
+        'chartjs'    => false,
     ],
 ];
