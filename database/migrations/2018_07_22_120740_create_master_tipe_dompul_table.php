@@ -13,7 +13,7 @@ class CreateMasterTipeDompulTable extends Migration
      */
     public function up()
     {
-        Schema::create('master_tipe_dompul', function (Blueprint $table) {
+        Schema::create('master_tipe_dompuls', function (Blueprint $table) {
             $table->increments('id_tipe_dompul');
             $table->string('tipe_dompul');
         });
@@ -26,6 +26,6 @@ class CreateMasterTipeDompulTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('master_tipe_dompul');
+        Schema::dropIfExists('master_tipe_dompuls');
     }
 }

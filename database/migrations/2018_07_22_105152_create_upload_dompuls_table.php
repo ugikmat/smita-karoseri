@@ -17,7 +17,7 @@ class CreateUploadDompulsTable extends Migration
             $table->increments('id_upload');
             $table->string('no_hp_sub_master_dompul');
             $table->string('nama_sub_master_dompul');
-            $table->date('tanggal_transfer');
+            $table->timestamp('tanggal_transfer');
             $table->string('no_faktur');
             $table->string('produk');
             $table->bigInteger('qty');
