@@ -4,9 +4,14 @@
 @stop @section('css') {{--
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/u/bs-3.3.6/jq-2.2.3,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.12,b-1.2.0,b-colvis-1.2.0,b-html5-1.2.0,b-print-1.2.0,fh-3.1.2,se-1.2.0/datatables.min.css"
 /> --}}
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker.min.css"
-/> @stop @section('content')
-<table id="harga-dompul-table" class="table table-bordered">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker.min.css"/> @stop @section('content')
+<style>
+  tfoot input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+</style>
+<table id="harga-dompul-table" class="table responsive" width="100%">
   <thead>
     <tr>
       <th>Id Harga Dompul</th>
@@ -18,6 +23,15 @@
       <th>Action</th>
     </tr>
   </thead>
+  <tfoot>
+    <tr>
+      <th>Id Harga Dompul</th>
+      <th>Nama Harga Dompul</th>
+      <th>Tipe Harga Dompul</th>
+      <th>Harga Dompul</th>
+      <th>Tanggal Update</th>
+    </tr>
+  </tfoot>
 </table>
 <!-- Modal Tambah -->
 <section class="content-header">
@@ -43,17 +57,8 @@
                 <div class="x_content">
                   <br />
 
-                  <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Harga Dompul
-                        <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value="">
-                      </div>
-                    </div>
-
+                  <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/master/harga_dompul">
+                    @csrf
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Harga Dompul
                         <span class="required">*</span>
@@ -81,24 +86,14 @@
                       </div>
                     </div>
 
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Update
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12 date_picker">
                         <input type="text" id="update_time" class="form-control" name="update_time" placeholder="Pick Date">
                       </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status
-                        <span class="required">*</span>
-                      </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
-                      </div>
-                    </div>
-
+                    </div> --}}
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -144,18 +139,9 @@
               <div class="x_content">
                 <br />
 
-                <form id="edit" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Id Harga Dompul
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
-                  </div>
-
-                  <div class="form-group">
+                <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
+                  @csrf @method('put')
+                  <div class="form-group nama">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Harga Dompul
                       <span class="required">*</span>
                     </label>
@@ -164,7 +150,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group tipe">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Harga Dompul
                       <span class="required">*</span>
                     </label>
@@ -173,7 +159,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group harga">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Harga Dompul
                       <span class="required">*</span>
                     </label>
@@ -182,23 +168,14 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  {{-- <div class="form-group tanggal">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Update
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12 date_picker">
                       <input type="text" id="update_time" class="form-control" name="update_time" placeholder="Pick Date">
                     </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="status" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
-                  </div>
+                  </div> --}}
 
                   <div class="ln_solid"></div>
                   <div class="form-group">
@@ -216,7 +193,6 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
-
     </div>
   </div>
 </div>
@@ -225,7 +201,9 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-
+      <form action="" method="POST" id="deleteForm">
+        @csrf @method('delete')
+      
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -233,10 +211,10 @@
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Hapus</button>
+        <button type="submit" class="btn btn-danger" >Hapus</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
       </div>
-
+      </form>
     </div>
   </div>
 </div>
@@ -270,9 +248,49 @@
           orderable: false,
           searchable: false
         }
-      ]
+      ],
+      initComplete: function () {
+        this.api().columns().every(function () {
+          var column = this;
+          var input = document.createElement("input");
+          $(input).appendTo($(column.footer()).empty())
+            .on('change', function () {
+              column.search($(this).val(), false, false, true).draw();
+            });
+        });
+      }
     });
   });
+</script>
+<script>
+  $('#editModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id')
+    var nama = button.data('nama')
+    var tipe = button.data('tipe')
+    var harga = button.data('harga')
+    // var tanggal = button.data('tanggal')
+    // var status = button.data('status')
+
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    $('#editForm').attr('action', `/master/harga_dompul/${id}`);
+    modal.find('.modal-body .nama input').val(nama)
+    modal.find('.modal-body .tipe input').val(tipe)
+    modal.find('.modal-body .harga input').val(harga)
+    // modal.find('.modal-body .tanggal input').val(tanggal)
+    // modal.find('.modal-body .status input').val(status)
+  })
+</script>
+<script>
+  $('#deleteModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    $('#deleteForm').attr('action', `/master/harga_dompul/${id}`);
+  })
 </script>
 {{--
 <script type="text/javascript" src="https://cdn.datatables.net/u/bs-3.3.6/jq-2.2.3,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.12,b-1.2.0,b-colvis-1.2.0,b-html5-1.2.0,b-print-1.2.0,fh-3.1.2,se-1.2.0/datatables.min.js"></script> --}}

@@ -52,14 +52,14 @@
                 <div class="x_content">
                   <br />
 
-                  <form id="tambahForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/master/dompul">
+                  <form id="tambahForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/master/tipe_dompul">
                     @csrf
                     <div class="form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Tipe Dompul
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipe">Nama Tipe Dompul
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="hp-master" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="tipe" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
                     <div class="ln_solid"></div>
@@ -109,12 +109,12 @@
 
                 <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
                   @csrf @method('put')
-                  <div class="form-group hp-master">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Tipe Dompul
+                  <div class="form-group tipe">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipe">Nama Tipe Dompul
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="hp-master" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="tipe" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
                   <div class="ln_solid"></div>
@@ -190,16 +190,16 @@
     });
   });
 </script>
-<!-- <script>
+<script>
   $('#editModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
-    var hp_master = button.data('hp-master')
     var id = button.data('id')
+    var tipe = button.data('tipe')
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    $('#editForm').attr('action', `/master/dompul/${id}`);
-    modal.find('.modal-body .hp-master input').val(hp_master)
+    $('#editForm').attr('action', `/master/tipe_dompul/${id}`);
+    modal.find('.modal-body .tipe input').val(tipe);
   })
 </script>
 <script>
@@ -208,7 +208,7 @@
     var id = button.data('id') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/master/dompul/${id}`);
+    $('#deleteForm').attr('action', `/master/tipe_dompul/${id}`);
   })
-</script> -->
+</script>
 @stop

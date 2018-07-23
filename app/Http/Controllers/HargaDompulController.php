@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\HargaDompul;
 use Yajra\Datatables\Datatables;
+use Carbon\Carbon;
 
 class HargaDompulController extends Controller
 {
@@ -47,7 +48,14 @@ class HargaDompulController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $hargaProduk = new HargaDompul();
+        $hargaProduk->nama_harga_dompul = $request->get('nama');
+        $hargaProduk->tipe_harga_dompul = $request->get('tipe');
+        $hargaProduk->harga_dompul = $request->get('harga');
+        $hargaProduk->tanggal_update = Carbon::now('Asia/Jakarta')->toDateTimeString();
+        $hargaProduk->status_harga_dompul = "Aktif";
+        $hargaProduk->save();
+        return redirect('/master/harga_dompul');
     }
 
     /**
@@ -81,7 +89,13 @@ class HargaDompulController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $hargaProduk = HargaDompul::where('id_harga_dompul',$id)->first();
+        $hargaProduk->nama_harga_dompul = $request->get('nama');
+        $hargaProduk->tipe_harga_dompul = $request->get('tipe');
+        $hargaProduk->harga_dompul = $request->get('harga');
+        $hargaProduk->tanggal_update = Carbon::now('Asia/Jakarta')->toDateTimeString();
+        $hargaProduk->save();
+        return redirect('/master/harga_dompul');
     }
 
     /**
@@ -92,7 +106,10 @@ class HargaDompulController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $hargaProduk = HargaDompul::where('id_harga_dompul',$id)->first();
+        $hargaProduk->status_harga_dompul = "Non Aktif";
+        $hargaProduk->save();
+        return redirect('/master/harga_dompul');
     }
     /**
      * Process dataTable ajax response.
@@ -102,10 +119,13 @@ class HargaDompulController extends Controller
      */
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(HargaDompul::query())
+        return $datatables->eloquent(HargaDompul::where('status_harga_dompul','Aktif'))
                           ->addColumn('action', function ($hargaDompul) {
                               return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$hargaDompul->id_harga_dompul.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$hargaDompul->id_harga_dompul.'" 
+                              data-nama="'.$hargaDompul->nama_harga_dompul.'"
+                              data-tipe="'.$hargaDompul->tipe_harga_dompul.'"
+                              data-harga="'.$hargaDompul->harga_dompul.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                               <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$hargaDompul->id_harga_dompul.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
                           ->make(true);
