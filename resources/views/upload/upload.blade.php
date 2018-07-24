@@ -13,7 +13,7 @@
     box-sizing: border-box;
   }
 </style>
-<!-- <style>
+<style>
   .scrolling table {
     table-layout: inherit;
   }
@@ -33,7 +33,7 @@
     overflow-x: auto;
     overflow-y: visible;
   }
-</style> -->
+</style>
 @stop @section('content')
 <div class="container-fluid">
   <div class="row">
