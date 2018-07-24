@@ -70,7 +70,17 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
+                        <div class="col-md-7 col-xs-12">
+                          <label class="radio-inline">
+                            <input type="radio" name="tipe">PCS
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="tipe">BOX
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="tipe">UNIT
+                          </label>
+                        </div>
                       </div>
                     </div>
 
@@ -150,12 +160,22 @@
                     </div>
                   </div>
 
-                  <div class="form-group tipe">
+                  <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Satuan
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
+                      <div class="col-md-7 col-xs-12">
+                        <label class="radio-inline">
+                          <input type="radio" name="tipe">PCS
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="tipe">BOX
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="tipe">UNIT
+                        </label>
+                      </div>
                     </div>
                   </div>
 
