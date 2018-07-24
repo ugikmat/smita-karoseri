@@ -337,13 +337,6 @@
     }
   }
 </script> --}}
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/jquery-ui/jquery-ui.js"></script>
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('.input-tanggal').datepicker();
-    });
-</script>
 <script>
   $(function () {
     $('#upload-table').DataTable({
