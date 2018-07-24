@@ -28,29 +28,44 @@ class UploadDompulController extends Controller
 		if($request->hasFile('import_file')){
             $path = $request->file('import_file')->getRealPath();
             $data = Excel::load($path, function($reader) {
-			})->get();
+			},'UTF-8')->get();
 			if(!empty($data) && $data->count()){
 				foreach ($data as $key => $value) {
-                    $insert[] = ['no_hp_sub_master_dompul' => $value->hp_sub_master ,
-                    'nama_sub_master_dompul' => $value->nama_sub_master ,
-                    'tanggal_transfer' => $value->tanggal_trx ,
-                    'no_faktur' => $value->no_faktur ,
-                    'produk' => $value->produk ,
-                    'qty' => $value->qty ,
-                    'balance' => $value->balance ,
-                    'diskon' => $value->diskon ,
-                    'no_hp_downline' => $value->hp_downline ,
-                    'nama_downline' => $value->nama_downline ,
-                    'status' => $value->status ,
-                    'no_hp_canvasser' => $value->hp_kanvacer ,
-                    'nama_canvasser' => $value->nama_kanvacer ,
-                    'print' => $value->print,
-                    'bayar' => $value->bayar 
-                ];
-                    
+                    $uploadDompul[] = ['no_hp_sub_master_dompul' => $value->hp_sub_master ,
+                        'nama_sub_master_dompul' => $value->nama_sub_master ,
+                        'tanggal_transfer' => $value->tanggal_trx ,
+                        'no_faktur' => $value->no_faktur ,
+                        'produk' => $value->produk ,
+                        'qty' => str_replace(',','',$value->qty),
+                        'balance' => str_replace(',','',$value->balance),
+                        'diskon' => $value->diskon ,
+                        'no_hp_downline' => $value->hp_downline ,
+                        'nama_downline' => $value->nama_downline ,
+                        'status' => $value->status ,
+                        'no_hp_canvasser' => $value->hp_kanvacer ,
+                        'nama_canvasser' => $value->nama_kanvacer ,
+                        'print' => $value->print,
+                        'bayar' => $value->bayar 
+                    ];
+                    // $uploadDompul[] = ['no_hp_sub_master_dompul' => $value->hp_sub_master ,
+                    //     'nama_sub_master_dompul' => $value->nama_sub_master ,
+                    //     'tanggal_transfer' => $value->tanggal_trx ,
+                    //     'no_faktur' => $value->no_faktur ,
+                    //     'produk' => $value->produk ,
+                    //     'qty' => $value->qty ,
+                    //     'balance' => $value->balance ,
+                    //     'diskon' => $value->diskon ,
+                    //     'no_hp_downline' => $value->hp_downline ,
+                    //     'nama_downline' => $value->nama_downline ,
+                    //     'status' => $value->status ,
+                    //     'no_hp_canvasser' => $value->hp_kanvacer ,
+                    //     'nama_canvasser' => $value->nama_kanvacer ,
+                    //     'print' => $value->print,
+                    //     'bayar' => $value->bayar 
+                    // ];
 				}
-				if(!empty($insert)){
-					DB::table('upload_dompuls')->insert($insert);
+				if(!empty($uploadDompul)){
+					DB::table('upload_dompuls')->insert($uploadDompul);
 				}
 			}
 		}
