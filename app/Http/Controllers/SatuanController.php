@@ -97,7 +97,11 @@ class SatuanController extends Controller
         $satuan = Satuan::where('id_satuan', $id)->first();
         $satuan->nama_satuan = $request->get('nama');
         $satuan->tipe_satuan = $request->get('tipe');
-        $satuan->induk_satuan = $request->get('induk');
+        if ($request->get('induk') == 'other') {
+            $satuan->induk_satuan = $request->get('other');
+        }else {
+            $satuan->induk_satuan = $request->get('induk');
+        }
         $satuan->nilai_konversi = $request->get('nilai');
         $satuan->save();
         return redirect('master/satuan');
