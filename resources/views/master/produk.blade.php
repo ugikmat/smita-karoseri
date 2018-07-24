@@ -96,7 +96,14 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="kategori" required="required" name="kategori" class="form-control col-md-7 col-xs-12" value="">
+                        <div class="col-md-7 col-xs-12">
+                          <label class="radio-inline">
+                            <input type="radio" name="kategori">Dompul
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="kategori">SP
+                          </label>
+                        </div>
                       </div>
                     </div>
 
@@ -228,12 +235,19 @@
                     </div>
                   </div>
 
-                  <div class="form-group kategori">
+                  <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kategori Produk
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="kategori" class="form-control col-md-7 col-xs-12" value="">
+                      <div class="col-md-7 col-xs-12">
+                        <label class="radio-inline">
+                          <input type="radio" name="kategori">Dompul
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="kategori">SP
+                        </label>
+                      </div>
                     </div>
                   </div>
 
