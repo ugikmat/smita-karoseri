@@ -71,16 +71,11 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select name="tipe" required="required">
                           <option value="selected" selected>-- Pilih Tipe Harga Produk --</option>
-                          <option value="ds">DS</option>
-                          <option value="cvs">CVS</option>
-                          <option value="hi">HI</option>
-                          <option value="server">SERVER</option>
-                          <option value="sde">SDE</option>
-                          <option value="cvs1">CVS1</option>
-                          <option value="cvs2">CVS2</option>
-                          <option value="cvs3">CVS3</option>
-                          <option value="server1">SERVER1</option>
-                          <option value="server2">SERVER2</option>
+                          @isset($tipes)
+                            @foreach($tipes as $tipe)
+                              <option value="{{$tipe->tipe_dompul}}">{{$tipe->tipe_dompul}}</option>
+                            @endforeach
+                          @endisset
                         </select>
                       </div>
                     </div>
