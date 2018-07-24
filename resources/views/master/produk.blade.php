@@ -237,12 +237,12 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kategori Produk
                       <span class="required">*</span>
                     </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-md-6 col-sm-6 col-xs-12 kategori">
                         <label class="radio-inline">
-                          <input type="radio" name="kategori">Dompul
+                          <input type="radio" name="kategori" id="Dompul">Dompul
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" name="kategori">SP
+                          <input type="radio" name="kategori" id="SP">SP
                         </label>
                     </div>
                   </div>
@@ -434,7 +434,7 @@
     modal.find('.modal-body .nama input').val(name)
     modal.find('.modal-body .id input').val(id)
     modal.find('.modal-body .kode input').val(kode)
-    modal.find('.modal-body .kategori input').val(kategori)
+    modal.find(`.modal-body .kategori #${kategori}`).attr('checked', 'checked');
     modal.find('.modal-body .satuan input').val(satuan)
     modal.find('.modal-body .jenis input').val(jenis)
     modal.find('.modal-body .bom input').val(bom)
