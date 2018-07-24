@@ -104,7 +104,12 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="bank" class="form-control col-md-7 col-xs-12" value="">
+                        <select name="bank" required="required">
+                          <option value="selected" selected>-- Select Bank --</option>
+                          <option value="bca">BCA</option>
+                          <option value="bri">BRI</option>
+                          <option value="bni">BNI</option>
+                        </select>
                       </div>
                     </div>
 
@@ -205,7 +210,12 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="bank" class="form-control col-md-7 col-xs-12" value="">
+                      <select name="bank" required="required">
+                        <option value="selected" selected>Bank Sekarang</option>
+                        <option value="bca">BCA</option>
+                        <option value="bri">BRI</option>
+                        <option value="bni">BNI</option>
+                      </select>
                     </div>
                   </div>
 
