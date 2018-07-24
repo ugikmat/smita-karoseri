@@ -26,7 +26,7 @@ class HargaProdukController extends Controller
      */
     public function index()
     {
-        $tipes = TipeDompul::all();
+        $tipes = TipeDompul::where('status_tipe_dompul','Aktif')->get();
         return view('master.harga_produk',['tipes'=>$tipes]);
     }
 
