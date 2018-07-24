@@ -7,25 +7,48 @@
 @stop
 
 @section('content')
-<table>
-  <tr>
-    <td>HP Sales</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Nama Sales</td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Hp. Kios</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Nama Kios</td>
-    <td></td>
-  </tr>
-</table>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+        HP Sales
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
+        : 12121212
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+        Nama Sales
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
+        : qwert
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+        HP Kios
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
+        : 1111111111
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+        Nama Kios
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
+        : aaaaaaaaaa
+      </div>
+    </div>
+  </div>
+</div>
 <table id="users-table" class="table table-bordered">
     <thead>
     <tr>
