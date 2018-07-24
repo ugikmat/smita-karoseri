@@ -96,14 +96,12 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div class="col-md-7 col-xs-12">
                           <label class="radio-inline">
                             <input type="radio" name="kategori">Dompul
                           </label>
                           <label class="radio-inline">
                             <input type="radio" name="kategori">SP
                           </label>
-                        </div>
                       </div>
                     </div>
 
@@ -240,14 +238,12 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <div class="col-md-7 col-xs-12">
                         <label class="radio-inline">
                           <input type="radio" name="kategori">Dompul
                         </label>
                         <label class="radio-inline">
                           <input type="radio" name="kategori">SP
                         </label>
-                      </div>
                     </div>
                   </div>
 
