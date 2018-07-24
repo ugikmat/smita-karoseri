@@ -97,11 +97,11 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                           <label class="radio-inline">
-                            <input type="radio" name="kategori">Dompul
-                          </label>
-                          <label class="radio-inline">
-                            <input type="radio" name="kategori">SP
-                          </label>
+                          <input type="radio" name="kategori" id="Dompul" value="Dompul">Dompul
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="kategori" id="SP" value="SP">SP
+                        </label>
                       </div>
                     </div>
 
@@ -239,10 +239,10 @@
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12 kategori">
                         <label class="radio-inline">
-                          <input type="radio" name="kategori" id="Dompul">Dompul
+                          <input type="radio" name="kategori" id="Dompul" value="Dompul">Dompul
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" name="kategori" id="SP">SP
+                          <input type="radio" name="kategori" id="SP" value="SP">SP
                         </label>
                     </div>
                   </div>
