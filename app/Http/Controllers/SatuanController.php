@@ -26,7 +26,8 @@ class SatuanController extends Controller
      */
     public function index()
     {
-        return view('master.satuan');
+        $satuans = Satuan::where('status_satuan','tersedia')->get();
+        return view('master.satuan',['satuans'=>$satuans]);
     }
 
     /**
@@ -50,7 +51,11 @@ class SatuanController extends Controller
         $satuan = new Satuan();
         $satuan->nama_satuan = $request->get('nama');
         $satuan->tipe_satuan = $request->get('tipe');
-        $satuan->induk_satuan = $request->get('induk');
+        if ($request->get('induk') == 'other') {
+            $satuan->induk_satuan = $request->get('other');
+        }else {
+            $satuan->induk_satuan = $request->get('induk');
+        }
         $satuan->nilai_konversi = $request->get('nilai');
         $satuan->status_satuan = "tersedia";
         $satuan->save();

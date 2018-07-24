@@ -70,7 +70,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="Tipe" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
@@ -79,17 +79,15 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
+                            @isset($satuans)
+                              @foreach($satuans as $satuan)
+                              <label class="radio-inline">
+                                <input type="radio" name="induk" value="{{$satuan->nama_satuan}}">{{$satuan->nama_satuan}}
+                              </label>
+                              @endforeach
+                            @endisset
                           <label class="radio-inline">
-                            <input type="radio" name="induk">PCS
-                          </label>
-                          <label class="radio-inline">
-                            <input type="radio" name="induk">BOX
-                          </label>
-                          <label class="radio-inline">
-                            <input type="radio" name="induk">UNIT
-                          </label>
-                          <label class="radio-inline">
-                            <input type="radio" name="induk"> <input type="text" name="induk" value="">
+                            <input type="radio" name="induk" value="other"> <input type="text" name="other" value="" placeholder="Yang Lain...">
                           </label>
                       </div>
                     </div>
