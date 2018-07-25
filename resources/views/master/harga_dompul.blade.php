@@ -72,19 +72,13 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Harga Dompul
                         <span class="required">*</span>
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
                         <select name="tipe" required="required">
-                          <option value="selected" selected>-- Pilih Tipe Harga Dompul --</option>
-                          <option value="ds">DS</option>
-                          <option value="cvs">CVS</option>
-                          <option value="hi">HI</option>
-                          <option value="server">SERVER</option>
-                          <option value="sde">SDE</option>
-                          <option value="cvs1">CVS1</option>
-                          <option value="cvs2">CVS2</option>
-                          <option value="cvs3">CVS3</option>
-                          <option value="server1">SERVER1</option>
-                          <option value="server2">SERVER2</option>
+                          @isset($tipes)
+                            @foreach($tipes as $tipe)
+                              <option value="{{$tipe->tipe_dompul}}" id="{{$tipe->tipe_dompul}}">{{$tipe->tipe_dompul}}</option>
+                            @endforeach
+                          @endisset
                         </select>
                       </div>
                     </div>
@@ -166,21 +160,15 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Harga Dompul
                       <span class="required">*</span>
                     </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <select name="tipe" required="required">
-                        <option value="selected" selected>tipe harga sekarang</option>
-                        <option value="ds">DS</option>
-                        <option value="cvs">CVS</option>
-                        <option value="hi">HI</option>
-                        <option value="server">SERVER</option>
-                        <option value="sde">SDE</option>
-                        <option value="cvs1">CVS1</option>
-                        <option value="cvs2">CVS2</option>
-                        <option value="cvs3">CVS3</option>
-                        <option value="server1">SERVER1</option>
-                        <option value="server2">SERVER2</option>
-                      </select>
-                    </div>
+                   <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select name="tipe" required="required">
+                          @isset($tipes)
+                            @foreach($tipes as $tipe)
+                              <option value="{{$tipe->tipe_dompul}}" id="{{$tipe->tipe_dompul}}">{{$tipe->tipe_dompul}}</option>
+                            @endforeach
+                          @endisset
+                        </select>
+                      </div>
                   </div>
 
                   <div class="form-group harga">
@@ -301,7 +289,7 @@
     var modal = $(this)
     $('#editForm').attr('action', `/master/harga_dompul/${id}`);
     modal.find('.modal-body .nama input').val(nama)
-    modal.find('.modal-body .tipe input').val(tipe)
+    modal.find(`.modal-body .tipe #${tipe}`).attr('selected','selected');
     modal.find('.modal-body .harga input').val(harga)
     // modal.find('.modal-body .tanggal input').val(tanggal)
     // modal.find('.modal-body .status input').val(status)
