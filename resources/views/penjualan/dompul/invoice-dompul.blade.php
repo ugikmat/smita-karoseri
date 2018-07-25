@@ -156,7 +156,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input class="datepicker col-md-7 col-xs-12" required="required" name="tgl" data-date-format="mm/dd/yyyy">
+                      <input class="datepicker col-md-7 col-xs-12" required="required" name="tgl" data-date-format="yyyy-mm-dd">
                     </div>
                   </div>
 
@@ -190,11 +190,11 @@
         $('#invoice-dompul-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '',
+            ajax: '/invoice_dompul',
             columns: [
-                {data: 'no'},
-                {data: 'nama-ro'},
-                {data: 'qty-penjualan'},
+                // {data: 'no'},
+                {data: 'nama_downline'},
+                {data: 'qty'},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });
