@@ -80,6 +80,11 @@ Route::get('/penjualan/dompul/list-invoice', function() {
   return view ('/penjualan/dompul/list-invoice');
 }) -> name('list-invoice');
 
+Route::get('/penjualan/dompul/invoice-dompul-3', function() {
+  return view ('/penjualan/dompul/invoice-dompul-3');
+}) -> name('invoice-dompul-3y');
+
+
 //monitoring
 Route::get('/penjualan/dompul/list-invoice', function() {
   return view ('/penjualan/dompul/list-invoice');
