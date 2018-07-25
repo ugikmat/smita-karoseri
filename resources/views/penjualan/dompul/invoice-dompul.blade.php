@@ -16,10 +16,12 @@
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Tanggal Penjualan
+        Tanggal Penjualan : 
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        : tanggalan
+        @if (session('tgl'))
+            {{ session('tgl')}}
+        @endif
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -58,26 +60,32 @@
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        ID Canvaser
+        ID Canvaser : 
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        : 123123123
+        @if (session('sales'))
+            {{ session('sales')->id_sales }}
+        @endif
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Nama Canvaser
+        Nama Canvaser : 
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        : qwerty
+        @if (session('sales'))
+            {{ session('sales')->nm_sales }}
+        @endif
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Tanggal Cetak Penjualan
+        Tanggal Cetak Penjualan : 
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        : tanggalan
+        @if (session('now'))
+            {{ session('now') }}
+        @endif
       </div>
     </div>
   </div>
@@ -114,14 +122,23 @@
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="">
-                  @csrf @method('put')
+              <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/penjualan/dompul/invoice-dompul">
+                  @csrf
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Canvasser
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value="">
+                      {{-- <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value=""> --}}
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select name="id" required="required">
+                          @isset($saless)
+                            @foreach($saless as $sales)
+                              <option value="{{$sales->nm_sales}}" id="{{$sales->nm_sales}}">{{$sales->nm_sales}}</option>
+                            @endforeach
+                          @endisset
+                        </select>
+                      </div>
                     </div>
                   </div>
 
@@ -139,7 +156,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input class="datepicker col-md-7 col-xs-12" required="required" data-date-format="mm/dd/yyyy">
+                      <input class="datepicker col-md-7 col-xs-12" required="required" name="tgl" data-date-format="mm/dd/yyyy">
                     </div>
                   </div>
 
