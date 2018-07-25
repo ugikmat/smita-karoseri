@@ -132,6 +132,10 @@ return [
                             'url'   => '/penjualan/dompul/invoice-dompul',
                         ],
                         [
+                            'text'  => 'lalala',
+                            'url'   => '/penjualan/dompul/invoice-dompul-3',
+                        ],
+                        [
                             'text'  => 'List Invoice Dompul',
                             'url'   => '/penjualan/dompul/list-invoice',
                         ],
