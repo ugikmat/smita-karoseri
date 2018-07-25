@@ -49,7 +49,7 @@
     </div>
   </div>
 </div>
-<table id="invoice-dompul" class="table table-bordered">
+<table id="invoice-dompul-table" class="table responsive"  width="100%">
     <thead>
     <tr>
         <th>No</th>
@@ -63,7 +63,7 @@
     </tr>
     </thead>
     <tfoot>
-      <form class="" action="index.html" method="post">
+      <form class="invoice-dompul" action="" method="post">
         <tr>
           <td></td>
           <td></td>
@@ -160,10 +160,23 @@
           <td></td>
           <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value=""></td>
         </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            <a href="invoice-dompul-4.blade.php" class="btn btn-info btn-lg pull-right">
+              <span class="glyphicon glyphicon-ok"></span> Lanjutkan
+            </a>
+          </td>
+        </tr>
       </form>
     </tfoot>
 </table>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Tambah</button>
+
 <!--Modal Edit-->
 <div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -224,7 +237,7 @@
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset">Reset</button>
                       <input type="submit" class="btn btn-success" value="Simpan">
-                      {{-- <button type="button" class="btn btn-primary" data-dismiss="modal"> Simpan</button> --}}
+                      {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
                     </div>
                   </div>
                 </form>
@@ -246,7 +259,7 @@
 @section('js')
 <script>
     $(function () {
-        $('#invoice-dompul').DataTable({
+        $('#invoice-dompul-table').DataTable({
             serverSide: true,
             processing: true,
             ajax: '',
