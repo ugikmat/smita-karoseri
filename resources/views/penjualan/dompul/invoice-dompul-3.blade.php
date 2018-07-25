@@ -49,7 +49,7 @@
     </div>
   </div>
 </div>
-<table id="users-table" class="table table-bordered">
+<table id="invoice-dompul" class="table table-bordered">
     <thead>
     <tr>
         <th>No</th>
@@ -63,15 +63,107 @@
     </tr>
     </thead>
     <tfoot>
-      <tr>
-        <th></th>
-        <th>Grand Total</th>
-        <th></th>
-        <th>Harga Total</th>
-      </tr>
+      <form class="" action="index.html" method="post">
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td colspan="2"><b>Grand Total</b></td>
+          <td></td>
+          <td>totalnya</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td colspan="2"><b>Jumlah Tunai</b></td>
+          <td></td>
+          <td><input type="text" id="tunai" required="required" name="tunai" class="form-control" value=""></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td colspan="2"><b>Bank Transfer 1</b></td>
+          <td></td>
+          <td>
+            <select>
+              <option value="" selected>-- pilih bank --</option>
+              <option value="bca">BCA</option>
+              <option value="bri">BRI</option>
+              <option value="bni">BNI</option>
+              <option value="mandiri">Mandiri</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td colspan="2"><b>Jumlah Transfer 1</b></td>
+          <td></td>
+          <td><input type="text" id="trf1" required="required" name="trf1" class="form-control" value=""></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td colspan="2"><b>Bank Transfer 2</b></td>
+          <td></td>
+          <td>
+            <select>
+              <option value="" selected>-- pilih bank --</option>
+              <option value="bca">BCA</option>
+              <option value="bri">BRI</option>
+              <option value="bni">BNI</option>
+              <option value="mandiri">Mandiri</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td colspan="2"><b>Jumlah Transfer 2</b></td>
+          <td></td>
+          <td><input type="text" id="trf2" required="required" name="trf2" class="form-control" value=""></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td colspan="2"><b>Bank Transfer 3</b></td>
+          <td></td>
+          <td>
+            <select>
+              <option value="" selected>-- pilih bank --</option>
+              <option value="bca">BCA</option>
+              <option value="bri">BRI</option>
+              <option value="bni">BNI</option>
+              <option value="mandiri">Mandiri</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td colspan="2"><b>Jumlah Transfer 3</b></td>
+          <td></td>
+          <td><input type="text" id="trf3" required="required" name="trf3" class="form-control" value=""></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td colspan="2"><b>Catatan</b></td>
+          <td></td>
+          <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value=""></td>
+        </tr>
+      </form>
     </tfoot>
 </table>
-
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Tambah</button>
 <!--Modal Edit-->
 <div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -122,7 +214,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="Auto Generate"  disabled>
+                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 
@@ -154,7 +246,7 @@
 @section('js')
 <script>
     $(function () {
-        $('#users-table').DataTable({
+        $('#invoice-dompul').DataTable({
             serverSide: true,
             processing: true,
             ajax: '',
