@@ -70,7 +70,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="Tipe" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
@@ -79,17 +79,15 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
+                            @isset($satuans)
+                              @foreach($satuans as $satuan)
+                              <label class="radio-inline">
+                                <input type="radio" name="induk" value="{{$satuan->nama_satuan}}">{{$satuan->nama_satuan}}
+                              </label>
+                              @endforeach
+                            @endisset
                           <label class="radio-inline">
-                            <input type="radio" name="induk">PCS
-                          </label>
-                          <label class="radio-inline">
-                            <input type="radio" name="induk">BOX
-                          </label>
-                          <label class="radio-inline">
-                            <input type="radio" name="induk">UNIT
-                          </label>
-                          <label class="radio-inline">
-                            <input type="radio" name="induk"> <input type="text" name="induk" value="">
+                            <input type="radio" name="induk" value="other"> <input type="text" name="other" value="" placeholder="Yang Lain...">
                           </label>
                       </div>
                     </div>
@@ -161,7 +159,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group tipe">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Satuan
                       <span class="required">*</span>
                     </label>
@@ -175,19 +173,17 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <label class="radio-inline">
-                          <input type="radio" name="induk">PCS
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="induk">BOX
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="induk">UNIT
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="induk"> <input type="text" name="induk" value="">
-                        </label>
-                    </div>
+                            @isset($satuans)
+                              @foreach($satuans as $satuan)
+                              <label class="radio-inline">
+                                <input type="radio" name="induk" id="{{$satuan->nama_satuan}}" value="{{$satuan->nama_satuan}}">{{$satuan->nama_satuan}}
+                              </label>
+                              @endforeach
+                            @endisset
+                          <label class="radio-inline">
+                            <input type="radio" name="induk" value="other"> <input type="text" name="other" value="" placeholder="Yang Lain...">
+                          </label>
+                      </div>
                   </div>
 
                   <div class="form-group nilai">
@@ -296,7 +292,7 @@
     modal.find('.modal-body .nama input').val(name)
     modal.find('.modal-body .id input').val(id)
     modal.find('.modal-body .tipe input').val(tipe)
-    modal.find('.modal-body .induk input').val(induk)
+    modal.find(`.modal-body .induk #${induk}`).attr('checked', 'checked');
     modal.find('.modal-body .nilai input').val(nilai)
     modal.find('.modal-body .status input').val(status)
   })
