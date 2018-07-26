@@ -28,10 +28,12 @@ class UploadDompulController extends Controller
 		if($request->hasFile('import_file')){
             $path = $request->file('import_file')->getRealPath();
             $data = Excel::load($path, function($reader) {
-			})->get();
+                $reader->ignoreEmpty();
+            })->get();
 			if(!empty($data) && $data->count()){
 				foreach ($data as $key => $value) {
-                    $uploadDompul[] = ['no_hp_sub_master_dompul' => $value->hp_sub_master ,
+                    if(!empty($value) && $value->count()){
+                         $uploadDompul[] = ['no_hp_sub_master_dompul' => $value->hp_sub_master ,
                         'nama_sub_master_dompul' => $value->nama_sub_master ,
                         'tanggal_transfer' => $value->tanggal_trx ,
                         'no_faktur' => $value->no_faktur ,
@@ -47,38 +49,46 @@ class UploadDompulController extends Controller
                         'print' => $value->print,
                         'bayar' => $value->bayar 
                     ];
-                    // $hargaDompul[] = ['nama_harga_dompul' => $value->produk ,
-                    //     'harga_dompul' => $value->harga_dompul ,
-                    //     'tanggal_update' => $value->tanggal_update_dompul ,
-                    //     'tipe_harga_dompul' => $value->tipe_harga_dompul,
-                    //     'status_harga_dompul' => 'Aktif'
-                    // ];
-                    // $customer[] = ['nm_cust' => $value->nama_downline ,
-                    //     'alamat_cust' => $value->alamat_cust ,
-                    //     'no_hp' => $value->hp_downline ,
-                    //     'id_gudang' => $value->id_gudang ,
-                    //     'jabatan' => $value->jabatan_cust
-                    // ];
-                    // $sales[] = ['nm_sales' => $value->nama_kanvacer ,
-                    //     'alamat_sales' => $value->alamat_sales ,
-                    //     'no_hp' => $value->hp_kanvacer
-                    // ];
+                    $dompul[] = ['no_hp_master_dompul' => $value->no_hp_master_dompul ,
+                        'no_hp_sub_master_dompul' => $value->hp_sub_master ,
+                        'nama_sub_master_dompul' => $value->nama_sub_master ,
+                        'tipe_dompul' => $value->tipe_harga_dompul,
+                        'id_gudang' => $value->id_gudang ,
+                        'status_sub_master_dompul' => 'Aktif'
+                    ];
+
+                    $hargaDompul[] = ['nama_harga_dompul' => $value->produk ,
+                        'harga_dompul' => $value->harga_dompul ,
+                        'tanggal_update' => $value->tanggal_update_dompul ,
+                        'tipe_harga_dompul' => $value->tipe_harga_dompul,
+                        'status_harga_dompul' => 'Aktif'
+                    ];
+                    $customer[] = ['nm_cust' => $value->nama_downline ,
+                        'alamat_cust' => $value->alamat_cust ,
+                        'no_hp' => $value->hp_downline ,
+                        'jabatan' => $value->jabatan_cust
+                    ];
+                    $sales[] = ['nm_sales' => $value->nama_kanvacer ,
+                        'alamat_sales' => $value->alamat_sales ,
+                        'no_hp' => $value->hp_kanvacer
+                    ];
+                    }
 				}
 				if(!empty($uploadDompul)){
                     DB::table('upload_dompuls')->insert($uploadDompul);
                 }
-                // if(!empty($dompul)){
-                //     DB::table('master_dompuls')->insert($dompul);
-                // }
-                // if(!empty($hargaDompul)){
-                //     DB::table('master_harga_dompuls')->insert($hargaDompul);
-                // }
-                // if(!empty($customer)){
-                //     DB::table('master_customers')->insert($customer);
-                // }
-                // if(!empty($sales)){
-                //     DB::table('master_saless')->insert($sales);
-				// }
+                if(!empty($dompul)){
+                    DB::table('master_dompuls')->insert($dompul);
+                }
+                if(!empty($hargaDompul)){
+                    DB::table('master_harga_dompuls')->insert($hargaDompul);
+                }
+                if(!empty($customer)){
+                    DB::table('master_customers')->insert($customer);
+                }
+                if(!empty($sales)){
+                    DB::table('master_saless')->insert($sales);
+				}
 			}
 		}
 		return redirect('/upload/dompul');
