@@ -29,6 +29,6 @@ class CreateMasterHargaSp extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('master_harga_sps');
+        Schema::dropIfExists('master_harga_sp');
     }
 }
