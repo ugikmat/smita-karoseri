@@ -222,7 +222,7 @@ td{
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="'/invoice_dompul/update/{{$datas->nama_canvasser}}/{{$tgl}}/{{$datas->nama_downline}}">
+                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/invoice_dompul/update/{{$datas->nama_canvasser}}/{{$tgl}}/{{$datas->nama_downline}}/{{$datas->produk}}">
                   @csrf @method('put')
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul
@@ -231,16 +231,16 @@ td{
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <select name="tipe" required="required">
                         <option value="selected" selected>-- Pilih Tipe Dompul --</option>
-                        <option value="ds">DS</option>
-                        <option value="cvs">CVS</option>
-                        <option value="hi">HI</option>
-                        <option value="server">SERVER</option>
-                        <option value="sde">SDE</option>
-                        <option value="cvs1">CVS1</option>
-                        <option value="cvs2">CVS2</option>
-                        <option value="cvs3">CVS3</option>
-                        <option value="server1">SERVER1</option>
-                        <option value="server2">SERVER2</option>
+                        <option value="DS">DS</option>
+                        <option value="CVS">CVS</option>
+                        <option value="HI">HI</option>
+                        <option value="SERVER">SERVER</option>
+                        <option value="SDE">SDE</option>
+                        <option value="CVS1">CVS1</option>
+                        <option value="CVS2">CVS2</option>
+                        <option value="CVS3">CVS3</option>
+                        <option value="SERVER1">SERVER1</option>
+                        <option value="SERVER2">SERVER2</option>
                       </select>
                     </div>
                   </div>
@@ -300,5 +300,17 @@ td{
                   ]
               });
     });
+</script>
+<script>
+  $('#editModal').on('show.bs.modal', function (event) {
+    var tgl = $('#tgl').val();
+    var canvaser = $('#canvasser').val();
+    var downline = $('#downline').val();
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var produk = button.data('produk') // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    $('#editForm').attr('action', `/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}`);
+  })
 </script>
 @stop

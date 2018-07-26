@@ -118,7 +118,7 @@ class PenjualanDompulController extends Controller
     }
 
     public function edit($canvaser,$tgl,$downline)
-    {   $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser')
+    {   $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser','produk')
                         ->where('nama_canvasser',$canvaser)
                         ->where('tanggal_transfer',$tgl)
                         ->where('nama_downline',$downline)->first();
@@ -141,13 +141,14 @@ class PenjualanDompulController extends Controller
         return view('penjualan.dompul.invoice-dompul-3',['datas'=>$datas,'tgl'=>$tgl,'total'=>$total]);
     }
 
-    public function update(Request $request,$canvaser,$tgl,$downline){
+    public function update(Request $request,$canvaser,$tgl,$downline,$produk){
         $data =UploadDompul::where('nama_canvasser',$canvaser)
                         ->where('tanggal_transfer',$tgl)
-                        ->where('nama_downline',$downline)->first();
+                        ->where('nama_downline',$downline)
+                        ->where('produk',$produk)->first();
         $tipe = $request->get('tipe');
         $qty_program = $request->get('qty_program');
-        $data->tipe_program = $tipe;
+        $data->tipe_dompul = $tipe;
         $data->qty_program = $qty_program;
         $data->save();
         return redirect()->back();
@@ -177,18 +178,29 @@ class PenjualanDompulController extends Controller
      */
     public function penjualanData(Datatables $datatables,$canvaser,$tgl,$downline)
     {
-        return $datatables->eloquent(UploadDompul::select('upload_dompuls.produk','upload_dompuls.tipe_dompul','upload_dompuls.qty','upload_dompuls.qty_program','master_harga_dompuls.harga_dompul')
-                        ->join('master_harga_dompuls','master_harga_dompuls.nama_harga_dompul','=','upload_dompuls.produk')
+        $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser')
                         ->where('nama_canvasser',$canvaser)
                         ->where('tanggal_transfer',$tgl)
-                        ->where('nama_downline',$downline)
-                        ->where('tipe_harga_dompul','CVS'))
+                        ->where('nama_downline',$downline)->first();
+        if(empty($datas->tipe_dompul)){
+            $tipe = 'CVS';
+        }else{
+            $tipe = $datas->tipe_dompul;
+        }
+        return $datatables->eloquent(UploadDompul::select('upload_dompuls.produk','upload_dompuls.tipe_dompul','upload_dompuls.qty','upload_dompuls.qty_program','master_harga_dompuls.harga_dompul')
+                        ->join('master_harga_dompuls',function($join){
+                            $join->on('master_harga_dompuls.nama_harga_dompul','=','upload_dompuls.produk')
+                                ->on('master_harga_dompuls.tipe_harga_dompul','=','upload_dompuls.tipe_dompul');
+                        })
+                        ->where('nama_canvasser',$canvaser)
+                        ->where('tanggal_transfer',$tgl)
+                        ->where('nama_downline',$downline))
                         ->addColumn('total_harga', function ($uploadDompul) {
-                              return ($uploadDompul->qty*$uploadDompul->harga_dompul)-$uploadDompul->qty_program;
+                              return ($uploadDompul->qty-$uploadDompul->qty_program)*$uploadDompul->harga_dompul;
                             })
                           ->addColumn('action', function ($uploadDompul) {
                               return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-produk="'.$uploadDompul->produk.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
                             })
                           ->make(true);
     }
