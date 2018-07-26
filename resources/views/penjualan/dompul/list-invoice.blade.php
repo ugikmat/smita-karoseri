@@ -11,6 +11,7 @@
 @stop
 
 @section('content')
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput">Input Tanggal Penjualan</button>
 <table id="list-invoice-table" class="table responsive" width="100%">
     <thead>
     <tr>
@@ -26,7 +27,6 @@
     </thead>
 </table>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput">Tambah</button>
 <!--Modal input-->
 <div class="modal fade bs-example-modal-lg" id='modalInput' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -64,8 +64,8 @@
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset"> <i class="fa fa-repeat"></i> Kosongkan</button>
-                      <input type="submit" class="btn btn-success" value="Tampilkan Penjualan">
-                      {{-- <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-ok"></i>Tampilkan Penjualan</button> --}}
+                      <input type="submit" class="btn btn-success" value="Tampilkan List Penjualan">
+                      {{-- <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-ok"></i>Tampilkan List Penjualan</button> --}}
                     </div>
                   </div>
                 </form>
