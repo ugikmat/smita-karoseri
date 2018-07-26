@@ -88,7 +88,11 @@ td{
           <td></td>
           <td colspan="2"><b>Grand Total</b></td>
           <td></td>
-          <td>totalnya</td>
+          <td>
+            @isset($total)
+              {{$total}}
+            @endisset
+          </td>
           <td></td>
         </tr>
         <tr>
@@ -181,7 +185,7 @@ td{
         </tr>
         <tr>
           <td colspan="6">
-            <a href="invoice-dompul-4.blade.php" class="btn btn-info btn-lg pull-right">
+          <a href="/penjualan/dompul/verify/{{$datas->nama_canvasser}}/{{$tgl}}/{{$datas->nama_downline}}" class="btn btn-info btn-lg pull-right">
               <span class="glyphicon glyphicon-ok"></span> Lanjutkan
             </a>
           </td>
