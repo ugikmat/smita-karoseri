@@ -27,7 +27,7 @@ class ProdukSeeder extends Seeder
         $sp1->save();
 
         $sp2 = new produk();
-        $sp2->kode_produk='SP1';
+        $sp2->kode_produk='BG12044';
         $sp2->nama_produk='Combo Lite 4GB+';
         $sp2->kategori_produk='SP';
         $sp2->satuan='PCS';
