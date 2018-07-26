@@ -68,7 +68,8 @@ td{
     </div>
   </div>
 </div>
-<form class="invoice-dompul" action="" method="post">
+<form class="invoice-dompul" action="/penjualan/dompul/verify/{{$datas->nama_canvasser}}/{{$tgl}}/{{$datas->nama_downline}}" method="post">
+  @csrf
 <table id="invoice-dompul-table" class="table responsive"  width="100%">
     <thead>
     <tr>
@@ -109,7 +110,7 @@ td{
           <td colspan="2"><b>Bank Transfer 1</b></td>
           <td></td>
           <td>
-            <select>
+            <select name="bank1">
               <option value="" selected>-- pilih bank --</option>
               <option value="bca">BCA</option>
               <option value="bri">BRI</option>
@@ -133,7 +134,7 @@ td{
           <td colspan="2"><b>Bank Transfer 2</b></td>
           <td></td>
           <td>
-            <select>
+            <select name="bank2">
               <option value="" selected>-- pilih bank --</option>
               <option value="bca">BCA</option>
               <option value="bri">BRI</option>
@@ -157,7 +158,7 @@ td{
           <td colspan="2"><b>Bank Transfer 3</b></td>
           <td></td>
           <td>
-            <select>
+            <select name="bank3">
               <option value="" selected>-- pilih bank --</option>
               <option value="bca">BCA</option>
               <option value="bri">BRI</option>
@@ -185,9 +186,13 @@ td{
         </tr>
         <tr>
           <td colspan="6">
-          <a href="/penjualan/dompul/verify/{{$datas->nama_canvasser}}/{{$tgl}}/{{$datas->nama_downline}}" class="btn btn-info btn-lg pull-right">
+            <div class="pull-right">
+              <input type="submit" class="btn btn-success glyphicon glyphicon-ok" value="Lanjutkan">
+            </div>
+            
+          {{-- <a href="/penjualan/dompul/verify/{{$datas->nama_canvasser}}/{{$tgl}}/{{$datas->nama_downline}}" class="btn btn-info btn-lg pull-right">
               <span class="glyphicon glyphicon-ok"></span> Lanjutkan
-            </a>
+            </a> --}}
           </td>
           <td></td>
         </tr>

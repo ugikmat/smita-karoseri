@@ -12,8 +12,6 @@ use Carbon\Carbon;
 
 class PenjualanDompulController extends Controller
 {
-    private $nama_canvasser;
-    private $tgl;
      /**
      * Create a new controller instance.
      *
@@ -35,15 +33,20 @@ class PenjualanDompulController extends Controller
     }
     public function show(Request $request)
     {
-        
-        $this->nama_canvasser = $request->get('id');
-        $this->nama_tgl = $request->get('tgl');
-        $sales = Sales::where('status','1')->where('nm_sales',$this->nama_canvasser)->first();
-        return redirect('/penjualan/dompul/invoice-dompul')->with(['sales'=>$sales,'tgl'=>$this->nama_tgl,'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
+        $sales = Sales::where('status','1')->where('nm_sales',$request->get('id'))->first();
+        return redirect('/penjualan/dompul/invoice-dompul')->with(['sales'=>$sales,'tgl'=>$request->get('tgl'),'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
         // return view('penjualan.dompul.invoice-dompul')->with(['sales'=>$sales,'tgl'=>$this->nama_tgl,'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
     }
     
-    public function verify($canvaser,$tgl,$downline){
+    public function verify(Request $request,$canvaser,$tgl,$downline){
+        $tunai = $request->get('tunai');
+        $trf1 = $request->get('trf1');
+        $bank1 = $request->get('bank1');
+        $trf2 = $request->get('trf2');
+        $bank2 = $request->get('bank2');
+        $trf3 = $request->get('trf3');
+        $bank3 = $request->get('bank3');        
+        $catatan = $request->get('catatan'); 
         $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser')
                         ->where('nama_canvasser',$canvaser)
                         ->where('tanggal_transfer',$tgl)
@@ -58,7 +61,20 @@ class PenjualanDompulController extends Controller
         foreach ($sums as $key => $value) {
             $total+=$value->qty*$value->harga_dompul;
         }
-        return view('penjualan.dompul.invoice-dompul-4',['datas'=>$datas,'tgl'=>$tgl,'total'=>$total]);
+        return view('penjualan.dompul.invoice-dompul-4',
+        [
+            'datas'=>$datas,
+            'tgl'=>$tgl,
+            'total'=>$total,
+            'tunai'=>$tunai,
+            'trf1'=>$trf1,
+            'trf2'=>$trf2,
+            'trf3'=>$trf3,
+            'bank1'=>$bank1,
+            'bank2'=>$bank2,
+            'bank3'=>$bank3,
+            'catatan'=>$catatan
+            ]);
     }
 
     public function edit($canvaser,$tgl,$downline)

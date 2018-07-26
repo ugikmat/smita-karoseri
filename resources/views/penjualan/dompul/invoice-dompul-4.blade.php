@@ -77,7 +77,9 @@ td{
           <td></td>
           <td colspan="2"><b>Jumlah Tunai</b></td>
           <td></td>
-          <td><input type="text" id="tunai" required="required" name="tunai" class="form-control" value=""></td>
+          <td>
+          <input type="text" id="tunai" required="required" name="tunai" class="form-control" value="{{$tunai}}" disabled>
+          </td>
           <td></td>
         </tr>
         <tr>
@@ -85,7 +87,7 @@ td{
           <td></td>
           <td colspan="2"><b>Bank Transfer 1</b></td>
           <td></td>
-          <td>bank yg dipake</td>
+          <td>{{$bank1}}</td>
           <td></td>
         </tr>
         <tr>
@@ -93,7 +95,7 @@ td{
           <td></td>
           <td colspan="2"><b>Jumlah Transfer 1</b></td>
           <td></td>
-          <td><input type="text" id="trf1" required="required" name="trf1" class="form-control" value=""></td>
+          <td><input type="text" id="trf1" required="required" name="trf1" class="form-control" value="{{$trf1}}" disabled></td>
           <td></td>
         </tr>
         <tr>
@@ -101,7 +103,7 @@ td{
           <td></td>
           <td colspan="2"><b>Bank Transfer 2</b></td>
           <td></td>
-          <td>bank yg dipake</td>
+          <td>{{$bank2}}</td>
           <td></td>
         </tr>
         <tr>
@@ -109,7 +111,7 @@ td{
           <td></td>
           <td colspan="2"><b>Jumlah Transfer 2</b></td>
           <td></td>
-          <td><input type="text" id="trf2" required="required" name="trf2" class="form-control" value=""></td>
+          <td><input type="text" id="trf2" required="required" name="trf2" class="form-control" value="{{$trf2}}" disabled></td>
           <td></td>
         </tr>
         <tr>
@@ -117,7 +119,7 @@ td{
           <td></td>
           <td colspan="2"><b>Bank Transfer 3</b></td>
           <td></td>
-          <td>bank yg dipake</td>
+          <td>{{$bank3}}</td>
           <td></td>
         </tr>
         <tr>
@@ -125,7 +127,7 @@ td{
           <td></td>
           <td colspan="2"><b>Jumlah Transfer 3</b></td>
           <td></td>
-          <td><input type="text" id="trf3" required="required" name="trf3" class="form-control" value=""></td>
+          <td><input type="text" id="trf3" required="required" name="trf3" class="form-control" value="{{$trf2}}" disabled></td>
           <td></td>
         </tr>
         <tr>
@@ -133,7 +135,7 @@ td{
           <td></td>
           <td colspan="2"><b>Catatan</b></td>
           <td></td>
-          <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value=""></td>
+          <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{$catatan}}" disabled></td>
           <td></td>
         </tr>
         <tr>
