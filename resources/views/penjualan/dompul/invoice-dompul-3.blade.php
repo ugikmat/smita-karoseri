@@ -38,7 +38,7 @@ td{
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
         @isset($datas)
-          <input type="text" name="canvaser" id="canvaser" value="{{$datas->nama_canvasser}}" disabled>
+          <input type="text" name="canvasser" id="canvasser" value="{{$datas->nama_canvasser}}" disabled>
         @endisset
       </div>
     </div>
@@ -283,7 +283,7 @@ td{
 <script>
     $(function () {
         var tgl = $('#tgl').val();
-        var canvaser = $('#canvaser').val();
+        var canvaser = $('#canvasser').val();
         var downline = $('#downline').val();
         var t = $('#invoice-dompul-table').DataTable({
                   serverSide: true,

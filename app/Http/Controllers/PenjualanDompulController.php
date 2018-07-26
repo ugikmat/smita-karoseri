@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Sales;
 use App\UploadDompul;
+use App\PenjualanDompul;
 use DB;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
@@ -47,6 +48,7 @@ class PenjualanDompulController extends Controller
         $trf3 = $request->get('trf3');
         $bank3 = $request->get('bank3');        
         $catatan = $request->get('catatan'); 
+        $sales = Sales::select('id_sales')->where('nm_sales',$canvaser)->first();
         $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser')
                         ->where('nama_canvasser',$canvaser)
                         ->where('tanggal_transfer',$tgl)
@@ -73,8 +75,46 @@ class PenjualanDompulController extends Controller
             'bank1'=>$bank1,
             'bank2'=>$bank2,
             'bank3'=>$bank3,
-            'catatan'=>$catatan
+            'catatan'=>$catatan,
+            'sales'=>$sales
             ]);
+    }
+
+    public function store(Request $request){
+        
+        $id_sales = $request->get('sales');
+        $hp_downline = $request->get('downline');
+        $tgl = $request->get('tgl');
+        $user = $request->get('user');
+        $tgl_input = Carbon::now('Asia/Jakarta')->toDateString();
+        $tunai = $request->get('tunai');
+        $trf1 = $request->get('trf1');
+        $bank1 = $request->get('bank1');
+        $trf2 = $request->get('trf2');
+        $bank2 = $request->get('bank2');
+        $trf3 = $request->get('trf3');
+        $bank3 = $request->get('bank3');        
+        $catatan = $request->get('catatan');
+        $total = $request->get('total');
+
+        $penjualanDompul = new PenjualanDompul();        
+            $penjualanDompul->id_sales=$id_sales;
+            $penjualanDompul->no_hp_kios=$hp_downline;
+            $penjualanDompul->no_user=$user;
+            $penjualanDompul->tanggal_penjualan_dompul=$tgl;
+            $penjualanDompul->tanggal_input=$tgl_input;
+            $penjualanDompul->bank=$bank1;
+            $penjualanDompul->bank2=$bank2;
+            $penjualanDompul->bank3=$bank3;
+            $penjualanDompul->grand_total=$total;
+            $penjualanDompul->bayar_tunai=$tunai;
+            $penjualanDompul->bayar_transfer=$trf1;
+            $penjualanDompul->bayar_transfer2=$trf2;
+            $penjualanDompul->bayar_transfer3=$trf3;
+            $penjualanDompul->catatan=$catatan;
+        $penjualanDompul->save();
+        return redirect('/home');
+
     }
 
     public function edit($canvaser,$tgl,$downline)
@@ -109,11 +149,6 @@ class PenjualanDompulController extends Controller
                         ->where('tanggal_transfer',$tgl)
                         ->groupBy('nama_downline')
                         ->orderBy('nama_downline'))
-                          ->addColumn('action', function ($uploadDompul) {
-                              return 
-                              '<a class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                              <a class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
-                            })
                           ->make(true);
     }
 
@@ -136,8 +171,7 @@ class PenjualanDompulController extends Controller
                             })
                           ->addColumn('action', function ($uploadDompul) {
                               return 
-                              '<a class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                              <a class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
                             })
                           ->make(true);
     }

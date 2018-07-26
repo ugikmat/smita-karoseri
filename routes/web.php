@@ -77,6 +77,7 @@ Route::post('/penjualan/dompul/invoice-dompul', 'PenjualanDompulController@show'
 Route::get('/invoice_dompul/{canvaser}/{tgl}', 'PenjualanDompulController@data');
 Route::get('/penjualan/dompul/{canvaser}/{tgl}/{downline}', 'PenjualanDompulController@edit');
 Route::get('/edit_invoice_dompul/{canvaser}/{tgl}/{downline}', 'PenjualanDompulController@penjualanData');
+Route::post('/invoice_dompul/store','PenjualanDompulController@store');
 
 Route::post('/penjualan/dompul/verify/{canvaser}/{tgl}/{downline}','PenjualanDompulController@verify');
 

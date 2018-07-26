@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class PenjualanDompul extends Model
 {
     public $timestamps=false;
+    protected $table='penjualan_dompuls';
+    protected $primaryKey='id_penjualan_dompul';
 
      /**
      * The attributes that are mass assignable.
