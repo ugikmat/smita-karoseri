@@ -128,11 +128,13 @@ class PenjualanDompulController extends Controller
             $tipe = $datas->tipe_dompul;
         }
         $sums = UploadDompul::select('upload_dompuls.produk','upload_dompuls.tipe_dompul','upload_dompuls.qty','upload_dompuls.qty_program','master_harga_dompuls.harga_dompul')
-                        ->join('master_harga_dompuls','master_harga_dompuls.nama_harga_dompul','=','upload_dompuls.produk')
+                        ->join('master_harga_dompuls',function($join){
+                            $join->on('master_harga_dompuls.nama_harga_dompul','=','upload_dompuls.produk')
+                                ->on('master_harga_dompuls.tipe_harga_dompul','=','upload_dompuls.tipe_dompul');
+                        })
                         ->where('nama_canvasser',$canvaser)
                         ->where('tanggal_transfer',$tgl)
-                        ->where('nama_downline',$downline)
-                        ->where('tipe_harga_dompul',$tipe)->get();
+                        ->where('nama_downline',$downline)->get();
         $total = 0;
         foreach ($sums as $key => $value) {
             $total+=(($value->qty-$value->qty_program)*$value->harga_dompul);
