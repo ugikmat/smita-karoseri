@@ -122,18 +122,35 @@ class PenjualanDompulController extends Controller
                         ->where('nama_canvasser',$canvaser)
                         ->where('tanggal_transfer',$tgl)
                         ->where('nama_downline',$downline)->first();
+        if(empty($datas->tipe_dompul)){
+            $tipe = 'CVS';
+        }else{
+            $tipe = $datas->tipe_dompul;
+        }
         $sums = UploadDompul::select('upload_dompuls.produk','upload_dompuls.tipe_dompul','upload_dompuls.qty','upload_dompuls.qty_program','master_harga_dompuls.harga_dompul')
                         ->join('master_harga_dompuls','master_harga_dompuls.nama_harga_dompul','=','upload_dompuls.produk')
                         ->where('nama_canvasser',$canvaser)
                         ->where('tanggal_transfer',$tgl)
                         ->where('nama_downline',$downline)
-                        ->where('tipe_harga_dompul','CVS')->get();
+                        ->where('tipe_harga_dompul',$tipe)->get();
         $total = 0;
         foreach ($sums as $key => $value) {
-            $total+=$value->qty*$value->harga_dompul;
+            $total+=(($value->qty*$value->harga_dompul)-$value->qty_program);
         }
         
         return view('penjualan.dompul.invoice-dompul-3',['datas'=>$datas,'tgl'=>$tgl,'total'=>$total]);
+    }
+
+    public function update(Request $request,$canvaser,$tgl,$downline){
+        $data =UploadDompul::where('nama_canvasser',$canvaser)
+                        ->where('tanggal_transfer',$tgl)
+                        ->where('nama_downline',$downline)->first();
+        $tipe = $request->get('tipe');
+        $qty_program = $request->get('qty_program');
+        $data->tipe_program = $tipe;
+        $data->qty_program = $qty_program;
+        $data->save();
+        return redirect()->back();
     }
 
      /**
@@ -167,7 +184,7 @@ class PenjualanDompulController extends Controller
                         ->where('nama_downline',$downline)
                         ->where('tipe_harga_dompul','CVS'))
                         ->addColumn('total_harga', function ($uploadDompul) {
-                              return $uploadDompul->qty*$uploadDompul->harga_dompul;
+                              return ($uploadDompul->qty*$uploadDompul->harga_dompul)-$uploadDompul->qty_program;
                             })
                           ->addColumn('action', function ($uploadDompul) {
                               return 

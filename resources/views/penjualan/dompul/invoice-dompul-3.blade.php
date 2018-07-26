@@ -222,7 +222,7 @@ td{
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="">
+                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="'/invoice_dompul/update/{{$datas->nama_canvasser}}/{{$tgl}}/{{$datas->nama_downline}}">
                   @csrf @method('put')
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul
@@ -250,7 +250,7 @@ td{
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                      <input type="text" id="first-name" required="required" name="qty_program" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 
