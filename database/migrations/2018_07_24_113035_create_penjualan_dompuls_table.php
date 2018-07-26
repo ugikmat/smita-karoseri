@@ -14,10 +14,10 @@ class CreatePenjualanDompulsTable extends Migration
     public function up()
     {
         Schema::create('penjualan_dompuls', function (Blueprint $table) {
-            $table->string('id_penjualan_dompul');
+            $table->increments('id_penjualan_dompul');
             $table->integer('id_sales');
-            $table->integer('id_ho');
-            $table->integer('id_bo');
+            // $table->integer('id_ho');
+            // $table->integer('id_bo');
             $table->string('no_hp_kios');
             $table->string('no_user');
             $table->date('tanggal_penjualan_dompul');
@@ -31,7 +31,7 @@ class CreatePenjualanDompulsTable extends Migration
             $table->bigInteger('bayar_transfer2');
             $table->bigInteger('bayar_transfer3');
             $table->text('catatan');
-            $table->tinyInteger('status_pembayaran')->default(1);
+            $table->tinyInteger('status_pembayaran')->default(0);
             $table->tinyInteger('status_penjualan')->default(1);
             $table->tinyInteger('deleted')->default(0);
         });
