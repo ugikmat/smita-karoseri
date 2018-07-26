@@ -101,7 +101,7 @@ td{
           <td></td>
           <td colspan="2"><b>Jumlah Tunai</b></td>
           <td></td>
-          <td><input type="text" id="tunai" required="required" name="tunai" class="form-control" value=""></td>
+          <td><input type="text" id="tunai" name="tunai" class="form-control" value=""></td>
           <td></td>
         </tr>
         <tr>
@@ -112,10 +112,10 @@ td{
           <td>
             <select name="bank1">
               <option value="" selected>-- pilih bank --</option>
-              <option value="bca">BCA</option>
-              <option value="bri">BRI</option>
-              <option value="bni">BNI</option>
-              <option value="mandiri">Mandiri</option>
+              <option value="BCA">BCA</option>
+              <option value="BRI">BRI</option>
+              <option value="BNI">BNI</option>
+              <option value="MANDIRI">Mandiri</option>
             </select>
           </td>
           <td></td>
@@ -125,7 +125,7 @@ td{
           <td></td>
           <td colspan="2"><b>Jumlah Transfer 1</b></td>
           <td></td>
-          <td><input type="text" id="trf1" required="required" name="trf1" class="form-control" value=""></td>
+          <td><input type="text" id="trf1" name="trf1" class="form-control" value=""></td>
           <td></td>
         </tr>
         <tr>
@@ -136,10 +136,10 @@ td{
           <td>
             <select name="bank2">
               <option value="" selected>-- pilih bank --</option>
-              <option value="bca">BCA</option>
-              <option value="bri">BRI</option>
-              <option value="bni">BNI</option>
-              <option value="mandiri">Mandiri</option>
+              <option value="BCA">BCA</option>
+              <option value="BRI">BRI</option>
+              <option value="BNI">BNI</option>
+              <option value="MANDIRI">Mandiri</option>
             </select>
           </td>
           <td></td>
@@ -149,7 +149,7 @@ td{
           <td></td>
           <td colspan="2"><b>Jumlah Transfer 2</b></td>
           <td></td>
-          <td><input type="text" id="trf2" required="required" name="trf2" class="form-control" value=""></td>
+          <td><input type="text" id="trf2" name="trf2" class="form-control" value=""></td>
           <td></td>
         </tr>
         <tr>
@@ -160,10 +160,10 @@ td{
           <td>
             <select name="bank3">
               <option value="" selected>-- pilih bank --</option>
-              <option value="bca">BCA</option>
-              <option value="bri">BRI</option>
-              <option value="bni">BNI</option>
-              <option value="mandiri">Mandiri</option>
+              <option value="BCA">BCA</option>
+              <option value="BRI">BRI</option>
+              <option value="BNI">BNI</option>
+              <option value="MANDIRI">Mandiri</option>
             </select>
           </td>
           <td></td>
@@ -173,7 +173,7 @@ td{
           <td></td>
           <td colspan="2"><b>Jumlah Transfer 3</b></td>
           <td></td>
-          <td><input type="text" id="trf3" required="required" name="trf3" class="form-control" value=""></td>
+          <td><input type="text" id="trf3" name="trf3" class="form-control" value=""></td>
           <td></td>
         </tr>
         <tr>
@@ -187,12 +187,8 @@ td{
         <tr>
           <td colspan="6">
             <div class="pull-right">
-              <input type="submit" class="btn btn-success glyphicon glyphicon-ok" value="Lanjutkan">
+              <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Lanjutkan</button>
             </div>
-            
-          {{-- <a href="/penjualan/dompul/verify/{{$datas->nama_canvasser}}/{{$tgl}}/{{$datas->nama_downline}}" class="btn btn-info btn-lg pull-right">
-              <span class="glyphicon glyphicon-ok"></span> Lanjutkan
-            </a> --}}
           </td>
           <td></td>
         </tr>
