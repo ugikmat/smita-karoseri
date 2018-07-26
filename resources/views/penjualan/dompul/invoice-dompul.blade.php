@@ -189,7 +189,6 @@
     $(function () {
         var tgl = $('#tgl').val();
         var canvaser = $('#canvaser').val();
-        // tgl = ''+tgl;
         var t = $('#invoice-dompul-table').DataTable({
             serverSide: true,
             processing: true,

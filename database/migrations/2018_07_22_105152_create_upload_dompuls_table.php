@@ -31,11 +31,11 @@ class CreateUploadDompulsTable extends Migration
             $table->string('nama_canvasser');
             $table->string('print')->nullable();
             $table->string('bayar');
-            $table->timestamp('tanggal_input');
-            $table->integer('no_user');
+            // $table->timestamp('tanggal_input');
+            // $table->integer('no_user');
             $table->string('tipe_dompul');
-            $table->tinyInteger('status_upload_dompul')->default(1);
-            $table->tinyInteger('status_bayar_dompul')->default(0);
+            // $table->tinyInteger('status_upload_dompul')->default(1);
+            // $table->tinyInteger('status_bayar_dompul')->default(0);
         });
     }
 

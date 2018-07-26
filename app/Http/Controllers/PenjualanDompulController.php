@@ -43,12 +43,12 @@ class PenjualanDompulController extends Controller
         // return view('penjualan.dompul.invoice-dompul')->with(['sales'=>$sales,'tgl'=>$this->nama_tgl,'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
     }
     
-    public function edit($canvaser,$tgl,$data)
+    public function edit($canvaser,$tgl,$downline)
     {   $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser')
                         ->where('nama_canvasser',$canvaser)
                         ->where('tanggal_transfer',$tgl)
-                        ->where('nama_downline',$data)->first();
-        return view('penjualan.dompul.invoice-dompul-3',['datas'=>$datas]);
+                        ->where('nama_downline',$downline)->first();
+        return view('penjualan.dompul.invoice-dompul-3',['datas'=>$datas,'tgl'=>$tgl]);
     }
 
      /**
@@ -64,6 +64,30 @@ class PenjualanDompulController extends Controller
                         ->where('tanggal_transfer',$tgl)
                         ->groupBy('nama_downline','qty')
                         ->orderBy('nama_downline'))
+                          ->addColumn('action', function ($uploadDompul) {
+                              return 
+                              '<a class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              <a class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+                            })
+                          ->make(true);
+    }
+
+    /**
+     * Process dataTable ajax response.
+     *
+     * @param \Yajra\Datatables\Datatables $datatables
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function penjualanData(Datatables $datatables,$canvaser,$tgl,$downline)
+    {
+        return $datatables->eloquent(UploadDompul::select('upload_dompuls.produk','upload_dompuls.tipe_dompul','upload_dompuls.qty','upload_dompuls.qty_program','master_harga_dompuls.harga_dompul')
+                        ->where('nama_canvasser',$canvaser)
+                        ->where('tanggal_transfer',$tgl)
+                        ->where('nama_downline',$downline)
+                        ->join('master_harga_dompuls','master_harga_dompuls.nama_harga_dompul','=','upload_dompuls.produk'))
+                        ->addColumn('total_harga', function ($uploadDompul) {
+                              return $uploadDompul->qty*$uploadDompul->harga_dompul;
+                            })
                           ->addColumn('action', function ($uploadDompul) {
                               return 
                               '<a class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
