@@ -18,23 +18,22 @@ class CreatePenjualanDompulsTable extends Migration
             $table->integer('id_sales');
             $table->integer('id_ho');
             $table->integer('id_bo');
-            $table->string('hp_kios');
-            $table->integer('No_user');
+            $table->string('no_hp_kios');
+            $table->string('no_user');
             $table->date('tanggal_penjualan_dompul');
             $table->date('tanggal_input');
             $table->string('bank');
             $table->string('bank2');
             $table->string('bank3');
-            $table->biginteger('grand_total');
-            $table->biginteger('bayar_tunai');
-            $table->biginteger('bayar_transfer');
-            $table->biginteger('bayar_transfer2');
-            $table->biginteger('bayar_transfer3');
+            $table->bigInteger('grand_total');
+            $table->bigInteger('bayar_tunai');
+            $table->bigInteger('bayar_transfer');
+            $table->bigInteger('bayar_transfer2');
+            $table->bigInteger('bayar_transfer3');
             $table->text('catatan');
-            $table->integer('status_pembayaran');
-            $table->integer('status_penjualan');
-            $table->integer('deleted');
-            $table->timestamps();
+            $table->tinyInteger('status_pembayaran')->default(1);
+            $table->tinyInteger('status_penjualan')->default(1);
+            $table->tinyInteger('deleted')->default(0);
         });
     }
 
