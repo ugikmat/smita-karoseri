@@ -11,40 +11,48 @@
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        HP Sales
+        HP Sales : 
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-        : 12121212
+        @isset($datas)
+          {{$datas->no_hp_canvasser}}
+        @endisset
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        Nama Sales
+        Nama Sales :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-        : qwert
+        @isset($datas)
+          {{$datas->nama_canvasser}}
+        @endisset
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        HP Kios
+        HP Kios :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-        : 1111111111
+        @isset($datas)
+          {{$datas->no_hp_downline}}
+        @endisset
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        Nama Kios
+        Nama Kios : 
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-        : aaaaaaaaaa
+        @isset($datas)
+          {{$datas->nama_downline}}
+        @endisset
       </div>
     </div>
   </div>

@@ -75,6 +75,7 @@ Route::get('viewprint/{id}', 'ViewPrintController@print');
 Route::get('/penjualan/dompul/invoice-dompul', 'PenjualanDompulController@index');
 Route::post('/penjualan/dompul/invoice-dompul', 'PenjualanDompulController@show');
 Route::get('/invoice_dompul/{canvaser}/{tgl}', 'PenjualanDompulController@data');
+Route::get('/penjualan/dompul/{canvaser}/{tgl}/{id}', 'PenjualanDompulController@edit');
 
 Route::get('/penjualan/dompul/list-invoice', function() {
   return view ('/penjualan/dompul/list-invoice');

@@ -42,6 +42,15 @@ class PenjualanDompulController extends Controller
         return redirect('/penjualan/dompul/invoice-dompul')->with(['sales'=>$sales,'tgl'=>$this->nama_tgl,'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
         // return view('penjualan.dompul.invoice-dompul')->with(['sales'=>$sales,'tgl'=>$this->nama_tgl,'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
     }
+    
+    public function edit($canvaser,$tgl,$data)
+    {   $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser')
+                        ->where('nama_canvasser',$canvaser)
+                        ->where('tanggal_transfer',$tgl)
+                        ->where('nama_downline',$data)->first();
+        return view('penjualan.dompul.invoice-dompul-3',['datas'=>$datas]);
+    }
+
      /**
      * Process dataTable ajax response.
      *

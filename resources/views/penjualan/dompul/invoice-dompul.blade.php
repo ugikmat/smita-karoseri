@@ -200,6 +200,17 @@
             // "targets": 0
             //     } ],
             // "order": [[ 1, 'asc' ]],
+            columnDefs: [
+                {
+                    targets:0,
+                    render: function ( data, type, row, meta ) {
+                        if(type === 'display'){
+                            data = `<a class="link-post" href="/penjualan/dompul/${canvaser}/${tgl}/${data}">` + data + '</a>';
+                        }
+                        return data;
+                    }
+                }
+            ],
             columns: [
                 // {data: 'id_upload'},
                 {data: 'nama_downline'},
