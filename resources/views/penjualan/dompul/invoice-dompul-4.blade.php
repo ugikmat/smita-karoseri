@@ -74,15 +74,7 @@ td{
           <td></td>
           <td colspan="2"><b>Bank Transfer 1</b></td>
           <td></td>
-          <td>
-            <select>
-              <option value="" selected>-- pilih bank --</option>
-              <option value="bca">BCA</option>
-              <option value="bri">BRI</option>
-              <option value="bni">BNI</option>
-              <option value="mandiri">Mandiri</option>
-            </select>
-          </td>
+          <td>bank yg dipake</td>
           <td></td>
         </tr>
         <tr>
@@ -98,15 +90,7 @@ td{
           <td></td>
           <td colspan="2"><b>Bank Transfer 2</b></td>
           <td></td>
-          <td>
-            <select>
-              <option value="" selected>-- pilih bank --</option>
-              <option value="bca">BCA</option>
-              <option value="bri">BRI</option>
-              <option value="bni">BNI</option>
-              <option value="mandiri">Mandiri</option>
-            </select>
-          </td>
+          <td>bank yg dipake</td>
           <td></td>
         </tr>
         <tr>
@@ -122,15 +106,7 @@ td{
           <td></td>
           <td colspan="2"><b>Bank Transfer 3</b></td>
           <td></td>
-          <td>
-            <select>
-              <option value="" selected>-- pilih bank --</option>
-              <option value="bca">BCA</option>
-              <option value="bri">BRI</option>
-              <option value="bni">BNI</option>
-              <option value="mandiri">Mandiri</option>
-            </select>
-          </td>
+          <td>bank yg dipake</td>
           <td></td>
         </tr>
         <tr>
