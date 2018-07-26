@@ -150,7 +150,7 @@ class PenjualanDompulController extends Controller
                         ->where('produk',$produk)->first();
         $tipe = $request->get('tipe');
         $qty_program = $request->get('qty_program');
-        $data->tipe_dompul = $tipe;
+        if($tipe != 'default') {$data->tipe_dompul = $tipe;}
         $data->qty_program = $qty_program;
         $data->save();
         return redirect()->back();

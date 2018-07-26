@@ -230,7 +230,7 @@ td{
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <select name="tipe" required="required">
-                        <option value="selected" selected>-- Pilih Tipe Dompul --</option>
+                        <option value="default">-- Pilih Tipe Dompul --</option>
                         <option value="DS">DS</option>
                         <option value="CVS">CVS</option>
                         <option value="HI">HI</option>
