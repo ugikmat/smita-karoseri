@@ -16,6 +16,11 @@ td{
 
 @section('content')
 <div class="row">
+  @isset($datas)
+  <input type="hidden" name="canvaser" id="canvaser" value="{{$datas->nama_canvasser}}" disabled>     
+  <input type="hidden" name="tgl" id="tgl" value="{{$tgl}}">   
+  @endisset
+  
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
         HP Kios :
@@ -60,7 +65,11 @@ td{
           <td></td>
           <td colspan="2"><b>Grand Total</b></td>
           <td></td>
-          <td>totalnya</td>
+          <td>
+            @isset($total)
+              {{$total}}
+            @endisset
+          </td>
           <td></td>
         </tr>
         <tr>
@@ -130,7 +139,7 @@ td{
         <tr>
           <td colspan="6">
             <div class="pull-right">
-              <a href="invoice-dompul-4.blade.php" class="btn btn-success btn-lg">
+              <a href="{{ URL::previous() }}" class="btn btn-success btn-lg">
                 <span class="glyphicon glyphicon-chevron-left"></span> Kembali
               </a>
               <a href="invoice-dompul-4.blade.php" class="btn btn-info btn-lg">

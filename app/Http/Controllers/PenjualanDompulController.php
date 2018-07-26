@@ -48,7 +48,17 @@ class PenjualanDompulController extends Controller
                         ->where('nama_canvasser',$canvaser)
                         ->where('tanggal_transfer',$tgl)
                         ->where('nama_downline',$downline)->first();
-        return view('penjualan.dompul.invoice-dompul-4',['datas'=>$datas]);
+        $sums = UploadDompul::select('upload_dompuls.produk','upload_dompuls.tipe_dompul','upload_dompuls.qty','upload_dompuls.qty_program','master_harga_dompuls.harga_dompul')
+                        ->join('master_harga_dompuls','master_harga_dompuls.nama_harga_dompul','=','upload_dompuls.produk')
+                        ->where('nama_canvasser',$canvaser)
+                        ->where('tanggal_transfer',$tgl)
+                        ->where('nama_downline',$downline)
+                        ->where('tipe_harga_dompul','CVS')->get();
+        $total = 0;
+        foreach ($sums as $key => $value) {
+            $total+=$value->qty*$value->harga_dompul;
+        }
+        return view('penjualan.dompul.invoice-dompul-4',['datas'=>$datas,'tgl'=>$tgl,'total'=>$total]);
     }
 
     public function edit($canvaser,$tgl,$downline)
