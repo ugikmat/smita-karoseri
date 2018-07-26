@@ -41,12 +41,24 @@ class PenjualanDompulController extends Controller
     
     public function verify(Request $request,$canvaser,$tgl,$downline){
         $tunai = $request->get('tunai');
-        $trf1 = $request->get('trf1');
         $bank1 = $request->get('bank1');
-        $trf2 = $request->get('trf2');
+        if (!empty($bank1)) {
+            $trf1 = $request->get('trf1');
+        }else{
+            $trf1 = '';    
+        }
         $bank2 = $request->get('bank2');
-        $trf3 = $request->get('trf3');
+        if (!empty($bank2)) {
+            $trf2 = $request->get('trf2');
+        }else{
+            $trf2 = '';    
+        }
         $bank3 = $request->get('bank3');        
+        if (!empty($bank3)) {
+            $trf3 = $request->get('trf3');
+        }else{
+            $trf3 = '';    
+        }
         $catatan = $request->get('catatan'); 
         $sales = Sales::select('id_sales')->where('nm_sales',$canvaser)->first();
         $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser')
@@ -54,14 +66,16 @@ class PenjualanDompulController extends Controller
                         ->where('tanggal_transfer',$tgl)
                         ->where('nama_downline',$downline)->first();
         $sums = UploadDompul::select('upload_dompuls.produk','upload_dompuls.tipe_dompul','upload_dompuls.qty','upload_dompuls.qty_program','master_harga_dompuls.harga_dompul')
-                        ->join('master_harga_dompuls','master_harga_dompuls.nama_harga_dompul','=','upload_dompuls.produk')
+                        ->join('master_harga_dompuls',function($join){
+                            $join->on('master_harga_dompuls.nama_harga_dompul','=','upload_dompuls.produk')
+                                ->on('master_harga_dompuls.tipe_harga_dompul','=','upload_dompuls.tipe_dompul');
+                        })
                         ->where('nama_canvasser',$canvaser)
                         ->where('tanggal_transfer',$tgl)
-                        ->where('nama_downline',$downline)
-                        ->where('tipe_harga_dompul','CVS')->get();
+                        ->where('nama_downline',$downline)->get();
         $total = 0;
         foreach ($sums as $key => $value) {
-            $total+=$value->qty*$value->harga_dompul;
+            $total+=(($value->qty-$value->qty_program)*$value->harga_dompul);
         }
         return view('penjualan.dompul.invoice-dompul-4',
         [
