@@ -12,8 +12,8 @@ use Carbon\Carbon;
 
 class PenjualanDompulController extends Controller
 {
-    private $nama_canvasser='';
-    private $tgl='';
+    private $nama_canvasser;
+    private $tgl;
      /**
      * Create a new controller instance.
      *
@@ -35,11 +35,12 @@ class PenjualanDompulController extends Controller
     }
     public function show(Request $request)
     {
-        $sales = Sales::where('status','1')->where('nm_sales',$request->get('id'))->first();
+        
         $this->nama_canvasser = $request->get('id');
         $this->nama_tgl = $request->get('tgl');
-        // return redirect('/penjualan/dompul/invoice-dompul',['sales'=>$sales,'tgl'=>$request->get('tgl'),'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
-        return redirect('/penjualan/dompul/invoice-dompul')->with(['sales'=>$sales,'tgl'=>$request->get('tgl'),'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
+        $sales = Sales::where('status','1')->where('nm_sales',$this->nama_canvasser)->first();
+        return redirect('/penjualan/dompul/invoice-dompul')->with(['sales'=>$sales,'tgl'=>$this->nama_tgl,'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
+        // return view('penjualan.dompul.invoice-dompul')->with(['sales'=>$sales,'tgl'=>$this->nama_tgl,'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
     }
      /**
      * Process dataTable ajax response.
@@ -47,21 +48,17 @@ class PenjualanDompulController extends Controller
      * @param \Yajra\Datatables\Datatables $datatables
      * @return \Illuminate\Http\JsonResponse
      */
-    public function data(Datatables $datatables)
+    public function data(Datatables $datatables,$canvaser,$tgl)
     {
-        
         return $datatables->eloquent(UploadDompul::select(DB::raw('nama_downline, COUNT(id_upload) as qty'))
-                        ->where('nama_canvasser',$this->nama_canvasser)
-                        ->where('tanggal_transfer',$this->tgl)
-                        ->groupBy('nama_downline')
+                        ->where('nama_canvasser',$canvaser)
+                        ->where('tanggal_transfer',$tgl)
+                        ->groupBy('nama_downline','qty')
                         ->orderBy('nama_downline'))
-                          ->addColumn('action', function ($hargaDompul) {
+                          ->addColumn('action', function ($uploadDompul) {
                               return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$hargaDompul->id_harga_dompul.'" 
-                              data-nama="'.$hargaDompul->nama_harga_dompul.'"
-                              data-tipe="'.$hargaDompul->tipe_harga_dompul.'"
-                              data-harga="'.$hargaDompul->harga_dompul.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$hargaDompul->id_harga_dompul.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+                              '<a class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                              <a class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
                           ->make(true);
     }

@@ -20,7 +20,7 @@
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
         @if (session('tgl'))
-            {{ session('tgl')}}
+            <input type="input" disabled id="tgl"value={{ session('tgl')}}></input>
         @endif
       </div>
     </div>
@@ -64,7 +64,7 @@
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
         @if (session('sales'))
-            {{ session('sales')->id_sales }}
+            <p>{{ session('sales')->id_sales }}</p>
         @endif
       </div>
     </div>
@@ -74,7 +74,7 @@
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
         @if (session('sales'))
-            {{ session('sales')->nm_sales }}
+          <input type="input" disabled id="canvaser"value='{{ session('sales')->nm_sales}}'></input>
         @endif
       </div>
     </div>
@@ -90,10 +90,10 @@
     </div>
   </div>
 
-<table id="invoice-dompul-table" class="table table-bordered">
+<table id="invoice-dompul-table" class="table responsive" width="100%">
     <thead>
     <tr>
-        <th>No.</th>
+        {{-- <th>No.</th> --}}
         <th>Nama RO</th>
         <th>Qty Penjualan</th>
     </tr>
@@ -187,17 +187,30 @@
 @section('js')
 <script>
     $(function () {
-        $('#invoice-dompul-table').DataTable({
+        var tgl = $('#tgl').val();
+        var canvaser = $('#canvaser').val();
+        // tgl = ''+tgl;
+        var t = $('#invoice-dompul-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/invoice_dompul',
+            ajax: `/invoice_dompul/${canvaser}/${tgl}`,
+            // "columnDefs": [ {
+            // "searchable": false,
+            // "orderable": false,
+            // "targets": 0
+            //     } ],
+            // "order": [[ 1, 'asc' ]],
             columns: [
-                // {data: 'no'},
+                // {data: 'id_upload'},
                 {data: 'nama_downline'},
-                {data: 'qty'},
-                {data: 'action', orderable: false, searchable: false}
+                {data: 'qty'}
             ]
         });
+        // t.on( 'order.dt search.dt', function () {
+        // t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+        //     cell.innerHTML = i+1;
+        //   } );
+        // } ).draw();
     });
 </script>
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
@@ -205,10 +218,11 @@
 $('.datepicker').datepicker({
 });
 </script>
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/jquery-ui/jquery-ui.js"></script>
+{{-- <script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-ui/jquery-ui.js"></script> --}}
 <script type="text/javascript">
   $(document).ready(function(){
     $('.input-tanggal').datepicker();
     });
+</script>
 @stop
