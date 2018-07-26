@@ -13,7 +13,7 @@ class CreateMasterHargaSp extends Migration
      */
     public function up()
     {
-      Schema::create('master_harga_sps', function (Blueprint $table) {
+      Schema::create('master_harga_sp', function (Blueprint $table) {
           $table->increments('id_harga_sp');
           $table->string('id_produk');
           $table->string('tipe_harga_sp');
