@@ -113,7 +113,7 @@ class PenjualanDompulController extends Controller
             $penjualanDompul->bayar_transfer3=$trf3;
             $penjualanDompul->catatan=$catatan;
         $penjualanDompul->save();
-        return redirect('/home');
+        return redirect('/penjualan/dompul/invoice-dompul');
 
     }
 
@@ -135,7 +135,7 @@ class PenjualanDompulController extends Controller
                         ->where('tipe_harga_dompul',$tipe)->get();
         $total = 0;
         foreach ($sums as $key => $value) {
-            $total+=(($value->qty*$value->harga_dompul)-$value->qty_program);
+            $total+=(($value->qty-$value->qty_program)*$value->harga_dompul);
         }
         
         return view('penjualan.dompul.invoice-dompul-3',['datas'=>$datas,'tgl'=>$tgl,'total'=>$total]);
