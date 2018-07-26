@@ -170,6 +170,24 @@
           <td></td>
           <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value=""></td>
         </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            <div class="pull-right">
+              <a href="invoice-dompul-4.blade.php" class="btn btn-success btn-lg">
+                <span class="glyphicon glyphicon-chevron-left"></span> Kembali
+              </a>
+              <a href="invoice-dompul-4.blade.php" class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-ok"></span> Lanjutkan
+              </a>
+            </div>
+          </td>
+        </tr>
       </form>
     </tfoot>
 </table>
@@ -183,7 +201,7 @@
         <button type="button" class="close" data-dismiss="modal">
           <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Edit Tipe</h4>
+        <h4 class="modal-title" id="myModalLabel">Edit Penjualan Dompul</h4>
       </div>
       <div class="modal-body">
         <div class="clearfix"></div>
