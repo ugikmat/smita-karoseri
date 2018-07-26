@@ -71,11 +71,9 @@ td{
           <td></td>
           <td>
             @isset($total)
-            <input type="number" name="total" id="total" value="{{$total}}" readonly>
-              
+            <input type="text" name="total" id="total" value="{{$total}}" readonly>
             @endisset
           </td>
-          <td></td>
         </tr>
         <tr>
           <td></td>
@@ -85,7 +83,7 @@ td{
           <td>
           <input type="text" id="tunai" required="required" name="tunai" class="form-control" value="{{$tunai}}" readonly>
           </td>
-          <td></td>
+          
         </tr>
         <tr>
           <td></td>
@@ -93,8 +91,7 @@ td{
           <td colspan="2"><b>Bank Transfer 1</b></td>
           <td></td>
           <td><input type="text" id="bank1" required="required" name="bank1" class="form-control" value="{{$bank1}}" readonly></td>
-          <td></td>
-          <td></td>
+          
         </tr>
         <tr>
           <td></td>
@@ -102,7 +99,7 @@ td{
           <td colspan="2"><b>Jumlah Transfer 1</b></td>
           <td></td>
           <td><input type="text" id="trf1" required="required" name="trf1" class="form-control" value="{{$trf1}}" readonly></td>
-          <td></td>
+          
         </tr>
         <tr>
           <td></td>
@@ -110,7 +107,7 @@ td{
           <td colspan="2"><b>Bank Transfer 2</b></td>
           <td></td>
           <td><input type="text" id="bank2" required="required" name="bank2" class="form-control" value="{{$bank2}}" readonly></td>
-          <td></td>
+          
         </tr>
         <tr>
           <td></td>
@@ -118,7 +115,7 @@ td{
           <td colspan="2"><b>Jumlah Transfer 2</b></td>
           <td></td>
           <td><input type="text" id="trf2" required="required" name="trf2" class="form-control" value="{{$trf2}}" readonly></td>
-          <td></td>
+          
         </tr>
         <tr>
           <td></td>
@@ -126,7 +123,7 @@ td{
           <td colspan="2"><b>Bank Transfer 3</b></td>
           <td></td>
           <td><input type="text" id="bank3" required="required" name="bank3" class="form-control" value="{{$bank3}}" readonly></td>
-          <td></td>
+          
         </tr>
         <tr>
           <td></td>
@@ -134,7 +131,7 @@ td{
           <td colspan="2"><b>Jumlah Transfer 3</b></td>
           <td></td>
           <td><input type="text" id="trf3" required="required" name="trf3" class="form-control" value="{{$trf2}}" readonly></td>
-          <td></td>
+          
         </tr>
         <tr>
           <td></td>
@@ -142,7 +139,7 @@ td{
           <td colspan="2"><b>Catatan</b></td>
           <td></td>
           <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{$catatan}}" readonly></td>
-          <td></td>
+          
         </tr>
         <tr>
           <td colspan="6">
@@ -155,7 +152,6 @@ td{
               </div>
             </div>
           </td>
-          <td></td>
         </tr>
     </tfoot>
 </table>
