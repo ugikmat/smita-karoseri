@@ -8,43 +8,54 @@
 
 @section('content')
 <div class="container-fluid">
+  @isset($tgl)
+    <input type="hidden" name="tgl" id="tgl" value="{{$tgl}}">
+  @endisset
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        HP Sales
+        HP Sales : 
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-        : 12121212
+        @isset($datas)
+           {{$datas->no_hp_canvasser}}
+        @endisset
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        Nama Sales
+        Nama Sales :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-        : qwert
+        @isset($datas)
+          <input type="text" name="canvaser" id="canvaser" value="{{$datas->nama_canvasser}}" disabled> 
+        @endisset
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        HP Kios
+        HP Kios :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-        : 1111111111
+        @isset($datas)
+          {{$datas->no_hp_downline}}
+        @endisset
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        Nama Kios
+        Nama Kios : 
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-        : aaaaaaaaaa
+        @isset($datas)
+        <input type="text" name="downline" id="downline" value="{{$datas->nama_downline}}" disabled>
+        @endisset
       </div>
     </div>
   </div>
@@ -52,7 +63,7 @@
 <table id="invoice-dompul-table" class="table responsive"  width="100%">
     <thead>
     <tr>
-        <th>No</th>
+        {{-- <th>No</th> --}}
         <th>Uraian</th>
         <th>Tipe</th>
         <th>Harga</th>
@@ -62,7 +73,7 @@
         <th>Action</th>
     </tr>
     </thead>
-    <tfoot>
+    {{-- <tfoot>
       <form class="invoice-dompul" action="" method="post">
         <tr>
           <td></td>
@@ -174,7 +185,7 @@
           </td>
         </tr>
       </form>
-    </tfoot>
+    </tfoot> --}}
 </table>
 
 <!--Modal Edit-->
@@ -259,21 +270,23 @@
 @section('js')
 <script>
     $(function () {
-        $('#invoice-dompul-table').DataTable({
-            serverSide: true,
-            processing: true,
-            ajax: '',
-            columns: [
-                {data: 'id_penjualan_dompul'},
-                {data: 'hp_kios'},
-                {data: 'tanggal_penjualan_dompul'},
-                {data: 'tanggal_input'},
-                {data: 'grand_total'},
-                {data: 'bayar_tunai'},
-                {data: 'catatan'},
-                {data: 'action', orderable: false, searchable: false}
-            ]
-        });
+        var tgl = $('#tgl').val();
+        var canvaser = $('#canvaser').val();
+        var downline = $('#downline').val();
+        var t = $('#invoice-dompul-table').DataTable({
+                  serverSide: true,
+                  processing: true,
+                  ajax: `/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`,
+                  columns: [
+                      {data: 'produk'},
+                      {data: 'tipe_dompul'},
+                      {data: 'harga_dompul'},
+                      {data: 'qty'},
+                      {data: 'qty_program'},
+                      {data: 'total_harga'},
+                      {data: 'action', orderable: false, searchable: false}
+                  ]
+              });
     });
 </script>
 @stop

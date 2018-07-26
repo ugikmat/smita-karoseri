@@ -21,7 +21,8 @@ class CreateUploadDompulsTable extends Migration
             $table->string('no_faktur');
             $table->string('produk');
             $table->bigInteger('qty');
-            $table->string('balance');
+            $table->bigInteger('qty_program');
+            $table->double('balance');
             $table->double('diskon');
             $table->string('no_hp_downline');
             $table->string('nama_downline');
@@ -30,6 +31,11 @@ class CreateUploadDompulsTable extends Migration
             $table->string('nama_canvasser');
             $table->string('print')->nullable();
             $table->string('bayar');
+            // $table->timestamp('tanggal_input');
+            // $table->integer('no_user');
+            $table->string('tipe_dompul');
+            // $table->tinyInteger('status_upload_dompul')->default(1);
+            // $table->tinyInteger('status_bayar_dompul')->default(0);
         });
     }
 

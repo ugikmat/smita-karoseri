@@ -47,7 +47,9 @@ class UploadDompulController extends Controller
                         'no_hp_canvasser' => $value->hp_kanvacer ,
                         'nama_canvasser' => $value->nama_kanvacer ,
                         'print' => $value->print,
-                        'bayar' => $value->bayar 
+                        'bayar' => $value->bayar,
+                        'qty_program' => 0,
+                        'tipe_dompul' => ''
                     ];
                     $dompul[] = ['no_hp_master_dompul' => $value->no_hp_master_dompul ,
                         'no_hp_sub_master_dompul' => $value->hp_sub_master ,

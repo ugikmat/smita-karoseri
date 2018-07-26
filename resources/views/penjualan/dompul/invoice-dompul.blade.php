@@ -16,10 +16,12 @@
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Tanggal Penjualan
+        Tanggal Penjualan : 
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        : tanggalan
+        @if (session('tgl'))
+            <input type="input" disabled id="tgl"value={{ session('tgl')}}></input>
+        @endif
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -58,34 +60,40 @@
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        ID Canvaser
+        ID Canvaser : 
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        : 123123123
+        @if (session('sales'))
+            <p>{{ session('sales')->id_sales }}</p>
+        @endif
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Nama Canvaser
+        Nama Canvaser : 
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        : qwerty
+        @if (session('sales'))
+          <input type="input" disabled id="canvaser"value='{{ session('sales')->nm_sales}}'></input>
+        @endif
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Tanggal Cetak Penjualan
+        Tanggal Cetak Penjualan : 
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        : tanggalan
+        @if (session('now'))
+            {{ session('now') }}
+        @endif
       </div>
     </div>
   </div>
 
-<table id="invoice-dompul-table" class="table table-bordered">
+<table id="invoice-dompul-table" class="table responsive" width="100%">
     <thead>
     <tr>
-        <th>No.</th>
+        {{-- <th>No.</th> --}}
         <th>Nama RO</th>
         <th>Qty Penjualan</th>
     </tr>
@@ -114,14 +122,23 @@
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="">
-                  @csrf @method('put')
+              <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/penjualan/dompul/invoice-dompul">
+                  @csrf
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Canvasser
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value="">
+                      {{-- <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value=""> --}}
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select name="id" required="required">
+                          @isset($saless)
+                            @foreach($saless as $sales)
+                              <option value="{{$sales->nm_sales}}" id="{{$sales->nm_sales}}">{{$sales->nm_sales}}</option>
+                            @endforeach
+                          @endisset
+                        </select>
+                      </div>
                     </div>
                   </div>
 
@@ -139,7 +156,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input class="datepicker col-md-7 col-xs-12" required="required" data-date-format="mm/dd/yyyy">
+                      <input class="datepicker col-md-7 col-xs-12" required="required" name="tgl" data-date-format="yyyy-mm-dd">
                     </div>
                   </div>
 
@@ -170,17 +187,40 @@
 @section('js')
 <script>
     $(function () {
-        $('#invoice-dompul-table').DataTable({
+        var tgl = $('#tgl').val();
+        var canvaser = $('#canvaser').val();
+        var t = $('#invoice-dompul-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '',
+            ajax: `/invoice_dompul/${canvaser}/${tgl}`,
+            // "columnDefs": [ {
+            // "searchable": false,
+            // "orderable": false,
+            // "targets": 0
+            //     } ],
+            // "order": [[ 1, 'asc' ]],
+            columnDefs: [
+                {
+                    targets:0,
+                    render: function ( data, type, row, meta ) {
+                        if(type === 'display'){
+                            data = `<a class="link-post" href="/penjualan/dompul/${canvaser}/${tgl}/${data}">` + data + '</a>';
+                        }
+                        return data;
+                    }
+                }
+            ],
             columns: [
-                {data: 'no'},
-                {data: 'nama-ro'},
-                {data: 'qty-penjualan'},
-                {data: 'action', orderable: false, searchable: false}
+                // {data: 'id_upload'},
+                {data: 'nama_downline'},
+                {data: 'qty'}
             ]
         });
+        // t.on( 'order.dt search.dt', function () {
+        // t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+        //     cell.innerHTML = i+1;
+        //   } );
+        // } ).draw();
     });
 </script>
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
@@ -188,10 +228,11 @@
 $('.datepicker').datepicker({
 });
 </script>
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/jquery-ui/jquery-ui.js"></script>
+{{-- <script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery-ui/jquery-ui.js"></script> --}}
 <script type="text/javascript">
   $(document).ready(function(){
     $('.input-tanggal').datepicker();
     });
+</script>
 @stop
