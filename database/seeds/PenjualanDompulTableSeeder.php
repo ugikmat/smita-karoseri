@@ -13,7 +13,6 @@ class PenjualanDompulTableSeeder extends Seeder
     public function run()
     {
         $dompul = new PenjualanDompul();
-        $dompul->id_penjualan_dompul='DP/H2/GRK/17110001';
         $dompul->id_sales=15;
         $dompul->id_ho=2;
         $dompul->id_bo=12;
@@ -28,7 +27,7 @@ class PenjualanDompulTableSeeder extends Seeder
         $dompul->bayar_transfer2=0;
         $dompul->bayar_transfer3=0;
         $dompul->catatan='';
-        $dompul->status_pembayaran=1;
+        $dompul->status_pembayaran=0;
         $dompul->status_penjualan=1;
         $dompul->deleted=0;
         $dompul->save();
