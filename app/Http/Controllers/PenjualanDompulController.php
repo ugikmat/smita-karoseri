@@ -62,7 +62,7 @@ class PenjualanDompulController extends Controller
         return $datatables->eloquent(UploadDompul::select(DB::raw('nama_downline, COUNT(id_upload) as qty'))
                         ->where('nama_canvasser',$canvaser)
                         ->where('tanggal_transfer',$tgl)
-                        ->groupBy('nama_downline','qty')
+                        ->groupBy('nama_downline')
                         ->orderBy('nama_downline'))
                           ->addColumn('action', function ($uploadDompul) {
                               return 
@@ -81,10 +81,11 @@ class PenjualanDompulController extends Controller
     public function penjualanData(Datatables $datatables,$canvaser,$tgl,$downline)
     {
         return $datatables->eloquent(UploadDompul::select('upload_dompuls.produk','upload_dompuls.tipe_dompul','upload_dompuls.qty','upload_dompuls.qty_program','master_harga_dompuls.harga_dompul')
+                        ->join('master_harga_dompuls','master_harga_dompuls.nama_harga_dompul','=','upload_dompuls.produk')
                         ->where('nama_canvasser',$canvaser)
                         ->where('tanggal_transfer',$tgl)
                         ->where('nama_downline',$downline)
-                        ->join('master_harga_dompuls','master_harga_dompuls.nama_harga_dompul','=','upload_dompuls.produk'))
+                        ->where('tipe_harga_dompul','CVS'))
                         ->addColumn('total_harga', function ($uploadDompul) {
                               return $uploadDompul->qty*$uploadDompul->harga_dompul;
                             })

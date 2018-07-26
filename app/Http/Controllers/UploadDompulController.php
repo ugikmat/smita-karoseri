@@ -79,12 +79,12 @@ class UploadDompulController extends Controller
 				if(!empty($uploadDompul)){
                     DB::table('upload_dompuls')->insert($uploadDompul);
                 }
-                if(!empty($dompul)){
-                    DB::table('master_dompuls')->insert($dompul);
-                }
-                if(!empty($hargaDompul)){
-                    DB::table('master_harga_dompuls')->insert($hargaDompul);
-                }
+                // if(!empty($dompul)){
+                //     DB::table('master_dompuls')->insert($dompul);
+                // }
+                // if(!empty($hargaDompul)){
+                //     DB::table('master_harga_dompuls')->insert($hargaDompul);
+                // }
                 if(!empty($customer)){
                     DB::table('master_customers')->insert($customer);
                 }
