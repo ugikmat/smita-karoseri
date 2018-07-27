@@ -33,7 +33,7 @@ class CreateUploadDompulsTable extends Migration
             $table->string('bayar');
             // $table->timestamp('tanggal_input');
             // $table->integer('no_user');
-            $table->string('tipe_dompul');
+            $table->string('tipe_dompul')->default('CVS');
             // $table->tinyInteger('status_upload_dompul')->default(1);
             // $table->tinyInteger('status_bayar_dompul')->default(0);
         });
