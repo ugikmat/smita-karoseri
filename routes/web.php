@@ -92,9 +92,9 @@ Route::get('/penjualan/dompul/invoice-dompul-3', function() {
 
 
 //monitoring
-Route::get('/penjualan/dompul/list-invoice', function() {
-  return view ('/penjualan/dompul/list-invoice');
-}) -> name('list-invoice');
+Route::get('/penjualan/monitoring/mntr-upload', function() {
+  return view ('/penjualan/monitoring/mntr-upload');
+}) -> name('mntr-upload');
 
 //upload
 // Route::get('/upload/upload', function() {

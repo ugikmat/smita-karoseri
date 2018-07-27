@@ -101,7 +101,7 @@ td{
           <td></td>
           <td colspan="2"><b>Jumlah Tunai</b></td>
           <td></td>
-          <td><input type="text" id="tunai" required="required" name="tunai" class="form-control" value=""></td>
+          <td><input type="text" id="tunai" name="tunai" class="form-control" value=""></td>
           <td></td>
         </tr>
         <tr>
@@ -187,12 +187,8 @@ td{
         <tr>
           <td colspan="6">
             <div class="pull-right">
-              <input type="submit" class="btn btn-success glyphicon glyphicon-ok" value="Lanjutkan">
+              <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Lanjutkan</button>
             </div>
-            
-          {{-- <a href="/penjualan/dompul/verify/{{$datas->nama_canvasser}}/{{$tgl}}/{{$datas->nama_downline}}" class="btn btn-info btn-lg pull-right">
-              <span class="glyphicon glyphicon-ok"></span> Lanjutkan
-            </a> --}}
           </td>
           <td></td>
         </tr>

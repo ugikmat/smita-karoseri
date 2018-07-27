@@ -16,7 +16,7 @@
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Tanggal Penjualan : 
+        Tanggal Penjualan :
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
         @if (session('tgl'))
@@ -60,7 +60,7 @@
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        ID Canvaser : 
+        ID Canvaser :
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
         @if (session('sales'))
@@ -70,7 +70,7 @@
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Nama Canvaser : 
+        Nama Canvaser :
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
         @if (session('sales'))
@@ -80,7 +80,7 @@
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Tanggal Cetak Penjualan : 
+        Tanggal Cetak Penjualan :
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
         @if (session('now'))
@@ -164,8 +164,7 @@
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset"> <i class="fa fa-repeat"></i> Kosongkan</button>
-                      <input type="submit" class="btn btn-success" value="Rekap Penjualan">
-                      {{-- <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-ok"></i> Rekap Penjualan</button> --}}
+                      <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Rekap Penjualan</button>
                     </div>
                   </div>
                 </form>
