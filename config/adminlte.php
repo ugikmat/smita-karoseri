@@ -130,20 +130,19 @@ return [
                         [
                             'text'  => 'Invoice Dompul',
                             'url'   => '/penjualan/dompul/invoice-dompul',
-                        ],
-                        [
-                            'text'  => 'lalala',
-                            'url'   => '/penjualan/dompul/invoice-dompul-3',
+                            'icon'  => 'credit-card',
                         ],
                         [
                             'text'  => 'List Invoice Dompul',
                             'url'   => '/penjualan/dompul/list-invoice',
+                            'icon'  => 'file',
                         ],
                       ],
                   ],
                   [
                       'text'    => 'Monitoring Upload',
-                      'url'     => '#',
+                      'url'     => '/penjualan/monitoring/mntr-upload',
+                      'icon'    => 'play-circle',
                   ],
                   [
                     'text'    => 'Laporan Penjualan',
@@ -163,6 +162,7 @@ return [
               ],
               [
                 'text'    => 'Persediaan',
+                'icon'    => 'share',
                 'submenu' => [
                   [
                     'text'  => 'MutasiDompul',
@@ -173,6 +173,7 @@ return [
               [
                 'text'    => 'Upload',
                 'url'     => '/upload/dompul',
+                'icon'    => 'upload',
               ],
             ],
         ],
