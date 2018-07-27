@@ -59,6 +59,7 @@
     </div>
   </div>
 </div>
+<form class="" action="index.html" method="post">
 <table id="list-edit-invoice-table" class="table responsive"  width="100%">
     <thead>
     <tr>
@@ -73,7 +74,6 @@
     </tr>
     </thead>
     <tfoot>
-      <form class="invoice-dompul" action="" method="post">
         <tr>
           <td></td>
           <td></td>
@@ -179,18 +179,13 @@
           <td></td>
           <td>
             <div class="pull-right">
-              <a href="invoice-dompul-4.blade.php" class="btn btn-success btn-lg">
-                <span class="glyphicon glyphicon-chevron-left"></span> Kembali
-              </a>
-              <a href="invoice-dompul-4.blade.php" class="btn btn-info btn-lg">
-                <span class="glyphicon glyphicon-ok"></span> Lanjutkan
-              </a>
+              <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Selesai</button>
             </div>
           </td>
         </tr>
-      </form>
     </tfoot>
 </table>
+</form>
 
 <!--Modal Edit-->
 <div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
