@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Sales;
 use App\UploadDompul;
+use App\HargaDompul;
 use App\PenjualanDompul;
 use DB;
 use Yajra\Datatables\Datatables;
@@ -166,6 +167,10 @@ class PenjualanDompulController extends Controller
         $qty_program = $request->get('qty_program');
         if($tipe != 'default') {$data->tipe_dompul = $tipe;}
         $data->qty_program = $qty_program;
+        $data->harga_dompul = HargaDompul::where('nama_harga_dompul',$produk)
+                                                    ->where('tipe_harga_dompul',$tipe)
+                                                    ->first()
+                                                    ->harga_dompul;
         $data->save();
         return redirect()->back();
     }
