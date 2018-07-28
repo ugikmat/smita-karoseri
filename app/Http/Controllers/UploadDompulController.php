@@ -35,7 +35,7 @@ class UploadDompulController extends Controller
                     if(!empty($value) && $value->count()){
                          $uploadDompul[] = ['no_hp_sub_master_dompul' => $value->hp_sub_master ,
                         'nama_sub_master_dompul' => $value->nama_sub_master ,
-                        'tanggal_transfer' => $value->tanggal_trx ,
+                        'tanggal_transfer' => $value->tanggal_trx,
                         'no_faktur' => $value->no_faktur ,
                         'produk' => $value->produk ,
                         'qty' => str_replace(',','',$value->qty),
@@ -85,12 +85,12 @@ class UploadDompulController extends Controller
                 // if(!empty($hargaDompul)){
                 //     DB::table('master_harga_dompuls')->insert($hargaDompul);
                 // }
-                if(!empty($customer)){
-                    DB::table('master_customers')->insert($customer);
-                }
-                if(!empty($sales)){
-                    DB::table('master_saless')->insert($sales);
-				}
+                // if(!empty($customer)){
+                //     DB::table('master_customers')->insert($customer);
+                // }
+                // if(!empty($sales)){
+                //     DB::table('master_saless')->insert($sales);
+				// }
 			}
 		}
 		return redirect('/upload/dompul');
