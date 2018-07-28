@@ -33,47 +33,50 @@ class UploadDompulController extends Controller
 			if(!empty($data) && $data->count()){
 				foreach ($data as $key => $value) {
                     if(!empty($value) && $value->count()){
-                         $uploadDompul[] = ['no_hp_sub_master_dompul' => $value->hp_sub_master ,
-                        'nama_sub_master_dompul' => $value->nama_sub_master ,
-                        'tanggal_transfer' => $value->tanggal_trx,
-                        'no_faktur' => $value->no_faktur ,
-                        'produk' => $value->produk ,
-                        'qty' => str_replace(',','',$value->qty),
-                        'balance' => str_replace(',','',$value->balance),
-                        'diskon' => $value->diskon ,
-                        'no_hp_downline' => $value->hp_downline ,
-                        'nama_downline' => $value->nama_downline ,
-                        'status' => $value->status ,
-                        'no_hp_canvasser' => $value->hp_kanvacer ,
-                        'nama_canvasser' => $value->nama_kanvacer ,
-                        'print' => $value->print,
-                        'bayar' => $value->bayar,
-                        'qty_program' => 0
-                        // 'tipe_dompul' => ''
-                    ];
-                    $dompul[] = ['no_hp_master_dompul' => $value->no_hp_master_dompul ,
-                        'no_hp_sub_master_dompul' => $value->hp_sub_master ,
-                        'nama_sub_master_dompul' => $value->nama_sub_master ,
-                        'tipe_dompul' => $value->tipe_harga_dompul,
-                        'id_gudang' => $value->id_gudang ,
-                        'status_sub_master_dompul' => 'Aktif'
-                    ];
+                        if(!empty($value->hp_sub_master)){
+                            $uploadDompul[] = ['no_hp_sub_master_dompul' => $value->hp_sub_master ,
+                                'nama_sub_master_dompul' => $value->nama_sub_master ,
+                                'tanggal_transfer' => $value->tanggal_trx,
+                                'no_faktur' => $value->no_faktur ,
+                                'produk' => $value->produk ,
+                                'qty' => str_replace(',','',$value->qty),
+                                'balance' => str_replace(',','',$value->balance),
+                                'diskon' => $value->diskon ,
+                                'no_hp_downline' => $value->hp_downline ,
+                                'nama_downline' => $value->nama_downline ,
+                                'status' => $value->status ,
+                                'no_hp_canvasser' => $value->hp_kanvacer ,
+                                'nama_canvasser' => $value->nama_kanvacer ,
+                                'print' => $value->print,
+                                'bayar' => $value->bayar,
+                                'qty_program' => 0
+                                // 'tipe_dompul' => ''
+                            ];
+                        }
+                        
+                        // $dompul[] = ['no_hp_master_dompul' => $value->no_hp_master_dompul ,
+                        //     'no_hp_sub_master_dompul' => $value->hp_sub_master ,
+                        //     'nama_sub_master_dompul' => $value->nama_sub_master ,
+                        //     'tipe_dompul' => $value->tipe_harga_dompul,
+                        //     'id_gudang' => $value->id_gudang ,
+                        //     'status_sub_master_dompul' => 'Aktif'
+                        // ];
 
-                    $hargaDompul[] = ['nama_harga_dompul' => $value->produk ,
-                        'harga_dompul' => $value->harga_dompul ,
-                        'tanggal_update' => $value->tanggal_update_dompul ,
-                        'tipe_harga_dompul' => $value->tipe_harga_dompul,
-                        'status_harga_dompul' => 'Aktif'
-                    ];
-                    $customer[] = ['nm_cust' => $value->nama_downline ,
-                        'alamat_cust' => $value->alamat_cust ,
-                        'no_hp' => $value->hp_downline ,
-                        'jabatan' => $value->jabatan_cust
-                    ];
-                    $sales[] = ['nm_sales' => $value->nama_kanvacer ,
-                        'alamat_sales' => $value->alamat_sales ,
-                        'no_hp' => $value->hp_kanvacer
-                    ];
+                        // $hargaDompul[] = ['nama_harga_dompul' => $value->produk ,
+                        //     'harga_dompul' => $value->harga_dompul ,
+                        //     'tanggal_update' => $value->tanggal_update_dompul ,
+                        //     'tipe_harga_dompul' => $value->tipe_harga_dompul,
+                        //     'status_harga_dompul' => 'Aktif'
+                        // ];
+                        // $customer[] = ['nm_cust' => $value->nama_downline ,
+                        //     'alamat_cust' => $value->alamat_cust ,
+                        //     'no_hp' => $value->hp_downline ,
+                        //     'jabatan' => $value->jabatan_cust
+                        // ];
+                        // $sales[] = ['nm_sales' => $value->nama_kanvacer ,
+                        //     'alamat_sales' => $value->alamat_sales ,
+                        //     'no_hp' => $value->hp_kanvacer
+                        // ];
                     }
 				}
 				if(!empty($uploadDompul)){
