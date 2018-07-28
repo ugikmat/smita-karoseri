@@ -35,7 +35,7 @@ class CreateUploadDompulsTable extends Migration
             $table->string('print')->nullable();
             $table->string('bayar');
             $table->string('tipe_dompul')->default('CVS');
-            $table->double('harga_Dompul')->default(0);
+            $table->double('harga_dompul')->default(0);
             // $table->integer('no_user');
             $table->tinyInteger('status_active')->default(0);
             $table->tinyInteger('status_penjualan')->default(0);

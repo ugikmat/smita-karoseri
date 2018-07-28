@@ -5,6 +5,7 @@ use App\UploadDompul;
 use App\Dompul;
 use App\Sales;
 use App\Customer;
+use App\HargaDompul;
 use DB;
 use Excel;
 use Yajra\Datatables\Datatables;
@@ -80,12 +81,16 @@ class UploadDompulController extends Controller {
                                 'status' => $value->status,
                                 'no_hp_canvasser' => $value->hp_kanvacer,
                                 'nama_canvasser' => $value->nama_kanvacer,
+                                'harga_dompul' => HargaDompul::where('nama_harga_dompul',$value->produk)
+                                                    ->where('tipe_harga_dompul','CVS')
+                                                    ->first()
+                                                    ->harga_dompul,
                                 'print' => $value->print,
                                 'bayar' => $value->bayar,
                                 'qty_program' => 0
                                 // 'tipe_dompul' => ''
                             ];
-                            $faktur[] = $value->no_faktur;
+                            // $faktur[] = $value->no_faktur;
                             }
 
                             if (in_array($value->nama_sub_master, $sub_master)) {
@@ -160,9 +165,15 @@ class UploadDompulController extends Controller {
      * Drop row on Upload Dompul Table
      *
      */
-    public
-    function empty() {
+    public function empty() {
         UploadDompul::truncate();
+        return redirect()->back();
+    }
+
+    public function aktifasi($tgl_transfer, $tgl_upload){
+        uploadDompul::where('tanggal_transfer',$tgl_transfer)
+            ->where('tanggal_upload',$tgl_upload)
+            ->update(['status_active' => 1]);
         return redirect()->back();
     }
 
@@ -172,8 +183,22 @@ class UploadDompulController extends Controller {
      * @param \Yajra\Datatables\Datatables $datatables
      * @return \Illuminate\Http\JsonResponse
      */
-    public
-    function data(Datatables $datatables) {
+    public function uploadData(Datatables $datatables) {
+        return $datatables->eloquent(UploadDompul::select(DB::raw('tanggal_transfer, tanggal_upload, COUNT(no_faktur) as jumlah_transaksi'))
+        ->groupBy('tanggal_transfer','tanggal_upload')
+        ->orderBy('tanggal_transfer','tanggal_upload'))
+       ->addColumn('action', function ($uploadDompul) {
+                return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#detailModal"><i class="glyphicon glyphicon-edit"></i> Lihat Data</a>
+                <a class = "btn btn-xs btn-warning" data-toggle="modal" data-target="#deleteModal"><i class="glyphicon glyphicon-remove"></i> Aktifasi</a>';
+            })->make(true);
+    }
+    /**
+     * Process dataTable ajax response.
+     *
+     * @param \Yajra\Datatables\Datatables $datatables
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function data(Datatables $datatables) {
         return $datatables->eloquent(UploadDompul::query()) 
        ->addColumn('action', function ($uploadDompul) {
                 return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$uploadDompul->id_upload.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>

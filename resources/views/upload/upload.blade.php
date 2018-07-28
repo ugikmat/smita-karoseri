@@ -1,10 +1,8 @@
 @extends('adminlte::page') @section('title', 'Upload') @section('content_header')
 <h1>Upload File</h1>
 
-@stop
-@section('css')
+@stop @section('css')
 <style>
-
 </style>
 <link rel="stylesheet" href="{{ asset('/datepicker/css/bootstrap-datepicker.min.css') }}">
 <style>
@@ -33,6 +31,70 @@
     overflow-x: auto;
     overflow-y: visible;
   }
+  #detailModal.modal{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+#detailModal .modal-dialog{
+  position: fixed;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+#detailModal .modal-content{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 2px solid #3c7dcf;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+#detailModal .modal-header{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 50px;
+  padding: 10px;
+  background: #6598d9;
+  border: 0;
+}
+
+#detailModal .modal-title{
+  font-weight: 300;
+  font-size: 2em;
+  color: #fff;
+  line-height: 30px;
+}
+
+#detailModal .modal-body{
+  position: absolute;
+  top: 50px;
+  bottom: 60px;
+  width: 100%;
+  font-weight: 300;
+  overflow: auto;
+}
+
+#detailModal .modal-footer{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 60px;
+  padding: 10px;
+  background: #f1f3f5;
+}
 </style>
 @stop @section('content')
 <div class="container-fluid">
@@ -57,7 +119,34 @@
     </div>
   </div>
 </div>
-<div class="scrolling outer">
+<table id="tgl-upload-table" class="table responsive" width="100%">
+  <thead>
+    <tr>
+      <th>Tanggal TRX</th>
+      <th>Tanggal Upload</th>
+      <th>Qty</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th>Tanggal TRX</th>
+      <th>Tanggal Upload</th>
+      <th>Qty</th>
+    </tr>
+  </tfoot>
+</table>
+<!-- Modal -->
+<div id="detailModal" class="modal fade" role="dialog" width="100%">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Detail Transaksi</h4>
+      </div>
+      <div class="modal-body">
+        <div class="scrolling outer">
   <div class="inner">
     <table id="upload-table" class="table responsive" width="100%">
       <thead>
@@ -106,7 +195,13 @@
         </tr>
       </tfoot>
     </table>
-
+  </div>
+</div>  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -346,6 +441,122 @@
 </script> --}}
 <script>
   $(function () {
+    $('#tgl-upload-table').DataTable({
+      serverSide: true,
+      processing: true,
+      ajax: '/upload/tgl',
+      columns: [
+        {
+          data: 'tanggal_transfer'
+        },
+        {
+          data: 'tanggal_upload'
+        },
+        {
+          data: 'jumlah_transaksi'
+        },
+        {
+          data: 'action',
+          orderable: false,
+          searchable: false
+        }
+      ],
+      initComplete: function () {
+        this.api().columns().every(function () {
+          var column = this;
+          var input = document.createElement("input");
+          $(input).appendTo($(column.footer()).empty())
+            .on('change', function () {
+              column.search($(this).val(), false, false, true).draw();
+            });
+        });
+      }
+    });
+  });
+</script>
+{{-- <script>
+  $('#detailModal').on('show.bs.modal', function (event) {
+    $(function () {
+    $('#upload-table').DataTable({
+      serverSide: true,
+      processing: true,
+      ajax: '/upload',
+      columns: [{
+          data: 'id_upload'
+        },
+        {
+          data: 'no_hp_sub_master_dompul'
+        },
+        {
+          data: 'nama_sub_master_dompul'
+        },
+        {
+          data: 'tanggal_transfer'
+        },
+        {
+          data: 'tanggal_upload'
+        },
+        {
+          data: 'no_faktur'
+        },
+        {
+          data: 'produk'
+        },
+        {
+          data: 'qty'
+        },
+        {
+          data: 'balance'
+        },
+        {
+          data: 'diskon'
+        },
+        {
+          data: 'no_hp_downline'
+        },
+        {
+          data: 'nama_downline'
+        },
+        {
+          data: 'status'
+        },
+        {
+          data: 'no_hp_canvasser'
+        },
+        {
+          data: 'nama_canvasser'
+        },
+        {
+          data: 'inbox'
+        },
+        {
+          data: 'print'
+        },
+        {
+          data: 'bayar'
+        },
+        {
+          data: 'action',
+          orderable: false,
+          searchable: false
+        }
+      ],
+      initComplete: function () {
+        this.api().columns().every(function () {
+          var column = this;
+          var input = document.createElement("input");
+          $(input).appendTo($(column.footer()).empty())
+            .on('change', function () {
+              column.search($(this).val(), false, false, true).draw();
+            });
+        });
+      }
+    });
+  });
+  })
+</script> --}}
+<script>
+  $(function () {
     $('#upload-table').DataTable({
       serverSide: true,
       processing: true,
@@ -425,10 +636,8 @@
 </script>
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <script>
-$('.datepicker').datepicker({
-});
+  $('.datepicker').datepicker({});
 </script>
-
 <!-- <script>
   $('#editModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
