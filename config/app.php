@@ -82,6 +82,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Faker Locale Configuration
+    |--------------------------------------------------------------------------
+    |
+    | The Faker locale determines the default locale that will be used
+    | by the Faker service provider. You are free to set this value
+    | to any of the locales which will be supported by the application.
+    |
+    */
+
+    'faker_locale' => 'id_ID',
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Fallback Locale
     |--------------------------------------------------------------------------
     |
