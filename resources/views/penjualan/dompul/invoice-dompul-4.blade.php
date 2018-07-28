@@ -48,6 +48,7 @@ td{
 <form class="invoice-dompul" action="/invoice_dompul/store" method="post">
   @csrf
   <input type="hidden" name="sales" id="sales" value="{{$sales->id_sales}}">
+  <input type="hidden" name="nm_sales" id="nm_sales" value="{{$sales->nm_sales}}">
   <input type="hidden" name="downline" id="downline" value="{{$datas->no_hp_downline}}">
   <input type="hidden" name="tgl" id="tgl" value="{{$tgl}}">
   <input type="hidden" name="user" id="user" value="{{ Auth::user()->id }}">

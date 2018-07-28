@@ -61,7 +61,7 @@ class PenjualanDompulController extends Controller
             $trf3 = '';    
         }
         $catatan = $request->get('catatan'); 
-        $sales = Sales::select('id_sales')->where('nm_sales',$canvaser)->first();
+        $sales = Sales::select('id_sales','nm_sales')->where('nm_sales',$canvaser)->first();
         $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser')
                         ->where('nama_canvasser',$canvaser)
                         ->where('tanggal_transfer',$tgl)
@@ -97,7 +97,8 @@ class PenjualanDompulController extends Controller
 
     public function store(Request $request){
         
-        $id_sales = $request->get('sales');
+        $sales = $request->get('sales');
+        $nm_sales = $request->get('nm_sales');
         $hp_downline = $request->get('downline');
         $tgl = $request->get('tgl');
         $user = $request->get('user');
@@ -113,7 +114,7 @@ class PenjualanDompulController extends Controller
         $total = $request->get('total');
 
         $penjualanDompul = new PenjualanDompul();        
-            $penjualanDompul->id_sales=$id_sales;
+            $penjualanDompul->id_sales=$sales;
             $penjualanDompul->no_hp_kios=$hp_downline;
             $penjualanDompul->no_user=$user;
             $penjualanDompul->tanggal_penjualan_dompul=$tgl;
@@ -128,6 +129,10 @@ class PenjualanDompulController extends Controller
             $penjualanDompul->bayar_transfer3=$trf3;
             $penjualanDompul->catatan=$catatan;
         $penjualanDompul->save();
+        UploadDompul::where('tanggal_transfer',$tgl)
+                    ->where('no_hp_downline',$hp_downline)
+                    ->where('nama_canvasser',$nm_sales)
+                    ->update(['status_penjualan' => 1,'id_penjualan_dompul'=>$penjualanDompul->id_penjualan_dompul]);
         return redirect('/penjualan/dompul/invoice-dompul');
 
     }
@@ -186,6 +191,7 @@ class PenjualanDompulController extends Controller
         return $datatables->eloquent(UploadDompul::select(DB::raw('nama_downline, COUNT(id_upload) as qty'))
                         ->where('nama_canvasser',$canvaser)
                         ->where('tanggal_transfer',$tgl)
+                        ->where('status_penjualan',0)
                         ->groupBy('nama_downline')
                         ->orderBy('nama_downline'))
                           ->make(true);
@@ -199,15 +205,11 @@ class PenjualanDompulController extends Controller
      */
     public function penjualanData(Datatables $datatables,$canvaser,$tgl,$downline)
     {
-        $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser')
+        $datas =UploadDompul::select('produk')
                         ->where('nama_canvasser',$canvaser)
                         ->where('tanggal_transfer',$tgl)
-                        ->where('nama_downline',$downline)->first();
-        if(empty($datas->tipe_dompul)){
-            $tipe = 'CVS';
-        }else{
-            $tipe = $datas->tipe_dompul;
-        }
+                        ->where('nama_downline',$downline)->get();
+
         return $datatables->eloquent(UploadDompul::select('upload_dompuls.produk','upload_dompuls.tipe_dompul','upload_dompuls.qty','upload_dompuls.qty_program','master_harga_dompuls.harga_dompul')
                         ->join('master_harga_dompuls',function($join){
                             $join->on('master_harga_dompuls.nama_harga_dompul','=','upload_dompuls.produk')

@@ -225,7 +225,7 @@ td{
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <select name="tipe" required="required">
+                      <select name="tipe" required="required" id="tipe">
                         <option value="default">-- Pilih Tipe Dompul --</option>
                         <option value="DS">DS</option>
                         <option value="CVS">CVS</option>
@@ -302,6 +302,16 @@ td{
     var tgl = $('#tgl').val();
     var canvaser = $('#canvasser').val();
     var downline = $('#downline').val();
+    // var tipe = document.getElementById("tipe");
+    // while (tipe.firstChild) {
+    //     tipe.removeChild(tipe.firstChild);
+    // }
+    // array.forEach(element => {
+    //   var opt = document.createElement('option');
+    //   opt.value = i;
+    //   opt.innerHTML = i;
+    //   tipe.appendChild(opt);
+    // });
     var button = $(event.relatedTarget) // Button that triggered the modal
     var produk = button.data('produk') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
