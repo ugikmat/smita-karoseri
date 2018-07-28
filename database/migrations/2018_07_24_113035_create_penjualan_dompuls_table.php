@@ -32,7 +32,7 @@ class CreatePenjualanDompulsTable extends Migration
             $table->bigInteger('bayar_transfer3')->nullable();
             $table->text('catatan');
             $table->tinyInteger('status_pembayaran')->default(0);
-            $table->tinyInteger('status_penjualan')->default(1);
+            $table->tinyInteger('status_penjualan')->default(0);
             $table->tinyInteger('deleted')->default(0);
         });
     }
