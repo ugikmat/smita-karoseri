@@ -26,6 +26,12 @@ class UploadDompulController extends Controller {
     public
     function importExcel(Request $request) {
         $faker = Faker::create();
+        // Get current data from items table
+        $sub_master = [];
+        $downline = [];
+        $kanvacer = [];
+        $faktur = [];
+
         if ($request->hasFile('import_file')) {
             $path = $request->file('import_file')->getRealPath();
             $data = Excel::load($path, function ($reader) {
@@ -35,7 +41,10 @@ class UploadDompulController extends Controller {
                 foreach($data as $key => $value) {
                     if (!empty($value) && $value->count()) {
                         if (!empty($value->hp_sub_master)) {
-                            $uploadDompul[] = ['no_hp_sub_master_dompul' => $value->hp_sub_master,
+                            if (in_array($value->no_faktur, $faktur)) {
+                                // continue;
+                            }else{
+                                $uploadDompul[] = ['no_hp_sub_master_dompul' => $value->hp_sub_master,
                                 'nama_sub_master_dompul' => $value->nama_sub_master,
                                 'tanggal_transfer' => $value->tanggal_trx,
                                 'tanggal_upload' => Carbon::now('Asia/Jakarta')->toDateString(),
@@ -55,29 +64,49 @@ class UploadDompulController extends Controller {
                                 'qty_program' => 0
                                 // 'tipe_dompul' => ''
                             ];
-                            $dompul[] = ['no_hp_master_dompul' => $faker->phoneNumber,
+                            $faktur[] = $value->no_faktur;
+                            }
+
+                            if (in_array($value->nama_sub_master, $sub_master)) {
+                                // continue;
+                            }else{
+                                $dompul[] = ['no_hp_master_dompul' => $faker->phoneNumber,
                                 'no_hp_sub_master_dompul' => $value->hp_sub_master,
                                 'nama_sub_master_dompul' => $value->nama_sub_master,
                                 'tipe_dompul' => substr($value->nama_sub_master, 0, 3),
                                 'id_gudang' => 0,
                                 'status_sub_master_dompul' => 'Aktif'
-                            ];
+                            ];   
+                                $sub_master[] = $value->nama_sub_master;
+                            }
                             // $hargaDompul[] = ['nama_harga_dompul' => $value->produk ,
                             //     'harga_dompul' => $value->harga_dompul ,
                             //     'tanggal_update' => $value->tanggal_update_dompul ,
                             //     'tipe_harga_dompul' => $value->tipe_harga_dompul,
                             //     'status_harga_dompul' => 'Aktif'
                             // ];
-                            $customer[] = ['nm_cust' => $value->nama_downline,
+
+                            if (in_array($value->nama_downline, $downline)) {
+                                // continue;
+                            }else{
+                                $customer[] = ['nm_cust' => $value->nama_downline,
                                 'alamat_cust' => $faker->address,
                                 'no_hp' => $value->hp_downline,
                                 'jabatan' => $faker->jobTitle
                             ];
-                            $sales[] = ['nm_sales' => $value->nama_kanvacer,
+                                $downline[] = $value->nama_downline;
+                            }
+
+                            if (in_array($value->nama_kanvacer, $kanvacer)) {
+                                // continue;
+                            }else{
+                                $sales[] = ['nm_sales' => $value->nama_kanvacer,
                                 'alamat_sales' => $faker->address,
                                 'id_lokasi' => 0,
                                 'no_hp' => $value->hp_kanvacer
-                            ];
+                            ];   
+                                $kanvacer[] = $value->nama_kanvacer;
+                            }
                         }
                     }
                 }
