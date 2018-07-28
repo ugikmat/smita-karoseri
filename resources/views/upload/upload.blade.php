@@ -479,7 +479,7 @@
       serverSide: true,
       processing: true,
       //Just Dummy Date
-      ajax: '/upload/2017-03-18/2017-03-03',
+      ajax: '/upload/null/null',
       columns: [{
           data: 'id_upload'
         },
