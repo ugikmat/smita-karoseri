@@ -209,7 +209,6 @@ class PenjualanDompulController extends Controller
                         ->where('nama_canvasser',$canvaser)
                         ->where('tanggal_transfer',$tgl)
                         ->where('nama_downline',$downline)->get();
-
         return $datatables->eloquent(UploadDompul::select('upload_dompuls.produk','upload_dompuls.tipe_dompul','upload_dompuls.qty','upload_dompuls.qty_program','master_harga_dompuls.harga_dompul')
                         ->join('master_harga_dompuls',function($join){
                             $join->on('master_harga_dompuls.nama_harga_dompul','=','upload_dompuls.produk')

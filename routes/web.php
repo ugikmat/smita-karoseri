@@ -104,7 +104,7 @@ Route::get('/penjualan/monitoring/mntr-upload', function() {
 Route::get('upload/dompul', 'UploadDompulController@index');
 Route::get('downloadExcel/{type}', 'UploadDompulController@downloadExcel');
 Route::post('importExcel', 'UploadDompulController@importExcel');
-Route::get('/upload', 'UploadDompulController@data');
+Route::get('/upload/{transfer}/{upload}', 'UploadDompulController@data');
 Route::get('/upload/tgl', 'UploadDompulController@uploadData');
 Route::get('/upload/empty', 'UploadDompulController@empty');
 

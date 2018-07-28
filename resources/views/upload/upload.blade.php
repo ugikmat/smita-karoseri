@@ -474,13 +474,12 @@
     });
   });
 </script>
-{{-- <script>
-  $('#detailModal').on('show.bs.modal', function (event) {
-    $(function () {
-    $('#upload-table').DataTable({
+<script>
+    var table = $('#upload-table').DataTable({
       serverSide: true,
       processing: true,
-      ajax: '/upload',
+      //Just Dummy Date
+      ajax: '/upload/2017-03-18/2017-03-03',
       columns: [{
           data: 'id_upload'
         },
@@ -552,10 +551,14 @@
         });
       }
     });
-  });
+  $('#detailModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var transfer = button.data('transfer') // Extract info from data-* attributes
+    var upload = button.data('upload')
+    table.ajax.url(`/upload/${transfer}/${upload}`).load();
   })
-</script> --}}
-<script>
+</script>
+{{-- <script>
   $(function () {
     $('#upload-table').DataTable({
       serverSide: true,
@@ -633,7 +636,7 @@
       }
     });
   });
-</script>
+</script> --}}
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <script>
   $('.datepicker').datepicker({});

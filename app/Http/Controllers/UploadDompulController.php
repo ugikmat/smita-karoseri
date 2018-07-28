@@ -70,7 +70,7 @@ class UploadDompulController extends Controller {
                                 'nama_sub_master_dompul' => $value->nama_sub_master,
                                 'tanggal_transfer' => $value->tanggal_trx,
                                 'tanggal_upload' => Carbon::now('Asia/Jakarta')->toDateString(),
-                                'inbox' => $value->inbox,
+                                'inbox' => ($value->inbox==null) ? 0 : $value->inbox ,
                                 'no_faktur' => $value->no_faktur,
                                 'produk' => $value->produk,
                                 'qty' => str_replace(',', '', $value->qty),
@@ -188,7 +188,7 @@ class UploadDompulController extends Controller {
         ->groupBy('tanggal_transfer','tanggal_upload')
         ->orderBy('tanggal_transfer','tanggal_upload'))
        ->addColumn('action', function ($uploadDompul) {
-                return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#detailModal"><i class="glyphicon glyphicon-edit"></i> Lihat Data</a>
+                return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#detailModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-edit"></i> Lihat Data</a>
                 <a class = "btn btn-xs btn-warning" data-toggle="modal" data-target="#deleteModal"><i class="glyphicon glyphicon-remove"></i> Aktifasi</a>';
             })->make(true);
     }
@@ -198,10 +198,11 @@ class UploadDompulController extends Controller {
      * @param \Yajra\Datatables\Datatables $datatables
      * @return \Illuminate\Http\JsonResponse
      */
-    public function data(Datatables $datatables) {
-        return $datatables->eloquent(UploadDompul::query()) 
+    public function data(Datatables $datatables, $transfer, $upload) {
+        return $datatables->eloquent(UploadDompul::where('tanggal_transfer',$transfer)
+                                                ->where('tanggal_upload',$upload)) 
        ->addColumn('action', function ($uploadDompul) {
-                return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$uploadDompul->id_upload.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+                return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                 <a class = "btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$uploadDompul->id_upload.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
             })->make(true);
     }
