@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\UploadDompul;
+use App\Dompul;
+use App\Sales;
+use App\Customer;
 use DB;
 use Excel;
 use Yajra\Datatables\Datatables;
@@ -26,11 +29,29 @@ class UploadDompulController extends Controller {
     public
     function importExcel(Request $request) {
         $faker = Faker::create();
-        // Get current data from items table
+        // Get data from database
+        $db_sub_master = Dompul::select('nama_sub_master_dompul')->get();
+        $db_downline = Customer::select('nm_cust')->get();
+        $db_kanvacer = Sales::select('nm_sales')->get();
+        $db_faktur = UploadDompul::select('no_faktur')->get();
+        //Create Array
         $sub_master = [];
         $downline = [];
         $kanvacer = [];
         $faktur = [];
+        //Add data to array
+        foreach ($db_sub_master as $key => $value) {
+            $sub_master[]=$value->nama_sub_master_dompul;
+        }
+        foreach ($db_downline as $key => $value) {
+            $downline[]=$value->nm_cust;
+        }
+        foreach ($db_kanvacer as $key => $value) {
+            $kanvacer[]=$value->nm_sales;
+        }
+        foreach ($db_faktur as $key => $value) {
+            $faktur[]=$value->no_faktur;
+        }
 
         if ($request->hasFile('import_file')) {
             $path = $request->file('import_file')->getRealPath();
