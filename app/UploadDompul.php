@@ -17,6 +17,7 @@ class UploadDompul extends Model
      */
     protected $dates = [
         'tanggal_transfer',
+        'tanggal_upload'
     ];
     // public function getDateFormat()
     // {

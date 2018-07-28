@@ -6,6 +6,7 @@ use DB;
 use Excel;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class UploadDompulController extends Controller
 {
@@ -37,6 +38,8 @@ class UploadDompulController extends Controller
                             $uploadDompul[] = ['no_hp_sub_master_dompul' => $value->hp_sub_master ,
                                 'nama_sub_master_dompul' => $value->nama_sub_master ,
                                 'tanggal_transfer' => $value->tanggal_trx,
+                                'tanggal_upload' => Carbon::now('Asia/Jakarta')->toDateString(),
+                                'inbox' => $value->inbox,
                                 'no_faktur' => $value->no_faktur ,
                                 'produk' => $value->produk ,
                                 'qty' => str_replace(',','',$value->qty),
@@ -99,6 +102,15 @@ class UploadDompulController extends Controller
 		return redirect('/upload/dompul');
 
     }
+    /**
+     * Drop row on Upload Dompul Table
+     *
+     */
+    public function empty(){
+        UploadDompul::truncate();
+        return redirect()->back();
+    }
+
     /**
      * Process dataTable ajax response.
      *

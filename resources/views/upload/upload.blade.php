@@ -48,6 +48,9 @@
       <a href="{{ URL::to('downloadExcel/csv') }}">
         <button class="btn btn-success">Download CSV</button>
       </a>
+      <a href="{{ URL::to('/upload/empty') }}">
+        <button class="btn btn-warning">Empty Data</button>
+      </a>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
       Tanggal :
@@ -63,6 +66,7 @@
           <th>HP Sub Master</th>
           <th>Nama Sub Master</th>
           <th>Tanggal TRX</th>
+          <th>Tanggal Upload</th>
           <th>No Faktur</th>
           <th>Produk</th>
           <th>Qty</th>
@@ -73,6 +77,7 @@
           <th>Status</th>
           <th>HP Kanvacer</th>
           <th>Nama Kanvacer</th>
+          <th>Inbox</th>
           <th>Print</th>
           <th>Bayar</th>
           <th>Action</th>
@@ -84,6 +89,7 @@
           <th>HP Sub Master</th>
           <th>Nama Sub Master</th>
           <th>Tanggal TRX</th>
+          <th>Tanggal Upload</th>
           <th>No Faktur</th>
           <th>Produk</th>
           <th>Qty</th>
@@ -94,6 +100,7 @@
           <th>Status</th>
           <th>HP Kanvacer</th>
           <th>Nama Kanvacer</th>
+          <th>Inbox</th>
           <th>Print</th>
           <th>Bayar</th>
         </tr>
@@ -356,6 +363,9 @@
           data: 'tanggal_transfer'
         },
         {
+          data: 'tanggal_upload'
+        },
+        {
           data: 'no_faktur'
         },
         {
@@ -384,6 +394,9 @@
         },
         {
           data: 'nama_canvasser'
+        },
+        {
+          data: 'inbox'
         },
         {
           data: 'print'

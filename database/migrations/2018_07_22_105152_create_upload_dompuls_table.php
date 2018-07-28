@@ -15,7 +15,7 @@ class CreateUploadDompulsTable extends Migration
     {
         Schema::create('upload_dompuls', function (Blueprint $table) {
             $table->increments('id_upload');
-            $table->integer('id_penjualan_dompul');
+            $table->integer('id_penjualan_dompul')->nullable();
             $table->string('no_hp_sub_master_dompul');
             $table->string('nama_sub_master_dompul');
             $table->date('tanggal_transfer');
