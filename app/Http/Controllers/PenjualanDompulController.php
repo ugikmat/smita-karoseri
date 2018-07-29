@@ -83,22 +83,23 @@ class PenjualanDompulController extends Controller
      * Update Upload Dompul tipe and price, back to edit
      * 
      */
-    public function update(Request $request,$canvaser,$tgl,$downline,$produk){
+    public function update(Request $request,$canvaser,$tgl,$downline,$produk,$no_faktur){
         $data =UploadDompul::where('nama_canvasser',$canvaser)
                         ->where('tanggal_transfer',$tgl)
                         ->where('nama_downline',$downline)
-                        ->where('produk',$produk)->first();
+                        ->where('produk',$produk)
+                        ->where('no_faktur',$no_faktur)->first();
         $tipe = $request->get('tipe');
         $qty_program = $request->get('qty_program');
         
         if($tipe != 'default') {
             $data->tipe_dompul = $tipe;
-        }
-        $data->qty_program = $qty_program;
-        $data->harga_dompul = HargaDompul::where('nama_harga_dompul',$produk)
+            $data->harga_dompul = HargaDompul::where('nama_harga_dompul',$produk)
                                                     ->where('tipe_harga_dompul',$tipe)
                                                     ->first()
                                                     ->harga_dompul;
+        }
+        $data->qty_program = $qty_program;
         $data->save();
         return redirect()->back();
     }
@@ -235,7 +236,7 @@ class PenjualanDompulController extends Controller
      */
     public function penjualanData(Datatables $datatables,$canvaser,$tgl,$downline)
     {
-        return $datatables->eloquent(UploadDompul::select('upload_dompuls.produk','upload_dompuls.tipe_dompul','upload_dompuls.qty','upload_dompuls.qty_program','master_harga_dompuls.harga_dompul')
+        return $datatables->eloquent(UploadDompul::select('upload_dompuls.no_faktur','upload_dompuls.produk','upload_dompuls.tipe_dompul','upload_dompuls.qty','upload_dompuls.qty_program','master_harga_dompuls.harga_dompul')
                         ->join('master_harga_dompuls',function($join){
                             $join->on('master_harga_dompuls.nama_harga_dompul','=','upload_dompuls.produk')
                                 ->on('master_harga_dompuls.tipe_harga_dompul','=','upload_dompuls.tipe_dompul');
@@ -249,7 +250,7 @@ class PenjualanDompulController extends Controller
                           ->addColumn('action', function ($uploadDompul) {
                               $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$uploadDompul->produk)->get();
                               return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-tipe='.$tipe.' data-produk="'.$uploadDompul->produk.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-tipe='.$tipe.' data-produk="'.$uploadDompul->produk.'" data-faktur="'.$uploadDompul->no_faktur.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
                             })
                           ->make(true);
     }

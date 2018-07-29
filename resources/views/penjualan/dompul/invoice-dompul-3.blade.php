@@ -291,12 +291,13 @@ td{
   $('#editModal').on('show.bs.modal', function (event) {
     var tgl = $('#tgl').val();
     var canvaser = $('#canvasser').val();
-    var downline = $('#downline').val();
+    var downline = $('#downline').val();    
     var tipe = document.getElementById("tipe");
     
     var button = $(event.relatedTarget) // Button that triggered the modal
     var produk = button.data('produk') // Extract info from data-* attributes
     var tipe_harga = button.data('tipe')
+    var no_faktur = button.data('faktur')
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     while (tipe.firstChild) {
@@ -313,7 +314,7 @@ td{
       tipe.appendChild(opt);
     });
     console.log(produk);
-    $('#editForm').attr('action', `/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}`);
+    $('#editForm').attr('action', `/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}`);
   })
 </script>
 @stop
