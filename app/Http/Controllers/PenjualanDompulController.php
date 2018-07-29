@@ -33,13 +33,77 @@ class PenjualanDompulController extends Controller
         $saless = Sales::where('status','1')->get();
         return view('penjualan.dompul.invoice-dompul',['saless'=>$saless]);
     }
+    /**
+     * Display a list of sales based on name
+     * @param \Illuminate\Http\Request
+     * @return \Illuminate\Http\Response
+     */
     public function show(Request $request)
     {
         $sales = Sales::where('status','1')->where('nm_sales',$request->get('id'))->first();
         return redirect('/penjualan/dompul/invoice-dompul')->with(['sales'=>$sales,'tgl'=>$request->get('tgl'),'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
         // return view('penjualan.dompul.invoice-dompul')->with(['sales'=>$sales,'tgl'=>$this->nama_tgl,'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
     }
-    
+    /**
+     * Diplay a list of transaction made before
+     */
+    public function list(){
+        return view('penjualan.dompul.list-invoice');
+    }
+
+    /**
+     * Display a list of transaction
+     */
+    public function edit($canvaser,$tgl,$downline)
+    {   $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser','produk')
+                        ->where('nama_canvasser',$canvaser)
+                        ->where('tanggal_transfer',$tgl)
+                        ->where('nama_downline',$downline)->first();
+        if(empty($datas->tipe_dompul)){
+            $tipe = 'CVS';
+        }else{
+            $tipe = $datas->tipe_dompul;
+        }
+        $sums = UploadDompul::select('upload_dompuls.produk','upload_dompuls.tipe_dompul','upload_dompuls.qty','upload_dompuls.qty_program','master_harga_dompuls.harga_dompul')
+                        ->join('master_harga_dompuls',function($join){
+                            $join->on('master_harga_dompuls.nama_harga_dompul','=','upload_dompuls.produk')
+                                ->on('master_harga_dompuls.tipe_harga_dompul','=','upload_dompuls.tipe_dompul');
+                        })
+                        ->where('nama_canvasser',$canvaser)
+                        ->where('tanggal_transfer',$tgl)
+                        ->where('nama_downline',$downline)->get();
+        $total = 0;
+        foreach ($sums as $key => $value) {
+            $total+=(($value->qty-$value->qty_program)*$value->harga_dompul);
+        }
+        
+        return view('penjualan.dompul.invoice-dompul-3',['datas'=>$datas,'tgl'=>$tgl,'total'=>$total]);
+    }
+    /**
+     * Update Upload Dompul tipe and price, back to edit
+     * 
+     */
+    public function update(Request $request,$canvaser,$tgl,$downline,$produk){
+        $data =UploadDompul::where('nama_canvasser',$canvaser)
+                        ->where('tanggal_transfer',$tgl)
+                        ->where('nama_downline',$downline)
+                        ->where('produk',$produk)->first();
+        $tipe = $request->get('tipe');
+        $qty_program = $request->get('qty_program');
+        if($tipe != 'default') {$data->tipe_dompul = $tipe;}
+        $data->qty_program = $qty_program;
+        $data->harga_dompul = HargaDompul::where('nama_harga_dompul',$produk)
+                                                    ->where('tipe_harga_dompul',$tipe)
+                                                    ->first()
+                                                    ->harga_dompul;
+        $data->save();
+        return redirect()->back();
+    }
+
+    /**
+     * Verification before submit
+     * 
+     */
     public function verify(Request $request,$canvaser,$tgl,$downline){
         $tunai = $request->get('tunai');
         $bank1 = $request->get('bank1');
@@ -94,7 +158,9 @@ class PenjualanDompulController extends Controller
             'sales'=>$sales
             ]);
     }
-
+    /**
+     * Save transaction
+     */
     public function store(Request $request){
         
         $sales = $request->get('sales');
@@ -137,48 +203,7 @@ class PenjualanDompulController extends Controller
 
     }
 
-    public function edit($canvaser,$tgl,$downline)
-    {   $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser','produk')
-                        ->where('nama_canvasser',$canvaser)
-                        ->where('tanggal_transfer',$tgl)
-                        ->where('nama_downline',$downline)->first();
-        if(empty($datas->tipe_dompul)){
-            $tipe = 'CVS';
-        }else{
-            $tipe = $datas->tipe_dompul;
-        }
-        $sums = UploadDompul::select('upload_dompuls.produk','upload_dompuls.tipe_dompul','upload_dompuls.qty','upload_dompuls.qty_program','master_harga_dompuls.harga_dompul')
-                        ->join('master_harga_dompuls',function($join){
-                            $join->on('master_harga_dompuls.nama_harga_dompul','=','upload_dompuls.produk')
-                                ->on('master_harga_dompuls.tipe_harga_dompul','=','upload_dompuls.tipe_dompul');
-                        })
-                        ->where('nama_canvasser',$canvaser)
-                        ->where('tanggal_transfer',$tgl)
-                        ->where('nama_downline',$downline)->get();
-        $total = 0;
-        foreach ($sums as $key => $value) {
-            $total+=(($value->qty-$value->qty_program)*$value->harga_dompul);
-        }
-        
-        return view('penjualan.dompul.invoice-dompul-3',['datas'=>$datas,'tgl'=>$tgl,'total'=>$total]);
-    }
-
-    public function update(Request $request,$canvaser,$tgl,$downline,$produk){
-        $data =UploadDompul::where('nama_canvasser',$canvaser)
-                        ->where('tanggal_transfer',$tgl)
-                        ->where('nama_downline',$downline)
-                        ->where('produk',$produk)->first();
-        $tipe = $request->get('tipe');
-        $qty_program = $request->get('qty_program');
-        if($tipe != 'default') {$data->tipe_dompul = $tipe;}
-        $data->qty_program = $qty_program;
-        $data->harga_dompul = HargaDompul::where('nama_harga_dompul',$produk)
-                                                    ->where('tipe_harga_dompul',$tipe)
-                                                    ->first()
-                                                    ->harga_dompul;
-        $data->save();
-        return redirect()->back();
-    }
+    
 
      /**
      * Process dataTable ajax response.
@@ -205,10 +230,6 @@ class PenjualanDompulController extends Controller
      */
     public function penjualanData(Datatables $datatables,$canvaser,$tgl,$downline)
     {
-        $datas =UploadDompul::select('produk')
-                        ->where('nama_canvasser',$canvaser)
-                        ->where('tanggal_transfer',$tgl)
-                        ->where('nama_downline',$downline)->get();
         return $datatables->eloquent(UploadDompul::select('upload_dompuls.produk','upload_dompuls.tipe_dompul','upload_dompuls.qty','upload_dompuls.qty_program','master_harga_dompuls.harga_dompul')
                         ->join('master_harga_dompuls',function($join){
                             $join->on('master_harga_dompuls.nama_harga_dompul','=','upload_dompuls.produk')
@@ -220,6 +241,25 @@ class PenjualanDompulController extends Controller
                         ->addColumn('total_harga', function ($uploadDompul) {
                               return ($uploadDompul->qty-$uploadDompul->qty_program)*$uploadDompul->harga_dompul;
                             })
+                          ->addColumn('action', function ($uploadDompul) {
+                              return 
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-produk="'.$uploadDompul->produk.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                            })
+                          ->make(true);
+    }
+
+    /**
+     * Process dataTable ajax response.
+     *
+     * @param \Yajra\Datatables\Datatables $datatables
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function listData(Datatables $datatables)
+    {
+
+        return $datatables->eloquent(PenjualanDompul::select('penjualan_dompuls.id_penjualan_dompul','master_saless.nm_sales','penjualan_dompuls.no_hp_kios','master_customers.nm_cust','penjualan_dompuls.tanggal_penjualan_dompul','penjualan_dompuls.status_pembayaran')
+                        ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
+                        ->join('master_customers','master_customers.no_hp','=','penjualan_dompuls.no_hp_kios'))
                           ->addColumn('action', function ($uploadDompul) {
                               return 
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-produk="'.$uploadDompul->produk.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';

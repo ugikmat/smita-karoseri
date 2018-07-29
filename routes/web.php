@@ -82,14 +82,8 @@ Route::put('/invoice_dompul/update/{canvaser}/{tgl}/{downline}/{produk}', 'Penju
 
 Route::post('/penjualan/dompul/verify/{canvaser}/{tgl}/{downline}','PenjualanDompulController@verify');
 
-Route::get('/penjualan/dompul/list-invoice', function() {
-  return view ('/penjualan/dompul/list-invoice');
-}) -> name('list-invoice');
-
-Route::get('/penjualan/dompul/invoice-dompul-3', function() {
-  return view ('/penjualan/dompul/invoice-dompul-3');
-}) -> name('invoice-dompul-3y');
-
+Route::get('/penjualan/dompul/list-invoice', 'PenjualanDompulController@list');
+Route::get('/invoice_dompul/list', 'PenjualanDompulController@listData');
 
 //monitoring
 Route::get('/penjualan/monitoring/mntr-upload', function() {

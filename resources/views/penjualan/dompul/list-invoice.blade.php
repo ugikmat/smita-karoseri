@@ -15,7 +15,6 @@
 <table id="list-invoice-table" class="table responsive" width="100%">
     <thead>
     <tr>
-        <th>No</th>
         <th>No Penjualan</th>
         <th>Sales</th>
         <th>Hp Kios</th>
@@ -92,18 +91,17 @@
 </script>
 <script>
     $(function () {
-        $('#users-table').DataTable({
+        $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '',
+            ajax: '/invoice_dompul/list',
             columns: [
-                {data: 'no'},
-                {data: 'no_penjualan'},
-                {data: 'sales'},
-                {data: 'hp_kios'},
-                {data: 'nama_kios'},
-                {data: 'tanggal_penjualan'},
-                {data: 'status_verifikasi'},
+                {data: 'id_penjualan_dompul'},
+                {data: 'nm_sales'},
+                {data: 'no_hp_kios'},
+                {data: 'nm_cust'},
+                {data: 'tanggal_penjualan_dompul'},
+                {data: 'status_pembayaran'},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });
