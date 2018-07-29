@@ -226,17 +226,7 @@ td{
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <select name="tipe" required="required" id="tipe">
-                        <option value="default">-- Pilih Tipe Dompul --</option>
-                        <option value="DS">DS</option>
-                        <option value="CVS">CVS</option>
-                        <option value="HI">HI</option>
-                        <option value="SERVER">SERVER</option>
-                        <option value="SDE">SDE</option>
-                        <option value="CVS1">CVS1</option>
-                        <option value="CVS2">CVS2</option>
-                        <option value="CVS3">CVS3</option>
-                        <option value="SERVER1">SERVER1</option>
-                        <option value="SERVER2">SERVER2</option>
+                   
                       </select>
                     </div>
                   </div>
@@ -302,20 +292,27 @@ td{
     var tgl = $('#tgl').val();
     var canvaser = $('#canvasser').val();
     var downline = $('#downline').val();
-    // var tipe = document.getElementById("tipe");
-    // while (tipe.firstChild) {
-    //     tipe.removeChild(tipe.firstChild);
-    // }
-    // array.forEach(element => {
-    //   var opt = document.createElement('option');
-    //   opt.value = i;
-    //   opt.innerHTML = i;
-    //   tipe.appendChild(opt);
-    // });
+    var tipe = document.getElementById("tipe");
+    
     var button = $(event.relatedTarget) // Button that triggered the modal
     var produk = button.data('produk') // Extract info from data-* attributes
+    var tipe_harga = button.data('tipe')
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    while (tipe.firstChild) {
+        tipe.removeChild(tipe.firstChild);
+    }
+    var default_opt = document.createElement('option');
+    default_opt.value = 'default';
+    default_opt.innerHTML = '-- Pilih Tipe Dompul --';
+    tipe.appendChild(default_opt);
+    tipe_harga.forEach(element => {
+      var opt = document.createElement('option');
+      opt.value = element.tipe_harga_dompul;
+      opt.innerHTML = element.tipe_harga_dompul;
+      tipe.appendChild(opt);
+    });
+    console.log(produk);
     $('#editForm').attr('action', `/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}`);
   })
 </script>

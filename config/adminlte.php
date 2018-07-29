@@ -116,7 +116,7 @@ return [
         ],
         [
             'text'        => 'XL',
-            'url'         => 'list/users',
+            // 'url'         => 'list/users',
             'icon'        => 'phone-square',
             'submenu'     => [
               [

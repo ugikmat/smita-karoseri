@@ -90,7 +90,10 @@ class PenjualanDompulController extends Controller
                         ->where('produk',$produk)->first();
         $tipe = $request->get('tipe');
         $qty_program = $request->get('qty_program');
-        if($tipe != 'default') {$data->tipe_dompul = $tipe;}
+        
+        if($tipe != 'default') {
+            $data->tipe_dompul = $tipe;
+        }
         $data->qty_program = $qty_program;
         $data->harga_dompul = HargaDompul::where('nama_harga_dompul',$produk)
                                                     ->where('tipe_harga_dompul',$tipe)
@@ -244,8 +247,9 @@ class PenjualanDompulController extends Controller
                               return ($uploadDompul->qty-$uploadDompul->qty_program)*$uploadDompul->harga_dompul;
                             })
                           ->addColumn('action', function ($uploadDompul) {
+                              $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$uploadDompul->produk)->get();
                               return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-produk="'.$uploadDompul->produk.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-tipe='.$tipe.' data-produk="'.$uploadDompul->produk.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
                             })
                           ->make(true);
     }
