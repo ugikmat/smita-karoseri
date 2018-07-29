@@ -217,8 +217,7 @@ class PenjualanDompulController extends Controller
                         ->where('nama_canvasser',$canvaser)
                         ->where('tanggal_transfer',$tgl)
                         ->where('status_penjualan',0)
-                        ->groupBy('nama_downline')
-                        ->orderBy('nama_downline'))
+                        ->groupBy('nama_downline'))
                         ->addColumn('indeks', function ($uploadDompul) {
                               return '';
                             })
@@ -263,6 +262,9 @@ class PenjualanDompulController extends Controller
         return $datatables->eloquent(PenjualanDompul::select('penjualan_dompuls.id_penjualan_dompul','master_saless.nm_sales','penjualan_dompuls.no_hp_kios','master_customers.nm_cust','penjualan_dompuls.tanggal_penjualan_dompul','penjualan_dompuls.status_pembayaran')
                         ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
                         ->join('master_customers','master_customers.no_hp','=','penjualan_dompuls.no_hp_kios'))
+                        // ->addColumn('indeks', function ($uploadDompul) {
+                        //       return '';
+                        //     })
                           ->addColumn('action', function ($uploadDompul) {
                               return 
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-produk="'.$uploadDompul->produk.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
