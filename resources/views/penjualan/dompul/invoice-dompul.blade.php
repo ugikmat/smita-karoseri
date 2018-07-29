@@ -93,7 +93,7 @@
 <table id="invoice-dompul-table" class="table responsive" width="100%">
     <thead>
     <tr>
-        {{-- <th>No.</th> --}}
+        <th>No.</th>
         <th>Nama RO</th>
         <th>Qty Penjualan</th>
     </tr>
@@ -192,15 +192,15 @@
             serverSide: true,
             processing: true,
             ajax: `/invoice_dompul/${canvaser}/${tgl}`,
-            // "columnDefs": [ {
-            // "searchable": false,
-            // "orderable": false,
-            // "targets": 0
-            //     } ],
-            // "order": [[ 1, 'asc' ]],
+            "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+                } ],
+            "order": [[ 1, 'asc' ]],
             columnDefs: [
                 {
-                    targets:0,
+                    targets:1,
                     render: function ( data, type, row, meta ) {
                         if(type === 'display'){
                             data = `<a class="link-post" href="/penjualan/dompul/${canvaser}/${tgl}/${data}">` + data + '</a>';
@@ -210,16 +210,16 @@
                 }
             ],
             columns: [
-                // {data: 'id_upload'},
+                {data: 'indeks'},
                 {data: 'nama_downline'},
                 {data: 'qty'}
             ]
         });
-        // t.on( 'order.dt search.dt', function () {
-        // t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-        //     cell.innerHTML = i+1;
-        //   } );
-        // } ).draw();
+        t.on( 'order.dt search.dt', function () {
+        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+          } );
+        } ).draw();
     });
 </script>
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>

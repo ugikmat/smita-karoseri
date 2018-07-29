@@ -219,6 +219,9 @@ class PenjualanDompulController extends Controller
                         ->where('status_penjualan',0)
                         ->groupBy('nama_downline')
                         ->orderBy('nama_downline'))
+                        ->addColumn('indeks', function ($uploadDompul) {
+                              return '';
+                            })
                           ->make(true);
     }
 
