@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Sales;
+use App\Lokasi;
 use Yajra\Datatables\Datatables;
 
 
@@ -26,7 +27,8 @@ class SalesController extends Controller
       */
     public function index()
     {
-        return view('master.sales');
+        $lokasis = Lokasi::all();
+        return view('master.sales',['lokasis'=>$lokasis]);
     }
 
     /**
@@ -50,6 +52,7 @@ class SalesController extends Controller
       $sales = new Sales;
 
       $sales->nm_sales = $request->get('nm_sales');
+      $sales->id_lokasi = $request->get('lokasi');
       $sales->alamat_sales = $request->get('alamat_sales');
       $sales->no_hp = $request->get('no_hp');
       $sales->save();

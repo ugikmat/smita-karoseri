@@ -14,6 +14,7 @@
     <tr>
       <th>Id Sales</th>
       <th>Nama Sales</th>
+      <th>Id Lokasi</th>
       <th>Alamat Sales</th>
       <th>No Telepon</th>
       <th>Action</th>
@@ -23,6 +24,7 @@
     <tr>
       <th>Id Sales</th>
       <th>Nama Sales</th>
+      <th>Id Lokasi</th>
       <th>Alamat Sales</th>
       <th>No Telepon</th>
     </tr>
@@ -79,10 +81,11 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select name="lokasi" required="required">
-                          <option value=""></option>
-                          <option value=""></option>
-                          <option value=""></option>
-                          <option value=""></option>
+                          @isset($lokasis)
+                            @foreach($lokasis as $lokasi)
+                              <option value='{{$lokasi->id_lokasi}}'>{{$lokasi->nm_lokasi}}</option>
+                            @endforeach
+                          @endisset
                         </select>
                       </div>
                     </div>
@@ -226,6 +229,9 @@
         },
         {
           data: 'nm_sales'
+        },
+        {
+          data: 'id_lokasi'
         },
         {
           data: 'alamat_sales'
