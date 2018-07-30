@@ -79,10 +79,11 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select name="lokasi" required="required">
-                          <option value=""></option>
-                          <option value=""></option>
-                          <option value=""></option>
-                          <option value=""></option>
+                          @isset($lokasis)
+                            @foreach($lokasis as $lokasi)
+                              <option value='{{$lokasi->id_lokasi}}'>{{$lokasi->nm_lokasi}}</option>
+                            @endforeach
+                          @endisset
                         </select>
                       </div>
                     </div>
