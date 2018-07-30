@@ -186,8 +186,16 @@
 @section('js')
 <script>
     $(function () {
-        var tgl = $('#tgl').val();
-        var canvaser = $('#canvaser').val();
+        if ($('#tgl').val()==undefined) {
+          var tgl = null;
+        } else {
+          var tgl = $('#tgl').val();
+        }
+        if ($('#canvaser').val()==undefined) {
+          var canvaser = null;
+        } else {
+          var canvaser = $('#canvaser').val();
+        }
         var t = $('#invoice-dompul-table').DataTable({
             serverSide: true,
             processing: true,
