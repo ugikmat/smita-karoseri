@@ -52,6 +52,7 @@ class SalesController extends Controller
       $sales = new Sales;
 
       $sales->nm_sales = $request->get('nm_sales');
+      $sales->id_lokasi = $request->get('lokasi');
       $sales->alamat_sales = $request->get('alamat_sales');
       $sales->no_hp = $request->get('no_hp');
       $sales->save();
