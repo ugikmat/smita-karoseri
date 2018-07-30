@@ -72,13 +72,13 @@ Route::post('getDataView','ViewPrintController@getData');
 Route::get('viewprint/{id}', 'ViewPrintController@print');
 
 // penjualan
+Route::get('/penjualan/dompul/{canvaser}/{tgl}/{downline}', 'PenjualanDompulController@edit');
 Route::get('/penjualan/dompul/invoice-dompul', 'PenjualanDompulController@index');
 Route::post('/penjualan/dompul/invoice-dompul', 'PenjualanDompulController@show');
+Route::put('/invoice_dompul/update/{canvaser}/{tgl}/{downline}/{produk}/{no_faktur}', 'PenjualanDompulController@update');
 Route::get('/invoice_dompul/{canvaser}/{tgl}', 'PenjualanDompulController@data');
-Route::get('/penjualan/dompul/{canvaser}/{tgl}/{downline}', 'PenjualanDompulController@edit');
 Route::get('/edit_invoice_dompul/{canvaser}/{tgl}/{downline}', 'PenjualanDompulController@penjualanData');
 Route::post('/invoice_dompul/store','PenjualanDompulController@store');
-Route::put('/invoice_dompul/update/{canvaser}/{tgl}/{downline}/{produk}/{no_faktur}', 'PenjualanDompulController@update');
 
 Route::post('/penjualan/dompul/verify/{canvaser}/{tgl}/{downline}','PenjualanDompulController@verify');
 
@@ -94,11 +94,10 @@ Route::get('/penjualan/monitoring/mntr-upload', function() {
 // Route::get('/upload/upload', function() {
 //   return view ('/upload/upload');
 // }) -> name('upload');
-
+Route::get('/upload/{transfer}/{upload}', 'UploadDompulController@data');
 Route::get('upload/dompul', 'UploadDompulController@index');
 Route::get('downloadExcel/{type}', 'UploadDompulController@downloadExcel');
 Route::post('importExcel', 'UploadDompulController@importExcel');
-Route::get('/upload/{transfer}/{upload}', 'UploadDompulController@data');
 Route::get('/upload/tgl', 'UploadDompulController@uploadData');
 Route::get('/upload/empty', 'UploadDompulController@empty');
 
