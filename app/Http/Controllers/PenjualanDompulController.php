@@ -225,6 +225,9 @@ class PenjualanDompulController extends Controller
                         ->addColumn('indeks', function ($uploadDompul) {
                               return '';
                             })
+                            // ->addColumn('input', function ($uploadDompul) {
+                            //   return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                            // })->rawColumns(['input'])
                           ->make(true);
     }
 
