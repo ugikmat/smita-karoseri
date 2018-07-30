@@ -151,10 +151,12 @@ return [
                       [
                         'text'  => 'Dompet Pulsa',
                         'url'   => '#',
+                        'icon'  => 'briefcase',
                       ],
                       [
                         'text'  => 'Pemjualan Dompul Head',
                         'url'   => '#',
+                        'icon'  => 'money',
                       ],
                     ],
                   ],

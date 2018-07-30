@@ -196,7 +196,7 @@
       </tfoot>
     </table>
   </div>
-</div>  
+</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -423,6 +423,26 @@
   </div>
 </div>
 
+<!--Modal Aktivasi-->
+<div class="modal fade" id="activationModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="" method="POST" id="activationForm">
+        @csrf @method('activation')
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Apakah Anda Yakin ingin melakukan aktivasi pada file ini?</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+          <button type="submit" class="btn btn-success">Aktivasi</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 @stop @section('js') {{--
 <script type="text/javascript">

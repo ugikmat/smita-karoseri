@@ -101,7 +101,7 @@ td{
           <td></td>
           <td colspan="2"><b>Jumlah Tunai</b></td>
           <td></td>
-          <td><input type="text" id="tunai" name="tunai" class="form-control" value=""></td>
+          <td><input type="text" id="tunai" name="tunai" class="form-control" value="" required="required"></td>
           <td></td>
         </tr>
         <tr>
@@ -226,7 +226,7 @@ td{
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <select name="tipe" required="required" id="tipe">
-                   
+
                       </select>
                     </div>
                   </div>
@@ -291,9 +291,9 @@ td{
   $('#editModal').on('show.bs.modal', function (event) {
     var tgl = $('#tgl').val();
     var canvaser = $('#canvasser').val();
-    var downline = $('#downline').val();    
+    var downline = $('#downline').val();
     var tipe = document.getElementById("tipe");
-    
+
     var button = $(event.relatedTarget) // Button that triggered the modal
     var produk = button.data('produk') // Extract info from data-* attributes
     var tipe_harga = button.data('tipe')
