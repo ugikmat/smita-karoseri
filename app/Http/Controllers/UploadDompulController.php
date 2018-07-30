@@ -184,12 +184,11 @@ class UploadDompulController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function uploadData(Datatables $datatables) {
-        return $datatables->eloquent(UploadDompul::select(DB::raw('tanggal_transfer, tanggal_upload, COUNT(no_faktur) as jumlah_transaksi'))
-        ->groupBy('tanggal_transfer','tanggal_upload')
-        ->orderBy('tanggal_transfer','tanggal_upload'))
+        return $datatables->eloquent(UploadDompul::select(DB::raw('tanggal_transfer, tanggal_upload,status_active, COUNT(no_faktur) as jumlah_transaksi'))
+        ->groupBy('tanggal_transfer','tanggal_upload','status_active'))
        ->addColumn('action', function ($uploadDompul) {
                 return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#detailModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-edit"></i> Lihat Data</a>
-                <a class = "btn btn-xs btn-warning" data-toggle="modal" data-target="#deleteModal"><i class="glyphicon glyphicon-remove"></i> Aktifasi</a>';
+                <a class = "btn btn-xs btn-warning" data-toggle="modal" data-target="#activationModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-remove"></i> Aktifasi</a>';
             })->make(true);
     }
     /**

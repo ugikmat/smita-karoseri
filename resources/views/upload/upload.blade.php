@@ -125,6 +125,7 @@
       <th>Tanggal TRX</th>
       <th>Tanggal Upload</th>
       <th>Qty</th>
+      <th>Aktif</th>
       <th>Action</th>
     </tr>
   </thead>
@@ -132,6 +133,7 @@
     <tr>
       <th>Tanggal TRX</th>
       <th>Tanggal Upload</th>
+      <th>Aktif</th>
       <th>Qty</th>
     </tr>
   </tfoot>
@@ -428,7 +430,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <form action="" method="POST" id="activationForm">
-        @csrf @method('activation')
+        @csrf @method('put')
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Apakah Anda Yakin ingin melakukan aktivasi pada file ini?</h4>
@@ -471,9 +473,12 @@
         },
         {
           data: 'tanggal_upload'
-        },
+        },        
         {
           data: 'jumlah_transaksi'
+        },
+        {
+          data: 'status_active'
         },
         {
           data: 'action',
@@ -577,118 +582,15 @@
     var upload = button.data('upload')
     table.ajax.url(`/upload/${transfer}/${upload}`).load();
   })
+  $('#activationModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var transfer = button.data('transfer') // Extract info from data-* attributes
+    var upload = button.data('upload')
+    $('#activationForm').attr('action',`/upload/aktifasi/${transfer}/${upload}`);
+  })
 </script>
-{{-- <script>
-  $(function () {
-    $('#upload-table').DataTable({
-      serverSide: true,
-      processing: true,
-      ajax: '/upload',
-      columns: [{
-          data: 'id_upload'
-        },
-        {
-          data: 'no_hp_sub_master_dompul'
-        },
-        {
-          data: 'nama_sub_master_dompul'
-        },
-        {
-          data: 'tanggal_transfer'
-        },
-        {
-          data: 'tanggal_upload'
-        },
-        {
-          data: 'no_faktur'
-        },
-        {
-          data: 'produk'
-        },
-        {
-          data: 'qty'
-        },
-        {
-          data: 'balance'
-        },
-        {
-          data: 'diskon'
-        },
-        {
-          data: 'no_hp_downline'
-        },
-        {
-          data: 'nama_downline'
-        },
-        {
-          data: 'status'
-        },
-        {
-          data: 'no_hp_canvasser'
-        },
-        {
-          data: 'nama_canvasser'
-        },
-        {
-          data: 'inbox'
-        },
-        {
-          data: 'print'
-        },
-        {
-          data: 'bayar'
-        },
-        {
-          data: 'action',
-          orderable: false,
-          searchable: false
-        }
-      ],
-      initComplete: function () {
-        this.api().columns().every(function () {
-          var column = this;
-          var input = document.createElement("input");
-          $(input).appendTo($(column.footer()).empty())
-            .on('change', function () {
-              column.search($(this).val(), false, false, true).draw();
-            });
-        });
-      }
-    });
-  });
-</script> --}}
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <script>
   $('.datepicker').datepicker({});
 </script>
-<!-- <script>
-  $('#editModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var name = button.data('name') // Extract info from data-* attributes
-    var id = button.data('id')
-    var tipe = button.data('tipe')
-    var induk = button.data('induk')
-    var nilai = button.data('nilai')
-    var status = button.data('status')
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    var modal = $(this)
-    $('#editForm').attr('action', `/master/satuan/${id}`);
-    modal.find('.modal-body .nama input').val(name)
-    modal.find('.modal-body .id input').val(id)
-    modal.find('.modal-body .tipe input').val(tipe)
-    modal.find('.modal-body .induk input').val(induk)
-    modal.find('.modal-body .nilai input').val(nilai)
-    modal.find('.modal-body .status input').val(status)
-  })
-</script>
-<script>
-  $('#deleteModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var id = button.data('id') // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/master/satuan/${id}`);
-  })
-</script> -->
 @stop
