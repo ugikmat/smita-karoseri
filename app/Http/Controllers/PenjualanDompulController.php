@@ -219,7 +219,7 @@ class PenjualanDompulController extends Controller
     {
         return $datatables->eloquent(UploadDompul::select(DB::raw('nama_downline, COUNT(id_upload) as qty'))
                         ->where('nama_canvasser',$canvaser)
-                        ->where('tanggal_transfer',$tgl)
+                        ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
                         ->where('status_penjualan',0)
                         ->groupBy('nama_downline'))
                         ->addColumn('indeks', function ($uploadDompul) {
