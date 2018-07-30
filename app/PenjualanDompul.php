@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Carbon\Carbon;
 
 class PenjualanDompul extends Model
 {
@@ -20,7 +20,30 @@ class PenjualanDompul extends Model
         'tanggal_penjualan_dompul',
         'tanggal_input'
     ];
-
+     /**
+     * Set the Tanggal Penjualan.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setTanggalPenjualanDompulAttribute($value)
+    {
+        $tgl = Carbon::parse($value);
+        $tgl = $tgl->format('Y-m-d');
+        $this->attributes['tanggal_penjualan_dompul'] = $tgl;
+    }
+    /**
+     * Set the Tanggal Input.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setTanggalInputAttribute($value)
+    {
+        $tgl = Carbon::parse($value);
+        $tgl = $tgl->format('Y-m-d');
+        $this->attributes['tanggal_input'] = $tgl;
+    }
      /**
      * The attributes that are mass assignable.
      *

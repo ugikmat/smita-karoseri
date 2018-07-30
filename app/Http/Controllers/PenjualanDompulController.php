@@ -216,7 +216,7 @@ class PenjualanDompulController extends Controller
                     ->where('status_penjualan',0)
                     ->where('status_active',1)
                     ->update(['status_penjualan' => 1,'id_penjualan_dompul'=>$penjualanDompul->id_penjualan_dompul]);
-        return redirect('/penjualan/dompul/invoice-dompul');
+        return redirect('/penjualan/dompul/list-invoice');
 
     }
 
