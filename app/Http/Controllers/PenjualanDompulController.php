@@ -57,7 +57,7 @@ class PenjualanDompulController extends Controller
     public function edit($canvaser,$tgl,$downline)
     {   $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser','produk')
                         ->where('nama_canvasser',$canvaser)
-                        ->where('tanggal_transfer',$tgl)
+                        ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
                         ->where('nama_downline',$downline)->first();
         if(empty($datas->tipe_dompul)){
             $tipe = 'CVS';
@@ -70,7 +70,7 @@ class PenjualanDompulController extends Controller
                                 ->on('master_harga_dompuls.tipe_harga_dompul','=','upload_dompuls.tipe_dompul');
                         })
                         ->where('nama_canvasser',$canvaser)
-                        ->where('tanggal_transfer',$tgl)
+                        ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
                         ->where('nama_downline',$downline)->get();
         $total = 0;
         foreach ($sums as $key => $value) {
@@ -85,7 +85,7 @@ class PenjualanDompulController extends Controller
      */
     public function update(Request $request,$canvaser,$tgl,$downline,$produk,$no_faktur){
         $data =UploadDompul::where('nama_canvasser',$canvaser)
-                        ->where('tanggal_transfer',$tgl)
+                        ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
                         ->where('nama_downline',$downline)
                         ->where('produk',$produk)
                         ->where('no_faktur',$no_faktur)->first();
@@ -132,7 +132,7 @@ class PenjualanDompulController extends Controller
         $sales = Sales::select('id_sales','nm_sales')->where('nm_sales',$canvaser)->first();
         $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser')
                         ->where('nama_canvasser',$canvaser)
-                        ->where('tanggal_transfer',$tgl)
+                        ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
                         ->where('nama_downline',$downline)->first();
         $sums = UploadDompul::select('upload_dompuls.produk','upload_dompuls.tipe_dompul','upload_dompuls.qty','upload_dompuls.qty_program','master_harga_dompuls.harga_dompul')
                         ->join('master_harga_dompuls',function($join){
@@ -140,7 +140,7 @@ class PenjualanDompulController extends Controller
                                 ->on('master_harga_dompuls.tipe_harga_dompul','=','upload_dompuls.tipe_dompul');
                         })
                         ->where('nama_canvasser',$canvaser)
-                        ->where('tanggal_transfer',$tgl)
+                        ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
                         ->where('nama_downline',$downline)->get();
         $total = 0;
         foreach ($sums as $key => $value) {
@@ -199,7 +199,7 @@ class PenjualanDompulController extends Controller
             $penjualanDompul->bayar_transfer3=$trf3;
             $penjualanDompul->catatan=$catatan;
         $penjualanDompul->save();
-        UploadDompul::where('tanggal_transfer',$tgl)
+        UploadDompul::where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
                     ->where('no_hp_downline',$hp_downline)
                     ->where('nama_canvasser',$nm_sales)
                     ->update(['status_penjualan' => 1,'id_penjualan_dompul'=>$penjualanDompul->id_penjualan_dompul]);
@@ -245,7 +245,7 @@ class PenjualanDompulController extends Controller
                                 ->on('master_harga_dompuls.tipe_harga_dompul','=','upload_dompuls.tipe_dompul');
                         })
                         ->where('nama_canvasser',$canvaser)
-                        ->where('tanggal_transfer',$tgl)
+                        ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
                         ->where('nama_downline',$downline))
                         ->addColumn('total_harga', function ($uploadDompul) {
                               return ($uploadDompul->qty-$uploadDompul->qty_program)*$uploadDompul->harga_dompul;
