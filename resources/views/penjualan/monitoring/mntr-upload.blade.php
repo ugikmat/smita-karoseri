@@ -3,7 +3,7 @@
 @section('title', 'Monitoring Upload')
 
 @section('content_header')
-    <h1>Monitoring Penjualan pload Dompul</h1>
+    <h1>Monitoring Penjualan Upload Dompul</h1>
 @stop
 
 @section('css')
