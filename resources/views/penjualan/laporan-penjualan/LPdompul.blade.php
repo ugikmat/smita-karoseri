@@ -1,9 +1,10 @@
 @extends('adminlte::page')
 
-@section('title', 'Monitoring Upload')
+@section('title', 'Laporan Dompul')
 
 @section('content_header')
-    <h1>Monitoring Penjualan pload Dompul</h1>
+    <h1>Laporan Penjualan Dompul</h1>
+
 @stop
 
 @section('css')
@@ -11,54 +12,25 @@
 @stop
 
 @section('content')
+
 <div class="cotainer-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Tanggal Penjualan
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        : 121118
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput" pull-right>Input Tanggal Penjualan</button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Nama Kasir
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-6">
-        : Ugik
-      </div>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput" pull-right>Input Tanggal Laporan Penjualan</button>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Nama Logistik
+        Tanggal Cetak Laporan
       </div>
-      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-6">
-        : Jovi
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Nama PIC
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-6">
-        : Pras
+        : tgl skarang
       </div>
     </div>
   </div>
 </div>
 
-<!-- kolom data canvasser e pake warna iki yo gik, cek podo ambek buku panduan bgcolor="#afeeee" -->
 
-<table id="m-penjualan-table" class="table responsive" width="100%">
+<table id="lp-dompul-table" class="table responsive" width="100%">
     <thead>
     <tr>
         <th>No.</th>
@@ -103,7 +75,7 @@
         <button type="button" class="close" data-dismiss="modal">
           <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Input Monitoring Penjualan Upload Dompul</h4>
+        <h4 class="modal-title" id="myModalLabel">Input Laporan Penjualan Dompul</h4>
       </div>
       <div class="modal-body">
         <div class="clearfix"></div>
@@ -131,7 +103,7 @@
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset"> <i class="fa fa-repeat"></i> Kosongkan</button>
-                      <button type="submit" class="btn btn-success" ><i class="glyphicon glyphicon-ok"></i>Tampilkan Monitoring Penjualan</button>
+                      <button type="submit" class="btn btn-success" ><i class="glyphicon glyphicon-ok"></i>Tampilkan Laporan Penjualan Dompul</button>
                     </div>
                   </div>
                 </form>
@@ -147,6 +119,7 @@
   </div>
 </div>
 
+
 @stop
 
 @section('js')
@@ -157,18 +130,13 @@
 </script>
 <script>
     $(function () {
-        $('#m-penjualan-table').DataTable({
+        $('#lp-dompul-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/penjualan/dompul-data',
+            ajax: '/lp-dompul-data',
             columns: [
-                {data: 'id_penjualan_dompul'},
-                {data: 'hp_kios'},
-                {data: 'tanggal_penjualan_dompul'},
-                {data: 'tanggal_input'},
-                {data: 'grand_total'},
-                {data: 'bayar_tunai'},
-                {data: 'catatan'},
+                {data: 'id_lokasi'},
+                {data: 'nm_lokasi'},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });
