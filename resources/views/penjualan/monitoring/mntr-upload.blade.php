@@ -160,7 +160,7 @@
         $('#m-penjualan-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/penjualan/dompul-data',
+            ajax: 'mntr-data',
             columns: [
                 {data: 'id_penjualan_dompul'},
                 {data: 'hp_kios'},

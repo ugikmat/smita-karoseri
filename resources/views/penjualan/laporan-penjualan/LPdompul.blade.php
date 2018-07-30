@@ -34,34 +34,31 @@
     <thead>
     <tr>
         <th>No.</th>
-        <th>Canvasser</th>
-        <th>Qty</th>
-        <th>5K</th>
-        <th>10K</th>
-        <th>Rupiah</th>
+        <th>Nama Sales</th>
+        <th>BO</th>
+        <th>Qty Penjualan</th>
+        <th>Total Penjualan</th>
+        <th>Total Tunai</th>
+        <th>BCA</th>
+        <th>Mandiri</th>
+        <th>BRI</th>
+        <th>BNI</th>
+        <th>Piutang</th>
     </tr>
     </thead>
     <tfoot>
       <tr>
         <td></td>
-        <td colspan="2"><b>Total Qty Penjualan Non Program</b></td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-      </tr>
-      <tr>
+        <td><b>Grand Total</b></td>
         <td></td>
-        <td colspan="2"><b>Total Qty Penjualan Program</b></td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-      </tr>
-      <tr>
         <td></td>
-        <td colspan="2"><b>Total All Penjualan</b></td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
     </tfoot>
 </table>
