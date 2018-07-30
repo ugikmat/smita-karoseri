@@ -73,12 +73,12 @@ Route::get('viewprint/{id}', 'ViewPrintController@print');
 
 // penjualan
 Route::post('/penjualan/dompul/verify/{canvaser}/{tgl}/{downline}','PenjualanDompulController@verify');
-Route::get('/penjualan/dompul/list-invoice', 'PenjualanDompulController@list');
+Route::get('/penjualan/dompul/list-invoice', 'ListPenjualanDompulController@index');
 Route::get('/penjualan/dompul/invoice-dompul', 'PenjualanDompulController@index');
 Route::post('/penjualan/dompul/invoice-dompul', 'PenjualanDompulController@show');
 Route::get('/penjualan/dompul/{canvaser}/{tgl}/{downline}', 'PenjualanDompulController@edit');
 Route::post('/invoice_dompul/store','PenjualanDompulController@store');
-Route::get('/invoice_dompul/list', 'PenjualanDompulController@listData');
+Route::get('/invoice_dompul/list/{tgl_penjualan}', 'ListPenjualanDompulController@data');
 Route::put('/invoice_dompul/update/{canvaser}/{tgl}/{downline}/{produk}/{no_faktur}', 'PenjualanDompulController@update');
 Route::get('/invoice_dompul/{canvaser}/{tgl}', 'PenjualanDompulController@data');
 Route::get('/edit_invoice_dompul/{canvaser}/{tgl}/{downline}', 'PenjualanDompulController@penjualanData');

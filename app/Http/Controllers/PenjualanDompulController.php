@@ -44,12 +44,7 @@ class PenjualanDompulController extends Controller
         return redirect('/penjualan/dompul/invoice-dompul')->with(['sales'=>$sales,'tgl'=>$request->get('tgl'),'now'=>Carbon::now('Asia/Jakarta')->format('d-m-Y')]);
         // return view('penjualan.dompul.invoice-dompul')->with(['sales'=>$sales,'tgl'=>$this->nama_tgl,'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
     }
-    /**
-     * Diplay a list of transaction made before
-     */
-    public function list(){
-        return view('penjualan.dompul.list-invoice');
-    }
+    
 
     /**
      * Display a list of transaction
@@ -274,25 +269,5 @@ class PenjualanDompulController extends Controller
                           ->make(true);
     }
 
-    /**
-     * Process dataTable ajax response.
-     *
-     * @param \Yajra\Datatables\Datatables $datatables
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function listData(Datatables $datatables)
-    {
-
-        return $datatables->eloquent(PenjualanDompul::select('penjualan_dompuls.id_penjualan_dompul','master_saless.nm_sales','penjualan_dompuls.no_hp_kios','master_customers.nm_cust','penjualan_dompuls.tanggal_penjualan_dompul','penjualan_dompuls.status_pembayaran')
-                        ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
-                        ->join('master_customers','master_customers.no_hp','=','penjualan_dompuls.no_hp_kios'))
-                        // ->addColumn('indeks', function ($uploadDompul) {
-                        //       return '';
-                        //     })
-                          ->addColumn('action', function ($uploadDompul) {
-                              return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-produk="'.$uploadDompul->produk.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-                            })
-                          ->make(true);
-    }
+    
 }

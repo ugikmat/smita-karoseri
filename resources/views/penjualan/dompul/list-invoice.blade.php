@@ -11,6 +11,9 @@
 @stop
 
 @section('content')
+{{-- @if (session('tgl'))
+  <input type="hidden" id="tgl"value={{ session('tgl')}}></input>
+@endif --}}
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput">Input Tanggal Penjualan</button>
 <table id="list-invoice-table" class="table responsive" width="100%">
     <thead>
@@ -56,7 +59,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input class="datepicker col-md-7 col-xs-12" data-date-format="mm-dd-yyyy">
+                      <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" required>
                     </div>
                   </div>
 
@@ -64,7 +67,8 @@
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset"> <i class="fa fa-repeat"></i> Kosongkan</button>
-                      <input type="submit" class="btn btn-success" value="Tampilkan List Penjualan">
+                      <button class="btn btn-success" type="button" onclick="loadData()" data-dismiss="modal"> </i> Tampilkan List Penjualan</button>
+                      {{-- <input type="btn" class="btn btn-success" onclick="loadData()" value="Tampilkan List Penjualan"> --}}
                       {{-- <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-ok"></i>Tampilkan List Penjualan</button> --}}
                     </div>
                   </div>
@@ -91,11 +95,11 @@
   });
 </script>
 <script>
-    $(function () {
+    // $(function () {
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/invoice_dompul/list',
+            ajax: '/invoice_dompul/list/null',
             // "columnDefs": [ {
             // "searchable": false,
             // "orderable": false,
@@ -118,6 +122,11 @@
         //     cell.innerHTML = i+1;
         //   } );
         // } ).draw();
-    });
+        
+    // });
+    function loadData() {
+          $tgl = $('#tgl').val();
+          t.ajax.url(`/invoice_dompul/list/${$tgl}`).load();
+        }
 </script>
 @stop
