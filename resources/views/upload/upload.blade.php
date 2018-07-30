@@ -402,6 +402,27 @@
   </div>
 </div>
 
+<!--Modal Hapus-->
+<div class="modal fade" id="deleteModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="" method="POST" id="deleteForm">
+        @csrf @method('delete')
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger">Hapus</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <!--Modal Aktivasi-->
 <div class="modal fade" id="activationModal">
   <div class="modal-dialog">
@@ -410,7 +431,7 @@
         @csrf @method('activation')
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Apakah Anda Yakin ingin mengaktivasi file ini?</h4>
+          <h4 class="modal-title">Apakah Anda Yakin ingin melakukan aktivasi pada file ini?</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <!-- Modal footer -->
@@ -422,7 +443,6 @@
     </div>
   </div>
 </div>
-
 
 @stop @section('js') {{--
 <script type="text/javascript">
