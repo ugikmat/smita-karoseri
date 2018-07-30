@@ -16,52 +16,16 @@
 <div class="cotainer-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput" pull-right>Input Tanggal Laporan Penjualan</button>
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Tanggal Cetak Laporan
+        <label class="control-label" for="first-name">Pilih Tanggal</label>
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        : tgl skarang
+          <input class="datepicker" data-date-format="dd-mm-yyyy"><i class="glyphicon glyphicon-calendar">
       </div>
     </div>
   </div>
 </div>
 
-
-<table id="lp-dompul-table" class="table responsive" width="100%">
-    <thead>
-    <tr>
-        <th>No.</th>
-        <th>Nama Sales</th>
-        <th>BO</th>
-        <th>Qty Penjualan</th>
-        <th>Total Penjualan</th>
-        <th>Total Tunai</th>
-        <th>BCA</th>
-        <th>Mandiri</th>
-        <th>BRI</th>
-        <th>BNI</th>
-        <th>Piutang</th>
-    </tr>
-    </thead>
-    <tfoot>
-      <tr>
-        <td></td>
-        <td><b>Grand Total</b></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tfoot>
-</table>
 
 <!--Modal input-->
 <div class="modal fade bs-example-modal-lg" id='modalInput' tabindex="-1" role="dialog" aria-hidden="true">
@@ -92,7 +56,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy">
+                      <input class="datepicker col-md-7 col-xs-12" data-date-format="mm-dd-yyyy">
                     </div>
                   </div>
 
