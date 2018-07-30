@@ -56,7 +56,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input class="datepicker col-md-7 col-xs-12" data-date-format="mm/dd/yyyy">
+                      <input class="datepicker col-md-7 col-xs-12" data-date-format="mm-dd-yyyy">
                     </div>
                   </div>
 

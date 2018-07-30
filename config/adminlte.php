@@ -150,7 +150,7 @@ return [
                     'submenu' => [
                       [
                         'text'  => 'Dompet Pulsa',
-                        'url'   => '#',
+                        'url'   => '/penjualan/laporan-penjualan/LPdompul',
                         'icon'  => 'briefcase',
                       ],
                       [
