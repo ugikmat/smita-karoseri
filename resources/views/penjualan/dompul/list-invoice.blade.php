@@ -15,6 +15,7 @@
   <input type="hidden" id="tgl"value={{ session('tgl')}}></input>
 @endif --}}
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput">Input Tanggal Penjualan</button>
+<form action="" method="post">
 <table id="list-invoice-table" class="table responsive" width="100%">
     <thead>
     <tr>
@@ -29,6 +30,7 @@
     </tr>
     </thead>
 </table>
+</form>
 
 <!--Modal input-->
 <div class="modal fade bs-example-modal-lg" id='modalInput' tabindex="-1" role="dialog" aria-hidden="true">
