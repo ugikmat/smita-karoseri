@@ -28,17 +28,6 @@ class ListPenjualanDompulController extends Controller
     public function index(){
         return view('penjualan.dompul.list-invoice');
     }
-    /**
-     * Display a list of sales based on name
-     * @param \Illuminate\Http\Request
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request)
-    {
-        $sales = Sales::where('status','1')->where('nm_sales',$request->get('id'))->first();
-        return redirect('/penjualan/dompul/list-invoice')->with(['sales'=>$sales,'tgl'=>$request->get('tgl'),'now'=>Carbon::now('Asia/Jakarta')->format('d-m-Y')]);
-        // return view('penjualan.dompul.invoice-dompul')->with(['sales'=>$sales,'tgl'=>$this->nama_tgl,'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
-    }
 
     public function edit($id,$canvaser,$tgl,$downline){
         $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser','produk','tanggal_transfer','id_penjualan_dompul')
@@ -69,6 +58,49 @@ class ListPenjualanDompulController extends Controller
             $total+=(($value->qty-$value->qty_program)*$value->harga_dompul);
         }
         return view('penjualan.dompul.list-edit-p-dompul-ro',['datas'=>$datas,'total'=>$total]);
+    }
+
+    public function update(Request $request){
+        $id = $request->get('id');
+        $tunai = $request->get('tunai');
+        // $trf1 = $request->get('trf1');
+        $bank1 = $request->get('bank1');
+        // $trf2 = $request->get('trf2');
+        $bank2 = $request->get('bank2');
+        // $trf3 = $request->get('trf3');
+        $bank3 = $request->get('bank3');        
+        $catatan = $request->get('catatan');
+        $total = $request->get('total');
+
+        if (!empty($bank1)) {
+            $trf1 = $request->get('trf1');
+        }else{
+            $trf1 = null;    
+        }
+        $bank2 = $request->get('bank2');
+        if (!empty($bank2)) {
+            $trf2 = $request->get('trf2');
+        }else{
+            $trf2 = null;    
+        }
+        $bank3 = $request->get('bank3');        
+        if (!empty($bank3)) {
+            $trf3 = $request->get('trf3');
+        }else{
+            $trf3 = null;    
+        }
+        PenjualanDompul::where('id_penjualan_dompul',$id)
+                        ->update(['bank'=>$bank1,
+                            'bank2'=>$bank2,
+                            'bank3'=>$bank3,
+                            'grand_total'=>$total,
+                            'bayar_tunai'=>$tunai,
+                            'bayar_transfer'=>$trf1,
+                            'bayar_transfer2'=>$trf2,
+                            'bayar_transfer3'=>$trf3,
+                            'catatan'=>$catatan
+                        ]);
+        return redirect('/penjualan/dompul/list-invoice');
     }
     /**
      * Process dataTable ajax response.

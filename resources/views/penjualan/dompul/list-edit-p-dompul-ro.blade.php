@@ -72,7 +72,9 @@
     </div>
   </div>
 </div>
-<form class="" action="" method="post">
+<form action="/list_invoice_dompul/update" method="post">
+  @csrf
+  <input type="hidden" name="id" id="id" value="{{$datas->id_penjualan_dompul}}">
 <table id="list-edit-invoice-table" class="table responsive"  width="100%">
     <thead>
     <tr>
@@ -94,7 +96,7 @@
           <td></td>
           <td>
             @isset($total)
-              {{$total}}
+              <input type="text" name="total" id="total" value="{{$total}}" readonly>
             @endisset
           </td>
           <td></td>
