@@ -7,6 +7,9 @@
 @stop
 
 @section('content')
+<input type="hidden" name="tgl" id="tgl" value="{{$datas->tanggal_transfer}}">
+<input type="hidden" name="customer" id="customer" value="{{$datas->nama_downline}}">
+<input type="hidden" name="sales" id="sales" value="{{$datas->nama_canvasser}}">
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -14,7 +17,9 @@
         No Penjualan
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-        : 12121212
+        <strong>
+        : {{$datas->id_penjualan_dompul}}
+        </strong>
       </div>
     </div>
   </div>
@@ -24,7 +29,9 @@
         Nama Sales
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-        : qwert
+        <strong>
+        : {{$datas->nama_canvasser}}
+        </strong>
       </div>
     </div>
   </div>
@@ -34,7 +41,9 @@
         HP Sales
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-        : 1111111111
+        <strong>
+        : {{$datas->no_hp_canvasser}}
+        </strong>
       </div>
     </div>
   </div>
@@ -44,7 +53,9 @@
         HP Kios
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-        : 12121212
+        <strong>
+        : {{$datas->no_hp_downline}}
+        </strong>
       </div>
     </div>
   </div>
@@ -54,16 +65,20 @@
         Nama Kios
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-        : aaaaaaaaaa
+        <strong>
+        : {{$datas->nama_downline}}
+        </strong>
       </div>
     </div>
   </div>
 </div>
-<form class="" action="index.html" method="post">
+<form action="/list_invoice_dompul/update" method="post">
+  @csrf
+  <input type="hidden" name="id" id="id" value="{{$datas->id_penjualan_dompul}}">
 <table id="list-edit-invoice-table" class="table responsive"  width="100%">
     <thead>
     <tr>
-        <th>No</th>
+        {{-- <th>No</th> --}}
         <th>Uraian</th>
         <th>Tipe</th>
         <th>Harga</th>
@@ -73,115 +88,114 @@
         <th>Action</th>
     </tr>
     </thead>
-    <tfoot>
+      <tfoot>
         <tr>
-          <td></td>
           <td></td>
           <td></td>
           <td colspan="2"><b>Grand Total</b></td>
           <td></td>
-          <td>totalnya</td>
+          <td>
+            @isset($total)
+              <input type="text" name="total" id="total" value="{{$total}}" readonly>
+            @endisset
+          </td>
+          <td></td>
         </tr>
         <tr>
-          <td></td>
           <td></td>
           <td></td>
           <td colspan="2"><b>Jumlah Tunai</b></td>
           <td></td>
-          <td><input type="text" id="tunai" required="required" name="tunai" class="form-control" value=""></td>
+        <td><input type="text" id="tunai" name="tunai" class="form-control" value="{{$penjualanDompul->bayar_tunai}}" required="required"></td>
+          <td></td>
         </tr>
         <tr>
-          <td></td>
           <td></td>
           <td></td>
           <td colspan="2"><b>Bank Transfer 1</b></td>
           <td></td>
           <td>
-            <select>
-              <option value="" selected>-- pilih bank --</option>
-              <option value="bca">BCA</option>
-              <option value="bri">BRI</option>
-              <option value="bni">BNI</option>
-              <option value="mandiri">Mandiri</option>
+            <select name="bank1">
+              <option value="">-- pilih bank --</option>
+              <option value="BCA">BCA</option>
+              <option value="BRI">BRI</option>
+              <option value="BNI">BNI</option>
+              <option value="Mandiri">Mandiri</option>
             </select>
           </td>
+          <td></td>
         </tr>
         <tr>
-          <td></td>
           <td></td>
           <td></td>
           <td colspan="2"><b>Jumlah Transfer 1</b></td>
           <td></td>
-          <td><input type="text" id="trf1" required="required" name="trf1" class="form-control" value=""></td>
+          <td><input type="text" id="trf1" name="trf1" class="form-control" value=""></td>
+          <td></td>
         </tr>
         <tr>
-          <td></td>
           <td></td>
           <td></td>
           <td colspan="2"><b>Bank Transfer 2</b></td>
           <td></td>
           <td>
-            <select>
-              <option value="" selected>-- pilih bank --</option>
-              <option value="bca">BCA</option>
-              <option value="bri">BRI</option>
-              <option value="bni">BNI</option>
-              <option value="mandiri">Mandiri</option>
+            <select name="bank2">
+              <option value="">-- pilih bank --</option>
+              <option value="BCA">BCA</option>
+              <option value="BRI">BRI</option>
+              <option value="BNI">BNI</option>
+              <option value="Mandiri">Mandiri</option>
             </select>
           </td>
+          <td></td>
         </tr>
         <tr>
-          <td></td>
           <td></td>
           <td></td>
           <td colspan="2"><b>Jumlah Transfer 2</b></td>
           <td></td>
-          <td><input type="text" id="trf2" required="required" name="trf2" class="form-control" value=""></td>
+          <td><input type="text" id="trf2" name="trf2" class="form-control" value=""></td>
+          <td></td>
         </tr>
         <tr>
-          <td></td>
           <td></td>
           <td></td>
           <td colspan="2"><b>Bank Transfer 3</b></td>
           <td></td>
           <td>
-            <select>
-              <option value="" selected>-- pilih bank --</option>
-              <option value="bca">BCA</option>
-              <option value="bri">BRI</option>
-              <option value="bni">BNI</option>
-              <option value="mandiri">Mandiri</option>
+            <select name="bank3">
+              <option value="">-- pilih bank --</option>
+              <option value="BCA">BCA</option>
+              <option value="BRI">BRI</option>
+              <option value="BNI">BNI</option>
+              <option value="Mandiri">Mandiri</option>
             </select>
           </td>
+          <td></td>
         </tr>
         <tr>
-          <td></td>
           <td></td>
           <td></td>
           <td colspan="2"><b>Jumlah Transfer 3</b></td>
           <td></td>
-          <td><input type="text" id="trf3" required="required" name="trf3" class="form-control" value=""></td>
+          <td><input type="text" id="trf3" name="trf3" class="form-control" value=""></td>
+          <td></td>
         </tr>
         <tr>
-          <td></td>
           <td></td>
           <td></td>
           <td colspan="2"><b>Catatan</b></td>
           <td></td>
-          <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value=""></td>
+          <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{$penjualanDompul->catatan}}"></td>
+          <td></td>
         </tr>
         <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>
+          <td colspan="6">
             <div class="pull-right">
               <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Selesai</button>
             </div>
           </td>
+          <td></td>
         </tr>
     </tfoot>
 </table>
@@ -209,25 +223,15 @@
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="">
+                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/invoice_dompul/update/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}/{{$datas->produk}}">
                   @csrf @method('put')
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <select name="tipe" required="required">
-                        <option value="selected" selected>-- Pilih Tipe Dompul --</option>
-                        <option value="ds">DS</option>
-                        <option value="cvs">CVS</option>
-                        <option value="hi">HI</option>
-                        <option value="server">SERVER</option>
-                        <option value="sde">SDE</option>
-                        <option value="cvs1">CVS1</option>
-                        <option value="cvs2">CVS2</option>
-                        <option value="cvs3">CVS3</option>
-                        <option value="server1">SERVER1</option>
-                        <option value="server2">SERVER2</option>
+                      <select name="tipe" required="required" id="tipe">
+
                       </select>
                     </div>
                   </div>
@@ -237,7 +241,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="">
+                      <input type="text" id="first-name" required="required" name="qty_program" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 
@@ -269,21 +273,53 @@
 @section('js')
 <script>
     $(function () {
+        var tgl = $('#tgl').val();
+        var sales = $('#sales').val();
+        var customer = $('#customer').val();
         $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '',
+            ajax: `/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
             columns: [
-                {data: 'id_penjualan_dompul'},
-                {data: 'hp_kios'},
-                {data: 'tanggal_penjualan_dompul'},
-                {data: 'tanggal_input'},
-                {data: 'grand_total'},
-                {data: 'bayar_tunai'},
-                {data: 'catatan'},
-                {data: 'action', orderable: false, searchable: false}
+              {data: 'produk'},
+              {data: 'tipe_dompul'},
+              {data: 'harga_dompul'},
+              {data: 'qty'},
+              {data: 'qty_program'},
+              {data: 'total_harga'},
+              {data: 'action', orderable: false, searchable: false}
             ]
         });
     });
+</script>
+<script>
+  $('#editModal').on('show.bs.modal', function (event) {
+    var tgl = $('#tgl').val();
+    var canvaser = $('#sales').val();
+    var downline = $('#customer').val();
+    var tipe = document.getElementById("tipe");
+
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var produk = button.data('produk') // Extract info from data-* attributes
+    var tipe_harga = button.data('tipe')
+    var no_faktur = button.data('faktur')
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    while (tipe.firstChild) {
+        tipe.removeChild(tipe.firstChild);
+    }
+    var default_opt = document.createElement('option');
+    default_opt.value = 'default';
+    default_opt.innerHTML = '-- Pilih Tipe Dompul --';
+    tipe.appendChild(default_opt);
+    tipe_harga.forEach(element => {
+      var opt = document.createElement('option');
+      opt.value = element.tipe_harga_dompul;
+      opt.innerHTML = element.tipe_harga_dompul;
+      tipe.appendChild(opt);
+    });
+    console.log(produk);
+    $('#editForm').attr('action', `/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
+  })
 </script>
 @stop

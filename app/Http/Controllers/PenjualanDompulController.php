@@ -44,18 +44,13 @@ class PenjualanDompulController extends Controller
         return redirect('/penjualan/dompul/invoice-dompul')->with(['sales'=>$sales,'tgl'=>$request->get('tgl'),'now'=>Carbon::now('Asia/Jakarta')->format('d-m-Y')]);
         // return view('penjualan.dompul.invoice-dompul')->with(['sales'=>$sales,'tgl'=>$this->nama_tgl,'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
     }
-    /**
-     * Diplay a list of transaction made before
-     */
-    public function list(){
-        return view('penjualan.dompul.list-invoice');
-    }
+    
 
     /**
      * Display a list of transaction
      */
     public function edit($canvaser,$tgl,$downline)
-    {   $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser','produk')
+    {   $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser','produk','tanggal_transfer')
                         ->where('nama_canvasser',$canvaser)
                         ->where('status_penjualan',0)
                         ->where('status_active',1)
@@ -87,16 +82,18 @@ class PenjualanDompulController extends Controller
      * Update Upload Dompul tipe and price, back to edit
      * 
      */
-    public function update(Request $request,$canvaser,$tgl,$downline,$produk,$no_faktur){
+    public function update(Request $request,$canvaser,$tgl,$downline,$produk,$no_faktur,$status_penjualan){
         $data =UploadDompul::where('nama_canvasser',$canvaser)
-                        ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
+                        // ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
+                        ->where('tanggal_transfer',$tgl)
                         ->where('nama_downline',$downline)
                         ->where('produk',$produk)
-                        ->where('status_penjualan',0)
+                        ->where('status_penjualan',$status_penjualan)
                         ->where('status_active',1)
                         ->where('no_faktur',$no_faktur)->first();
         $tipe = $request->get('tipe');
         $qty_program = $request->get('qty_program');
+        $status_penjualans=$status_penjualan;
         
         if($tipe != 'default') {
             $data->tipe_dompul = $tipe;
@@ -138,7 +135,8 @@ class PenjualanDompulController extends Controller
         $sales = Sales::select('id_sales','nm_sales')->where('nm_sales',$canvaser)->first();
         $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser')
                         ->where('nama_canvasser',$canvaser)
-                        ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
+                        // ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
+                        ->where('tanggal_transfer',$tgl)
                         ->where('status_penjualan',0)
                         ->where('status_active',1)
                         ->where('nama_downline',$downline)->first();
@@ -150,7 +148,7 @@ class PenjualanDompulController extends Controller
                         ->where('nama_canvasser',$canvaser)
                         ->where('status_penjualan',0)
                         ->where('status_active',1)
-                        ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
+                        ->where('tanggal_transfer',$tgl)
                         ->where('nama_downline',$downline)->get();
         $total = 0;
         foreach ($sums as $key => $value) {
@@ -216,7 +214,7 @@ class PenjualanDompulController extends Controller
                     ->where('status_penjualan',0)
                     ->where('status_active',1)
                     ->update(['status_penjualan' => 1,'id_penjualan_dompul'=>$penjualanDompul->id_penjualan_dompul]);
-        return redirect('/penjualan/dompul/invoice-dompul');
+        return redirect('/penjualan/dompul/list-invoice');
 
     }
 
@@ -259,7 +257,8 @@ class PenjualanDompulController extends Controller
                                 ->on('master_harga_dompuls.tipe_harga_dompul','=','upload_dompuls.tipe_dompul');
                         })
                         ->where('nama_canvasser',$canvaser)
-                        ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
+                        // ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
+                        ->where('tanggal_transfer',$tgl)
                         ->where('nama_downline',$downline)
                         ->where('status_penjualan',0)
                         ->where('status_active',1))
@@ -274,25 +273,5 @@ class PenjualanDompulController extends Controller
                           ->make(true);
     }
 
-    /**
-     * Process dataTable ajax response.
-     *
-     * @param \Yajra\Datatables\Datatables $datatables
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function listData(Datatables $datatables)
-    {
-
-        return $datatables->eloquent(PenjualanDompul::select('penjualan_dompuls.id_penjualan_dompul','master_saless.nm_sales','penjualan_dompuls.no_hp_kios','master_customers.nm_cust','penjualan_dompuls.tanggal_penjualan_dompul','penjualan_dompuls.status_pembayaran')
-                        ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
-                        ->join('master_customers','master_customers.no_hp','=','penjualan_dompuls.no_hp_kios'))
-                        // ->addColumn('indeks', function ($uploadDompul) {
-                        //       return '';
-                        //     })
-                          ->addColumn('action', function ($uploadDompul) {
-                              return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-produk="'.$uploadDompul->produk.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-                            })
-                          ->make(true);
-    }
+    
 }

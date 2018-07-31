@@ -16,8 +16,8 @@ td{
 
 @section('content')
 <div class="container-fluid">
-  @isset($tgl)
-    <input type="hidden" name="tgl" id="tgl" value="{{$tgl}}">
+  @isset($datas)
+    <input type="hidden" name="tgl" id="tgl" value="{{$datas->tanggal_transfer}}">
   @endisset
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -68,7 +68,7 @@ td{
     </div>
   </div>
 </div>
-<form class="invoice-dompul" action="/penjualan/dompul/verify/{{$datas->nama_canvasser}}/{{$tgl}}/{{$datas->nama_downline}}" method="post">
+<form class="invoice-dompul" action="/penjualan/dompul/verify/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}" method="post">
   @csrf
 <table id="invoice-dompul-table" class="table responsive"  width="100%">
     <thead>
@@ -218,7 +218,7 @@ td{
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/invoice_dompul/update/{{$datas->nama_canvasser}}/{{$tgl}}/{{$datas->nama_downline}}/{{$datas->produk}}">
+                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/invoice_dompul/update/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}/{{$datas->produk}}">
                   @csrf @method('put')
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul
@@ -314,7 +314,7 @@ td{
       tipe.appendChild(opt);
     });
     console.log(produk);
-    $('#editForm').attr('action', `/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}`);
+    $('#editForm').attr('action', `/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/0`);
   })
 </script>
 @stop
