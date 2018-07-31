@@ -57,7 +57,8 @@ class ListPenjualanDompulController extends Controller
         foreach ($sums as $key => $value) {
             $total+=(($value->qty-$value->qty_program)*$value->harga_dompul);
         }
-        return view('penjualan.dompul.list-edit-p-dompul-ro',['datas'=>$datas,'total'=>$total]);
+        $penjualanDompul = PenjualanDompul::where('id_penjualan_dompul',$id)->first();
+        return view('penjualan.dompul.list-edit-p-dompul-ro',['datas'=>$datas,'total'=>$total,'penjualanDompul'=>$penjualanDompul]);
     }
 
     public function update(Request $request){

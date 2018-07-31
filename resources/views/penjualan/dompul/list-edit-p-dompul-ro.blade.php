@@ -106,7 +106,7 @@
           <td></td>
           <td colspan="2"><b>Jumlah Tunai</b></td>
           <td></td>
-          <td><input type="text" id="tunai" name="tunai" class="form-control" value="" required="required"></td>
+        <td><input type="text" id="tunai" name="tunai" class="form-control" value="{{$penjualanDompul->bayar_tunai}}" required="required"></td>
           <td></td>
         </tr>
         <tr>
@@ -186,7 +186,7 @@
           <td></td>
           <td colspan="2"><b>Catatan</b></td>
           <td></td>
-          <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value=""></td>
+          <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{$penjualanDompul->catatan}}"></td>
           <td></td>
         </tr>
         <tr>
