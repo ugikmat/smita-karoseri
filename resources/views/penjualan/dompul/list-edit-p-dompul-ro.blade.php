@@ -7,9 +7,9 @@
 @stop
 
 @section('content')
-<input type="hidden" name="tgl" id="tgl" value="{{$penjualanDompul->tanggal_penjualan_dompul}}">
-<input type="hidden" name="customer" id="customer" value="{{$penjualanDompul->nm_cust}}">
-<input type="hidden" name="sales" id="sales" value="{{$penjualanDompul->nm_sales}}">
+<input type="hidden" name="tgl" id="tgl" value="{{$datas->tanggal_transfer}}">
+<input type="hidden" name="customer" id="customer" value="{{$datas->nama_downline}}">
+<input type="hidden" name="sales" id="sales" value="{{$datas->nama_canvasser}}">
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -18,7 +18,7 @@
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
         <strong>
-        : {{$penjualanDompul->id_penjualan_dompul}}
+        : {{$datas->id_penjualan_dompul}}
         </strong>
       </div>
     </div>
@@ -30,7 +30,7 @@
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
         <strong>
-        : {{$penjualanDompul->nm_sales}}
+        : {{$datas->nama_canvasser}}
         </strong>
       </div>
     </div>
@@ -42,7 +42,7 @@
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
         <strong>
-        : {{$penjualanDompul->no_hp}}
+        : {{$datas->no_hp_canvasser}}
         </strong>
       </div>
     </div>
@@ -54,7 +54,7 @@
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
         <strong>
-        : {{$penjualanDompul->no_hp_kios}}
+        : {{$datas->no_hp_downline}}
         </strong>
       </div>
     </div>
@@ -66,7 +66,7 @@
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
         <strong>
-        : {{$penjualanDompul->nm_cust}}
+        : {{$datas->nama_downline}}
         </strong>
       </div>
     </div>
@@ -221,7 +221,7 @@
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="">
+                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/invoice_dompul/update/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}/{{$datas->produk}}">
                   @csrf @method('put')
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul

@@ -41,10 +41,18 @@ class ListPenjualanDompulController extends Controller
     }
 
     public function edit($id,$canvaser,$tgl,$downline){
-        $penjualanDompul = PenjualanDompul::select('penjualan_dompuls.id_penjualan_dompul','master_saless.nm_sales','master_saless.no_hp','penjualan_dompuls.no_hp_kios','master_customers.nm_cust','penjualan_dompuls.tanggal_penjualan_dompul')
-                            ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
-                            ->join('master_customers','master_customers.no_hp','=','penjualan_dompuls.no_hp_kios')
-                            ->where('id_penjualan_dompul',$id)->first();
+        $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser','produk','tanggal_transfer','id_penjualan_dompul')
+                        ->where('nama_canvasser',$canvaser)
+                        ->where('status_penjualan',1)
+                        ->where('status_active',1)
+                        // ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
+                        ->where('tanggal_transfer',$tgl)
+                        ->where('id_penjualan_dompul',$id)
+                        ->where('nama_downline',$downline)->first();
+        // $penjualanDompul = PenjualanDompul::select('penjualan_dompuls.id_penjualan_dompul','master_saless.nm_sales','master_saless.no_hp','penjualan_dompuls.no_hp_kios','master_customers.nm_cust','penjualan_dompuls.tanggal_penjualan_dompul')
+        //                     ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
+        //                     ->join('master_customers','master_customers.no_hp','=','penjualan_dompuls.no_hp_kios')
+        //                     ->where('id_penjualan_dompul',$id)->first();
         $sums = UploadDompul::select('upload_dompuls.produk','upload_dompuls.tipe_dompul','upload_dompuls.qty','upload_dompuls.qty_program','master_harga_dompuls.harga_dompul')
                         ->join('master_harga_dompuls',function($join){
                             $join->on('master_harga_dompuls.nama_harga_dompul','=','upload_dompuls.produk')
@@ -60,7 +68,7 @@ class ListPenjualanDompulController extends Controller
         foreach ($sums as $key => $value) {
             $total+=(($value->qty-$value->qty_program)*$value->harga_dompul);
         }
-        return view('penjualan.dompul.list-edit-p-dompul-ro',['penjualanDompul'=>$penjualanDompul,'total'=>$total]);
+        return view('penjualan.dompul.list-edit-p-dompul-ro',['datas'=>$datas,'total'=>$total]);
     }
     /**
      * Process dataTable ajax response.
