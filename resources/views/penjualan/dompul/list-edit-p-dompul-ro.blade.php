@@ -293,8 +293,8 @@
 <script>
   $('#editModal').on('show.bs.modal', function (event) {
     var tgl = $('#tgl').val();
-    var canvaser = $('#canvasser').val();
-    var downline = $('#downline').val();
+    var canvaser = $('#sales').val();
+    var downline = $('#customer').val();
     var tipe = document.getElementById("tipe");
 
     var button = $(event.relatedTarget) // Button that triggered the modal
@@ -317,7 +317,7 @@
       tipe.appendChild(opt);
     });
     console.log(produk);
-    $('#editForm').attr('action', `/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}`);
+    $('#editForm').attr('action', `/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
   })
 </script>
 @stop

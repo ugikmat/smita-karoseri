@@ -50,7 +50,7 @@ class PenjualanDompulController extends Controller
      * Display a list of transaction
      */
     public function edit($canvaser,$tgl,$downline)
-    {   $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser','produk')
+    {   $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser','produk','tanggal_transfer')
                         ->where('nama_canvasser',$canvaser)
                         ->where('status_penjualan',0)
                         ->where('status_active',1)
@@ -82,16 +82,18 @@ class PenjualanDompulController extends Controller
      * Update Upload Dompul tipe and price, back to edit
      * 
      */
-    public function update(Request $request,$canvaser,$tgl,$downline,$produk,$no_faktur){
+    public function update(Request $request,$canvaser,$tgl,$downline,$produk,$no_faktur,$status_penjualan){
         $data =UploadDompul::where('nama_canvasser',$canvaser)
-                        ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
+                        // ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
+                        ->where('tanggal_transfer',$tgl)
                         ->where('nama_downline',$downline)
                         ->where('produk',$produk)
-                        ->where('status_penjualan',0)
+                        ->where('status_penjualan',$status_penjualan)
                         ->where('status_active',1)
                         ->where('no_faktur',$no_faktur)->first();
         $tipe = $request->get('tipe');
         $qty_program = $request->get('qty_program');
+        $status_penjualans=$status_penjualan;
         
         if($tipe != 'default') {
             $data->tipe_dompul = $tipe;
@@ -133,7 +135,8 @@ class PenjualanDompulController extends Controller
         $sales = Sales::select('id_sales','nm_sales')->where('nm_sales',$canvaser)->first();
         $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser')
                         ->where('nama_canvasser',$canvaser)
-                        ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
+                        // ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
+                        ->where('tanggal_transfer',$tgl)
                         ->where('status_penjualan',0)
                         ->where('status_active',1)
                         ->where('nama_downline',$downline)->first();
@@ -145,7 +148,7 @@ class PenjualanDompulController extends Controller
                         ->where('nama_canvasser',$canvaser)
                         ->where('status_penjualan',0)
                         ->where('status_active',1)
-                        ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
+                        ->where('tanggal_transfer',$tgl)
                         ->where('nama_downline',$downline)->get();
         $total = 0;
         foreach ($sums as $key => $value) {
@@ -254,7 +257,8 @@ class PenjualanDompulController extends Controller
                                 ->on('master_harga_dompuls.tipe_harga_dompul','=','upload_dompuls.tipe_dompul');
                         })
                         ->where('nama_canvasser',$canvaser)
-                        ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
+                        // ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
+                        ->where('tanggal_transfer',$tgl)
                         ->where('nama_downline',$downline)
                         ->where('status_penjualan',0)
                         ->where('status_active',1))
