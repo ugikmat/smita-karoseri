@@ -63,20 +63,17 @@
     <tr>
         <th rowspan="2">No.</th>
         <th rowspan="2">Canvasser</th>
-        <th colspan="3">5K</th>
-        <th colspan="3">10K</th>
-        <th colspan="3">Rupiah</th>
+        <th colspan="2">5K</th>
+        <th colspan="2">10K</th>
+        <th colspan="2">Rupiah</th>
     </tr>
     <tr>
       <th>Program</th>
       <th>Non Program</th>
-      <th>Rupiah</th>
       <th>Program</th>
       <th>Non Program</th>
-      <th>Rupiah</th>
       <th>Program</th>
       <th>Non Program</th>
-      <th>Rupiah</th>
     </tr>
     </thead>
     <tfoot>
@@ -89,16 +86,13 @@
         <td>harganya(dari database)</td>
         <td>harganya(dari database)</td>
         <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
       </tr>
       <tr>
         <td></td>
         <td><b>Total Keseluruhan</b></td>
-        <td colspan="3">harganya(dari database)</td>
-        <td colspan="3">harganya(dari database)</td>
-        <td colspan="3">harganya(dari database)</td>
+        <td colspan="2">harganya(dari database)</td>
+        <td colspan="2">harganya(dari database)</td>
+        <td colspan="2">harganya(dari database)</td>
       </tr>
     </tfoot>
 </table>
