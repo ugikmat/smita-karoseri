@@ -61,6 +61,13 @@ class ListPenjualanDompulController extends Controller
         return view('penjualan.dompul.list-edit-p-dompul-ro',['datas'=>$datas,'total'=>$total,'penjualanDompul'=>$penjualanDompul]);
     }
 
+    public function verif($id){
+        PenjualanDompul::where('id_penjualan_dompul',$id)
+                        ->update(['status_pembayaran'=>1
+                        ]);
+        return redirect()->back();
+    }
+
     public function update(Request $request){
         $id = $request->get('id');
         $tunai = $request->get('tunai');
@@ -90,17 +97,68 @@ class ListPenjualanDompulController extends Controller
         }else{
             $trf3 = 0;    
         }
-        PenjualanDompul::where('id_penjualan_dompul',$id)
-                        ->update(['bank'=>$bank1,
-                            'bank2'=>$bank2,
-                            'bank3'=>$bank3,
-                            'grand_total'=>$total,
-                            'bayar_tunai'=>$tunai,
-                            'bayar_transfer'=>$trf1,
-                            'bayar_transfer2'=>$trf2,
-                            'bayar_transfer3'=>$trf3,
-                            'catatan'=>$catatan
-                        ]);
+        $penjualanDompul = PenjualanDompul::where('id_penjualan_dompul',$id)->first();
+        switch ($bank1) {
+                case 'BCA Pusat':
+                    $penjualanDompul->bca_pusat=$trf1;
+                    break;
+                case 'BCA Cabang':
+                    $penjualanDompul->bca_cabang=$trf1;
+                    break;
+                case 'Mandiri':
+                    $penjualanDompul->mandiri=$trf1;
+                    break;
+                case 'BNI':
+                    $penjualanDompul->bni=$trf1;
+                    break;
+                case 'BRI':
+                    $penjualanDompul->bri=$trf1;
+                    break;
+                default:
+                    break;
+            }
+            switch ($bank2) {
+                 case 'BCA Pusat':
+                    $penjualanDompul->bca_pusat=$trf2;
+                    break;
+                case 'BCA Cabang':
+                    $penjualanDompul->bca_cabang=$trf2;
+                    break;
+                case 'Mandiri':
+                    $penjualanDompul->mandiri=$trf2;
+                    break;
+                case 'BNI':
+                    $penjualanDompul->bni=$trf2;
+                    break;
+                case 'BRI':
+                    $penjualanDompul->bri=$trf2;
+                    break;
+                default:
+                    break;
+            }
+            switch ($bank3) {
+                 case 'BCA Pusat':
+                    $penjualanDompul->bca_pusat=$trf3;
+                    break;
+                case 'BCA Cabang':
+                    $penjualanDompul->bca_cabang=$trf3;
+                    break;
+                case 'Mandiri':
+                    $penjualanDompul->mandiri=$trf3;
+                    break;
+                case 'BNI':
+                    $penjualanDompul->bni=$trf3;
+                    break;
+                case 'BRI':
+                    $penjualanDompul->bri=$trf3;
+                    break;
+                default:
+                    break;
+            }
+            $penjualanDompul->grand_total=$total;
+            $penjualanDompul->bayar_tunai=$tunai;
+            $penjualanDompul->catatan=$catatan;
+            $penjualanDompul->save();
         return redirect('/penjualan/dompul/list-invoice');
     }
     /**
@@ -129,7 +187,8 @@ class ListPenjualanDompulController extends Controller
                               '<a class="btn btn-xs btn-primary" 
                               href="/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
                               <i class="glyphicon glyphicon-edit"></i> Edit
-                              </a>';
+                              </a>
+                              <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>';
                             })
                           ->make(true);
     }

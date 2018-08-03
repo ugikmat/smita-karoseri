@@ -151,5 +151,10 @@
           $tgl = $('#tgl').val();
           t.ajax.url(`/invoice_dompul/list/${$tgl}`).load();
         }
+$('#verificationModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id') // Extract info from data-* attributes
+    $('#verificationForm').attr('action',`/invoice_dompul/verify/${id}`);
+  })
 </script>
 @stop
