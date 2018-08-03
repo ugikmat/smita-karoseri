@@ -127,16 +127,38 @@
 </script>
 <script>
     $(function () {
-        $('#lp-dompul-table').DataTable({
+        var t = $('#lp-dompul-table').DataTable({
             serverSide: true,
             processing: true,
             ajax: '/lp-dompul-data',
+            "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+                } ],
+            "order": [[ 1, 'asc' ]],
+            columnDefs: [
+                {
+                    targets:1,
+                    render: function ( data, type, row, meta ) {
+                        if(type === 'display'){
+                            data = `<a class="link-post" href="/penjualan/dompul/${canvaser}/${tgl}/${data}">` + data + '</a>';
+                        }
+                        return data;
+                    }
+                }
+            ],
             columns: [
                 {data: 'id_lokasi'},
                 {data: 'nm_lokasi'},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });
+        t.on( 'order.dt search.dt', function () {
+        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+          } );
+        } ).draw();
     });
 </script>
 @stop
