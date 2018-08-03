@@ -33,13 +33,13 @@
 <table id="lp-dompul-table" class="table responsive" width="100%">
     <thead>
     <tr>
-        <th>No.</th>
+        <th>No</th>
         <th>Nama Sales</th>
-        <th>BO</th>
         <th>Qty Penjualan</th>
         <th>Total Penjualan</th>
         <th>Total Tunai</th>
-        <th>BCA</th>
+        <th>BCA Pusat</th>
+        <th>BCA Cabang</th>
         <th>Mandiri</th>
         <th>BRI</th>
         <th>BNI</th>
@@ -50,7 +50,6 @@
       <tr>
         <td></td>
         <td><b>Grand Total</b></td>
-        <td></td>
         <td></td>
         <td></td>
         <td></td>
@@ -92,7 +91,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy">
+                      <input class="datepicker col-md-7 col-xs-12" id="tgl" data-date-format="dd-mm-yyyy">
                     </div>
                   </div>
 
@@ -100,7 +99,7 @@
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset"> <i class="fa fa-repeat"></i> Kosongkan</button>
-                      <button type="submit" class="btn btn-success" ><i class="glyphicon glyphicon-ok"></i>Tampilkan Laporan Penjualan Dompul</button>
+                      <button type="button" onclick="loadData()" class="btn btn-success" data-dismiss="modal"><i class="glyphicon glyphicon-ok"></i>Tampilkan Laporan Penjualan Dompul</button>
                     </div>
                   </div>
                 </form>
@@ -126,11 +125,11 @@
   });
 </script>
 <script>
-    $(function () {
+    // $(function () {
         var t = $('#lp-dompul-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/lp-dompul-data',
+            ajax: '/laporan-penjualan/null',
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -142,16 +141,24 @@
                     targets:1,
                     render: function ( data, type, row, meta ) {
                         if(type === 'display'){
-                            data = `<a class="link-post" href="/penjualan/dompul/${canvaser}/${tgl}/${data}">` + data + '</a>';
+                            data = `<a class="link-post" href="/penjualan/dompul/">` + data + '</a>';
                         }
                         return data;
                     }
                 }
             ],
             columns: [
-                {data: 'id_lokasi'},
-                {data: 'nm_lokasi'},
-                {data: 'action', orderable: false, searchable: false}
+                {data: 'index'},
+                {data: 'nm_sales'},
+                {data: 'qty'},
+                {data: 'total_penjualan'},
+                {data: 'total_tunai'},
+                {data: 'bca_pusat'},
+                {data: 'bca_cabang'},
+                {data: 'mandiri'},
+                {data: 'bni'},
+                {data: 'bri'},
+                {data: 'piutang'},
             ]
         });
         t.on( 'order.dt search.dt', function () {
@@ -159,6 +166,10 @@
             cell.innerHTML = i+1;
           } );
         } ).draw();
-    });
+        function loadData() {
+          $tgl = $('#tgl').val();
+          t.ajax.url(`/laporan-penjualan/${$tgl}`).load();
+        }
+    // });
 </script>
 @stop

@@ -117,19 +117,19 @@ class PenjualanDompulController extends Controller
         if (!empty($bank1)) {
             $trf1 = $request->get('trf1');
         }else{
-            $trf1 = '';    
+            $trf1 = 0;
         }
         $bank2 = $request->get('bank2');
         if (!empty($bank2)) {
             $trf2 = $request->get('trf2');
         }else{
-            $trf2 = '';    
+            $trf2 = 0;
         }
         $bank3 = $request->get('bank3');        
         if (!empty($bank3)) {
             $trf3 = $request->get('trf3');
         }else{
-            $trf3 = '';    
+            $trf3 = 0;    
         }
         $catatan = $request->get('catatan'); 
         $sales = Sales::select('id_sales','nm_sales')->where('nm_sales',$canvaser)->first();
@@ -198,14 +198,65 @@ class PenjualanDompulController extends Controller
             $penjualanDompul->no_user=$user;
             $penjualanDompul->tanggal_penjualan_dompul=$tgl;
             $penjualanDompul->tanggal_input=$tgl_input;
-            $penjualanDompul->bank=$bank1;
-            $penjualanDompul->bank2=$bank2;
-            $penjualanDompul->bank3=$bank3;
+            switch ($bank1) {
+                case 'BCA Pusat':
+                    $penjualanDompul->bca_pusat=$trf1;
+                    break;
+                case 'BCA Cabang':
+                    $penjualanDompul->bca_cabang=$trf1;
+                    break;
+                case 'Mandiri ':
+                    $penjualanDompul->mandiri=$trf1;
+                    break;
+                case 'BNI ':
+                    $penjualanDompul->bni=$trf1;
+                    break;
+                case 'BRI ':
+                    $penjualanDompul->bri=$trf1;
+                    break;
+                default:
+                    break;
+            }
+            switch ($bank2) {
+                 case 'BCA Pusat':
+                    $penjualanDompul->bca_pusat=$trf2;
+                    break;
+                case 'BCA Cabang':
+                    $penjualanDompul->bca_cabang=$trf2;
+                    break;
+                case 'Mandiri ':
+                    $penjualanDompul->mandiri=$trf2;
+                    break;
+                case 'BNI ':
+                    $penjualanDompul->bni=$trf2;
+                    break;
+                case 'BRI ':
+                    $penjualanDompul->bri=$trf2;
+                    break;
+                default:
+                    break;
+            }
+            switch ($bank3) {
+                 case 'BCA Pusat':
+                    $penjualanDompul->bca_pusat=$trf3;
+                    break;
+                case 'BCA Cabang':
+                    $penjualanDompul->bca_cabang=$trf3;
+                    break;
+                case 'Mandiri ':
+                    $penjualanDompul->mandiri=$trf3;
+                    break;
+                case 'BNI ':
+                    $penjualanDompul->bni=$trf3;
+                    break;
+                case 'BRI ':
+                    $penjualanDompul->bri=$trf3;
+                    break;
+                default:
+                    break;
+            }
             $penjualanDompul->grand_total=$total;
             $penjualanDompul->bayar_tunai=$tunai;
-            $penjualanDompul->bayar_transfer=$trf1;
-            $penjualanDompul->bayar_transfer2=$trf2;
-            $penjualanDompul->bayar_transfer3=$trf3;
             $penjualanDompul->catatan=$catatan;
         $penjualanDompul->save();
         UploadDompul::where('tanggal_transfer',$tgl)
