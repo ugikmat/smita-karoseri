@@ -168,7 +168,8 @@ return [
                 'submenu' => [
                   [
                     'text'  => 'MutasiDompul',
-                    'url'   => '#',
+                    'icon'  => 'truck',
+                    'url'   => '/persediaan/mutasi-dompul',
                   ],
                 ],
               ],
