@@ -61,6 +61,13 @@ class ListPenjualanDompulController extends Controller
         return view('penjualan.dompul.list-edit-p-dompul-ro',['datas'=>$datas,'total'=>$total,'penjualanDompul'=>$penjualanDompul]);
     }
 
+    public function verif($id){
+        PenjualanDompul::where('id_penjualan_dompul',$id)
+                        ->update(['status_pembayaran'=>1
+                        ]);
+        return redirect()->back();
+    }
+
     public function update(Request $request){
         $id = $request->get('id');
         $tunai = $request->get('tunai');
@@ -129,7 +136,8 @@ class ListPenjualanDompulController extends Controller
                               '<a class="btn btn-xs btn-primary" 
                               href="/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
                               <i class="glyphicon glyphicon-edit"></i> Edit
-                              </a>';
+                              </a>
+                              <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>';
                             })
                           ->make(true);
     }
