@@ -205,13 +205,13 @@ class PenjualanDompulController extends Controller
                 case 'BCA Cabang':
                     $penjualanDompul->bca_cabang=$trf1;
                     break;
-                case 'Mandiri ':
+                case 'Mandiri':
                     $penjualanDompul->mandiri=$trf1;
                     break;
-                case 'BNI ':
+                case 'BNI':
                     $penjualanDompul->bni=$trf1;
                     break;
-                case 'BRI ':
+                case 'BRI':
                     $penjualanDompul->bri=$trf1;
                     break;
                 default:
@@ -224,13 +224,13 @@ class PenjualanDompulController extends Controller
                 case 'BCA Cabang':
                     $penjualanDompul->bca_cabang=$trf2;
                     break;
-                case 'Mandiri ':
+                case 'Mandiri':
                     $penjualanDompul->mandiri=$trf2;
                     break;
-                case 'BNI ':
+                case 'BNI':
                     $penjualanDompul->bni=$trf2;
                     break;
-                case 'BRI ':
+                case 'BRI':
                     $penjualanDompul->bri=$trf2;
                     break;
                 default:
@@ -243,13 +243,13 @@ class PenjualanDompulController extends Controller
                 case 'BCA Cabang':
                     $penjualanDompul->bca_cabang=$trf3;
                     break;
-                case 'Mandiri ':
+                case 'Mandiri':
                     $penjualanDompul->mandiri=$trf3;
                     break;
-                case 'BNI ':
+                case 'BNI':
                     $penjualanDompul->bni=$trf3;
                     break;
-                case 'BRI ':
+                case 'BRI':
                     $penjualanDompul->bri=$trf3;
                     break;
                 default:
