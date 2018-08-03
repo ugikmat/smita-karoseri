@@ -154,7 +154,7 @@ return [
                         'icon'  => 'briefcase',
                       ],
                       [
-                        'text'  => 'Pemjualan Dompul Head',
+                        'text'  => 'Penjualan Dompul Head',
                         'url'   => '#',
                         'icon'  => 'money',
                       ],
@@ -220,7 +220,7 @@ return [
                 'url'   => '/master/satuan',
               ],
               [
-                'text'  => 'suplier',
+                'text'  => 'supplier',
                 'url'   => '/master/supplier',
               ],
               [
