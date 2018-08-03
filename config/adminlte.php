@@ -155,7 +155,7 @@ return [
                       ],
                       [
                         'text'  => 'Penjualan Dompul Head',
-                        'url'   => '#',
+                        'url'   => '/penjualan/laporan-penjualan/dompul-head',
                         'icon'  => 'money',
                       ],
                     ],
@@ -168,7 +168,8 @@ return [
                 'submenu' => [
                   [
                     'text'  => 'MutasiDompul',
-                    'url'   => '#',
+                    'icon'  => 'truck',
+                    'url'   => '/persediaan/mutasi-dompul',
                   ],
                 ],
               ],

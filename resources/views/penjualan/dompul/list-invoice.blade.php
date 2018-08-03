@@ -83,10 +83,31 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
-
     </div>
   </div>
 </div>
+
+<!--Modal Aktivasi-->
+<div class="modal fade" id="verificationModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="" method="POST" id="verificationForm">
+        @csrf @method('put')
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Apakah Anda Yakin ingin memverifikasi transaksi ini?</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+          <button type="submit" class="btn btn-success">Verifikasi</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 
 @stop
 
@@ -124,7 +145,7 @@
         //     cell.innerHTML = i+1;
         //   } );
         // } ).draw();
-        
+
     // });
     function loadData() {
           $tgl = $('#tgl').val();

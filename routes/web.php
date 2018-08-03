@@ -96,6 +96,16 @@ Route::get('/penjualan/laporan-penjualan/LPdompul', function() {
   return view ('/penjualan/laporan-penjualan/LPdompul');
 }) -> name('LPdompul');
 
+Route::get('/penjualan/laporan-penjualan/dompul-head', function() {
+  return view ('/penjualan/laporan-penjualan/dompul-head');
+}) -> name('dompul-head');
+
+//Persediaan
+Route::get('/persediaan/mutasi-dompul', function() {
+  return view ('/persediaan/mutasi-dompul');
+}) -> name('mutasi-dompul');
+
+
 //upload
 // Route::get('/upload/upload', function() {
 //   return view ('/upload/upload');

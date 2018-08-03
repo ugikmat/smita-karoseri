@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Monitoring Upload')
+@section('title', 'Persediaan')
 
 @section('content_header')
-    <h1>Monitoring Penjualan Upload Dompul</h1>
+    <h1>Mutasi Dompul</h1>
 @stop
 
 @section('css')
@@ -14,18 +14,7 @@
 <div class="cotainer-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Tanggal Penjualan
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        : 121118
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput" pull-right>Input Tanggal Penjualan</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput">Pilih Tanggal Mutasi</button>
     </div>
   </div>
   <div class="row">
@@ -38,19 +27,11 @@
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Nama Logistik
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
+        Tanggal Cetak Laporan
       </div>
-      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-6">
-        : Jovi
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Nama PIC
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-6">
-        : Pras
+      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+        : 1111213
       </div>
     </div>
   </div>
@@ -58,35 +39,35 @@
 
 <!-- kolom data canvasser e pake warna iki yo gik, cek podo ambek buku panduan bgcolor="#afeeee" -->
 
-<table id="m-penjualan-table" class="table responsive" width="100%">
+<table id="mutasi-dompul-table" class="table responsive" width="100%">
     <thead>
     <tr>
-        <th>No.</th>
-        <th>Canvasser</th>
-        <th>Qty</th>
-        <th>5K</th>
-        <th>10K</th>
-        <th>Rupiah</th>
+        <th rowspan="2">No.</th>
+        <th rowspan="2">No Sub Master Dompul</th>
+        <th colspan="3">Stok Awal</th>
+        <th colspan="3">Stok Masuk</th>
+        <th colspan="3">Stok Keluar</th>
+        <th colspan="3">Stok Akhir</th>
+    </tr>
+    <tr>
+      <th>5K</th>
+      <th>10K</th>
+      <th>Rupiah</th>
+      <th>5K</th>
+      <th>10K</th>
+      <th>Rupiah</th>
+      <th>5K</th>
+      <th>10K</th>
+      <th>Rupiah</th>
+      <th>5K</th>
+      <th>10K</th>
+      <th>Rupiah</th>
     </tr>
     </thead>
     <tfoot>
       <tr>
         <td></td>
-        <td colspan="2"><b>Total Qty Penjualan Non Program</b></td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-      </tr>
-      <tr>
-        <td></td>
-        <td colspan="2"><b>Total Qty Penjualan Program</b></td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-      </tr>
-      <tr>
-        <td></td>
-        <td colspan="2"><b>Total All Penjualan</b></td>
+        <td colspan="2"><b>Total Stok</b></td>
         <td>harganya(dari database)</td>
         <td>harganya(dari database)</td>
         <td>harganya(dari database)</td>
@@ -103,7 +84,7 @@
         <button type="button" class="close" data-dismiss="modal">
           <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Input Monitoring Penjualan Upload Dompul</h4>
+        <h4 class="modal-title" id="myModalLabel">Input Tanggal Mutasi Dompul</h4>
       </div>
       <div class="modal-body">
         <div class="clearfix"></div>
@@ -131,7 +112,7 @@
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset"> <i class="fa fa-repeat"></i> Kosongkan</button>
-                      <button type="submit" class="btn btn-success" ><i class="glyphicon glyphicon-ok"></i>Tampilkan Monitoring Penjualan</button>
+                      <button type="submit" class="btn btn-success" ><i class="glyphicon glyphicon-ok"></i>Tampilkan Mutasi Dompul</button>
                     </div>
                   </div>
                 </form>
@@ -157,10 +138,10 @@
 </script>
 <script>
     $(function () {
-        $('#m-penjualan-table').DataTable({
+        $('#mutasi-dompul-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: 'mntr-data',
+            ajax: 'mutasi-dompul-data',
             columns: [
                 {data: 'id_penjualan_dompul'},
                 {data: 'hp_kios'},
