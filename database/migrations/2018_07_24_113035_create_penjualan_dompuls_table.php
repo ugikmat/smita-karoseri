@@ -22,9 +22,11 @@ class CreatePenjualanDompulsTable extends Migration
             $table->string('no_user');
             $table->date('tanggal_penjualan_dompul');
             $table->date('tanggal_input');
-            $table->string('bank')->nullable();
-            $table->string('bank2')->nullable();
-            $table->string('bank3')->nullable();
+            $table->string('bca_pusat')->nullable();
+            $table->string('bca_cabang')->nullable();
+            $table->string('mandiri')->nullable();
+            $table->string('bni')->nullable();
+            $table->string('bri')->nullable();
             $table->bigInteger('grand_total');
             $table->bigInteger('bayar_tunai')->default(0);
             $table->bigInteger('bayar_transfer')->nullable();

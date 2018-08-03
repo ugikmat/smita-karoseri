@@ -3,7 +3,7 @@
 @section('title', 'Tipe Dompul')
 
 @section('content_header')
-<h1>Master TIpe Dompul</h1>
+<h1>Master Tipe Dompul</h1>
 
 @stop @section('css')
 <style>
