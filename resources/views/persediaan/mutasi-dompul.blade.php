@@ -112,7 +112,7 @@
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset"> <i class="fa fa-repeat"></i> Kosongkan</button>
-                      <button type="submit" class="btn btn-success" ><i class="glyphicon glyphicon-ok"></i>Tampilkan Monitoring Penjualan</button>
+                      <button type="submit" class="btn btn-success" ><i class="glyphicon glyphicon-ok"></i>Tampilkan Mutasi Dompul</button>
                     </div>
                   </div>
                 </form>
