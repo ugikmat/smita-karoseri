@@ -129,7 +129,7 @@ class PenjualanDompulController extends Controller
         if (!empty($bank3)) {
             $trf3 = $request->get('trf3');
         }else{
-            $trf3 = 0;    
+            $trf3 = 0;
         }
         $catatan = $request->get('catatan'); 
         $sales = Sales::select('id_sales','nm_sales')->where('nm_sales',$canvaser)->first();
