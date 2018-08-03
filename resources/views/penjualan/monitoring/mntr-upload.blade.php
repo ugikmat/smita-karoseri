@@ -61,35 +61,38 @@
 <table id="m-penjualan-table" class="table responsive" width="100%">
     <thead>
     <tr>
-        <th>No.</th>
-        <th>Canvasser</th>
-        <th>Qty</th>
-        <th>5K</th>
-        <th>10K</th>
-        <th>Rupiah</th>
+        <th rowspan="2">No.</th>
+        <th rowspan="2">Canvasser</th>
+        <th colspan="2">5K</th>
+        <th colspan="2">10K</th>
+        <th colspan="2">Rupiah</th>
+    </tr>
+    <tr>
+      <th>Program</th>
+      <th>Non Program</th>
+      <th>Program</th>
+      <th>Non Program</th>
+      <th>Program</th>
+      <th>Non Program</th>
     </tr>
     </thead>
     <tfoot>
       <tr>
         <td></td>
-        <td colspan="2"><b>Total Qty Penjualan Non Program</b></td>
+        <td><b>Total</b></td>
+        <td>harganya(dari database)</td>
+        <td>harganya(dari database)</td>
+        <td>harganya(dari database)</td>
         <td>harganya(dari database)</td>
         <td>harganya(dari database)</td>
         <td>harganya(dari database)</td>
       </tr>
       <tr>
         <td></td>
-        <td colspan="2"><b>Total Qty Penjualan Program</b></td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-      </tr>
-      <tr>
-        <td></td>
-        <td colspan="2"><b>Total All Penjualan</b></td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
+        <td><b>Total Keseluruhan</b></td>
+        <td colspan="2">harganya(dari database)</td>
+        <td colspan="2">harganya(dari database)</td>
+        <td colspan="2">harganya(dari database)</td>
       </tr>
     </tfoot>
 </table>

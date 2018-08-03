@@ -18,7 +18,8 @@
     <tr>
         <th rowspan="2">No.</th>
         <th rowspan="2" colspan="2">Nama BO</th>
-        <th colspan="3">Qty Penjualan</th>
+        <th>Total Out Internal</th>
+        <th>Total Out Penjualan</th>
     </tr>
     <tr>
       <th>5k</th>
