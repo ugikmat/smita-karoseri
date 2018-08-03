@@ -112,7 +112,8 @@ td{
           <td>
             <select name="bank1">
               <option value="">-- pilih bank --</option>
-              <option value="BCA">BCA</option>
+              <option value="BCA">BCA Pusat</option>
+              <option value="BCA">BCA Cabang</option>
               <option value="BRI">BRI</option>
               <option value="BNI">BNI</option>
               <option value="Mandiri">Mandiri</option>
@@ -136,7 +137,8 @@ td{
           <td>
             <select name="bank2">
               <option value="">-- pilih bank --</option>
-              <option value="BCA">BCA</option>
+              <option value="BCA">BCA Pusat</option>
+              <option value="BCA">BCA Cabang</option>
               <option value="BRI">BRI</option>
               <option value="BNI">BNI</option>
               <option value="Mandiri">Mandiri</option>
@@ -160,7 +162,8 @@ td{
           <td>
             <select name="bank3">
               <option value="">-- pilih bank --</option>
-              <option value="BCA">BCA</option>
+              <option value="BCA">BCA Pusat</option>
+              <option value="BCA">BCA Cabang</option>
               <option value="BRI">BRI</option>
               <option value="BNI">BNI</option>
               <option value="Mandiri">Mandiri</option>
