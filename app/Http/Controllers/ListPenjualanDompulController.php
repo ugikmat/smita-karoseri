@@ -76,19 +76,19 @@ class ListPenjualanDompulController extends Controller
         if (!empty($bank1)) {
             $trf1 = $request->get('trf1');
         }else{
-            $trf1 = null;    
+            $trf1 = 0;    
         }
         $bank2 = $request->get('bank2');
         if (!empty($bank2)) {
             $trf2 = $request->get('trf2');
         }else{
-            $trf2 = null;    
+            $trf2 = 0;    
         }
         $bank3 = $request->get('bank3');        
         if (!empty($bank3)) {
             $trf3 = $request->get('trf3');
         }else{
-            $trf3 = null;    
+            $trf3 = 0;    
         }
         PenjualanDompul::where('id_penjualan_dompul',$id)
                         ->update(['bank'=>$bank1,

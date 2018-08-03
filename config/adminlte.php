@@ -221,7 +221,7 @@ return [
                 'url'   => '/master/satuan',
               ],
               [
-                'text'  => 'suplier',
+                'text'  => 'supplier',
                 'url'   => '/master/supplier',
               ],
               [

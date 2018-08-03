@@ -92,9 +92,8 @@ Route::get('/penjualan/monitoring/mntr-upload', function() {
 }) -> name('mntr-upload');
 
 // laporan penjualan
-Route::get('/penjualan/laporan-penjualan/LPdompul', function() {
-  return view ('/penjualan/laporan-penjualan/LPdompul');
-}) -> name('LPdompul');
+Route::get('/penjualan/laporan-penjualan/LPdompul', 'LaporanPenjualanDompulController@index');
+Route::get('/laporan-penjualan/{tgl_penjualan}', 'LaporanPenjualanDompulController@data');
 
 Route::get('/penjualan/laporan-penjualan/dompul-head', function() {
   return view ('/penjualan/laporan-penjualan/dompul-head');
