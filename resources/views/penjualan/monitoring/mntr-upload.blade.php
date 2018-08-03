@@ -61,12 +61,18 @@
 <table id="m-penjualan-table" class="table responsive" width="100%">
     <thead>
     <tr>
-        <th>No.</th>
-        <th>Canvasser</th>
-        <th>Qty</th>
-        <th>5K</th>
-        <th>10K</th>
-        <th>Rupiah</th>
+        <th rowspan="2">No.</th>
+        <th rowspan="2">Canvasser</th>
+        <th colspan="3">Total Program</th>
+        <th colspan="3">Total Non Program</th>
+    </tr>
+    <tr>
+      <th>5K</th>
+      <th>10K</th>
+      <th>Rupiah</th>
+      <th>5K</th>
+      <th>10K</th>
+      <th>Rupiah</th>
     </tr>
     </thead>
     <tfoot>
