@@ -82,6 +82,9 @@
         <td>harganya(dari database)</td>
         <td>harganya(dari database)</td>
         <td>harganya(dari database)</td>
+        <td>harganya(dari database)</td>
+        <td>harganya(dari database)</td>
+        <td>harganya(dari database)</td>
       </tr>
       <tr>
         <td></td>
@@ -89,10 +92,16 @@
         <td>harganya(dari database)</td>
         <td>harganya(dari database)</td>
         <td>harganya(dari database)</td>
+        <td>harganya(dari database)</td>
+        <td>harganya(dari database)</td>
+        <td>harganya(dari database)</td>
       </tr>
       <tr>
         <td></td>
         <td colspan="2"><b>Total All Penjualan</b></td>
+        <td>harganya(dari database)</td>
+        <td>harganya(dari database)</td>
+        <td>harganya(dari database)</td>
         <td>harganya(dari database)</td>
         <td>harganya(dari database)</td>
         <td>harganya(dari database)</td>
