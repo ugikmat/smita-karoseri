@@ -118,6 +118,10 @@ Route::get('/upload/tgl', 'UploadDompulController@uploadData');
 Route::get('/upload/empty', 'UploadDompulController@empty');
 
 //Master
+Route::get('/master/user', function() {
+  return view ('/master/user');
+}) -> name('user');
+
 Route::resource('master/bank', 'BankController');
 Route::get('bank-data', 'BankController@data');
 
