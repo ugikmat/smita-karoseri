@@ -140,6 +140,22 @@ return [
                       ],
                   ],
                   [
+                    'text'      => 'Penjualan SP',
+                    'icon'      => 'share',
+                    'submenu'   => [
+                      [
+                        'text'    => 'Invoice SP',
+                        'url'     => '/penjualan/sp/invoice-sp',
+                        'icon'    => 'mobile-phone',
+                      ],
+                      [
+                        'text'    => 'List Invoice SP',
+                        'url'     => '/penjualan/sp/list-invoice-sp',
+                        'icon'    =>  'file',
+                      ],
+                    ],
+                  ],
+                  [
                       'text'    => 'Monitoring Upload',
                       'url'     => '/penjualan/monitoring/mntr-upload',
                       'icon'    => 'play-circle',
@@ -210,7 +226,7 @@ return [
               [
                 'text'  => 'user',
                 'url'   => '/master/user',
-                'icon'  => 'user',
+                'icon'  => 'users',
               ],
               [
                 'text'  => 'bank',
