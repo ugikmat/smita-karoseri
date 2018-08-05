@@ -86,6 +86,15 @@ Route::get('/invoice_dompul/{canvaser}/{tgl}', 'PenjualanDompulController@data')
 Route::get('/edit_invoice_dompul/{canvaser}/{tgl}/{downline}', 'PenjualanDompulController@penjualanData');
 Route::get('/edit_list_invoice_dompul/{sales}/{tgl}/{customer}', 'ListPenjualanDompulController@penjualanData');
 Route::put('/invoice_dompul/verify/{id}', 'ListPenjualanDompulController@verif');
+
+Route::get('/penjualan/sp/invoice-sp', function() {
+  return view ('/penjualan/sp/invoice-sp');
+}) -> name('invoice-sp');
+
+Route::get('/master/user', function() {
+  return view ('/penjualan/sp/list-invoice-sp');
+}) -> name('list-invoice-sp');
+
 //monitoring
 Route::get('/penjualan/monitoring/mntr-upload', function() {
   return view ('/penjualan/monitoring/mntr-upload');
