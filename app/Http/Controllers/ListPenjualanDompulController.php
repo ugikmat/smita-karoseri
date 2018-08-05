@@ -183,12 +183,21 @@ class ListPenjualanDompulController extends Controller
                         //       return '';
                         //     })
                           ->addColumn('action', function ($penjualanDompul) {
-                              return 
-                              '<a class="btn btn-xs btn-primary" 
-                              href="/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
-                              <i class="glyphicon glyphicon-edit"></i> Edit
-                              </a>
-                              <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>';
+                              if ($penjualanDompul->status_pembayaran==0) {
+                                  return 
+                                    '<a class="btn btn-xs btn-primary" 
+                                    href="/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
+                                    <i class="glyphicon glyphicon-edit"></i> Edit
+                                    </a>
+                                    <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>';
+                              } else {
+                                  return 
+                                    '<a class="btn btn-xs btn-primary" 
+                                    href="/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
+                                    <i class="glyphicon glyphicon-edit"></i> Lihat
+                                    </a>';
+                              }
+                              
                             })
                           ->make(true);
     }

@@ -106,7 +106,13 @@
           <td></td>
           <td colspan="2"><b>Jumlah Tunai</b></td>
           <td></td>
-        <td><input type="text" id="tunai" name="tunai" class="form-control" value="{{$penjualanDompul->bayar_tunai}}" required="required"></td>
+          <td>
+            @if($penjualanDompul->status_pembayaran==0)
+              <input type="text" id="tunai" name="tunai" class="form-control" value="{{$penjualanDompul->bayar_tunai}}" required="required">
+            @else
+              <input type="text" id="tunai" name="tunai" class="form-control" value="{{$penjualanDompul->bayar_tunai}}" readonly>
+            @endif
+          </td>
           <td></td>
         </tr>
         <tr>
@@ -131,7 +137,11 @@
           <td></td>
           <td colspan="2"><b>Jumlah Transfer 1</b></td>
           <td></td>
-          <td><input type="text" id="trf1" name="trf1" class="form-control" value=""></td>
+          @if($penjualanDompul->status_pembayaran==0)
+              <td><input type="text" id="trf1" name="trf1" class="form-control" value=""></td>
+            @else
+              <td><input type="text" id="trf1" name="trf1" class="form-control" readonly></td>
+            @endif
           <td></td>
         </tr>
         <tr>
@@ -156,7 +166,11 @@
           <td></td>
           <td colspan="2"><b>Jumlah Transfer 2</b></td>
           <td></td>
-          <td><input type="text" id="trf2" name="trf2" class="form-control" value=""></td>
+          @if($penjualanDompul->status_pembayaran==0)
+              <td><input type="text" id="trf2" name="trf2" class="form-control" value=""></td>
+            @else
+              <td><input type="text" id="trf2" name="trf2" class="form-control" value="" readonly></td>
+            @endif
           <td></td>
         </tr>
         <tr>
@@ -181,7 +195,11 @@
           <td></td>
           <td colspan="2"><b>Jumlah Transfer 3</b></td>
           <td></td>
-          <td><input type="text" id="trf3" name="trf3" class="form-control" value=""></td>
+          @if($penjualanDompul->status_pembayaran==0)
+              <td><input type="text" id="trf3" name="trf3" class="form-control" value=""></td>
+            @else
+              <td><input type="text" id="trf3" name="trf3" class="form-control" value="" readonly></td>
+            @endif
           <td></td>
         </tr>
         <tr>
@@ -189,13 +207,21 @@
           <td></td>
           <td colspan="2"><b>Catatan</b></td>
           <td></td>
-          <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{$penjualanDompul->catatan}}"></td>
+          @if($penjualanDompul->status_pembayaran==0)
+              <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{$penjualanDompul->catatan}}"></td>
+            @else
+              <td><input type="text" id="catatan" readonly name="catatan" class="form-control" value="{{$penjualanDompul->catatan}}"></td>
+            @endif
           <td></td>
         </tr>
         <tr>
           <td colspan="6">
             <div class="pull-right">
+              @if($penjualanDompul->status_pembayaran==0)
               <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Selesai</button>
+            @else
+              <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span><a href="{{url()->previous()}}">Kembali</a></button>
+            @endif
             </div>
           </td>
           <td></td>
