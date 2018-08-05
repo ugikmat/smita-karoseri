@@ -124,6 +124,8 @@
     <tr>
       <th>Tanggal TRX</th>
       <th>Tanggal Upload</th>
+      <th>User</th>
+      <th>Lokasi</th>
       <th>Qty</th>
       <th>Aktif</th>
       <th>Action</th>
@@ -133,6 +135,8 @@
     <tr>
       <th>Tanggal TRX</th>
       <th>Tanggal Upload</th>
+      <th>User</th>
+      <th>Lokasi</th>
       <th>Aktif</th>
       <th>Qty</th>
     </tr>
@@ -473,7 +477,7 @@
         },
         {
           data: 'tanggal_upload'
-        },        
+        },
         {
           data: 'jumlah_transaksi'
         },
