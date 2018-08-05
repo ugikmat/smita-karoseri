@@ -88,6 +88,8 @@
   </div>
 </div>
 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">Daftar SP</button>
+
 <form class="repeater">
     <!--
         The value given to the data-repeater-list attribute will be used as the
@@ -98,10 +100,6 @@
     <div data-repeater-list="group-a">
       <div data-repeater-item>
         <input type="text" name="text-input" value="A"/>
-        <input data-repeater-delete type="button" value="Delete"/>
-      </div>
-      <div data-repeater-item>
-        <input type="text" name="text-input" value="B"/>
         <input data-repeater-delete type="button" value="Delete"/>
       </div>
     </div>
