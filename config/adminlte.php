@@ -208,6 +208,11 @@ return [
             'icon'        => 'tasks',
             'submenu'     => [
               [
+                'text'  => 'user',
+                'url'   => '/master/user',
+                'icon'  => 'user',
+              ],
+              [
                 'text'  => 'bank',
                 'url'   => '/master/bank',
                 'icon'  => 'bank',

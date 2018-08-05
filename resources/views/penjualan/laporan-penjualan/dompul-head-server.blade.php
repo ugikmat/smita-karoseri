@@ -17,20 +17,33 @@
     <thead>
     <tr>
         <th rowspan="2">No.</th>
-        <th rowspan="2" colspan="2">Nama BO</th>
-        <th>Total Out Internal</th>
-        <th>Total Out Penjualan</th>
+        <th rowspan="2">Nama BO</th>
+        <th colspan="3">5K</th>
+        <th colspan="3">10K</th>
+        <th colspan="3">Rupah</th>
     </tr>
     <tr>
-      <th>5k</th>
-      <th>10K</th>
-      <th>Rupiah</th>
+      <th>Total Out Internal</th>
+      <th>Total Out Penjualan</th>
+      <th>Total Out All</th>
+      <th>Total Out Internal</th>
+      <th>Total Out Penjualan</th>
+      <th>Total Out All</th>
+      <th>Total Out Internal</th>
+      <th>Total Out Penjualan</th>
+      <th>Total Out All</th>
     </tr>
     </thead>
     <tfoot>
       <tr>
         <td></td>
         <td><b>Grand Total</b></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>

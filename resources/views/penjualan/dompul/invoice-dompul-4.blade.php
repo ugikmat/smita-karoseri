@@ -170,6 +170,7 @@ function goBack() {
         var t = $('#invoice-dompul-table').DataTable({
                   serverSide: true,
                   processing: true,
+                  searching:  false,
                   ajax: `/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`,
                   columns: [
                       {data: 'produk'},
