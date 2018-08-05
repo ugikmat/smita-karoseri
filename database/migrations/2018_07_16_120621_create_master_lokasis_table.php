@@ -16,7 +16,7 @@ class CreateMasterLokasisTable extends Migration
         Schema::create('master_lokasis', function (Blueprint $table) {
             $table->increments('id_lokasi');
             $table->string('nm_lokasi');
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status_lokasi')->default(1);
             $table->timestamps();
         });
         // if (Schema::hasTable('master_gudangs')) {
