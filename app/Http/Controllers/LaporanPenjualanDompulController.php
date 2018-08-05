@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\PenjualanDompul;
 use App\UploadDompul;
 use App\HargaDompul;
+use App\Sales;
 use DB;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
@@ -28,6 +29,11 @@ class LaporanPenjualanDompulController extends Controller
      */
     public function index(){
         return view('penjualan.laporan-penjualan.LPdompul');
+    }
+
+    public function detail($sales){
+        $sales = Sales::where('nm_sales',$sales)->first();
+        return view('penjualan.laporan-penjualan.LPdompul-2',['sales'=>$sales]);
     }
     /**
      * Process dataTable ajax response.
@@ -56,36 +62,41 @@ class LaporanPenjualanDompulController extends Controller
                         ->join('master_customers','master_customers.no_hp','=','penjualan_dompuls.no_hp_kios')
                         ->where('tanggal_penjualan_dompul',$tgl)
                         ->groupBy('master_saless.nm_sales'))
-                        // ->addColumn('indeks', function ($uploadDompul) {
-                        //       return '';
-                        //     })
                         ->addColumn('index', function ($penjualanDompul) {
                               return 
                               '';
                             })
-                            // ->addColumn('bca_pusat', function ($penjualanDompul) {
-                            //   return 
-                            //   '';
-                            // })
-                            // ->addColumn('bca_cabang', function ($penjualanDompul) {
-                            //   return 
-                            //   '';
-                            // })
-                            // ->addColumn('mandiri', function ($penjualanDompul) {
-                            //   return 
-                            //   '';
-                            // })
-                            // ->addColumn('bni', function ($penjualanDompul) {
-                            //   return 
-                            //   '';
-                            // })
-                            // ->addColumn('bri', function ($penjualanDompul) {
-                            //   return 
-                            //   '';
-                            // })
                             ->addColumn('piutang', function ($penjualanDompul) {
                               return $penjualanDompul->total_penjualan-
                               ($penjualanDompul->total_tunai+
+                                $penjualanDompul->bca_pusat+
+                                $penjualanDompul->bca_cabang+
+                                $penjualanDompul->mandiri+
+                                $penjualanDompul->bri+
+                                $penjualanDompul->bni);
+                            })
+                          ->make(true);
+    }
+    /**
+     * Process dataTable ajax response.
+     *
+     * @param \Yajra\Datatables\Datatables $datatables
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function dataPiutang(Datatables $datatables,$id)
+    {
+        return $datatables->eloquent(PenjualanDompul::select('master_customers.nm_cust','grand_total','bayar_tunai','grand_total',
+                            'bca_pusat','bca_cabang','mandiri','bri','bni')
+                        ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
+                        ->join('master_customers','master_customers.no_hp','=','penjualan_dompuls.no_hp_kios')
+                        ->where('penjualan_dompuls.id_sales',$id))
+                        ->addColumn('index', function ($penjualanDompul) {
+                              return 
+                              '';
+                            })
+                            ->addColumn('piutang', function ($penjualanDompul) {
+                              return $penjualanDompul->grand_total-
+                              ($penjualanDompul->bayar_tunai+
                                 $penjualanDompul->bca_pusat+
                                 $penjualanDompul->bca_cabang+
                                 $penjualanDompul->mandiri+

@@ -75,7 +75,7 @@ class PenjualanDompulController extends Controller
         foreach ($sums as $key => $value) {
             $total+=(($value->qty-$value->qty_program)*$value->harga_dompul);
         }
-        
+        $total=number_format($total,0,",",".");
         return view('penjualan.dompul.invoice-dompul-3',['datas'=>$datas,'tgl'=>$tgl,'total'=>$total]);
     }
     /**
@@ -154,6 +154,7 @@ class PenjualanDompulController extends Controller
         foreach ($sums as $key => $value) {
             $total+=(($value->qty-$value->qty_program)*$value->harga_dompul);
         }
+        $total=number_format($total,0,",",".");
         return view('penjualan.dompul.invoice-dompul-4',
         [
             'datas'=>$datas,
@@ -175,7 +176,7 @@ class PenjualanDompulController extends Controller
      */
     public function store(Request $request){
         
-        $sales = $request->get('sales');
+        $id_sales = $request->get('sales');
         $nm_sales = $request->get('nm_sales');
         $hp_downline = $request->get('downline');
         $tgl = Carbon::parse($request->get('tgl'));
@@ -191,9 +192,9 @@ class PenjualanDompulController extends Controller
         $bank3 = $request->get('bank3');        
         $catatan = $request->get('catatan');
         $total = $request->get('total');
-
+        $sales = Sales::where('id_sales',$id_sales)->first();
         $penjualanDompul = new PenjualanDompul();        
-            $penjualanDompul->id_sales=$sales;
+            $penjualanDompul->id_sales=$id_sales;
             $penjualanDompul->no_hp_kios=$hp_downline;
             $penjualanDompul->no_user=$user;
             $penjualanDompul->tanggal_penjualan_dompul=$tgl;
@@ -255,7 +256,7 @@ class PenjualanDompulController extends Controller
                 default:
                     break;
             }
-            $penjualanDompul->grand_total=$total;
+            $penjualanDompul->grand_total=str_replace('.', '', $total);
             $penjualanDompul->bayar_tunai=$tunai;
             $penjualanDompul->catatan=$catatan;
         $penjualanDompul->save();
@@ -265,7 +266,7 @@ class PenjualanDompulController extends Controller
                     ->where('status_penjualan',0)
                     ->where('status_active',1)
                     ->update(['status_penjualan' => 1,'id_penjualan_dompul'=>$penjualanDompul->id_penjualan_dompul]);
-        return redirect('/penjualan/dompul/list-invoice');
+        return redirect('/penjualan/dompul/invoice-dompul')->with('tgl',$request->get('tgl'))->with('sales',$sales);
 
     }
 
@@ -314,7 +315,7 @@ class PenjualanDompulController extends Controller
                         ->where('status_penjualan',0)
                         ->where('status_active',1))
                         ->addColumn('total_harga', function ($uploadDompul) {
-                              return ($uploadDompul->qty-$uploadDompul->qty_program)*$uploadDompul->harga_dompul;
+                              return number_format(($uploadDompul->qty-$uploadDompul->qty_program)*$uploadDompul->harga_dompul,0,",",".");
                             })
                           ->addColumn('action', function ($uploadDompul) {
                               $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$uploadDompul->produk)->get();

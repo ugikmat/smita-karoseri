@@ -63,18 +63,19 @@
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        ID Canvaser
+        ID Canvaser : 
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        : 123123123
+        <input type="text" id="id_sales" value="{{$sales->id_sales}}" readonly>
+      {{-- <strong>{{$sales->id_sales}}</strong> --}}
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Nama Canvaser
+        Nama Canvaser : 
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        : name
+        <strong>{{$sales->nm_sales}}</strong>
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -107,17 +108,29 @@
 
 @section('js')
 <script>
-    $(function () {
-        $('#lp-dompul-table').DataTable({
+  var id = $('#id_sales').val();
+  console.log('/laporan-penjualan/piutang/'+id);
+  var t = $('#lp-dompul-2-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/lp-dompul-data',
+            ajax: '/laporan-penjualan/piutang/'+id,
+            "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+                } ],
+            "order": [[ 1, 'asc' ]],
             columns: [
-                {data: 'id_lokasi'},
-                {data: 'nm_lokasi'},
-                {data: 'action', orderable: false, searchable: false}
+                {data: 'index'},
+                {data: 'nm_cust'},
+                {data: 'grand_total'},
+                {data: 'piutang'}
             ]
         });
-    });
+        t.on( 'order.dt search.dt', function () {
+        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+          } );
+        } ).draw();
 </script>
 @stop
