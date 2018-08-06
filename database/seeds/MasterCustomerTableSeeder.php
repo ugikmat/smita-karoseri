@@ -18,12 +18,11 @@ class MasterCustomerTableSeeder extends Seeder
       $table->tinyInteger('status')->default(1);
 
       $cust1 = new Customer();
-      $subdompul1->no_hp_master_dompul='081938063309';
-      $subdompul1->no_hp_sub_master_dompul='081938062640';
-      $subdompul1->id_gudang='2';
-      $subdompul1->nama_sub_master_dompul='SD ROS SDJ';
-      $subdompul1->tipe_dompul='SD';
-      $subdompul1->status_sub_master_dompul='Aktif';
-      $subdompul1->save();
+      $cust1->nm_cust='SASMITA CELL';
+      $cust1->alamat_cust='Bangkalan';
+      $cust1->no_hp='087750955792';
+      $cust1->jabatan='Owner';
+      $cust1->status=1;
+      $cust1->save();
     }
 }

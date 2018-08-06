@@ -70,7 +70,7 @@ class MasterHargaDompulTableSeeder extends Seeder
 
       $hargadompul9 = new HargaDompul();
       $hargadompul9->nama_harga_dompul='DP5';
-      $hargadompul9->tipe_harga_dompul='Sidebar';
+      $hargadompul9->tipe_harga_dompul='SDE';
       $hargadompul9->harga_dompul=5500;
       $hargadompul9->status_harga_dompul='Aktif';
       $hargadompul9->save();
