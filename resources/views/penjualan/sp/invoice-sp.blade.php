@@ -88,6 +88,8 @@
   </div>
 </div>
 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">Daftar SP</button>
+
 <form class="repeater">
     <!--
         The value given to the data-repeater-list attribute will be used as the
@@ -98,10 +100,6 @@
     <div data-repeater-list="group-a">
       <div data-repeater-item>
         <input type="text" name="text-input" value="A"/>
-        <input data-repeater-delete type="button" value="Delete"/>
-      </div>
-      <div data-repeater-item>
-        <input type="text" name="text-input" value="B"/>
         <input data-repeater-delete type="button" value="Delete"/>
       </div>
     </div>
@@ -218,15 +216,15 @@
             // start with an empty list of repeaters. Set your first (and only)
             // "data-repeater-item" with style="display:none;" and pass the
             // following configuration flag
-            initEmpty: true,
+            // initEmpty: true,
             // (Optional)
             // "defaultValues" sets the values of added items.  The keys of
             // defaultValues refer to the value of the input's name attribute.
             // If a default value is not specified for an input, then it will
             // have its value cleared.
-            defaultValues: {
-                'text-input': 'foo'
-            },
+            // defaultValues: {
+            //     'text-input': 'foo'
+            // },
             // (Optional)
             // "show" is called just after an item is added.  The item is hidden
             // at this point.  If a show callback is not given the item will
@@ -256,7 +254,7 @@
             // (Optional)
             // Removes the delete button from the first list item,
             // defaults to false.
-            isFirstItemUndeletable: true
+            isFirstItemUndeletable: false
         })
     });
 </script>
