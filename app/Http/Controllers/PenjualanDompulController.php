@@ -41,7 +41,8 @@ class PenjualanDompulController extends Controller
     public function show(Request $request)
     {
         $sales = Sales::where('status','1')->where('nm_sales',$request->get('id'))->first();
-        return redirect('/penjualan/dompul/invoice-dompul')->with(['sales'=>$sales,'tgl'=>$request->get('tgl'),'now'=>Carbon::now('Asia/Jakarta')->format('d-m-Y')]);
+        session(['sales'=>$sales,'tgl'=>$request->get('tgl'),'now'=>Carbon::now('Asia/Jakarta')->format('d-m-Y')]);
+        return redirect('/penjualan/dompul/invoice-dompul');
         // return view('penjualan.dompul.invoice-dompul')->with(['sales'=>$sales,'tgl'=>$this->nama_tgl,'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
     }
     
