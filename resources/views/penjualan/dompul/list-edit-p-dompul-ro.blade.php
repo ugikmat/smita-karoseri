@@ -119,9 +119,9 @@
           <td></td>
           <td>
             @if($penjualanDompul->status_pembayaran==0)
-              <input type="text" id="tunai" name="tunai" class="form-control" value="{{$penjualanDompul->bayar_tunai}}" required="required">
+              <input type="text" id="tunai" name="tunai" class="form-control" value="{{number_format($penjualanDompul->bayar_tunai,0,",",".")}}" required="required">
             @else
-              <input type="text" id="tunai" name="tunai" class="form-control" value="{{$penjualanDompul->bayar_tunai}}" readonly>
+              <input type="text" id="tunai" name="tunai" class="form-control" value="{{number_format($penjualanDompul->bayar_tunai,0,",",".")}}" readonly >
             @endif
           </td>
           
