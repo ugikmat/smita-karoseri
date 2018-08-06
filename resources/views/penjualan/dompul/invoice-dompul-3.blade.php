@@ -91,9 +91,10 @@ td{
         <td></td>
         <td>
           @isset($total)
-          <input type="text" name="total" id="total" value="{{$total}}" readonly>
+          <input type="text" class="form-control" name="total" id="total" value="{{$total}}" readonly>
           @endisset
         </td>
+        <td></td>
       </tr>
       <tr>
         <td></td>
@@ -103,6 +104,7 @@ td{
         <td>
         <input type="text" id="tunai" required="required" name="tunai" class="form-control">
         </td>
+        <td></td>
 
       </tr>
       <tr>
@@ -111,7 +113,7 @@ td{
         <td colspan="2"><b>Bank Transfer 1</b></td>
         <td></td>
         <td><input type="text" id="bank1" name="bank1" class="form-control"></td>
-
+        <td></td>
       </tr>
       <tr>
         <td></td>
@@ -119,7 +121,7 @@ td{
         <td colspan="2"><b>Jumlah Transfer 1</b></td>
         <td></td>
         <td><input type="text" id="trf1" name="trf1" class="form-control"></td>
-
+        <td></td>
       </tr>
       <tr>
         <td></td>
@@ -127,7 +129,7 @@ td{
         <td colspan="2"><b>Bank Transfer 2</b></td>
         <td></td>
         <td><input type="text" id="bank2" name="bank2" class="form-control"></td>
-
+        <td></td>
       </tr>
       <tr>
         <td></td>
@@ -135,7 +137,7 @@ td{
         <td colspan="2"><b>Jumlah Transfer 2</b></td>
         <td></td>
         <td><input type="text" id="trf2" name="trf2" class="form-control"></td>
-
+        <td></td>
       </tr>
       <tr>
         <td></td>
@@ -143,7 +145,7 @@ td{
         <td colspan="2"><b>Bank Transfer 3</b></td>
         <td></td>
         <td><input type="text" id="bank3" name="bank3" class="form-control"></td>
-
+        <td></td>
       </tr>
       <tr>
         <td></td>
@@ -151,7 +153,7 @@ td{
         <td colspan="2"><b>Jumlah Transfer 3</b></td>
         <td></td>
         <td><input type="text" id="trf3" name="trf3" class="form-control"></td>
-
+        <td></td>
       </tr>
       <tr>
         <td></td>
@@ -159,13 +161,12 @@ td{
         <td colspan="2"><b>Catatan</b></td>
         <td></td>
         <td><input type="text" id="catatan" required="required" name="catatan" class="form-control"></td>
-
+        <td></td>
       </tr>
       <tr>
-        <td colspan="6">
+        <td colspan="7">
           <div class="pull-right">
-            <button type="button" onclick="goBack()" class="btn btn-danger"><span class="glyphicon glyphicon-chevron-left"></span> Kembali</button>
-            <button type="submit" class="btn btn-success" name="button"><span class="glyphicon glyphicon-ok"></span> Simpan</button>
+            <button type="submit" class="btn btn-success" name="button"><span class="glyphicon glyphicon-ok"></span> Lanjutkan</button>
           </div>
         </td>
       </tr>
