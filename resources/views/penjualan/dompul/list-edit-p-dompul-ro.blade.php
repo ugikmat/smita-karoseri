@@ -220,7 +220,7 @@
               @if($penjualanDompul->status_pembayaran==0)
               <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Selesai</button>
             @else
-              <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span><a href="{{url()->previous()}}">Kembali</a></button>
+              {{-- <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span><a href="{{url()->previous()}}">Kembali</a></button> --}}
             @endif
             </div>
           </td>
