@@ -38,6 +38,21 @@
                         </span>
                     @endif
                 </div>
+                <div class="form-group has-feedback {{ $errors->has('lokasi') ? 'has-error' : '' }}">
+                    <select id="lokasi" required="required" name="lokasi" placeholder="Pilih Lokasi" class="form-control">
+                          <option value="" selected disabled>Pilih Lokasi</option>
+                          @isset($lokasiarray)
+                              @foreach ($lokasiarray as $data)
+                              <option value="{{ $data->id_lokasi }}">{{ $data->nm_lokasi }}</option>
+                              @endforeach
+                          @endisset
+                    </select>
+                    @if ($errors->has('name'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('name') }}</strong>
+                        </span>
+                    @endif
+                </div>
                 <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                     <input type="email" name="email" class="form-control" value="{{ old('email') }}"
                            placeholder="{{ trans('adminlte::adminlte.email') }}">
