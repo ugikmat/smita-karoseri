@@ -214,7 +214,7 @@ td{
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="qty_program" class="form-control col-md-7 col-xs-12" value="">
+                      <input type="text" id="qty_program" required="required" name="qty_program" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 
@@ -276,6 +276,7 @@ td{
     var produk = button.data('produk') // Extract info from data-* attributes
     var tipe_harga = button.data('tipe')
     var no_faktur = button.data('faktur')
+    var qty_program = button.data('qty')
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     while (tipe.firstChild) {
@@ -291,7 +292,7 @@ td{
       opt.innerHTML = element.tipe_harga_dompul;
       tipe.appendChild(opt);
     });
-    console.log(produk);
+    $('#qty_program').val(qty_program);
     $('#editForm').attr('action', `/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/0`);
   })
 </script>

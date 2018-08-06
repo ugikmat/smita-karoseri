@@ -60,11 +60,11 @@
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        ID Canvaser 
+        ID Canvaser
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
         @if (session('sales'))
-            :<p>{{ session('sales')->id_sales }}</p>
+            : {{ session('sales')->id_sales }}
         @endif
       </div>
     </div>
