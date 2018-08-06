@@ -3,7 +3,7 @@
 @section('title', 'Penjualan SP')
 
 @section('content_header')
-    <h1>Detail Penjualan SP</h1>
+    <h1>Penjualan SP</h1>
 @stop
 
 @section('css')
@@ -15,95 +15,77 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        No. Penjualan
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+          Nama Canvaser :
       </div>
-      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        :
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Nama Kios
-      </div>
-      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        :
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <span class="pull-right"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLink">Input Data</button></span>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Nama Kasir
-      </div>
-      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        :
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
+        <select id="sales" required="required" name="sales" placeholder="Pilih Nama Canvaser" class="form-control">
+              <option value="" selected disabled>Pilih Nama Canvaser</option>
+              <!-- @isset($lokasiarray)
+                  @foreach ($lokasiarray as $data)
+                  <option value="{{ $data->id_sales }}">{{ $data->nm_lokasi }}</option>
+                  @endforeach
+              @endisset -->
+        </select>
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Nama Logistik
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          Nama Kios :
       </div>
-      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        :
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Nama PIC
-      </div>
-      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        :
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        ID Canvaser
-      </div>
-      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        :
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="form-control">
+              <option value="" selected disabled>Pilih Nama Kios</option>
+              <!-- @isset($lokasiarray)
+                  @foreach ($lokasiarray as $data)
+                  <option value="{{ $data->id_sales }}">{{ $data->nm_lokasi }}</option>
+                  @endforeach
+              @endisset -->
+        </select>
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Nama Canvaser
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        Tanggal Penjualan :
       </div>
-      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        :
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Tanggal Penjualan
-      </div>
-      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        :
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl">
       </div>
     </div>
   </div>
 </div>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">Daftar SP</button>
-<br>
-<div class="row">
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      <h4>Daftar ID Barang</h2>
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      <h4>Daftar Nama Barang</h4>
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      <h4>Daftar Satuan</h4>
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+<table>
+  <tr>
+    <th>Nama Barang</th>
+    <th>Satuan</th>
+    <th>Harga Satuan</th>
+    <th>Tipe Harga</th>
+    <th>Jumlah</th>
+    <th>Harga Total</th>
+  </tr>
+  <tr>
+    <td>
+      <input type="text" class="form-control" id="Produk" name="barang" value="BRONET 2GB" disabled>
+    </td>
+    <td>
+      <input type="text" class="form-control" id="Produk" name="satuan" value="PCS" disabled>
+    </td>
+    <td>
+      <input type="text" class="form-control" id="Produk" name="harga-satuan" value="20000" disabled>
+    </td>
+    <td>
+      <input type="text" class="form-control" id="Produk" name="satuan" value="PCS" disabled>
+    </td>
+    <td>
+      <input type="text" class="form-control" id="Produk" name="satuan" value="PCS" disabled>
+    </td>
+    <td>
+      <input type="text" class="form-control" id="Produk" name="satuan" value="PCS" disabled>
+    </td>
+  </tr>
+</table>
 
-  </div>
-</div>
 <form class="repeater">
     <!--
         The value given to the data-repeater-list attribute will be used as the
@@ -233,56 +215,13 @@
 @stop
 
 @section('js')
-<script>
-    $(document).ready(function () {
-        $('.repeater').repeater({
-            // (Optional)
-            // start with an empty list of repeaters. Set your first (and only)
-            // "data-repeater-item" with style="display:none;" and pass the
-            // following configuration flag
-            // initEmpty: true,
-            // (Optional)
-            // "defaultValues" sets the values of added items.  The keys of
-            // defaultValues refer to the value of the input's name attribute.
-            // If a default value is not specified for an input, then it will
-            // have its value cleared.
-            // defaultValues: {
-            //     'text-input': 'foo'
-            // },
-            // (Optional)
-            // "show" is called just after an item is added.  The item is hidden
-            // at this point.  If a show callback is not given the item will
-            // have $(this).show() called on it.
-            show: function () {
-                $(this).slideDown();
-            },
-            // (Optional)
-            // "hide" is called when a user clicks on a data-repeater-delete
-            // element.  The item is still visible.  "hide" is passed a function
-            // as its first argument which will properly remove the item.
-            // "hide" allows for a confirmation step, to send a delete request
-            // to the server, etc.  If a hide callback is not given the item
-            // will be deleted.
-            hide: function (deleteElement) {
-                if(confirm('Apakah anda yakin ingin menghapus pesanan SP ini?')) {
-                    $(this).slideUp(deleteElement);
-                }
-            },
-            // (Optional)
-            // You can use this if you need to manually re-index the list
-            // for example if you are using a drag and drop library to reorder
-            // list items.
-            // ready: function (setIndexes) {
-            //     $dragAndDrop.on('drop', setIndexes);
-            // },
-            // (Optional)
-            // Removes the delete button from the first list item,
-            // defaults to false.
-            isFirstItemUndeletable: false
-        })
-    });
-</script>
+<script type="text/javascript">
+  function today(){
+    var today = new Date();
+    var today = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  }
 
+</script>
 <!-- <script>
     $(function () {
         if ($('#tgl').val()==undefined) {
