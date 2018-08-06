@@ -11,6 +11,7 @@ use Excel;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Faker\Factory as Faker;
 
 class UploadDompulController extends Controller {
@@ -68,6 +69,8 @@ class UploadDompulController extends Controller {
                             }else{
                                 $uploadDompul[] = ['no_hp_sub_master_dompul' => $value->hp_sub_master,
                                 'nama_sub_master_dompul' => $value->nama_sub_master,
+                                'id' => Auth::user()->id,
+                                'id_lokasi' => Auth::user()->id_lokasi,
                                 'tanggal_transfer' => $value->tanggal_trx,
                                 'tanggal_upload' => Carbon::now('Asia/Jakarta')->toDateString(),
                                 'inbox' => ($value->inbox==null) ? 0 : $value->inbox ,
