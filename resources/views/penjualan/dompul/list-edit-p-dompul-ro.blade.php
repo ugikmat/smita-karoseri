@@ -10,6 +10,7 @@
 <input type="hidden" name="tgl" id="tgl" value="{{$datas->tanggal_transfer}}">
 <input type="hidden" name="customer" id="customer" value="{{$datas->nama_downline}}">
 <input type="hidden" name="sales" id="sales" value="{{$datas->nama_canvasser}}">
+<input type="hidden" name="status_pembayaran" id="status_pembayaran" value="{{$penjualanDompul->status_pembayaran}}">
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -78,7 +79,8 @@
 <table id="list-edit-invoice-table" class="table responsive"  width="100%">
     <thead>
     <tr>
-        {{-- <th>No</th> --}}
+      @if($penjualanDompul->status_pembayaran==0)
+      {{-- <th>No</th> --}}
         <th>Uraian</th>
         <th>Tipe</th>
         <th>Harga</th>
@@ -86,6 +88,15 @@
         <th>Jumlah Program</th>
         <th>Harga Total</th>
         <th>Action</th>
+      @else
+              {{-- <th>No</th> --}}
+        <th>Uraian</th>
+        <th>Tipe</th>
+        <th>Harga</th>
+        <th>Jumlah</th>
+        <th>Jumlah Program</th>
+        <th>Harga Total</th>
+      @endif
     </tr>
     </thead>
       <tfoot>
@@ -99,7 +110,7 @@
               <input type="text" name="total" id="total" value="{{$total}}" readonly>
             @endisset
           </td>
-          <td></td>
+          
         </tr>
         <tr>
           <td></td>
@@ -113,7 +124,7 @@
               <input type="text" id="tunai" name="tunai" class="form-control" value="{{$penjualanDompul->bayar_tunai}}" readonly>
             @endif
           </td>
-          <td></td>
+          
         </tr>
         <tr>
           <td></td>
@@ -130,7 +141,7 @@
               <option value="Mandiri">Mandiri</option>
             </select>
           </td>
-          <td></td>
+          
         </tr>
         <tr>
           <td></td>
@@ -142,7 +153,7 @@
             @else
               <td><input type="text" id="trf1" name="trf1" class="form-control" readonly></td>
             @endif
-          <td></td>
+          
         </tr>
         <tr>
           <td></td>
@@ -159,7 +170,7 @@
               <option value="Mandiri">Mandiri</option>
             </select>
           </td>
-          <td></td>
+          
         </tr>
         <tr>
           <td></td>
@@ -171,7 +182,7 @@
             @else
               <td><input type="text" id="trf2" name="trf2" class="form-control" value="" readonly></td>
             @endif
-          <td></td>
+          
         </tr>
         <tr>
           <td></td>
@@ -188,7 +199,7 @@
               <option value="Mandiri">Mandiri</option>
             </select>
           </td>
-          <td></td>
+          
         </tr>
         <tr>
           <td></td>
@@ -200,7 +211,7 @@
             @else
               <td><input type="text" id="trf3" name="trf3" class="form-control" value="" readonly></td>
             @endif
-          <td></td>
+          
         </tr>
         <tr>
           <td></td>
@@ -212,7 +223,7 @@
             @else
               <td><input type="text" id="catatan" readonly name="catatan" class="form-control" value="{{$penjualanDompul->catatan}}"></td>
             @endif
-          <td></td>
+          
         </tr>
         <tr>
           <td colspan="6">
@@ -224,7 +235,7 @@
             @endif
             </div>
           </td>
-          <td></td>
+          
         </tr>
     </tfoot>
 </table>
@@ -305,7 +316,8 @@
         var tgl = $('#tgl').val();
         var sales = $('#sales').val();
         var customer = $('#customer').val();
-        $('#list-edit-invoice-table').DataTable({
+        if($('#status_pembayaran').val()==0){
+          $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
             ajax: `/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
@@ -319,6 +331,21 @@
               {data: 'action', orderable: false, searchable: false}
             ]
         });
+        }else{
+          $('#list-edit-invoice-table').DataTable({
+            serverSide: true,
+            processing: true,
+            ajax: `/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
+            columns: [
+              {data: 'produk'},
+              {data: 'tipe_dompul'},
+              {data: 'harga_dompul'},
+              {data: 'qty'},
+              {data: 'qty_program'},
+              {data: 'total_harga'}
+            ]
+        });
+        }
     });
 </script>
 <script>

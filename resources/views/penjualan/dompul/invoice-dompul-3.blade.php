@@ -102,7 +102,7 @@ td{
         <td colspan="2"><b>Jumlah Tunai</b></td>
         <td></td>
         <td>
-        <input type="text" id="tunai" required="required" name="tunai" class="form-control">
+        <input type="text" id="tunai" required="required" name="tunai" class="form-control" value="{{session('tunai')}}" onkeyup="inputTunai(this.value)">
         </td>
         <td></td>
 
@@ -160,7 +160,7 @@ td{
         <td></td>
         <td colspan="2"><b>Catatan</b></td>
         <td></td>
-        <td><input type="text" id="catatan" required="required" name="catatan" class="form-control"></td>
+      <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{session('catatan')}}" onkeyup="inputCatatan(this.value)"></td>
         <td></td>
       </tr>
       <tr>
@@ -198,6 +198,8 @@ td{
 
                 <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/invoice_dompul/update/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}/{{$datas->produk}}">
                   @csrf @method('put')
+                  <input type="hidden" name="update_catatan" id="update_catatan" value="{{session('catatan')}}">
+                  <input type="hidden" name="update_tunai" id="update_tunai" value="{{session('tunai')}}">
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul
                       <span class="required">*</span>
@@ -246,6 +248,7 @@ td{
 @section('js')
 <script>
     $(function () {
+        
         var tgl = $('#tgl').val();
         var canvaser = $('#canvasser').val();
         var downline = $('#downline').val();
@@ -263,7 +266,14 @@ td{
                       {data: 'action', orderable: false, searchable: false}
                   ]
               });
+        $('#tunai').on('keyup',loadData);
     });
+    function inputTunai(str) {
+      $('#update_tunai').val(str);
+    }
+    function inputCatatan(str) {
+      $('#update_catatan').val(str);
+    }
 </script>
 <script>
   $('#editModal').on('show.bs.modal', function (event) {

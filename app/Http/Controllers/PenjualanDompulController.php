@@ -84,6 +84,7 @@ class PenjualanDompulController extends Controller
      * 
      */
     public function update(Request $request,$canvaser,$tgl,$downline,$produk,$no_faktur,$status_penjualan){
+        session(['tunai'=>$request->get('update_tunai'),'catatan'=>$request->get('update_catatan')]);
         $data =UploadDompul::where('nama_canvasser',$canvaser)
                         // ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
                         ->where('tanggal_transfer',$tgl)
