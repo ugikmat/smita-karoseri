@@ -31,7 +31,6 @@
       <th>Nama</th>
       <th>Email</th>
       <th>Lokasi</th>
-      <th>action</th>
     </tr>
   </tfoot>
 </table>
@@ -63,7 +62,7 @@
     $('#user-table').DataTable({
       serverSide: true,
       processing: true,
-      ajax: '/supplier-data',
+      ajax: '/user-data',
       columns: [{
           data: 'id'
         },

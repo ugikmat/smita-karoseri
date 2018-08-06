@@ -100,13 +100,13 @@ class LokasiController extends Controller
      */
     public function destroy($id)
     {
-      $lok = Lokasi::where('id_lokasi', $id)->update(['status' => 0]);
+      $lok = Lokasi::where('id_lokasi', $id)->update(['status_lokasi' => 0]);
       return redirect('/lokasi');
     }
 
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(Lokasi::where('status', '1'))
+        return $datatables->eloquent(Lokasi::where('status_lokasi', '1'))
                           ->addColumn('action', function ($lok) {
                               return
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$lok->id_lokasi.'" data-name="'.$lok->nm_lokasi.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>

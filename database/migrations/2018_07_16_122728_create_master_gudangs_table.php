@@ -29,7 +29,7 @@ class CreateMasterGudangsTable extends Migration
         //         });
         //     }
         // }
-        DB::statement( 'CREATE VIEW view_gudang AS
+        DB::statement( 'CREATE OR REPLACE VIEW view_gudang AS
         SELECT id_gudang, master_lokasis.nm_lokasi, alamat_gudang, master_gudangs.status
         FROM master_gudangs INNER join master_lokasis on master_gudangs.id_lokasi = master_lokasis.id_lokasi' );
     }
