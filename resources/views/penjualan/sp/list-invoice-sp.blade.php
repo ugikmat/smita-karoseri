@@ -3,7 +3,7 @@
 @section('title', 'List Invoice')
 
 @section('content_header')
-    <h1>List Penjualan Dompul</h1>
+    <h1>List Penjualan SP</h1>
 @stop
 
 @section('css')
@@ -41,7 +41,7 @@
         <button type="button" class="close" data-dismiss="modal">
           <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Input Penjualan Dompul</h4>
+        <h4 class="modal-title" id="myModalLabel">Input Penjualan SP</h4>
       </div>
       <div class="modal-body">
         <div class="clearfix"></div>
