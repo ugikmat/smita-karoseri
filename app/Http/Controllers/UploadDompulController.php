@@ -11,6 +11,7 @@ use Excel;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Faker\Factory as Faker;
 
 class UploadDompulController extends Controller {
@@ -68,6 +69,8 @@ class UploadDompulController extends Controller {
                             }else{
                                 $uploadDompul[] = ['no_hp_sub_master_dompul' => $value->hp_sub_master,
                                 'nama_sub_master_dompul' => $value->nama_sub_master,
+                                'id' => Auth::user()->id,
+                                'id_lokasi' => Auth::user()->id_lokasi,
                                 'tanggal_transfer' => $value->tanggal_trx,
                                 'tanggal_upload' => Carbon::now('Asia/Jakarta')->toDateString(),
                                 'inbox' => ($value->inbox==null) ? 0 : $value->inbox ,
@@ -184,11 +187,17 @@ class UploadDompulController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function uploadData(Datatables $datatables) {
-        return $datatables->eloquent(UploadDompul::select(DB::raw('tanggal_transfer,tanggal_upload, IF(status_active=1, "Aktif", "Tidak Aktif") as status_active, COUNT(no_faktur) as jumlah_transaksi'))
-        ->groupBy('tanggal_transfer','tanggal_upload','status_active'))
+        return $datatables->eloquent(UploadDompul::select(DB::raw('tanggal_transfer,tanggal_upload, IF(status_active=1, "Aktif", "Tidak Aktif") as status_active, COUNT(no_faktur) as jumlah_transaksi, name,nm_lokasi'))
+        ->groupBy('tanggal_transfer','tanggal_upload','status_active','name','nm_lokasi')
+        ->join('users','users.id','=','upload_dompuls.id')
+        ->join('master_lokasis','master_lokasis.id_lokasi','=','upload_dompuls.id_lokasi'))
        ->addColumn('action', function ($uploadDompul) {
-                return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#detailModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-edit"></i> Lihat Data</a>
-                <a class = "btn btn-xs btn-warning" data-toggle="modal" data-target="#activationModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-remove"></i> Aktifasi</a>';
+                if ($uploadDompul->status_active=='Aktif') {
+                    return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#detailModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-edit"></i> Lihat Data</a>';
+                } else {
+                    return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#detailModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-edit"></i> Lihat Data</a>
+                <a class = "btn btn-xs btn-warning" data-toggle="modal" data-target="#activationModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-remove"></i> Aktifasi</a>';   
+                }
             })->make(true);
     }
     /**

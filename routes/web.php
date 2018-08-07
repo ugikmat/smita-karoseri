@@ -91,6 +91,10 @@ Route::get('/penjualan/sp/invoice-sp', function() {
   return view ('/penjualan/sp/invoice-sp');
 }) -> name('invoice-sp');
 
+Route::get('/penjualan/sp/list-invoice-sp', function() {
+  return view ('/penjualan/sp/list-invoice-sp');
+}) -> name('list-invoice-sp');
+
 Route::get('/master/user', function() {
   return view ('/penjualan/sp/list-invoice-sp');
 }) -> name('list-invoice-sp');
@@ -132,6 +136,7 @@ Route::get('/upload/empty', 'UploadDompulController@empty');
 Route::get('/master/user', function() {
   return view ('/master/user');
 }) -> name('user');
+Route::get('/user-data', 'UsersController@data');
 
 Route::resource('master/bank', 'BankController');
 Route::get('bank-data', 'BankController@data');

@@ -3,7 +3,7 @@
 @section('title', 'List Invoice')
 
 @section('content_header')
-    <h1>List Penjualan Dompul</h1>
+    <h1>List Penjualan SP</h1>
 @stop
 
 @section('css')
@@ -41,7 +41,7 @@
         <button type="button" class="close" data-dismiss="modal">
           <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Input Penjualan Dompul</h4>
+        <h4 class="modal-title" id="myModalLabel">Input Penjualan SP</h4>
       </div>
       <div class="modal-body">
         <div class="clearfix"></div>
@@ -61,7 +61,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" required value="{{session('dompul-list-tgl')}}">
+                      <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" required>
                     </div>
                   </div>
 
@@ -69,7 +69,7 @@
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset"> <i class="fa fa-repeat"></i> Kosongkan</button>
-                      <button id="show" class="btn btn-success" type="button" data-dismiss="modal"> </i> Tampilkan List Penjualan</button>
+                      <button class="btn btn-success" type="button" onclick="loadData()" data-dismiss="modal"> </i> Tampilkan List Penjualan</button>
                       {{-- <input type="btn" class="btn btn-success" onclick="loadData()" value="Tampilkan List Penjualan"> --}}
                       {{-- <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-ok"></i>Tampilkan List Penjualan</button> --}}
                     </div>
@@ -118,12 +118,11 @@
   });
 </script>
 <script>
-    $(function () {
-        $tgl_penjualan = ($('#tgl').val()=='') ? 'null' : $('#tgl').val();
+    // $(function () {
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: `/invoice_dompul/list/${$tgl_penjualan}`,
+            ajax: '/invoice_dompul/list/null',
             // "columnDefs": [ {
             // "searchable": false,
             // "orderable": false,
@@ -146,12 +145,12 @@
         //     cell.innerHTML = i+1;
         //   } );
         // } ).draw();
-        function loadData() {
+
+    // });
+    function loadData() {
           $tgl = $('#tgl').val();
           t.ajax.url(`/invoice_dompul/list/${$tgl}`).load();
         }
-        $('#show').on('click',loadData);
-    });
 $('#verificationModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var id = button.data('id') // Extract info from data-* attributes
