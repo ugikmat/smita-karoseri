@@ -73,20 +73,18 @@ td{
   </div>
 </div>
 
-<form class="invoice-dompul" action="/penjualan/dompul/verify/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}" method="post">
+<form class="invoice-sp" action="" method="post">
   @csrf
-<table id="invoice-dompul-table" class="table responsive"  width="100%">
+<table id="invoice-sp-table" class="table responsive"  width="100%">
     <thead>
-    <tr>
-        {{-- <th>No</th> --}}
-        <th>Uraian</th>
-        <th>Tipe</th>
-        <th>Harga</th>
+      <tr>
+        <th>Nama Barang</th>
+        <th>Satuan</th>
+        <th>Harga Satuan</th>
+        <th>Tipe Harga</th>
         <th>Jumlah</th>
-        <th>Jumlah Program</th>
         <th>Harga Total</th>
-        <th>Action</th>
-    </tr>
+      </tr>
     </thead>
     <tfoot>
       <tr>

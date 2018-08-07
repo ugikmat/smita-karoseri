@@ -116,7 +116,7 @@
   </tr>
 </table>
 <div class="pull-right">
-  <button type="submit" class="btn btn-success" name="button"><span class="glyphicon glyphicon-ok"></span> Lanjutkan</button>
+  <button type="submit" class="btn btn-success" name="button"><span class="glyphicon glyphicon-ok"></span> Pembelian</button>
 </div>
 
 </form>
