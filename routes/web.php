@@ -93,9 +93,7 @@ Route::get('/penjualan/sp/invoice-sp-3', function() {
   return view ('/penjualan/sp/invoice-sp-3');
 }) -> name('invoice-sp-3');
 
-Route::get('/penjualan/sp/invoice-sp-2', function() {
-  return view ('/penjualan/sp/invoice-sp-2');
-}) -> name('invoice-sp-2');
+Route::post('/penjualan/sp/invoice-sp/edit', 'PenjualanSPController@edit');
 
 
 Route::get('/penjualan/sp/list-invoice-sp', function() {
