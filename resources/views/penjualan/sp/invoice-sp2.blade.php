@@ -81,10 +81,10 @@ td{
     <thead>
       <tr>
         <th>Nama Barang</th>
-        <th>Satuan</th>
-        <th>Harga Satuan</th>
         <th>Tipe Harga</th>
+        <th>Harga Satuan</th>
         <th>Jumlah</th>
+        <th>Qty Program</th>
         <th>Harga Total</th>
         <th>action</th>
       </tr>
@@ -108,7 +108,7 @@ td{
         <td colspan="2"><b>Jumlah Tunai</b></td>
         <td></td>
         <td>
-        <!-- <input type="text" id="tunai" required="required" name="tunai" class="form-control" value="{{session('tunai')}}" onkeyup="inputTunai(this.value)"> -->
+        <input type="text" id="tunai" required="required" name="tunai" class="form-control" value="{{session('tunai')}}" onkeyup="inputTunai(this.value)">
         </td>
         <td></td>
 
@@ -194,7 +194,7 @@ td{
         <td colspan="2"><b>Catatan</b></td>
         <td></td>
         <td>
-          <!-- <input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{session('catatan')}}" onkeyup="inputCatatan(this.value)"> -->
+          <input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{session('catatan')}}" onkeyup="inputCatatan(this.value)">
         </td>
         <td></td>
       </tr>
