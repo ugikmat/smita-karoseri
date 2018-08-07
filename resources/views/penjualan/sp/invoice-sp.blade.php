@@ -12,6 +12,8 @@
 @stop
 
 @section('content')
+<form class="invoice-sp" action="" method="post">
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -21,11 +23,11 @@
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
         <select id="sales" required="required" name="sales" placeholder="Pilih Nama Canvaser" class="form-control">
               <option value="" selected disabled>Pilih Nama Canvaser</option>
-              <!-- @isset($salesarray)
-                  @foreach ($salesarray as $data)
+              @isset($saless)
+                  @foreach ($saless as $data)
                   <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
                   @endforeach
-              @endisset -->
+              @endisset
         </select>
       </div>
     </div>
@@ -36,11 +38,11 @@
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="form-control">
               <option value="" selected disabled>Pilih Nama Kios</option>
-              <!-- @isset($custarray)
-                  @foreach ($custarray as $data)
+              @isset($customerarray)
+                  @foreach ($customerarray as $data)
                   <option value="{{ $data->id_cust }}">{{ $data->nm_cust }}</option>
                   @endforeach
-              @endisset -->
+              @endisset
         </select>
       </div>
     </div>
@@ -57,8 +59,6 @@
 
 <br><br>
 
-<form class="invoice-sp" action="" method="post">
-
 <table id="invoice-sp-table" class="table responsive"  width="100%">
   <tr>
     <th>Nama Barang</th>
@@ -68,55 +68,39 @@
     <th>Jumlah</th>
     <th>Harga Total</th>
   </tr>
+  @foreach($produks as $key => $produk)
   <tr>
     <td>
-      <input type="text" class="form-control" id="nama" name="nama" value="BRONET 2GB" disabled>
+    <input type="text" class="form-control" id="nama" name="nama" value="{{$produk->nama_produk}}" disabled>
     </td>
     <td>
-      <input type="text" class="form-control" id="satuan" name="satuan" value="PCS" disabled>
+      <input type="text" class="form-control" id="satuan" name="satuan" value="{{$produk->satuan}}" disabled>
     </td>
     <td>
-      <input type="text" class="form-control" id="harga" name="harga-satuan" value="20000" disabled>
+      <input type="text" class="form-control" id="harga{{$key+1}}" name="harga-satuan" value="20000" disabled>
     </td>
     <td>
       <select class="form-control" name="tipe" id="tipe">
-        <option value="CVS">CVS</option>
-        <option value="DS">DS</option>
+        @foreach($hargaProduks as $harga)
+          @if($harga->id_produk==$produk->kode_produk)
+            <option value="{{$harga->tipe_harga_sp}}">{{$harga->tipe_harga_sp}}</option>
+          @endif
+        @endforeach
       </select>
     </td>
     <td>
-      <input type="text" class="form-control" id="jumlah" name="jumlah">
+      <input type="text" class="form-control" id="jumlah{{$key+1}}" name="jumlah">
     </td>
     <td>
-      <input type="text" class="form-control" id="total" name="total" readonly>
+      <input type="text" class="form-control" id="total{{$key+1}}" name="total" readonly>
     </td>
   </tr>
-  <tr>
-    <td>
-      <input type="text" class="form-control" id="nama" name="nama" value="Combo Lite 4GB+" disabled>
-    </td>
-    <td>
-      <input type="text" class="form-control" id="satuan" name="satuan" value="PCS" disabled>
-    </td>
-    <td>
-      <input type="text" class="form-control" id="harga" name="harga-satuan" value="35000" disabled>
-    </td>
-    <td>
-      <select class="form-control" name="tipe" id="tipe">
-        <option value="CVS">CVS</option>
-        <option value="DS">DS</option>
-      </select>
-    </td>
-    <td>
-      <input type="text" class="form-control" id="jumlah" name="jumlah">
-    </td>
-    <td>
-      <input type="text" class="form-control" id="total" name="total" readonly>
-    </td>
-  </tr>
+  @endforeach
+
 </table>
 <div class="pull-right">
-  <button type="submit" class="btn btn-success" name="button"><span class="glyphicon glyphicon-ok"></span> Pembelian</button>
+
+  <button type="submit" class="btn btn-success" name="button"><span class="glyphicon glyphicon-ok"></span> <a href="/penjualan/sp/invoice-sp-2" style="text-decoration:none;" >Pembelian</a></button>
 </div>
 
 </form>
@@ -135,6 +119,19 @@
 
 @section('js')
 <script type="text/javascript">
+for (let index = 0; index < {{$jumlah}}; index++) {
+  console.log(index);
+  $(`#jumlah${index+1}`).on('keyup',function (event) {
+    $(`#total${index+1}`).val($(`#harga${index+1}`).val()*this.value);
+  })
+}
+  // $produks.forEach(function myFunction(item, index) {
+  //   console.log(index)
+  //   $(`#jumlah${index+1}`).on('keyup',function (event) {
+  //     $(`#total${index+1}`).val($(`#harga${index+1}`).val()*this.value);
+  // })
+  // })
+  
   function today(){
     var today = new Date();
     var today = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();

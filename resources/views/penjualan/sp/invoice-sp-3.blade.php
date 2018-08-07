@@ -20,6 +20,8 @@ td{
 @endisset -->
 
 @section('content')
+<form class="invoice-sp" action="/invoice_sp/store" method="post">
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -80,13 +82,7 @@ td{
 
 
 
-<form class="invoice-sp" action="/invoice_sp/store" method="post">
-  <!-- @csrf
-  <input type="hidden" name="sales" id="sales" value="{{$sales->id_sales}}">
-  <input type="hidden" name="nm_sales" id="nm_sales" value="{{$sales->nm_sales}}">
-  <input type="hidden" name="downline" id="downline" value="{{$datas->no_hp_downline}}">
-  <input type="hidden" name="tgl" id="tgl" value="{{$tgl}}">
-  <input type="hidden" name="user" id="user" value="{{ Auth::user()->id }}"> -->
+
 <table id="invoice-sp-table" class="table responsive"  width="100%">
     <thead>
     <tr>
@@ -106,7 +102,7 @@ td{
           <td></td>
           <td>
             @isset($total)
-            <input type="text" name="total" id="total" value="{{$total}}" readonly>
+            <!-- <input type="text" name="total" id="total" value="{{$total}}" readonly> -->
             @endisset
           </td>
         </tr>
@@ -116,7 +112,7 @@ td{
           <td colspan="2"><b>Jumlah Tunai</b></td>
           <td></td>
           <td>
-          <input type="text" id="tunai"  name="tunai" class="form-control" value="{{$tunai}}" readonly>
+          <!-- <input type="text" id="tunai"  name="tunai" class="form-control" value="{{$tunai}}" readonly> -->
           </td>
 
         </tr>
@@ -125,7 +121,7 @@ td{
           <td></td>
           <td colspan="2"><b>Bank Transfer 1</b></td>
           <td></td>
-          <td><input type="text" id="bank1" required="required" name="bank1" class="form-control" value="{{$bank1}}" readonly></td>
+          <!-- <td><input type="text" id="bank1" required="required" name="bank1" class="form-control" value="{{$bank1}}" readonly></td> -->
 
         </tr>
         <tr>
@@ -133,7 +129,7 @@ td{
           <td></td>
           <td colspan="2"><b>Jumlah Transfer 1</b></td>
           <td></td>
-          <td><input type="text" id="trf1" required="required" name="trf1" class="form-control" value="{{$trf1}}" readonly></td>
+          <!-- <td><input type="text" id="trf1" required="required" name="trf1" class="form-control" value="{{$trf1}}" readonly></td> -->
 
         </tr>
         <tr>
@@ -141,7 +137,7 @@ td{
           <td></td>
           <td colspan="2"><b>Bank Transfer 2</b></td>
           <td></td>
-          <td><input type="text" id="bank2" required="required" name="bank2" class="form-control" value="{{$bank2}}" readonly></td>
+          <!-- <td><input type="text" id="bank2" required="required" name="bank2" class="form-control" value="{{$bank2}}" readonly></td> -->
 
         </tr>
         <tr>
@@ -149,7 +145,7 @@ td{
           <td></td>
           <td colspan="2"><b>Jumlah Transfer 2</b></td>
           <td></td>
-          <td><input type="text" id="trf2" required="required" name="trf2" class="form-control" value="{{$trf2}}" readonly></td>
+          <!-- <td><input type="text" id="trf2" required="required" name="trf2" class="form-control" value="{{$trf2}}" readonly></td> -->
 
         </tr>
         <tr>
@@ -157,7 +153,7 @@ td{
           <td></td>
           <td colspan="2"><b>Bank Transfer 3</b></td>
           <td></td>
-          <td><input type="text" id="bank3" required="required" name="bank3" class="form-control" value="{{$bank3}}" readonly></td>
+          <!-- <td><input type="text" id="bank3" required="required" name="bank3" class="form-control" value="{{$bank3}}" readonly></td> -->
 
         </tr>
         <tr>
@@ -165,7 +161,7 @@ td{
           <td></td>
           <td colspan="2"><b>Jumlah Transfer 3</b></td>
           <td></td>
-          <td><input type="text" id="trf3" required="required" name="trf3" class="form-control" value="{{$trf2}}" readonly></td>
+          <!-- <td><input type="text" id="trf3" required="required" name="trf3" class="form-control" value="{{$trf2}}" readonly></td> -->
 
         </tr>
         <tr>
@@ -173,7 +169,7 @@ td{
           <td></td>
           <td colspan="2"><b>Catatan</b></td>
           <td></td>
-          <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{$catatan}}" readonly></td>
+          <!-- <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{$catatan}}" readonly></td> -->
 
         </tr>
         <tr>
