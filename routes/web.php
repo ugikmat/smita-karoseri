@@ -91,6 +91,10 @@ Route::get('/penjualan/sp/invoice-sp', function() {
   return view ('/penjualan/sp/invoice-sp');
 }) -> name('invoice-sp');
 
+Route::get('/penjualan/sp/invoice-sp-3', function() {
+  return view ('/penjualan/sp/invoice-sp-3');
+}) -> name('invoice-sp-3');
+
 Route::get('/penjualan/sp/list-invoice-sp', function() {
   return view ('/penjualan/sp/list-invoice-sp');
 }) -> name('list-invoice-sp');

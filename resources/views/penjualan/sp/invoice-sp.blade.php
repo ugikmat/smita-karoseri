@@ -3,7 +3,7 @@
 @section('title', 'Penjualan SP')
 
 @section('content_header')
-    <h1>Detail Penjualan SP</h1>
+    <h1>Penjualan SP</h1>
 @stop
 
 @section('css')
@@ -15,119 +15,110 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        No. Penjualan
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
+          Nama Canvaser :
       </div>
-      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        :
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Nama Kios
-      </div>
-      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        :
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <span class="pull-right"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLink">Input Data</button></span>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Nama Kasir
-      </div>
-      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        :
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
+        <select id="sales" required="required" name="sales" placeholder="Pilih Nama Canvaser" class="form-control">
+              <option value="" selected disabled>Pilih Nama Canvaser</option>
+              <!-- @isset($salesarray)
+                  @foreach ($salesarray as $data)
+                  <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
+                  @endforeach
+              @endisset -->
+        </select>
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Nama Logistik
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          Nama Kios :
       </div>
-      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        :
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Nama PIC
-      </div>
-      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        :
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        ID Canvaser
-      </div>
-      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        :
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="form-control">
+              <option value="" selected disabled>Pilih Nama Kios</option>
+              <!-- @isset($custarray)
+                  @foreach ($custarray as $data)
+                  <option value="{{ $data->id_cust }}">{{ $data->nm_cust }}</option>
+                  @endforeach
+              @endisset -->
+        </select>
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Nama Canvaser
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        Tanggal Penjualan :
       </div>
-      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        :
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Tanggal Penjualan
-      </div>
-      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        :
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl">
       </div>
     </div>
   </div>
 </div>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">Daftar SP</button>
-<br>
-<div class="row">
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      <h4>Daftar ID Barang</h2>
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      <h4>Daftar Nama Barang</h4>
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      <h4>Daftar Satuan</h4>
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+<br><br>
 
-  </div>
+<form class="invoice-sp" action="" method="post">
+
+<table id="invoice-sp-table" class="table responsive"  width="100%">
+  <tr>
+    <th>Nama Barang</th>
+    <th>Satuan</th>
+    <th>Harga Satuan</th>
+    <th>Tipe Harga</th>
+    <th>Jumlah</th>
+    <th>Harga Total</th>
+  </tr>
+  <tr>
+    <td>
+      <input type="text" class="form-control" id="nama" name="nama" value="BRONET 2GB" disabled>
+    </td>
+    <td>
+      <input type="text" class="form-control" id="satuan" name="satuan" value="PCS" disabled>
+    </td>
+    <td>
+      <input type="text" class="form-control" id="harga" name="harga-satuan" value="20000" disabled>
+    </td>
+    <td>
+      <select class="form-control" name="tipe" id="tipe">
+        <option value="CVS">CVS</option>
+        <option value="DS">DS</option>
+      </select>
+    </td>
+    <td>
+      <input type="text" class="form-control" id="jumlah" name="jumlah">
+    </td>
+    <td>
+      <input type="text" class="form-control" id="total" name="total" readonly>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <input type="text" class="form-control" id="nama" name="nama" value="Combo Lite 4GB+" disabled>
+    </td>
+    <td>
+      <input type="text" class="form-control" id="satuan" name="satuan" value="PCS" disabled>
+    </td>
+    <td>
+      <input type="text" class="form-control" id="harga" name="harga-satuan" value="35000" disabled>
+    </td>
+    <td>
+      <select class="form-control" name="tipe" id="tipe">
+        <option value="CVS">CVS</option>
+        <option value="DS">DS</option>
+      </select>
+    </td>
+    <td>
+      <input type="text" class="form-control" id="jumlah" name="jumlah">
+    </td>
+    <td>
+      <input type="text" class="form-control" id="total" name="total" readonly>
+    </td>
+  </tr>
+</table>
+<div class="pull-right">
+  <button type="submit" class="btn btn-success" name="button"><span class="glyphicon glyphicon-ok"></span> Pembelian</button>
 </div>
-<form class="repeater">
-    <!--
-        The value given to the data-repeater-list attribute will be used as the
-        base of rewritten name attributes.  In this example, the first
-        data-repeater-item's name attribute would become group-a[0][text-input],
-        and the second data-repeater-item would become group-a[1][text-input]
-    -->
-    <div data-repeater-list="group-a">
-      <div data-repeater-item>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            ID Barang : <input type="text" name="text-input" value=""/>
-        </div>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            Nama Barang : <input type="text" name="text-input" value=""/>
-        </div>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            Satuan : <input type="text" name="text-input" value=""/>
-        </div>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            <button data-repeater-delete type="button" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
-        </div>
-      </div>
-    </div>
-    <button data-repeater-create type="button" class="btn btn-success"> <span class="glyphicon glyphicon-plus"></span> Add</button>
+
 </form>
 
 <!-- <table id="invoice-sp-table" class="table responsive" width="100%">
@@ -140,149 +131,16 @@
     </thead>
 </table> -->
 
-<!--Modal Link-->
-<div class="modal fade bs-example-modal-lg" id='modalLink' tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Input Penjualan SP</h4>
-      </div>
-      <div class="modal-body">
-        <div class="clearfix"></div>
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <br />
-
-              <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/penjualan/dompul/invoice-sp">
-                  @csrf
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Canvasser
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <select class="form-control col-md-7 col-xs-12" name="id">
-                        <option value="1">pras</option>
-                        <option value="3">ugik</option>
-                        <option value="2">jovi</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <!-- ini dinamis mengikuti id canvaser yg dipilih di atas-->
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Kios
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <select class="form-control col-md-7 col-xs-12" name="id">
-                        <option value="1">pras</option>
-                        <option value="3">ugik</option>
-                        <option value="2">jovi</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No. Penjualan
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="Auto Generate"  disabled>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tgl Penjualan
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input class="datepicker col-md-7 col-xs-12" required="required" name="tgl" data-date-format="dd-mm-yyyy">
-                    </div>
-                  </div>
-
-                  <div class="ln_solid"></div>
-                  <div class="form-group">
-                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                      <button class="btn btn-primary" type="reset"> <i class="fa fa-repeat"></i> Kosongkan</button>
-                      <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Rekap Penjualan</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-  </div>
-</div>
-
 @stop
 
 @section('js')
-<script>
-    $(document).ready(function () {
-        $('.repeater').repeater({
-            // (Optional)
-            // start with an empty list of repeaters. Set your first (and only)
-            // "data-repeater-item" with style="display:none;" and pass the
-            // following configuration flag
-            // initEmpty: true,
-            // (Optional)
-            // "defaultValues" sets the values of added items.  The keys of
-            // defaultValues refer to the value of the input's name attribute.
-            // If a default value is not specified for an input, then it will
-            // have its value cleared.
-            // defaultValues: {
-            //     'text-input': 'foo'
-            // },
-            // (Optional)
-            // "show" is called just after an item is added.  The item is hidden
-            // at this point.  If a show callback is not given the item will
-            // have $(this).show() called on it.
-            show: function () {
-                $(this).slideDown();
-            },
-            // (Optional)
-            // "hide" is called when a user clicks on a data-repeater-delete
-            // element.  The item is still visible.  "hide" is passed a function
-            // as its first argument which will properly remove the item.
-            // "hide" allows for a confirmation step, to send a delete request
-            // to the server, etc.  If a hide callback is not given the item
-            // will be deleted.
-            hide: function (deleteElement) {
-                if(confirm('Apakah anda yakin ingin menghapus pesanan SP ini?')) {
-                    $(this).slideUp(deleteElement);
-                }
-            },
-            // (Optional)
-            // You can use this if you need to manually re-index the list
-            // for example if you are using a drag and drop library to reorder
-            // list items.
-            // ready: function (setIndexes) {
-            //     $dragAndDrop.on('drop', setIndexes);
-            // },
-            // (Optional)
-            // Removes the delete button from the first list item,
-            // defaults to false.
-            isFirstItemUndeletable: false
-        })
-    });
-</script>
+<script type="text/javascript">
+  function today(){
+    var today = new Date();
+    var today = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  }
 
+</script>
 <!-- <script>
     $(function () {
         if ($('#tgl').val()==undefined) {
