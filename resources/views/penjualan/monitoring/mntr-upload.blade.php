@@ -18,7 +18,7 @@
         Tanggal Penjualan
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        : 121118
+        : {{session('tgl')}}
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -80,19 +80,34 @@
       <tr>
         <td></td>
         <td><b>Total</b></td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
+        @isset($totalQtyProgram5k)
+        <td>{{$totalQtyProgram5k}}</td>
+        <td>{{$totalQtyNonProgram5k}}</td>
+        <td>{{$totalQtyProgram10k}}</td>
+        <td>{{$totalQtyNonProgram10k}}</td>
+        <td>{{$totalQtyProgramRupiah}}</td>
+        <td>{{$totalQtyNonProgramRupiah}}</td>
+        @else
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>0</td>
+        @endisset
       </tr>
       <tr>
         <td></td>
         <td><b>Total Keseluruhan</b></td>
-        <td colspan="2">harganya(dari database)</td>
-        <td colspan="2">harganya(dari database)</td>
-        <td colspan="2">harganya(dari database)</td>
+        @isset($total_5k)
+        <td colspan="2">{{$total_5k}}</td>
+        <td colspan="2">{{$total_10k}}</td>
+        <td colspan="2">{{$total_rupiah}}</td>
+        @else
+        <td colspan="2"></td>
+        <td colspan="2"></td>
+        <td colspan="2"></td>
+        @endisset
       </tr>
     </tfoot>
 </table>
@@ -119,14 +134,14 @@
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="">
-                  @csrf @method('put')
+                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/penjualan/monitoring/mntr-upload/show">
+                  @csrf @method('get')
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Pilih Tanggal
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy">
+                    <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" value="{{session('tgl_penjualan')}}">
                     </div>
                   </div>
 
@@ -160,10 +175,15 @@
 </script>
 <script>
     $(function () {
+        if ($('#tgl').val()==="") {
+          var tgl = null;
+        } else {
+          var tgl = $('#tgl').val();
+        }
         var t = $('#m-penjualan-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/monitor-data',
+            ajax: `/monitor-data/${tgl}`,
             columns: [
                 {data: 'index'},
                 {data: 'nama'},

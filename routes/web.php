@@ -101,7 +101,8 @@ Route::get('/master/user', function() {
 
 //monitoring
 Route::get('/penjualan/monitoring/mntr-upload', 'MonitorController@index');
-Route::get('/monitor-data','MonitorController@data');
+Route::get('/penjualan/monitoring/mntr-upload/show', 'MonitorController@show');
+Route::get('/monitor-data/{tgl}','MonitorController@data');
 
 // laporan penjualan
 Route::get('/penjualan/laporan-penjualan/LPdompul', 'LaporanPenjualanDompulController@index');
