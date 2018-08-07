@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Penjualan Dompul')
+@section('title', 'Penjualan SP')
 
 @section('content_header')
-    <h1>Tambah Penjualan Dompul RO</h1>
+    <h1>Pembayaran Penjualan SP</h1>
 @stop
 
 @section('css')
@@ -74,7 +74,7 @@ td{
 </div>
 
 <form class="invoice-sp" action="" method="post">
-  @csrf
+
 <table id="invoice-sp-table" class="table responsive"  width="100%">
     <thead>
       <tr>
@@ -93,9 +93,9 @@ td{
         <td colspan="2"><b>Grand Total</b></td>
         <td></td>
         <td>
-          @isset($total)
+          <!-- @isset($total)
           <input type="text" class="form-control" name="total" id="total" value="{{$total}}" readonly>
-          @endisset
+          @endisset -->
         </td>
         <td></td>
       </tr>
@@ -105,7 +105,7 @@ td{
         <td colspan="2"><b>Jumlah Tunai</b></td>
         <td></td>
         <td>
-        <input type="text" id="tunai" required="required" name="tunai" class="form-control" value="{{session('tunai')}}" onkeyup="inputTunai(this.value)">
+        <!-- <input type="text" id="tunai" required="required" name="tunai" class="form-control" value="{{session('tunai')}}" onkeyup="inputTunai(this.value)"> -->
         </td>
         <td></td>
 
@@ -190,7 +190,9 @@ td{
         <td></td>
         <td colspan="2"><b>Catatan</b></td>
         <td></td>
-      <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{session('catatan')}}" onkeyup="inputCatatan(this.value)"></td>
+        <td>
+          <!-- <input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{session('catatan')}}" onkeyup="inputCatatan(this.value)"> -->
+        </td>
         <td></td>
       </tr>
       <tr>
@@ -205,7 +207,7 @@ td{
 </form>
 
 <!--Modal Edit-->
-<div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
+<!-- <div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
@@ -226,12 +228,12 @@ td{
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/invoice_dompul/update/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}/{{$datas->produk}}">
+                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/invoice_sp/update/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}/{{$datas->produk}}">
                   @csrf @method('put')
                   <input type="hidden" name="update_catatan" id="update_catatan" value="{{session('catatan')}}">
                   <input type="hidden" name="update_tunai" id="update_tunai" value="{{session('tunai')}}">
                   <div class="form-group kode">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe sp
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -271,25 +273,25 @@ td{
 
     </div>
   </div>
-</div>
+</div> -->
 
 @stop
 
 @section('js')
-<script>
+<!-- <script>
     $(function () {
 
         var tgl = $('#tgl').val();
         var canvaser = $('#canvasser').val();
         var downline = $('#downline').val();
-        var t = $('#invoice-dompul-table').DataTable({
+        var t = $('#invoice-sp-table').DataTable({
                   serverSide: true,
                   processing: true,
-                  ajax: `/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`,
+                  ajax: `/edit_invoice_sp/${canvaser}/${tgl}/${downline}`,
                   columns: [
                       {data: 'produk'},
-                      {data: 'tipe_dompul'},
-                      {data: 'harga_dompul'},
+                      {data: 'tipe_sp'},
+                      {data: 'harga_sp'},
                       {data: 'qty'},
                       {data: 'qty_program'},
                       {data: 'total_harga'},
@@ -324,16 +326,16 @@ td{
     }
     var default_opt = document.createElement('option');
     default_opt.value = 'default';
-    default_opt.innerHTML = '-- Pilih Tipe Dompul --';
+    default_opt.innerHTML = '-- Pilih Tipe sp --';
     tipe.appendChild(default_opt);
     tipe_harga.forEach(element => {
       var opt = document.createElement('option');
-      opt.value = element.tipe_harga_dompul;
-      opt.innerHTML = element.tipe_harga_dompul;
+      opt.value = element.tipe_harga_sp;
+      opt.innerHTML = element.tipe_harga_sp;
       tipe.appendChild(opt);
     });
     $('#qty_program').val(qty_program);
-    $('#editForm').attr('action', `/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/0`);
+    $('#editForm').attr('action', `/invoice_sp/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/0`);
   })
-</script>
+</script> -->
 @stop
