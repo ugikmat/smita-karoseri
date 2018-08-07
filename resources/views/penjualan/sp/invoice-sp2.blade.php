@@ -73,6 +73,8 @@ td{
   </div>
 </div>
 
+<br><br>
+
 <form class="invoice-sp" action="" method="post">
 
 <table id="invoice-sp-table" class="table responsive"  width="100%">
@@ -84,6 +86,7 @@ td{
         <th>Tipe Harga</th>
         <th>Jumlah</th>
         <th>Harga Total</th>
+        <th>action</th>
       </tr>
     </thead>
     <tfoot>
@@ -207,7 +210,7 @@ td{
 </form>
 
 <!--Modal Edit-->
-<!-- <div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade bs-example-modal-lg" id='editModal' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
@@ -228,17 +231,18 @@ td{
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/invoice_sp/update/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}/{{$datas->produk}}">
+                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="">
                   @csrf @method('put')
-                  <input type="hidden" name="update_catatan" id="update_catatan" value="{{session('catatan')}}">
-                  <input type="hidden" name="update_tunai" id="update_tunai" value="{{session('tunai')}}">
+                  <!-- <input type="hidden" name="update_catatan" id="update_catatan" value="{{session('catatan')}}">
+                  <input type="hidden" name="update_tunai" id="update_tunai" value="{{session('tunai')}}"> -->
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe sp
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <select name="tipe" required="required" id="tipe">
-
+                        <option value="CVS">CVS</option>
+                        <option value="DS">DS</option>
                       </select>
                     </div>
                   </div>
@@ -250,7 +254,7 @@ td{
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <input type="text" id="qty_program" required="required" name="qty_program" class="form-control col-md-7 col-xs-12" value="">
                     </div>
-                  </div>
+                  </div>/
 
 
                   <div class="ln_solid"></div>
@@ -258,7 +262,6 @@ td{
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset">Reset</button>
                       <input type="submit" class="btn btn-success" value="Simpan">
-                      {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
                     </div>
                   </div>
                 </form>
@@ -273,7 +276,7 @@ td{
 
     </div>
   </div>
-</div> -->
+</div>
 
 @stop
 
