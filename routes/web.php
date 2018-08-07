@@ -88,7 +88,7 @@ Route::get('/edit_list_invoice_dompul/{sales}/{tgl}/{customer}', 'ListPenjualanD
 Route::put('/invoice_dompul/verify/{id}', 'ListPenjualanDompulController@verif');
 
 Route::get('/penjualan/sp/invoice-sp', 'PenjualanSPController@index');
-
+Route::post('/get_harga/{tipe}/{kode}', 'PenjualanSPController@getHarga');
 Route::get('/penjualan/sp/invoice-sp-3', function() {
   return view ('/penjualan/sp/invoice-sp-3');
 }) -> name('invoice-sp-3');

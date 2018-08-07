@@ -23,6 +23,15 @@ class PenjualanSPController extends Controller
     {
         $this->middleware('auth');
     }
+    public function set_session(Request $request){
+        session(['tipe_harga'=>$request->input('tipe_harga'),'kode_produk'=>$request->input('kode_produk')]);
+    }
+
+    public function getHarga($tipe,$kode){
+        $hargaProduks = HargaProduk::select('harga_sp')->where('status_harga_sp','Aktif')->where('id_produk',$kode)->where('tipe_harga_sp',$tipe)->first();
+        return response()->json(['success' => true, 'harga' => $hargaProduks]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -31,9 +40,10 @@ class PenjualanSPController extends Controller
     public function index()
     {
         $hargaProduks = HargaProduk::where('status_harga_sp','Aktif')->get();
+        $arrHarga = $hargaProduks->mode('harga_sp');
         $produks = produk::where('status_produk','1')->get();
         $saless = Sales::where('status','1')->get();
         $jumlahProduk = $produks->count();
-        return view('penjualan.sp.invoice-sp',['saless'=>$saless,'produks'=>$produks,'hargaProduks'=>$hargaProduks,'jumlah'=>$jumlahProduk]);
+        return view('penjualan.sp.invoice-sp',['saless'=>$saless,'produks'=>$produks,'hargaProduks'=>$hargaProduks,'jumlah'=>$jumlahProduk,'arrHarga'=>$arrHarga]);
     }
 }
