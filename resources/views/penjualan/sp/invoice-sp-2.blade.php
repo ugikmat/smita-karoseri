@@ -16,7 +16,7 @@ td{
 
 @section('content')
 <form class="invoice-sp" action="" method="post">
-
+  <input type="hidden" name="id" id="id" value="{{$penjualanSp->id_penjualan_sp}}" disabled>
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -24,9 +24,9 @@ td{
           Nama Canvaser :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
-        <!-- @isset($datas)
-          <input type="text" name="canvasser" id="canvasser" value="{{$datas->nama_canvasser}}" disabled>
-        @endisset -->
+        @isset($sales)
+          <input type="text" name="canvasser" id="canvasser" value="{{$sales->nm_sales}}" disabled>
+        @endisset
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -34,9 +34,9 @@ td{
           Nama Kios :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <!-- @isset($datas)
-        <input type="text" name="downline" id="downline" value="{{$datas->nama_downline}}" disabled>
-        @endisset -->
+        @isset($customer)
+        <input type="text" name="downline" id="downline" value="{{$customer->nm_cust}}" disabled>
+        @endisset
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -49,9 +49,9 @@ td{
           No HP Canvaser :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
-        <!-- @isset($datas)
-           {{$datas->no_hp_canvasser}}
-        @endisset -->
+        @isset($sales)
+           {{$sales->no_hp}}
+        @endisset
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -59,9 +59,9 @@ td{
           No HP Kios :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <!-- @isset($datas)
-          {{$datas->no_hp_downline}}
-        @endisset -->
+        @isset($customer)
+          {{$customer->no_hp}}
+        @endisset
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -69,7 +69,7 @@ td{
         Tanggal Penjualan :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl" value="">
+      <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl" value="{{$penjualanSp->tanggal_penjualan_sp}}">
       </div>
     </div>
   </div>
@@ -281,36 +281,26 @@ td{
 @stop
 
 @section('js')
-<!-- <script>
+<script>
     $(function () {
-
-        var tgl = $('#tgl').val();
-        var canvaser = $('#canvasser').val();
-        var downline = $('#downline').val();
+        var id = $('#id').val();
         var t = $('#invoice-sp-table').DataTable({
                   serverSide: true,
                   processing: true,
-                  ajax: `/edit_invoice_sp/${canvaser}/${tgl}/${downline}`,
+                  ajax: `/edit_invoice_sp/${id}`,
                   columns: [
-                      {data: 'produk'},
-                      {data: 'tipe_sp'},
-                      {data: 'harga_sp'},
-                      {data: 'qty'},
-                      {data: 'qty_program'},
-                      {data: 'total_harga'},
+                      {data: 'nama_produk'},
+                      {data: 'tipe_harga'},
+                      {data: 'harga_satuan'},
+                      {data: 'jumlah_sp'},
+                      {data: 'harga_beli'},
+                      {data: 'harga_total'},
                       {data: 'action', orderable: false, searchable: false}
                   ]
               });
-        $('#tunai').on('keyup',loadData);
     });
-    function inputTunai(str) {
-      $('#update_tunai').val(str);
-    }
-    function inputCatatan(str) {
-      $('#update_catatan').val(str);
-    }
 </script>
-<script>
+{{-- <script>
   $('#editModal').on('show.bs.modal', function (event) {
     var tgl = $('#tgl').val();
     var canvaser = $('#canvasser').val();
@@ -340,5 +330,5 @@ td{
     $('#qty_program').val(qty_program);
     $('#editForm').attr('action', `/invoice_sp/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/0`);
   })
-</script> -->
+</script> --}}
 @stop

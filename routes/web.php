@@ -94,6 +94,7 @@ Route::get('/penjualan/sp/invoice-sp-3', function() {
 }) -> name('invoice-sp-3');
 
 Route::post('/penjualan/sp/invoice-sp/edit', 'PenjualanSPController@edit');
+Route::get('/edit_invoice_sp/{id}', 'PenjualanSPController@data');
 
 
 Route::get('/penjualan/sp/list-invoice-sp', function() {

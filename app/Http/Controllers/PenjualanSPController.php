@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Sales;
+use App\Customer;
 use App\produk;
 use App\UploadDompul;
 use App\PenjualanProduk;
@@ -59,11 +60,14 @@ class PenjualanSPController extends Controller
                 $detailPenjualanSp->tipe_harga=$request->get("tipe{$i}");
                 $detailPenjualanSp->harga_satuan=$request->get("harga{$i}");
                 $detailPenjualanSp->harga_total=$request->get("total{$i}");
+                $detailPenjualanSp->harga_beli=0;
                 $detailPenjualanSp->keterangan_detail_psp='none';
                 $detailPenjualanSp->save();
             }
-        }        
-        return view('/penjualan/sp/invoice-sp-2');
+        }
+        $sales = Sales::where('id_sales',$penjualanSp->id_sales)->first();
+        $customer = Customer::where('id_cust',$penjualanSp->id_customer)->first();
+        return view('/penjualan/sp/invoice-sp-2',['penjualanSp'=>$penjualanSp,'sales'=>$sales,'customer'=>$customer]);
     }
 
     /**
@@ -79,5 +83,64 @@ class PenjualanSPController extends Controller
         $saless = Sales::where('status','1')->get();
         $jumlahProduk = $produks->count();
         return view('penjualan.sp.invoice-sp',['saless'=>$saless,'produks'=>$produks,'hargaProduks'=>$hargaProduks,'jumlah'=>$jumlahProduk,'arrHarga'=>$arrHarga]);
+    }
+    /**
+     * Process dataTable ajax response.
+     *
+     * @param \Yajra\Datatables\Datatables $datatables
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function data(Datatables $datatables,$id)
+    {
+/**
+ * SELECT master_produks.nama_produk(uraian), master_produks.satuan, detail_penjualan_sps.harga_satuan, 
+*       detail_penjualan_sps.tipe_harga, detail_penjualan_sps.jumlah_sp(kuantitas), 
+*       detail_penjualan_sps.harga_total
+*FROM master_produks JOIN detail_penjualan_sps
+*ON master_produks.kode_produk = detail_penjualan_sps.id_produk
+ */
+        return $datatables->eloquent(DetailPenjualanProduk::select(DB::raw('master_produks.nama_produk, 
+        master_produks.satuan, detail_penjualan_sps.harga_satuan,detail_penjualan_sps.harga_beli,
+        detail_penjualan_sps.tipe_harga, detail_penjualan_sps.jumlah_sp,
+        detail_penjualan_sps.harga_total'))
+                        ->join('master_produks',function($join){
+                            $join->on('detail_penjualan_sps.id_produk','=','master_produks.kode_produk');
+                        })
+                        ->where('id_penjualan_sp',$id))
+                        ->addColumn('indeks', function ($uploadDompul) {
+                              return '';
+                            })
+                            ->addColumn('action', function ($uploadDompul) {
+                              return '';
+                            })
+                            // ->addColumn('input', function ($uploadDompul) {
+                            //   return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                            // })->rawColumns(['input'])
+                          ->make(true);
+    }
+    /**
+     * Process dataTable ajax response.
+     *
+     * @param \Yajra\Datatables\Datatables $datatables
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function detailData(Datatables $datatables,$tgl)
+    {
+
+        return $datatables->eloquent(PenjualanProduk::select(DB::raw('penjualan_sps.id_penjualan_sp, master_saless.nm_sales, master_customers.no_hp_customer, master_customers.nm_cust, penjualan_sps.tanggal_penjualan_sp, penjualan_sps.status_penjualan'))
+                        ->join('master_saless',function($join){
+                            $join->on('penjualan_sps.id_sales','=','master_saless.id_sales');
+                        })
+                        ->join('master_customers',function($join){
+                            $join->on('penjualan_sps.id_customer','=','master_customers.id_cust');
+                        })
+                        ->where('tanggal_penjualan_sp',$tgl))
+                        ->addColumn('indeks', function ($uploadDompul) {
+                              return '';
+                            })
+                            // ->addColumn('input', function ($uploadDompul) {
+                            //   return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                            // })->rawColumns(['input'])
+                          ->make(true);
     }
 }
