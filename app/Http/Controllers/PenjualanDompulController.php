@@ -41,7 +41,8 @@ class PenjualanDompulController extends Controller
     public function show(Request $request)
     {
         $sales = Sales::where('status','1')->where('nm_sales',$request->get('id'))->first();
-        return redirect('/penjualan/dompul/invoice-dompul')->with(['sales'=>$sales,'tgl'=>$request->get('tgl'),'now'=>Carbon::now('Asia/Jakarta')->format('d-m-Y')]);
+        session(['sales'=>$sales,'tgl'=>$request->get('tgl'),'now'=>Carbon::now('Asia/Jakarta')->format('d-m-Y')]);
+        return redirect('/penjualan/dompul/invoice-dompul');
         // return view('penjualan.dompul.invoice-dompul')->with(['sales'=>$sales,'tgl'=>$this->nama_tgl,'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
     }
     
@@ -83,6 +84,7 @@ class PenjualanDompulController extends Controller
      * 
      */
     public function update(Request $request,$canvaser,$tgl,$downline,$produk,$no_faktur,$status_penjualan){
+        session(['tunai'=>$request->get('update_tunai'),'catatan'=>$request->get('update_catatan')]);
         $data =UploadDompul::where('nama_canvasser',$canvaser)
                         // ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
                         ->where('tanggal_transfer',$tgl)
@@ -155,6 +157,7 @@ class PenjualanDompulController extends Controller
             $total+=(($value->qty-$value->qty_program)*$value->harga_dompul);
         }
         $total=number_format($total,0,",",".");
+        $tunai=number_format($tunai,0,",",".");
         return view('penjualan.dompul.invoice-dompul-4',
         [
             'datas'=>$datas,
@@ -257,7 +260,7 @@ class PenjualanDompulController extends Controller
                     break;
             }
             $penjualanDompul->grand_total=str_replace('.', '', $total);
-            $penjualanDompul->bayar_tunai=$tunai;
+            $penjualanDompul->bayar_tunai=str_replace('.', '', $tunai);
             $penjualanDompul->catatan=$catatan;
         $penjualanDompul->save();
         UploadDompul::where('tanggal_transfer',$tgl)
@@ -320,7 +323,7 @@ class PenjualanDompulController extends Controller
                           ->addColumn('action', function ($uploadDompul) {
                               $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$uploadDompul->produk)->get();
                               return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-tipe='.$tipe.' data-produk="'.$uploadDompul->produk.'" data-faktur="'.$uploadDompul->no_faktur.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-tipe='.$tipe.' data-produk="'.$uploadDompul->produk.'" data-faktur="'.$uploadDompul->no_faktur.'" data-qty="'.$uploadDompul->qty_program.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
                             })
                           ->make(true);
     }

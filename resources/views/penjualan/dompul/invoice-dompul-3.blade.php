@@ -102,7 +102,7 @@ td{
         <td colspan="2"><b>Jumlah Tunai</b></td>
         <td></td>
         <td>
-        <input type="text" id="tunai" required="required" name="tunai" class="form-control">
+        <input type="text" id="tunai" required="required" name="tunai" class="form-control" value="{{session('tunai')}}" onkeyup="inputTunai(this.value)">
         </td>
         <td></td>
 
@@ -187,7 +187,7 @@ td{
         <td></td>
         <td colspan="2"><b>Catatan</b></td>
         <td></td>
-        <td><input type="text" id="catatan" required="required" name="catatan" class="form-control"></td>
+      <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{session('catatan')}}" onkeyup="inputCatatan(this.value)"></td>
         <td></td>
       </tr>
       <tr>
@@ -225,6 +225,8 @@ td{
 
                 <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/invoice_dompul/update/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}/{{$datas->produk}}">
                   @csrf @method('put')
+                  <input type="hidden" name="update_catatan" id="update_catatan" value="{{session('catatan')}}">
+                  <input type="hidden" name="update_tunai" id="update_tunai" value="{{session('tunai')}}">
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul
                       <span class="required">*</span>
@@ -241,7 +243,7 @@ td{
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="qty_program" class="form-control col-md-7 col-xs-12" value="">
+                      <input type="text" id="qty_program" required="required" name="qty_program" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 
@@ -273,6 +275,7 @@ td{
 @section('js')
 <script>
     $(function () {
+        
         var tgl = $('#tgl').val();
         var canvaser = $('#canvasser').val();
         var downline = $('#downline').val();
@@ -290,7 +293,14 @@ td{
                       {data: 'action', orderable: false, searchable: false}
                   ]
               });
+        $('#tunai').on('keyup',loadData);
     });
+    function inputTunai(str) {
+      $('#update_tunai').val(str);
+    }
+    function inputCatatan(str) {
+      $('#update_catatan').val(str);
+    }
 </script>
 <script>
   $('#editModal').on('show.bs.modal', function (event) {
@@ -303,6 +313,7 @@ td{
     var produk = button.data('produk') // Extract info from data-* attributes
     var tipe_harga = button.data('tipe')
     var no_faktur = button.data('faktur')
+    var qty_program = button.data('qty')
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     while (tipe.firstChild) {
@@ -318,7 +329,7 @@ td{
       opt.innerHTML = element.tipe_harga_dompul;
       tipe.appendChild(opt);
     });
-    console.log(produk);
+    $('#qty_program').val(qty_program);
     $('#editForm').attr('action', `/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/0`);
   })
 </script>

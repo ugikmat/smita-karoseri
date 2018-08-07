@@ -110,9 +110,9 @@
       <a href="{{ URL::to('downloadExcel/csv') }}">
         <button class="btn btn-success">Download CSV</button>
       </a>
-      <a href="{{ URL::to('/upload/empty') }}">
+      {{-- <a href="{{ URL::to('/upload/empty') }}">
         <button class="btn btn-warning">Empty Data</button>
-      </a>
+      </a> --}}
     </div>
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
       Tanggal :
@@ -124,8 +124,8 @@
     <tr>
       <th>Tanggal TRX</th>
       <th>Tanggal Upload</th>
-      {{-- <th>User</th>
-      <th>Lokasi</th> --}}
+      <th>User</th>
+      <th>Lokasi</th>
       <th>Qty</th>
       <th>Aktif</th>
       <th>Action</th>
@@ -135,8 +135,8 @@
     <tr>
       <th>Tanggal TRX</th>
       <th>Tanggal Upload</th>
-      {{-- <th>User</th>
-      <th>Lokasi</th> --}}
+      <th>User</th>
+      <th>Lokasi</th>
       <th>Aktif</th>
       <th>Qty</th>
     </tr>
@@ -477,6 +477,12 @@
         },
         {
           data: 'tanggal_upload'
+        },
+        {
+          data: 'name'
+        },
+        {
+          data: 'nm_lokasi'
         },
         {
           data: 'jumlah_transaksi'

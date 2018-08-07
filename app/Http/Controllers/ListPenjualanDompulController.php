@@ -57,6 +57,7 @@ class ListPenjualanDompulController extends Controller
         foreach ($sums as $key => $value) {
             $total+=(($value->qty-$value->qty_program)*$value->harga_dompul);
         }
+        $total=number_format($total,0,",",".");
         $penjualanDompul = PenjualanDompul::where('id_penjualan_dompul',$id)->first();
         return view('penjualan.dompul.list-edit-p-dompul-ro',['datas'=>$datas,'total'=>$total,'penjualanDompul'=>$penjualanDompul]);
     }
@@ -155,8 +156,8 @@ class ListPenjualanDompulController extends Controller
                 default:
                     break;
             }
-            $penjualanDompul->grand_total=$total;
-            $penjualanDompul->bayar_tunai=$tunai;
+            $penjualanDompul->grand_total=str_replace('.', '', $total);
+            $penjualanDompul->bayar_tunai=str_replace('.', '', $tunai);
             $penjualanDompul->catatan=$catatan;
             $penjualanDompul->save();
         return redirect('/penjualan/dompul/list-invoice');
@@ -172,8 +173,10 @@ class ListPenjualanDompulController extends Controller
         if ($tgl_penjualan=='null') {
             $tgl = $tgl_penjualan;
         }else {
+            session(['dompul-list-tgl'=>$tgl_penjualan]);
             $tgl = Carbon::parse($tgl_penjualan);
             $tgl = $tgl->format('Y-m-d');
+
         }
         return $datatables->eloquent(PenjualanDompul::select('penjualan_dompuls.id_penjualan_dompul','master_saless.nm_sales','penjualan_dompuls.no_hp_kios','master_customers.nm_cust','penjualan_dompuls.tanggal_penjualan_dompul','penjualan_dompuls.status_pembayaran')
                         ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
@@ -222,7 +225,7 @@ class ListPenjualanDompulController extends Controller
                         ->where('status_penjualan',1)
                         ->where('status_active',1))
                         ->addColumn('total_harga', function ($uploadDompul) {
-                              return ($uploadDompul->qty-$uploadDompul->qty_program)*$uploadDompul->harga_dompul;
+                              return number_format(($uploadDompul->qty-$uploadDompul->qty_program)*$uploadDompul->harga_dompul,0,",",".");
                             })
                           ->addColumn('action', function ($uploadDompul) {
                               $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$uploadDompul->produk)->get();

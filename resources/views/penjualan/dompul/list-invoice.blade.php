@@ -61,7 +61,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" required>
+                    <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" required value="{{session('dompul-list-tgl')}}">
                     </div>
                   </div>
 
@@ -69,7 +69,7 @@
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset"> <i class="fa fa-repeat"></i> Kosongkan</button>
-                      <button class="btn btn-success" type="button" onclick="loadData()" data-dismiss="modal"> </i> Tampilkan List Penjualan</button>
+                      <button id="show" class="btn btn-success" type="button" data-dismiss="modal"> </i> Tampilkan List Penjualan</button>
                       {{-- <input type="btn" class="btn btn-success" onclick="loadData()" value="Tampilkan List Penjualan"> --}}
                       {{-- <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-ok"></i>Tampilkan List Penjualan</button> --}}
                     </div>
@@ -118,11 +118,12 @@
   });
 </script>
 <script>
-    // $(function () {
+    $(function () {
+        $tgl_penjualan = ($('#tgl').val()=='') ? 'null' : $('#tgl').val();
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/invoice_dompul/list/null',
+            ajax: `/invoice_dompul/list/${$tgl_penjualan}`,
             // "columnDefs": [ {
             // "searchable": false,
             // "orderable": false,
@@ -145,12 +146,12 @@
         //     cell.innerHTML = i+1;
         //   } );
         // } ).draw();
-
-    // });
-    function loadData() {
+        function loadData() {
           $tgl = $('#tgl').val();
           t.ajax.url(`/invoice_dompul/list/${$tgl}`).load();
         }
+        $('#show').on('click',loadData);
+    });
 $('#verificationModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var id = button.data('id') // Extract info from data-* attributes
