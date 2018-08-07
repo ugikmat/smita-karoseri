@@ -780,7 +780,7 @@ class ProdukSeeder extends Seeder
         $sp55->diskon=0;
         $sp55->komisi=0;
         $sp55->status_produk=1;
-        $sp55->5ave();
+        $sp55->save();
 
         // $dompul = new produk();
         // $dompul->kode_produk='DOMPUL1';
