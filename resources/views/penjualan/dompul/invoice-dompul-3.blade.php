@@ -115,11 +115,11 @@ td{
         <td>
           <select class="form-control" name="bank1" id="bank1">
             <option value="" selected disabled>-- Pilih Bank --</option>
-            <option value="BCA">BCA Pusat</option>
-            <option value="BCA">BCA Cabang</option>
-            <option value="BCA">BRI</option>
-            <option value="BCA">BNI</option>
-            <option value="BCA">Mandiri</option>
+            <option value="BCA Pusat">BCA Pusat</option>
+            <option value="BCA Cabang">BCA Cabang</option>
+            <option value="BRI">BRI</option>
+            <option value="BNI">BNI</option>
+            <option value="Mandiri">Mandiri</option>
           </select>
         </td>
         <td></td>
@@ -140,11 +140,11 @@ td{
         <td>
           <select class="form-control" name="bank2" id="bank2">
             <option value="" selected disabled>-- Pilih Bank --</option>
-            <option value="BCA">BCA Pusat</option>
-            <option value="BCA">BCA Cabang</option>
-            <option value="BCA">BRI</option>
-            <option value="BCA">BNI</option>
-            <option value="BCA">Mandiri</option>
+            <option value="BCA Pusat">BCA Pusat</option>
+            <option value="BCA Cabang">BCA Cabang</option>
+            <option value="BRI">BRI</option>
+            <option value="BNI">BNI</option>
+            <option value="Mandiri">Mandiri</option>
           </select>
         </td>
         <td></td>
@@ -165,11 +165,11 @@ td{
         <td>
           <select class="form-control" name="bank3" id="bank3">
             <option value="" selected disabled>-- Pilih Bank --</option>
-            <option value="BCA">BCA Pusat</option>
-            <option value="BCA">BCA Cabang</option>
-            <option value="BCA">BRI</option>
-            <option value="BCA">BNI</option>
-            <option value="BCA">Mandiri</option>
+            <option value="BCA Pusat">BCA Pusat</option>
+            <option value="BCA Cabang">BCA Cabang</option>
+            <option value="BRI">BRI</option>
+            <option value="BNI">BNI</option>
+            <option value="Mandiri">Mandiri</option>
           </select>
         </td>
         <td></td>
@@ -275,7 +275,7 @@ td{
 @section('js')
 <script>
     $(function () {
-        
+
         var tgl = $('#tgl').val();
         var canvaser = $('#canvasser').val();
         var downline = $('#downline').val();

@@ -150,7 +150,7 @@ return [
                       ],
                       [
                         'text'    => 'lalala',
-                        'url'     => '/penjualan/sp/invoice-sp2',
+                        'url'     => '/penjualan/sp/invoice-sp3',
                       ],
                       [
                         'text'    => 'List Invoice SP',
