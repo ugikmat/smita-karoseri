@@ -77,7 +77,7 @@
       <input type="text" class="form-control" id="satuan" name="satuan" value="{{$produk->satuan}}" disabled>
     </td>
     <td>
-      <input type="text" class="form-control" id="harga{{$key+1}}" name="harga-satuan" value="20000" disabled>
+      <input type="text" class="form-control" id="harga{{$key+1}}" name="harga-satuan" value="{{$hargaProduks->where('id_produk',$produk->kode_produk)->first()['harga_sp']}}" disabled>
     </td>
     <td>
       <select class="form-control" name="tipe" id="tipe">
