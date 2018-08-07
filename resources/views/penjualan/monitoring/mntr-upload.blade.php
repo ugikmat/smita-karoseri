@@ -160,21 +160,27 @@
 </script>
 <script>
     $(function () {
-        $('#m-penjualan-table').DataTable({
+        var t = $('#m-penjualan-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: 'mntr-data',
+            ajax: '/monitor-data',
             columns: [
-                {data: 'id_penjualan_dompul'},
-                {data: 'hp_kios'},
-                {data: 'tanggal_penjualan_dompul'},
-                {data: 'tanggal_input'},
-                {data: 'grand_total'},
-                {data: 'bayar_tunai'},
-                {data: 'catatan'},
-                {data: 'action', orderable: false, searchable: false}
+                {data: 'index'},
+                {data: 'nama'},
+                {data: 'qty_program5k'},
+                {data: 'qty_non_program5k'},
+                {data: 'qty_program10k'},
+                {data: 'qty_non_program10k'},
+                {data: 'program_rupiah'},
+                {data: 'non_program_rupiah'}
             ]
         });
+        t.on( 'order.dt search.dt', function () {
+        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+          } );
+        } ).draw();
     });
+    
 </script>
 @stop
