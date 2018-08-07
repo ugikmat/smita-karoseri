@@ -112,7 +112,16 @@ td{
         <td></td>
         <td colspan="2"><b>Bank Transfer 1</b></td>
         <td></td>
-        <td><input type="text" id="bank1" name="bank1" class="form-control"></td>
+        <td>
+          <select class="form-control" name="bank1" id="bank1">
+            <option value="" selected disabled>-- Pilih Bank --</option>
+            <option value="BCA">BCA Pusat</option>
+            <option value="BCA">BCA Cabang</option>
+            <option value="BCA">BRI</option>
+            <option value="BCA">BNI</option>
+            <option value="BCA">Mandiri</option>
+          </select>
+        </td>
         <td></td>
       </tr>
       <tr>
@@ -128,7 +137,16 @@ td{
         <td></td>
         <td colspan="2"><b>Bank Transfer 2</b></td>
         <td></td>
-        <td><input type="text" id="bank2" name="bank2" class="form-control"></td>
+        <td>
+          <select class="form-control" name="bank2" id="bank2">
+            <option value="" selected disabled>-- Pilih Bank --</option>
+            <option value="BCA">BCA Pusat</option>
+            <option value="BCA">BCA Cabang</option>
+            <option value="BCA">BRI</option>
+            <option value="BCA">BNI</option>
+            <option value="BCA">Mandiri</option>
+          </select>
+        </td>
         <td></td>
       </tr>
       <tr>
@@ -144,7 +162,16 @@ td{
         <td></td>
         <td colspan="2"><b>Bank Transfer 3</b></td>
         <td></td>
-        <td><input type="text" id="bank3" name="bank3" class="form-control"></td>
+        <td>
+          <select class="form-control" name="bank3" id="bank3">
+            <option value="" selected disabled>-- Pilih Bank --</option>
+            <option value="BCA">BCA Pusat</option>
+            <option value="BCA">BCA Cabang</option>
+            <option value="BCA">BRI</option>
+            <option value="BCA">BNI</option>
+            <option value="BCA">Mandiri</option>
+          </select>
+        </td>
         <td></td>
       </tr>
       <tr>
