@@ -55,7 +55,11 @@
   </div>
 </div>
 
-<table>
+<br><br>
+
+<form class="invoice-sp" action="" method="post">
+
+<table id="invoice-sp-table" class="table responsive"  width="100%">
   <tr>
     <th>Nama Barang</th>
     <th>Satuan</th>
@@ -66,50 +70,55 @@
   </tr>
   <tr>
     <td>
-      <input type="text" class="form-control" id="Produk" name="barang" value="BRONET 2GB" disabled>
+      <input type="text" class="form-control" id="nama" name="nama" value="BRONET 2GB" disabled>
     </td>
     <td>
-      <input type="text" class="form-control" id="Produk" name="satuan" value="PCS" disabled>
+      <input type="text" class="form-control" id="satuan" name="satuan" value="PCS" disabled>
     </td>
     <td>
-      <input type="text" class="form-control" id="Produk" name="harga-satuan" value="20000" disabled>
+      <input type="text" class="form-control" id="harga" name="harga-satuan" value="20000" disabled>
     </td>
     <td>
-      <input type="text" class="form-control" id="Produk" name="satuan" value="PCS" disabled>
+      <select class="form-control" name="tipe" id="tipe">
+        <option value="CVS">CVS</option>
+        <option value="DS">DS</option>
+      </select>
     </td>
     <td>
-      <input type="text" class="form-control" id="Produk" name="satuan" value="PCS" disabled>
+      <input type="text" class="form-control" id="jumlah" name="jumlah">
     </td>
     <td>
-      <input type="text" class="form-control" id="Produk" name="satuan" value="PCS" disabled>
+      <input type="text" class="form-control" id="total" name="total" readonly>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <input type="text" class="form-control" id="nama" name="nama" value="Combo Lite 4GB+" disabled>
+    </td>
+    <td>
+      <input type="text" class="form-control" id="satuan" name="satuan" value="PCS" disabled>
+    </td>
+    <td>
+      <input type="text" class="form-control" id="harga" name="harga-satuan" value="35000" disabled>
+    </td>
+    <td>
+      <select class="form-control" name="tipe" id="tipe">
+        <option value="CVS">CVS</option>
+        <option value="DS">DS</option>
+      </select>
+    </td>
+    <td>
+      <input type="text" class="form-control" id="jumlah" name="jumlah">
+    </td>
+    <td>
+      <input type="text" class="form-control" id="total" name="total" readonly>
     </td>
   </tr>
 </table>
+<div class="pull-right">
+  <button type="submit" class="btn btn-success" name="button"><span class="glyphicon glyphicon-ok"></span> Lanjutkan</button>
+</div>
 
-<form class="repeater">
-    <!--
-        The value given to the data-repeater-list attribute will be used as the
-        base of rewritten name attributes.  In this example, the first
-        data-repeater-item's name attribute would become group-a[0][text-input],
-        and the second data-repeater-item would become group-a[1][text-input]
-    -->
-    <div data-repeater-list="group-a">
-      <div data-repeater-item>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            ID Barang : <input type="text" name="text-input" value=""/>
-        </div>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            Nama Barang : <input type="text" name="text-input" value=""/>
-        </div>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            Satuan : <input type="text" name="text-input" value=""/>
-        </div>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            <button data-repeater-delete type="button" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
-        </div>
-      </div>
-    </div>
-    <button data-repeater-create type="button" class="btn btn-success"> <span class="glyphicon glyphicon-plus"></span> Add</button>
 </form>
 
 <!-- <table id="invoice-sp-table" class="table responsive" width="100%">
@@ -121,96 +130,6 @@
     </tr>
     </thead>
 </table> -->
-
-<!--Modal Link-->
-<div class="modal fade bs-example-modal-lg" id='modalLink' tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Input Penjualan SP</h4>
-      </div>
-      <div class="modal-body">
-        <div class="clearfix"></div>
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <br />
-
-              <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/penjualan/dompul/invoice-sp">
-                  @csrf
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Canvasser
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <select class="form-control col-md-7 col-xs-12" name="id">
-                        <option value="1">pras</option>
-                        <option value="3">ugik</option>
-                        <option value="2">jovi</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <!-- ini dinamis mengikuti id canvaser yg dipilih di atas-->
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Kios
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <select class="form-control col-md-7 col-xs-12" name="id">
-                        <option value="1">pras</option>
-                        <option value="3">ugik</option>
-                        <option value="2">jovi</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No. Penjualan
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="nama" class="form-control col-md-7 col-xs-12" value="Auto Generate"  disabled>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tgl Penjualan
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input class="datepicker col-md-7 col-xs-12" required="required" name="tgl" data-date-format="dd-mm-yyyy">
-                    </div>
-                  </div>
-
-                  <div class="ln_solid"></div>
-                  <div class="form-group">
-                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                      <button class="btn btn-primary" type="reset"> <i class="fa fa-repeat"></i> Kosongkan</button>
-                      <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Rekap Penjualan</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-  </div>
-</div>
 
 @stop
 
