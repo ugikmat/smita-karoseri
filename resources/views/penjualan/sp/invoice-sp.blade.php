@@ -85,7 +85,7 @@
       </select>
     </td>
     <td>
-      <input type="text" class="form-control" id="jumlah" name="jumlah">
+      <input type="number" class="form-control" id="jumlah" name="jumlah">
     </td>
     <td>
       <input type="text" class="form-control" id="total" name="total" readonly>
@@ -115,6 +115,7 @@
     </td>
   </tr>
 </table>
+
 <div class="pull-right">
 
   <button type="submit" class="btn btn-success" name="button"><span class="glyphicon glyphicon-ok"></span> <a href="/penjualan/sp/invoice-sp-2" style="text-decoration:none;" >Pembelian</a></button>
