@@ -89,7 +89,21 @@
 </div>
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#">Daftar SP</button>
+<br>
+<div class="row">
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <h4>Daftar ID Barang</h2>
+  </div>
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <h4>Daftar Nama Barang</h4>
+  </div>
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <h4>Daftar Satuan</h4>
+  </div>
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
+  </div>
+</div>
 <form class="repeater">
     <!--
         The value given to the data-repeater-list attribute will be used as the
@@ -99,8 +113,18 @@
     -->
     <div data-repeater-list="group-a">
       <div data-repeater-item>
-        <input type="text" name="text-input" value="A"/>
-        <input data-repeater-delete type="button" value="Delete"/>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            ID Barang : <input type="text" name="text-input" value=""/>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            Nama Barang : <input type="text" name="text-input" value=""/>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            Satuan : <input type="text" name="text-input" value=""/>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <button data-repeater-delete type="button" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
+        </div>
       </div>
     </div>
     <button data-repeater-create type="button" class="btn btn-success"> <span class="glyphicon glyphicon-plus"></span> Add</button>
