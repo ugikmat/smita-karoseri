@@ -157,7 +157,7 @@
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       @if (session('tgl'))
-                        <input class="datepicker col-md-7 col-xs-12" required="required" name="tgl" data-date-format="dd-mm-yyyy" value="{{ session('status') }}">
+                        <input class="datepicker col-md-7 col-xs-12" required="required" name="tgl" data-date-format="dd-mm-yyyy" value="{{ session('tgl') }}">
                       @else
                         <input class="datepicker col-md-7 col-xs-12" required="required" name="tgl" data-date-format="dd-mm-yyyy" value="">
                       @endif

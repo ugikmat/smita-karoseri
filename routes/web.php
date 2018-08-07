@@ -109,9 +109,9 @@ Route::get('/master/user', function() {
 }) -> name('list-invoice-sp');
 
 //monitoring
-Route::get('/penjualan/monitoring/mntr-upload', function() {
-  return view ('/penjualan/monitoring/mntr-upload');
-}) -> name('mntr-upload');
+Route::get('/penjualan/monitoring/mntr-upload', 'MonitorController@index');
+Route::get('/penjualan/monitoring/mntr-upload/show', 'MonitorController@show');
+Route::get('/monitor-data/{tgl}','MonitorController@data');
 
 // laporan penjualan
 Route::get('/penjualan/laporan-penjualan/LPdompul', 'LaporanPenjualanDompulController@index');
