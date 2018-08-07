@@ -33,6 +33,7 @@ class PenjualanSPController extends Controller
         $hargaProduks = HargaProduk::where('status_harga_sp','Aktif')->get();
         $produks = produk::where('status_produk','1')->get();
         $saless = Sales::where('status','1')->get();
-        return view('penjualan.sp.invoice-sp',['saless'=>$saless,'produks'=>$produks,'hargaProduks'=>$hargaProduks]);
+        $jumlahProduk = $produks->count();
+        return view('penjualan.sp.invoice-sp',['saless'=>$saless,'produks'=>$produks,'hargaProduks'=>$hargaProduks,'jumlah'=>$jumlahProduk]);
     }
 }

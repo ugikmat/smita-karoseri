@@ -118,6 +118,12 @@
 
 @section('js')
 <script type="text/javascript">
+for (let index = 0; index < {{$jumlah}}; index++) {
+  console.log(index);
+  $(`#jumlah${index+1}`).on('keyup',function (event) {
+    $(`#total${index+1}`).val($(`#harga${index+1}`).val()*this.value);
+  })
+}
   // $produks.forEach(function myFunction(item, index) {
   //   console.log(index)
   //   $(`#jumlah${index+1}`).on('keyup',function (event) {
