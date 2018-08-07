@@ -15,6 +15,8 @@ td{
 @stop
 
 @section('content')
+<form class="invoice-sp" action="" method="post">
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -74,8 +76,6 @@ td{
 </div>
 
 <br><br>
-
-<form class="invoice-sp" action="" method="post">
 
 <table id="invoice-sp-table" class="table responsive"  width="100%">
     <thead>
@@ -201,7 +201,7 @@ td{
       <tr>
         <td colspan="7">
           <div class="pull-right">
-            <button type="submit" class="btn btn-success" name="button"><span class="glyphicon glyphicon-ok"></span> Lanjutkan</button>
+            <button type="submit" class="btn btn-success" name="button"><span class="glyphicon glyphicon-ok"></span><a href="/penjualan/sp/invoice-sp-3" style="text-decoration:none;"> Lanjutkan</a></button>
           </div>
         </td>
       </tr>
