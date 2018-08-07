@@ -122,7 +122,7 @@
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/invoice_dompul/list/null',
+            ajax: '/invoice_sp/list/null',
             // "columnDefs": [ {
             // "searchable": false,
             // "orderable": false,
@@ -131,11 +131,11 @@
             // "order": [[ 1, 'asc' ]],
             columns: [
                 // {data: 'indeks'},
-                {data: 'id_penjualan_dompul'},
+                {data: 'id_penjualan_sp'},
                 {data: 'nm_sales'},
                 {data: 'no_hp_kios'},
                 {data: 'nm_cust'},
-                {data: 'tanggal_penjualan_dompul'},
+                {data: 'tanggal_penjualan_sp'},
                 {data: 'status_pembayaran'},
                 {data: 'action', orderable: false, searchable: false}
             ]
@@ -149,12 +149,12 @@
     // });
     function loadData() {
           $tgl = $('#tgl').val();
-          t.ajax.url(`/invoice_dompul/list/${$tgl}`).load();
+          t.ajax.url(`/invoice_sp/list/${$tgl}`).load();
         }
 $('#verificationModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var id = button.data('id') // Extract info from data-* attributes
-    $('#verificationForm').attr('action',`/invoice_dompul/verify/${id}`);
+    $('#verificationForm').attr('action',`/invoice_sp/verify/${id}`);
   })
 </script>
 @stop
