@@ -21,9 +21,9 @@
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
         <select id="sales" required="required" name="sales" placeholder="Pilih Nama Canvaser" class="form-control">
               <option value="" selected disabled>Pilih Nama Canvaser</option>
-              <!-- @isset($lokasiarray)
-                  @foreach ($lokasiarray as $data)
-                  <option value="{{ $data->id_sales }}">{{ $data->nm_lokasi }}</option>
+              <!-- @isset($salesarray)
+                  @foreach ($salesarray as $data)
+                  <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
                   @endforeach
               @endisset -->
         </select>
@@ -36,9 +36,9 @@
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="form-control">
               <option value="" selected disabled>Pilih Nama Kios</option>
-              <!-- @isset($lokasiarray)
-                  @foreach ($lokasiarray as $data)
-                  <option value="{{ $data->id_sales }}">{{ $data->nm_lokasi }}</option>
+              <!-- @isset($custarray)
+                  @foreach ($custarray as $data)
+                  <option value="{{ $data->id_cust }}">{{ $data->nm_cust }}</option>
                   @endforeach
               @endisset -->
         </select>
