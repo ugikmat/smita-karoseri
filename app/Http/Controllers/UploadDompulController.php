@@ -192,7 +192,7 @@ class UploadDompulController extends Controller {
         ->join('users','users.id','=','upload_dompuls.id')
         ->join('master_lokasis','master_lokasis.id_lokasi','=','upload_dompuls.id_lokasi'))
        ->addColumn('action', function ($uploadDompul) {
-                if ($uploadDompul->status_active) {
+                if ($uploadDompul->status_active=='Aktif') {
                     return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#detailModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-edit"></i> Lihat Data</a>';
                 } else {
                     return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#detailModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-edit"></i> Lihat Data</a>
