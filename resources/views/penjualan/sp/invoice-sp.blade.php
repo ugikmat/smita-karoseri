@@ -90,7 +90,7 @@
       </select>
     </td>
     <td>
-      <input type="text" class="form-control" id="jumlah{{$key+1}}" name="jumlah{{$key+1}}">
+      <input type="number" class="form-control" id="jumlah{{$key+1}}" name="jumlah{{$key+1}}">
     </td>
     <td>
       <input type="text" class="form-control" id="total{{$key+1}}" name="total{{$key+1}}" readonly>
@@ -99,6 +99,7 @@
   @endforeach
 
 </table>
+
 <div class="pull-right">
 
   <button type="submit" class="btn btn-success" name="button"><span class="glyphicon glyphicon-ok"></span>Pembelian</button>
@@ -165,7 +166,7 @@ for (let index = 0; index < {{$jumlah}}; index++) {
   //     $(`#total${index+1}`).val($(`#harga${index+1}`).val()*this.value);
   // })
   // })
-  
+
   function today(){
     var today = new Date();
     var today = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
