@@ -25,7 +25,7 @@ class CreateProduksTable extends Migration
             $table->double('tarif_pajak');
             $table->double('diskon');
             $table->double('komisi');
-            $table->string('status_produk');
+            $table->tinyInteger('status_produk')->default(1);
         });
     }
 
