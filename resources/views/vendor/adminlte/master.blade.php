@@ -54,6 +54,7 @@ header("Pragma: no-cache");
 <script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/jquery.repeater.min.js') }}"></script>
 <script src="{{ asset('js/jquery.session.js') }}"></script>
+<script src="{{ asset('js/bootstrap-select.js') }}"></script>
 
 @if(config('adminlte.plugins.datatables'))
     <!-- DataTables -->

@@ -138,7 +138,7 @@ for (let index = 0; index < {{$jumlah}}; index++) {
 for (let index = 0; index < {{$jumlah}}; index++) {
 
   $(`#tipe${index+1}`).on('change',function (event) {
-    //ajax call 
+    //ajax call
     console.log($(this).val());
     console.log($(`#kode${index+1}`).val());
     $.post('/get_harga/'+$(this).val()+'/'+$(`#kode${index+1}`).val(), function(response){
@@ -152,7 +152,7 @@ for (let index = 0; index < {{$jumlah}}; index++) {
     // $.ajax({
     //      url: "/sp/set-session",
     //      data: { tipe_harga: this.value , kode_produk:$(`#kode${index+1}`).val()}
-    // }); 
+    // });
     // $.session.set("tipe_harga", this.value);
     // $.session.set("kode_produk", $(`#kode${index+1}`).val());
     // console.log($.session.get("tipe_harga"));
