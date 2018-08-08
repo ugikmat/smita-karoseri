@@ -23,6 +23,7 @@ class CreatePenjualanSpsTable extends Migration
           $table->string('no_user');
           $table->date('tanggal_penjualan_sp');
           $table->date('tanggal_input');
+          $table->string('cash')->default(0);
           $table->string('bca_pusat')->default(0);
           $table->string('bca_cabang')->default(0);
           $table->string('mandiri')->default(0);
