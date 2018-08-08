@@ -31,7 +31,7 @@
           Nama Canvaser :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
-        <select id="sales" required="required" name="sales" placeholder="Pilih Nama Canvaser" class="form-control">
+        <select id="sales" required="required" name="sales" placeholder="Pilih Nama Canvaser" class="chosen-select">
               <option value="" selected disabled>Pilih Nama Canvaser</option>
               @isset($saless)
                   @foreach ($saless as $data)
@@ -46,7 +46,7 @@
           Nama Kios :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="form-control">
+        <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="chosen-select">
               <option value="" selected disabled>Pilih Nama Kios</option>
               @isset($customerarray)
                   @foreach ($customerarray as $data)
@@ -106,7 +106,7 @@
         <td>
           <input type="text" class="form-control" name="total" id="total" value="{{session('total_harga_sp')}}" readonly>
         </td>
-        
+
       </tr>
       <tr>
         <td></td>
@@ -116,7 +116,7 @@
         <td>
         <input type="text" id="tunai" required="required" name="tunai" class="form-control" value="{{session('tunai')}}" onkeyup="inputTunai(this.value)">
         </td>
-        
+
 
       </tr>
       <tr>
@@ -134,7 +134,7 @@
             <option value="BCA">Mandiri</option>
           </select>
         </td>
-        
+
       </tr>
       <tr>
         <td></td>
@@ -142,7 +142,7 @@
         <td colspan="2"><b>Jumlah Transfer 1</b></td>
         <td></td>
         <td><input type="text" id="trf1" name="trf1" class="form-control"></td>
-        
+
       </tr>
       <tr>
         <td></td>
@@ -159,7 +159,7 @@
             <option value="BCA">Mandiri</option>
           </select>
         </td>
-        
+
       </tr>
       <tr>
         <td></td>
@@ -167,7 +167,7 @@
         <td colspan="2"><b>Jumlah Transfer 2</b></td>
         <td></td>
         <td><input type="text" id="trf2" name="trf2" class="form-control"></td>
-        
+
       </tr>
       <tr>
         <td></td>
@@ -184,7 +184,7 @@
             <option value="BCA">Mandiri</option>
           </select>
         </td>
-        
+
       </tr>
       <tr>
         <td></td>
@@ -192,7 +192,7 @@
         <td colspan="2"><b>Jumlah Transfer 3</b></td>
         <td></td>
         <td><input type="text" id="trf3" name="trf3" class="form-control"></td>
-        
+
       </tr>
       <tr>
         <td></td>
@@ -202,7 +202,7 @@
         <td>
           <input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{session('catatan')}}" onkeyup="inputCatatan(this.value)">
         </td>
-        
+
       </tr>
 </table>
 
@@ -225,6 +225,9 @@
 
 @stop
 @section('js')
+<script type="text/javascript">
+  $(".chosen-select").chosen()
+</script>
 <script type="text/javascript">
 $.ajaxSetup({
     headers: {
