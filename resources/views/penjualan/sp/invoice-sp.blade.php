@@ -79,7 +79,7 @@
       <input type="text" class="form-control" id="satuan{{$key+1}}" name="satuan{{$key+1}}" value="{{$produk->satuan}}" disabled>
     </td>
     <td>
-      <input type="text" class="form-control" id="harga{{$key+1}}" name="harga{{$key+1}}" value="{{$hargaProduks->where('id_produk',$produk->kode_produk)->first()['harga_sp']}}" readonly>
+      <input type="text" class="form-control" id="harga{{$key+1}}" name="harga{{$key+1}}" value="{{number_format($hargaProduks->where('id_produk',$produk->kode_produk)->first()['harga_sp'],0,",",".")}}" readonly>
     </td>
     <td>
       <select class="form-control" name="tipe{{$key+1}}" id="tipe{{$key+1}}">
@@ -234,16 +234,21 @@ $.ajaxSetup({
 var harga = [];
 var totalHarga = 0;
 for (let index = 0; index < {{$jumlah}}; index++) {
-  harga.push($(`#total${index+1}`).val());
+  harga.push($(`#total${index+1}`).val().replace(/[ .]/g, ''));
   totalHarga+=parseFloat(harga[index]);
-  console.log(`total Harga ${$(`#total${index+1}`).val().replace(/./g, '')}`);
+  console.log(`total Harga ${$(`#total${index+1}`).val().replace(/[ .]/g, '')}`);
   $(`#jumlah${index+1}`).on('keyup',function (event) {
     totalHarga-=parseFloat(harga[index]);
-    $(`#total${index+1}`).val(($(`#harga${index+1}`).val())*this.value);
-    harga[index]=$(`#total${index+1}`).val();
+
+    console.log(`Harga ${$(`#harga${index+1}`).val()}`);
+    console.log(`Harga S ${$(`#harga${index+1}`).val().toString()}`);
+    console.log(`Harga R ${$(`#harga${index+1}`).val().replace(/[ .]/g, '')}`);
+
+    $(`#total${index+1}`).val(($(`#harga${index+1}`).val().replace(/[ .]/g, '')*this.value.replace(/[ .]/g, '')).toLocaleString('id-ID'));
+    harga[index]=$(`#total${index+1}`).val().replace(/[ .]/g, '');
     totalHarga+=parseFloat(harga[index]);
     console.log(`total Harga ${harga[index]}`);
-    $('#total').val(totalHarga);
+    $('#total').val(totalHarga.toLocaleString('id-ID'));
   });
   // $(`#tipe${index+1}`).on('change',function (event) {
   //   $.session.set("tipe_harga", this.value);
@@ -251,7 +256,7 @@ for (let index = 0; index < {{$jumlah}}; index++) {
   //   $(`#harga${index+1}`).val({{$hargaProduks->where('id_produk',session('kode_produk'))->where('tipe_harga_sp',session('tipe_harga'))->first()['harga_sp']}});
   // });
 }
-$('#total').val(totalHarga);
+$('#total').val(totalHarga.toLocaleString('id-ID'));
 console.log(`total Harga`);
 for (let index = 0; index < {{$jumlah}}; index++) {
 
@@ -265,8 +270,8 @@ for (let index = 0; index < {{$jumlah}}; index++) {
       totalHarga-=parseFloat(harga[index]);
       console.log(response.harga);
       $(`#harga${index+1}`).val(response.harga.harga_sp);
-      $(`#total${index+1}`).val(($(`#harga${index+1}`).val())*$(`#jumlah${index+1}`).val());
-      harga[index]=$(`#total${index+1}`).val();
+      $(`#total${index+1}`).val(($(`#harga${index+1}`).val().replace(/[ .]/g, '')*$(`#jumlah${index+1}`).val().replace(/[ .]/g, '')).toLocaleString('id-ID'));
+      harga[index]=$(`#total${index+1}`).val().replace(/[ .]/g, '');
       totalHarga+=parseFloat(harga[index]);
       console.log(`total Harga ${totalHarga}`);
       $('#total').val(totalHarga);
