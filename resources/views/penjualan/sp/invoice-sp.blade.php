@@ -21,7 +21,7 @@
           Nama Canvaser :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
-        <select id="sales" required="required" name="sales" placeholder="Pilih Nama Canvaser" class="form-control">
+        <select id="sales" required="required" name="sales" placeholder="Pilih Nama Canvaser" class="form-control selectpicker" data-live-search="true">
               <option value="" selected disabled>Pilih Nama Canvaser</option>
               @isset($saless)
                   @foreach ($saless as $data)
@@ -36,7 +36,7 @@
           Nama Kios :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="form-control">
+        <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="form-control selectpicker" data-live-search="true">
               <option value="" selected disabled>Pilih Nama Kios</option>
               @isset($customerarray)
                   @foreach ($customerarray as $data)
@@ -138,7 +138,7 @@ for (let index = 0; index < {{$jumlah}}; index++) {
 for (let index = 0; index < {{$jumlah}}; index++) {
 
   $(`#tipe${index+1}`).on('change',function (event) {
-    //ajax call 
+    //ajax call
     console.log($(this).val());
     console.log($(`#kode${index+1}`).val());
     $.post('/get_harga/'+$(this).val()+'/'+$(`#kode${index+1}`).val(), function(response){
@@ -152,7 +152,7 @@ for (let index = 0; index < {{$jumlah}}; index++) {
     // $.ajax({
     //      url: "/sp/set-session",
     //      data: { tipe_harga: this.value , kode_produk:$(`#kode${index+1}`).val()}
-    // }); 
+    // });
     // $.session.set("tipe_harga", this.value);
     // $.session.set("kode_produk", $(`#kode${index+1}`).val());
     // console.log($.session.get("tipe_harga"));
