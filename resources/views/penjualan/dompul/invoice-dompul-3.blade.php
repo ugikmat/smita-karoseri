@@ -198,7 +198,7 @@ td{
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="qty_program" class="form-control col-md-7 col-xs-12" value="">
+                      <input type="text" id="qty_program" required="required" name="qty_program" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 
@@ -207,7 +207,7 @@ td{
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset">Reset</button>
-                      <input type="submit" class="btn btn-success" value="Simpan">
+                      <input type="button" class="btn btn-success" id="save" value="Simpan" data-dismiss="modal">
                       {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
                     </div>
                   </div>
@@ -220,7 +220,6 @@ td{
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
-
     </div>
   </div>
 </div>
@@ -229,6 +228,11 @@ td{
 
 @section('js')
 <script>
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
     $(document).ready(function () {
         $('.repeater').repeater({
             // (Optional)
@@ -298,6 +302,19 @@ td{
                       {data: 'action', orderable: false, searchable: false}
                   ]
               });
+        $(`#save`).on('click',function (event) {
+      //ajax call
+        $.post(`${$('#editForm').attr('action')}`, { tipe: $('#tipe').val(), qty_program: $('#qty_program').val() })
+        .done(function(response){
+      if(response.success)
+      {
+        console.log('success')
+        console.log(response.total);
+        t.ajax.url(`/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`).load();
+        $('#total').val(response.total);
+      }
+      }, 'json');
+    });
     });
 </script>
 <script>
