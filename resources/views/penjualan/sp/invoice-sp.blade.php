@@ -17,6 +17,15 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        Tanggal Penjualan :
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{session('now')}}"
+      </div>
+    </div>
+  </div>
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
           Nama Canvaser :
       </div>
@@ -46,15 +55,6 @@
         </select>
       </div>
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Tanggal Penjualan :
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan">
-      </div>
-    </div>
-  </div>
 </div>
 
 <br><br>

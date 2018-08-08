@@ -34,6 +34,7 @@ class PenjualanSPController extends Controller
      */
     public function index()
     {
+        session(['now'=>Carbon::now('Asia/Jakarta')->format('d-m-Y')]);
         $hargaProduks = HargaProduk::where('status_harga_sp','Aktif')->get();
         $arrHarga = $hargaProduks->mode('harga_sp');
         $produks = produk::where('status_produk','1')->get();
