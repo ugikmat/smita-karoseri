@@ -180,7 +180,6 @@ td{
               <div class="x_content">
                 <br />
 
-
                   <input type="hidden" name="link" id="link" value="/invoice_dompul/update/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}/{{$datas->produk}}">
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul
@@ -233,7 +232,7 @@ td{
     }
 });
     $(document).ready(function () {
-        var repeater = $('.repeater').repeater({
+        $('.repeater').repeater({
             // (Optional)
             // start with an empty list of repeaters. Set your first (and only)
             // "data-repeater-item" with style="display:none;" and pass the
@@ -277,13 +276,7 @@ td{
             // Removes the delete button from the first list item,
             // defaults to false.
             isFirstItemUndeletable: false
-        });
-        repeater.setList([
-          { 'trf': '10000' },
-          { 'trf': '100001' },
-          { 'trf': '551' ,'bank':'BRI' },
-          { 'trf': '551','bank':'BNI' }
-        ]);
+        })
     });
 </script>
 <script>
