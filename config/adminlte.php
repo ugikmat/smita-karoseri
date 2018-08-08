@@ -148,10 +148,10 @@ return [
                         'url'     => '/penjualan/sp/invoice-sp',
                         'icon'    => 'mobile-phone',
                       ],
-                      [
-                        'text'    => 'lalala',
-                        'url'     => '/penjualan/sp/invoice-sp-3',
-                      ],
+                      // [
+                      //   'text'    => 'lalala',
+                      //   'url'     => '/penjualan/sp/invoice-sp-3',
+                      // ],
                       [
                         'text'    => 'List Invoice SP',
                         'url'     => '/penjualan/sp/list-invoice-sp',

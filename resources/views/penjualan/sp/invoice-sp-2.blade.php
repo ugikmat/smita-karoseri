@@ -15,8 +15,9 @@ td{
 @stop
 
 @section('content')
-<form class="invoice-sp" action="" method="post">
-
+<form class="invoice-sp" action="/invoice_sp/verify" method="post">
+  @csrf
+  <input type="hidden" name="id" id="id" value="{{$penjualanSp->id_penjualan_sp}}">
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -24,9 +25,9 @@ td{
           Nama Canvaser :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
-        <!-- @isset($datas)
-          <input type="text" name="canvasser" id="canvasser" value="{{$datas->nama_canvasser}}" disabled>
-        @endisset -->
+        @isset($sales)
+          <input type="text" name="canvasser" id="canvasser" value="{{$sales->nm_sales}}" disabled>
+        @endisset
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -34,9 +35,9 @@ td{
           Nama Kios :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <!-- @isset($datas)
-        <input type="text" name="downline" id="downline" value="{{$datas->nama_downline}}" disabled>
-        @endisset -->
+        @isset($customer)
+        <input type="text" name="downline" id="downline" value="{{$customer->nm_cust}}" disabled>
+        @endisset
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -49,9 +50,9 @@ td{
           No HP Canvaser :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
-        <!-- @isset($datas)
-           {{$datas->no_hp_canvasser}}
-        @endisset -->
+        @isset($sales)
+           {{$sales->no_hp}}
+        @endisset
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -59,9 +60,9 @@ td{
           No HP Kios :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <!-- @isset($datas)
-          {{$datas->no_hp_downline}}
-        @endisset -->
+        @isset($customer)
+          {{$customer->no_hp}}
+        @endisset
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -69,7 +70,7 @@ td{
         Tanggal Penjualan :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl" value="">
+      <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl" value="{{$penjualanSp->tanggal_penjualan_sp}}" readonly>
       </div>
     </div>
   </div>
@@ -96,9 +97,7 @@ td{
         <td colspan="2"><b>Grand Total</b></td>
         <td></td>
         <td>
-          <!-- @isset($total)
-          <input type="text" class="form-control" name="total" id="total" value="{{$total}}" readonly>
-          @endisset -->
+          <input type="text" class="form-control" name="total" id="total" value="{{session('total_harga_sp')}}" readonly>
         </td>
         <td></td>
       </tr>
@@ -201,7 +200,7 @@ td{
       <tr>
         <td colspan="7">
           <div class="pull-right">
-            <button type="submit" class="btn btn-success" name="button"><span class="glyphicon glyphicon-ok"></span><a href="/penjualan/sp/invoice-sp-3" style="text-decoration:none;"> Lanjutkan</a></button>
+            <button type="submit" class="btn btn-success" name="button"><span class="glyphicon glyphicon-ok"></span>Lanjutkan</button>
           </div>
         </td>
       </tr>
@@ -233,8 +232,8 @@ td{
 
                 <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="">
                   @csrf @method('put')
-                  <!-- <input type="hidden" name="update_catatan" id="update_catatan" value="{{session('catatan')}}">
-                  <input type="hidden" name="update_tunai" id="update_tunai" value="{{session('tunai')}}"> -->
+                  <input type="hidden" name="update_catatan" id="update_catatan" value="{{session('catatan')}}">
+                  <input type="hidden" name="update_tunai" id="update_tunai" value="{{session('tunai')}}">
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe sp
                       <span class="required">*</span>
@@ -281,46 +280,44 @@ td{
 @stop
 
 @section('js')
-<!-- <script>
+<script>
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
     $(function () {
-
-        var tgl = $('#tgl').val();
-        var canvaser = $('#canvasser').val();
-        var downline = $('#downline').val();
+          function inputTunai(str) {
+          $('#update_tunai').val(str);
+        }
+        function inputCatatan(str) {
+          $('#update_catatan').val(str);
+        }
+        var id = $('#id').val();
         var t = $('#invoice-sp-table').DataTable({
                   serverSide: true,
                   processing: true,
-                  ajax: `/edit_invoice_sp/${canvaser}/${tgl}/${downline}`,
+                  ajax: `/edit_invoice_sp/${id}`,
                   columns: [
-                      {data: 'produk'},
-                      {data: 'tipe_sp'},
-                      {data: 'harga_sp'},
-                      {data: 'qty'},
-                      {data: 'qty_program'},
+                      {data: 'nama_produk'},
+                      {data: 'tipe_harga'},
+                      {data: 'harga_satuan'},
+                      {data: 'jumlah_sp'},
+                      {data: 'harga_beli'},
                       {data: 'total_harga'},
                       {data: 'action', orderable: false, searchable: false}
                   ]
               });
-        $('#tunai').on('keyup',loadData);
+        console.log('{{session('total_harga_sp')}}');
     });
-    function inputTunai(str) {
-      $('#update_tunai').val(str);
-    }
-    function inputCatatan(str) {
-      $('#update_catatan').val(str);
-    }
 </script>
 <script>
   $('#editModal').on('show.bs.modal', function (event) {
-    var tgl = $('#tgl').val();
-    var canvaser = $('#canvasser').val();
-    var downline = $('#downline').val();
     var tipe = document.getElementById("tipe");
 
     var button = $(event.relatedTarget) // Button that triggered the modal
-    var produk = button.data('produk') // Extract info from data-* attributes
+    var id = button.data('id')
     var tipe_harga = button.data('tipe')
-    var no_faktur = button.data('faktur')
     var qty_program = button.data('qty')
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
@@ -338,7 +335,7 @@ td{
       tipe.appendChild(opt);
     });
     $('#qty_program').val(qty_program);
-    $('#editForm').attr('action', `/invoice_sp/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/0`);
+    $('#editForm').attr('action', `/invoice_sp/update/${id}`);
   })
-</script> -->
+</script>
 @stop

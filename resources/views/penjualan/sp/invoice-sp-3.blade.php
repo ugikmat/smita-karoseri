@@ -14,14 +14,11 @@ td{
 </style>
 @stop
 
-<!-- @isset($datas)
-<input type="hidden" name="canvaser" id="canvaser" value="{{$datas->nama_canvasser}}" readonly>
-<input type="hidden" name="tgl" id="tgl" value="{{$tgl}}">
-@endisset -->
 
 @section('content')
 <form class="invoice-sp" action="/invoice_sp/store" method="post">
-
+  @csrf
+<input type="hidden" name="id" id="id" value="{{$penjualanSp->id_penjualan_sp}}">
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -29,9 +26,7 @@ td{
           Nama Canvaser :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
-        <!-- @isset($datas)
-          <input type="text" name="canvasser" id="canvasser" value="{{$datas->nama_canvasser}}" disabled>
-        @endisset -->
+        <input type="text" name="canvasser" id="canvasser" value="{{$sales->nm_sales}}" disabled>
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -39,9 +34,7 @@ td{
           Nama Kios :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <!-- @isset($datas)
-        <input type="text" name="downline" id="downline" value="{{$datas->nama_downline}}" disabled>
-        @endisset -->
+        <input type="text" name="downline" id="downline" value="{{$customer->nm_cust}}" disabled>
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -54,9 +47,9 @@ td{
           No HP Canvaser :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
-        <!-- @isset($datas)
-           {{$datas->no_hp_canvasser}}
-        @endisset -->
+        @isset($sales)
+           {{$sales->no_hp}}
+        @endisset
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -64,9 +57,9 @@ td{
           No HP Kios :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <!-- @isset($datas)
-          {{$datas->no_hp_downline}}
-        @endisset -->
+        @isset($customer)
+          {{$customer->no_hp}}
+        @endisset
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -74,7 +67,7 @@ td{
         Tanggal Penjualan :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl" value="">
+            <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl" value="{{$penjualanSp->tanggal_penjualan_sp}}" readonly>
       </div>
     </div>
   </div>
@@ -100,10 +93,8 @@ td{
           <td></td>
           <td colspan="2"><b>Grand Total</b></td>
           <td></td>
-          <td>
-            @isset($total)
-            <!-- <input type="text" name="total" id="total" value="{{$total}}" readonly> -->
-            @endisset
+          <td>            
+            <input type="text" name="total" id="total" value="{{session('total_harga_sp')}}" readonly>
           </td>
         </tr>
         <tr>
@@ -112,7 +103,9 @@ td{
           <td colspan="2"><b>Jumlah Tunai</b></td>
           <td></td>
           <td>
-          <!-- <input type="text" id="tunai"  name="tunai" class="form-control" value="{{$tunai}}" readonly> -->
+            @isset($tunai)
+          <input type="text" id="tunai"  name="tunai" class="form-control" value="{{$tunai}}" readonly>
+          @endisset
           </td>
 
         </tr>
@@ -121,7 +114,7 @@ td{
           <td></td>
           <td colspan="2"><b>Bank Transfer 1</b></td>
           <td></td>
-          <!-- <td><input type="text" id="bank1" required="required" name="bank1" class="form-control" value="{{$bank1}}" readonly></td> -->
+          <td><input type="text" id="bank1" required="required" name="bank1" class="form-control" value="{{$bank1}}" readonly></td>
 
         </tr>
         <tr>
@@ -129,7 +122,7 @@ td{
           <td></td>
           <td colspan="2"><b>Jumlah Transfer 1</b></td>
           <td></td>
-          <!-- <td><input type="text" id="trf1" required="required" name="trf1" class="form-control" value="{{$trf1}}" readonly></td> -->
+          <td><input type="text" id="trf1" required="required" name="trf1" class="form-control" value="{{$trf1}}" readonly></td>
 
         </tr>
         <tr>
@@ -137,7 +130,7 @@ td{
           <td></td>
           <td colspan="2"><b>Bank Transfer 2</b></td>
           <td></td>
-          <!-- <td><input type="text" id="bank2" required="required" name="bank2" class="form-control" value="{{$bank2}}" readonly></td> -->
+          <td><input type="text" id="bank2" required="required" name="bank2" class="form-control" value="{{$bank2}}" readonly></td>
 
         </tr>
         <tr>
@@ -145,7 +138,7 @@ td{
           <td></td>
           <td colspan="2"><b>Jumlah Transfer 2</b></td>
           <td></td>
-          <!-- <td><input type="text" id="trf2" required="required" name="trf2" class="form-control" value="{{$trf2}}" readonly></td> -->
+          <td><input type="text" id="trf2" required="required" name="trf2" class="form-control" value="{{$trf2}}" readonly></td>
 
         </tr>
         <tr>
@@ -153,7 +146,7 @@ td{
           <td></td>
           <td colspan="2"><b>Bank Transfer 3</b></td>
           <td></td>
-          <!-- <td><input type="text" id="bank3" required="required" name="bank3" class="form-control" value="{{$bank3}}" readonly></td> -->
+          <td><input type="text" id="bank3" required="required" name="bank3" class="form-control" value="{{$bank3}}" readonly></td>
 
         </tr>
         <tr>
@@ -161,7 +154,7 @@ td{
           <td></td>
           <td colspan="2"><b>Jumlah Transfer 3</b></td>
           <td></td>
-          <!-- <td><input type="text" id="trf3" required="required" name="trf3" class="form-control" value="{{$trf2}}" readonly></td> -->
+          <td><input type="text" id="trf3" required="required" name="trf3" class="form-control" value="{{$trf2}}" readonly></td>
 
         </tr>
         <tr>
@@ -169,7 +162,7 @@ td{
           <td></td>
           <td colspan="2"><b>Catatan</b></td>
           <td></td>
-          <!-- <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{$catatan}}" readonly></td> -->
+          <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{$catatan}}" readonly></td>
 
         </tr>
         <tr>
@@ -187,30 +180,33 @@ td{
 @stop
 
 @section('js')
-<!-- <script>
+<script>
 function goBack() {
     window.history.back()
 }
 </script>
 <script>
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
     $(function () {
-        var tgl = $('#tgl').val();
-        var canvaser = $('#canvaser').val();
-        var downline = $('#downline').val();
+        var id = $('#id').val();
         var t = $('#invoice-sp-table').DataTable({
                   serverSide: true,
                   processing: true,
-                  searching:  false,
-                  ajax: `/edit_invoice_sp/${canvaser}/${tgl}/${downline}`,
+                  ajax: `/edit_invoice_sp/${id}`,
                   columns: [
-                      {data: 'produk'},
-                      {data: 'tipe_sp'},
-                      {data: 'harga_sp'},
-                      {data: 'qty'},
-                      {data: 'qty_program'},
+                      {data: 'nama_produk'},
+                      {data: 'tipe_harga'},
+                      {data: 'harga_satuan'},
+                      {data: 'jumlah_sp'},
+                      {data: 'harga_beli'},
                       {data: 'total_harga'}
                   ]
               });
+        console.log('{{session('total_harga_sp')}}');
     });
-</script> -->
+</script>
 @stop

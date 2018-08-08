@@ -88,15 +88,16 @@ Route::get('/edit_list_invoice_dompul/{sales}/{tgl}/{customer}', 'ListPenjualanD
 Route::put('/invoice_dompul/verify/{id}', 'ListPenjualanDompulController@verif');
 
 Route::get('/penjualan/sp/invoice-sp', 'PenjualanSPController@index');
+Route::post('/get_harga/{tipe}/{kode}', 'PenjualanSPController@getHarga');
+// Route::get('/penjualan/sp/invoice-sp-3', function() {
+//   return view ('/penjualan/sp/invoice-sp-3');
+// }) -> name('invoice-sp-3');
 
-Route::get('/penjualan/sp/invoice-sp-3', function() {
-  return view ('/penjualan/sp/invoice-sp-3');
-}) -> name('invoice-sp-3');
-
-Route::get('/penjualan/sp/invoice-sp-2', function() {
-  return view ('/penjualan/sp/invoice-sp-2');
-}) -> name('invoice-sp-2');
-
+Route::post('/penjualan/sp/invoice-sp/edit', 'PenjualanSPController@edit');
+Route::get('/edit_invoice_sp/{id}', 'PenjualanSPController@data');
+Route::put('/invoice_sp/update/{id}','PenjualanSPController@update');
+Route::post('/invoice_sp/verify','PenjualanSPController@verify');
+Route::post('/invoice_sp/store','PenjualanSPController@store');
 
 Route::get('/penjualan/sp/list-invoice-sp', function() {
   return view ('/penjualan/sp/list-invoice-sp');

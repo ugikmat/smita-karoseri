@@ -138,19 +138,19 @@ class ProdukSeeder extends Seeder
         $sp9->status_produk=1;
         $sp9->save();
 
-        $sp10 = new produk();
-        $sp10->kode_produk='BG6041';
-        $sp10->nama_produk='SP0K Hitz';
-        $sp10->kategori_produk='SP';
-        $sp10->satuan='PCS';
-        $sp10->jenis='GOODS';
-        $sp10->BOM='YA';
-        $sp10->harga_jual=0;
-        $sp10->tarif_pajak=0;
-        $sp10->diskon=0;
-        $sp10->komisi=0;
-        $sp10->status_produk=1;
-        $sp10->save();
+        // $sp10 = new produk();
+        // $sp10->kode_produk='BG6041';
+        // $sp10->nama_produk='SP0K Hitz';
+        // $sp10->kategori_produk='SP';
+        // $sp10->satuan='PCS';
+        // $sp10->jenis='GOODS';
+        // $sp10->BOM='YA';
+        // $sp10->harga_jual=0;
+        // $sp10->tarif_pajak=0;
+        // $sp10->diskon=0;
+        // $sp10->komisi=0;
+        // $sp10->status_produk=1;
+        // $sp10->save();
 
         $sp11 = new produk();
         $sp11->kode_produk='BG6040';
@@ -376,19 +376,19 @@ class ProdukSeeder extends Seeder
         $sp26->status_produk=1;
         $sp26->save();
 
-        $sp27 = new produk();
-        $sp27->kode_produk='BG11054';
-        $sp27->nama_produk='SP WHITELIST 16GB';
-        $sp27->kategori_produk='SP';
-        $sp27->satuan='PCS';
-        $sp27->jenis='GOODS';
-        $sp27->BOM='YA';
-        $sp27->harga_jual=0;
-        $sp27->tarif_pajak=0;
-        $sp27->diskon=0;
-        $sp27->komisi=0;
-        $sp27->status_produk=1;
-        $sp27->save();
+        // $sp27 = new produk();
+        // $sp27->kode_produk='BG11054';
+        // $sp27->nama_produk='SP WHITELIST 16GB';
+        // $sp27->kategori_produk='SP';
+        // $sp27->satuan='PCS';
+        // $sp27->jenis='GOODS';
+        // $sp27->BOM='YA';
+        // $sp27->harga_jual=0;
+        // $sp27->tarif_pajak=0;
+        // $sp27->diskon=0;
+        // $sp27->komisi=0;
+        // $sp27->status_produk=1;
+        // $sp27->save();
 
         $sp28 = new produk();
         $sp28->kode_produk='BG11053';
@@ -642,19 +642,19 @@ class ProdukSeeder extends Seeder
         $sp45->status_produk=1;
         $sp45->save();
 
-        $sp46 = new produk();
-        $sp46->kode_produk='BG1037';
-        $sp46->nama_produk='SP0KAXGAOL4G';
-        $sp46->kategori_produk='SP';
-        $sp46->satuan='PCS';
-        $sp46->jenis='GOODS';
-        $sp46->BOM='YA';
-        $sp46->harga_jual=0;
-        $sp46->tarif_pajak=0;
-        $sp46->diskon=0;
-        $sp46->komisi=0;
-        $sp46->status_produk=1;
-        $sp46->save();
+        // $sp46 = new produk();
+        // $sp46->kode_produk='BG1037';
+        // $sp46->nama_produk='SP0KAXGAOL4G';
+        // $sp46->kategori_produk='SP';
+        // $sp46->satuan='PCS';
+        // $sp46->jenis='GOODS';
+        // $sp46->BOM='YA';
+        // $sp46->harga_jual=0;
+        // $sp46->tarif_pajak=0;
+        // $sp46->diskon=0;
+        // $sp46->komisi=0;
+        // $sp46->status_produk=1;
+        // $sp46->save();
 
         $sp47 = new produk();
         $sp47->kode_produk='BG10034';

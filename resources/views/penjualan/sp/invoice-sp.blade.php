@@ -12,8 +12,8 @@
 @stop
 
 @section('content')
-<form class="invoice-sp" action="" method="post">
-
+<form class="invoice-sp" action="/penjualan/sp/invoice-sp/edit" method="post">
+  @csrf
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -51,7 +51,7 @@
         Tanggal Penjualan :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl">
+            <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan">
       </div>
     </div>
   </div>
@@ -70,17 +70,18 @@
   </tr>
   @foreach($produks as $key => $produk)
   <tr>
+    <input type="hidden" name="kode{{$key+1}}" id="kode{{$key+1}}" value="{{$produk->kode_produk}}">
     <td>
-    <input type="text" class="form-control" id="nama" name="nama" value="{{$produk->nama_produk}}" disabled>
+    <input type="text" class="form-control" id="nama{{$key+1}}" name="nama{{$key+1}}" value="{{$produk->nama_produk}}" disabled>
     </td>
     <td>
-      <input type="text" class="form-control" id="satuan" name="satuan" value="{{$produk->satuan}}" disabled>
+      <input type="text" class="form-control" id="satuan{{$key+1}}" name="satuan{{$key+1}}" value="{{$produk->satuan}}" disabled>
     </td>
     <td>
-      <input type="text" class="form-control" id="harga{{$key+1}}" name="harga-satuan" value="20000" disabled>
+      <input type="text" class="form-control" id="harga{{$key+1}}" name="harga{{$key+1}}" value="{{$hargaProduks->where('id_produk',$produk->kode_produk)->first()['harga_sp']}}" readonly>
     </td>
     <td>
-      <select class="form-control" name="tipe" id="tipe">
+      <select class="form-control" name="tipe{{$key+1}}" id="tipe{{$key+1}}">
         @foreach($hargaProduks as $harga)
           @if($harga->id_produk==$produk->kode_produk)
             <option value="{{$harga->tipe_harga_sp}}">{{$harga->tipe_harga_sp}}</option>
@@ -89,10 +90,10 @@
       </select>
     </td>
     <td>
-      <input type="number" class="form-control" id="jumlah{{$key+1}}" name="jumlah">
+      <input type="number" class="form-control" id="jumlah{{$key+1}}" name="jumlah{{$key+1}}">
     </td>
     <td>
-      <input type="text" class="form-control" id="total{{$key+1}}" name="total" readonly>
+      <input type="text" class="form-control" id="total{{$key+1}}" name="total{{$key+1}}" readonly>
     </td>
   </tr>
   @endforeach
@@ -101,11 +102,10 @@
 
 <div class="pull-right">
 
-  <button type="submit" class="btn btn-success" name="button"><span class="glyphicon glyphicon-ok"></span> <a href="/penjualan/sp/invoice-sp-2" style="text-decoration:none;" >Pembelian</a></button>
+  <button type="submit" class="btn btn-success" name="button"><span class="glyphicon glyphicon-ok"></span>Pembelian</button>
 </div>
 
 </form>
-
 <!-- <table id="invoice-sp-table" class="table responsive" width="100%">
     <thead>
     <tr>
@@ -117,14 +117,48 @@
 </table> -->
 
 @stop
-
 @section('js')
 <script type="text/javascript">
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 for (let index = 0; index < {{$jumlah}}; index++) {
   console.log(index);
   $(`#jumlah${index+1}`).on('keyup',function (event) {
     $(`#total${index+1}`).val($(`#harga${index+1}`).val()*this.value);
-  })
+  });
+  // $(`#tipe${index+1}`).on('change',function (event) {
+  //   $.session.set("tipe_harga", this.value);
+  //   $.session.set("kode_produk", $(`#kode${index+1}`).val());
+  //   $(`#harga${index+1}`).val({{$hargaProduks->where('id_produk',session('kode_produk'))->where('tipe_harga_sp',session('tipe_harga'))->first()['harga_sp']}});
+  // });
+}
+for (let index = 0; index < {{$jumlah}}; index++) {
+
+  $(`#tipe${index+1}`).on('change',function (event) {
+    //ajax call 
+    console.log($(this).val());
+    console.log($(`#kode${index+1}`).val());
+    $.post('/get_harga/'+$(this).val()+'/'+$(`#kode${index+1}`).val(), function(response){
+    if(response.success)
+    {
+      console.log(response.harga);
+      $(`#harga${index+1}`).val(response.harga.harga_sp);
+      $(`#total${index+1}`).val($(`#harga${index+1}`).val()*$(`#jumlah${index+1}`).val());
+    }
+}, 'json');
+    // $.ajax({
+    //      url: "/sp/set-session",
+    //      data: { tipe_harga: this.value , kode_produk:$(`#kode${index+1}`).val()}
+    // }); 
+    // $.session.set("tipe_harga", this.value);
+    // $.session.set("kode_produk", $(`#kode${index+1}`).val());
+    // console.log($.session.get("tipe_harga"));
+    // console.log($.session.get("kode_produk"));
+    // $(`#harga${index+1}`).val('0');
+  });
 }
   // $produks.forEach(function myFunction(item, index) {
   //   console.log(index)
