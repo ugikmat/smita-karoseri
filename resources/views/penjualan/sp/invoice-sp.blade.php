@@ -21,7 +21,7 @@
           Nama Canvaser :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
-        <select id="sales" required="required" name="sales" placeholder="Pilih Nama Canvaser" class="form-control selectpicker" data-live-search="true">
+        <select id="sales" required="required" name="sales" placeholder="Pilih Nama Canvaser" class="form-control">
               <option value="" selected disabled>Pilih Nama Canvaser</option>
               @isset($saless)
                   @foreach ($saless as $data)
@@ -36,7 +36,7 @@
           Nama Kios :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="form-control selectpicker" data-live-search="true">
+        <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="form-control">
               <option value="" selected disabled>Pilih Nama Kios</option>
               @isset($customerarray)
                   @foreach ($customerarray as $data)
