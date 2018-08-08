@@ -27,6 +27,20 @@ class PenjualanSPController extends Controller
     {
         $this->middleware('auth');
     }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $hargaProduks = HargaProduk::where('status_harga_sp','Aktif')->get();
+        $arrHarga = $hargaProduks->mode('harga_sp');
+        $produks = produk::where('status_produk','1')->get();
+        $saless = Sales::where('status','1')->get();
+        $jumlahProduk = $produks->count();
+        return view('penjualan.sp.invoice-sp',['saless'=>$saless,'produks'=>$produks,'hargaProduks'=>$hargaProduks,'jumlah'=>$jumlahProduk,'arrHarga'=>$arrHarga]);
+    }
     public function set_session(Request $request){
         session(['tipe_harga'=>$request->input('tipe_harga'),'kode_produk'=>$request->input('kode_produk')]);
     }
@@ -70,20 +84,155 @@ class PenjualanSPController extends Controller
         return view('/penjualan/sp/invoice-sp-2',['penjualanSp'=>$penjualanSp,'sales'=>$sales,'customer'=>$customer]);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $hargaProduks = HargaProduk::where('status_harga_sp','Aktif')->get();
-        $arrHarga = $hargaProduks->mode('harga_sp');
-        $produks = produk::where('status_produk','1')->get();
-        $saless = Sales::where('status','1')->get();
-        $jumlahProduk = $produks->count();
-        return view('penjualan.sp.invoice-sp',['saless'=>$saless,'produks'=>$produks,'hargaProduks'=>$hargaProduks,'jumlah'=>$jumlahProduk,'arrHarga'=>$arrHarga]);
+    public function update(Request $request, $id){
+        $data = DetailPenjualanProduk::where('id_detail_penjualan_sp',$id)->first();
+
+        $tipe = $request->get('tipe');
+        $qty_program = $request->get('qty_program');
+        
+        if($tipe != 'default') {
+            $data->tipe_harga = $tipe;
+        }
+        $harga = HargaProduk::where('id_produk',$data->id_produk)->where('tipe_harga_sp',$data->tipe_harga)->first();
+        $data->harga_satuan=$data->jumlah_sp*$harga->harga_sp;
+        $data->harga_beli = $qty_program;
+        $data->save();
+        return redirect()->back();
     }
+
+    public function verify(Request $request){
+        $tunai = $request->get('tunai');
+        $bank1 = $request->get('bank1');
+        $id = $request->get('id');
+        $tgl = $request->get('tgl');
+        if (!empty($bank1)) {
+            $trf1 = $request->get('trf1');
+        }else{
+            $trf1 = 0;
+        }
+        $bank2 = $request->get('bank2');
+        if (!empty($bank2)) {
+            $trf2 = $request->get('trf2');
+        }else{
+            $trf2 = 0;
+        }
+        $bank3 = $request->get('bank3');        
+        if (!empty($bank3)) {
+            $trf3 = $request->get('trf3');
+        }else{
+            $trf3 = 0;
+        }
+        $catatan = $request->get('catatan'); 
+        $penjualanSp =PenjualanProduk::where('id_penjualan_sp',$id)->first();
+        $sales = Sales::where('id_sales',$penjualanSp->id_sales)->first();
+        $customer = Customer::where('id_cust',$penjualanSp->id_customer)->first();
+        $tunai=number_format($tunai,0,",",".");
+        return view('penjualan/sp/invoice-sp-3',
+        [
+            'penjualanSp'=>$penjualanSp,
+            'tgl'=>$tgl,
+            'tunai'=>$tunai,
+            'trf1'=>$trf1,
+            'trf2'=>$trf2,
+            'trf3'=>$trf3,
+            'bank1'=>$bank1,
+            'bank2'=>$bank2,
+            'bank3'=>$bank3,
+            'catatan'=>$catatan,
+            'sales'=>$sales,
+            'customer'=>$customer,
+            ]);
+    }
+
+    /**
+     * Save transaction
+     */
+    public function store(Request $request){
+        $request->session()->forget('tunai');
+        $request->session()->forget('catatan');
+        $id_sales = $request->get('sales');
+        $nm_sales = $request->get('nm_sales');
+        $id = $request->get('id');
+        $hp_downline = $request->get('downline');
+        $tgl = Carbon::parse($request->get('tgl'));
+        $tgl = $tgl->format('Y-m-d');
+        $user = $request->get('user');
+        $tgl_input = Carbon::now('Asia/Jakarta')->toDateString();
+        $tunai = $request->get('tunai');
+        $trf1 = $request->get('trf1');
+        $bank1 = $request->get('bank1');
+        $trf2 = $request->get('trf2');
+        $bank2 = $request->get('bank2');
+        $trf3 = $request->get('trf3');
+        $bank3 = $request->get('bank3');        
+        $catatan = $request->get('catatan');
+        $total = $request->get('total');
+        $sales = Sales::where('id_sales',$id_sales)->first();
+        $penjualanProduk = PenjualanProduk::where('id_penjualan_sp',$id)->first(); ;
+            switch ($bank1) {
+                case 'BCA Pusat':
+                    $penjualanProduk->bca_pusat=$trf1;
+                    break;
+                case 'BCA Cabang':
+                    $penjualanProduk->bca_cabang=$trf1;
+                    break;
+                case 'Mandiri':
+                    $penjualanProduk->mandiri=$trf1;
+                    break;
+                case 'BNI':
+                    $penjualanProduk->bni=$trf1;
+                    break;
+                case 'BRI':
+                    $penjualanProduk->bri=$trf1;
+                    break;
+                default:
+                    break;
+            }
+            switch ($bank2) {
+                 case 'BCA Pusat':
+                    $penjualanProduk->bca_pusat=$trf2;
+                    break;
+                case 'BCA Cabang':
+                    $penjualanProduk->bca_cabang=$trf2;
+                    break;
+                case 'Mandiri':
+                    $penjualanProduk->mandiri=$trf2;
+                    break;
+                case 'BNI':
+                    $penjualanProduk->bni=$trf2;
+                    break;
+                case 'BRI':
+                    $penjualanProduk->bri=$trf2;
+                    break;
+                default:
+                    break;
+            }
+            switch ($bank3) {
+                 case 'BCA Pusat':
+                    $penjualanProduk->bca_pusat=$trf3;
+                    break;
+                case 'BCA Cabang':
+                    $penjualanProduk->bca_cabang=$trf3;
+                    break;
+                case 'Mandiri':
+                    $penjualanProduk->mandiri=$trf3;
+                    break;
+                case 'BNI':
+                    $penjualanProduk->bni=$trf3;
+                    break;
+                case 'BRI':
+                    $penjualanProduk->bri=$trf3;
+                    break;
+                default:
+                    break;
+            }
+            $penjualanProduk->grand_total=str_replace('.', '', $total);
+            $penjualanProduk->bayar_tunai=str_replace('.', '', $tunai);
+            $penjualanProduk->catatan=$catatan;
+        $penjualanProduk->save();
+        return redirect('/penjualan/sp/invoice-sp');
+    }
+
     /**
      * Process dataTable ajax response.
      *
@@ -98,20 +247,32 @@ class PenjualanSPController extends Controller
 *       detail_penjualan_sps.harga_total
 *FROM master_produks JOIN detail_penjualan_sps
 *ON master_produks.kode_produk = detail_penjualan_sps.id_produk
- */
-        return $datatables->eloquent(DetailPenjualanProduk::select(DB::raw('master_produks.nama_produk, 
-        master_produks.satuan, detail_penjualan_sps.harga_satuan,detail_penjualan_sps.harga_beli,
+ */     $detailPenjualan = DetailPenjualanProduk::select(DB::raw('master_produks.nama_produk, 
+        master_produks.satuan, detail_penjualan_sps.harga_satuan,detail_penjualan_sps.harga_beli,detail_penjualan_sps.id_produk,detail_penjualan_sps.id_detail_penjualan_sp,
         detail_penjualan_sps.tipe_harga, detail_penjualan_sps.jumlah_sp,
         detail_penjualan_sps.harga_total'))
                         ->join('master_produks',function($join){
                             $join->on('detail_penjualan_sps.id_produk','=','master_produks.kode_produk');
                         })
-                        ->where('id_penjualan_sp',$id))
-                        ->addColumn('indeks', function ($uploadDompul) {
+                        ->where('id_penjualan_sp',$id)->get();
+        $total = 0;
+        foreach ($detailPenjualan as $key => $value) {
+            $total+=$value->harga_total;
+        }
+        $total=number_format($total,0,",",".");
+        session(['total_harga_sp' => $total]);
+        return $datatables->of($detailPenjualan)
+                        ->addColumn('indeks', function ($detailPenjualanSp) {
                               return '';
                             })
-                            ->addColumn('action', function ($uploadDompul) {
-                              return '';
+                            ->addColumn('total_harga', function ($detailPenjualanSp) {
+                              return number_format(($detailPenjualanSp->jumlah_sp-$detailPenjualanSp->harga_beli)*$detailPenjualanSp->harga_satuan,0,",",".");
+                            })
+                            ->addColumn('action', function ($detailPenjualanSp) {
+                                $tipe = HargaProduk::select('tipe_harga_sp')->where('id_produk',$detailPenjualanSp->id_produk)->get();
+                                // $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$uploadDompul->produk)->get();
+                              return 
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$detailPenjualanSp->id_detail_penjualan_sp.'" data-tipe='.$tipe.' data-qty="'.$detailPenjualanSp->harga_beli.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
                             })
                             // ->addColumn('input', function ($uploadDompul) {
                             //   return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-edit"></i> Edit</a>';

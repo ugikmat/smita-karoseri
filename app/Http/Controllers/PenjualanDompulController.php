@@ -178,7 +178,8 @@ class PenjualanDompulController extends Controller
      * Save transaction
      */
     public function store(Request $request){
-        
+        $request->session()->forget('tunai');
+        $request->session()->forget('catatan');
         $id_sales = $request->get('sales');
         $nm_sales = $request->get('nm_sales');
         $hp_downline = $request->get('downline');

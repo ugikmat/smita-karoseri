@@ -312,6 +312,7 @@ td{
     var button = $(event.relatedTarget) // Button that triggered the modal
     var produk = button.data('produk') // Extract info from data-* attributes
     var tipe_harga = button.data('tipe')
+    console.log(tipe_harga);
     var no_faktur = button.data('faktur')
     var qty_program = button.data('qty')
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).

@@ -15,8 +15,9 @@ td{
 @stop
 
 @section('content')
-<form class="invoice-sp" action="" method="post">
-  <input type="hidden" name="id" id="id" value="{{$penjualanSp->id_penjualan_sp}}" disabled>
+<form class="invoice-sp" action="/invoice_sp/verify" method="post">
+  @csrf
+  <input type="hidden" name="id" id="id" value="{{$penjualanSp->id_penjualan_sp}}">
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -96,9 +97,7 @@ td{
         <td colspan="2"><b>Grand Total</b></td>
         <td></td>
         <td>
-          <!-- @isset($total)
-          <input type="text" class="form-control" name="total" id="total" value="{{$total}}" readonly>
-          @endisset -->
+          <input type="text" class="form-control" name="total" id="total" value="{{session('total_harga_sp')}}" readonly>
         </td>
         <td></td>
       </tr>
@@ -201,7 +200,7 @@ td{
       <tr>
         <td colspan="7">
           <div class="pull-right">
-            <button type="submit" class="btn btn-success" name="button"><span class="glyphicon glyphicon-ok"></span><a href="/penjualan/sp/invoice-sp-3" style="text-decoration:none;"> Lanjutkan</a></button>
+            <button type="submit" class="btn btn-success" name="button"><span class="glyphicon glyphicon-ok"></span>Lanjutkan</button>
           </div>
         </td>
       </tr>
@@ -233,8 +232,8 @@ td{
 
                 <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="">
                   @csrf @method('put')
-                  <!-- <input type="hidden" name="update_catatan" id="update_catatan" value="{{session('catatan')}}">
-                  <input type="hidden" name="update_tunai" id="update_tunai" value="{{session('tunai')}}"> -->
+                  <input type="hidden" name="update_catatan" id="update_catatan" value="{{session('catatan')}}">
+                  <input type="hidden" name="update_tunai" id="update_tunai" value="{{session('tunai')}}">
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe sp
                       <span class="required">*</span>
@@ -282,7 +281,18 @@ td{
 
 @section('js')
 <script>
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
     $(function () {
+          function inputTunai(str) {
+          $('#update_tunai').val(str);
+        }
+        function inputCatatan(str) {
+          $('#update_catatan').val(str);
+        }
         var id = $('#id').val();
         var t = $('#invoice-sp-table').DataTable({
                   serverSide: true,
@@ -294,23 +304,20 @@ td{
                       {data: 'harga_satuan'},
                       {data: 'jumlah_sp'},
                       {data: 'harga_beli'},
-                      {data: 'harga_total'},
+                      {data: 'total_harga'},
                       {data: 'action', orderable: false, searchable: false}
                   ]
               });
+        console.log('{{session('total_harga_sp')}}');
     });
 </script>
-{{-- <script>
+<script>
   $('#editModal').on('show.bs.modal', function (event) {
-    var tgl = $('#tgl').val();
-    var canvaser = $('#canvasser').val();
-    var downline = $('#downline').val();
     var tipe = document.getElementById("tipe");
 
     var button = $(event.relatedTarget) // Button that triggered the modal
-    var produk = button.data('produk') // Extract info from data-* attributes
+    var id = button.data('id')
     var tipe_harga = button.data('tipe')
-    var no_faktur = button.data('faktur')
     var qty_program = button.data('qty')
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
@@ -328,7 +335,7 @@ td{
       tipe.appendChild(opt);
     });
     $('#qty_program').val(qty_program);
-    $('#editForm').attr('action', `/invoice_sp/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/0`);
+    $('#editForm').attr('action', `/invoice_sp/update/${id}`);
   })
-</script> --}}
+</script>
 @stop
