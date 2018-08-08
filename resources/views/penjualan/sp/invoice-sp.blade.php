@@ -12,30 +12,22 @@
 @stop
 
 @section('content')
-
-<div class="container-fluid">
-  <form class="invoice-sp" action="/penjualan/sp/invoice-sp/edit" method="post">
+<form class="invoice-sp" action="/penjualan/sp/invoice-sp/edit" method="post">
   @csrf
+<div class="container-fluid">
   <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Tanggal Penjualan :
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{session('now')}}"
-      </div>
-    </div>
-  </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
           Nama Canvaser :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
-        <select id="sales" required="required" name="sales"class="selectpicker" data-live-search="true">
-
-              <option data-tokens="a">Blal</option>
-              <option data-tokens="b">al</option>
-              <option data-tokens="c">Blalal</option>
+        <select id="sales" required="required" name="sales" placeholder="Pilih Nama Canvaser" class="chosen-select">
+              <option value="" selected disabled>Pilih Nama Canvaser</option>
+              @isset($saless)
+                  @foreach ($saless as $data)
+                  <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
+                  @endforeach
+              @endisset
         </select>
       </div>
     </div>
@@ -44,7 +36,7 @@
           Nama Kios :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="selectpicker" data-live-search="true">
+        <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="chosen-select">
               <option value="" selected disabled>Pilih Nama Kios</option>
               @isset($customerarray)
                   @foreach ($customerarray as $data)
@@ -54,6 +46,15 @@
         </select>
       </div>
     </div>
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        Tanggal Penjualan :
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan">
+      </div>
+    </div>
+  </div>
 </div>
 
 <br><br>
@@ -77,7 +78,7 @@
       <input type="text" class="form-control" id="satuan{{$key+1}}" name="satuan{{$key+1}}" value="{{$produk->satuan}}" disabled>
     </td>
     <td>
-      <input type="text" class="form-control" id="harga{{$key+1}}" name="harga{{$key+1}}" value="{{number_format($hargaProduks->where('id_produk',$produk->kode_produk)->first()['harga_sp'],0,",",".")}}" readonly>
+      <input type="text" class="form-control" id="harga{{$key+1}}" name="harga{{$key+1}}" value="{{$hargaProduks->where('id_produk',$produk->kode_produk)->first()['harga_sp']}}" readonly>
     </td>
     <td>
       <select class="form-control" name="tipe{{$key+1}}" id="tipe{{$key+1}}">
@@ -89,119 +90,14 @@
       </select>
     </td>
     <td>
-      <input type="number" class="form-control" id="jumlah{{$key+1}}" name="jumlah{{$key+1}}" value=0>
+      <input type="number" class="form-control" id="jumlah{{$key+1}}" name="jumlah{{$key+1}}">
     </td>
     <td>
-      <input type="text" class="form-control" id="total{{$key+1}}" name="total{{$key+1}}" readonly value=0>
+      <input type="text" class="form-control" id="total{{$key+1}}" name="total{{$key+1}}" readonly>
     </td>
   </tr>
   @endforeach
-  <tr>
-        <td></td>
-        <td></td>
-        <td colspan="2"><b>Grand Total</b></td>
-        <td></td>
-        <td>
-          <input type="text" class="form-control" name="total" id="total" value="{{session('total_harga_sp')}}" readonly>
-        </td>
-        
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td colspan="2"><b>Jumlah Tunai</b></td>
-        <td></td>
-        <td>
-        <input type="text" id="tunai" required="required" name="tunai" class="form-control" value="{{session('tunai')}}" onkeyup="inputTunai(this.value)">
-        </td>
-        
 
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td colspan="2"><b>Bank Transfer 1</b></td>
-        <td></td>
-        <td>
-          <select class="form-control" name="bank1" id="bank1">
-            <option value="" selected disabled>-- Pilih Bank --</option>
-            <option value="BCA">BCA Pusat</option>
-            <option value="BCA">BCA Cabang</option>
-            <option value="BCA">BRI</option>
-            <option value="BCA">BNI</option>
-            <option value="BCA">Mandiri</option>
-          </select>
-        </td>
-        
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td colspan="2"><b>Jumlah Transfer 1</b></td>
-        <td></td>
-        <td><input type="text" id="trf1" name="trf1" class="form-control"></td>
-        
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td colspan="2"><b>Bank Transfer 2</b></td>
-        <td></td>
-        <td>
-          <select class="form-control" name="bank2" id="bank2">
-            <option value="" selected disabled>-- Pilih Bank --</option>
-            <option value="BCA">BCA Pusat</option>
-            <option value="BCA">BCA Cabang</option>
-            <option value="BCA">BRI</option>
-            <option value="BCA">BNI</option>
-            <option value="BCA">Mandiri</option>
-          </select>
-        </td>
-        
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td colspan="2"><b>Jumlah Transfer 2</b></td>
-        <td></td>
-        <td><input type="text" id="trf2" name="trf2" class="form-control"></td>
-        
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td colspan="2"><b>Bank Transfer 3</b></td>
-        <td></td>
-        <td>
-          <select class="form-control" name="bank3" id="bank3">
-            <option value="" selected disabled>-- Pilih Bank --</option>
-            <option value="BCA">BCA Pusat</option>
-            <option value="BCA">BCA Cabang</option>
-            <option value="BCA">BRI</option>
-            <option value="BCA">BNI</option>
-            <option value="BCA">Mandiri</option>
-          </select>
-        </td>
-        
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td colspan="2"><b>Jumlah Transfer 3</b></td>
-        <td></td>
-        <td><input type="text" id="trf3" name="trf3" class="form-control"></td>
-        
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td colspan="2"><b>Catatan</b></td>
-        <td></td>
-        <td>
-          <input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{session('catatan')}}" onkeyup="inputCatatan(this.value)">
-        </td>
-        
-      </tr>
 </table>
 
 <div class="pull-right">
@@ -210,7 +106,6 @@
 </div>
 
 </form>
-</div>
 <!-- <table id="invoice-sp-table" class="table responsive" width="100%">
     <thead>
     <tr>
@@ -224,24 +119,18 @@
 @stop
 @section('js')
 <script type="text/javascript">
+  $(".chosen-select").chosen()
+</script>
+<script type="text/javascript">
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-var harga = [];
-var totalHarga = 0;
 for (let index = 0; index < {{$jumlah}}; index++) {
-  harga.push($(`#total${index+1}`).val().replace(/[ .]/g, ''));
-  totalHarga+=parseFloat(harga[index]);
-  console.log(`total Harga ${$(`#total${index+1}`).val().replace(/[ .]/g, '')}`);
+  console.log(index);
   $(`#jumlah${index+1}`).on('keyup',function (event) {
-    totalHarga-=parseFloat(harga[index]);
-    $(`#total${index+1}`).val(($(`#harga${index+1}`).val().replace(/[ .]/g, '')*this.value.replace(/[ .]/g, '')).toLocaleString('id-ID'));
-    harga[index]=$(`#total${index+1}`).val().replace(/[ .]/g, '');
-    totalHarga+=parseFloat(harga[index]);
-    console.log(`total Harga ${harga[index]}`);
-    $('#total').val(totalHarga.toLocaleString('id-ID'));
+    $(`#total${index+1}`).val($(`#harga${index+1}`).val()*this.value);
   });
   // $(`#tipe${index+1}`).on('change',function (event) {
   //   $.session.set("tipe_harga", this.value);
@@ -249,8 +138,6 @@ for (let index = 0; index < {{$jumlah}}; index++) {
   //   $(`#harga${index+1}`).val({{$hargaProduks->where('id_produk',session('kode_produk'))->where('tipe_harga_sp',session('tipe_harga'))->first()['harga_sp']}});
   // });
 }
-$('#total').val(totalHarga.toLocaleString('id-ID'));
-console.log(`total Harga`);
 for (let index = 0; index < {{$jumlah}}; index++) {
 
   $(`#tipe${index+1}`).on('change',function (event) {
@@ -260,14 +147,9 @@ for (let index = 0; index < {{$jumlah}}; index++) {
     $.post('/get_harga/'+$(this).val()+'/'+$(`#kode${index+1}`).val(), function(response){
     if(response.success)
     {
-      totalHarga-=parseFloat(harga[index]);
       console.log(response.harga);
-      $(`#harga${index+1}`).val(response.harga.harga_sp.toLocaleString('id-ID'));
-      $(`#total${index+1}`).val(($(`#harga${index+1}`).val().replace(/[ .]/g, '')*$(`#jumlah${index+1}`).val().replace(/[ .]/g, '')).toLocaleString('id-ID'));
-      harga[index]=$(`#total${index+1}`).val().replace(/[ .]/g, '');
-      totalHarga+=parseFloat(harga[index]);
-      console.log(`total Harga ${totalHarga}`);
-      $('#total').val(totalHarga.toLocaleString('id-ID'));
+      $(`#harga${index+1}`).val(response.harga.harga_sp);
+      $(`#total${index+1}`).val($(`#harga${index+1}`).val()*$(`#jumlah${index+1}`).val());
     }
 }, 'json');
     // $.ajax({
