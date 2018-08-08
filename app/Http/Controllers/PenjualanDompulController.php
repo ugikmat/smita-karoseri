@@ -85,15 +85,14 @@ class PenjualanDompulController extends Controller
      */
     public function update(Request $request,$canvaser,$tgl,$downline,$produk,$no_faktur,$status_penjualan){
         // session(['tunai'=>$request->get('update_tunai'),'catatan'=>$request->get('update_catatan')]);
-        $datas =UploadDompul::where('nama_canvasser',$canvaser)
+        $data =UploadDompul::where('nama_canvasser',$canvaser)
                         // ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
                         ->where('tanggal_transfer',$tgl)
                         ->where('nama_downline',$downline)
                         ->where('produk',$produk)
                         ->where('status_penjualan',$status_penjualan)
                         ->where('status_active',1)
-                        ->where('no_faktur',$no_faktur)->get();
-        $data = $datas->first();
+                        ->where('no_faktur',$no_faktur)->first();
         $tipe = $request->get('tipe');
         $qty_program = $request->get('qty_program');
         $status_penjualans=$status_penjualan;
@@ -108,7 +107,13 @@ class PenjualanDompulController extends Controller
         $data->qty_program = $qty_program;
         $data->save();
         $total=0;
-        foreach ($datas as $key => $value) {
+        $sum =UploadDompul::where('nama_canvasser',$canvaser)
+                        // ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
+                        ->where('tanggal_transfer',$tgl)
+                        ->where('nama_downline',$downline)
+                        ->where('status_penjualan',$status_penjualan)
+                        ->where('status_active',1)->get();
+        foreach ($sum as $key => $value) {
             $total+=(($value->qty-$value->qty_program)*$value->harga_dompul);
         }
         return response()->json(['success' => true,'total'=>$total]);

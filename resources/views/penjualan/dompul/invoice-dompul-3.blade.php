@@ -180,8 +180,7 @@ td{
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/invoice_dompul/update/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}/{{$datas->produk}}">
-                  @csrf @method('put')
+                  <input type="hidden" name="link" id="link" value="/invoice_dompul/update/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}/{{$datas->produk}}">
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul
                       <span class="required">*</span>
@@ -211,7 +210,6 @@ td{
                       {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
                     </div>
                   </div>
-                </form>
               </div>
             </div>
           </div>
@@ -304,14 +302,14 @@ td{
               });
         $(`#save`).on('click',function (event) {
       //ajax call
-        $.post(`${$('#editForm').attr('action')}`, { tipe: $('#tipe').val(), qty_program: $('#qty_program').val() })
+        $.post(`${$('#link').val()}`, { tipe: $('#tipe').val(), qty_program: $('#qty_program').val() })
         .done(function(response){
       if(response.success)
       {
         console.log('success')
         console.log(response.total);
         t.ajax.url(`/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`).load();
-        $('#total').val(response.total);
+        $('#total').val(response.total.toLocaleString('id-ID'));
       }
       }, 'json');
     });
@@ -345,7 +343,7 @@ td{
       tipe.appendChild(opt);
     });
     console.log(produk);
-    $('#editForm').attr('action', `/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/0`);
+    $('#link').val(`/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/0`);
   })
 </script>
 @stop
