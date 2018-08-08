@@ -21,13 +21,11 @@
           Nama Canvaser :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
-        <select id="sales" required="required" name="sales" placeholder="Pilih Nama Canvaser" class="form-control">
-              <option value="" selected disabled>Pilih Nama Canvaser</option>
-              @isset($saless)
-                  @foreach ($saless as $data)
-                  <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
-                  @endforeach
-              @endisset
+        <select id="sales" required="required" name="sales"class="selectpicker" data-live-search="true">
+
+              <option data-tokens="a">Blal</option>
+              <option data-tokens="b">al</option>
+              <option data-tokens="c">Blalal</option>
         </select>
       </div>
     </div>
@@ -36,7 +34,7 @@
           Nama Kios :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="form-control">
+        <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="selectpicker" data-live-search="true">
               <option value="" selected disabled>Pilih Nama Kios</option>
               @isset($customerarray)
                   @foreach ($customerarray as $data)
