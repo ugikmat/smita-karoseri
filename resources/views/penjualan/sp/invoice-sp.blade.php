@@ -235,13 +235,13 @@ var harga = [];
 var totalHarga = 0;
 for (let index = 0; index < {{$jumlah}}; index++) {
   harga.push($(`#total${index+1}`).val());
-  totalHarga+=harga[index];
+  totalHarga+=parseFloat(harga[index]);
   console.log(`total Harga ${$(`#total${index+1}`).val().replace(/./g, '')}`);
   $(`#jumlah${index+1}`).on('keyup',function (event) {
-    totalHarga-=harga[index];    
+    totalHarga-=parseFloat(harga[index]);
     $(`#total${index+1}`).val(($(`#harga${index+1}`).val())*this.value);
     harga[index]=$(`#total${index+1}`).val();
-    totalHarga+=harga[index];
+    totalHarga+=parseFloat(harga[index]);
     console.log(`total Harga ${harga[index]}`);
     $('#total').val(totalHarga);
   });
@@ -262,12 +262,12 @@ for (let index = 0; index < {{$jumlah}}; index++) {
     $.post('/get_harga/'+$(this).val()+'/'+$(`#kode${index+1}`).val(), function(response){
     if(response.success)
     {
-      totalHarga-=harga[index];
+      totalHarga-=parseFloat(harga[index]);
       console.log(response.harga);
       $(`#harga${index+1}`).val(response.harga.harga_sp);
       $(`#total${index+1}`).val(($(`#harga${index+1}`).val())*$(`#jumlah${index+1}`).val());
       harga[index]=$(`#total${index+1}`).val();
-      totalHarga+=harga[index];
+      totalHarga+=parseFloat(harga[index]);
       console.log(`total Harga ${totalHarga}`);
       $('#total').val(totalHarga);
     }
