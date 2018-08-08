@@ -269,7 +269,7 @@ for (let index = 0; index < {{$jumlah}}; index++) {
       harga[index]=$(`#total${index+1}`).val().replace(/[ .]/g, '');
       totalHarga+=parseFloat(harga[index]);
       console.log(`total Harga ${totalHarga}`);
-      $('#total').val(totalHarga);
+      $('#total').val(totalHarga.toLocaleString('id-ID'));
     }
 }, 'json');
     // $.ajax({
