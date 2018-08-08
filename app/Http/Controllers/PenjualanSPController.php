@@ -34,6 +34,7 @@ class PenjualanSPController extends Controller
      */
     public function index()
     {
+        session(['now'=>Carbon::now('Asia/Jakarta')->format('d-m-Y')]);
         $hargaProduks = HargaProduk::where('status_harga_sp','Aktif')->get();
         $arrHarga = $hargaProduks->mode('harga_sp');
         $produks = produk::where('status_produk','1')->get();
@@ -72,8 +73,8 @@ class PenjualanSPController extends Controller
                 $detailPenjualanSp->id_produk=$request->get("kode{$i}");
                 $detailPenjualanSp->jumlah_sp=$request->get("jumlah{$i}");
                 $detailPenjualanSp->tipe_harga=$request->get("tipe{$i}");
-                $detailPenjualanSp->harga_satuan=$request->get("harga{$i}");
-                $detailPenjualanSp->harga_total=$request->get("total{$i}");
+                $detailPenjualanSp->harga_satuan=str_replace('.', '', $request->get("harga{$i}"));
+                $detailPenjualanSp->harga_total=str_replace('.', '', $request->get("total{$i}"));
                 $detailPenjualanSp->harga_beli=0;
                 $detailPenjualanSp->keterangan_detail_psp='none';
                 $detailPenjualanSp->save();
@@ -148,16 +149,7 @@ class PenjualanSPController extends Controller
      * Save transaction
      */
     public function store(Request $request){
-        $request->session()->forget('tunai');
-        $request->session()->forget('catatan');
-        $id_sales = $request->get('sales');
-        $nm_sales = $request->get('nm_sales');
         $id = $request->get('id');
-        $hp_downline = $request->get('downline');
-        $tgl = Carbon::parse($request->get('tgl'));
-        $tgl = $tgl->format('Y-m-d');
-        $user = $request->get('user');
-        $tgl_input = Carbon::now('Asia/Jakarta')->toDateString();
         $tunai = $request->get('tunai');
         $trf1 = $request->get('trf1');
         $bank1 = $request->get('bank1');
@@ -168,68 +160,96 @@ class PenjualanSPController extends Controller
         $catatan = $request->get('catatan');
         $total = $request->get('total');
         $sales = Sales::where('id_sales',$id_sales)->first();
-        $penjualanProduk = PenjualanProduk::where('id_penjualan_sp',$id)->first(); ;
+        
+        $penjualanSp = new PenjualanProduk();
+        $penjualanSp->id_sales=$request->get('sales');
+        $penjualanSp->id_customer=$request->get('customer');
+        $penjualanSp->no_hp_customer='0';
+        $penjualanSp->grand_total=$total;
+        $penjualanSp->catatan=$catatan;
+        $penjualanSp->grand_total=str_replace('.', '', $total);
+        $penjualanSp->bayar_tunai=str_replace('.', '', $tunai);
+        $tgl = Carbon::parse($request->get('tgl_penjualan'));
+        $tgl = $tgl->format('Y-m-d');
+        $penjualanSp->tanggal_penjualan_sp=$tgl;
+        $penjualanSp->tanggal_input=Carbon::now('Asia/Jakarta')->toDateString();
+        $penjualanSp->no_user=Auth::user()->id;
+        $penjualanSp->save();
+        $produks = produk::where('status_produk','1')->get()->count();
+        for ($i=0; $i <$produks ; $i++) {
+            if (!empty($request->get("jumlah{$i}"))) {
+                $detailPenjualanSp = new DetailPenjualanProduk();
+                $detailPenjualanSp->id_penjualan_sp = $penjualanSp->id_penjualan_sp;
+                $detailPenjualanSp->id_customer=$request->get('customer');
+                $detailPenjualanSp->id_produk=$request->get("kode{$i}");
+                $detailPenjualanSp->jumlah_sp=$request->get("jumlah{$i}");
+                $detailPenjualanSp->tipe_harga=$request->get("tipe{$i}");
+                $detailPenjualanSp->harga_satuan=str_replace('.', '', $request->get("harga{$i}"));
+                $detailPenjualanSp->harga_total=str_replace('.', '', $request->get("total{$i}"));
+                $detailPenjualanSp->harga_beli=0;
+                $detailPenjualanSp->keterangan_detail_psp='none';
+                $detailPenjualanSp->save();
+            }
+        }
+        $penjualanSp = PenjualanProduk::where('id_penjualan_sp',$id)->first();
             switch ($bank1) {
                 case 'BCA Pusat':
-                    $penjualanProduk->bca_pusat=$trf1;
+                    $penjualanSp->bca_pusat=$trf1;
                     break;
                 case 'BCA Cabang':
-                    $penjualanProduk->bca_cabang=$trf1;
+                    $penjualanSp->bca_cabang=$trf1;
                     break;
                 case 'Mandiri':
-                    $penjualanProduk->mandiri=$trf1;
+                    $penjualanSp->mandiri=$trf1;
                     break;
                 case 'BNI':
-                    $penjualanProduk->bni=$trf1;
+                    $penjualanSp->bni=$trf1;
                     break;
                 case 'BRI':
-                    $penjualanProduk->bri=$trf1;
+                    $penjualanSp->bri=$trf1;
                     break;
                 default:
                     break;
             }
             switch ($bank2) {
                  case 'BCA Pusat':
-                    $penjualanProduk->bca_pusat=$trf2;
+                    $penjualanSp->bca_pusat=$trf2;
                     break;
                 case 'BCA Cabang':
-                    $penjualanProduk->bca_cabang=$trf2;
+                    $penjualanSp->bca_cabang=$trf2;
                     break;
                 case 'Mandiri':
-                    $penjualanProduk->mandiri=$trf2;
+                    $penjualanSp->mandiri=$trf2;
                     break;
                 case 'BNI':
-                    $penjualanProduk->bni=$trf2;
+                    $penjualanSp->bni=$trf2;
                     break;
                 case 'BRI':
-                    $penjualanProduk->bri=$trf2;
+                    $penjualanSp->bri=$trf2;
                     break;
                 default:
                     break;
             }
             switch ($bank3) {
                  case 'BCA Pusat':
-                    $penjualanProduk->bca_pusat=$trf3;
+                    $penjualanSp->bca_pusat=$trf3;
                     break;
                 case 'BCA Cabang':
-                    $penjualanProduk->bca_cabang=$trf3;
+                    $penjualanSp->bca_cabang=$trf3;
                     break;
                 case 'Mandiri':
-                    $penjualanProduk->mandiri=$trf3;
+                    $penjualanSp->mandiri=$trf3;
                     break;
                 case 'BNI':
-                    $penjualanProduk->bni=$trf3;
+                    $penjualanSp->bni=$trf3;
                     break;
                 case 'BRI':
-                    $penjualanProduk->bri=$trf3;
+                    $penjualanSp->bri=$trf3;
                     break;
                 default:
                     break;
             }
-            $penjualanProduk->grand_total=str_replace('.', '', $total);
-            $penjualanProduk->bayar_tunai=str_replace('.', '', $tunai);
-            $penjualanProduk->catatan=$catatan;
-        $penjualanProduk->save();
+        $penjualanSp->save();
         return redirect('/penjualan/sp/invoice-sp');
     }
 
