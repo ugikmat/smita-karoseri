@@ -169,7 +169,7 @@ class ProdukSeeder extends Seeder
         $sp12 = new produk();
         $sp12->kode_produk='BG4010';
         $sp12->nama_produk='CIP DOMPUL';
-        $sp12->kategori_produk='CHIP DOMPUL';
+        $sp12->kategori_produk='SP';
         $sp12->satuan='PCS';
         $sp12->jenis='GOODS';
         $sp12->BOM='YA';
