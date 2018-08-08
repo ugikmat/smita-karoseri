@@ -21,8 +21,6 @@ header("Pragma: no-cache");
     <!-- Ionicons -->
     {{-- <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/Ionicons/css/ionicons.min.css') }}"> --}}
 
-    <link href="{{ asset('css/selectstyle.css') }}" rel="stylesheet">
-
     {{-- @if(config('adminlte.plugins.select2'))
         <!-- Select2 -->
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css">
@@ -56,8 +54,7 @@ header("Pragma: no-cache");
 <script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/jquery.repeater.min.js') }}"></script>
 <script src="{{ asset('js/jquery.session.js') }}"></script>
-<script src="//code.jquery.com/jquery.min.js"></script>
-<script src="{{ asset('js/selectstyle.js') }}"></script>
+<script src="{{ asset('js/bootstrap-select.js') }}"></script>
 
 @if(config('adminlte.plugins.datatables'))
     <!-- DataTables -->
