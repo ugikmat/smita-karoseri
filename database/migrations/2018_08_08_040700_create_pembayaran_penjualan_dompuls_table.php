@@ -20,8 +20,8 @@ class CreatePembayaranPenjualanDompulsTable extends Migration
             $table->date('tanggal_pembayaran_penjualan');
             $table->date('tanggal_input');
             $table->bigInteger('nominal');
-            $table->tinyInteger('status_pembayaran_penjualan');
-            $table->tinyInteger('status_cetak');
+            $table->tinyInteger('status_pembayaran_penjualan')->default(0);
+            $table->tinyInteger('status_cetak')->default(0);
         });
     }
 
