@@ -86,52 +86,21 @@ td{
           </td>
 
         </tr>
+        @foreach($bank as $key=>$value)
         <tr>
           <td></td>
           <td></td>
-          <td colspan="2"><b>Bank Transfer 1</b></td>
+          <td colspan="2"><b>Bank Transfer</b></td>
           <td></td>
-          <td><input type="text" id="bank1" required="required" name="bank1" class="form-control" value="{{$bank1}}" readonly></td>
+        <td><input type="text" id="bank{{$key}}" required="required" name="bank[{{$key}}][bank]" class="form-control" value="{{$value['bank']}}" readonly></td>
 
         </tr>
         <tr>
           <td></td>
           <td></td>
-          <td colspan="2"><b>Jumlah Transfer 1</b></td>
+          <td colspan="2"><b>Jumlah Transfer</b></td>
           <td></td>
-          <td><input type="text" id="trf1" required="required" name="trf1" class="form-control" value="{{$trf1}}" readonly></td>
-
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Bank Transfer 2</b></td>
-          <td></td>
-          <td><input type="text" id="bank2" required="required" name="bank2" class="form-control" value="{{$bank2}}" readonly></td>
-
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Jumlah Transfer 2</b></td>
-          <td></td>
-          <td><input type="text" id="trf2" required="required" name="trf2" class="form-control" value="{{$trf2}}" readonly></td>
-
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Bank Transfer 3</b></td>
-          <td></td>
-          <td><input type="text" id="bank3" required="required" name="bank3" class="form-control" value="{{$bank3}}" readonly></td>
-
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Jumlah Transfer 3</b></td>
-          <td></td>
-          <td><input type="text" id="trf3" required="required" name="trf3" class="form-control" value="{{$trf2}}" readonly></td>
+          <td><input type="text" id="trf{{$key}}" required="required" name="bank[{{$key}}][trf]" class="form-control" value="{{$value['trf']}}" readonly></td>
 
         </tr>
         <tr>
@@ -139,9 +108,10 @@ td{
           <td></td>
           <td colspan="2"><b>Catatan</b></td>
           <td></td>
-          <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{$catatan}}" readonly></td>
+          <td><input type="text" id="catatan" required="required" name="bank[{{$key}}][catatan]" class="form-control" value="{{$value['catatan']}}" readonly></td>
 
         </tr>
+        @endforeach
         <tr>
           <td colspan="6">
             <div class="pull-right">

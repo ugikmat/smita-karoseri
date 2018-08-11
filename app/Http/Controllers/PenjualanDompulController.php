@@ -130,9 +130,8 @@ class PenjualanDompulController extends Controller
         $tunai = $request->get('tunai');
         $bank = $request->get('bank');
         foreach ($bank as $key => $value) {
-            
+            $bank[$key]['trf']=number_format($bank[$key]['trf'],0,",",".");
         }
-        $catatan = $request->get('catatan'); 
         $sales = Sales::select('id_sales','nm_sales')->where('nm_sales',$canvaser)->first();
         $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser')
                         ->where('nama_canvasser',$canvaser)
@@ -163,8 +162,7 @@ class PenjualanDompulController extends Controller
             'tgl'=>$tgl,
             'total'=>$total,
             'tunai'=>$tunai,
-            'bank1'=>$bank,
-            'catatan'=>$catatan,
+            'bank'=>$bank,
             'sales'=>$sales
             ]);
     }
