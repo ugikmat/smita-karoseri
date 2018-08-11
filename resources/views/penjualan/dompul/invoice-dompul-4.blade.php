@@ -76,21 +76,11 @@ td{
             @endisset
           </td>
         </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Jumlah Tunai</b></td>
-          <td></td>
-          <td>
-          <input type="text" id="tunai"  name="tunai" class="form-control" value="{{$tunai}}" readonly>
-          </td>
-
-        </tr>
         @foreach($bank as $key=>$value)
         <tr>
           <td></td>
           <td></td>
-          <td colspan="2"><b>Bank Transfer</b></td>
+          <td colspan="2"><b>Pembayaran {{$key+1}}</b></td>
           <td></td>
         <td><input type="text" id="bank{{$key}}" required="required" name="bank[{{$key}}][bank]" class="form-control" value="{{$value['bank']}}" readonly></td>
 
@@ -98,7 +88,7 @@ td{
         <tr>
           <td></td>
           <td></td>
-          <td colspan="2"><b>Jumlah Transfer</b></td>
+          <td colspan="2"><b>Nominal {{$key+1}}</b></td>
           <td></td>
           <td><input type="text" id="trf{{$key}}" required="required" name="bank[{{$key}}][trf]" class="form-control" value="{{$value['trf']}}" readonly></td>
 
@@ -106,9 +96,9 @@ td{
         <tr>
           <td></td>
           <td></td>
-          <td colspan="2"><b>Catatan</b></td>
+          <td colspan="2"><b>Catatan {{$key+1}}</b></td>
           <td></td>
-          <td><input type="text" id="catatan" required="required" name="bank[{{$key}}][catatan]" class="form-control" value="{{$value['catatan']}}" readonly></td>
+          <td><input type="text" id="catatan{{$key}}" required="required" name="bank[{{$key}}][catatan]" class="form-control" value="{{$value['catatan']}}" readonly></td>
 
         </tr>
         @endforeach

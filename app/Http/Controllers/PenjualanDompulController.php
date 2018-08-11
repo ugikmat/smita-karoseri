@@ -155,7 +155,6 @@ class PenjualanDompulController extends Controller
             $total+=(($value->qty-$value->qty_program)*$value->harga_dompul);
         }
         $total=number_format($total,0,",",".");
-        $tunai=number_format($tunai,0,",",".");
         return view('penjualan.dompul.invoice-dompul-4',
         [
             'datas'=>$datas,
