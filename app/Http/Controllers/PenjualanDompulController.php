@@ -169,8 +169,6 @@ class PenjualanDompulController extends Controller
      * Save transaction
      */
     public function store(Request $request){
-        $request->session()->forget('tunai');
-        $request->session()->forget('catatan');
         $id_sales = $request->get('sales');
         $nm_sales = $request->get('nm_sales');
         $hp_downline = $request->get('downline');
@@ -178,14 +176,7 @@ class PenjualanDompulController extends Controller
         $tgl = $tgl->format('Y-m-d');
         $user = $request->get('user');
         $tgl_input = Carbon::now('Asia/Jakarta')->toDateString();
-        $tunai = $request->get('tunai');
-        $trf1 = $request->get('trf1');
-        $bank1 = $request->get('bank1');
-        $trf2 = $request->get('trf2');
-        $bank2 = $request->get('bank2');
-        $trf3 = $request->get('trf3');
-        $bank3 = $request->get('bank3');        
-        $catatan = $request->get('catatan');
+        $bank = $request->get('bank');
         $total = $request->get('total');
         $sales = Sales::where('id_sales',$id_sales)->first();
         $penjualanDompul = new PenjualanDompul();        

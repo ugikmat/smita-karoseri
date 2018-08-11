@@ -79,15 +79,15 @@ class MonitorController extends Controller
         }
         
         return view('penjualan.monitoring.mntr-upload',[
-        'totalQtyProgram5k'=>$totalQtyProgram5k,
-        'totalQtyNonProgram5k'=>$totalQtyNonProgram5k,
-        'totalQtyProgram10k'=>$totalQtyProgram10k,
-        'totalQtyNonProgram10k'=>$totalQtyNonProgram10k,
-        'totalQtyProgramRupiah'=>$totalQtyProgramRupiah,
-        'totalQtyNonProgramRupiah'=>$totalQtyNonProgramRupiah,
-        'total_5k'=>$total_5k,
-        'total_10k'=>$total_10k,
-        'total_rupiah'=>$total_rupiah]);
+        'totalQtyProgram5k'=>number_format($totalQtyProgram5k,0,",","."),
+        'totalQtyNonProgram5k'=>number_format($totalQtyNonProgram5k,0,",","."),
+        'totalQtyProgram10k'=>number_format($totalQtyProgram10k,0,",","."),
+        'totalQtyNonProgram10k'=>number_format($totalQtyProgramRupiah,0,",","."),
+        'totalQtyProgramRupiah'=>number_format($totalQtyProgramRupiah,0,",","."),
+        'totalQtyNonProgramRupiah'=>number_format($totalQtyNonProgramRupiah,0,",","."),
+        'total_5k'=>number_format($total_5k,0,",","."),
+        'total_10k'=>number_format($total_10k,0,",","."),
+        'total_rupiah'=>number_format($total_rupiah,0,",","."),]);
     }
     public function show(Request $request){
         $tgl = $request->get('tgl');
@@ -131,15 +131,15 @@ class MonitorController extends Controller
         $total_10k=$totalQtyProgram10k+$totalQtyNonProgram10k;
         $total_rupiah=$totalQtyProgramRupiah+$totalQtyNonProgramRupiah;
         return view('penjualan.monitoring.mntr-upload',[
-        'totalQtyProgram5k'=>$totalQtyProgram5k,
-        'totalQtyNonProgram5k'=>$totalQtyNonProgram5k,
-        'totalQtyProgram10k'=>$totalQtyProgram10k,
-        'totalQtyNonProgram10k'=>$totalQtyNonProgram10k,
-        'totalQtyProgramRupiah'=>$totalQtyProgramRupiah,
-        'totalQtyNonProgramRupiah'=>$totalQtyNonProgramRupiah,
-        'total_5k'=>$total_5k,
-        'total_10k'=>$total_10k,
-        'total_rupiah'=>$total_rupiah]);
+        'totalQtyProgram5k'=>number_format($totalQtyProgram5k,0,",","."),
+        'totalQtyNonProgram5k'=>number_format($totalQtyNonProgram5k,0,",","."),
+        'totalQtyProgram10k'=>number_format($totalQtyProgram10k,0,",","."),
+        'totalQtyNonProgram10k'=>number_format($totalQtyProgramRupiah,0,",","."),
+        'totalQtyProgramRupiah'=>number_format($totalQtyProgramRupiah,0,",","."),
+        'totalQtyNonProgramRupiah'=>number_format($totalQtyNonProgramRupiah,0,",","."),
+        'total_5k'=>number_format($total_5k,0,",","."),
+        'total_10k'=>number_format($total_10k,0,",","."),
+        'total_rupiah'=>number_format($total_rupiah,0,",","."),]);
     }
 
     /**
@@ -155,12 +155,12 @@ class MonitorController extends Controller
             $tgl = $tgl->format('Y-m-d');   
         }
         $monitorUpload = UploadDompul::selectRaw("nama_canvasser AS nama,
-(SELECT sum(qty_program) FROM upload_dompuls WHERE produk = 'DP5' and nama_canvasser = nama) AS qty_program5k,
-(SELECT sum(qty) FROM upload_dompuls WHERE produk = 'DP5' and nama_canvasser = nama) AS qty_non_program5k,
-(SELECT sum(qty_program) FROM upload_dompuls WHERE produk = 'DP10' and nama_canvasser = nama) AS qty_program10k,
-(SELECT sum(qty) FROM upload_dompuls WHERE produk = 'DP10' and nama_canvasser = nama) AS qty_non_program10k,
-(SELECT sum(qty_program) AS rupiah_program FROM upload_dompuls WHERE produk = 'DOMPUL' and nama_canvasser = nama) AS program_rupiah,
-(SELECT sum(qty) AS rupiah FROM upload_dompuls WHERE produk = 'DOMPUL' and nama_canvasser = nama) AS non_program_rupiah")
+(SELECT FORMAT(sum(qty_program),0,'id_ID') FROM upload_dompuls WHERE produk = 'DP5' and nama_canvasser = nama) AS qty_program5k,
+(SELECT FORMAT(sum(qty),0,'id_ID') FROM upload_dompuls WHERE produk = 'DP5' and nama_canvasser = nama) AS qty_non_program5k,
+(SELECT FORMAT(sum(qty_program),0,'id_ID') FROM upload_dompuls WHERE produk = 'DP10' and nama_canvasser = nama) AS qty_program10k,
+(SELECT FORMAT(sum(qty),0,'id_ID') FROM upload_dompuls WHERE produk = 'DP10' and nama_canvasser = nama) AS qty_non_program10k,
+(SELECT FORMAT(sum(qty_program),0,'id_ID') AS rupiah_program FROM upload_dompuls WHERE produk = 'DOMPUL' and nama_canvasser = nama) AS program_rupiah,
+(SELECT FORMAT(sum(qty),0,'id_ID') AS rupiah FROM upload_dompuls WHERE produk = 'DOMPUL' and nama_canvasser = nama) AS non_program_rupiah")
                         ->where('tanggal_transfer',$tgl)
                         ->groupBy('nama')->get();
         return $datatables->of($monitorUpload)
