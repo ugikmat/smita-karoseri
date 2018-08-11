@@ -104,7 +104,8 @@ class PenjualanDompulController extends Controller
                                                     ->first()
                                                     ->harga_dompul;
         }
-        if (!empty($qty_program)) {
+        
+        if (!is_null($qty_program)||!$qty_program==='') {
             $data->qty_program = $qty_program;
         }
         $data->save();
@@ -127,23 +128,9 @@ class PenjualanDompulController extends Controller
      */
     public function verify(Request $request,$canvaser,$tgl,$downline){
         $tunai = $request->get('tunai');
-        $bank1 = $request->get('bank1');
-        if (!empty($bank1)) {
-            $trf1 = $request->get('trf1');
-        }else{
-            $trf1 = 0;
-        }
-        $bank2 = $request->get('bank2');
-        if (!empty($bank2)) {
-            $trf2 = $request->get('trf2');
-        }else{
-            $trf2 = 0;
-        }
-        $bank3 = $request->get('bank3');        
-        if (!empty($bank3)) {
-            $trf3 = $request->get('trf3');
-        }else{
-            $trf3 = 0;
+        $bank = $request->get('bank');
+        foreach ($bank as $key => $value) {
+            
         }
         $catatan = $request->get('catatan'); 
         $sales = Sales::select('id_sales','nm_sales')->where('nm_sales',$canvaser)->first();
@@ -176,12 +163,7 @@ class PenjualanDompulController extends Controller
             'tgl'=>$tgl,
             'total'=>$total,
             'tunai'=>$tunai,
-            'trf1'=>$trf1,
-            'trf2'=>$trf2,
-            'trf3'=>$trf3,
-            'bank1'=>$bank1,
-            'bank2'=>$bank2,
-            'bank3'=>$bank3,
+            'bank1'=>$bank,
             'catatan'=>$catatan,
             'sales'=>$sales
             ]);
