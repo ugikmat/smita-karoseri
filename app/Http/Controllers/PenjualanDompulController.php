@@ -104,7 +104,9 @@ class PenjualanDompulController extends Controller
                                                     ->first()
                                                     ->harga_dompul;
         }
-        $data->qty_program = $qty_program;
+        if (!empty($qty_program)) {
+            $data->qty_program = $qty_program;
+        }
         $data->save();
         $total=0;
         $sum =UploadDompul::where('nama_canvasser',$canvaser)
