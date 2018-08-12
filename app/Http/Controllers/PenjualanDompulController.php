@@ -8,6 +8,7 @@ use App\Sales;
 use App\UploadDompul;
 use App\HargaDompul;
 use App\PenjualanDompul;
+use App\DetailPenjualanDompul;
 use DB;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
@@ -189,73 +190,42 @@ class PenjualanDompulController extends Controller
         $bank = $request->get('bank');
         $total = $request->get('total');
         $sales = Sales::where('id_sales',$id_sales)->first();
-        $penjualanDompul = new PenjualanDompul();        
-            $penjualanDompul->id_sales=$id_sales;
-            $penjualanDompul->no_hp_kios=$hp_downline;
-            $penjualanDompul->no_user=$user;
-            $penjualanDompul->tanggal_penjualan_dompul=$tgl;
-            $penjualanDompul->tanggal_input=$tgl_input;
-            switch ($bank1) {
-                case 'BCA Pusat':
-                    $penjualanDompul->bca_pusat=$trf1;
-                    break;
-                case 'BCA Cabang':
-                    $penjualanDompul->bca_cabang=$trf1;
-                    break;
-                case 'Mandiri':
-                    $penjualanDompul->mandiri=$trf1;
-                    break;
-                case 'BNI':
-                    $penjualanDompul->bni=$trf1;
-                    break;
-                case 'BRI':
-                    $penjualanDompul->bri=$trf1;
-                    break;
-                default:
-                    break;
-            }
-            switch ($bank2) {
-                 case 'BCA Pusat':
-                    $penjualanDompul->bca_pusat=$trf2;
-                    break;
-                case 'BCA Cabang':
-                    $penjualanDompul->bca_cabang=$trf2;
-                    break;
-                case 'Mandiri':
-                    $penjualanDompul->mandiri=$trf2;
-                    break;
-                case 'BNI':
-                    $penjualanDompul->bni=$trf2;
-                    break;
-                case 'BRI':
-                    $penjualanDompul->bri=$trf2;
-                    break;
-                default:
-                    break;
-            }
-            switch ($bank3) {
-                 case 'BCA Pusat':
-                    $penjualanDompul->bca_pusat=$trf3;
-                    break;
-                case 'BCA Cabang':
-                    $penjualanDompul->bca_cabang=$trf3;
-                    break;
-                case 'Mandiri':
-                    $penjualanDompul->mandiri=$trf3;
-                    break;
-                case 'BNI':
-                    $penjualanDompul->bni=$trf3;
-                    break;
-                case 'BRI':
-                    $penjualanDompul->bri=$trf3;
-                    break;
-                default:
-                    break;
-            }
-            $penjualanDompul->grand_total=str_replace('.', '', $total);
-            $penjualanDompul->bayar_tunai=str_replace('.', '', $tunai);
-            $penjualanDompul->catatan=$catatan;
+        $penjualanDompul = new PenjualanDompul();
+        $penjualanDompul->id_sales=$id_sales;
+        $penjualanDompul->no_hp_kios=$hp_downline;
+        $penjualanDompul->no_user=$user;
+        $penjualanDompul->tanggal_penjualan_dompul=$tgl;
+        $penjualanDompul->tanggal_input=$tgl_input;
+        $penjualanDompul->grand_total=str_replace('.', '', $total);
         $penjualanDompul->save();
+        foreach ($bank as $key => $value) {
+            $detailPenjualanDompul = new DetailPenjualanDompul();
+            $detailPenjualanDompul->id_penjualan_dompul = $penjualanDompul->id_penjualan_dompul;
+                switch ($value['bank']) {
+                    case 'BCA Pusat':
+                        $detailPenjualanDompul->bca_pusat=$value['trf'];
+                        break;
+                    case 'BCA Cabang':
+                        $detailPenjualanDompul->bca_cabang=$value['trf'];
+                        break;
+                    case 'Mandiri':
+                        $detailPenjualanDompul->mandiri=$value['trf'];
+                        break;
+                    case 'BNI':
+                        $detailPenjualanDompul->bni=$value['trf'];
+                        break;
+                    case 'BRI':
+                        $detailPenjualanDompul->bri=$value['trf'];
+                        break;
+                    case 'Cash':
+                        $detailPenjualanDompul->cash=$value['trf'];
+                        break;
+                    default:
+                        break;
+                }
+            $detailPenjualanDompul->catatan = $value['catatan'];
+            $detailPenjualanDompul->save();
+        }
         UploadDompul::where('tanggal_transfer',$tgl)
                     ->where('no_hp_downline',$hp_downline)
                     ->where('nama_canvasser',$nm_sales)
