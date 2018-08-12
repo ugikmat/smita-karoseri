@@ -129,9 +129,19 @@ class PenjualanDompulController extends Controller
     public function verify(Request $request,$canvaser,$tgl,$downline){
         $tunai = $request->get('tunai');
         $bank = $request->get('bank');
-        foreach ($bank as $key => $value) {
+        for ($key=0; $key <count($bank) ; $key++) { 
             $bank[$key]['trf']=number_format($bank[$key]['trf'],0,",",".");
+            if (empty($bank[$key]['bank'])) {
+                array_splice($bank, $key,1);
+                $key--;
+            }
         }
+        // foreach ($bank as $key => $value) {
+        //     $bank[$key]['trf']=number_format($bank[$key]['trf'],0,",",".");
+        //     if (empty($value['bank'])) {
+        //         array_splice($bank, $key,1);
+        //     }
+        // }
         $sales = Sales::select('id_sales','nm_sales')->where('nm_sales',$canvaser)->first();
         $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser')
                         ->where('nama_canvasser',$canvaser)
