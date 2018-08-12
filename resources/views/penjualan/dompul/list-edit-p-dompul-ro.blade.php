@@ -305,6 +305,7 @@
           var t = $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
+            searching:  false,
             ajax: `/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
             columns: [
               {data: 'produk'},
