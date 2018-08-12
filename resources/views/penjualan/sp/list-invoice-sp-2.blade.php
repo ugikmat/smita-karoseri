@@ -99,145 +99,52 @@
       @endif
     </tr>
     </thead>
-      <tfoot>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Grand Total</b></td>
-          <td></td>
-          <td>
-            @isset($total)
-              <input type="text" name="total" id="total" value="{{$total}}" readonly>
-            @endisset
-          </td>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td></td>
+        <td colspan="2"><b>Grand Total</b></td>
+        <td></td>
+        <td>
+          @isset($total)
+          <input type="text" name="total" id="total" value="{{$total}}" readonly>
+          @endisset
+        </td>
+      </tr>
+      @foreach($bank as $key=>$value)
+      <tr>
+        <td></td>
+        <td></td>
+        <td colspan="2"><b>Pembayaran {{$key+1}}</b></td>
+        <td></td>
+      <td><input type="text" id="bank{{$key}}" required="required" name="bank[{{$key}}][bank]" class="form-control" value="{{$value['bank']}}" readonly></td>
 
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Jumlah Tunai</b></td>
-          <td></td>
-          <td>
-            @if($penjualanSP->status_pembayaran==0)
-              <input type="text" id="tunai" name="tunai" class="form-control" value="{{number_format($penjualanSP->bayar_tunai,0,",",".")}}" required="required">
-            @else
-              <input type="text" id="tunai" name="tunai" class="form-control" value="{{number_format($penjualanSP->bayar_tunai,0,",",".")}}" readonly >
-            @endif
-          </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td colspan="2"><b>Nominal {{$key+1}}</b></td>
+        <td></td>
+        <td><input type="text" id="trf{{$key}}" required="required" name="bank[{{$key}}][trf]" class="form-control" value="{{$value['trf']}}" readonly></td>
 
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Bank Transfer 1</b></td>
-          <td></td>
-          <td>
-            <select name="bank1">
-              <option value="">-- pilih bank --</option>
-              <option value="BCA Pusat">BCA Pusat</option>
-              <option value="BCA Cabang">BCA Cabang</option>
-              <option value="BRI">BRI</option>
-              <option value="BNI">BNI</option>
-              <option value="Mandiri">Mandiri</option>
-            </select>
-          </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td colspan="2"><b>Catatan {{$key+1}}</b></td>
+        <td></td>
+        <td><input type="text" id="catatan{{$key}}" required="required" name="bank[{{$key}}][catatan]" class="form-control" value="{{$value['catatan']}}" readonly></td>
 
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Jumlah Transfer 1</b></td>
-          <td></td>
-          @if($penjualanSP->status_pembayaran==0)
-              <td><input type="text" id="trf1" name="trf1" class="form-control" value=""></td>
-            @else
-              <td><input type="text" id="trf1" name="trf1" class="form-control" readonly></td>
-            @endif
-
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Bank Transfer 2</b></td>
-          <td></td>
-          <td>
-            <select name="bank2">
-              <option value="">-- pilih bank --</option>
-              <option value="BCA Pusat">BCA Pusat</option>
-              <option value="BCA Cabang">BCA Cabang</option>
-              <option value="BRI">BRI</option>
-              <option value="BNI">BNI</option>
-              <option value="Mandiri">Mandiri</option>
-            </select>
-          </td>
-
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Jumlah Transfer 2</b></td>
-          <td></td>
-          @if($penjualanSP->status_pembayaran==0)
-              <td><input type="text" id="trf2" name="trf2" class="form-control" value=""></td>
-            @else
-              <td><input type="text" id="trf2" name="trf2" class="form-control" value="" readonly></td>
-            @endif
-
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Bank Transfer 3</b></td>
-          <td></td>
-          <td>
-            <select name="bank3">
-              <option value="">-- pilih bank --</option>
-              <option value="BCA Pusat">BCA Pusat</option>
-              <option value="BCA Cabang">BCA Cabang</option>
-              <option value="BRI">BRI</option>
-              <option value="BNI">BNI</option>
-              <option value="Mandiri">Mandiri</option>
-            </select>
-          </td>
-
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Jumlah Transfer 3</b></td>
-          <td></td>
-          @if($penjualanSP->status_pembayaran==0)
-              <td><input type="text" id="trf3" name="trf3" class="form-control" value=""></td>
-            @else
-              <td><input type="text" id="trf3" name="trf3" class="form-control" value="" readonly></td>
-            @endif
-
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Catatan</b></td>
-          <td></td>
-          @if($penjualanSP->status_pembayaran==0)
-              <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{$penjualanSP->catatan}}"></td>
-            @else
-              <td><input type="text" id="catatan" readonly name="catatan" class="form-control" value="{{$penjualanSP->catatan}}"></td>
-            @endif
-
-        </tr>
-        <tr>
-          <td colspan="6">
-            <div class="pull-right">
-              @if($penjualanSP->status_pembayaran==0)
-              <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Selesai</button>
-            @else
-              {{-- <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span><a href="{{url()->previous()}}">Kembali</a></button> --}}
-            @endif
-            </div>
-          </td>
-
-        </tr>
-    </tfoot>
+      </tr>
+      @endforeach
+      <tr>
+        <td colspan="6">
+          <div class="pull-right">
+            <button type="submit" class="btn btn-success" name="button"><span class="glyphicon glyphicon-ok"></span> Selesai</button>
+          </div>
+        </td>
+      </tr>
+  </tfoot>
 </table>
 </form>
 
