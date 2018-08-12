@@ -84,6 +84,7 @@ td{
     </tr>
     </thead>
 </table>
+<br><br>
 <div class="container-fluid" style="background:white;">
   <br>
   <div class="form row">
@@ -287,8 +288,6 @@ td{
         var t = $('#invoice-dompul-table').DataTable({
                   serverSide: true,
                   processing: true,
-                  paging:false,
-                  info:false,
                   ajax: `/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`,
                   columns: [
                       {data: 'produk'},
