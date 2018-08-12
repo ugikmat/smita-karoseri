@@ -20,7 +20,7 @@ class CreateKartuStokDompulsTable extends Migration
             $table->integer('stok_masuk')->default(0);
             $table->integer('stok_keluar')->default(0);
             $table->integer('stok_akhir')->default(0);
-            $table->tinyInteger('status_stok_sp')->default(1);
+            $table->tinyInteger('status_stok_dompul')->default(1);
         });
     }
 
