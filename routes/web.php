@@ -118,9 +118,9 @@ Route::get('/penjualan/laporan-penjualan/LPdompul-piutang/{sales}', 'LaporanPenj
 Route::get('/laporan-penjualan/{tgl_penjualan}', 'LaporanPenjualanDompulController@data');
 Route::get('/laporan-penjualan/piutang/{id}', 'LaporanPenjualanDompulController@dataPiutang');
 
-Route::get('/penjualan/laporan-penjualan/dompul-head', function() {
-  return view ('/penjualan/laporan-penjualan/dompul-head');
-}) -> name('dompul-head');
+Route::get('/penjualan/laporan-penjualan/dompul-head', 'LaporanDompulHeadController@index');
+Route::get('/penjualan/laporan-penjualan/dompul-head-user', 'LaporanDompulHeadController@showUserTransaction');
+Route::get('/penjualan/laporan-penjualan/dompul-head-server', 'LaporanDompulHeadController@showServerTransaction');
 
 //Persediaan
 Route::get('/persediaan/mutasi-dompul', function() {

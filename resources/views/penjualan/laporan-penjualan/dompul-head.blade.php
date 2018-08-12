@@ -28,8 +28,8 @@
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <button class="btn btn-danger" type="reset"> <i class="fa fa-repeat"></i> Kosongkan</button>
-      <button type="submit" class="btn btn-primary" ><i class="glyphicon glyphicon-user"></i> Tampilkan Laporan Transaksi User</button>
-      <button type="submit" class="btn btn-success" ><i class="fa fa-server"></i> Tampilkan Laporan Transaksi Server</button>
+      <button type="submit" class="btn btn-primary" ><a href="/penjualan/laporan-penjualan/dompul-head-user"><i class="glyphicon glyphicon-user"></i> Tampilkan Laporan Transaksi User</a></button>
+      <button type="submit" class="btn btn-success" ><a href="/penjualan/laporan-penjualan/dompul-head-server"><i class="fa fa-server"></i> Tampilkan Laporan Transaksi Server</a></button>
     </div>
   </div>
 </div>

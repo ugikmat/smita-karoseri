@@ -58,7 +58,7 @@
     $(function () {
         $('#dompul-head-server-table').DataTable({
             serverSide: true,
-            processing: true,
+            // processing: true,
             ajax: '/dompul-head-server-data',
             columns: [
                 {data: 'id_lokasi'},
