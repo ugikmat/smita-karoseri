@@ -318,8 +318,7 @@
           $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
-            paging:false,
-            info:false,
+            searching:  false,
             ajax: `/edit_list_invoice_sp/${sales}/${tgl}/${customer}`,
             columns: [
               {data: 'produk'},
