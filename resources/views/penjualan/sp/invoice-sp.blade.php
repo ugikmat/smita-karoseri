@@ -240,7 +240,7 @@ for (let index = 0; index < {{$jumlah}}; index++) {
   harga.push($(`#total${index+1}`).val().replace(/[ .]/g, ''));
   totalHarga+=parseFloat(harga[index]);
   console.log(`total Harga ${$(`#total${index+1}`).val().replace(/[ .]/g, '')}`);
-  $(`#jumlah${index+1}`).on('keyup',function (event) {
+  $(`#jumlah${index+1}`).on('input',function (event) {
     totalHarga-=parseFloat(harga[index]);
     $(`#total${index+1}`).val(($(`#harga${index+1}`).val().replace(/[ .]/g, '')*this.value.replace(/[ .]/g, '')).toLocaleString('id-ID'));
     harga[index]=$(`#total${index+1}`).val().replace(/[ .]/g, '');
