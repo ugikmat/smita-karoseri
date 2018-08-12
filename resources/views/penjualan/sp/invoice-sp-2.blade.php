@@ -303,8 +303,6 @@ td{
         var t = $('#invoice-sp-table').DataTable({
                   serverSide: true,
                   processing: true,
-                  paging:  false,
-                  info:  false,
                   ajax: `/edit_invoice_sp/${id}`,
                   columns: [
                       {data: 'nama_produk'},
