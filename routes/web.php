@@ -122,6 +122,10 @@ Route::get('/penjualan/laporan-penjualan/dompul-head', 'LaporanDompulHeadControl
 Route::get('/penjualan/laporan-penjualan/dompul-head-user', 'LaporanDompulHeadController@showUserTransaction');
 Route::get('/penjualan/laporan-penjualan/dompul-head-server', 'LaporanDompulHeadController@showServerTransaction');
 
+Route::get('/penjualan/laporan-penjualan/LPsp', function() {
+  return view ('/penjualan/laporan-penjualan/LPsp');
+}) -> name('LPsp');
+
 //Persediaan
 Route::get('/persediaan/mutasi-dompul', function() {
   return view ('/persediaan/mutasi-dompul');

@@ -178,6 +178,11 @@ return [
                         'url'   => '/penjualan/laporan-penjualan/dompul-head',
                         'icon'  => 'money',
                       ],
+                      [
+                        'text'  => 'Starter Pack',
+                        'url'   => '/penjualan/laporan-penjualan/LPsp',
+                        'icon'  => 'briefcase',
+                      ],
                     ],
                   ],
                 ],
