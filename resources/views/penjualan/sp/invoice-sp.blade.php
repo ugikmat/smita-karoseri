@@ -174,7 +174,6 @@
 </div>
 
 </form>
-<button type="button" onclick="myFunction()">Try it</button>
 <!-- <table id="invoice-sp-table" class="table responsive" width="100%">
     <thead>
     <tr>
