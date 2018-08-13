@@ -87,7 +87,7 @@
   </div>
 </div>
 
-<!--Modal Aktivasi-->
+<!--Modal Verifikasi-->
 <div class="modal fade" id="verificationModal">
   <div class="modal-dialog">
     <div class="modal-content">

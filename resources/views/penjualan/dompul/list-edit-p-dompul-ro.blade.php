@@ -73,7 +73,7 @@
     </div>
   </div>
 </div>
-<form action="/list_invoice_dompul/update" method="post">
+<form action="/list_invoice_dompul/update" method="post" class="repeater">
   @csrf
   <input type="hidden" name="id" id="id" value="{{$datas->id_penjualan_dompul}}">
 <table id="list-edit-invoice-table" class="table responsive"  width="100%">
@@ -99,146 +99,79 @@
       @endif
     </tr>
     </thead>
-      <tfoot>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Grand Total</b></td>
-          <td></td>
-          <td>
-            @isset($total)
-              <input type="text" name="total" id="total" value="{{$total}}" readonly>
-            @endisset
-          </td>
-          
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Jumlah Tunai</b></td>
-          <td></td>
-          <td>
-            @if($penjualanDompul->status_pembayaran==0)
-              <input type="text" id="tunai" name="tunai" class="form-control" value="{{number_format($penjualanDompul->bayar_tunai,0,",",".")}}" required="required">
-            @else
-              <input type="text" id="tunai" name="tunai" class="form-control" value="{{number_format($penjualanDompul->bayar_tunai,0,",",".")}}" readonly >
-            @endif
-          </td>
-          
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Bank Transfer 1</b></td>
-          <td></td>
-          <td>
-            <select name="bank1">
-              <option value="">-- pilih bank --</option>
-              <option value="BCA Pusat">BCA Pusat</option>
-              <option value="BCA Cabang">BCA Cabang</option>
-              <option value="BRI">BRI</option>
-              <option value="BNI">BNI</option>
-              <option value="Mandiri">Mandiri</option>
-            </select>
-          </td>
-          
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Jumlah Transfer 1</b></td>
-          <td></td>
-          @if($penjualanDompul->status_pembayaran==0)
-              <td><input type="text" id="trf1" name="trf1" class="form-control" value=""></td>
-            @else
-              <td><input type="text" id="trf1" name="trf1" class="form-control" readonly></td>
-            @endif
-          
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Bank Transfer 2</b></td>
-          <td></td>
-          <td>
-            <select name="bank2">
-              <option value="">-- pilih bank --</option>
-              <option value="BCA Pusat">BCA Pusat</option>
-              <option value="BCA Cabang">BCA Cabang</option>
-              <option value="BRI">BRI</option>
-              <option value="BNI">BNI</option>
-              <option value="Mandiri">Mandiri</option>
-            </select>
-          </td>
-          
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Jumlah Transfer 2</b></td>
-          <td></td>
-          @if($penjualanDompul->status_pembayaran==0)
-              <td><input type="text" id="trf2" name="trf2" class="form-control" value=""></td>
-            @else
-              <td><input type="text" id="trf2" name="trf2" class="form-control" value="" readonly></td>
-            @endif
-          
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Bank Transfer 3</b></td>
-          <td></td>
-          <td>
-            <select name="bank3">
-              <option value="">-- pilih bank --</option>
-              <option value="BCA Pusat">BCA Pusat</option>
-              <option value="BCA Cabang">BCA Cabang</option>
-              <option value="BRI">BRI</option>
-              <option value="BNI">BNI</option>
-              <option value="Mandiri">Mandiri</option>
-            </select>
-          </td>
-          
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Jumlah Transfer 3</b></td>
-          <td></td>
-          @if($penjualanDompul->status_pembayaran==0)
-              <td><input type="text" id="trf3" name="trf3" class="form-control" value=""></td>
-            @else
-              <td><input type="text" id="trf3" name="trf3" class="form-control" value="" readonly></td>
-            @endif
-          
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td colspan="2"><b>Catatan</b></td>
-          <td></td>
-          @if($penjualanDompul->status_pembayaran==0)
-              <td><input type="text" id="catatan" required="required" name="catatan" class="form-control" value="{{$penjualanDompul->catatan}}"></td>
-            @else
-              <td><input type="text" id="catatan" readonly name="catatan" class="form-control" value="{{$penjualanDompul->catatan}}"></td>
-            @endif
-          
-        </tr>
-        <tr>
-          <td colspan="6">
-            <div class="pull-right">
-              @if($penjualanDompul->status_pembayaran==0)
-              <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Selesai</button>
-            @else
-              {{-- <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span><a href="{{url()->previous()}}">Kembali</a></button> --}}
-            @endif
-            </div>
-          </td>
-          
-        </tr>
-    </tfoot>
 </table>
+<div class="container-fluid" style="background:white;">
+  <br>
+  <div class="form row">
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <b>Jumlah Tunai</b>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      @isset($total)
+        <input type="text" class="form-control" name="total" id="total" value="{{$total}}" readonly>
+      @endisset
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+    </div>
+  </div>
+  <hr>
+  <div data-repeater-list="bank">
+    <div data-repeater-item>
+      <div class="form row">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
+          <b>Pembayaran</b>
+          <br>
+          <select name="bank" id="bank" style="height: calc(3.5rem - 2px); width:100%">
+            <option value="">-- Cara Pembayaran --</option>
+            <option value="Cash">Cash</option>
+            <option value="BCA Pusat">BCA Pusat</option>
+            <option value="BCA Cabang">BCA Cabang</option>
+            <option value="BRI">BRI</option>
+            <option value="BNI">BNI</option>
+            <option value="Mandiri">Mandiri</option>
+          </select>
+        </div>
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-3">
+          <b>Nominal</b>
+          <br>
+          <input type="text" id="trf" name="trf" class="form-control" value="">
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          <b>Catatan</b>
+          <br>
+          <input type="text" id="catatan" name="catatan" class="form-control" value="">
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          <br>
+          <button data-repeater-delete type="button" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
+        </div>
+      </div>
+    <hr>
+    </div>
+  </div>
+<button data-repeater-create type="button" class="btn btn-warning"> <span class="glyphicon glyphicon-plus"></span> Tambah Pembayaran</button>
+
+<div class="row">
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+  </div>
+  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+  </div>
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+  </div>
+  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+    <br>
+    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Simpan</button>
+    <br><br>
+  </div>
+</div>
+</div>
 </form>
 
 <!--Modal Edit-->
@@ -310,6 +243,55 @@
 
 @section('js')
 <script>
+    $(document).ready(function () {
+        $('.repeater').repeater({
+            // (Optional)
+            // start with an empty list of repeaters. Set your first (and only)
+            // "data-repeater-item" with style="display:none;" and pass the
+            // following configuration flag
+            // initEmpty: true,
+            // (Optional)
+            // "defaultValues" sets the values of added items.  The keys of
+            // defaultValues refer to the value of the input's name attribute.
+            // If a default value is not specified for an input, then it will
+            // have its value cleared.
+            // defaultValues: {
+            //     'text-input': 'foo'
+            // },
+            // (Optional)
+            // "show" is called just after an item is added.  The item is hidden
+            // at this point.  If a show callback is not given the item will
+            // have $(this).show() called on it.
+            show: function () {
+                $(this).slideDown();
+            },
+            // (Optional)
+            // "hide" is called when a user clicks on a data-repeater-delete
+            // element.  The item is still visible.  "hide" is passed a function
+            // as its first argument which will properly remove the item.
+            // "hide" allows for a confirmation step, to send a delete request
+            // to the server, etc.  If a hide callback is not given the item
+            // will be deleted.
+            hide: function (deleteElement) {
+                if(confirm('Apakah anda yakin ingin menghapus pesanan SP ini?')) {
+                    $(this).slideUp(deleteElement);
+                }
+            },
+            // (Optional)
+            // You can use this if you need to manually re-index the list
+            // for example if you are using a drag and drop library to reorder
+            // list items.
+            // ready: function (setIndexes) {
+            //     $dragAndDrop.on('drop', setIndexes);
+            // },
+            // (Optional)
+            // Removes the delete button from the first list item,
+            // defaults to false.
+            isFirstItemUndeletable: false
+        })
+    });
+</script>
+<script>
   $.ajaxSetup({
   headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -323,6 +305,7 @@
           var t = $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
+            searching:  false,
             ajax: `/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
             columns: [
               {data: 'produk'},
@@ -351,6 +334,7 @@
           $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
+            searching:  false,
             ajax: `/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
             columns: [
               {data: 'produk'},
@@ -362,7 +346,7 @@
             ]
         });
         }
-        
+
     });
 </script>
 <script>
