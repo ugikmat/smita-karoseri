@@ -237,6 +237,10 @@
 </script>
 <script type="text/javascript">
   $(".chosen-select").chosen();
+  $("#sales").val("{{session('id_sales')}}");
+  $("#customer").val("{{session('id_cust')}}");
+  $("#sales").trigger("chosen:updated");
+  $("#customer").trigger("chosen:updated");
 </script>
 <script type="text/javascript">
 $.ajaxSetup({
