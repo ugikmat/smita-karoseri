@@ -8,6 +8,13 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('/datepicker/css/bootstrap-datepicker.min.css') }}">
+<style>
+  th{
+    text-align: center;
+    margin: auto;
+    padding: 10%;
+  }
+</style>
 @stop
 
 @section('content')
@@ -37,7 +44,6 @@
   </div>
 </div>
 
-<!-- kolom data canvasser e pake warna iki yo gik, cek podo ambek buku panduan bgcolor="#afeeee" -->
 
 <table id="mutasi-dompul-table" class="table responsive" width="100%">
     <thead>
@@ -68,9 +74,10 @@
       <tr>
         <td></td>
         <td colspan="2"><b>Total Stok</b></td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
+        <td colspan="3">harganya(dari database)</td>
+        <td colspan="3">harganya(dari database)</td>
+        <td colspan="3">harganya(dari database)</td>
+        <td colspan="3">harganya(dari database)</td>
       </tr>
     </tfoot>
 </table>

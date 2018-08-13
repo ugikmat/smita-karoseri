@@ -187,9 +187,14 @@ return [
                 'icon'    => 'share',
                 'submenu' => [
                   [
-                    'text'  => 'MutasiDompul',
+                    'text'  => 'Mutasi Dompul',
                     'icon'  => 'truck',
                     'url'   => '/persediaan/mutasi-dompul',
+                  ],
+                  [
+                    'text'  => 'Mutasi SP',
+                    'icon'  => 'tags',
+                    'url'   => '/persediaan/mutasi-sp',
                   ],
                 ],
               ],
