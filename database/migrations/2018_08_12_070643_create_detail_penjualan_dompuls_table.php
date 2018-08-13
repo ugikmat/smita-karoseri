@@ -24,7 +24,6 @@ class CreateDetailPenjualanDompulsTable extends Migration
             $table->string('mandiri')->default(0);
             $table->string('bni')->default(0);
             $table->string('bri')->default(0);
-            $table->bigInteger('bayar')->default(0);
             $table->text('catatan');
             $table->tinyInteger('deleted')->default(0);
         });
