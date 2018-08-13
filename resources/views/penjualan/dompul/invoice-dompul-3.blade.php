@@ -107,7 +107,7 @@ td{
   <div data-repeater-list="bank">
     <div data-repeater-item>
       <div class="form row">
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
+        <div class="col-xs-3">
           <b>Pembayaran</b>
           <br>
           <select name="bank" id="bank" style="height: calc(3.5rem - 2px); width:100%">
@@ -120,17 +120,17 @@ td{
             <option value="Mandiri">Mandiri</option>
           </select>
         </div>
-        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-3">
+        <div class="col-xs-3">
           <b>Nominal</b>
           <br>
           <input type="text" id="trf" name="trf" class="form-control" value="">
         </div>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-3">
           <b>Catatan</b>
+          <div class="col-xs-3">
           <br>
           <input type="text" id="catatan" name="catatan" class="form-control" value="">
         </div>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
           <br>
           <button data-repeater-delete type="button" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
         </div>

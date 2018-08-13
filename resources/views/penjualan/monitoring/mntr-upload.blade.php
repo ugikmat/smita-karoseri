@@ -8,6 +8,12 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('/datepicker/css/bootstrap-datepicker.min.css') }}">
+<style>
+  th{
+    text-align: center;
+    margin: auto;
+  }
+</style>
 @stop
 
 @section('content')
@@ -201,6 +207,6 @@
           } );
         } ).draw();
     });
-    
+
 </script>
 @stop
