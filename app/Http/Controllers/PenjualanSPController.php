@@ -57,6 +57,7 @@ class PenjualanSPController extends Controller
         $penjualanSp->id_customer=$request->get('customer');
         $penjualanSp->no_hp_customer='0';
         $penjualanSp->grand_total='0';
+        $bank = $request->get('bank-sp');
         $penjualanSp->catatan='none';
         $tgl = Carbon::parse($request->get('tgl_penjualan'));
         $tgl = $tgl->format('Y-m-d');
@@ -82,7 +83,7 @@ class PenjualanSPController extends Controller
         }
         $sales = Sales::where('id_sales',$penjualanSp->id_sales)->first();
         $customer = Customer::where('id_cust',$penjualanSp->id_customer)->first();
-        return view('/penjualan/sp/invoice-sp-2',['penjualanSp'=>$penjualanSp,'sales'=>$sales,'customer'=>$customer]);
+        return view('/penjualan/sp/invoice-sp-2',['penjualanSp'=>$penjualanSp,'sales'=>$sales,'customer'=>$customer,'bank'=>$bank]);
     }
 
     public function update(Request $request, $id){

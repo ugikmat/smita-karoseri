@@ -18,6 +18,7 @@ td{
 <form class="invoice-sp repeater" action="/invoice_sp/verify" method="post">
   @csrf
   <input type="hidden" name="id" id="id" value="{{$penjualanSp->id_penjualan_sp}}">
+  <input type="hidden" name="banks" id="banks" value="{{count($bank)}}">
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -240,7 +241,7 @@ td{
 @section('js')
 <script>
     $(document).ready(function () {
-        $('.repeater').repeater({
+        var repeater = $('.repeater').repeater({
             // (Optional)
             // start with an empty list of repeaters. Set your first (and only)
             // "data-repeater-item" with style="display:none;" and pass the
@@ -284,8 +285,18 @@ td{
             // Removes the delete button from the first list item,
             // defaults to false.
             isFirstItemUndeletable: false
-        })
+        });
+        repeater.setList([
+          @foreach($bank as $item)
+          {  
+                'bank': "{{$item['bank']}}",
+                'trf' : "{{$item['trf']}}",
+                'catatan' : "{{$item['catatan']}}"
+            },
+          @endforeach
+        ]);
     });
+
 </script>
 <script>
   $.ajaxSetup({
