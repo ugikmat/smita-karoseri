@@ -84,6 +84,7 @@ td{
     </tr>
     </thead>
 </table>
+<br><br>
 <div class="container-fluid" style="background:white;">
   <br>
   <div class="form row">
@@ -109,7 +110,7 @@ td{
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
           <b>Pembayaran</b>
           <br>
-          <select name="bank"  style="height: calc(3.5rem - 2px); width:100%">
+          <select name="bank" id="bank" style="height: calc(3.5rem - 2px); width:100%">
             <option value="">-- Cara Pembayaran --</option>
             <option value="Cash">Cash</option>
             <option value="BCA Pusat">BCA Pusat</option>
@@ -181,18 +182,18 @@ td{
                 <br />
 
                   <input type="hidden" name="link" id="link" value="/invoice_dompul/update/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}/{{$datas->produk}}">
-                  <div class="form-group kode">
+                  <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <select name="tipe" required="required" id="tipe">
+                      <select name="tipe" class="form-control col-md-7 col-xs-12" required="required" id="tipe">
 
                       </select>
                     </div>
                   </div>
 
-                  <div class="form-group nama">
+                  <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Qty Program
                       <span class="required">*</span>
                     </label>
@@ -287,8 +288,6 @@ td{
         var t = $('#invoice-dompul-table').DataTable({
                   serverSide: true,
                   processing: true,
-                  paging:false,
-                  info:false,
                   ajax: `/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`,
                   columns: [
                       {data: 'produk'},

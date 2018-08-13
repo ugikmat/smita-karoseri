@@ -77,26 +77,26 @@ class ListPenjualanDompulController extends Controller
         // $trf2 = $request->get('trf2');
         $bank2 = $request->get('bank2');
         // $trf3 = $request->get('trf3');
-        $bank3 = $request->get('bank3');        
+        $bank3 = $request->get('bank3');
         $catatan = $request->get('catatan');
         $total = $request->get('total');
 
         if (!empty($bank1)) {
             $trf1 = $request->get('trf1');
         }else{
-            $trf1 = 0;    
+            $trf1 = 0;
         }
         $bank2 = $request->get('bank2');
         if (!empty($bank2)) {
             $trf2 = $request->get('trf2');
         }else{
-            $trf2 = 0;    
+            $trf2 = 0;
         }
-        $bank3 = $request->get('bank3');        
+        $bank3 = $request->get('bank3');
         if (!empty($bank3)) {
             $trf3 = $request->get('trf3');
         }else{
-            $trf3 = 0;    
+            $trf3 = 0;
         }
         $penjualanDompul = PenjualanDompul::where('id_penjualan_dompul',$id)->first();
         switch ($bank1) {
@@ -188,20 +188,20 @@ class ListPenjualanDompulController extends Controller
                         //     })
                           ->addColumn('action', function ($penjualanDompul) {
                               if ($penjualanDompul->status_pembayaran==0) {
-                                  return 
-                                    '<a class="btn btn-xs btn-primary" 
+                                  return
+                                    '<a class="btn btn-xs btn-primary"
                                     href="/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
                                     <i class="glyphicon glyphicon-edit"></i> Edit
                                     </a>
                                     <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>';
                               } else {
-                                  return 
-                                    '<a class="btn btn-xs btn-primary" 
+                                  return
+                                    '<a class="btn btn-xs btn-primary"
                                     href="/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
                                     <i class="glyphicon glyphicon-edit"></i> Lihat
                                     </a>';
                               }
-                              
+
                             })
                           ->make(true);
     }
@@ -230,7 +230,7 @@ class ListPenjualanDompulController extends Controller
                             })
                           ->addColumn('action', function ($uploadDompul) {
                               $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$uploadDompul->produk)->get();
-                              return 
+                              return
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-tipe='.$tipe.' data-produk="'.$uploadDompul->produk.'" data-faktur="'.$uploadDompul->no_faktur.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
                             })
                           ->make(true);
