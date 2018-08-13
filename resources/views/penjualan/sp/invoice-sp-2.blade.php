@@ -17,7 +17,9 @@ td{
 @section('content')
 <form class="invoice-sp repeater" action="/invoice_sp/verify" method="post">
   @csrf
-  <input type="hidden" name="id" id="id" value="{{$penjualanSp->id_penjualan_sp}}">
+  <input type="hidden" name="id" id="id" value="{{$penjualanSp->id_temp_penjualan_sp}}">
+  <input type="hidden" name="banks" id="banks" value="{{count($bank)}}">
+  <input type="hidden" name="data" value="{{$data}}">
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -99,9 +101,7 @@ td{
       <b>Jumlah Tunai</b>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-
         <input type="text" class="form-control" name="total" id="total" value="{{session('total_harga_sp')}}" readonly>
-
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -188,8 +188,7 @@ td{
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="">
-                  @csrf @method('put')
+                <input type="hidden" name="link" id="link" value="">
                   <input type="hidden" name="update_catatan" id="update_catatan" value="{{session('catatan')}}">
                   <input type="hidden" name="update_tunai" id="update_tunai" value="{{session('tunai')}}">
                   <div class="form-group kode">
@@ -211,17 +210,17 @@ td{
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <input type="text" id="qty_program" required="required" name="qty_program" class="form-control col-md-7 col-xs-12" value="">
                     </div>
-                  </div>/
+                  </div>
 
 
                   <div class="ln_solid"></div>
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset">Reset</button>
-                      <input type="submit" class="btn btn-success" value="Simpan">
+                      <!-- <input type="submit" class="btn btn-success" value="Simpan"> -->
+                      <input type="button" class="btn btn-success" id="save" value="Simpan" data-dismiss="modal">
                     </div>
                   </div>
-                </form>
               </div>
             </div>
           </div>
@@ -239,8 +238,13 @@ td{
 
 @section('js')
 <script>
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
     $(document).ready(function () {
-        $('.repeater').repeater({
+        var repeater = $('.repeater').repeater({
             // (Optional)
             // start with an empty list of repeaters. Set your first (and only)
             // "data-repeater-item" with style="display:none;" and pass the
@@ -284,22 +288,22 @@ td{
             // Removes the delete button from the first list item,
             // defaults to false.
             isFirstItemUndeletable: false
-        })
+        });
+        repeater.setList([
+          @foreach($bank as $item)
+          {  
+                'bank': "{{$item['bank']}}",
+                'trf' : "{{$item['trf']}}",
+                'catatan' : "{{$item['catatan']}}"
+            },
+          @endforeach
+        ]);
     });
+
 </script>
 <script>
-  $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
     $(function () {
-          function inputTunai(str) {
-          $('#update_tunai').val(str);
-        }
-        function inputCatatan(str) {
-          $('#update_catatan').val(str);
-        }
+          
         var id = $('#id').val();
         var t = $('#invoice-sp-table').DataTable({
                   serverSide: true,
@@ -315,6 +319,24 @@ td{
                       {data: 'action', orderable: false, searchable: false}
                   ]
               });
+              $(`#save`).on('click',function (event) {
+      //ajax call
+        $.post(`${$('#link').val()}`, { tipe: $('#tipe').val(), qty_program: $('#qty_program').val() })
+        .done(function(response){
+      if(response.success)
+      {
+        console.log('success')
+        console.log(response.total);
+        console.log($('#total').val());
+        $('#total').val(response.total);
+        console.log($('#total').val());
+        t.ajax.url(`/edit_invoice_sp/${id}`).load();
+        
+        // console.log($('#total').val(response.total));
+        
+      }
+      }, 'json');
+    });
         console.log('{{session('total_harga_sp')}}');
     });
 </script>
@@ -342,7 +364,8 @@ td{
       tipe.appendChild(opt);
     });
     $('#qty_program').val(qty_program);
-    $('#editForm').attr('action', `/invoice_sp/update/${id}`);
+    // $('#editForm').attr('action', `/invoice_sp/update/${id}`);
+    $('#link').val(`/invoice_sp/update/${id}`);
   })
 </script>
 @stop

@@ -95,7 +95,7 @@ Route::post('/get_harga/{tipe}/{kode}', 'PenjualanSPController@getHarga');
 
 Route::post('/penjualan/sp/invoice-sp/edit', 'PenjualanSPController@edit');
 Route::get('/edit_invoice_sp/{id}', 'PenjualanSPController@data');
-Route::put('/invoice_sp/update/{id}','PenjualanSPController@update');
+Route::post('/invoice_sp/update/{id}','PenjualanSPController@update');
 Route::post('/invoice_sp/verify','PenjualanSPController@verify');
 Route::post('/invoice_sp/store','PenjualanSPController@store');
 

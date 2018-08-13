@@ -31,8 +31,8 @@
           Nama Canvaser :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
-        <select id="sales" required="required" name="sales" placeholder="Pilih Nama Canvaser" class="chosen-select">
-              <option value="" selected disabled>Pilih Nama Canvaser</option>
+        <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('id_sales')}}">
+              <option value="" disabled>Pilih Nama Canvaser</option>
               @isset($saless)
                   @foreach ($saless as $data)
                   <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
@@ -46,8 +46,8 @@
           Nama Kios :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="chosen-select">
-              <option value="" selected disabled>Pilih Nama Kios</option>
+        <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="chosen-select" data-placeholder="{{session('id_cust')}}">
+              <option value="" disabled>Pilih Nama Kios</option>
               @isset($customerarray)
                   @foreach ($customerarray as $data)
                   <option value="{{ $data->id_cust }}">{{ $data->nm_cust }}</option>
@@ -174,6 +174,7 @@
 </div>
 
 </form>
+<button type="button" onclick="myFunction()">Try it</button>
 <!-- <table id="invoice-sp-table" class="table responsive" width="100%">
     <thead>
     <tr>
@@ -236,7 +237,7 @@
     });
 </script>
 <script type="text/javascript">
-  $(".chosen-select").chosen()
+  $(".chosen-select").chosen();
 </script>
 <script type="text/javascript">
 $.ajaxSetup({
@@ -280,7 +281,7 @@ for (let index = 0; index < {{$jumlah}}; index++) {
       harga[index]=$(`#total${index+1}`).val().replace(/[ .]/g, '');
       totalHarga+=parseFloat(harga[index]);
       console.log(`total Harga ${totalHarga}`);
-      $('#total').val(totalHarga);
+      $('#total').val(totalHarga.toLocaleString('id-ID'));
     }
 }, 'json');
   });
