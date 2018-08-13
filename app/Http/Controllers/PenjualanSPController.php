@@ -9,6 +9,7 @@ use Illuminate\Database\Schema\Blueprint;
 use App\Sales;
 use App\Customer;
 use App\produk;
+use App\DetailPembayaranSp;
 use App\UploadDompul;
 use App\PenjualanProduk;
 use App\DetailPenjualanProduk;
@@ -200,105 +201,67 @@ class PenjualanSPController extends Controller
     public function store(Request $request){
         $id = $request->get('id');
         $tunai = $request->get('tunai');
-        $trf1 = $request->get('trf1');
-        $bank1 = $request->get('bank1');
-        $trf2 = $request->get('trf2');
-        $bank2 = $request->get('bank2');
-        $trf3 = $request->get('trf3');
-        $bank3 = $request->get('bank3');        
-        $catatan = $request->get('catatan');
+        $bank = $request->get('bank-sp');
         $total = $request->get('total');
-        $sales = Sales::where('id_sales',$id_sales)->first();
-        
+
+        $data = DB::table('temp_penjualan_sps')->where('id_temp_penjualan_sp',$id)->first();
+        $dataDetail = DB::table('temp_detail_penjualan_sps')->where('id_penjualan_sp',$id)->get();
         $penjualanSp = new PenjualanProduk();
-        $penjualanSp->id_sales=$request->get('sales');
-        $penjualanSp->id_customer=$request->get('customer');
-        $penjualanSp->no_hp_customer='0';
-        $penjualanSp->grand_total=$total;
-        $penjualanSp->catatan=$catatan;
+        $penjualanSp->id_sales=$data->id_sales;
+        $penjualanSp->id_customer=$data->id_customer;
+        $penjualanSp->no_hp_customer=$data->no_hp_customer;
         $penjualanSp->grand_total=str_replace('.', '', $total);
-        $penjualanSp->bayar_tunai=str_replace('.', '', $tunai);
-        $tgl = Carbon::parse($request->get('tgl_penjualan'));
-        $tgl = $tgl->format('Y-m-d');
-        $penjualanSp->tanggal_penjualan_sp=$tgl;
+        $penjualanSp->tanggal_penjualan_sp=$data->tanggal_penjualan_sp;
         $penjualanSp->tanggal_input=Carbon::now('Asia/Jakarta')->toDateString();
         $penjualanSp->no_user=Auth::user()->id;
         $penjualanSp->save();
-        $produks = produk::where('status_produk','1')->get()->count();
-        for ($i=0; $i <$produks ; $i++) {
-            if (!empty($request->get("jumlah{$i}"))) {
-                $detailPenjualanSp = new DetailPenjualanProduk();
+
+        foreach ($dataDetail as $key => $value) {
+            $detailPenjualanSp = new DetailPenjualanProduk();
                 $detailPenjualanSp->id_penjualan_sp = $penjualanSp->id_penjualan_sp;
-                $detailPenjualanSp->id_customer=$request->get('customer');
-                $detailPenjualanSp->id_produk=$request->get("kode{$i}");
-                $detailPenjualanSp->jumlah_sp=$request->get("jumlah{$i}");
-                $detailPenjualanSp->tipe_harga=$request->get("tipe{$i}");
-                $detailPenjualanSp->harga_satuan=str_replace('.', '', $request->get("harga{$i}"));
-                $detailPenjualanSp->harga_total=str_replace('.', '', $request->get("total{$i}"));
-                $detailPenjualanSp->harga_beli=0;
-                $detailPenjualanSp->keterangan_detail_psp='none';
-                $detailPenjualanSp->save();
+                $detailPenjualanSp->id_customer= $value->id_customer;
+                $detailPenjualanSp->id_produk= $value->id_produk;
+                $detailPenjualanSp->jumlah_sp= $value->jumlah_sp;
+                $detailPenjualanSp->tipe_harga= $value->tipe_harga;
+                $detailPenjualanSp->harga_satuan= $value->harga_satuan;
+                $detailPenjualanSp->harga_total= $value->harga_total;
+                $detailPenjualanSp->harga_beli= $value->harga_beli;
+                $detailPenjualanSp->keterangan_detail_psp= $value->keterangan_detail_psp;
+                $detailPenjualanSp->save();   
+        }
+
+        $detailPembayaranSp = new DetailPembayaranSp();
+        $detailPembayaranSp->id_penjualan_sp =$penjualanSp->id_penjualan_sp;
+        
+        foreach ($bank as $key => $value) {
+            $detailPembayaranSp->catatan = $value['catatan'];
+            switch ($value['bank']) {
+                case 'BCA Pusat':
+                    $detailPembayaranSp->bca_pusat=$value['trf'];
+                    break;
+                case 'BCA Cabang':
+                    $detailPembayaranSp->bca_cabang=$value['trf'];
+                    break;
+                case 'Mandiri':
+                    $detailPembayaranSp->mandiri=$value['trf'];
+                    break;
+                case 'BNI':
+                    $detailPembayaranSp->bni=$value['trf'];
+                    break;
+                case 'BRI':
+                    $detailPembayaranSp->bri=$value['trf'];
+                    break;
+                case 'Cash':
+                    $detailPembayaranSp->cash=$value['trf'];
+                    break;
+                default:
+                    break;
             }
         }
-        $penjualanSp = PenjualanProduk::where('id_penjualan_sp',$id)->first();
-            switch ($bank1) {
-                case 'BCA Pusat':
-                    $penjualanSp->bca_pusat=$trf1;
-                    break;
-                case 'BCA Cabang':
-                    $penjualanSp->bca_cabang=$trf1;
-                    break;
-                case 'Mandiri':
-                    $penjualanSp->mandiri=$trf1;
-                    break;
-                case 'BNI':
-                    $penjualanSp->bni=$trf1;
-                    break;
-                case 'BRI':
-                    $penjualanSp->bri=$trf1;
-                    break;
-                default:
-                    break;
-            }
-            switch ($bank2) {
-                 case 'BCA Pusat':
-                    $penjualanSp->bca_pusat=$trf2;
-                    break;
-                case 'BCA Cabang':
-                    $penjualanSp->bca_cabang=$trf2;
-                    break;
-                case 'Mandiri':
-                    $penjualanSp->mandiri=$trf2;
-                    break;
-                case 'BNI':
-                    $penjualanSp->bni=$trf2;
-                    break;
-                case 'BRI':
-                    $penjualanSp->bri=$trf2;
-                    break;
-                default:
-                    break;
-            }
-            switch ($bank3) {
-                 case 'BCA Pusat':
-                    $penjualanSp->bca_pusat=$trf3;
-                    break;
-                case 'BCA Cabang':
-                    $penjualanSp->bca_cabang=$trf3;
-                    break;
-                case 'Mandiri':
-                    $penjualanSp->mandiri=$trf3;
-                    break;
-                case 'BNI':
-                    $penjualanSp->bni=$trf3;
-                    break;
-                case 'BRI':
-                    $penjualanSp->bri=$trf3;
-                    break;
-                default:
-                    break;
-            }
-        $penjualanSp->save();
+        $detailPembayaranSp->save();
+        session(['id_sales'=>$penjualanSp->id_sales,'id_cust'=>$penjualanSp->id_customer]);
+        Schema::dropIfExists('temp_penjualan_sps');
+        Schema::dropIfExists('temp_detail_penjualan_sps');
         return redirect('/penjualan/sp/invoice-sp');
     }
 
