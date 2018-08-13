@@ -263,8 +263,7 @@
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/invoice_dompul/update/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}/{{$datas->produk}}">
-                  @csrf @method('put')
+                  <input type="hidden" name="link" id="link" value="/invoice_dompul/update/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}/{{$datas->produk}}">
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul
                       <span class="required">*</span>
@@ -281,7 +280,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="qty_program" class="form-control col-md-7 col-xs-12" value="">
+                      <input type="text" required="required" id="qty_program" name="qty_program" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 
@@ -290,11 +289,10 @@
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset">Reset</button>
-                      <input type="submit" class="btn btn-success" value="Simpan">
+                      <input type="button" class="btn btn-success" id="save" value="Simpan" data-dismiss="modal">
                       {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
                     </div>
                   </div>
-                </form>
               </div>
             </div>
           </div>
@@ -312,12 +310,17 @@
 
 @section('js')
 <script>
+  $.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
     $(function () {
         var tgl = $('#tgl').val();
         var sales = $('#sales').val();
         var customer = $('#customer').val();
         if($('#status_pembayaran').val()==0){
-          $('#list-edit-invoice-table').DataTable({
+          var t = $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
             ajax: `/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
@@ -330,6 +333,19 @@
               {data: 'total_harga'},
               {data: 'action', orderable: false, searchable: false}
             ]
+        });
+        $(`#save`).on('click',function (event) {
+      //ajax call
+        $.post(`${$('#link').val()}`, { tipe: $('#tipe').val(), qty_program: $('#qty_program').val() })
+        .done(function(response){
+          if(response.success)
+          {
+            console.log('success')
+            console.log(response.total);
+            t.ajax.url(`/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`).load();
+            $('#total').val(response.total.toLocaleString('id-ID'));
+          }
+          }, 'json');
         });
         }else{
           $('#list-edit-invoice-table').DataTable({
@@ -346,6 +362,7 @@
             ]
         });
         }
+        
     });
 </script>
 <script>
@@ -375,7 +392,7 @@
       tipe.appendChild(opt);
     });
     console.log(produk);
-    $('#editForm').attr('action', `/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
+    $('#link').val(`/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
   })
 </script>
 @stop
