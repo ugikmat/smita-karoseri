@@ -127,6 +127,9 @@ Route::get('/persediaan/mutasi-dompul', function() {
   return view ('/persediaan/mutasi-dompul');
 }) -> name('mutasi-dompul');
 
+Route::get('/persediaan/mutasi-sp', function() {
+  return view ('/persediaan/mutasi-sp');
+}) -> name('mutasi-sp');
 
 //upload
 // Route::get('/upload/upload', function() {

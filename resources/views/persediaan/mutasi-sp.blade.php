@@ -47,10 +47,10 @@
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <button class="btn btn-success" type="submit" name="button"></button>
+      <button class="btn btn-success" type="submit" name="button"><i class="fa fa-caret-square-o-right"></i>  Tampilkan</button>
     </div>
 </div>
-
+<br><br>
 
 <table id="mutasi-sp-table" class="table responsive" width="100%">
     <thead>
@@ -64,7 +64,6 @@
     </thead>
     <tfoot>
       <tr>
-        <td></td>
         <td><b>Total Stok</b></td>
         <td>harganya(dari database)</td>
         <td>harganya(dari database)</td>
@@ -79,6 +78,9 @@
 
 @section('js')
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+<script type="text/javascript">
+  $(".chosen-select").chosen()
+</script>
 <script>
   $('.datepicker').datepicker({
   });
