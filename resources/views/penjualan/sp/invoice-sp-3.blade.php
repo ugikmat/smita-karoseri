@@ -18,7 +18,7 @@ td{
 @section('content')
 <form class="invoice-sp repeater" action="/invoice_sp/store" method="post">
   @csrf
-<input type="hidden" name="id" id="id" value="{{$penjualanSp->id_penjualan_sp}}">
+<input type="hidden" name="id" id="id" value="{{$penjualanSp->id_temp_penjualan_sp}}">
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -110,35 +110,25 @@ td{
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
           <b>Pembayaran</b>
           <br>
-          <select name="bank" id="bank" style="height: calc(3.5rem - 2px); width:100%;">
-            <option value="">-- Cara Pembayaran --</option>
-            <option value="Cash">Cash</option>
-            <option value="BCA Pusat">BCA Pusat</option>
-            <option value="BCA Cabang">BCA Cabang</option>
-            <option value="BRI">BRI</option>
-            <option value="BNI">BNI</option>
-            <option value="Mandiri">Mandiri</option>
-          </select>
+          <input type="text" id="bank" name="bank" class="form-control" value="" readonly>
         </div>
         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-3">
           <b>Nominal</b>
           <br>
-          <input type="text" id="trf" name="trf" class="form-control" value="">
+          <input type="text" id="trf" name="trf" class="form-control" value="" readonly>
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
           <b>Catatan</b>
           <br>
-          <input type="text" id="catatan" name="catatan" class="form-control" value="">
+          <input type="text" id="catatan" name="catatan" class="form-control" value="" readonly>
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
           <br>
-          <button data-repeater-delete type="button" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
         </div>
       </div>
     <hr>
     </div>
   </div>
-<button data-repeater-create type="button" class="btn btn-warning"> <span class="glyphicon glyphicon-plus"></span> Tambah Pembayaran</button>
 
 <div class="row">
   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -165,7 +155,7 @@ td{
 @section('js')
 <script>
     $(document).ready(function () {
-        $('.repeater').repeater({
+        var repeater = $('.repeater').repeater({
             // (Optional)
             // start with an empty list of repeaters. Set your first (and only)
             // "data-repeater-item" with style="display:none;" and pass the
@@ -209,7 +199,16 @@ td{
             // Removes the delete button from the first list item,
             // defaults to false.
             isFirstItemUndeletable: false
-        })
+        });
+        repeater.setList([
+          @foreach($bank as $item)
+          {
+                'bank': "{{$item['bank']}}",
+                'trf' : "{{$item['trf']}}",
+                'catatan' : "{{$item['catatan']}}"
+            },
+          @endforeach
+        ]);
     });
 </script>
 <script>
