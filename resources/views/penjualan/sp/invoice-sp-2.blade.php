@@ -191,7 +191,7 @@ td{
                 <input type="hidden" name="link" id="link" value="">
                   <input type="hidden" name="update_catatan" id="update_catatan" value="{{session('catatan')}}">
                   <input type="hidden" name="update_tunai" id="update_tunai" value="{{session('tunai')}}">
-                  <div class="form-group kode">
+                  <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe sp
                       <span class="required">*</span>
                     </label>
@@ -203,7 +203,7 @@ td{
                     </div>
                   </div>
 
-                  <div class="form-group nama">
+                  <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Qty Program
                       <span class="required">*</span>
                     </label>
@@ -291,7 +291,7 @@ $.ajaxSetup({
         });
         repeater.setList([
           @foreach($bank as $item)
-          {  
+          {
                 'bank': "{{$item['bank']}}",
                 'trf' : "{{$item['trf']}}",
                 'catatan' : "{{$item['catatan']}}"
@@ -303,7 +303,7 @@ $.ajaxSetup({
 </script>
 <script>
     $(function () {
-          
+
         var id = $('#id').val();
         var t = $('#invoice-sp-table').DataTable({
                   serverSide: true,
@@ -331,9 +331,9 @@ $.ajaxSetup({
         $('#total').val(response.total);
         console.log($('#total').val());
         t.ajax.url(`/edit_invoice_sp/${id}`).load();
-        
+
         // console.log($('#total').val(response.total));
-        
+
       }
       }, 'json');
     });
