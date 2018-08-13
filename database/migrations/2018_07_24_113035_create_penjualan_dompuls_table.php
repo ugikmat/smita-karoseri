@@ -15,7 +15,6 @@ class CreatePenjualanDompulsTable extends Migration
     {
         Schema::create('penjualan_dompuls', function (Blueprint $table) {
             $table->increments('id_penjualan_dompul');
-            $table->integer('id_detail');
             $table->integer('id_sales');
             // $table->integer('id_ho');
             // $table->integer('id_bo');
