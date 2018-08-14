@@ -73,6 +73,7 @@
     </div>
   </div>
 </div>
+<br>
 <form action="/list_invoice_dompul/update" method="post" class="repeater">
   @csrf
   <input type="hidden" name="id" id="id" value="{{$datas->id_penjualan_dompul}}">
@@ -100,6 +101,7 @@
     </tr>
     </thead>
 </table>
+<br>
 <div class="container-fluid" style="background:white;">
   <br>
   <div class="form row">
@@ -221,18 +223,18 @@
                 <br />
 
                   <input type="hidden" name="link" id="link" value="/invoice_dompul/update/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}/{{$datas->produk}}">
-                  <div class="form-group kode">
+                  <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <select name="tipe" required="required" id="tipe">
+                      <select name="tipe" required="required" id="tipe" class="form-control col-md-7 col-xs-12">
 
                       </select>
                     </div>
                   </div>
 
-                  <div class="form-group nama">
+                  <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Qty Program
                       <span class="required">*</span>
                     </label>
@@ -308,7 +310,7 @@
             // ready: function (setIndexes) {
             //     $dragAndDrop.on('drop', setIndexes);
             // },
-            
+
 
             // (Optional)
             // Removes the delete button from the first list item,
