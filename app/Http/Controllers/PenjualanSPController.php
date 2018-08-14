@@ -231,9 +231,9 @@ class PenjualanSPController extends Controller
         }
 
         if (!empty($bank)) {
+            foreach ($bank as $key => $value) {
             $detailPembayaranSp = new DetailPembayaranSp();
             $detailPembayaranSp->id_penjualan_sp =$penjualanSp->id_penjualan_sp;
-            foreach ($bank as $key => $value) {
             $detailPembayaranSp->metode_pembayaran = $value['bank'];
             $detailPembayaranSp->nominal=$value['trf'];
             $detailPembayaranSp->catatan = $value['catatan'];
@@ -259,8 +259,9 @@ class PenjualanSPController extends Controller
                 default:
                     break;
             }
+            $detailPembayaranSp->save();
         }
-        $detailPembayaranSp->save();
+        
         }
         
         session(['id_sales'=>$penjualanSp->id_sales,'id_cust'=>$penjualanSp->id_customer]);
