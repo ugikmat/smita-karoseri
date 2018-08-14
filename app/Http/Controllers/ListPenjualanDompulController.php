@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\PenjualanDompul;
+use App\DetailPenjualanDompul;
 use App\UploadDompul;
 use App\HargaDompul;
 use DB;
@@ -59,7 +60,8 @@ class ListPenjualanDompulController extends Controller
         }
         $total=number_format($total,0,",",".");
         $penjualanDompul = PenjualanDompul::where('id_penjualan_dompul',$id)->first();
-        return view('penjualan.dompul.list-edit-p-dompul-ro',['datas'=>$datas,'total'=>$total,'penjualanDompul'=>$penjualanDompul]);
+        $detailPenjualanDompul = DetailPenjualanDompul::where('id_penjualan_dompul',$id)->get();
+        return view('penjualan.dompul.list-edit-p-dompul-ro',['datas'=>$datas,'total'=>$total,'penjualanDompul'=>$penjualanDompul,'detailPenjualanDompul'=>$detailPenjualanDompul]);
     }
 
     public function verif($id){
@@ -71,95 +73,45 @@ class ListPenjualanDompulController extends Controller
 
     public function update(Request $request){
         $id = $request->get('id');
-        $tunai = $request->get('tunai');
-        // $trf1 = $request->get('trf1');
-        $bank1 = $request->get('bank1');
-        // $trf2 = $request->get('trf2');
-        $bank2 = $request->get('bank2');
-        // $trf3 = $request->get('trf3');
-        $bank3 = $request->get('bank3');
-        $catatan = $request->get('catatan');
+        $bank = $request->get('bank');
         $total = $request->get('total');
-
-        if (!empty($bank1)) {
-            $trf1 = $request->get('trf1');
-        }else{
-            $trf1 = 0;
-        }
-        $bank2 = $request->get('bank2');
-        if (!empty($bank2)) {
-            $trf2 = $request->get('trf2');
-        }else{
-            $trf2 = 0;
-        }
-        $bank3 = $request->get('bank3');
-        if (!empty($bank3)) {
-            $trf3 = $request->get('trf3');
-        }else{
-            $trf3 = 0;
-        }
         $penjualanDompul = PenjualanDompul::where('id_penjualan_dompul',$id)->first();
-        switch ($bank1) {
-                case 'BCA Pusat':
-                    $penjualanDompul->bca_pusat=$trf1;
-                    break;
-                case 'BCA Cabang':
-                    $penjualanDompul->bca_cabang=$trf1;
-                    break;
-                case 'Mandiri':
-                    $penjualanDompul->mandiri=$trf1;
-                    break;
-                case 'BNI':
-                    $penjualanDompul->bni=$trf1;
-                    break;
-                case 'BRI':
-                    $penjualanDompul->bri=$trf1;
-                    break;
-                default:
-                    break;
+        $penjualanDompul->grand_total=str_replace('.', '', $total);
+        $penjualanDompul->save();
+        foreach ($bank as $key => $value) {
+            if (empty($value['id'])) {
+                $detailPenjualanDompul = new DetailPenjualanDompul();
+            } else {
+                $detailPenjualanDompul = DetailPenjualanDompul::where('id_detail_penjualan',$value['id'])->first();   
             }
-            switch ($bank2) {
-                 case 'BCA Pusat':
-                    $penjualanDompul->bca_pusat=$trf2;
-                    break;
-                case 'BCA Cabang':
-                    $penjualanDompul->bca_cabang=$trf2;
-                    break;
-                case 'Mandiri':
-                    $penjualanDompul->mandiri=$trf2;
-                    break;
-                case 'BNI':
-                    $penjualanDompul->bni=$trf2;
-                    break;
-                case 'BRI':
-                    $penjualanDompul->bri=$trf2;
-                    break;
-                default:
-                    break;
-            }
-            switch ($bank3) {
-                 case 'BCA Pusat':
-                    $penjualanDompul->bca_pusat=$trf3;
-                    break;
-                case 'BCA Cabang':
-                    $penjualanDompul->bca_cabang=$trf3;
-                    break;
-                case 'Mandiri':
-                    $penjualanDompul->mandiri=$trf3;
-                    break;
-                case 'BNI':
-                    $penjualanDompul->bni=$trf3;
-                    break;
-                case 'BRI':
-                    $penjualanDompul->bri=$trf3;
-                    break;
-                default:
-                    break;
-            }
-            $penjualanDompul->grand_total=str_replace('.', '', $total);
-            $penjualanDompul->bayar_tunai=str_replace('.', '', $tunai);
-            $penjualanDompul->catatan=$catatan;
-            $penjualanDompul->save();
+            $detailPenjualanDompul->id_penjualan_dompul = $penjualanDompul->id_penjualan_dompul;
+            $detailPenjualanDompul->metode_pembayaran = $value['bank'];
+            $detailPenjualanDompul->nominal=$value['trf'];
+                switch ($value['bank']) {
+                    case 'BCA Pusat':
+                        $detailPenjualanDompul->bca_pusat=$value['trf'];
+                        break;
+                    case 'BCA Cabang':
+                        $detailPenjualanDompul->bca_cabang=$value['trf'];
+                        break;
+                    case 'Mandiri':
+                        $detailPenjualanDompul->mandiri=$value['trf'];
+                        break;
+                    case 'BNI':
+                        $detailPenjualanDompul->bni=$value['trf'];
+                        break;
+                    case 'BRI':
+                        $detailPenjualanDompul->bri=$value['trf'];
+                        break;
+                    case 'Cash':
+                        $detailPenjualanDompul->cash=$value['trf'];
+                        break;
+                    default:
+                        break;
+                }
+            $detailPenjualanDompul->catatan = $value['catatan'];
+            $detailPenjualanDompul->save();
+        }
         return redirect('/penjualan/dompul/list-invoice');
     }
     /**
@@ -178,10 +130,15 @@ class ListPenjualanDompulController extends Controller
             $tgl = $tgl->format('Y-m-d');
 
         }
-        return $datatables->eloquent(PenjualanDompul::select('penjualan_dompuls.id_penjualan_dompul','master_saless.nm_sales','penjualan_dompuls.no_hp_kios','master_customers.nm_cust','penjualan_dompuls.tanggal_penjualan_dompul','penjualan_dompuls.status_pembayaran')
+        return $datatables->eloquent(PenjualanDompul::select('penjualan_dompuls.id_penjualan_dompul',
+        'master_saless.nm_sales',
+        'penjualan_dompuls.no_hp_kios',
+        'master_customers.nm_cust',
+        'penjualan_dompuls.tanggal_penjualan_dompul',
+        'penjualan_dompuls.status_pembayaran')
                         ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
                         ->join('master_customers','master_customers.no_hp','=','penjualan_dompuls.no_hp_kios')
-                        ->join('detail_penjualan_dompuls','detail_penjualan_dompuls.id_penjualan_dompul','=','penjualan_dompuls.id_penjualan_dompul')
+                        // ->join('detail_penjualan_dompuls','detail_penjualan_dompuls.id_penjualan_dompul','=','penjualan_dompuls.id_penjualan_dompul')
                         ->where('tanggal_penjualan_dompul',$tgl))
                         // ->addColumn('indeks', function ($uploadDompul) {
                         //       return '';

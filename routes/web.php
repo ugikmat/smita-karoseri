@@ -99,9 +99,13 @@ Route::post('/invoice_sp/update/{id}','PenjualanSPController@update');
 Route::post('/invoice_sp/verify','PenjualanSPController@verify');
 Route::post('/invoice_sp/store','PenjualanSPController@store');
 
-Route::get('/penjualan/sp/list-invoice-sp', function() {
-  return view ('/penjualan/sp/list-invoice-sp');
-}) -> name('list-invoice-sp');
+Route::get('/penjualan/sp/list-invoice-sp', 'ListPenjualanSPController@index');
+Route::get('/penjualan/sp/list-invoice-sp/edit/{id_penjualan_sp}/{sales}/{tgl}/{customer}', 'ListPenjualanSPController@edit');
+Route::get('/invoice_sp/list/{tgl}', 'ListPenjualanSPController@data');
+Route::get('/edit_list_invoice_sp/{id}', 'ListPenjualanSPController@penjualanData');
+Route::post('/list_invoice_sp/update/{id}/{id_detail}','ListPenjualanSPController@update');
+Route::post('/list_invoice_SP/store','ListPenjualanSPController@store');
+Route::put('/invoice_sp/verify/{id}','ListPenjualanSPController@verif');
 
 Route::get('/master/user', function() {
   return view ('/penjualan/sp/list-invoice-sp');

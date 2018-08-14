@@ -16,12 +16,14 @@ class CreateDetailPenjualanDompulsTable extends Migration
         Schema::create('detail_penjualan_dompuls', function (Blueprint $table) {
             $table->increments('id_detail_penjualan');
             $table->integer('id_penjualan_dompul');
+            $table->string('metode_pembayaran')->nullable();
             $table->string('cash')->default(0);
             $table->string('bca_pusat')->default(0);
             $table->string('bca_cabang')->default(0);
             $table->string('mandiri')->default(0);
             $table->string('bni')->default(0);
             $table->string('bri')->default(0);
+            $table->string('nominal')->default(0);
             $table->text('catatan');
             $table->tinyInteger('deleted')->default(0);
         });
