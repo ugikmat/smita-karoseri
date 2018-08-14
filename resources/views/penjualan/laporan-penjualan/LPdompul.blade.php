@@ -152,9 +152,9 @@
             columns: [
                 {data: 'index'},
                 {data: 'nm_sales'},
-                {data: 'qty'},
+                {data: 'total_transaksi'},
                 {data: 'total_penjualan'},
-                {data: 'total_tunai'},
+                {data: 'cash'},
                 {data: 'bca_pusat'},
                 {data: 'bca_cabang'},
                 {data: 'mandiri'},
