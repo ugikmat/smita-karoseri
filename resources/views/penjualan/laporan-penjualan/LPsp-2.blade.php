@@ -98,7 +98,7 @@
         <td></td>
         <td><b>Grand Total</b></td>
         <td><input type="text" name="tagihan" id="tagihan" class="form-control" value="" readonly></td>
-        <td><input type="text" name="piutang" id="piutang" class="forn-control" value="" readonly> </td>
+        <td><input type="text" name="piutang" id="piutang" class="form-control" value="" readonly> </td>
       </tr>
     </tfoot>
 </table>

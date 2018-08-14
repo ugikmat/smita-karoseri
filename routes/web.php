@@ -130,6 +130,14 @@ Route::get('/penjualan/laporan-penjualan/LPsp', function() {
   return view ('/penjualan/laporan-penjualan/LPsp');
 }) -> name('LPsp');
 
+Route::get('/penjualan/laporan-penjualan/LPdompul-2', function() {
+  return view ('/penjualan/laporan-penjualan/LPdompul-2');
+}) -> name('LPdompul-2');
+
+Route::get('/penjualan/laporan-penjualan/LPsp-2', function() {
+  return view ('/penjualan/laporan-penjualan/LPsp-2');
+}) -> name('LPsp-2');
+
 //Persediaan
 Route::get('/persediaan/mutasi-dompul', function() {
   return view ('/persediaan/mutasi-dompul');

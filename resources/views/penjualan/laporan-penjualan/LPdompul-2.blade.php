@@ -66,8 +66,8 @@
         ID Canvaser :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <input type="text" id="id_sales" value="{{$sales->id_sales}}" readonly>
-      {{-- <strong>{{$sales->id_sales}}</strong> --}}
+        <!-- <input type="text" id="id_sales" value="{{$sales->id_sales}}" readonly> -->
+      <!-- <strong>{{$sales->id_sales}}</strong> -->
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -75,7 +75,7 @@
         Nama Canvaser :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <strong>{{$sales->nm_sales}}</strong>
+        <!-- <strong>{{$sales->nm_sales}}</strong> -->
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">

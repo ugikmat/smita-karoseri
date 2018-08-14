@@ -174,6 +174,10 @@ return [
                         'icon'  => 'briefcase',
                       ],
                       [
+                        'text'  => 'Dompet Pulsa 2',
+                        'url'   => '/penjualan/laporan-penjualan/LPdompul-2',
+                      ],
+                      [
                         'text'  => 'Penjualan Dompul Head',
                         'url'   => '/penjualan/laporan-penjualan/dompul-head',
                         'icon'  => 'money',
@@ -182,6 +186,10 @@ return [
                         'text'  => 'Starter Pack',
                         'url'   => '/penjualan/laporan-penjualan/LPsp',
                         'icon'  => 'briefcase',
+                      ],
+                      [
+                        'text'  => 'Starter Pack 2',
+                        'url'   => '/penjualan/laporan-penjualan/LPsp-2',
                       ],
                     ],
                   ],
