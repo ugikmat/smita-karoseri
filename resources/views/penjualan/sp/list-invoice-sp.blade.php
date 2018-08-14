@@ -137,7 +137,7 @@
                 {data: 'no_hp'},
                 {data: 'nm_cust'},
                 {data: 'tanggal_penjualan_sp'},
-                {data: 'status_penjualan'},
+                {data: 'status_verif'},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });

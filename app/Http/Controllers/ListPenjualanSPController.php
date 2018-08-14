@@ -160,6 +160,14 @@ class ListPenjualanSPController extends Controller
                         // ->addColumn('indeks', function ($uploadDompul) {
                         //       return '';
                         //     })
+                        ->addColumn('status_verif', function ($penjualanSP) {
+                              if ($penjualanSP->status_penjualan==0) {
+                                  return 'Belum Verifikasi';
+                              } else {
+                                  return 'Telah Verifikasi';
+                              }
+
+                            })
                           ->addColumn('action', function ($penjualanSP) {
                               if ($penjualanSP->status_penjualan==0) {
                                   return
