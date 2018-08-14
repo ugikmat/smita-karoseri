@@ -9,6 +9,12 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('/datepicker/css/bootstrap-datepicker.min.css') }}">
+<style media="screen">
+  a{
+    text-decoration: none;
+    color: white;
+  }
+</style>
 @stop
 
 @section('content')
