@@ -13,6 +13,9 @@
     text-align: center;
     margin: auto;
   }
+  td{
+    text-align: center;
+  }
 </style>
 @stop
 
