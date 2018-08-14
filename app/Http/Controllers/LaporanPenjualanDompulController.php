@@ -35,6 +35,63 @@ class LaporanPenjualanDompulController extends Controller
         $sales = Sales::where('nm_sales',$sales)->first();
         return view('penjualan.laporan-penjualan.LPdompul-2',['sales'=>$sales]);
     }
+    public function getData($tgl){
+        if ($tgl!='null') {
+            $tgl = Carbon::parse($tgl);
+            $tgl = $tgl->format('Y-m-d');
+        }
+        $total_nominal = DB::table('detail_penjualan_dompuls')
+                   ->select(DB::raw("id_penjualan_dompul, sum(nominal) AS total_bayar,
+    	sum(IF(metode_pembayaran = 'Cash', nominal, 0)) AS cash,
+	sum(IF(metode_pembayaran = 'BCA Pusat', nominal, 0)) AS bca_pusat, 
+	sum(IF(metode_pembayaran = 'BCA Cabang', nominal, 0)) AS bca_cabang, 
+	sum(IF(metode_pembayaran = 'Mandiri', nominal, 0)) AS mandiri,
+	sum(IF(metode_pembayaran = 'BNI', nominal, 0)) AS bni, 
+	sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+                   ->groupBy('id_penjualan_dompul');
+        $data = PenjualanDompul::select(DB::raw('master_saless.nm_sales, 
+                                sum(penjualan_dompuls.grand_total) AS total_penjualan, sum(cash) AS cash, 
+                                sum(bca_pusat) AS pusat, sum(bca_cabang) AS cabang, sum(mandiri) AS mandiri, sum(bni) AS bni, sum(bri) AS bri, 
+                                (sum(penjualan_dompuls.grand_total)-sum(total_bayar)) AS piutang,
+                                COUNT(penjualan_dompuls.id_penjualan_dompul) AS total_transaksi'))
+                        ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
+                        ->joinSub($total_nominal, 'total_nominal', function($join) {
+                            $join->on('penjualan_dompuls.id_penjualan_dompul', '=', 'total_nominal.id_penjualan_dompul');
+                        })
+                        ->where('tanggal_penjualan_dompul',$tgl)
+                        ->groupBy('master_saless.nm_sales')->get();
+                        $qty=0;
+                        $total=0;
+                        $cash=0;
+                        $bca_pusat=0;
+                        $bca_cabang=0;
+                        $mandiri=0;
+                        $bni=0;
+                        $bri=0;
+                        $piutang=0;
+                        foreach ($data as $key => $value) {
+                            $qty+=$value->total_transaksi;
+                            $total+=$value->total_penjualan;
+                            $cash+=$value->cash;
+                            $bca_pusat+=$value->pusat;
+                            $bca_cabang+=$value->cabang;
+                            $mandiri+=$value->mandiri;
+                            $bni+=$value->bni;
+                            $bri+=$value->bri;
+                            $piutang+=$value->piutang;
+                        }
+        return response()->json(['success' => true, 'data' => $data
+        , 'qty' => $qty
+        , 'total' => $total
+        , 'cash' => $cash
+        , 'bca_pusat' => $bca_pusat
+        , 'bca_cabang' => $bca_cabang
+        , 'mandiri' => $mandiri
+        , 'bni' => $bni
+        , 'bri' => $bri
+        , 'piutang' => $piutang]);
+    }
+
     /**
      * Process dataTable ajax response.
      *

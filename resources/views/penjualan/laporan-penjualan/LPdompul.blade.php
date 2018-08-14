@@ -52,18 +52,17 @@
         <td></td>
         <td><b>Grand Total</b></td>
         <td><input type="text" name="qty" id="qty" class="form-control" value="" readonly></td>
-        <td><input type="text" name="penjualan" id="penjualan" class="form-control" value="" readonly></td>
+        <td><input type="text" name="total" id="total" class="form-control" value="" readonly></td>
         <td><input type="text" name="cash" id="cash" class="form-control" value="" readonly></td>
-        <td><input type="text" name="bca-pusat" id="bca-pusat" class="form-control" value="" readonly></td>
-        <td><input type="text" name="bca-cabang" id="bca-cabang" class="form-control" value="" readonly></td>
+        <td><input type="text" name="bca_pusat" id="bca_pusat" class="form-control" value="" readonly></td>
+        <td><input type="text" name="bca_cabang" id="bca_cabang" class="form-control" value="" readonly></td>
+        <td><input type="text" name="mandiri" id="mandiri" class="form-control" value="" readonly></td>
         <td><input type="text" name="bri" id="bri" class="form-control" value="" readonly></td>
         <td><input type="text" name="bni" id="bni" class="form-control" value="" readonly></td>
-        <td><input type="text" name="mandiri" id="mandiri" class="form-control" value="" readonly></td>
         <td><input type="text" name="piutang" id="piutang" class="form-control" value="" readonly></td>
       </tr>
     </tfoot>
 </table>
-
 <!--Modal input-->
 <div class="modal fade bs-example-modal-lg" id='modalInput' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -127,6 +126,11 @@
   });
 </script>
 <script>
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
     // $(function () {
         var t = $('#lp-dompul-table').DataTable({
             serverSide: true,
@@ -158,8 +162,8 @@
                 {data: 'bca_pusat'},
                 {data: 'bca_cabang'},
                 {data: 'mandiri'},
-                {data: 'bni'},
                 {data: 'bri'},
+                {data: 'bni'},
                 {data: 'piutang'},
             ]
         });
@@ -171,6 +175,23 @@
         function loadData() {
           $tgl = $('#tgl').val();
           t.ajax.url(`/laporan-penjualan/${$tgl}`).load();
+          $.post(`/get_laporan_dompul/${$tgl}`, function(response){
+            if(response.success)
+            {
+              console.log('Success..');
+              $('#qty').val(response.qty);
+              $('#total').val(response.total);
+              $('#cash').val(response.cash);
+              $('#bca_pusat').val(response.bca_pusat);
+              $('#bca_cabang').val(response.bca_cabang);
+              $('#mandiri').val(response.mandiri);
+              $('#bni').val(response.bni);
+              $('#bri').val(response.bri);
+              $('#piutang').val(response.piutang);
+              console.log('Loaded');
+              console.log(response.data);
+            }
+        }, 'json');
         }
     // });
 </script>
