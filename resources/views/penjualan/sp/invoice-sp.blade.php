@@ -12,9 +12,8 @@
 @stop
 
 @section('content')
-
+<form class="invoice-sp repeater" action="/penjualan/sp/invoice-sp/edit" method="post">
 <div class="container-fluid">
-  <form class="invoice-sp repeater" action="/penjualan/sp/invoice-sp/edit" method="post">
   @csrf
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -25,7 +24,6 @@
       <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{session('now')}}">
       </div>
     </div>
-  </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
           Nama Canvaser :
@@ -56,6 +54,7 @@
         </select>
       </div>
     </div>
+  </div>
 </div>
 
 <br><br>
