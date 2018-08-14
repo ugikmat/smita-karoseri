@@ -64,8 +64,7 @@
     </div>
   </div>
 </div>
-
-<!-- kolom data canvasser e pake warna iki yo gik, cek podo ambek buku panduan bgcolor="#afeeee" -->
+<br><br>
 
 <table id="m-penjualan-table" class="table responsive" width="100%">
     <thead>
