@@ -198,7 +198,8 @@ class PenjualanDompulController extends Controller
         $penjualanDompul->tanggal_input=$tgl_input;
         $penjualanDompul->grand_total=str_replace('.', '', $total);
         $penjualanDompul->save();
-        foreach ($bank as $key => $value) {
+        if (!empty($bank)) {
+            foreach ($bank as $key => $value) {
             $detailPenjualanDompul = new DetailPenjualanDompul();
             $detailPenjualanDompul->id_penjualan_dompul = $penjualanDompul->id_penjualan_dompul;
             $detailPenjualanDompul->metode_pembayaran = $value['bank'];
@@ -228,6 +229,9 @@ class PenjualanDompulController extends Controller
             $detailPenjualanDompul->catatan = $value['catatan'];
             $detailPenjualanDompul->save();
         }
+        }
+        
+        
         UploadDompul::where('tanggal_transfer',$tgl)
                     ->where('no_hp_downline',$hp_downline)
                     ->where('nama_canvasser',$nm_sales)

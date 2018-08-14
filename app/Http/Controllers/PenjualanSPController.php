@@ -230,10 +230,10 @@ class PenjualanSPController extends Controller
                 $detailPenjualanSp->save();   
         }
 
-        $detailPembayaranSp = new DetailPembayaranSp();
-        $detailPembayaranSp->id_penjualan_sp =$penjualanSp->id_penjualan_sp;
-        
-        foreach ($bank as $key => $value) {
+        if (!empty($bank)) {
+            $detailPembayaranSp = new DetailPembayaranSp();
+            $detailPembayaranSp->id_penjualan_sp =$penjualanSp->id_penjualan_sp;
+            foreach ($bank as $key => $value) {
             $detailPembayaranSp->metode_pembayaran = $value['bank'];
             $detailPembayaranSp->nominal=$value['trf'];
             $detailPembayaranSp->catatan = $value['catatan'];
@@ -261,6 +261,8 @@ class PenjualanSPController extends Controller
             }
         }
         $detailPembayaranSp->save();
+        }
+        
         session(['id_sales'=>$penjualanSp->id_sales,'id_cust'=>$penjualanSp->id_customer]);
         Schema::dropIfExists('temp_penjualan_sps');
         Schema::dropIfExists('temp_detail_penjualan_sps');
