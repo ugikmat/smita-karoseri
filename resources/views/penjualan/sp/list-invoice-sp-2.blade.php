@@ -216,7 +216,7 @@
                 <br />
 
                 <input type="hidden" name="link" id="link" value="">
-                  <div class="form-group kode">
+                  <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe SP
                       <span class="required">*</span>
                     </label>
@@ -227,7 +227,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group nama">
+                  <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Qty Program
                       <span class="required">*</span>
                     </label>
@@ -246,7 +246,7 @@
                       {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
                     </div>
                   </div>
-                
+
               </div>
             </div>
           </div>
@@ -389,7 +389,7 @@
     var canvaser = $('#sales').val();
     var downline = $('#customer').val();
     var tipe = document.getElementById("tipe");
-    
+
     var button = $(event.relatedTarget) // Button that triggered the modal
     var produk = button.data('produk') // Extract info from data-* attributes
     var tipe_harga = button.data('tipe')
