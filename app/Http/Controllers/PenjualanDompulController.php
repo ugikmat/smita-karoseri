@@ -201,6 +201,8 @@ class PenjualanDompulController extends Controller
         foreach ($bank as $key => $value) {
             $detailPenjualanDompul = new DetailPenjualanDompul();
             $detailPenjualanDompul->id_penjualan_dompul = $penjualanDompul->id_penjualan_dompul;
+            $detailPenjualanDompul->metode_pembayaran = $value['bank'];
+            $detailPenjualanDompul->nominal=$value['trf'];
                 switch ($value['bank']) {
                     case 'BCA Pusat':
                         $detailPenjualanDompul->bca_pusat=$value['trf'];

@@ -122,6 +122,8 @@
   <div data-repeater-list="bank">
     <div data-repeater-item>
       <div class="form row">
+        <input type="hidden" id="id" name="id" class="form-control" value="">
+        @if($penjualanDompul->status_pembayaran==0)
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
           <b>Pembayaran</b>
           <br>
@@ -149,11 +151,33 @@
           <br>
           <button data-repeater-delete type="button" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
         </div>
+        @else
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
+          <b>Pembayaran</b>
+          <br>
+          <input type="text" name="bank" id="bank" class="form-control" value="" readonly>
+        </div>
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-3">
+          <b>Nominal</b>
+          <br>
+          <input type="text" id="trf" name="trf" class="form-control" value="" readonly>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          <b>Catatan</b>
+          <br>
+          <input type="text" id="catatan" name="catatan" class="form-control" value="" readonly>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          <br>
+        </div>
+        @endif
       </div>
     <hr>
     </div>
   </div>
+@if($penjualanDompul->status_pembayaran==0)
 <button data-repeater-create type="button" class="btn btn-warning"> <span class="glyphicon glyphicon-plus"></span> Tambah Pembayaran</button>
+@endif
 
 <div class="row">
   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -244,7 +268,7 @@
 @section('js')
 <script>
     $(document).ready(function () {
-        $('.repeater').repeater({
+        var repeater = $('.repeater').repeater({
             // (Optional)
             // start with an empty list of repeaters. Set your first (and only)
             // "data-repeater-item" with style="display:none;" and pass the
@@ -284,11 +308,23 @@
             // ready: function (setIndexes) {
             //     $dragAndDrop.on('drop', setIndexes);
             // },
+            
+
             // (Optional)
             // Removes the delete button from the first list item,
             // defaults to false.
             isFirstItemUndeletable: false
-        })
+        });
+        repeater.setList([
+          @foreach($detailPenjualanDompul as $item)
+          {
+                'id': "{{$item->id_detail_penjualan}}",
+                'bank': "{{$item->metode_pembayaran}}",
+                'trf' : "{{$item->nominal}}",
+                'catatan' : "{{$item->catatan}}"
+            },
+          @endforeach
+        ]);
     });
 </script>
 <script>
