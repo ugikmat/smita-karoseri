@@ -78,7 +78,7 @@
 <table id="list-edit-invoice-table" class="table responsive"  width="100%">
     <thead>
     <tr>
-      @if($penjualanSP->status_pembayaran==0)
+      @if($penjualanSP->status_penjualan==0)
       {{-- <th>No</th> --}}
         <th>Uraian</th>
         <th>Tipe</th>
@@ -120,6 +120,7 @@
     <div data-repeater-item>
       <div class="form row">
         <input type="hidden" id="id" name="id" class="form-control" value="">
+        @if($penjualanSP->status_penjualan==0)
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
           <b>Pembayaran</b>
           <br>
@@ -147,11 +148,30 @@
           <br>
           <button data-repeater-delete type="button" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
         </div>
+        @else
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
+          <b>Pembayaran</b>
+          <br>
+          <input type="text" name="bank" id="bank" class="form-control" value="" readonly>
+        </div>
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-3">
+          <b>Nominal</b>
+          <br>
+          <input type="text" id="trf" name="trf" class="form-control" value="" readonly>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          <b>Catatan</b>
+          <br>
+          <input type="text" id="catatan" name="catatan" class="form-control" value="" readonly>
+        </div>
+        @endif
       </div>
     <hr>
     </div>
   </div>
+@if($penjualanSP->status_penjualan==0)
 <button data-repeater-create type="button" class="btn btn-warning"> <span class="glyphicon glyphicon-plus"></span> Tambah Pembayaran</button>
+
 
 <div class="row">
   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -169,6 +189,7 @@
     <br><br>
   </div>
 </div>
+@endif
 </div>
 </form>
 
@@ -309,7 +330,7 @@
 <script>
     $(function () {
         var id = $('#id').val();
-        if({{$penjualanSP->status_pembayaran}}==0){
+        if({{$penjualanSP->status_penjualan}}==0){
           var t= $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,

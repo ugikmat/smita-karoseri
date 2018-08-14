@@ -32,6 +32,13 @@ class ListPenjualanSPController extends Controller
         return view('penjualan.sp.list-invoice-sp');
     }
 
+    public function verif($id){
+        PenjualanProduk::where('id_penjualan_sp',$id)
+                        ->update(['status_penjualan'=>1
+                        ]);
+        return redirect()->back();
+    }
+
     public function edit($id_penjualan_sp, $sales, $tgl, $customer){
         $sales = Sales::where('nm_sales',$sales)->first();
         $customer = Customer::where('nm_cust',$customer)->first();
