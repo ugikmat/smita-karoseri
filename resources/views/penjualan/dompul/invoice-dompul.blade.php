@@ -131,7 +131,7 @@
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       {{-- <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value=""> --}}
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select name="id" required="required">
+                        <select name="id" required="required" class="form-control col-md-7 col-xs-12">
                           @isset($saless)
                             @foreach($saless as $sales)
                               <option value="{{$sales->nm_sales}}" id="{{$sales->nm_sales}}">{{$sales->nm_sales}}</option>

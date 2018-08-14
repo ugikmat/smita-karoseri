@@ -127,7 +127,6 @@ td{
         </div>
         <div class="col-xs-3">
           <b>Catatan</b>
-          <div class="col-xs-3">
           <br>
           <input type="text" id="catatan" name="catatan" class="form-control" value="">
         </div>
