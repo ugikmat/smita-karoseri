@@ -100,7 +100,9 @@ Route::post('/invoice_sp/verify','PenjualanSPController@verify');
 Route::post('/invoice_sp/store','PenjualanSPController@store');
 
 Route::get('/penjualan/sp/list-invoice-sp', 'ListPenjualanSPController@index');
+Route::get('/penjualan/sp/list-invoice-sp/edit/{id_penjualan_sp}/{sales}/{tgl}/{customer}', 'ListPenjualanSPController@edit');
 Route::get('/invoice_sp/list/{tgl}', 'ListPenjualanSPController@data');
+Route::get('/edit_list_invoice_sp/{id}', 'ListPenjualanSPController@penjualanData');
 
 Route::get('/master/user', function() {
   return view ('/penjualan/sp/list-invoice-sp');

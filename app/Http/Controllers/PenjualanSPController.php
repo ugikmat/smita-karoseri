@@ -277,14 +277,7 @@ class PenjualanSPController extends Controller
     {
         // $data = DB::table('temp_detail_penjualan_sps')->get();
 
-        
-/**
- * SELECT master_produks.nama_produk(uraian), master_produks.satuan, detail_penjualan_sps.harga_satuan, 
-*       detail_penjualan_sps.tipe_harga, detail_penjualan_sps.jumlah_sp(kuantitas), 
-*       detail_penjualan_sps.harga_total
-*FROM master_produks JOIN detail_penjualan_sps
-*ON master_produks.kode_produk = detail_penjualan_sps.id_produk
- */     $detailPenjualan = DB::table('temp_detail_penjualan_sps')->select(DB::raw('master_produks.nama_produk, 
+        $detailPenjualan = DB::table('temp_detail_penjualan_sps')->select(DB::raw('master_produks.nama_produk, 
         master_produks.satuan, 
         temp_detail_penjualan_sps.harga_satuan,
         temp_detail_penjualan_sps.harga_beli,

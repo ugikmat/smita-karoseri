@@ -7,10 +7,9 @@
 @stop
 
 @section('content')
-<input type="hidden" name="tgl" id="tgl" value="{{$datas->tanggal_transfer}}">
-<input type="hidden" name="customer" id="customer" value="{{$datas->nama_downline}}">
-<input type="hidden" name="sales" id="sales" value="{{$datas->nama_canvasser}}">
-<input type="hidden" name="status_pembayaran" id="status_pembayaran" value="{{$penjualanSP->status_pembayaran}}">
+<input type="hidden" name="tgl" id="tgl" value="{{$penjualanSP->tanggal_penjualan_sp}}">
+<input type="hidden" name="customer" id="customer" value="{{$customer->nm_cust}}">
+<input type="hidden" name="sales" id="sales" value="{{$sales->nm_sales}}">
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -19,7 +18,7 @@
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
         <strong>
-        : {{$datas->id_penjualan_SP}}
+        : {{$penjualanSP->id_penjualan_sp}}
         </strong>
       </div>
     </div>
@@ -31,7 +30,7 @@
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
         <strong>
-        : {{$datas->nama_canvasser}}
+        : {{$sales->nm_sales}}
         </strong>
       </div>
     </div>
@@ -43,7 +42,7 @@
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
         <strong>
-        : {{$datas->no_hp_canvasser}}
+        : {{$sales->no_hp}}
         </strong>
       </div>
     </div>
@@ -55,7 +54,7 @@
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
         <strong>
-        : {{$datas->no_hp_downline}}
+        : {{$customer->no_hp}}
         </strong>
       </div>
     </div>
@@ -67,7 +66,7 @@
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
         <strong>
-        : {{$datas->nama_downline}}
+        : {{$customer->nm_cust}}
         </strong>
       </div>
     </div>
@@ -75,7 +74,7 @@
 </div>
 <form action="/list_invoice_SP/update" method="post" class="repeater">
   @csrf
-  <input type="hidden" name="id" id="id" value="{{$datas->id_penjualan_sp}}">
+  <input type="hidden" name="id" id="id" value="{{$penjualanSP->id_penjualan_sp}}">
 <table id="list-edit-invoice-table" class="table responsive"  width="100%">
     <thead>
     <tr>
@@ -108,7 +107,7 @@
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
       @isset($total)
-        <input type="text" class="form-control" name="total" id="total" value="{{$total}}" readonly>
+        <input type="text" class="form-control" name="total" id="total" value="{{$penjualanSP->grand_total}}" readonly>
       @endisset
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -196,7 +195,7 @@
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/invoice_sp/update/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}/{{$datas->produk}}">
+                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="">
                   @csrf @method('put')
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe SP
@@ -295,23 +294,21 @@
 </script>
 <script>
     $(function () {
-        var tgl = $('#tgl').val();
-        var sales = $('#sales').val();
-        var customer = $('#customer').val();
-        if($('#status_pembayaran').val()==0){
+        var id = $('#id').val();
+        if({{$penjualanSP->status_pembayaran}}==0){
           $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
             searching:  false,
-            ajax: `/edit_list_invoice_sp/${sales}/${tgl}/${customer}`,
+            ajax: `/edit_list_invoice_sp/${id}`,
             columns: [
-              {data: 'produk'},
-              {data: 'tipe_sp'},
-              {data: 'harga_sp'},
-              {data: 'qty'},
-              {data: 'qty_program'},
-              {data: 'total_harga'},
-              {data: 'action', orderable: false, searchable: false}
+              {data: 'nama_produk'},
+                      {data: 'tipe_harga'},
+                      {data: 'harga_satuan'},
+                      {data: 'jumlah_sp'},
+                      {data: 'harga_beli'},
+                      {data: 'total_harga'},
+                      {data: 'action', orderable: false, searchable: false}
             ]
         });
         }else{
@@ -319,14 +316,14 @@
             serverSide: true,
             processing: true,
             searching:  false,
-            ajax: `/edit_list_invoice_sp/${sales}/${tgl}/${customer}`,
+            ajax: `/edit_list_invoice_sp/${id}`,
             columns: [
-              {data: 'produk'},
-              {data: 'tipe_sp'},
-              {data: 'harga_sp'},
-              {data: 'qty'},
-              {data: 'qty_program'},
-              {data: 'total_harga'}
+              {data: 'nama_produk'},
+                      {data: 'tipe_harga'},
+                      {data: 'harga_satuan'},
+                      {data: 'jumlah_sp'},
+                      {data: 'harga_beli'},
+                      {data: 'total_harga'},
             ]
         });
         }
