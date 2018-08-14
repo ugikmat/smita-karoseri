@@ -234,6 +234,8 @@ class PenjualanSPController extends Controller
         $detailPembayaranSp->id_penjualan_sp =$penjualanSp->id_penjualan_sp;
         
         foreach ($bank as $key => $value) {
+            $detailPembayaranSp->metode_pembayaran = $value['bank'];
+            $detailPembayaranSp->nominal=$value['trf'];
             $detailPembayaranSp->catatan = $value['catatan'];
             switch ($value['bank']) {
                 case 'BCA Pusat':

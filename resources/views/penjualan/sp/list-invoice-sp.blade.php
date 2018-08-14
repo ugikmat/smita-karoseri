@@ -61,7 +61,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" required>
+                      <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" value="{{session('sp-list-tgl')}}" required>
                     </div>
                   </div>
 
@@ -69,7 +69,7 @@
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset"> <i class="fa fa-repeat"></i> Kosongkan</button>
-                      <button class="btn btn-success" type="button" onclick="loadData()" data-dismiss="modal"> </i> Tampilkan List Penjualan</button>
+                      <button class="btn btn-success" type="button" data-dismiss="modal" id="show"> </i> Tampilkan List Penjualan</button>
                       {{-- <input type="btn" class="btn btn-success" onclick="loadData()" value="Tampilkan List Penjualan"> --}}
                       {{-- <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-ok"></i>Tampilkan List Penjualan</button> --}}
                     </div>
@@ -118,11 +118,12 @@
   });
 </script>
 <script>
-    // $(function () {
+    $(function () {
+        $tgl_penjualan = ($('#tgl').val()=='') ? 'null' : $('#tgl').val();
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/invoice_sp/list/null',
+            ajax: `/invoice_sp/list/${$tgl_penjualan}`,
             // "columnDefs": [ {
             // "searchable": false,
             // "orderable": false,
@@ -133,10 +134,10 @@
                 // {data: 'indeks'},
                 {data: 'id_penjualan_sp'},
                 {data: 'nm_sales'},
-                {data: 'no_hp_kios'},
+                {data: 'no_hp_customer'},
                 {data: 'nm_cust'},
                 {data: 'tanggal_penjualan_sp'},
-                {data: 'status_pembayaran'},
+                {data: 'status_penjualan'},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });
@@ -145,12 +146,14 @@
         //     cell.innerHTML = i+1;
         //   } );
         // } ).draw();
-
-    // });
-    function loadData() {
+        $('#show').on('click',function (event) {
           $tgl = $('#tgl').val();
+          console.log($tgl);
+          console.log('Loading Data...');
           t.ajax.url(`/invoice_sp/list/${$tgl}`).load();
-        }
+          console.log('Loaded');  
+        });
+    });
 $('#verificationModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var id = button.data('id') // Extract info from data-* attributes
