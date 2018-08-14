@@ -36,7 +36,8 @@ class ListPenjualanSPController extends Controller
         $sales = Sales::where('nm_sales',$sales)->first();
         $customer = Customer::where('nm_cust',$customer)->first();
         $penjualanSP = PenjualanProduk::where('id_penjualan_sp',$id_penjualan_sp)->first();
-        return view('penjualan.sp.list-invoice-sp-2',['sales'=>$sales,'customer'=>$customer,'penjualanSP'=>$penjualanSP]);
+        $pembayaran = DetailPembayaranSp::where('id_penjualan_sp',$id_penjualan_sp)->get();
+        return view('penjualan.sp.list-invoice-sp-2',['sales'=>$sales,'customer'=>$customer,'penjualanSP'=>$penjualanSP,'pembayaran'=>$pembayaran]);
     }
 
     /**

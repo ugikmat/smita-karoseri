@@ -121,6 +121,7 @@
   <div data-repeater-list="bank">
     <div data-repeater-item>
       <div class="form row">
+        <input type="hidden" id="id" name="id" class="form-control" value="">
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
           <b>Pembayaran</b>
           <br>
@@ -245,7 +246,7 @@
 @section('js')
 <script>
     $(document).ready(function () {
-        $('.repeater').repeater({
+        var repeater = $('.repeater').repeater({
             // (Optional)
             // start with an empty list of repeaters. Set your first (and only)
             // "data-repeater-item" with style="display:none;" and pass the
@@ -289,7 +290,17 @@
             // Removes the delete button from the first list item,
             // defaults to false.
             isFirstItemUndeletable: false
-        })
+        });
+        repeater.setList([
+          @foreach($pembayaran as $item)
+          {
+                'id': "{{$item->id_detail_pembayaran_sp}}",
+                'bank': "{{$item->metode_pembayaran}}",
+                'trf' : "{{$item->nominal}}",
+                'catatan' : "{{$item->catatan}}"
+            },
+          @endforeach
+        ]);
     });
 </script>
 <script>
