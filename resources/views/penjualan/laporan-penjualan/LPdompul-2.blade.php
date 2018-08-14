@@ -3,7 +3,7 @@
 @section('title', 'Laporan Dompul')
 
 @section('content_header')
-    <h1>Laporan Penjualan Dompul</h1>
+    <h1>Detai Piutang Dompul</h1>
 
 @stop
 
@@ -63,7 +63,7 @@
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        ID Canvaser : 
+        ID Canvaser :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <input type="text" id="id_sales" value="{{$sales->id_sales}}" readonly>
@@ -72,7 +72,7 @@
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Nama Canvaser : 
+        Nama Canvaser :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <strong>{{$sales->nm_sales}}</strong>
