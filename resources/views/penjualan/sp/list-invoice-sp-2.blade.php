@@ -72,7 +72,7 @@
     </div>
   </div>
 </div>
-<form action="/list_invoice_SP/update" method="post" class="repeater">
+<form action="/list_invoice_SP/store" method="post" class="repeater">
   @csrf
   <input type="hidden" name="id" id="id" value="{{$penjualanSP->id_penjualan_sp}}">
 <table id="list-edit-invoice-table" class="table responsive"  width="100%">

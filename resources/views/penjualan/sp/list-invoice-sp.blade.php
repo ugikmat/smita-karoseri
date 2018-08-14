@@ -134,7 +134,7 @@
                 // {data: 'indeks'},
                 {data: 'id_penjualan_sp'},
                 {data: 'nm_sales'},
-                {data: 'no_hp_customer'},
+                {data: 'no_hp'},
                 {data: 'nm_cust'},
                 {data: 'tanggal_penjualan_sp'},
                 {data: 'status_penjualan'},

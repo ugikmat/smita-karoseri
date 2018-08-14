@@ -72,6 +72,59 @@ class ListPenjualanSPController extends Controller
     }
 
     /**
+     * Save transaction
+     */
+    public function store(Request $request){
+        $id = $request->get('id');
+        $bank = $request->get('bank');
+        $total = $request->get('total');
+        $penjualanSp = PenjualanProduk::where('id_penjualan_sp',$id)->first();
+        // $data = DB::table('temp_penjualan_sps')->where('id_temp_penjualan_sp',$id)->first();
+        $dataDetail = DetailPenjualanProduk::where('id_penjualan_sp',$id)->get();
+        // $dataDetail = DB::table('temp_detail_penjualan_sps')->where('id_penjualan_sp',$id)->get();
+        // $penjualanSp = new PenjualanProduk();
+        $penjualanSp->grand_total=str_replace('.', '', $total);
+        $penjualanSp->save();
+    
+        foreach ($bank as $key => $value) {
+            if (empty($value['id'])) {
+                $detailPembayaranSp = new DetailPembayaranSp();
+                $detailPembayaranSp->id_penjualan_sp = $penjualanSp->id_penjualan_sp;
+            } else {
+                $detailPembayaranSp = DetailPembayaranSp::where('id_detail_pembayaran_sp',$value['id'])->first();
+            }
+            $detailPembayaranSp->metode_pembayaran = $value['bank'];
+            $detailPembayaranSp->nominal=$value['trf'];
+            $detailPembayaranSp->catatan = $value['catatan'];
+            switch ($value['bank']) {
+                case 'BCA Pusat':
+                    $detailPembayaranSp->bca_pusat=$value['trf'];
+                    break;
+                case 'BCA Cabang':
+                    $detailPembayaranSp->bca_cabang=$value['trf'];
+                    break;
+                case 'Mandiri':
+                    $detailPembayaranSp->mandiri=$value['trf'];
+                    break;
+                case 'BNI':
+                    $detailPembayaranSp->bni=$value['trf'];
+                    break;
+                case 'BRI':
+                    $detailPembayaranSp->bri=$value['trf'];
+                    break;
+                case 'Cash':
+                    $detailPembayaranSp->cash=$value['trf'];
+                    break;
+                default:
+                    break;
+            }
+            $detailPembayaranSp->save();
+        }
+        // session(['tgl_penjualan_sp'=>$penjualanSp->id_sales,'id_cust'=>$penjualanSp->id_customer]);
+        return redirect('/penjualan/sp/list-invoice-sp');
+    }
+
+    /**
      * Process dataTable ajax response.
      *
      * @param \Yajra\Datatables\Datatables $datatables
@@ -89,7 +142,7 @@ class ListPenjualanSPController extends Controller
         }
         return $datatables->eloquent(PenjualanProduk::select('id_penjualan_sp',
         'nm_sales',
-        'no_hp_customer',
+        'master_customers.no_hp',
         'nm_cust',
         'tanggal_penjualan_sp',
         'status_penjualan')
