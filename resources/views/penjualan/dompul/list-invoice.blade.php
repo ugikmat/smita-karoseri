@@ -138,7 +138,7 @@
                 {data: 'no_hp_kios'},
                 {data: 'nm_cust'},
                 {data: 'tanggal_penjualan_dompul'},
-                {data: 'status_pembayaran'},
+                {data: 'status_verif'},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });

@@ -143,6 +143,14 @@ class ListPenjualanDompulController extends Controller
                         // ->addColumn('indeks', function ($uploadDompul) {
                         //       return '';
                         //     })
+                         ->addColumn('status_verif', function ($penjualanDompul) {
+                              if ($penjualanDompul->status_pembayaran==0) {
+                                  return 'Belum Verifikasi';
+                              } else {
+                                  return 'Telah Verifikasi';
+                              }
+
+                            })
                           ->addColumn('action', function ($penjualanDompul) {
                               if ($penjualanDompul->status_pembayaran==0) {
                                   return

@@ -35,7 +35,7 @@
     <tr>
         <th>No</th>
         <th>Nama Sales</th>
-        <th>BO</th>
+        {{-- <th>BO</th> --}}
         <th>Qty Penjualan</th>
         <th>Total Penjualan</th>
         <th>Total Tunai</th>
@@ -51,7 +51,6 @@
       <tr>
         <td></td>
         <td><b>Grand Total</b></td>
-        <td></td>
         <td><input type="text" name="qty" id="qty" class="form-control" value="" readonly></td>
         <td><input type="text" name="penjualan" id="penjualan" class="form-control" value="" readonly></td>
         <td><input type="text" name="cash" id="cash" class="form-control" value="" readonly></td>
