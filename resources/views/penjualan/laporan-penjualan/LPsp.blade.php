@@ -35,6 +35,7 @@
     <tr>
         <th>No</th>
         <th>Nama Sales</th>
+        <th>BO</th>
         <th>Qty Penjualan</th>
         <th>Total Penjualan</th>
         <th>Total Tunai</th>
@@ -51,13 +52,15 @@
         <td></td>
         <td><b>Grand Total</b></td>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><input type="text" name="qty" id="qty" class="form-control" value="" readonly></td>
+        <td><input type="text" name="penjualan" id="penjualan" class="form-control" value="" readonly></td>
+        <td><input type="text" name="cash" id="cash" class="form-control" value="" readonly></td>
+        <td><input type="text" name="bca-pusat" id="bca-pusat" class="form-control" value="" readonly></td>
+        <td><input type="text" name="bca-cabang" id="bca-cabang" class="form-control" value="" readonly></td>
+        <td><input type="text" name="bri" id="bri" class="form-control" value="" readonly></td>
+        <td><input type="text" name="bni" id="bni" class="form-control" value="" readonly></td>
+        <td><input type="text" name="mandiri" id="mandiri" class="form-control" value="" readonly></td>
+        <td><input type="text" name="piutang" id="piutang" class="form-control" value="" readonly></td>
       </tr>
     </tfoot>
 </table>
