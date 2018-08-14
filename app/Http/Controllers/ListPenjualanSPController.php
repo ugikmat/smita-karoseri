@@ -40,6 +40,37 @@ class ListPenjualanSPController extends Controller
         return view('penjualan.sp.list-invoice-sp-2',['sales'=>$sales,'customer'=>$customer,'penjualanSP'=>$penjualanSP,'pembayaran'=>$pembayaran]);
     }
 
+    public function update(Request $request, $id,$id_detail){
+        $data = DetailPenjualanProduk::where('id_detail_penjualan_sp',$id_detail)->first();
+
+        // $data = DB::table('temp_detail_penjualan_sps')->where('id_temp_penjualan_sp',$id)->first();
+        $tipe = $request->get('tipe');
+        $qty_program = $request->get('qty_program');
+        
+        if($tipe != 'default') {
+            // DB::table('temp_detail_penjualan_sps')->where('id_temp_penjualan_sp',$id)
+            // ->update(['tipe_harga'=>$tipe]);
+            $data->tipe_harga=$tipe;
+        }
+            $harga = HargaProduk::where('id_produk',$data->id_produk)->where('tipe_harga_sp',$data->tipe_harga)->first();
+            // DB::table('temp_detail_penjualan_sps')->where('id_temp_penjualan_sp',$id)
+            // ->update(['harga_satuan'=>$harga->harga_sp,
+            // 'harga_beli'=>$qty_program,
+            // 'harga_total'=>($data->jumlah_sp-$qty_program)*$harga->harga_sp]);
+            $data->harga_satuan=$harga->harga_sp;
+            $data->harga_beli=$qty_program;
+            $data->harga_total=($data->jumlah_sp-$qty_program)*$harga->harga_sp;
+            $data->save();
+        $total = 0;
+        $datas = DetailPenjualanProduk::where('id_penjualan_sp',$id)->get();
+        foreach ($datas as $key => $value) {
+            $total+=$value->harga_total;
+        }
+        $total=number_format($total,0,",",".");
+        session(['total_harga_sp' => $total]);
+        return response()->json(['success' => true,'total'=>$total]);
+    }
+
     /**
      * Process dataTable ajax response.
      *
@@ -98,6 +129,7 @@ class ListPenjualanSPController extends Controller
         detail_penjualan_sps.harga_beli,
         detail_penjualan_sps.id_produk,
         detail_penjualan_sps.id_penjualan_sp,
+        detail_penjualan_sps.id_detail_penjualan_sp,
         detail_penjualan_sps.tipe_harga, 
         detail_penjualan_sps.jumlah_sp,
         detail_penjualan_sps.harga_total'))
@@ -122,7 +154,7 @@ class ListPenjualanSPController extends Controller
                                 $tipe = HargaProduk::select('tipe_harga_sp')->where('id_produk',$detailPenjualanSp->id_produk)->get();
                                 // $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$uploadDompul->produk)->get();
                               return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$detailPenjualanSp->id_penjualan_sp.'" data-tipe='.$tipe.' data-qty="'.$detailPenjualanSp->harga_beli.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$detailPenjualanSp->id_penjualan_sp.'" data-id_detail="'.$detailPenjualanSp->id_detail_penjualan_sp.'" data-tipe='.$tipe.' data-qty="'.$detailPenjualanSp->harga_beli.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
                             })
                             // ->addColumn('input', function ($uploadDompul) {
                             //   return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-edit"></i> Edit</a>';

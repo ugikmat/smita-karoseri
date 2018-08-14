@@ -106,9 +106,7 @@
       <b>Jumlah Tunai</b>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      @isset($total)
-        <input type="text" class="form-control" name="total" id="total" value="{{$penjualanSP->grand_total}}" readonly>
-      @endisset
+      <input type="text" class="form-control" name="total" id="total" value="{{$penjualanSP->grand_total}}" readonly>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -196,8 +194,7 @@
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="">
-                  @csrf @method('put')
+                <input type="hidden" name="link" id="link" value="">
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe SP
                       <span class="required">*</span>
@@ -214,7 +211,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="qty_program" class="form-control col-md-7 col-xs-12" value="">
+                      <input type="text" id="qty_program" required="required" name="qty_program" class="form-control col-md-7 col-xs-12" value="">
                     </div>
                   </div>
 
@@ -223,11 +220,12 @@
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset">Reset</button>
-                      <input type="submit" class="btn btn-success" value="Simpan">
+                      {{-- <input type="submit" class="btn btn-success" value="Simpan"> --}}
+                      <input type="button" class="btn btn-success" id="save" value="Simpan" data-dismiss="modal">
                       {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
                     </div>
                   </div>
-                </form>
+                
               </div>
             </div>
           </div>
@@ -245,6 +243,11 @@
 
 @section('js')
 <script>
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
     $(document).ready(function () {
         var repeater = $('.repeater').repeater({
             // (Optional)
@@ -307,7 +310,7 @@
     $(function () {
         var id = $('#id').val();
         if({{$penjualanSP->status_pembayaran}}==0){
-          $('#list-edit-invoice-table').DataTable({
+          var t= $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
             searching:  false,
@@ -323,7 +326,7 @@
             ]
         });
         }else{
-          $('#list-edit-invoice-table').DataTable({
+          var t= $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
             searching:  false,
@@ -338,6 +341,25 @@
             ]
         });
         }
+        $(`#save`).on('click',function (event) {
+          //ajax call
+            $.post(`${$('#link').val()}`, { tipe: $('#tipe').val(), qty_program: $('#qty_program').val() })
+            .done(function(response){
+          if(response.success)
+          {
+            console.log('success')
+            console.log(response.total);
+            console.log($('#total').val());
+            $('#total').val(response.total);
+            console.log($('#total').val());
+            t.ajax.url(`/edit_list_invoice_sp/${id}`).load();
+
+            // console.log($('#total').val(response.total));
+
+          }
+          }, 'json');
+        });
+        console.log('{{session('total_harga_sp')}}');
     });
 </script>
 <script>
@@ -346,11 +368,13 @@
     var canvaser = $('#sales').val();
     var downline = $('#customer').val();
     var tipe = document.getElementById("tipe");
-
+    
     var button = $(event.relatedTarget) // Button that triggered the modal
     var produk = button.data('produk') // Extract info from data-* attributes
     var tipe_harga = button.data('tipe')
     var no_faktur = button.data('faktur')
+    var id = button.data('id')
+    var id_detail = button.data('id_detail')
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     while (tipe.firstChild) {
@@ -367,7 +391,8 @@
       tipe.appendChild(opt);
     });
     console.log(produk);
-    $('#editForm').attr('action', `/invoice_sp/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
+    // $('#editForm').attr('action', `/invoice_sp/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
+    $('#link').val(`/list_invoice_sp/update/${id}/${id_detail}`);
   })
 </script>
 @stop
