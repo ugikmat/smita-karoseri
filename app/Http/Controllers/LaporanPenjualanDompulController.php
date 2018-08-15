@@ -146,17 +146,19 @@ class LaporanPenjualanDompulController extends Controller
 	sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
                    ->groupBy('id_penjualan_dompul');
 
-        return $datatables->eloquent(PenjualanDompul::select(DB::raw('master_saless.nm_sales, 
+        return $datatables->eloquent(PenjualanDompul::select(DB::raw('master_saless.nm_sales, nama_bo,
                                 sum(penjualan_dompuls.grand_total) AS total_penjualan, sum(cash) AS cash, 
                                 sum(bca_pusat) AS bca_pusat, sum(bca_cabang) AS bca_cabang, sum(mandiri) AS mandiri, sum(bni) AS bni, sum(bri) AS bri, 
                                 (sum(penjualan_dompuls.grand_total)-sum(total_bayar)) AS piutang,
                                 COUNT(penjualan_dompuls.id_penjualan_dompul) AS total_transaksi'))
                         ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
+                        ->join('users','users.id','=','penjualan_dompuls.no_user')
+                        ->join('bos','bos.id_bo','=','users.id_bo')
                         ->joinSub($total_nominal, 'total_nominal', function($join) {
                             $join->on('penjualan_dompuls.id_penjualan_dompul', '=', 'total_nominal.id_penjualan_dompul');
                         })
                         ->where('tanggal_penjualan_dompul',$tgl)
-                        ->groupBy('master_saless.nm_sales'))
+                        ->groupBy('master_saless.nm_sales','nama_bo'))
                         ->addColumn('index', function ($penjualanDompul) {
                               return 
                               '';

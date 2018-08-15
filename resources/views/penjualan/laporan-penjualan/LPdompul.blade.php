@@ -23,7 +23,7 @@
         Tanggal Cetak Laporan
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        : tgl skarang
+        : {{\Carbon\Carbon::now()->format('d/m/Y')}}
       </div>
     </div>
   </div>
@@ -35,7 +35,7 @@
     <tr>
         <th>No</th>
         <th>Nama Sales</th>
-        {{-- <th>BO</th> --}}
+        <th>BO</th>
         <th>Qty Penjualan</th>
         <th>Total Penjualan</th>
         <th>Total Tunai</th>
@@ -51,6 +51,7 @@
       <tr>
         <td></td>
         <td><b>Grand Total</b></td>
+        <td></td>
         <td><input type="text" name="qty" id="qty" class="form-control" value="" readonly></td>
         <td><input type="text" name="total" id="total" class="form-control" value="" readonly></td>
         <td><input type="text" name="cash" id="cash" class="form-control" value="" readonly></td>
@@ -133,6 +134,11 @@
 });
     $(function () {
         $tgl = $('#tgl').val();
+        if($tgl==""){
+          $tgl='null';
+        }else{
+          console.log('No');
+        }
         var t = $('#lp-dompul-table').DataTable({
             serverSide: true,
             processing: true,
@@ -157,6 +163,7 @@
             columns: [
                 {data: 'index'},
                 {data: 'nm_sales'},
+                {data: 'nama_bo'},
                 {data: 'total_transaksi'},
                 {data: 'total_penjualan'},
                 {data: 'cash'},
