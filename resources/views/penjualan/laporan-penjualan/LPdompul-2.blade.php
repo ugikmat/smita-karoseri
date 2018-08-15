@@ -99,8 +99,8 @@
       <tr>
         <td></td>
         <td><b>Grand Total</b></td>
-        <td><input type="text" name="tagihan" id="tagihan" class="form-control" value="" readonly></td>
-        <td><input type="text" name="piutang" id="piutang" class="forn-control" value="" readonly> </td>
+      <td><input type="text" name="tagihan" id="tagihan" class="form-control" value="{{$total_penjualan}}" readonly></td>
+        <td><input type="text" name="piutang" id="piutang" class="form-control" value="{{$total_piutang}}" readonly> </td>
       </tr>
     </tfoot>
 </table>
@@ -125,7 +125,7 @@
             columns: [
                 {data: 'index'},
                 {data: 'nm_cust'},
-                {data: 'grand_total'},
+                {data: 'total_penjualan'},
                 {data: 'piutang'}
             ]
         });

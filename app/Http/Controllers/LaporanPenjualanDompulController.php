@@ -32,8 +32,36 @@ class LaporanPenjualanDompulController extends Controller
     }
 
     public function detail($sales){
-        $sales = Sales::where('nm_sales',$sales)->first();
-        return view('penjualan.laporan-penjualan.LPdompul-2',['sales'=>$sales]);
+        $dataSales = Sales::where('nm_sales',$sales)->first();
+        $total_nominal = DB::table('detail_penjualan_dompuls')
+                   ->select(DB::raw("id_penjualan_dompul, sum(nominal) AS total_bayar,
+    	sum(IF(metode_pembayaran = 'Cash', nominal, 0)) AS cash,
+	sum(IF(metode_pembayaran = 'BCA Pusat', nominal, 0)) AS bca_pusat, 
+	sum(IF(metode_pembayaran = 'BCA Cabang', nominal, 0)) AS bca_cabang, 
+	sum(IF(metode_pembayaran = 'Mandiri', nominal, 0)) AS mandiri,
+	sum(IF(metode_pembayaran = 'BNI', nominal, 0)) AS bni, 
+	sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+                   ->groupBy('id_penjualan_dompul');
+        $tgl = Carbon::parse(session('tgl_laporan_dompul'));
+        $tgl = $tgl->format('Y-m-d');
+        $penjualan =PenjualanDompul::select(DB::raw('master_customers.nm_cust,
+                                sum(penjualan_dompuls.grand_total) AS total_penjualan, 
+                                (sum(penjualan_dompuls.grand_total)-sum(total_bayar)) AS piutang'))
+                        ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
+                        ->join('master_customers','master_customers.no_hp','=','penjualan_dompuls.no_hp_kios')
+                        ->joinSub($total_nominal, 'total_nominal', function($join) {
+                            $join->on('penjualan_dompuls.id_penjualan_dompul', '=', 'total_nominal.id_penjualan_dompul');
+                        })
+                        ->where('tanggal_penjualan_dompul',$tgl)
+                        ->where('master_saless.nm_sales',$sales)
+                        ->groupBy('master_customers.nm_cust')->get();
+        $total_penjualan=0;
+        $total_piutang=0;
+        foreach ($penjualan as $key => $value) {
+            $total_penjualan+=$value->total_penjualan;
+            $total_piutang+=$value->total_piutang;
+        }
+        return view('penjualan.laporan-penjualan.LPdompul-2',['sales'=>$dataSales,'total_penjualan'=>$total_penjualan,'total_piutang'=>$total_piutang,]);
     }
     public function getData($tgl){
         if ($tgl!='null') {
@@ -152,7 +180,7 @@ class LaporanPenjualanDompulController extends Controller
      */
     public function dataPiutang(Datatables $datatables,$id,$tgl)
     {
-        if ($tgl_penjualan!='null') {
+        if ($tgl!='null') {
             $tgl = Carbon::parse($tgl);
             $tgl = $tgl->format('Y-m-d');
         }
@@ -165,12 +193,17 @@ class LaporanPenjualanDompulController extends Controller
 	sum(IF(metode_pembayaran = 'BNI', nominal, 0)) AS bni, 
 	sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
                    ->groupBy('id_penjualan_dompul');
-        return $datatables->eloquent(PenjualanDompul::select(DB::raw('master_saless.nm_sales, 
+        return $datatables->eloquent(PenjualanDompul::select(DB::raw('master_customers.nm_cust,
                                 sum(penjualan_dompuls.grand_total) AS total_penjualan, 
                                 (sum(penjualan_dompuls.grand_total)-sum(total_bayar)) AS piutang'))
                         ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
-                        ->where('penjualan_dompuls.id_sales',$id)
-                        ->where('tanggal_penjualan_dompul',$tgl))
+                        ->join('master_customers','master_customers.no_hp','=','penjualan_dompuls.no_hp_kios')
+                        ->joinSub($total_nominal, 'total_nominal', function($join) {
+                            $join->on('penjualan_dompuls.id_penjualan_dompul', '=', 'total_nominal.id_penjualan_dompul');
+                        })
+                        ->where('tanggal_penjualan_dompul',$tgl)
+                        ->where('master_saless.id_sales',$id)
+                        ->groupBy('master_customers.nm_cust'))
                         ->addColumn('index', function ($penjualanDompul) {
                               return 
                               '';
