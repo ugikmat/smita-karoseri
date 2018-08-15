@@ -124,6 +124,7 @@ Route::get('/laporan-penjualan/piutang/{id}/{tgl}', 'LaporanPenjualanDompulContr
 Route::post('/get_laporan_dompul/{tgl}', 'LaporanPenjualanDompulController@getData');
 
 Route::get('/penjualan/laporan-penjualan/dompul-head', 'LaporanDompulHeadController@index');
+Route::post('/penjualan/laporan-penjualan/dompul-head-show', 'LaporanDompulHeadController@lihatLaporan');
 Route::get('/penjualan/laporan-penjualan/dompul-head-user', 'LaporanDompulHeadController@showUserTransaction');
 Route::get('/penjualan/laporan-penjualan/dompul-head-server', 'LaporanDompulHeadController@showServerTransaction');
 
