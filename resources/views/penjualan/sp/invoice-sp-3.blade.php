@@ -67,7 +67,7 @@ td{
         Tanggal Penjualan :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl" value="{{$penjualanSp->tanggal_penjualan_sp}}" readonly>
+            <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl" value="{{Carbon\Carbon::parse($penjualanSp->tanggal_penjualan_sp)->format('d/m/Y')}}" readonly>
       </div>
     </div>
   </div>

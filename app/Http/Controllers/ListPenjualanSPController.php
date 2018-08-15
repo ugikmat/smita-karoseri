@@ -160,6 +160,13 @@ class ListPenjualanSPController extends Controller
                         // ->addColumn('indeks', function ($uploadDompul) {
                         //       return '';
                         //     })
+                        ->addColumn('tanggal_penjualan', function ($penjualanSP) {
+                        
+                            $tgl = Carbon::parse($penjualanSP->tanggal_penjualan_sp);
+                            $tgl = $tgl->format('d/m/Y');
+                            return $tgl;
+
+                            })
                         ->addColumn('status_verif', function ($penjualanSP) {
                               if ($penjualanSP->status_penjualan==0) {
                                   return 'Belum Verifikasi';
@@ -214,6 +221,15 @@ class ListPenjualanSPController extends Controller
         return $datatables->of($detailPenjualan)
                         ->addColumn('indeks', function ($detailPenjualanSp) {
                               return '';
+                            })
+                            ->addColumn('harga', function ($detailPenjualanSp) {
+                              return number_format($detailPenjualanSp->harga_satuan,0,",",".");
+                            })
+                            ->addColumn('jumlah', function ($detailPenjualanSp) {
+                              return number_format($detailPenjualanSp->jumlah_sp,0,",",".");
+                            })
+                            ->addColumn('jumlah_program', function ($detailPenjualanSp) {
+                              return number_format($detailPenjualanSp->harga_beli,0,",",".");
                             })
                             ->addColumn('total_harga', function ($detailPenjualanSp) {
                               return number_format(($detailPenjualanSp->jumlah_sp-$detailPenjualanSp->harga_beli)*$detailPenjualanSp->harga_satuan,0,",",".");

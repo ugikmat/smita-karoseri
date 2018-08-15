@@ -245,11 +245,11 @@ class PenjualanSPController extends Controller
                 $detailPenjualanSp->id_penjualan_sp = $penjualanSp->id_penjualan_sp;
                 $detailPenjualanSp->id_customer= $value->id_customer;
                 $detailPenjualanSp->id_produk= $value->id_produk;
-                $detailPenjualanSp->jumlah_sp= $value->jumlah_sp;
+                $detailPenjualanSp->jumlah_sp= str_replace('.', '', $value->jumlah_sp);
                 $detailPenjualanSp->tipe_harga= $value->tipe_harga;
-                $detailPenjualanSp->harga_satuan= $value->harga_satuan;
-                $detailPenjualanSp->harga_total= $value->harga_total;
-                $detailPenjualanSp->harga_beli= $value->harga_beli;
+                $detailPenjualanSp->harga_satuan= str_replace('.', '', $value->harga_satuan);
+                $detailPenjualanSp->harga_total= str_replace('.', '', $value->harga_total);
+                $detailPenjualanSp->harga_beli= str_replace('.', '', $value->harga_beli);
                 $detailPenjualanSp->keterangan_detail_psp= $value->keterangan_detail_psp;
                 $detailPenjualanSp->save();   
         }
@@ -259,7 +259,7 @@ class PenjualanSPController extends Controller
             $detailPembayaranSp = new DetailPembayaranSp();
             $detailPembayaranSp->id_penjualan_sp =$penjualanSp->id_penjualan_sp;
             $detailPembayaranSp->metode_pembayaran = $value['bank'];
-            $detailPembayaranSp->nominal=$value['trf'];
+            $detailPembayaranSp->nominal= str_replace('.', '', $value['trf']);
             $detailPembayaranSp->catatan = $value['catatan'];
             switch ($value['bank']) {
                 case 'BCA Pusat':
