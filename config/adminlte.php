@@ -248,7 +248,7 @@ return [
               [
                 'text'  => 'user',
                 'url'   => '/master/user',
-                'icon'  => 'users',
+                'icon'  => 'male',
               ],
               [
                 'text'  => 'bank',
@@ -256,16 +256,14 @@ return [
                 'icon'  => 'bank',
               ],
               [
-                'text'  => 'produk',
-                'url'   => '/master/produk'
-              ],
-              [
                 'text'  => 'satuan',
                 'url'   => '/master/satuan',
+                'icon'  => 'inbox',
               ],
               [
                 'text'  => 'supplier',
                 'url'   => '/master/supplier',
+                'icon'  => 'users',
               ],
               [
                 'text'  => 'customer',
@@ -275,6 +273,7 @@ return [
               [
                 'text'  => 'gudang',
                 'url'   => '/gudang',
+                'icon'  => 'briefcase',
               ],
               [
                 'text'  => 'lokasi',
@@ -284,7 +283,7 @@ return [
               [
                 'text'  => 'sales',
                 'url'   => '/sales',
-                'icon'  => 'user',
+                'icon'  => 'user-plus',
               ],
               [
                 'text'  => 'pemborong',
@@ -294,26 +293,33 @@ return [
               [
                 'text'  => 'supervisor',
                 'url'   => '/supervisor',
-                'icon'  => 'user',
+                'icon'  => 'user-secret',
               ],
               [
                 'text'  => 'dompul',
                 'url'   => '/master/dompul',
+                'icon'  => 'dollar',
               ],
               [
                 'text'  => 'harga dompul',
                 'url'   => '/master/harga_dompul',
                 'icon'  => 'money',
               ],
+
               [
-                'text'  => 'harga produk',
+                'text'  => 'SP',
+                'url'   => '/master/produk',
+                'icon'  => 'credit-card',
+              ],
+              [
+                'text'  => 'harga SP',
                 'url'   => '/master/harga_produk',
                 'icon'  => 'money',
               ],
               [
                 'text'  => 'tipe dompul',
                 'url'   => '/master/tipe_dompul',
-                'icon'  => 'money',
+                'icon'  => 'tag',
               ],
             ],
         ],
