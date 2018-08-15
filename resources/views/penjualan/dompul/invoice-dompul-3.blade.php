@@ -84,7 +84,7 @@ td{
     </tr>
     </thead>
 </table>
-<br><br>
+<br>
 <div class="container-fluid" style="background:white;">
   <br>
   <div class="form row">
@@ -110,7 +110,7 @@ td{
         <div class="col-xs-3">
           <b>Pembayaran</b>
           <br>
-          <select name="bank" id="bank" style="height: calc(3.5rem - 2px); width:100%">
+          <select name="bank" id="bank" style="height: calc(3.5rem - 2px); width:100%" required="required">
             <option value="">-- Cara Pembayaran --</option>
             <option value="Cash">Cash</option>
             <option value="BCA Pusat">BCA Pusat</option>
@@ -123,18 +123,20 @@ td{
         <div class="col-xs-3">
           <b>Nominal</b>
           <br>
-          <input type="text" id="trf" name="trf" class="form-control" value="">
+          <input type="text" id="trf" name="trf" class="form-control"  value="" required>
         </div>
         <div class="col-xs-3">
           <b>Catatan</b>
           <br>
           <input type="text" id="catatan" name="catatan" class="form-control" value="">
         </div>
+        <div class="col-xs-3">
           <br>
           <button data-repeater-delete type="button" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
         </div>
         <hr>
       </div>
+      <hr>
     </div>
   </div>
 <button data-repeater-create type="button" class="btn btn-warning"> <span class="glyphicon glyphicon-plus"></span> Tambah Pembayaran</button>

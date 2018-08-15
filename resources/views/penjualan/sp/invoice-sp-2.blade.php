@@ -93,7 +93,7 @@ td{
       </tr>
     </thead>
 </table>
-<br><br>
+<br>
 <div class="container-fluid" style="background:white;">
   <br>
   <div class="form row">
@@ -117,7 +117,7 @@ td{
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
           <b>Pembayaran</b>
           <br>
-          <select name="bank" id="bank" style="height: calc(3.5rem - 2px); width:100%;">
+          <select name="bank" id="bank" style="height: calc(3.5rem - 2px); width:100%;" required="required">
             <option value="">-- Cara Pembayaran --</option>
             <option value="Cash">Cash</option>
             <option value="BCA Pusat">BCA Pusat</option>
@@ -130,7 +130,7 @@ td{
         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-3">
           <b>Nominal</b>
           <br>
-          <input type="text" id="trf" name="trf" class="form-control" value="">
+          <input type="text" id="trf" name="trf" class="form-control" value="" required="required">
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
           <b>Catatan</b>
@@ -192,11 +192,11 @@ td{
                   <input type="hidden" name="update_catatan" id="update_catatan" value="{{session('catatan')}}">
                   <input type="hidden" name="update_tunai" id="update_tunai" value="{{session('tunai')}}">
                   <div class="form-group row">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe sp
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe SP
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <select name="tipe" required="required" id="tipe">
+                      <select name="tipe" required="required" id="tipe" class="form-control col-md-7 col-xs-12">
                         <option value="CVS">CVS</option>
                         <option value="DS">DS</option>
                       </select>
@@ -357,7 +357,7 @@ $.ajaxSetup({
     }
     var default_opt = document.createElement('option');
     default_opt.value = 'default';
-    default_opt.innerHTML = '-- Pilih Tipe sp --';
+    default_opt.innerHTML = '-- Pilih Tipe SP --';
     tipe.appendChild(default_opt);
     tipe_harga.forEach(element => {
       var opt = document.createElement('option');

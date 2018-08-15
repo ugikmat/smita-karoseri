@@ -88,7 +88,7 @@ td{
   <div data-repeater-list="bank">
     <div data-repeater-item>
       <div class="form row">
-        
+
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
           <b>Pembayaran</b>
           <br>

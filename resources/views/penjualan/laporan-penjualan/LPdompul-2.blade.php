@@ -64,7 +64,7 @@
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        ID Canvaser 
+        ID Canvaser
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
       <input type="hidden" id="id_sales" value="{{$sales->id_sales}}" readonly>
@@ -73,7 +73,7 @@
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Nama Canvaser 
+        Nama Canvaser
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         : <strong>{{$sales->nm_sales}}</strong>
@@ -104,6 +104,8 @@
       </tr>
     </tfoot>
 </table>
+<br>
+  <a href="{{URL::previous()}}" class="pull-right"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-chevron-left"></span> Kembali</button></a>
 
 @stop
 
