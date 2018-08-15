@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\StokSp;
 
 class KartuStokSpTableSeeder extends Seeder
 {
@@ -108,15 +109,16 @@ class KartuStokSpTableSeeder extends Seeder
       $stoksp11->stok_keluar=0;
       $stoksp11->stok_akhir=0;
       $stoksp11->status_stok_sp=1;
-      $stoksp11 = save();
+      $stoksp11->save();
 
+      $stoksp12 = new StokSp();
       $stoksp12->id_produk='BG1050';
       $stoksp12->stok_awal=0;
       $stoksp12->stok_masuk=0;
       $stoksp12->stok_keluar=0;
       $stoksp12->stok_akhir=0;
       $stoksp12->status_stok_sp=1;
-      $stoksp12 = save();
+      $stoksp12->save();
 
       $stoksp13 = new StokSp();
       $stoksp13->id_produk='BG11014';
@@ -136,7 +138,7 @@ class KartuStokSpTableSeeder extends Seeder
       $stoksp14->status_stok_sp=1;
       $stoksp14->save();
 
-      $stoksp115 = new StokSp();
+      $stoksp15 = new StokSp();
       $stoksp15->id_produk='BG11018';
       $stoksp15->stok_awal=0;
       $stoksp15->stok_masuk=0;
