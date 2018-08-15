@@ -173,10 +173,10 @@ return [
                         'url'   => '/penjualan/laporan-penjualan/LPdompul',
                         'icon'  => 'briefcase',
                       ],
-                      [
-                        'text'  => 'Dompet Pulsa 2',
-                        'url'   => '/penjualan/laporan-penjualan/LPdompul-2',
-                      ],
+                      // [
+                      //   'text'  => 'Dompet Pulsa 2',
+                      //   'url'   => '/penjualan/laporan-penjualan/LPdompul-2',
+                      // ],
                       [
                         'text'  => 'Penjualan Dompul Head',
                         'url'   => '/penjualan/laporan-penjualan/dompul-head',
@@ -187,10 +187,10 @@ return [
                         'url'   => '/penjualan/laporan-penjualan/LPsp',
                         'icon'  => 'briefcase',
                       ],
-                      [
-                        'text'  => 'Starter Pack 2',
-                        'url'   => '/penjualan/laporan-penjualan/LPsp-2',
-                      ],
+                      // [
+                      //   'text'  => 'Starter Pack 2',
+                      //   'url'   => '/penjualan/laporan-penjualan/LPsp-2',
+                      // ],
                     ],
                   ],
                 ],
