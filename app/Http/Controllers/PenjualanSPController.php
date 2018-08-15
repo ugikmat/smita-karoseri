@@ -54,6 +54,8 @@ class PenjualanSPController extends Controller
         return response()->json(['success' => true, 'harga' => $hargaProduks]);
     }
 
+
+
     public function edit(Request $request){
         Schema::dropIfExists('temp_penjualan_sps');
         Schema::create('temp_penjualan_sps', function (Blueprint $table) {
@@ -147,7 +149,29 @@ class PenjualanSPController extends Controller
         session(['total_harga_sp' => $total]);
         $sales = Sales::where('id_sales',$penjualanSp->id_sales)->first();
         $customer = Customer::where('id_cust',$penjualanSp->id_customer)->first();
-        return view('/penjualan/sp/invoice-sp-2',['penjualanSp'=>$penjualanSp,'sales'=>$sales,'customer'=>$customer,'bank'=>$bank,'data'=>$detailPenjualan]);
+        session(['id_sales'=>$penjualanSp->id_sales,'id_cust'=>$penjualanSp->id_customer,'bank-sp'=>$request->get('bank-sp')]);
+        // return view('/penjualan/sp/invoice-sp-2',['penjualanSp'=>$penjualanSp,'sales'=>$sales,'customer'=>$customer,'bank'=>$bank,'data'=>$detailPenjualan]);
+        return redirect("/penjualan/sp/invoice-sp/edit/{$penjualanSp->id_temp_penjualan_sp}");
+    }
+
+    public function showEdit($id){
+        $penjualanSp = DB::table('temp_penjualan_sps')->where('id_temp_penjualan_sp',$id)->first();
+        $sales = Sales::where('id_sales',$penjualanSp->id_sales)->first();
+        $customer = Customer::where('id_cust',$penjualanSp->id_customer)->first();
+        $detailPenjualan = DB::table('temp_detail_penjualan_sps')->select(DB::raw('master_produks.nama_produk, 
+        master_produks.satuan, 
+        temp_detail_penjualan_sps.harga_satuan,
+        temp_detail_penjualan_sps.harga_beli,
+        temp_detail_penjualan_sps.id_produk,
+        temp_detail_penjualan_sps.id_temp_penjualan_sp,
+        temp_detail_penjualan_sps.tipe_harga, 
+        temp_detail_penjualan_sps.jumlah_sp,
+        temp_detail_penjualan_sps.harga_total'))
+                        ->join('master_produks',function($join){
+                            $join->on('temp_detail_penjualan_sps.id_produk','=','master_produks.kode_produk');
+                        })
+                        ->where('id_penjualan_sp',$penjualanSp->id_temp_penjualan_sp)->get();
+        return view('/penjualan/sp/invoice-sp-2',['penjualanSp'=>$penjualanSp,'sales'=>$sales,'customer'=>$customer,'data'=>$detailPenjualan]);
     }
 
     public function update(Request $request, $id){
@@ -179,7 +203,7 @@ class PenjualanSPController extends Controller
         $bank = $request->get('bank-sp');
         $id = $request->get('id');
         $tgl = $request->get('tgl');
-        
+        session(['bank-sp'=>$request->get('bank-sp')]);
         $penjualanSp =DB::table('temp_penjualan_sps')->where('id_temp_penjualan_sp',$id)->first();
         $sales = Sales::where('id_sales',$penjualanSp->id_sales)->first();
         $customer = Customer::where('id_cust',$penjualanSp->id_customer)->first();
@@ -221,21 +245,21 @@ class PenjualanSPController extends Controller
                 $detailPenjualanSp->id_penjualan_sp = $penjualanSp->id_penjualan_sp;
                 $detailPenjualanSp->id_customer= $value->id_customer;
                 $detailPenjualanSp->id_produk= $value->id_produk;
-                $detailPenjualanSp->jumlah_sp= $value->jumlah_sp;
+                $detailPenjualanSp->jumlah_sp= str_replace('.', '', $value->jumlah_sp);
                 $detailPenjualanSp->tipe_harga= $value->tipe_harga;
-                $detailPenjualanSp->harga_satuan= $value->harga_satuan;
-                $detailPenjualanSp->harga_total= $value->harga_total;
-                $detailPenjualanSp->harga_beli= $value->harga_beli;
+                $detailPenjualanSp->harga_satuan= str_replace('.', '', $value->harga_satuan);
+                $detailPenjualanSp->harga_total= str_replace('.', '', $value->harga_total);
+                $detailPenjualanSp->harga_beli= str_replace('.', '', $value->harga_beli);
                 $detailPenjualanSp->keterangan_detail_psp= $value->keterangan_detail_psp;
                 $detailPenjualanSp->save();   
         }
 
-        $detailPembayaranSp = new DetailPembayaranSp();
-        $detailPembayaranSp->id_penjualan_sp =$penjualanSp->id_penjualan_sp;
-        
-        foreach ($bank as $key => $value) {
+        if (!empty($bank)) {
+            foreach ($bank as $key => $value) {
+            $detailPembayaranSp = new DetailPembayaranSp();
+            $detailPembayaranSp->id_penjualan_sp =$penjualanSp->id_penjualan_sp;
             $detailPembayaranSp->metode_pembayaran = $value['bank'];
-            $detailPembayaranSp->nominal=$value['trf'];
+            $detailPembayaranSp->nominal= str_replace('.', '', $value['trf']);
             $detailPembayaranSp->catatan = $value['catatan'];
             switch ($value['bank']) {
                 case 'BCA Pusat':
@@ -259,9 +283,10 @@ class PenjualanSPController extends Controller
                 default:
                     break;
             }
+            $detailPembayaranSp->save();
         }
-        $detailPembayaranSp->save();
-        session(['id_sales'=>$penjualanSp->id_sales,'id_cust'=>$penjualanSp->id_customer]);
+        $request->session()->forget('bank-sp');
+        }
         Schema::dropIfExists('temp_penjualan_sps');
         Schema::dropIfExists('temp_detail_penjualan_sps');
         return redirect('/penjualan/sp/invoice-sp');
@@ -299,6 +324,15 @@ class PenjualanSPController extends Controller
         return $datatables->of($detailPenjualan)
                         ->addColumn('indeks', function ($detailPenjualanSp) {
                               return '';
+                            })
+                            ->addColumn('harga', function ($detailPenjualanSp) {
+                              return number_format($detailPenjualanSp->harga_satuan,0,",",".");
+                            })
+                            ->addColumn('jumlah', function ($detailPenjualanSp) {
+                              return number_format($detailPenjualanSp->jumlah_sp,0,",",".");
+                            })
+                            ->addColumn('jumlah_program', function ($detailPenjualanSp) {
+                              return number_format($detailPenjualanSp->harga_beli,0,",",".");
                             })
                             ->addColumn('total_harga', function ($detailPenjualanSp) {
                               return number_format(($detailPenjualanSp->jumlah_sp-$detailPenjualanSp->harga_beli)*$detailPenjualanSp->harga_satuan,0,",",".");

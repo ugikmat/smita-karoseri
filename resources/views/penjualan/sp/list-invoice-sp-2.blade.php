@@ -106,7 +106,7 @@
       <b>Jumlah Tunai</b>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      <input type="text" class="form-control" name="total" id="total" value="{{$penjualanSP->grand_total}}" readonly>
+      <input type="text" class="form-control" name="total" id="total" value="{{number_format($penjualanSP->grand_total,0,",",".")}}" readonly>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -339,9 +339,9 @@
             columns: [
               {data: 'nama_produk'},
                       {data: 'tipe_harga'},
-                      {data: 'harga_satuan'},
-                      {data: 'jumlah_sp'},
-                      {data: 'harga_beli'},
+                      {data: 'harga'},
+                      {data: 'jumlah'},
+                      {data: 'jumlah_program'},
                       {data: 'total_harga'},
                       {data: 'action', orderable: false, searchable: false}
             ]
@@ -355,9 +355,9 @@
             columns: [
               {data: 'nama_produk'},
                       {data: 'tipe_harga'},
-                      {data: 'harga_satuan'},
-                      {data: 'jumlah_sp'},
-                      {data: 'harga_beli'},
+                      {data: 'harga'},
+                      {data: 'jumlah'},
+                      {data: 'jumlah_program'},
                       {data: 'total_harga'},
             ]
         });

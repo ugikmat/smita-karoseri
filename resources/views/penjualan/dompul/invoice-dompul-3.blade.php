@@ -134,6 +134,7 @@ td{
           <br>
           <button data-repeater-delete type="button" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
         </div>
+        <hr>
       </div>
       <hr>
     </div>
@@ -233,7 +234,7 @@ td{
     }
 });
     $(document).ready(function () {
-        $('.repeater').repeater({
+        var repeater = $('.repeater').repeater({
             // (Optional)
             // start with an empty list of repeaters. Set your first (and only)
             // "data-repeater-item" with style="display:none;" and pass the
@@ -277,7 +278,18 @@ td{
             // Removes the delete button from the first list item,
             // defaults to false.
             isFirstItemUndeletable: false
-        })
+        });
+        @if(Session::has('bank'))
+        repeater.setList([
+          @foreach(session('bank') as $item)
+          {
+                'bank': "{{$item['bank']}}",
+                'trf' : "{{$item['trf']}}",
+                'catatan' : "{{$item['catatan']}}"
+            },
+          @endforeach
+        ]);
+        @endif
     });
 </script>
 <script>
@@ -293,8 +305,8 @@ td{
                       {data: 'produk'},
                       {data: 'tipe_dompul'},
                       {data: 'harga_dompul'},
-                      {data: 'qty'},
-                      {data: 'qty_program'},
+                      {data: 'jumlah'},
+                      {data: 'jumlah_program'},
                       {data: 'total_harga'},
                       {data: 'action', orderable: false, searchable: false}
                   ]

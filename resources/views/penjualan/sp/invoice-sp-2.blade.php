@@ -72,7 +72,7 @@ td{
         Tanggal Penjualan :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl" value="{{$penjualanSp->tanggal_penjualan_sp}}" readonly>
+      <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl" value="{{Carbon\Carbon::parse($penjualanSp->tanggal_penjualan_sp)->format('d/m/Y')}}" readonly>
       </div>
     </div>
   </div>
@@ -289,8 +289,9 @@ $.ajaxSetup({
             // defaults to false.
             isFirstItemUndeletable: false
         });
+        @if(Session::has('bank-sp'))
         repeater.setList([
-          @foreach($bank as $item)
+          @foreach(session('bank-sp') as $item)
           {
                 'bank': "{{$item['bank']}}",
                 'trf' : "{{$item['trf']}}",
@@ -298,6 +299,7 @@ $.ajaxSetup({
             },
           @endforeach
         ]);
+        @endif
     });
 
 </script>
@@ -312,9 +314,9 @@ $.ajaxSetup({
                   columns: [
                       {data: 'nama_produk'},
                       {data: 'tipe_harga'},
-                      {data: 'harga_satuan'},
-                      {data: 'jumlah_sp'},
-                      {data: 'harga_beli'},
+                      {data: 'harga'},
+                      {data: 'jumlah'},
+                      {data: 'jumlah_program'},
                       {data: 'total_harga'},
                       {data: 'action', orderable: false, searchable: false}
                   ]

@@ -94,6 +94,7 @@ Route::post('/get_harga/{tipe}/{kode}', 'PenjualanSPController@getHarga');
 // }) -> name('invoice-sp-3');
 
 Route::post('/penjualan/sp/invoice-sp/edit', 'PenjualanSPController@edit');
+Route::get('/penjualan/sp/invoice-sp/edit/{id}', 'PenjualanSPController@showEdit');
 Route::get('/edit_invoice_sp/{id}', 'PenjualanSPController@data');
 Route::post('/invoice_sp/update/{id}','PenjualanSPController@update');
 Route::post('/invoice_sp/verify','PenjualanSPController@verify');
@@ -120,23 +121,20 @@ Route::get('/monitor-data/{tgl}','MonitorController@data');
 Route::get('/penjualan/laporan-penjualan/LPdompul', 'LaporanPenjualanDompulController@index');
 Route::get('/penjualan/laporan-penjualan/LPdompul-piutang/{sales}', 'LaporanPenjualanDompulController@detail');
 Route::get('/laporan-penjualan/{tgl_penjualan}', 'LaporanPenjualanDompulController@data');
-Route::get('/laporan-penjualan/piutang/{id}', 'LaporanPenjualanDompulController@dataPiutang');
+Route::get('/laporan-penjualan/piutang/{id}/{tgl}', 'LaporanPenjualanDompulController@dataPiutang');
+Route::post('/get_laporan_dompul/{tgl}', 'LaporanPenjualanDompulController@getData');
 
 Route::get('/penjualan/laporan-penjualan/dompul-head', 'LaporanDompulHeadController@index');
+Route::post('/penjualan/laporan-penjualan/dompul-head-show', 'LaporanDompulHeadController@lihatLaporan');
 Route::get('/penjualan/laporan-penjualan/dompul-head-user', 'LaporanDompulHeadController@showUserTransaction');
 Route::get('/penjualan/laporan-penjualan/dompul-head-server', 'LaporanDompulHeadController@showServerTransaction');
 
-Route::get('/penjualan/laporan-penjualan/LPsp', function() {
-  return view ('/penjualan/laporan-penjualan/LPsp');
-}) -> name('LPsp');
+Route::get('/penjualan/laporan-penjualan/LPsp', 'LaporanPenjualanSPController@index');
+Route::get('/laporan-penjualan/sp/{tgl_penjualan}', 'LaporanPenjualanSPController@data');
+Route::post('/get_laporan_sp/{tgl}', 'LaporanPenjualanSPController@getData');
+Route::get('/penjualan/laporan-penjualan/LPsp-piutang/{sales}','LaporanPenjualanSPController@detail');
+Route::get('/laporan-penjualan/sp/piutang/{id}/{tgl}', 'LaporanPenjualanSPController@dataPiutang');
 
-Route::get('/penjualan/laporan-penjualan/LPdompul-2', function() {
-  return view ('/penjualan/laporan-penjualan/LPdompul-2');
-}) -> name('LPdompul-2');
-
-Route::get('/penjualan/laporan-penjualan/LPsp-2', function() {
-  return view ('/penjualan/laporan-penjualan/LPsp-2');
-}) -> name('LPsp-2');
 
 //Persediaan
 Route::get('/persediaan/mutasi-dompul', function() {

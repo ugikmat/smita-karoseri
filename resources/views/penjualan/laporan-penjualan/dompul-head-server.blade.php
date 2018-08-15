@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Dompul Head User')
+@section('title', 'Dompul Head Server')
 
 @section('content_header')
-    <h1>Laporan Transaksi Penjualan Dompul User</h1>
+    <h1>Laporan Transaksi Penjualan Dompul Server</h1>
 
 @stop
 

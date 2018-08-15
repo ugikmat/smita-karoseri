@@ -190,6 +190,12 @@ class ListPenjualanDompulController extends Controller
                         ->where('nama_downline',$customer)
                         ->where('status_penjualan',1)
                         ->where('status_active',1))
+                        ->addColumn('jumlah', function ($uploadDompul) {
+                              return number_format($uploadDompul->qty,0,",",".");
+                            })
+                        ->addColumn('jumlah_program', function ($uploadDompul) {
+                            return number_format($uploadDompul->qty_program,0,",",".");
+                            })
                         ->addColumn('total_harga', function ($uploadDompul) {
                               return number_format(($uploadDompul->qty-$uploadDompul->qty_program)*$uploadDompul->harga_dompul,0,",",".");
                             })

@@ -67,7 +67,7 @@ td{
         Tanggal Penjualan :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl" value="{{$penjualanSp->tanggal_penjualan_sp}}" readonly>
+            <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl" value="{{Carbon\Carbon::parse($penjualanSp->tanggal_penjualan_sp)->format('d/m/Y')}}" readonly>
       </div>
     </div>
   </div>
@@ -142,7 +142,7 @@ td{
   </div>
   <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
     <br>
-    <button type="button" onclick="goBack()" class="btn btn-danger"><span class="glyphicon glyphicon-chevron-left"></span> Kembali</button>
+  <a href="{{URL::previous()}}"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-chevron-left"></span> Kembali</button></a>
     <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Simpan</button>
     <br><br>
   </div>
@@ -200,15 +200,17 @@ td{
             // defaults to false.
             isFirstItemUndeletable: false
         });
+        @if(Session::has('bank-sp'))
         repeater.setList([
-          @foreach($bank as $item)
+          @foreach(session('bank-sp') as $item)
           {
                 'bank': "{{$item['bank']}}",
-                'trf' : "{{$item['trf']}}",
+                'trf' : "{{number_format($item['trf'],0,",",".")}}",
                 'catatan' : "{{$item['catatan']}}"
             },
           @endforeach
         ]);
+        @endif
     });
 </script>
 <script>
@@ -232,9 +234,9 @@ function goBack() {
                   columns: [
                       {data: 'nama_produk'},
                       {data: 'tipe_harga'},
-                      {data: 'harga_satuan'},
-                      {data: 'jumlah_sp'},
-                      {data: 'harga_beli'},
+                      {data: 'harga'},
+                      {data: 'jumlah'},
+                      {data: 'jumlah_program'},
                       {data: 'total_harga'}
                   ]
               });

@@ -23,7 +23,7 @@
         Tanggal Cetak Laporan
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        : tgl skarang
+        : {{\Carbon\Carbon::now()->format('d/m/Y')}}
       </div>
     </div>
   </div>
@@ -35,7 +35,7 @@
     <tr>
         <th>No</th>
         <th>Nama Sales</th>
-        {{-- <th>BO</th> --}}
+        <th>BO</th>
         <th>Qty Penjualan</th>
         <th>Total Penjualan</th>
         <th>Total Tunai</th>
@@ -51,19 +51,19 @@
       <tr>
         <td></td>
         <td><b>Grand Total</b></td>
+        <td></td>
         <td><input type="text" name="qty" id="qty" class="form-control" value="" readonly></td>
-        <td><input type="text" name="penjualan" id="penjualan" class="form-control" value="" readonly></td>
+        <td><input type="text" name="total" id="total" class="form-control" value="" readonly></td>
         <td><input type="text" name="cash" id="cash" class="form-control" value="" readonly></td>
-        <td><input type="text" name="bca-pusat" id="bca-pusat" class="form-control" value="" readonly></td>
-        <td><input type="text" name="bca-cabang" id="bca-cabang" class="form-control" value="" readonly></td>
+        <td><input type="text" name="bca_pusat" id="bca_pusat" class="form-control" value="" readonly></td>
+        <td><input type="text" name="bca_cabang" id="bca_cabang" class="form-control" value="" readonly></td>
+        <td><input type="text" name="mandiri" id="mandiri" class="form-control" value="" readonly></td>
         <td><input type="text" name="bri" id="bri" class="form-control" value="" readonly></td>
         <td><input type="text" name="bni" id="bni" class="form-control" value="" readonly></td>
-        <td><input type="text" name="mandiri" id="mandiri" class="form-control" value="" readonly></td>
         <td><input type="text" name="piutang" id="piutang" class="form-control" value="" readonly></td>
       </tr>
     </tfoot>
 </table>
-
 <!--Modal input-->
 <div class="modal fade bs-example-modal-lg" id='modalInput' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -93,7 +93,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input class="datepicker col-md-7 col-xs-12" id="tgl" data-date-format="dd-mm-yyyy">
+                    <input class="datepicker col-md-7 col-xs-12" id="tgl" data-date-format="dd-mm-yyyy" value="{{session('tgl_laporan_dompul')}}">
                     </div>
                   </div>
 
@@ -101,7 +101,7 @@
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset"> <i class="fa fa-repeat"></i> Kosongkan</button>
-                      <button type="button" onclick="loadData()" class="btn btn-success" data-dismiss="modal"><i class="glyphicon glyphicon-ok"></i>Tampilkan Laporan Penjualan Dompul</button>
+                      <button type="button" id="save" class="btn btn-success" data-dismiss="modal"><i class="glyphicon glyphicon-ok"></i>Tampilkan Laporan Penjualan Dompul</button>
                     </div>
                   </div>
                 </form>
@@ -127,11 +127,22 @@
   });
 </script>
 <script>
-    // $(function () {
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+    $(function () {
+        $tgl = $('#tgl').val();
+        if($tgl==""){
+          $tgl='null';
+        }else{
+          console.log('No');
+        }
         var t = $('#lp-dompul-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/laporan-penjualan/null',
+            ajax: `/laporan-penjualan/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -152,14 +163,15 @@
             columns: [
                 {data: 'index'},
                 {data: 'nm_sales'},
-                {data: 'qty'},
+                {data: 'nama_bo'},
+                {data: 'total_transaksi'},
                 {data: 'total_penjualan'},
-                {data: 'total_tunai'},
+                {data: 'cash'},
                 {data: 'bca_pusat'},
                 {data: 'bca_cabang'},
                 {data: 'mandiri'},
-                {data: 'bni'},
                 {data: 'bri'},
+                {data: 'bni'},
                 {data: 'piutang'},
             ]
         });
@@ -168,10 +180,44 @@
             cell.innerHTML = i+1;
           } );
         } ).draw();
-        function loadData() {
+        $.post(`/get_laporan_dompul/${$tgl}`, function(response){
+            if(response.success)
+            {
+              console.log('Success..');
+              $('#qty').val(response.qty);
+              $('#total').val(response.total);
+              $('#cash').val(response.cash);
+              $('#bca_pusat').val(response.bca_pusat);
+              $('#bca_cabang').val(response.bca_cabang);
+              $('#mandiri').val(response.mandiri);
+              $('#bni').val(response.bni);
+              $('#bri').val(response.bri);
+              $('#piutang').val(response.piutang);
+              console.log('Loaded');
+              console.log(response.data);
+            }
+        }, 'json');
+        $('#save').on('click',function(event) {
           $tgl = $('#tgl').val();
           t.ajax.url(`/laporan-penjualan/${$tgl}`).load();
-        }
-    // });
+          $.post(`/get_laporan_dompul/${$tgl}`, function(response){
+            if(response.success)
+            {
+              console.log('Success..');
+              $('#qty').val(response.qty);
+              $('#total').val(response.total);
+              $('#cash').val(response.cash);
+              $('#bca_pusat').val(response.bca_pusat);
+              $('#bca_cabang').val(response.bca_cabang);
+              $('#mandiri').val(response.mandiri);
+              $('#bni').val(response.bni);
+              $('#bri').val(response.bri);
+              $('#piutang').val(response.piutang);
+              console.log('Loaded');
+              console.log(response.data);
+            }
+        }, 'json');
+        });
+    });
 </script>
 @stop

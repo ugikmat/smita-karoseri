@@ -53,6 +53,21 @@
                         </span>
                     @endif
                 </div>
+                <div class="form-group has-feedback {{ $errors->has('id_bo') ? 'has-error' : '' }}">
+                    <select id="id_bo" required="required" name="id_bo" placeholder="Pilih BO" class="form-control">
+                          <option value="" selected disabled>Pilih BO</option>
+                          @isset($bosarray)
+                              @foreach ($bosarray as $data)
+                              <option value="{{ $data->id_bo }}">{{ $data->nama_bo }}</option>
+                              @endforeach
+                          @endisset
+                    </select>
+                    @if ($errors->has('id_bo'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('id_bo') }}</strong>
+                        </span>
+                    @endif
+                </div>
                 <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
                     <input type="email" name="email" class="form-control" value="{{ old('email') }}"
                            placeholder="{{ trans('adminlte::adminlte.email') }}">

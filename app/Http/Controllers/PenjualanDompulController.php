@@ -42,7 +42,7 @@ class PenjualanDompulController extends Controller
     public function show(Request $request)
     {
         $sales = Sales::where('status','1')->where('nm_sales',$request->get('id'))->first();
-        session(['sales'=>$sales,'tgl'=>$request->get('tgl'),'now'=>Carbon::now('Asia/Jakarta')->format('d-m-Y')]);
+        session(['sales'=>$sales,'tgl_penjualan_dompul'=>$request->get('tgl'),'now'=>Carbon::now('Asia/Jakarta')->format('d-m-Y')]);
         return redirect('/penjualan/dompul/invoice-dompul');
         // return view('penjualan.dompul.invoice-dompul')->with(['sales'=>$sales,'tgl'=>$this->nama_tgl,'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
     }
@@ -130,6 +130,7 @@ class PenjualanDompulController extends Controller
     public function verify(Request $request,$canvaser,$tgl,$downline){
         $tunai = $request->get('tunai');
         $bank = $request->get('bank');
+        session(['bank'=>$bank]);
         for ($key=0; $key <count($bank) ; $key++) { 
             $bank[$key]['trf']=number_format($bank[$key]['trf'],0,",",".");
             if (empty($bank[$key]['bank'])) {
@@ -180,6 +181,7 @@ class PenjualanDompulController extends Controller
      * Save transaction
      */
     public function store(Request $request){
+        $request->session()->forget('bank');
         $id_sales = $request->get('sales');
         $nm_sales = $request->get('nm_sales');
         $hp_downline = $request->get('downline');
@@ -286,6 +288,12 @@ class PenjualanDompulController extends Controller
                         ->where('nama_downline',$downline)
                         ->where('status_penjualan',0)
                         ->where('status_active',1))
+                        ->addColumn('jumlah', function ($uploadDompul) {
+                              return number_format($uploadDompul->qty,0,",",".");
+                            })
+                        ->addColumn('jumlah_program', function ($uploadDompul) {
+                            return number_format($uploadDompul->qty_program,0,",",".");
+                            })
                         ->addColumn('total_harga', function ($uploadDompul) {
                               return number_format(($uploadDompul->qty-$uploadDompul->qty_program)*$uploadDompul->harga_dompul,0,",",".");
                             })
