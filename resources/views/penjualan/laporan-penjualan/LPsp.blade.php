@@ -9,6 +9,17 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('/datepicker/css/bootstrap-datepicker.min.css') }}">
+<style>
+  td{
+    text-align: center;
+  }
+  th{
+    text-align: center;
+  }
+  .form-control{
+    text-align: center;
+  }
+</style>
 @stop
 
 @section('content')
@@ -23,7 +34,7 @@
         Tanggal Cetak Laporan
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        : {{\Carbon\Carbon::now()->format('d/m/Y')}}
+        : {{\Carbon\Carbon::now()->format('d-m-Y')}}
       </div>
     </div>
   </div>
