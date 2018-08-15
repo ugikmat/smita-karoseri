@@ -37,8 +37,10 @@ class LaporanPenjualanDompulController extends Controller
     }
     public function getData($tgl){
         if ($tgl!='null') {
+            session(['tgl_laporan_dompul'=>$tgl]);
             $tgl = Carbon::parse($tgl);
             $tgl = $tgl->format('Y-m-d');
+
         }
         $total_nominal = DB::table('detail_penjualan_dompuls')
                    ->select(DB::raw("id_penjualan_dompul, sum(nominal) AS total_bayar,
@@ -148,25 +150,30 @@ class LaporanPenjualanDompulController extends Controller
      * @param \Yajra\Datatables\Datatables $datatables
      * @return \Illuminate\Http\JsonResponse
      */
-    public function dataPiutang(Datatables $datatables,$id)
+    public function dataPiutang(Datatables $datatables,$id,$tgl)
     {
-        return $datatables->eloquent(PenjualanDompul::select('master_customers.nm_cust','grand_total','bayar_tunai','grand_total',
-                            'bca_pusat','bca_cabang','mandiri','bri','bni')
+        if ($tgl_penjualan!='null') {
+            $tgl = Carbon::parse($tgl);
+            $tgl = $tgl->format('Y-m-d');
+        }
+        $total_nominal = DB::table('detail_penjualan_dompuls')
+                   ->select(DB::raw("id_penjualan_dompul, sum(nominal) AS total_bayar,
+    	sum(IF(metode_pembayaran = 'Cash', nominal, 0)) AS cash,
+	sum(IF(metode_pembayaran = 'BCA Pusat', nominal, 0)) AS bca_pusat, 
+	sum(IF(metode_pembayaran = 'BCA Cabang', nominal, 0)) AS bca_cabang, 
+	sum(IF(metode_pembayaran = 'Mandiri', nominal, 0)) AS mandiri,
+	sum(IF(metode_pembayaran = 'BNI', nominal, 0)) AS bni, 
+	sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+                   ->groupBy('id_penjualan_dompul');
+        return $datatables->eloquent(PenjualanDompul::select(DB::raw('master_saless.nm_sales, 
+                                sum(penjualan_dompuls.grand_total) AS total_penjualan, 
+                                (sum(penjualan_dompuls.grand_total)-sum(total_bayar)) AS piutang'))
                         ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
-                        ->join('master_customers','master_customers.no_hp','=','penjualan_dompuls.no_hp_kios')
-                        ->where('penjualan_dompuls.id_sales',$id))
+                        ->where('penjualan_dompuls.id_sales',$id)
+                        ->where('tanggal_penjualan_dompul',$tgl))
                         ->addColumn('index', function ($penjualanDompul) {
                               return 
                               '';
-                            })
-                            ->addColumn('piutang', function ($penjualanDompul) {
-                              return $penjualanDompul->grand_total-
-                              ($penjualanDompul->bayar_tunai+
-                                $penjualanDompul->bca_pusat+
-                                $penjualanDompul->bca_cabang+
-                                $penjualanDompul->mandiri+
-                                $penjualanDompul->bri+
-                                $penjualanDompul->bni);
                             })
                           ->make(true);
     }

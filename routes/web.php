@@ -120,7 +120,7 @@ Route::get('/monitor-data/{tgl}','MonitorController@data');
 Route::get('/penjualan/laporan-penjualan/LPdompul', 'LaporanPenjualanDompulController@index');
 Route::get('/penjualan/laporan-penjualan/LPdompul-piutang/{sales}', 'LaporanPenjualanDompulController@detail');
 Route::get('/laporan-penjualan/{tgl_penjualan}', 'LaporanPenjualanDompulController@data');
-Route::get('/laporan-penjualan/piutang/{id}', 'LaporanPenjualanDompulController@dataPiutang');
+Route::get('/laporan-penjualan/piutang/{id}/{tgl}', 'LaporanPenjualanDompulController@dataPiutang');
 Route::post('/get_laporan_dompul/{tgl}', 'LaporanPenjualanDompulController@getData');
 
 Route::get('/penjualan/laporan-penjualan/dompul-head', 'LaporanDompulHeadController@index');

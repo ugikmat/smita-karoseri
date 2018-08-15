@@ -92,7 +92,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input class="datepicker col-md-7 col-xs-12" id="tgl" data-date-format="dd-mm-yyyy">
+                    <input class="datepicker col-md-7 col-xs-12" id="tgl" data-date-format="dd-mm-yyyy" value="{{session('tgl_laporan_dompul')}}">
                     </div>
                   </div>
 
@@ -100,7 +100,7 @@
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset"> <i class="fa fa-repeat"></i> Kosongkan</button>
-                      <button type="button" onclick="loadData()" class="btn btn-success" data-dismiss="modal"><i class="glyphicon glyphicon-ok"></i>Tampilkan Laporan Penjualan Dompul</button>
+                      <button type="button" id="save" class="btn btn-success" data-dismiss="modal"><i class="glyphicon glyphicon-ok"></i>Tampilkan Laporan Penjualan Dompul</button>
                     </div>
                   </div>
                 </form>
@@ -131,11 +131,12 @@
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-    // $(function () {
+    $(function () {
+        $tgl = $('#tgl').val();
         var t = $('#lp-dompul-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/laporan-penjualan/null',
+            ajax: `/laporan-penjualan/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -172,7 +173,24 @@
             cell.innerHTML = i+1;
           } );
         } ).draw();
-        function loadData() {
+        $.post(`/get_laporan_dompul/${$tgl}`, function(response){
+            if(response.success)
+            {
+              console.log('Success..');
+              $('#qty').val(response.qty);
+              $('#total').val(response.total);
+              $('#cash').val(response.cash);
+              $('#bca_pusat').val(response.bca_pusat);
+              $('#bca_cabang').val(response.bca_cabang);
+              $('#mandiri').val(response.mandiri);
+              $('#bni').val(response.bni);
+              $('#bri').val(response.bri);
+              $('#piutang').val(response.piutang);
+              console.log('Loaded');
+              console.log(response.data);
+            }
+        }, 'json');
+        $('#save').on('click',function(event) {
           $tgl = $('#tgl').val();
           t.ajax.url(`/laporan-penjualan/${$tgl}`).load();
           $.post(`/get_laporan_dompul/${$tgl}`, function(response){
@@ -192,7 +210,7 @@
               console.log(response.data);
             }
         }, 'json');
-        }
-    // });
+        });
+    });
 </script>
 @stop
