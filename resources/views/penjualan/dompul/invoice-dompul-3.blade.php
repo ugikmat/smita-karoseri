@@ -123,18 +123,19 @@ td{
         <div class="col-xs-3">
           <b>Nominal</b>
           <br>
-          <input type="text" id="trf" name="trf" class="form-control" value="">
+          <input type="text" id="trf" name="trf" class="form-control"  value="" required>
         </div>
         <div class="col-xs-3">
           <b>Catatan</b>
           <br>
           <input type="text" id="catatan" name="catatan" class="form-control" value="">
         </div>
+        <div class="col-xs-3">
           <br>
           <button data-repeater-delete type="button" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
         </div>
       </div>
-    <hr>
+      <hr>
     </div>
   </div>
 <button data-repeater-create type="button" class="btn btn-warning"> <span class="glyphicon glyphicon-plus"></span> Tambah Pembayaran</button>
