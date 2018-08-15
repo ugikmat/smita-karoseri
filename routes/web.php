@@ -131,15 +131,9 @@ Route::get('/penjualan/laporan-penjualan/dompul-head-server', 'LaporanDompulHead
 Route::get('/penjualan/laporan-penjualan/LPsp', 'LaporanPenjualanSPController@index');
 Route::get('/laporan-penjualan/sp/{tgl_penjualan}', 'LaporanPenjualanSPController@data');
 Route::post('/get_laporan_sp/{tgl}', 'LaporanPenjualanSPController@getData');
+Route::get('/penjualan/laporan-penjualan/LPsp-piutang/{sales}','LaporanPenjualanSPController@detail');
+Route::get('/laporan-penjualan/sp/piutang/{id}/{tgl}', 'LaporanPenjualanSPController@dataPiutang');
 
-
-Route::get('/penjualan/laporan-penjualan/LPdompul-2', function() {
-  return view ('/penjualan/laporan-penjualan/LPdompul-2');
-}) -> name('LPdompul-2');
-
-Route::get('/penjualan/laporan-penjualan/LPsp-2', function() {
-  return view ('/penjualan/laporan-penjualan/LPsp-2');
-}) -> name('LPsp-2');
 
 //Persediaan
 Route::get('/persediaan/mutasi-dompul', function() {

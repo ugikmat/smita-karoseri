@@ -59,7 +59,7 @@ class LaporanPenjualanDompulController extends Controller
         $total_piutang=0;
         foreach ($penjualan as $key => $value) {
             $total_penjualan+=$value->total_penjualan;
-            $total_piutang+=$value->total_piutang;
+            $total_piutang+=$value->piutang;
         }
         return view('penjualan.laporan-penjualan.LPdompul-2',['sales'=>$dataSales,'total_penjualan'=>$total_penjualan,'total_piutang'=>$total_piutang,]);
     }

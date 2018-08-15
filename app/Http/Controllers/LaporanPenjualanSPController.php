@@ -31,6 +31,38 @@ class LaporanPenjualanSPController extends Controller
         return view('penjualan.laporan-penjualan.LPsp');
     }
 
+    public function detail($sales){
+        $dataSales = Sales::where('nm_sales',$sales)->first();
+        $total_nominal = DB::table('detail_pembayaran_sps')
+                   ->select(DB::raw("id_penjualan_sp, sum(nominal) AS total_bayar,
+    	sum(IF(metode_pembayaran = 'Cash', nominal, 0)) AS cash,
+	sum(IF(metode_pembayaran = 'BCA Pusat', nominal, 0)) AS bca_pusat, 
+	sum(IF(metode_pembayaran = 'BCA Cabang', nominal, 0)) AS bca_cabang, 
+	sum(IF(metode_pembayaran = 'Mandiri', nominal, 0)) AS mandiri,
+	sum(IF(metode_pembayaran = 'BNI', nominal, 0)) AS bni, 
+	sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+                   ->groupBy('id_penjualan_sp');
+        $tgl = Carbon::parse(session('tgl_laporan_sp'));
+        $tgl = $tgl->format('Y-m-d');
+        $penjualan =PenjualanProduk::select(DB::raw('master_customers.nm_cust,
+                                sum(penjualan_sps.grand_total) AS total_penjualan, 
+                                (sum(penjualan_sps.grand_total)-sum(total_bayar)) AS piutang'))
+                        ->join('master_saless','master_saless.id_sales','=','penjualan_sps.id_sales')
+                        ->join('master_customers','master_customers.id_cust','=','penjualan_sps.id_customer')
+                        ->joinSub($total_nominal, 'total_nominal', function($join) {
+                            $join->on('penjualan_sps.id_penjualan_sp', '=', 'total_nominal.id_penjualan_sp');
+                        })
+                        ->where('tanggal_penjualan_sp',$tgl)
+                        ->where('master_saless.nm_sales',$sales)
+                        ->groupBy('master_customers.nm_cust')->get();
+        $total_penjualan=0;
+        $total_piutang=0;
+        foreach ($penjualan as $key => $value) {
+            $total_penjualan+=$value->total_penjualan;
+            $total_piutang+=$value->piutang;
+        }
+        return view('penjualan.laporan-penjualan.LPsp-2',['sales'=>$dataSales,'total_penjualan'=>$total_penjualan,'total_piutang'=>$total_piutang,]);
+    }
 
     public function getData($tgl){
         if ($tgl!='null') {
@@ -141,6 +173,45 @@ class LaporanPenjualanSPController extends Controller
                             //     $penjualanDompul->bri+
                             //     $penjualanDompul->bni);
                             // })
+                          ->make(true);
+    }
+
+    /**
+     * Process dataTable ajax response.
+     *
+     * @param \Yajra\Datatables\Datatables $datatables
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function dataPiutang(Datatables $datatables,$id,$tgl)
+    {
+        if ($tgl!='null') {
+            $tgl = Carbon::parse($tgl);
+            $tgl = $tgl->format('Y-m-d');
+        }
+        $total_nominal = DB::table('detail_pembayaran_sps')
+                   ->select(DB::raw("id_penjualan_sp, sum(nominal) AS total_bayar,
+    	sum(IF(metode_pembayaran = 'Cash', nominal, 0)) AS cash,
+	sum(IF(metode_pembayaran = 'BCA Pusat', nominal, 0)) AS bca_pusat, 
+	sum(IF(metode_pembayaran = 'BCA Cabang', nominal, 0)) AS bca_cabang, 
+	sum(IF(metode_pembayaran = 'Mandiri', nominal, 0)) AS mandiri,
+	sum(IF(metode_pembayaran = 'BNI', nominal, 0)) AS bni, 
+	sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+                   ->groupBy('id_penjualan_sp');
+        return $datatables->eloquent(PenjualanProduk::select(DB::raw('master_customers.nm_cust,
+                                sum(penjualan_sps.grand_total) AS total_penjualan, 
+                                (sum(penjualan_sps.grand_total)-sum(total_bayar)) AS piutang'))
+                        ->join('master_saless','master_saless.id_sales','=','penjualan_sps.id_sales')
+                        ->join('master_customers','master_customers.id_cust','=','penjualan_sps.id_customer')
+                        ->joinSub($total_nominal, 'total_nominal', function($join) {
+                            $join->on('penjualan_sps.id_penjualan_sp', '=', 'total_nominal.id_penjualan_sp');
+                        })
+                        ->where('tanggal_penjualan_sp',$tgl)
+                        ->where('master_saless.id_sales',$id)
+                        ->groupBy('master_customers.nm_cust'))
+                        ->addColumn('index', function ($penjualanDompul) {
+                              return 
+                              '';
+                            })
                           ->make(true);
     }
 }
