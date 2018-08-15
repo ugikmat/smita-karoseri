@@ -105,8 +105,17 @@ class UploadDompulController extends Controller {
                                 'tipe_dompul' => substr($value->nama_sub_master, 0, 3),
                                 'id_gudang' => 0,
                                 'status_sub_master_dompul' => 'Aktif'
-                            ];   
+                            ];
+                                $master = explode(' ',$value->nama_sub_master);
+                                if(count($master)>1){
+                                    $bo[]=['id_ho'=>0,
+                                    'kode_bo'=>$master[1],
+                                    'nama_bo'=>$master[1],
+                                    'no_hp_sub_master_dompul'=>$value->hp_sub_master
+                                    ];
+                                }
                                 $sub_master[] = $value->nama_sub_master;
+                                
                             }
                             // $hargaDompul[] = ['nama_harga_dompul' => $value->produk ,
                             //     'harga_dompul' => $value->harga_dompul ,
@@ -140,6 +149,9 @@ class UploadDompulController extends Controller {
                     }
                 }
                 try {
+                if (!empty($bo)) {
+                    DB::table('bos')->insert($bo);
+                }
                 if (!empty($uploadDompul)) {
                     DB::table('upload_dompuls')->insert($uploadDompul);
                 }
