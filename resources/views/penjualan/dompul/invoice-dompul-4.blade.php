@@ -214,8 +214,8 @@ function goBack() {
                       {data: 'produk'},
                       {data: 'tipe_dompul'},
                       {data: 'harga_dompul'},
-                      {data: 'qty'},
-                      {data: 'qty_program'},
+                      {data: 'jumlah'},
+                      {data: 'jumlah_program'},
                       {data: 'total_harga'}
                   ]
               });
