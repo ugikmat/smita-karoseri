@@ -128,9 +128,10 @@ Route::post('/penjualan/laporan-penjualan/dompul-head-show', 'LaporanDompulHeadC
 Route::get('/penjualan/laporan-penjualan/dompul-head-user', 'LaporanDompulHeadController@showUserTransaction');
 Route::get('/penjualan/laporan-penjualan/dompul-head-server', 'LaporanDompulHeadController@showServerTransaction');
 
-Route::get('/penjualan/laporan-penjualan/LPsp', function() {
-  return view ('/penjualan/laporan-penjualan/LPsp');
-}) -> name('LPsp');
+Route::get('/penjualan/laporan-penjualan/LPsp', 'LaporanPenjualanSPController@index');
+Route::get('/laporan-penjualan/sp/{tgl_penjualan}', 'LaporanPenjualanSPController@data');
+Route::post('/get_laporan_sp/{tgl}', 'LaporanPenjualanSPController@getData');
+
 
 Route::get('/penjualan/laporan-penjualan/LPdompul-2', function() {
   return view ('/penjualan/laporan-penjualan/LPdompul-2');
