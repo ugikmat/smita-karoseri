@@ -19,8 +19,8 @@
         Tanggal Penjualan :
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        @if (session('tgl'))
-            <input type="input" disabled id="tgl"value={{ session('tgl')}}></input>
+        @if (Session::has('tgl_penjualan_dompul'))
+            <input type="input" disabled id="tgl" value={{ session('tgl_penjualan_dompul')}}>
         @endif
       </div>
     </div>
@@ -74,7 +74,7 @@
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
         @if (session('sales'))
-          <input type="input" disabled id="canvaser"value='{{ session('sales')->nm_sales}}'></input>
+          <input type="input" disabled id="canvaser"value='{{ session('sales')->nm_sales}}'>
         @endif
       </div>
     </div>
@@ -156,8 +156,8 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      @if (session('tgl'))
-                        <input class="datepicker col-md-7 col-xs-12" required="required" name="tgl" data-date-format="dd-mm-yyyy" value="{{ session('tgl') }}">
+                      @if (Session::has('tgl_penjualan_dompul'))
+                        <input class="datepicker col-md-7 col-xs-12" required="required" name="tgl" data-date-format="dd-mm-yyyy" value="{{ session('tgl_penjualan_dompul') }}">
                       @else
                         <input class="datepicker col-md-7 col-xs-12" required="required" name="tgl" data-date-format="dd-mm-yyyy" value="">
                       @endif

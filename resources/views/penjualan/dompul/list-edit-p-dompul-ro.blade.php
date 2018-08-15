@@ -179,7 +179,7 @@
   </div>
 @if($penjualanDompul->status_pembayaran==0)
 <button data-repeater-create type="button" class="btn btn-warning"> <span class="glyphicon glyphicon-plus"></span> Tambah Pembayaran</button>
-@endif
+
 
 <div class="row">
   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -197,6 +197,7 @@
     <br><br>
   </div>
 </div>
+@endif
 </div>
 </form>
 
@@ -318,14 +319,25 @@
             isFirstItemUndeletable: false
         });
         repeater.setList([
-          @foreach($detailPenjualanDompul as $item)
-          {
-                'id': "{{$item->id_detail_penjualan}}",
-                'bank': "{{$item->metode_pembayaran}}",
-                'trf' : "{{$item->nominal}}",
-                'catatan' : "{{$item->catatan}}"
-            },
-          @endforeach
+          @if($penjualanDompul->status_pembayaran==0)
+            @foreach($detailPenjualanDompul as $item)
+            {
+                  'id': "{{$item->id_detail_penjualan}}",
+                  'bank': "{{$item->metode_pembayaran}}",
+                  'trf' : "{{$item->nominal}}",
+                  'catatan' : "{{$item->catatan}}"
+              },
+            @endforeach
+          @else
+            @foreach($detailPenjualanDompul as $item)
+            {
+                  'id': "{{$item->id_detail_penjualan}}",
+                  'bank': "{{$item->metode_pembayaran}}",
+                  'trf' : "{{number_format($item->nominal,0,",",".")}}",
+                  'catatan' : "{{$item->catatan}}"
+              },
+            @endforeach
+          @endif
         ]);
     });
 </script>
@@ -349,8 +361,8 @@
               {data: 'produk'},
               {data: 'tipe_dompul'},
               {data: 'harga_dompul'},
-              {data: 'qty'},
-              {data: 'qty_program'},
+              {data: 'jumlah'},
+              {data: 'jumlah_program'},
               {data: 'total_harga'},
               {data: 'action', orderable: false, searchable: false}
             ]
@@ -378,8 +390,8 @@
               {data: 'produk'},
               {data: 'tipe_dompul'},
               {data: 'harga_dompul'},
-              {data: 'qty'},
-              {data: 'qty_program'},
+              {data: 'jumlah'},
+              {data: 'jumlah_program'},
               {data: 'total_harga'}
             ]
         });
