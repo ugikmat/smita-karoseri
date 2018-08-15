@@ -99,6 +99,7 @@
     </tr>
     </thead>
 </table>
+<br>
 <div class="container-fluid" style="background:white;">
   <br>
   <div class="form row">
@@ -221,7 +222,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <select name="tipe" required="required" id="tipe">
+                      <select name="tipe" required="required" id="tipe" class="form-control col-md-7 col-xs-12">
 
                       </select>
                     </div>
