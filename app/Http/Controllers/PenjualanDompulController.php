@@ -10,6 +10,7 @@ use App\HargaDompul;
 use App\PenjualanDompul;
 use App\DetailPenjualanDompul;
 use DB;
+use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
 
@@ -196,6 +197,7 @@ class PenjualanDompulController extends Controller
         $penjualanDompul->id_sales=$id_sales;
         $penjualanDompul->no_hp_kios=$hp_downline;
         $penjualanDompul->no_user=$user;
+        $penjualanDompul->id_bo=Auth::user()->id_bo;
         $penjualanDompul->tanggal_penjualan_dompul=$tgl;
         $penjualanDompul->tanggal_input=$tgl_input;
         $penjualanDompul->grand_total=str_replace('.', '', $total);
