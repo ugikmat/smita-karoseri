@@ -289,8 +289,9 @@ $.ajaxSetup({
             // defaults to false.
             isFirstItemUndeletable: false
         });
+        @if(Session::has('bank-sp'))
         repeater.setList([
-          @foreach($bank as $item)
+          @foreach(session('bank-sp') as $item)
           {
                 'bank': "{{$item['bank']}}",
                 'trf' : "{{$item['trf']}}",
@@ -298,6 +299,7 @@ $.ajaxSetup({
             },
           @endforeach
         ]);
+        @endif
     });
 
 </script>
@@ -312,9 +314,9 @@ $.ajaxSetup({
                   columns: [
                       {data: 'nama_produk'},
                       {data: 'tipe_harga'},
-                      {data: 'harga_satuan'},
-                      {data: 'jumlah_sp'},
-                      {data: 'harga_beli'},
+                      {data: 'harga'},
+                      {data: 'jumlah'},
+                      {data: 'jumlah_program'},
                       {data: 'total_harga'},
                       {data: 'action', orderable: false, searchable: false}
                   ]
