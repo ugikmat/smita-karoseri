@@ -124,7 +124,7 @@
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
           <b>Pembayaran</b>
           <br>
-          <select name="bank" id="bank" style="height: calc(3.5rem - 2px); width:100%;">
+          <select name="bank" id="bank" style="height: calc(3.5rem - 2px); width:100%;" required="required">
             <option value="">-- Cara Pembayaran --</option>
             <option value="Cash">Cash</option>
             <option value="BCA Pusat">BCA Pusat</option>
