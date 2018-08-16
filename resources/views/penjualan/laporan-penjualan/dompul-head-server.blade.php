@@ -8,7 +8,14 @@
 @stop
 
 @section('css')
-
+<style>
+  th{
+    text-align: center;
+  }
+  td{
+    text-align: center;
+  }
+</style>
 @stop
 
 @section('content')
@@ -16,9 +23,9 @@
 <table id="dompul-head-server-table" class="table responsive" width="100%">
     <thead>
       <tr>
-        <th>No.</th>
-        <th>Nama BO</th>
-        <th>Qty Penjualan</th>
+        <th rowspan="2">No.</th>
+        <th rowspan="2">Nama BO</th>
+        <th colspan="3">Qty Penjualan</th>
       </tr>
       <tr>
         <th>5K</th>
