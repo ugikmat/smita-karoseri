@@ -18,9 +18,9 @@
       <tr>
         <th rowspan="2">No.</th>
         <th rowspan="2">Nama BO</th>
-        <th colspan="3">Qty Penjualan</th>
+        <th colspan="3" style="text-align:center;">Qty Penjualan</th>
         <th rowspan="2">Total Nominal Penjualan</th>
-        <th colspan="7">Pembayaran</th>
+        <th colspan="7" style="text-align:center;">Pembayaran</th>
     </tr>
     <tr>
       <th>5k</th>
