@@ -94,8 +94,8 @@
             // processing: true,
             ajax: '/dompul-head-user-data',
             columns: [
-                {data: 'id_lokasi'},
-                {data: 'nm_lokasi'},
+                {data: ''},
+                {data: ''},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });
