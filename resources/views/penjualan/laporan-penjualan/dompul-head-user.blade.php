@@ -21,19 +21,19 @@
         <th colspan="3">Qty Penjualan</th>
         <th rowspan="2">Total Nominal Penjualan</th>
         <th colspan="7">Pembayaran</th>
-      </tr>
-      <tr>
-        <th>5K</th>
-        <th>10K</th>
-        <th>Rupiah</th>
-        <th>Tunai</th>
-        <th>BCA Pusat</th>
-        <th>BCA Cabang</th>
-        <th>Mandiri</th>
-        <th>BNI</th>
-        <th>BRI</th>
-        <th>Piutang</th>
-      </tr>
+    </tr>
+    <tr>
+      <th>5k</th>
+      <th>10K</th>
+      <th>Rupiah</th>
+      <th>Tunai</th>
+      <th>BCA Pusat</th>
+      <th>BCA Cabang</th>
+      <th>Mandiri</th>
+      <th>BRI</th>
+      <th>BNI</th>
+      <th>Piutang</th>
+    </tr>
     </thead>
     <tfoot>
       <tr>
