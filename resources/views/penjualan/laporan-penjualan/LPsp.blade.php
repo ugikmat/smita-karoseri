@@ -47,15 +47,15 @@
         <th>No</th>
         <th>Nama Sales</th>
         <th>BO</th>
-        <th>Qty Penjualan</th>
+        <th>Total Transaksi</th>
         <th>Total Penjualan</th>
-        <th>Total Tunai</th>
+        <th>Tunai</th>
         <th>BCA Pusat</th>
         <th>BCA Cabang</th>
         <th>Mandiri</th>
         <th>BRI</th>
         <th>BNI</th>
-        <th>Piutang</th>
+        <th>Kekurangan</th>
     </tr>
     </thead>
     <tfoot>

@@ -31,7 +31,7 @@
       <th>Mandiri</th>
       <th>BRI</th>
       <th>BNI</th>
-      <th>Piutang</th>
+      <th>Kekurangan</th>
     </tr>
     </thead>
     <tfoot>
