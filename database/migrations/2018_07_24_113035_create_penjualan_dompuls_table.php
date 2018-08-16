@@ -17,7 +17,7 @@ class CreatePenjualanDompulsTable extends Migration
             $table->increments('id_penjualan_dompul');
             $table->integer('id_sales');
             // $table->integer('id_ho');
-            // $table->integer('id_bo');
+            $table->integer('id_bo');
             $table->string('no_hp_kios');
             $table->string('no_user');
             $table->date('tanggal_penjualan_dompul');
