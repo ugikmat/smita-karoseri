@@ -15,29 +15,31 @@
 
 <table id="dompul-head-user-table" class="table responsive" width="100%">
     <thead>
-    <tr>
+      <tr>
         <th rowspan="2">No.</th>
-        <th rowspan="2" colspan="2">Nama BO</th>
+        <th rowspan="2">Nama BO</th>
         <th colspan="3">Qty Penjualan</th>
         <th rowspan="2">Total Nominal Penjualan</th>
-        <th colspan="6">Pembayaran</th>
-    </tr>
-    <tr>
-      <th>5k</th>
-      <th>10K</th>
-      <th>Rupiah</th>
-      <th>Tunai</th>
-      <th>BCA</th>
-      <th>Mandiri</th>
-      <th>BRI</th>
-      <th>BNI</th>
-      <th>Piutang</th>
-    </tr>
+        <th colspan="7">Pembayaran</th>
+      </tr>
+      <tr>
+        <th>5K</th>
+        <th>10K</th>
+        <th>Rupiah</th>
+        <th>Tunai</th>
+        <th>BCA Pusat</th>
+        <th>BCA Cabang</th>
+        <th>Mandiri</th>
+        <th>BNI</th>
+        <th>BRI</th>
+        <th>Piutang</th>
+      </tr>
     </thead>
     <tfoot>
       <tr>
         <td></td>
         <td><b>Total Non Program</b></td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>
@@ -62,10 +64,12 @@
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
       </tr>
       <tr>
         <td></td>
         <td><b>Grand Total</b></td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>
