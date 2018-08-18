@@ -305,14 +305,13 @@ $.ajaxSetup({
                       {data: 'tipe_harga'},
                       {data: 'harga'},
                       {data: 'jumlah'},
-                      {data: 'jumlah_program'},
                       {data: 'total_harga'},
                       {data: 'action', orderable: false, searchable: false}
                   ]
               });
               $(`#save`).on('click',function (event) {
       //ajax call
-        $.post(`${$('#link').val()}`, { tipe: $('#tipe').val(), qty_program: $('#qty_program').val() })
+        $.post(`${$('#link').val()}`, { tipe: $('#tipe').val()})
         .done(function(response){
       if(response.success)
       {
@@ -338,7 +337,6 @@ $.ajaxSetup({
     var button = $(event.relatedTarget) // Button that triggered the modal
     var id = button.data('id')
     var tipe_harga = button.data('tipe')
-    var qty_program = button.data('qty')
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     while (tipe.firstChild) {
@@ -354,7 +352,6 @@ $.ajaxSetup({
       opt.innerHTML = element.tipe_harga_sp;
       tipe.appendChild(opt);
     });
-    $('#qty_program').val(qty_program);
     // $('#editForm').attr('action', `/invoice_sp/update/${id}`);
     $('#link').val(`/invoice_sp/update/${id}`);
   })

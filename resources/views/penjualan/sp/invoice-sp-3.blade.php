@@ -236,7 +236,6 @@ function goBack() {
                       {data: 'tipe_harga'},
                       {data: 'harga'},
                       {data: 'jumlah'},
-                      {data: 'jumlah_program'},
                       {data: 'total_harga'}
                   ]
               });
