@@ -87,7 +87,6 @@ td{
         <th>Tipe Harga</th>
         <th>Harga Satuan</th>
         <th>Jumlah</th>
-        <th>Qty Program</th>
         <th>Harga Total</th>
         <th>action</th>
       </tr>
@@ -202,16 +201,6 @@ td{
                       </select>
                     </div>
                   </div>
-
-                  <div class="form-group row">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Qty Program
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="qty_program" required="required" name="qty_program" class="form-control col-md-7 col-xs-12" value="" autocomplete="off">
-                    </div>
-                  </div>
-
 
                   <div class="ln_solid"></div>
                   <div class="form-group">
