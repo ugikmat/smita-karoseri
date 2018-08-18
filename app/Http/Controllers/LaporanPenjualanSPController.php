@@ -164,6 +164,33 @@ class LaporanPenjualanSPController extends Controller
                               return 
                               '';
                             })
+                            ->addColumn('total_penjualan', function ($penjualanDompul) {
+                              return number_format($penjualanDompul->total_penjualan,0,",",".");
+                            })
+                            ->addColumn('cash', function ($penjualanDompul) {
+                              return number_format($penjualanDompul->cash,0,",",".");
+                            })
+                            ->addColumn('bca_pusat', function ($penjualanDompul) {
+                              return number_format($penjualanDompul->bca_pusat,0,",",".");
+                            })
+                            ->addColumn('bca_cabang', function ($penjualanDompul) {
+                              return number_format($penjualanDompul->bca_cabang,0,",",".");
+                            })
+                            ->addColumn('mandiri', function ($penjualanDompul) {
+                              return number_format($penjualanDompul->mandiri,0,",",".");
+                            })
+                            ->addColumn('bni', function ($penjualanDompul) {
+                              return number_format($penjualanDompul->bni,0,",",".");
+                            })
+                            ->addColumn('bri', function ($penjualanDompul) {
+                              return number_format($penjualanDompul->bri,0,",",".");
+                            })
+                            ->addColumn('mandiri', function ($penjualanDompul) {
+                              return number_format($penjualanDompul->mandiri,0,",",".");
+                            })
+                            ->addColumn('piutang', function ($penjualanDompul) {
+                              return number_format($penjualanDompul->piutang,0,",",".");
+                            })
                             // ->addColumn('piutang', function ($penjualanDompul) {
                             //   return $penjualanDompul->total_penjualan-
                             //   ($penjualanDompul->total_tunai+
@@ -211,6 +238,12 @@ class LaporanPenjualanSPController extends Controller
                         ->addColumn('index', function ($penjualanDompul) {
                               return 
                               '';
+                            })
+                             ->addColumn('total_penjualan', function ($penjualanDompul) {
+                              return number_format($penjualanDompul->total_penjualan,0,",",".");
+                            })
+                            ->addColumn('piutang', function ($penjualanDompul) {
+                              return number_format($penjualanDompul->piutang,0,",",".");
                             })
                           ->make(true);
     }

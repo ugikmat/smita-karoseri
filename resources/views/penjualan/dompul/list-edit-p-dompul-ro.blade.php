@@ -324,7 +324,7 @@
             {
                   'id': "{{$item->id_detail_penjualan}}",
                   'bank': "{{$item->metode_pembayaran}}",
-                  'trf' : "{{$item->nominal}}",
+                  'trf' : "{{number_format($item->nominal,0,",",".")}}",
                   'catatan' : "{{$item->catatan}}"
               },
             @endforeach
@@ -339,6 +339,11 @@
             @endforeach
           @endif
         ]);
+        $('#trf').on('keyup', function (event) {
+          var n = parseInt($(this).val().replace(/\D/g,''),10);
+          console.log('Isok');
+          (this).value=n.toLocaleString('id-ID');
+        })
     });
 </script>
 <script>

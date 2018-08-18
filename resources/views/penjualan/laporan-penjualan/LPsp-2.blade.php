@@ -99,8 +99,8 @@
       <tr>
         <td></td>
         <td><b>Grand Total</b></td>
-        <td><input type="text" name="tagihan" id="tagihan" class="form-control" value="{{$total_penjualan}}" readonly></td>
-        <td><input type="text" name="piutang" id="piutang" class="form-control" value="{{$total_piutang}}" readonly> </td>
+        <td><input type="text" name="tagihan" id="tagihan" class="form-control" value="{{number_format($total_penjualan,0,"",".")}}" readonly></td>
+        <td><input type="text" name="piutang" id="piutang" class="form-control" value="{{number_format($total_piutang,0,"",".")}}" readonly> </td>
       </tr>
     </tfoot>
 </table>
