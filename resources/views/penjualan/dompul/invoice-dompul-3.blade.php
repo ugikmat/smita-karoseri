@@ -104,7 +104,7 @@ td{
     </div>
   </div>
   <hr>
-  <div data-repeater-list="bank">
+  <div data-repeater-list="bank" id="pembayaran">
     <div data-repeater-item>
       <div class="form row">
         <div class="col-xs-3">
@@ -324,10 +324,18 @@ td{
       }
       }, 'json');
     });
-    $('#trf').on('keyup', function (event) {
-      var n = parseInt($(this).val().replace(/\D/g,''),10);
-      (this).value=n.toLocaleString('id-ID');
-    })
+    $("#pembayaran").on("keyup", "#trf", function(){
+      if (this.value.length!=0) {
+        var n = parseInt($(this).val().replace(/\D/g,''),10);
+        (this).value=n.toLocaleString('id-ID'); 
+      }else{
+        (this).value=0; 
+      }
+    });
+    // $('#trf').on('keyup', function (event) {
+    //   var n = parseInt($(this).val().replace(/\D/g,''),10);
+    //   (this).value=n.toLocaleString('id-ID');
+    // })
     });
 </script>
 <script>
