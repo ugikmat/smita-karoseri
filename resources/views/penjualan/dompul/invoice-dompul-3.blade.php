@@ -332,6 +332,14 @@ td{
         (this).value=0; 
       }
     });
+    $("#qty_program").on("keyup", function(){
+      if (this.value.length!=0) {
+        var n = parseInt($(this).val().replace(/\D/g,''),10);
+        (this).value=n.toLocaleString('id-ID'); 
+      }else{
+        (this).value=0; 
+      }
+    });
     // $('#trf').on('keyup', function (event) {
     //   var n = parseInt($(this).val().replace(/\D/g,''),10);
     //   (this).value=n.toLocaleString('id-ID');
@@ -348,6 +356,8 @@ td{
     var button = $(event.relatedTarget) // Button that triggered the modal
     var produk = button.data('produk') // Extract info from data-* attributes
     var tipe_harga = button.data('tipe')
+    var tipe_dompul = button.data('tipe_dompul')
+    var qty = button.data('qty')
     console.log(tipe_harga);
     var no_faktur = button.data('faktur')
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
@@ -365,6 +375,8 @@ td{
       opt.innerHTML = element.tipe_harga_dompul;
       tipe.appendChild(opt);
     });
+    tipe.value=tipe_dompul;
+    $('#qty_program').val(qty.toLocaleString('id-ID'));
     console.log(produk);
     $('#link').val(`/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/0`);
   })

@@ -96,7 +96,7 @@ class PenjualanDompulController extends Controller
                         ->where('status_active',1)
                         ->where('no_faktur',$no_faktur)->first();
         $tipe = $request->get('tipe');
-        $qty_program = $request->get('qty_program');
+        $qty_program = str_replace('.', '', $request->get('qty_program'));
         $status_penjualans=$status_penjualan;
         
         if($tipe != 'default') {
@@ -302,7 +302,7 @@ class PenjualanDompulController extends Controller
                           ->addColumn('action', function ($uploadDompul) {
                               $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$uploadDompul->produk)->get();
                               return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-tipe='.$tipe.' data-produk="'.$uploadDompul->produk.'" data-faktur="'.$uploadDompul->no_faktur.'" data-qty="'.$uploadDompul->qty_program.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-tipe='.$tipe.' data-tipe_dompul='.$uploadDompul->tipe_dompul.' data-produk="'.$uploadDompul->produk.'" data-faktur="'.$uploadDompul->no_faktur.'" data-qty="'.$uploadDompul->qty_program.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
                             })
                           ->make(true);
     }
