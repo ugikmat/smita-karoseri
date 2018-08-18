@@ -166,7 +166,7 @@
   </div>
   <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
     <br>
-    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Pembelian</button>
+    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Nota Penjualan</button>
     <br><br>
   </div>
 </div>
