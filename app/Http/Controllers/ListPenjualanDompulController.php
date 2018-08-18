@@ -202,7 +202,7 @@ class ListPenjualanDompulController extends Controller
                           ->addColumn('action', function ($uploadDompul) {
                               $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$uploadDompul->produk)->get();
                               return
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-tipe='.$tipe.' data-produk="'.$uploadDompul->produk.'" data-faktur="'.$uploadDompul->no_faktur.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-tipe='.$tipe.' data-tipe_dompul='.$uploadDompul->tipe_dompul.' data-produk="'.$uploadDompul->produk.'" data-faktur="'.$uploadDompul->no_faktur.'" data-qty="'.$uploadDompul->qty_program.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
                             })
                           ->make(true);
     }
