@@ -8,27 +8,24 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('/datepicker/css/bootstrap-datepicker.min.css') }}">
-
+<style>
+  #kiri{
+    padding-left: 0px;
+  }
+</style>
 @stop
 
 @section('content')
-<form class="invoice-sp repeater" action="/penjualan/sp/invoice-sp/edit" method="post">
-<div class="container-fluid">
+<form class="invoice-sp repeater" action="/invoice_sp/verify" method="post">
+<div class="container-fluid  form-inline">
   @csrf
   <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Tanggal Penjualan :
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
+      Tanggal Penjualan : &nbsp;
       <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{session('now')}}">
-      </div>
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
-          Nama Canvaser :
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
+        Nama Canvaser : &nbsp;
         <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('id_sales')}}">
               <option value="" disabled>Pilih Nama Canvaser</option>
               @isset($saless)
@@ -37,13 +34,9 @@
                   @endforeach
               @endisset
         </select>
-      </div>
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-          Nama Kios :
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
+        Nama Kios : &nbsp;
         <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="chosen-select" data-placeholder="{{session('id_cust')}}">
               <option value="" disabled>Pilih Nama Kios</option>
               @isset($customerarray)
@@ -52,7 +45,6 @@
                   @endforeach
               @endisset
         </select>
-      </div>
     </div>
   </div>
 </div>
@@ -118,7 +110,7 @@
     </div>
   </div>
   <hr>
-  <div data-repeater-list="bank-sp">
+  <div data-repeater-list="bank-sp" id="pembayaran">
     <div data-repeater-item>
       <div class="form row">
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
@@ -137,12 +129,12 @@
         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-3">
           <b>Nominal</b>
           <br>
-          <input type="text" id="trf" name="trf" class="form-control" value="" required="required">
+          <input type="text" id="trf" name="trf" class="form-control" value="" required="required" autocomplete="off">
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
           <b>Catatan</b>
           <br>
-          <input type="text" id="catatan" name="catatan" class="form-control" value="">
+          <input type="text" id="catatan" name="catatan" class="form-control" value="" autocomplete="off">
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
           <br>
@@ -166,7 +158,7 @@
   </div>
   <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
     <br>
-    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Pembelian</button>
+    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Nota Penjualan</button>
     <br><br>
   </div>
 </div>
@@ -231,7 +223,15 @@
             // Removes the delete button from the first list item,
             // defaults to false.
             isFirstItemUndeletable: false
-        })
+        });
+        $("#pembayaran").on("keyup", "#trf", function(){
+          if (this.value.length!=0) {
+            var n = parseInt($(this).val().replace(/\D/g,''),10);
+            (this).value=n.toLocaleString('id-ID'); 
+          }else{
+            (this).value=0; 
+          }
+        });
     });
 </script>
 <script type="text/javascript">
