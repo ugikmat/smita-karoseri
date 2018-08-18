@@ -87,7 +87,6 @@ td{
         <th>Tipe Harga</th>
         <th>Harga Satuan</th>
         <th>Jumlah</th>
-        <th>Qty Program</th>
         <th>Harga Total</th>
         <th>action</th>
       </tr>
@@ -130,12 +129,12 @@ td{
         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-3">
           <b>Nominal</b>
           <br>
-          <input type="text" id="trf" name="trf" class="form-control" value="" required="required">
+          <input type="text" id="trf" name="trf" class="form-control" value="" required="required" autocomplete="off">
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
           <b>Catatan</b>
           <br>
-          <input type="text" id="catatan" name="catatan" class="form-control" value="">
+          <input type="text" id="catatan" name="catatan" class="form-control" value="" autocomplete="off">
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
           <br>
@@ -202,16 +201,6 @@ td{
                       </select>
                     </div>
                   </div>
-
-                  <div class="form-group row">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Qty Program
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="qty_program" required="required" name="qty_program" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
-                  </div>
-
 
                   <div class="ln_solid"></div>
                   <div class="form-group">
@@ -316,14 +305,13 @@ $.ajaxSetup({
                       {data: 'tipe_harga'},
                       {data: 'harga'},
                       {data: 'jumlah'},
-                      {data: 'jumlah_program'},
                       {data: 'total_harga'},
                       {data: 'action', orderable: false, searchable: false}
                   ]
               });
               $(`#save`).on('click',function (event) {
       //ajax call
-        $.post(`${$('#link').val()}`, { tipe: $('#tipe').val(), qty_program: $('#qty_program').val() })
+        $.post(`${$('#link').val()}`, { tipe: $('#tipe').val()})
         .done(function(response){
       if(response.success)
       {
@@ -349,7 +337,6 @@ $.ajaxSetup({
     var button = $(event.relatedTarget) // Button that triggered the modal
     var id = button.data('id')
     var tipe_harga = button.data('tipe')
-    var qty_program = button.data('qty')
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     while (tipe.firstChild) {
@@ -365,7 +352,6 @@ $.ajaxSetup({
       opt.innerHTML = element.tipe_harga_sp;
       tipe.appendChild(opt);
     });
-    $('#qty_program').val(qty_program);
     // $('#editForm').attr('action', `/invoice_sp/update/${id}`);
     $('#link').val(`/invoice_sp/update/${id}`);
   })

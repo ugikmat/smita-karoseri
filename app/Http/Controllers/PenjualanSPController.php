@@ -127,13 +127,13 @@ class PenjualanSPController extends Controller
                 'keterangan_detail_psp'=>'none']);
             }
         }
-        $detailPenjualan = DB::table('temp_detail_penjualan_sps')->select(DB::raw('master_produks.nama_produk, 
-        master_produks.satuan, 
+        $detailPenjualan = DB::table('temp_detail_penjualan_sps')->select(DB::raw('master_produks.nama_produk,
+        master_produks.satuan,
         temp_detail_penjualan_sps.harga_satuan,
         temp_detail_penjualan_sps.harga_beli,
         temp_detail_penjualan_sps.id_produk,
         temp_detail_penjualan_sps.id_temp_penjualan_sp,
-        temp_detail_penjualan_sps.tipe_harga, 
+        temp_detail_penjualan_sps.tipe_harga,
         temp_detail_penjualan_sps.jumlah_sp,
         temp_detail_penjualan_sps.harga_total'))
                         ->join('master_produks',function($join){
@@ -158,13 +158,13 @@ class PenjualanSPController extends Controller
         $penjualanSp = DB::table('temp_penjualan_sps')->where('id_temp_penjualan_sp',$id)->first();
         $sales = Sales::where('id_sales',$penjualanSp->id_sales)->first();
         $customer = Customer::where('id_cust',$penjualanSp->id_customer)->first();
-        $detailPenjualan = DB::table('temp_detail_penjualan_sps')->select(DB::raw('master_produks.nama_produk, 
-        master_produks.satuan, 
+        $detailPenjualan = DB::table('temp_detail_penjualan_sps')->select(DB::raw('master_produks.nama_produk,
+        master_produks.satuan,
         temp_detail_penjualan_sps.harga_satuan,
         temp_detail_penjualan_sps.harga_beli,
         temp_detail_penjualan_sps.id_produk,
         temp_detail_penjualan_sps.id_temp_penjualan_sp,
-        temp_detail_penjualan_sps.tipe_harga, 
+        temp_detail_penjualan_sps.tipe_harga,
         temp_detail_penjualan_sps.jumlah_sp,
         temp_detail_penjualan_sps.harga_total'))
                         ->join('master_produks',function($join){
@@ -178,7 +178,7 @@ class PenjualanSPController extends Controller
         $data = DB::table('temp_detail_penjualan_sps')->where('id_temp_penjualan_sp',$id)->first();
         $tipe = $request->get('tipe');
         $qty_program = $request->get('qty_program');
-        
+
         if($tipe != 'default') {
             DB::table('temp_detail_penjualan_sps')->where('id_temp_penjualan_sp',$id)
             ->update(['tipe_harga'=>$tipe]);
@@ -251,7 +251,7 @@ class PenjualanSPController extends Controller
                 $detailPenjualanSp->harga_total= str_replace('.', '', $value->harga_total);
                 $detailPenjualanSp->harga_beli= str_replace('.', '', $value->harga_beli);
                 $detailPenjualanSp->keterangan_detail_psp= $value->keterangan_detail_psp;
-                $detailPenjualanSp->save();   
+                $detailPenjualanSp->save();
         }
 
         if (!empty($bank)) {
@@ -302,13 +302,13 @@ class PenjualanSPController extends Controller
     {
         // $data = DB::table('temp_detail_penjualan_sps')->get();
 
-        $detailPenjualan = DB::table('temp_detail_penjualan_sps')->select(DB::raw('master_produks.nama_produk, 
-        master_produks.satuan, 
+        $detailPenjualan = DB::table('temp_detail_penjualan_sps')->select(DB::raw('master_produks.nama_produk,
+        master_produks.satuan,
         temp_detail_penjualan_sps.harga_satuan,
         temp_detail_penjualan_sps.harga_beli,
         temp_detail_penjualan_sps.id_produk,
         temp_detail_penjualan_sps.id_temp_penjualan_sp,
-        temp_detail_penjualan_sps.tipe_harga, 
+        temp_detail_penjualan_sps.tipe_harga,
         temp_detail_penjualan_sps.jumlah_sp,
         temp_detail_penjualan_sps.harga_total'))
                         ->join('master_produks',function($join){
@@ -340,7 +340,7 @@ class PenjualanSPController extends Controller
                             ->addColumn('action', function ($detailPenjualanSp) {
                                 $tipe = HargaProduk::select('tipe_harga_sp')->where('id_produk',$detailPenjualanSp->id_produk)->get();
                                 // $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$uploadDompul->produk)->get();
-                              return 
+                              return
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$detailPenjualanSp->id_temp_penjualan_sp.'" data-tipe='.$tipe.' data-qty="'.$detailPenjualanSp->harga_beli.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
                             })
                             // ->addColumn('input', function ($uploadDompul) {

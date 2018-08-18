@@ -80,7 +80,6 @@ td{
       <th>Tipe Harga</th>
       <th>Harga Satuan</th>
       <th>Jumlah</th>
-      <th>Qty Program</th>
       <th>Harga Total</th>
     </tr>
     </thead>
@@ -237,7 +236,6 @@ function goBack() {
                       {data: 'tipe_harga'},
                       {data: 'harga'},
                       {data: 'jumlah'},
-                      {data: 'jumlah_program'},
                       {data: 'total_harga'}
                   ]
               });
