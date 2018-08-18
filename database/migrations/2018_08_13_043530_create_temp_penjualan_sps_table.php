@@ -20,7 +20,7 @@ class CreateTempPenjualanSpsTable extends Migration
             // $table->integer('id_bo');
             $table->integer('id_customer');
             $table->string('no_hp_customer')->nullable();
-            $table->string('no_user');
+            $table->string('id_user');
             $table->date('tanggal_penjualan_sp');
             $table->date('tanggal_input');
             $table->string('cash')->default(0);
