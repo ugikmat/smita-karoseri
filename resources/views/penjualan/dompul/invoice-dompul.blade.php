@@ -124,7 +124,7 @@
 
               <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/penjualan/dompul/invoice-dompul">
                   @csrf
-                  <div class="form-group kode">
+                  <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Canvasser
                       <span class="required">*</span>
                     </label>
@@ -142,7 +142,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group nama">
+                  <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No. Penjualan
                       <span class="required">*</span>
                     </label>
@@ -151,7 +151,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tgl Penjualan
                       <span class="required">*</span>
                     </label>

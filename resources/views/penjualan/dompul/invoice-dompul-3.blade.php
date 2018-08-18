@@ -123,12 +123,12 @@ td{
         <div class="col-xs-3">
           <b>Nominal</b>
           <br>
-          <input type="text" id="trf" name="trf" class="form-control"  value="" required>
+          <input type="text" id="trf" name="trf" class="form-control"  value="" required autocomplete="off">
         </div>
         <div class="col-xs-3">
           <b>Catatan</b>
           <br>
-          <input type="text" id="catatan" name="catatan" class="form-control" value="">
+          <input type="text" id="catatan" name="catatan" class="form-control" value="" autocomplete="off">
         </div>
         <div class="col-xs-3">
           <br>
@@ -199,7 +199,7 @@ td{
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="qty_program" required="required" name="qty_program" class="form-control col-md-7 col-xs-12" value="">
+                      <input type="text" id="qty_program" required="required" name="qty_program" class="form-control col-md-7 col-xs-12" value="" autocomplete="off">
                     </div>
                   </div>
 
