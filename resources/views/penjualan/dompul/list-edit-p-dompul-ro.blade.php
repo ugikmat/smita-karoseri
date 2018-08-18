@@ -121,7 +121,7 @@
     </div>
   </div>
   <hr>
-  <div data-repeater-list="bank">
+  <div data-repeater-list="bank" id="pembayaran">
     <div data-repeater-item>
       <div class="form row">
         <input type="hidden" id="id" name="id" class="form-control" value="">
@@ -339,11 +339,22 @@
             @endforeach
           @endif
         ]);
-        $('#trf').on('keyup', function (event) {
-          var n = parseInt($(this).val().replace(/\D/g,''),10);
-          console.log('Isok');
-          (this).value=n.toLocaleString('id-ID');
-        })
+        $("#pembayaran").on("keyup", "#trf", function(){
+          if (this.value.length!=0) {
+            var n = parseInt($(this).val().replace(/\D/g,''),10);
+            (this).value=n.toLocaleString('id-ID'); 
+          }else{
+            (this).value=0; 
+          }
+        });
+        $("#qty_program").on("keyup", function(){
+          if (this.value.length!=0) {
+            var n = parseInt($(this).val().replace(/\D/g,''),10);
+            (this).value=n.toLocaleString('id-ID'); 
+          }else{
+            (this).value=0; 
+          }
+        });
     });
 </script>
 <script>
@@ -414,6 +425,8 @@
     var button = $(event.relatedTarget) // Button that triggered the modal
     var produk = button.data('produk') // Extract info from data-* attributes
     var tipe_harga = button.data('tipe')
+    var tipe_dompul = button.data('tipe_dompul')
+    var qty = button.data('qty')
     var no_faktur = button.data('faktur')
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
@@ -430,6 +443,8 @@
       opt.innerHTML = element.tipe_harga_dompul;
       tipe.appendChild(opt);
     });
+    tipe.value=tipe_dompul;
+    $('#qty_program').val(qty.toLocaleString('id-ID'));
     console.log(produk);
     $('#link').val(`/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
   })

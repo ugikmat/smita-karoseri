@@ -104,7 +104,7 @@ td{
     </div>
   </div>
   <hr>
-  <div data-repeater-list="bank">
+  <div data-repeater-list="bank" id="pembayaran">
     <div data-repeater-item>
       <div class="form row">
         <div class="col-xs-3">
@@ -324,10 +324,26 @@ td{
       }
       }, 'json');
     });
-    $('#trf').on('keyup', function (event) {
-      var n = parseInt($(this).val().replace(/\D/g,''),10);
-      (this).value=n.toLocaleString('id-ID');
-    })
+    $("#pembayaran").on("keyup", "#trf", function(){
+      if (this.value.length!=0) {
+        var n = parseInt($(this).val().replace(/\D/g,''),10);
+        (this).value=n.toLocaleString('id-ID'); 
+      }else{
+        (this).value=0; 
+      }
+    });
+    $("#qty_program").on("keyup", function(){
+      if (this.value.length!=0) {
+        var n = parseInt($(this).val().replace(/\D/g,''),10);
+        (this).value=n.toLocaleString('id-ID'); 
+      }else{
+        (this).value=0; 
+      }
+    });
+    // $('#trf').on('keyup', function (event) {
+    //   var n = parseInt($(this).val().replace(/\D/g,''),10);
+    //   (this).value=n.toLocaleString('id-ID');
+    // })
     });
 </script>
 <script>
@@ -340,6 +356,8 @@ td{
     var button = $(event.relatedTarget) // Button that triggered the modal
     var produk = button.data('produk') // Extract info from data-* attributes
     var tipe_harga = button.data('tipe')
+    var tipe_dompul = button.data('tipe_dompul')
+    var qty = button.data('qty')
     console.log(tipe_harga);
     var no_faktur = button.data('faktur')
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
@@ -357,6 +375,8 @@ td{
       opt.innerHTML = element.tipe_harga_dompul;
       tipe.appendChild(opt);
     });
+    tipe.value=tipe_dompul;
+    $('#qty_program').val(qty.toLocaleString('id-ID'));
     console.log(produk);
     $('#link').val(`/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/0`);
   })
