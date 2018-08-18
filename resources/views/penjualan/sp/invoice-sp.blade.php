@@ -16,7 +16,7 @@
 @stop
 
 @section('content')
-<form class="invoice-sp repeater" action="/penjualan/sp/invoice-sp/edit" method="post">
+<form class="invoice-sp repeater" action="/invoice_sp/verify" method="post">
 <div class="container-fluid  form-inline">
   @csrf
   <div class="row">
@@ -110,7 +110,7 @@
     </div>
   </div>
   <hr>
-  <div data-repeater-list="bank-sp">
+  <div data-repeater-list="bank-sp" id="pembayaran">
     <div data-repeater-item>
       <div class="form row">
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
@@ -223,7 +223,15 @@
             // Removes the delete button from the first list item,
             // defaults to false.
             isFirstItemUndeletable: false
-        })
+        });
+        $("#pembayaran").on("keyup", "#trf", function(){
+          if (this.value.length!=0) {
+            var n = parseInt($(this).val().replace(/\D/g,''),10);
+            (this).value=n.toLocaleString('id-ID'); 
+          }else{
+            (this).value=0; 
+          }
+        });
     });
 </script>
 <script type="text/javascript">

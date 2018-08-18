@@ -101,7 +101,7 @@ class ListPenjualanSPController extends Controller
                 $detailPembayaranSp = DetailPembayaranSp::where('id_detail_pembayaran_sp',$value['id'])->first();
             }
             $detailPembayaranSp->metode_pembayaran = $value['bank'];
-            $detailPembayaranSp->nominal=$value['trf'];
+            $detailPembayaranSp->nominal=str_replace('.','',$value['trf']);
             $detailPembayaranSp->catatan = $value['catatan'];
             switch ($value['bank']) {
                 case 'BCA Pusat':

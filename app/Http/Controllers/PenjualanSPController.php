@@ -199,21 +199,110 @@ class PenjualanSPController extends Controller
     }
 
     public function verify(Request $request){
-        $tunai = $request->get('tunai');
+        Schema::dropIfExists('temp_penjualan_sps');
+        Schema::create('temp_penjualan_sps', function (Blueprint $table) {
+            $table->increments('id_temp_penjualan_sp');
+            $table->integer('id_sales');
+            $table->integer('id_customer');
+            $table->string('no_hp_customer')->nullable();
+            $table->string('no_user');
+            $table->date('tanggal_penjualan_sp');
+            $table->date('tanggal_input');
+            $table->string('cash')->default(0);
+            $table->string('bca_pusat')->default(0);
+            $table->string('bca_cabang')->default(0);
+            $table->string('mandiri')->default(0);
+            $table->string('bni')->default(0);
+            $table->string('bri')->default(0);
+            $table->bigInteger('grand_total')->default(0);
+            $table->bigInteger('bayar_tunai')->default(0);
+            $table->bigInteger('bayar_transfer')->default(0);
+            $table->bigInteger('bayar_transfer2')->default(0);
+            $table->bigInteger('bayar_transfer3')->default(0);
+            $table->integer('id_rek1')->default(0);
+            $table->integer('id_rek2')->default(0);
+            $table->integer('id_rek3')->default(0);
+            $table->text('catatan')->nullable();
+            $table->tinyInteger('status_pembayaran')->default(0);
+            $table->tinyInteger('status_penjualan')->default(0);
+            $table->tinyInteger('deleted')->default(0);
+        });
+        $tgl = Carbon::parse($request->get('tgl_penjualan'));
+        $tgl = $tgl->format('Y-m-d');
+        $id = DB::table('temp_penjualan_sps')->insertGetId(['id_sales'=>$request->get('sales'),
+        'id_customer'=>$request->get('customer'),
+        'no_hp_customer'=>0,
+        'grand_total'=>0,
+        'tanggal_penjualan_sp'=>$tgl,
+        'tanggal_input'=>Carbon::now('Asia/Jakarta')->toDateString(),
+        'no_user'=>Auth::user()->id,
+        'catatan'=>'none']);
+
+        $tunai = $request->get('total');
         $bank = $request->get('bank-sp');
-        $id = $request->get('id');
-        $tgl = $request->get('tgl');
-        session(['bank-sp'=>$request->get('bank-sp')]);
-        $penjualanSp =DB::table('temp_penjualan_sps')->where('id_temp_penjualan_sp',$id)->first();
+
+        $produks = produk::where('status_produk','1')->get()->count();
+        $penjualanSp = DB::table('temp_penjualan_sps')->where('id_temp_penjualan_sp',$id)->first();
+        Schema::dropIfExists('temp_detail_penjualan_sps');
+        Schema::create('temp_detail_penjualan_sps', function (Blueprint $table) {
+            $table->increments('id_temp_penjualan_sp');
+            $table->string('id_penjualan_sp');
+            $table->integer('id_customer');
+            $table->string('id_produk');
+            $table->integer('jumlah_sp');
+            $table->string('tipe_harga');
+            $table->integer('harga_satuan');
+            $table->integer('harga_beli')->nullable();
+            $table->bigInteger('harga_total');
+            $table->string('keterangan_detail_psp');
+            $table->tinyInteger('status_detail_psp')->default(1);
+            // $table->temporary();
+        });
+
+        for ($i=0; $i <$produks ; $i++) {
+            if (!empty($request->get("jumlah{$i}"))) {
+                DB::table('temp_detail_penjualan_sps')->insert(['id_penjualan_sp'=>$id,
+                'id_customer'=>$request->get('customer'),
+                'id_produk'=>$request->get("kode{$i}"),
+                'jumlah_sp'=>$request->get("jumlah{$i}"),
+                'tipe_harga'=>$request->get("tipe{$i}"),
+                'harga_satuan'=>str_replace('.', '', $request->get("harga{$i}")),
+                'harga_total'=>str_replace('.', '', $request->get("total{$i}")),
+                'harga_beli'=>0,
+                'keterangan_detail_psp'=>'none']);
+            }
+        }
+        $detailPenjualan = DB::table('temp_detail_penjualan_sps')->select(DB::raw('master_produks.nama_produk,
+        master_produks.satuan,
+        temp_detail_penjualan_sps.harga_satuan,
+        temp_detail_penjualan_sps.harga_beli,
+        temp_detail_penjualan_sps.id_produk,
+        temp_detail_penjualan_sps.id_temp_penjualan_sp,
+        temp_detail_penjualan_sps.tipe_harga,
+        temp_detail_penjualan_sps.jumlah_sp,
+        temp_detail_penjualan_sps.harga_total'))
+                        ->join('master_produks',function($join){
+                            $join->on('temp_detail_penjualan_sps.id_produk','=','master_produks.kode_produk');
+                        })
+                        ->where('id_penjualan_sp',$penjualanSp->id_temp_penjualan_sp)->get();
+        $data = DB::table('temp_detail_penjualan_sps')->get();
+        $total = 0;
+        foreach ($detailPenjualan as $key => $value) {
+            $total+=$value->harga_total;
+        }
+        $total=number_format($total,0,",",".");
+        session(['total_harga_sp' => $total]);
         $sales = Sales::where('id_sales',$penjualanSp->id_sales)->first();
         $customer = Customer::where('id_cust',$penjualanSp->id_customer)->first();
-        $tunai=number_format($tunai,0,",",".");
+        session(['id_sales'=>$penjualanSp->id_sales,'id_cust'=>$penjualanSp->id_customer,'bank-sp'=>$request->get('bank-sp')]);
+
+        // $tunai=number_format($tunai,0,",",".");
         return view('penjualan/sp/invoice-sp-3',
         [
             'penjualanSp'=>$penjualanSp,
             'tgl'=>$tgl,
             'bank'=>$bank,
-            'tunai'=>$tunai,
+            'tunai'=>$total,
             'sales'=>$sales,
             'customer'=>$customer,
             ]);
@@ -238,6 +327,7 @@ class PenjualanSPController extends Controller
         $penjualanSp->tanggal_penjualan_sp=$data->tanggal_penjualan_sp;
         $penjualanSp->tanggal_input=Carbon::now('Asia/Jakarta')->toDateString();
         $penjualanSp->no_user=Auth::user()->id;
+        // $penjualanSp->id_lokasi=Auth::user()->id_lokasi;
         $penjualanSp->save();
 
         foreach ($dataDetail as $key => $value) {
@@ -259,6 +349,7 @@ class PenjualanSPController extends Controller
             $detailPembayaranSp = new DetailPembayaranSp();
             $detailPembayaranSp->id_penjualan_sp =$penjualanSp->id_penjualan_sp;
             $detailPembayaranSp->metode_pembayaran = $value['bank'];
+
             $detailPembayaranSp->nominal= str_replace('.', '', $value['trf']);
             $detailPembayaranSp->catatan = $value['catatan'];
             switch ($value['bank']) {

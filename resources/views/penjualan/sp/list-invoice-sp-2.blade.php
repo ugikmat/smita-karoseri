@@ -117,7 +117,7 @@
     </div>
   </div>
   <hr>
-  <div data-repeater-list="bank">
+  <div data-repeater-list="bank" id="pembayaran">
     <div data-repeater-item>
       <div class="form row">
         <input type="hidden" id="id" name="id" class="form-control" value="">
@@ -321,11 +321,19 @@
           {
                 'id': "{{$item->id_detail_pembayaran_sp}}",
                 'bank': "{{$item->metode_pembayaran}}",
-                'trf' : "{{$item->nominal}}",
+                'trf' : "{{number_format($item->nominal,0,'','.')}}",
                 'catatan' : "{{$item->catatan}}"
             },
           @endforeach
         ]);
+        $("#pembayaran").on("keyup", "#trf", function(){
+          if (this.value.length!=0) {
+            var n = parseInt($(this).val().replace(/\D/g,''),10);
+            (this).value=n.toLocaleString('id-ID'); 
+          }else{
+            (this).value=0; 
+          }
+        });
     });
 </script>
 <script>

@@ -205,7 +205,7 @@ td{
           @foreach(session('bank-sp') as $item)
           {
                 'bank': "{{$item['bank']}}",
-                'trf' : "{{number_format($item['trf'],0,",",".")}}",
+                'trf' : "{{$item['trf']}}",
                 'catatan' : "{{$item['catatan']}}"
             },
           @endforeach
