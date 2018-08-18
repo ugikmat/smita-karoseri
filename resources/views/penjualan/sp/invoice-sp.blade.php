@@ -8,27 +8,24 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('/datepicker/css/bootstrap-datepicker.min.css') }}">
-
+<style>
+  #kiri{
+    padding-left: 0px;
+  }
+</style>
 @stop
 
 @section('content')
 <form class="invoice-sp repeater" action="/penjualan/sp/invoice-sp/edit" method="post">
-<div class="container-fluid">
+<div class="container-fluid  form-inline">
   @csrf
   <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Tanggal Penjualan :
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
+      Tanggal Penjualan : &nbsp;
       <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{session('now')}}">
-      </div>
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
-          Nama Canvaser :
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
+        Nama Canvaser : &nbsp;
         <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('id_sales')}}">
               <option value="" disabled>Pilih Nama Canvaser</option>
               @isset($saless)
@@ -37,13 +34,9 @@
                   @endforeach
               @endisset
         </select>
-      </div>
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-          Nama Kios :
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
+        Nama Kios : &nbsp;
         <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="chosen-select" data-placeholder="{{session('id_cust')}}">
               <option value="" disabled>Pilih Nama Kios</option>
               @isset($customerarray)
@@ -52,7 +45,6 @@
                   @endforeach
               @endisset
         </select>
-      </div>
     </div>
   </div>
 </div>
