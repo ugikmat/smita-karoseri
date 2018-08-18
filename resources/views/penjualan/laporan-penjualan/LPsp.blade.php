@@ -196,15 +196,15 @@
             if(response.success)
             {
               console.log('Success..');
-              $('#qty').val(response.qty);
-              $('#total').val(response.total);
-              $('#cash').val(response.cash);
-              $('#bca_pusat').val(response.bca_pusat);
-              $('#bca_cabang').val(response.bca_cabang);
-              $('#mandiri').val(response.mandiri);
-              $('#bni').val(response.bni);
-              $('#bri').val(response.bri);
-              $('#piutang').val(response.piutang);
+              $('#qty').val(response.qty.toLocaleString('id-ID'));
+              $('#total').val(response.total.toLocaleString('id-ID'));
+              $('#cash').val(response.cash.toLocaleString('id-ID'));
+              $('#bca_pusat').val(response.bca_pusat.toLocaleString('id-ID'));
+              $('#bca_cabang').val(response.bca_cabang.toLocaleString('id-ID'));
+              $('#mandiri').val(response.mandiri.toLocaleString('id-ID'));
+              $('#bni').val(response.bni.toLocaleString('id-ID'));
+              $('#bri').val(response.bri.toLocaleString('id-ID'));
+              $('#piutang').val(response.piutang.toLocaleString('id-ID'));
               console.log('Loaded');
               console.log(response.data);
             }
@@ -216,15 +216,15 @@
             if(response.success)
             {
               console.log('Success..');
-              $('#qty').val(response.qty);
-              $('#total').val(response.total);
-              $('#cash').val(response.cash);
-              $('#bca_pusat').val(response.bca_pusat);
-              $('#bca_cabang').val(response.bca_cabang);
-              $('#mandiri').val(response.mandiri);
-              $('#bni').val(response.bni);
-              $('#bri').val(response.bri);
-              $('#piutang').val(response.piutang);
+              $('#qty').val(response.qty.toLocaleString('id-ID'));
+              $('#total').val(response.total.toLocaleString('id-ID'));
+              $('#cash').val(response.cash.toLocaleString('id-ID'));
+              $('#bca_pusat').val(response.bca_pusat.toLocaleString('id-ID'));
+              $('#bca_cabang').val(response.bca_cabang.toLocaleString('id-ID'));
+              $('#mandiri').val(response.mandiri.toLocaleString('id-ID'));
+              $('#bni').val(response.bni.toLocaleString('id-ID'));
+              $('#bri').val(response.bri.toLocaleString('id-ID'));
+              $('#piutang').val(response.piutang.toLocaleString('id-ID'));
               console.log('Loaded');
               console.log(response.data);
             }

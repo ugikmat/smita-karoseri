@@ -63,8 +63,8 @@
         ID Canvaser
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        @if (session('sales'))
-            : {{ session('sales')->id_sales }}
+        @if (Session::has('dompul_sales_id'))
+            : {{ session('dompul_sales_id') }}
         @endif
       </div>
     </div>
@@ -73,8 +73,8 @@
         Nama Canvaser :
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        @if (session('sales'))
-          <input type="input" disabled id="canvaser"value='{{ session('sales')->nm_sales}}'>
+        @if (Session::has('dompul_sales_nama'))
+          <input type="input" disabled id="canvaser"value='{{ session('dompul_sales_nama')}}'>
         @endif
       </div>
     </div>

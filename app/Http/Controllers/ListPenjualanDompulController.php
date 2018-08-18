@@ -86,7 +86,7 @@ class ListPenjualanDompulController extends Controller
             }
             $detailPenjualanDompul->id_penjualan_dompul = $penjualanDompul->id_penjualan_dompul;
             $detailPenjualanDompul->metode_pembayaran = $value['bank'];
-            $detailPenjualanDompul->nominal=$value['trf'];
+            $detailPenjualanDompul->nominal=str_replace('.', '', $value['trf']);
                 switch ($value['bank']) {
                     case 'BCA Pusat':
                         $detailPenjualanDompul->bca_pusat=$value['trf'];

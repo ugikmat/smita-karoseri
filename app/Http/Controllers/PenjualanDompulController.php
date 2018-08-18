@@ -43,7 +43,7 @@ class PenjualanDompulController extends Controller
     public function show(Request $request)
     {
         $sales = Sales::where('status','1')->where('nm_sales',$request->get('id'))->first();
-        session(['sales'=>$sales,'tgl_penjualan_dompul'=>$request->get('tgl'),'now'=>Carbon::now('Asia/Jakarta')->format('d-m-Y')]);
+        session(['dompul_sales_id'=>$sales->id_sales,'dompul_sales_nama'=>$sales->nm_sales,'tgl_penjualan_dompul'=>$request->get('tgl'),'now'=>Carbon::now('Asia/Jakarta')->format('d-m-Y')]);
         return redirect('/penjualan/dompul/invoice-dompul');
         // return view('penjualan.dompul.invoice-dompul')->with(['sales'=>$sales,'tgl'=>$this->nama_tgl,'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
     }
@@ -133,7 +133,7 @@ class PenjualanDompulController extends Controller
         $bank = $request->get('bank');
         session(['bank'=>$bank]);
         for ($key=0; $key <count($bank) ; $key++) { 
-            $bank[$key]['trf']=number_format($bank[$key]['trf'],0,",",".");
+            // $bank[$key]['trf']=number_format($bank[$key]['trf'],0,",",".");
             if (empty($bank[$key]['bank'])) {
                 array_splice($bank, $key,1);
                 $key--;

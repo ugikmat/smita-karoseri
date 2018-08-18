@@ -324,6 +324,10 @@ td{
       }
       }, 'json');
     });
+    $('#trf').on('keyup', function (event) {
+      var n = parseInt($(this).val().replace(/\D/g,''),10);
+      (this).value=n.toLocaleString('id-ID');
+    })
     });
 </script>
 <script>
