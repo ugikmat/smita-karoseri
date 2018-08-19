@@ -77,6 +77,9 @@
 <form action="/list_invoice_dompul/update" method="post" class="repeater">
   @csrf
   <input type="hidden" name="id" id="id" value="{{$datas->id_penjualan_dompul}}">
+  <div id="deleted">
+
+  </div>
 <table id="list-edit-invoice-table" class="table responsive"  width="100%">
     <thead>
     <tr>
@@ -142,12 +145,12 @@
         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-3">
           <b>Nominal</b>
           <br>
-          <input type="text" id="trf" name="trf" class="form-control" value="">
+          <input type="text" id="trf" name="trf" class="form-control" value="" autocomplete="off">
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
           <b>Catatan</b>
           <br>
-          <input type="text" id="catatan" name="catatan" class="form-control" value="">
+          <input type="text" id="catatan" name="catatan" class="form-control" value="" autocomplete="off">
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
           <br>
@@ -240,7 +243,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" required="required" id="qty_program" name="qty_program" class="form-control col-md-7 col-xs-12" value="">
+                      <input type="text" required="required" id="qty_program" name="qty_program" class="form-control col-md-7 col-xs-12" value="" autocomplete="off">
                     </div>
                   </div>
 
@@ -271,6 +274,7 @@
 @section('js')
 <script>
     $(document).ready(function () {
+        var indeks = 0;
         var repeater = $('.repeater').repeater({
             // (Optional)
             // start with an empty list of repeaters. Set your first (and only)
@@ -303,6 +307,7 @@
                 if(confirm('Apakah anda yakin ingin menghapus pesanan SP ini?')) {
                     $(this).slideUp(deleteElement);
                 }
+                $('#deleted').append(`<input type='hidden' id='delete' name="delete[${indeks++}]" value='${$('#id', $(this)).val()}'>`);
             },
             // (Optional)
             // You can use this if you need to manually re-index the list

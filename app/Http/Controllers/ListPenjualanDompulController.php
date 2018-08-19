@@ -60,7 +60,7 @@ class ListPenjualanDompulController extends Controller
         }
         $total=number_format($total,0,",",".");
         $penjualanDompul = PenjualanDompul::where('id_penjualan_dompul',$id)->first();
-        $detailPenjualanDompul = DetailPenjualanDompul::where('id_penjualan_dompul',$id)->get();
+        $detailPenjualanDompul = DetailPenjualanDompul::where('id_penjualan_dompul',$id)->where('deleted',0)->get();
         return view('penjualan.dompul.list-edit-p-dompul-ro',['datas'=>$datas,'total'=>$total,'penjualanDompul'=>$penjualanDompul,'detailPenjualanDompul'=>$detailPenjualanDompul]);
     }
 
@@ -74,10 +74,16 @@ class ListPenjualanDompulController extends Controller
     public function update(Request $request){
         $id = $request->get('id');
         $bank = $request->get('bank');
+        $delete = $request->get('delete');
         $total = $request->get('total');
         $penjualanDompul = PenjualanDompul::where('id_penjualan_dompul',$id)->first();
         $penjualanDompul->grand_total=str_replace('.', '', $total);
         $penjualanDompul->save();
+        foreach ($delete as $key => $value) {
+            $detailPenjualanDompul = DetailPenjualanDompul::where('id_detail_penjualan',$value)->first();
+            $detailPenjualanDompul->deleted = 1;
+            $detailPenjualanDompul->save();
+        }
         foreach ($bank as $key => $value) {
             if (empty($value['id'])) {
                 $detailPenjualanDompul = new DetailPenjualanDompul();

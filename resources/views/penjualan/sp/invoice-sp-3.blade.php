@@ -80,7 +80,6 @@ td{
       <th>Tipe Harga</th>
       <th>Harga Satuan</th>
       <th>Jumlah</th>
-      <th>Qty Program</th>
       <th>Harga Total</th>
     </tr>
     </thead>
@@ -206,7 +205,7 @@ td{
           @foreach(session('bank-sp') as $item)
           {
                 'bank': "{{$item['bank']}}",
-                'trf' : "{{number_format($item['trf'],0,",",".")}}",
+                'trf' : "{{$item['trf']}}",
                 'catatan' : "{{$item['catatan']}}"
             },
           @endforeach
@@ -237,7 +236,6 @@ function goBack() {
                       {data: 'tipe_harga'},
                       {data: 'harga'},
                       {data: 'jumlah'},
-                      {data: 'jumlah_program'},
                       {data: 'total_harga'}
                   ]
               });

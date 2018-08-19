@@ -149,7 +149,11 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" value="{{session('tgl_penjualan')}}">
+                      @if(Session::has('tgl_penjualan'))
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" value="{{session('tgl_penjualan')}}">
+                      @else
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
+                      @endif
                     </div>
                   </div>
 

@@ -20,7 +20,9 @@
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
         @if (Session::has('tgl_penjualan_dompul'))
-            <input type="input" disabled id="tgl" value={{ session('tgl_penjualan_dompul')}}>
+          <input type="input" disabled id="tgl" value={{ session('tgl_penjualan_dompul')}}>
+        @else
+          <input type="input" disabled id="tgl" value={{ Carbon\Carbon::now()->format('d-m-Y')}}>
         @endif
       </div>
     </div>
@@ -124,7 +126,7 @@
 
               <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/penjualan/dompul/invoice-dompul">
                   @csrf
-                  <div class="form-group kode">
+                  <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Canvasser
                       <span class="required">*</span>
                     </label>
@@ -142,7 +144,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group nama">
+                  <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No. Penjualan
                       <span class="required">*</span>
                     </label>
@@ -151,7 +153,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tgl Penjualan
                       <span class="required">*</span>
                     </label>
@@ -159,7 +161,7 @@
                       @if (Session::has('tgl_penjualan_dompul'))
                         <input class="datepicker col-md-7 col-xs-12" required="required" name="tgl" data-date-format="dd-mm-yyyy" value="{{ session('tgl_penjualan_dompul') }}">
                       @else
-                        <input class="datepicker col-md-7 col-xs-12" required="required" name="tgl" data-date-format="dd-mm-yyyy" value="">
+                        <input class="datepicker col-md-7 col-xs-12" required="required" name="tgl" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
                       @endif
                     </div>
                   </div>
