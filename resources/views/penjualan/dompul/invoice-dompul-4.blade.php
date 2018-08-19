@@ -88,7 +88,7 @@ td{
         <b>Total Pembayaran</b>
       </div>
       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        <input type="text" class="form-control" name="total" id="total" value="" readonly>
+        <input type="text" class="form-control" name="pembayaran" id="pembayaran" value="" readonly>
       </div>
       <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
