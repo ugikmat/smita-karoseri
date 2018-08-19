@@ -105,7 +105,7 @@
     </tfoot>
 </table>
 <br>
-  <a href="{{URL::previous()}}" class="pull-right"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-chevron-left"></span> Kembali</button></a>
+  <a href="{{URL::previous()}}" class="pull-left"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-chevron-left"></span> Kembali</button></a>
 
 @stop
 

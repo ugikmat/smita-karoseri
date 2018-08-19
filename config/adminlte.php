@@ -196,16 +196,54 @@ return [
                 ],
               ],
               [
+                'text'    => 'Pembelian',
+                'icon'    => '',
+                'submenu' => [
+                  [
+                    'text'    => 'Pembelian Dompul',
+                    'icon'    => '',
+                    'submenu' => [
+                      [
+                        'text'  => 'Invoice Dompul',
+                        'icon'  => '',
+                        'url'   => '',
+                      ],
+                      [
+                        'text'  =>  'List Invoice Dompul',
+                        'icon'  => '',
+                        'url'   => '',
+                      ],
+                    ],
+                  ],
+                  [
+                    'text'  => 'Pembelian SP',
+                    'icon'  => '',
+                    'submenu' => [
+                      [
+                        'text'  => 'Invoice SP',
+                        'icon'  => '',
+                        'url'   => '',
+                      ],
+                      [
+                        'text'  => 'List Invoice SP',
+                        'icon'  => '',
+                        'url'   => '',
+                      ],
+                    ],
+                  ],
+                ],
+              ],
+              [
                 'text'    => 'Persediaan',
                 'icon'    => 'share',
                 'submenu' => [
                   [
-                    'text'  => 'Mutasi Dompul',
+                    'text'  => 'Kartu Stok Dompul',
                     'icon'  => 'truck',
                     'url'   => '/persediaan/mutasi-dompul',
                   ],
                   [
-                    'text'  => 'Mutasi SP',
+                    'text'  => 'Kartu Stok SP',
                     'icon'  => 'tags',
                     'url'   => '/persediaan/mutasi-sp',
                   ],

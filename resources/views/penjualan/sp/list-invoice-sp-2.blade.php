@@ -116,6 +116,20 @@
 
     </div>
   </div>
+  <div class="form row">
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <b>Total Pembayaran</b>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <input type="text" class="form-control" name="pembayaran" id="pembayaran" value="" readonly>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+    </div>
+</div>
   <hr>
   <div data-repeater-list="bank" id="pembayaran">
     <div data-repeater-item>
@@ -261,6 +275,28 @@
   </div>
 </div>
 
+<!--Modal Hapus-->
+<div class="modal fade" id="deleteModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="deleteForm" action="" method="POST">
+        @csrf @method('delete')
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-danger delete-user" value="Hapus">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
 @stop
 
 @section('js')
@@ -329,9 +365,9 @@
         $("#pembayaran").on("keyup", "#trf", function(){
           if (this.value.length!=0) {
             var n = parseInt($(this).val().replace(/\D/g,''),10);
-            (this).value=n.toLocaleString('id-ID'); 
+            (this).value=n.toLocaleString('id-ID');
           }else{
-            (this).value=0; 
+            (this).value=0;
           }
         });
     });
