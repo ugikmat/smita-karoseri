@@ -43,7 +43,7 @@ class ListPenjualanSPController extends Controller
         $sales = Sales::where('nm_sales',$sales)->first();
         $customer = Customer::where('nm_cust',$customer)->first();
         $penjualanSP = PenjualanProduk::where('id_penjualan_sp',$id_penjualan_sp)->first();
-        $pembayaran = DetailPembayaranSp::where('id_penjualan_sp',$id_penjualan_sp)->get();
+        $pembayaran = DetailPembayaranSp::where('id_penjualan_sp',$id_penjualan_sp)->where('deleted',0)->get();
         return view('penjualan.sp.list-invoice-sp-2',['sales'=>$sales,'customer'=>$customer,'penjualanSP'=>$penjualanSP,'pembayaran'=>$pembayaran]);
     }
 
@@ -85,6 +85,7 @@ class ListPenjualanSPController extends Controller
         $id = $request->get('id');
         $bank = $request->get('bank');
         $total = $request->get('total');
+        $delete = $request->get('delete');
         $penjualanSp = PenjualanProduk::where('id_penjualan_sp',$id)->first();
         // $data = DB::table('temp_penjualan_sps')->where('id_temp_penjualan_sp',$id)->first();
         $dataDetail = DetailPenjualanProduk::where('id_penjualan_sp',$id)->get();
@@ -92,7 +93,13 @@ class ListPenjualanSPController extends Controller
         // $penjualanSp = new PenjualanProduk();
         $penjualanSp->grand_total=str_replace('.', '', $total);
         $penjualanSp->save();
-    
+        if (!empty($delete)) {
+            foreach ($delete as $key => $value) {
+                $detailPembayaranSp = DetailPembayaranSp::where('id_detail_pembayaran_sp',$value)->first();
+                $detailPembayaranSp->deleted = 1;
+                $detailPembayaranSp->save();
+            }
+        }
         foreach ($bank as $key => $value) {
             if (empty($value['id'])) {
                 $detailPembayaranSp = new DetailPembayaranSp();

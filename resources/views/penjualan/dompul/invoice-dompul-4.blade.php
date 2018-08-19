@@ -51,7 +51,7 @@ td{
   <input type="hidden" name="nm_sales" id="nm_sales" value="{{$sales->nm_sales}}">
   <input type="hidden" name="downline" id="downline" value="{{$datas->no_hp_downline}}">
   <input type="hidden" name="tgl" id="tgl" value="{{$tgl}}">
-  <input type="hidden" name="user" id="user" value="{{ Auth::user()->id }}">
+  <input type="hidden" name="user" id="user" value="{{ Auth::user()->id_user }}">
 <table id="invoice-dompul-table" class="table responsive"  width="100%">
     <thead>
     <tr>
@@ -84,6 +84,20 @@ td{
 
     </div>
   </div>
+  <div class="form row">
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <b>Total Pembayaran</b>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="" readonly>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+    </div>
+</div>
   <hr>
   <div data-repeater-list="bank">
     <div data-repeater-item>

@@ -103,6 +103,20 @@ td{
 
     </div>
   </div>
+  <div class="form row">
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <b>Total Pembayaran</b>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="" readonly>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+    </div>
+  </div>
   <hr>
   <div data-repeater-list="bank" id="pembayaran">
     <div data-repeater-item>
@@ -327,17 +341,17 @@ td{
     $("#pembayaran").on("keyup", "#trf", function(){
       if (this.value.length!=0) {
         var n = parseInt($(this).val().replace(/\D/g,''),10);
-        (this).value=n.toLocaleString('id-ID'); 
+        (this).value=n.toLocaleString('id-ID');
       }else{
-        (this).value=0; 
+        (this).value=0;
       }
     });
     $("#qty_program").on("keyup", function(){
       if (this.value.length!=0) {
         var n = parseInt($(this).val().replace(/\D/g,''),10);
-        (this).value=n.toLocaleString('id-ID'); 
+        (this).value=n.toLocaleString('id-ID');
       }else{
-        (this).value=0; 
+        (this).value=0;
       }
     });
     // $('#trf').on('keyup', function (event) {

@@ -69,7 +69,7 @@ class UploadDompulController extends Controller {
                             }else{
                                 $uploadDompul[] = ['no_hp_sub_master_dompul' => $value->hp_sub_master,
                                 'nama_sub_master_dompul' => $value->nama_sub_master,
-                                'id' => Auth::user()->id,
+                                'id_user' => Auth::user()->id_user,
                                 'id_lokasi' => Auth::user()->id_lokasi,
                                 'tanggal_transfer' => $value->tanggal_trx,
                                 'tanggal_upload' => Carbon::now('Asia/Jakarta')->toDateString(),
@@ -201,7 +201,7 @@ class UploadDompulController extends Controller {
     public function uploadData(Datatables $datatables) {
         return $datatables->eloquent(UploadDompul::select(DB::raw('tanggal_transfer,tanggal_upload, IF(status_active=1, "Aktif", "Tidak Aktif") as status_active, COUNT(no_faktur) as jumlah_transaksi, name,nm_lokasi'))
         ->groupBy('tanggal_transfer','tanggal_upload','status_active','name','nm_lokasi')
-        ->join('users','users.id','=','upload_dompuls.id')
+        ->join('users','users.id_user','=','upload_dompuls.id_user')
         ->join('master_lokasis','master_lokasis.id_lokasi','=','upload_dompuls.id_lokasi'))
        ->addColumn('action', function ($uploadDompul) {
                 if ($uploadDompul->status_active=='Aktif') {

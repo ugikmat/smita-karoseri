@@ -196,7 +196,7 @@ class PenjualanDompulController extends Controller
         $penjualanDompul = new PenjualanDompul();
         $penjualanDompul->id_sales=$id_sales;
         $penjualanDompul->no_hp_kios=$hp_downline;
-        $penjualanDompul->no_user=$user;
+        $penjualanDompul->id_user=$user;
         $penjualanDompul->id_bo=Auth::user()->id_bo;
         $penjualanDompul->tanggal_penjualan_dompul=$tgl;
         $penjualanDompul->tanggal_input=$tgl_input;
