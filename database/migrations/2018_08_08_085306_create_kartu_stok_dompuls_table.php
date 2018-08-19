@@ -16,11 +16,17 @@ class CreateKartuStokDompulsTable extends Migration
         Schema::create('kartu_stok_dompuls', function (Blueprint $table) {
             $table->increments('id_stok_dompul');
             $table->string('id_produk');
-            $table->integer('stok_awal')->default(0);
-            $table->integer('stok_masuk')->default(0);
-            $table->integer('stok_keluar')->default(0);
-            $table->integer('stok_akhir')->default(0);
-            $table->tinyInteger('status_stok_dompul')->default(1);
+            $table->integer('id_sales');
+            $table->integer('id_lokasi');
+            $table->dateTime('tanggal_transaksi');
+            $table->string('nomor_referensi', 30);
+            $table->string('jenis_transaksi', 30);
+            $table->text('keterangan');
+            $table->bigInteger('masuk');
+            $table->bigInteger('keluar');
+            $table->dateTime('tanggal_input');
+            $table->integer('id_user');
+            $table->tinyInteger('status_stok_dompul')->default(0);
         });
     }
 
