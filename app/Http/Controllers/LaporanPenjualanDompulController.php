@@ -40,7 +40,8 @@ class LaporanPenjualanDompulController extends Controller
 	sum(IF(metode_pembayaran = 'BCA Cabang', nominal, 0)) AS bca_cabang, 
 	sum(IF(metode_pembayaran = 'Mandiri', nominal, 0)) AS mandiri,
 	sum(IF(metode_pembayaran = 'BNI', nominal, 0)) AS bni, 
-	sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+    sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+                    ->where('deleted',0)
                    ->groupBy('id_penjualan_dompul');
         $tgl = Carbon::parse(session('tgl_laporan_dompul'));
         $tgl = $tgl->format('Y-m-d');
@@ -77,7 +78,8 @@ class LaporanPenjualanDompulController extends Controller
 	sum(IF(metode_pembayaran = 'BCA Cabang', nominal, 0)) AS bca_cabang, 
 	sum(IF(metode_pembayaran = 'Mandiri', nominal, 0)) AS mandiri,
 	sum(IF(metode_pembayaran = 'BNI', nominal, 0)) AS bni, 
-	sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+    sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+                    ->where('deleted',0)
                    ->groupBy('id_penjualan_dompul');
         $data = PenjualanDompul::select(DB::raw('master_saless.nm_sales, 
                                 sum(penjualan_dompuls.grand_total) AS total_penjualan, sum(cash) AS cash, 
@@ -143,7 +145,8 @@ class LaporanPenjualanDompulController extends Controller
 	sum(IF(metode_pembayaran = 'BCA Cabang', nominal, 0)) AS bca_cabang, 
 	sum(IF(metode_pembayaran = 'Mandiri', nominal, 0)) AS mandiri,
 	sum(IF(metode_pembayaran = 'BNI', nominal, 0)) AS bni, 
-	sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+    sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+                    ->where('deleted',0)
                    ->groupBy('id_penjualan_dompul');
 
         return $datatables->eloquent(PenjualanDompul::select(DB::raw('master_saless.nm_sales, nama_bo,
@@ -220,7 +223,8 @@ class LaporanPenjualanDompulController extends Controller
 	sum(IF(metode_pembayaran = 'BCA Cabang', nominal, 0)) AS bca_cabang, 
 	sum(IF(metode_pembayaran = 'Mandiri', nominal, 0)) AS mandiri,
 	sum(IF(metode_pembayaran = 'BNI', nominal, 0)) AS bni, 
-	sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+    sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+                    ->where('deleted',0)
                    ->groupBy('id_penjualan_dompul');
         return $datatables->eloquent(PenjualanDompul::select(DB::raw('master_customers.nm_cust,
                                 sum(penjualan_dompuls.grand_total) AS total_penjualan, 
