@@ -79,11 +79,14 @@ class ListPenjualanDompulController extends Controller
         $penjualanDompul = PenjualanDompul::where('id_penjualan_dompul',$id)->first();
         $penjualanDompul->grand_total=str_replace('.', '', $total);
         $penjualanDompul->save();
-        foreach ($delete as $key => $value) {
-            $detailPenjualanDompul = DetailPenjualanDompul::where('id_detail_penjualan',$value)->first();
-            $detailPenjualanDompul->deleted = 1;
-            $detailPenjualanDompul->save();
+        if (!empty($delete)) {
+            foreach ($delete as $key => $value) {
+                $detailPenjualanDompul = DetailPenjualanDompul::where('id_detail_penjualan',$value)->first();
+                $detailPenjualanDompul->deleted = 1;
+                $detailPenjualanDompul->save();
+            }
         }
+        
         foreach ($bank as $key => $value) {
             if (empty($value['id'])) {
                 $detailPenjualanDompul = new DetailPenjualanDompul();

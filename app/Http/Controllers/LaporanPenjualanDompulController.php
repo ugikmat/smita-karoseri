@@ -155,7 +155,7 @@ class LaporanPenjualanDompulController extends Controller
                                 (sum(penjualan_dompuls.grand_total)-sum(total_bayar)) AS piutang,
                                 COUNT(penjualan_dompuls.id_penjualan_dompul) AS total_transaksi'))
                         ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
-                        ->join('users','users.id','=','penjualan_dompuls.no_user')
+                        ->join('users','users.id_user','=','penjualan_dompuls.id_user')
                         ->join('bos','bos.id_bo','=','users.id_bo')
                         ->joinSub($total_nominal, 'total_nominal', function($join) {
                             $join->on('penjualan_dompuls.id_penjualan_dompul', '=', 'total_nominal.id_penjualan_dompul');
