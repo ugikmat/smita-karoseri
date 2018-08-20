@@ -123,7 +123,7 @@
       <b>Total Pembayaran</b>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="" readonly>
+        <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="{{number_format($total_pembayaran,0,'','.')}}" readonly>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -138,7 +138,7 @@
     <b>Kekurangan Pembayaran</b>
   </div>
   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      <input type="text" class="form-control" name="selisih" id="selisih" value="" readonly>
+      <input type="text" class="form-control" name="selisih" id="selisih" value="0" readonly>
   </div>
   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -314,7 +314,9 @@
     }
 });
     $(document).ready(function () {
-      var indeks = 0;
+        $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
+        var indeks = 0;
+        var bayar=0;
         var repeater = $('.repeater').repeater({
             // (Optional)
             // start with an empty list of repeaters. Set your first (and only)
@@ -348,6 +350,11 @@
                     $(this).slideUp(deleteElement);
                 }
                 $('#deleted').append(`<input type='hidden' id='delete' name="delete[${indeks++}]" value='${$('#id', $(this)).val()}'>`);
+                var n = parseInt($('#trf', $(this)).val().replace(/\D/g,''),10);
+                var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-n;
+                console.log(total);
+                $('#total_pembayaran').val((total).toLocaleString('id-ID'));
+                $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
             },
             // (Optional)
             // You can use this if you need to manually re-index the list
@@ -371,14 +378,29 @@
             },
           @endforeach
         ]);
-        $("#pembayaran").on("keyup", "#trf", function(){
-          if (this.value.length!=0) {
-            var n = parseInt($(this).val().replace(/\D/g,''),10);
-            (this).value=n.toLocaleString('id-ID');
+        $("#pembayaran").on("keydown", "#trf", function(){
+          console.log((this).value);
+          if (this.value.length!=0&&!isNaN(parseInt($(this).val().replace(/\D/g,''),10))) {
+            console.log(`Value : ${this.value}`);
+            bayar = parseInt($(this).val().replace(/\D/g,''),10);
           }else{
-            (this).value=0;
+            bayar=0;
           }
         });
+    $("#pembayaran").on("input", "#trf", function(){
+      if (this.value.length!=0&&!isNaN(parseInt($(this).val().replace(/\D/g,''),10))) {
+        var n = parseInt($(this).val().replace(/\D/g,''),10);
+        (this).value=n.toLocaleString('id-ID');
+        var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-bayar;
+        $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
+      }else{
+        (this).value=0;
+        var n = parseInt($(this).val().replace(/\D/g,''),10);
+        var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-bayar;
+        $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
+      }
+      $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
+    });
     });
 </script>
 <script>

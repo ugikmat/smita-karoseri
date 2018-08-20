@@ -240,7 +240,8 @@ class PenjualanSPController extends Controller
 
         $tunai = $request->get('total');
         $bank = $request->get('bank-sp');
-
+        $total_pembayaran = $request->get('pembayaran');
+        $selisih = $request->get('selisih');
         $produks = produk::where('status_produk','1')->get()->count();
         $penjualanSp = DB::table('temp_penjualan_sps')->where('id_temp_penjualan_sp',$id)->first();
         Schema::dropIfExists('temp_detail_penjualan_sps');
@@ -305,6 +306,8 @@ class PenjualanSPController extends Controller
             'tunai'=>$total,
             'sales'=>$sales,
             'customer'=>$customer,
+            'total_pembayaran'=>$total_pembayaran,
+            'selisih'=>$selisih
             ]);
     }
 

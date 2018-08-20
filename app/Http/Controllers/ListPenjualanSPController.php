@@ -44,7 +44,11 @@ class ListPenjualanSPController extends Controller
         $customer = Customer::where('nm_cust',$customer)->first();
         $penjualanSP = PenjualanProduk::where('id_penjualan_sp',$id_penjualan_sp)->first();
         $pembayaran = DetailPembayaranSp::where('id_penjualan_sp',$id_penjualan_sp)->where('deleted',0)->get();
-        return view('penjualan.sp.list-invoice-sp-2',['sales'=>$sales,'customer'=>$customer,'penjualanSP'=>$penjualanSP,'pembayaran'=>$pembayaran]);
+        $total_pembayaran=0;
+        foreach ($pembayaran as $key => $value) {
+            $total_pembayaran+=$value->nominal;
+        }
+        return view('penjualan.sp.list-invoice-sp-2',['sales'=>$sales,'customer'=>$customer,'penjualanSP'=>$penjualanSP,'pembayaran'=>$pembayaran,'total_pembayaran'=>$total_pembayaran]);
     }
 
     public function update(Request $request, $id,$id_detail){
