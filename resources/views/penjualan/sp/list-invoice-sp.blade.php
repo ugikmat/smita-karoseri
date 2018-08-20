@@ -112,6 +112,26 @@
   </div>
 </div>
 
+<!--Modal Hapus-->
+<div class="modal fade" id="deleteModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="deleteForm" action="" method="POST">
+        @csrf @method('delete')
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-danger" value="Hapus">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 @stop
 
@@ -155,7 +175,7 @@
           console.log($tgl);
           console.log('Loading Data...');
           t.ajax.url(`/invoice_sp/list/${$tgl}`).load();
-          console.log('Loaded');  
+          console.log('Loaded');
         });
     });
 $('#verificationModal').on('show.bs.modal', function (event) {
