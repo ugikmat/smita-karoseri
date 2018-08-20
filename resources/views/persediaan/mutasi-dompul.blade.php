@@ -135,7 +135,7 @@
             processing: true,
             ajax: `/stok-dompul/data/${$tgl}`,
             columns: [
-                {data: 'indeks'},
+                // {data: 'indeks'},
                 {data: 'id_produk'},
                 {data: 'stok_awal'},
                 {data: 'stok_masuk'},
