@@ -90,7 +90,7 @@ td{
       <b>Total Pembayaran</b>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="" readonly>
+        <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="{{$total_pembayaran}}" readonly>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -105,7 +105,7 @@ td{
     <b>Kekurangan Pembayaran</b>
   </div>
   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      <input type="text" class="form-control" name="selisih" id="selisih" value="" readonly>
+      <input type="text" class="form-control" name="selisih" id="selisih" value="{{$selisih}}" readonly>
   </div>
   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 

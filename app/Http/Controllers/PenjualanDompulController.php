@@ -132,6 +132,8 @@ class PenjualanDompulController extends Controller
     public function verify(Request $request,$canvaser,$tgl,$downline){
         $tunai = $request->get('tunai');
         $bank = $request->get('bank');
+        $total_pembayaran = $request->get('pembayaran');
+        $selisih = $request->get('selisih');
         session(['bank'=>$bank]);
         for ($key=0; $key <count($bank) ; $key++) { 
             // $bank[$key]['trf']=number_format($bank[$key]['trf'],0,",",".");
@@ -176,7 +178,9 @@ class PenjualanDompulController extends Controller
             'total'=>$total,
             'tunai'=>$tunai,
             'bank'=>$bank,
-            'sales'=>$sales
+            'sales'=>$sales,
+            'total_pembayaran'=>$total_pembayaran,
+            'selisih'=>$selisih,
             ]);
     }
     /**

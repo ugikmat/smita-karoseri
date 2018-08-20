@@ -264,7 +264,6 @@
             $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
           }else{
             (this).value=0;
-            console.log('0000');
           }
         });
         $("#pembayaran").on("keydown", "#trf", function(){

@@ -109,7 +109,7 @@ td{
       <b>Total Pembayaran</b>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="" readonly>
+        <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="0" readonly>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -124,7 +124,7 @@ td{
       <b>Kekurangan Pembayaran</b>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        <input type="text" class="form-control" name="selisih" id="selisih" value="" readonly>
+        <input type="text" class="form-control" name="selisih" id="selisih" value="0" readonly>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -324,6 +324,8 @@ td{
 </script>
 <script>
     $(function () {
+        $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
+        var bayar=0;
         var tgl = $('#tgl').val();
         var canvaser = $('#canvasser').val();
         var downline = $('#downline').val();
@@ -354,14 +356,30 @@ td{
       }
       }, 'json');
     });
-    $("#pembayaran").on("keyup", "#trf", function(){
-      if (this.value.length!=0) {
+    $("#pembayaran").on("keydown", "#trf", function(){
+          console.log((this).value);
+          if (this.value.length!=0&&!isNaN(this.value)) {
+            console.log(`Value : ${this.value}`);
+            bayar = parseInt($(this).val().replace(/\D/g,''),10);
+          }else{
+            bayar=0;
+          }
+        });
+    $("#pembayaran").on("input", "#trf", function(){
+      if (this.value.length!=0&&!isNaN(this.value)) {
         var n = parseInt($(this).val().replace(/\D/g,''),10);
         (this).value=n.toLocaleString('id-ID');
+        var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-bayar;
+        $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
       }else{
         (this).value=0;
+        var n = parseInt($(this).val().replace(/\D/g,''),10);
+        var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-bayar;
+        $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
       }
+      $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
     });
+
     $("#qty_program").on("keyup", function(){
       if (this.value.length!=0) {
         var n = parseInt($(this).val().replace(/\D/g,''),10);
