@@ -67,8 +67,6 @@
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset"> <i class="fa fa-repeat"></i> Kosongkan</button>
                       <button id="show" class="btn btn-success" type="button" data-dismiss="modal"> </i> Tampilkan List Penjualan</button>
-                      {{-- <input type="btn" class="btn btn-success" onclick="loadData()" value="Tampilkan List Penjualan"> --}}
-                      {{-- <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-ok"></i>Tampilkan List Penjualan</button> --}}
                     </div>
                   </div>
                 </form>
