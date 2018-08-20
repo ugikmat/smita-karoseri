@@ -38,7 +38,7 @@
         Tanggal Cetak Laporan
       </div>
       <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        : 1111213
+        : {{Carbon\Carbon::now()->format('d/m/Y')}}
       </div>
     </div>
   </div>
@@ -48,29 +48,15 @@
 <table id="mutasi-dompul-table" class="table responsive" width="100%">
     <thead>
     <tr>
-        <th rowspan="2">No.</th>
-        <th rowspan="2">No Sub Master Dompul</th>
-        <th colspan="3">Stok Awal</th>
-        <th colspan="3">Stok Masuk</th>
-        <th colspan="3">Stok Keluar</th>
-        <th colspan="3">Stok Akhir</th>
-    </tr>
-    <tr>
-      <th>5K</th>
-      <th>10K</th>
-      <th>Rupiah</th>
-      <th>5K</th>
-      <th>10K</th>
-      <th>Rupiah</th>
-      <th>5K</th>
-      <th>10K</th>
-      <th>Rupiah</th>
-      <th>5K</th>
-      <th>10K</th>
-      <th>Rupiah</th>
+        <th>No.</th>
+        <th>No Sub Master Dompul</th>
+        <th>Stok Awal</th>
+        <th >Stok Masuk</th>
+        <th >Stok Keluar</th>
+        <th >Stok Akhir</th>
     </tr>
     </thead>
-    <tfoot>
+    {{-- <tfoot>
       <tr>
         <td></td>
         <td colspan="2"><b>Total Stok</b></td>
@@ -79,7 +65,7 @@
         <td colspan="3">harganya(dari database)</td>
         <td colspan="3">harganya(dari database)</td>
       </tr>
-    </tfoot>
+    </tfoot> --}}
 </table>
 
 <!--Modal input-->
@@ -103,15 +89,16 @@
               </div>
               <div class="x_content">
                 <br />
-
-                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="">
-                  @csrf @method('put')
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Pilih Tanggal
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy">
+                      @if(Session::has('tgl_stok_dompul'))
+                        <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy" id="tgl" name="tgl" value="{{session('tgl_stok_dompul')}}">
+                      @else
+                        <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy" id="tgl" name="tgl" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
+                      @endif
                     </div>
                   </div>
 
@@ -119,10 +106,9 @@
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset"> <i class="fa fa-repeat"></i> Kosongkan</button>
-                      <button type="submit" class="btn btn-success" ><i class="glyphicon glyphicon-ok"></i>Tampilkan Mutasi Dompul</button>
+                      <button type="button" id="save" class="btn btn-success" data-dismiss="modal"><i class="glyphicon glyphicon-ok"></i>Tampilkan Mutasi Dompul</button>
                     </div>
                   </div>
-                </form>
               </div>
             </div>
           </div>
@@ -145,20 +131,23 @@
 </script>
 <script>
     $(function () {
-        $('#mutasi-dompul-table').DataTable({
+        $tgl =  $('#tgl').val();
+        var t = $('#mutasi-dompul-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: 'mutasi-dompul-data',
+            ajax: `/stok-dompul/data/${$tgl}`,
             columns: [
-                {data: 'id_penjualan_dompul'},
-                {data: 'hp_kios'},
-                {data: 'tanggal_penjualan_dompul'},
-                {data: 'tanggal_input'},
-                {data: 'grand_total'},
-                {data: 'bayar_tunai'},
-                {data: 'catatan'},
-                {data: 'action', orderable: false, searchable: false}
+                {data: 'indeks'},
+                {data: 'id_produk'},
+                {data: 'stok_awal'},
+                {data: 'stok_masuk'},
+                {data: 'stok_keluar'},
+                {data: 'jumlah_stok'}
             ]
+        });
+        $('#save').on('click',function(event) {
+          $tgl = $('#tgl').val();
+          t.ajax.url(`/stok-dompul/data/${$tgl}`).load();
         });
     });
 </script>
