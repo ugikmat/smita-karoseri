@@ -114,7 +114,7 @@
       <b>Total Pembayaran</b>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="" readonly>
+        <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="0" readonly>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -193,6 +193,7 @@
 @section('js')
 <script>
     $(document).ready(function () {
+        var bayar=0;
         $('.repeater').repeater({
             // (Optional)
             // start with an empty list of repeaters. Set your first (and only)
@@ -238,12 +239,25 @@
             // defaults to false.
             isFirstItemUndeletable: false
         });
-        $("#pembayaran").on("keyup", "#trf", function(){
+        $("#pembayaran").on("input", "#trf", function(){
           if (this.value.length!=0) {
             var n = parseInt($(this).val().replace(/\D/g,''),10);
             (this).value=n.toLocaleString('id-ID');
+            console.log(`INPUT : ${this.value}`);
+            var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-bayar;
+            $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
           }else{
             (this).value=0;
+            console.log('0000');
+          }
+        });
+        $("#pembayaran").on("keydown", "#trf", function(){
+          console.log((this).value);
+          if (this.value.length!=0) {
+            console.log(`Value : ${this.value}`);
+            bayar = parseInt($(this).val().replace(/\D/g,''),10);
+          }else{
+            bayar=0;
           }
         });
     });
