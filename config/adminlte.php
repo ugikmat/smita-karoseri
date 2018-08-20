@@ -148,10 +148,6 @@ return [
                         'url'     => '/penjualan/sp/invoice-sp',
                         'icon'    => 'mobile-phone',
                       ],
-                      // [
-                      //   'text'    => 'lalala',
-                      //   'url'     => '/penjualan/sp/invoice-sp-3',
-                      // ],
                       [
                         'text'    => 'List Invoice SP',
                         'url'     => '/penjualan/sp/list-invoice-sp',
@@ -173,10 +169,6 @@ return [
                         'url'   => '/penjualan/laporan-penjualan/LPdompul',
                         'icon'  => 'briefcase',
                       ],
-                      // [
-                      //   'text'  => 'Dompet Pulsa 2',
-                      //   'url'   => '/penjualan/laporan-penjualan/LPdompul-2',
-                      // ],
                       [
                         'text'  => 'Penjualan Dompul Head',
                         'url'   => '/penjualan/laporan-penjualan/dompul-head',
@@ -187,10 +179,6 @@ return [
                         'url'   => '/penjualan/laporan-penjualan/LPsp',
                         'icon'  => 'briefcase',
                       ],
-                      // [
-                      //   'text'  => 'Starter Pack 2',
-                      //   'url'   => '/penjualan/laporan-penjualan/LPsp-2',
-                      // ],
                     ],
                   ],
                 ],
@@ -211,7 +199,7 @@ return [
                       [
                         'text'  =>  'List Invoice Dompul',
                         'icon'  => 'file',
-                        'url'   => '',
+                        'url'   => '/pembelian/dompul/list-p-dompul',
                       ],
                     ],
                   ],
@@ -227,7 +215,7 @@ return [
                       [
                         'text'  => 'List Invoice SP',
                         'icon'  => 'file',
-                        'url'   => '',
+                        'url'   => '/pembelian/splist-p-sp',
                       ],
                     ],
                   ],
