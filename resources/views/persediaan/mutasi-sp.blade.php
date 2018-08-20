@@ -55,7 +55,7 @@
 <table id="mutasi-sp-table" class="table responsive" width="100%">
     <thead>
       <tr>
-        <th>Nama Barang</th>
+        <th>Nama Produk</th>
         <th>Stok Awal</th>
         <th>Stok Masuk</th>
         <th>Stok Keluar</th>
@@ -64,11 +64,11 @@
     </thead>
     <tfoot>
       <tr>
-        <td><b>Total Stok</b></td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
+        <td><b>Total Mutasi</b></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
     </tfoot>
 </table>
