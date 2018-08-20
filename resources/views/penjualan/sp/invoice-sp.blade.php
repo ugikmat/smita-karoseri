@@ -256,7 +256,7 @@
             isFirstItemUndeletable: false
         });
         $("#pembayaran").on("input", "#trf", function(){
-          if (this.value.length!=0) {
+          if (this.value.length!=0&&!isNaN(parseInt($(this).val().replace(/\D/g,''),10))) {
             var n = parseInt($(this).val().replace(/\D/g,''),10);
             (this).value=n.toLocaleString('id-ID');
             console.log(`INPUT : ${this.value}`);

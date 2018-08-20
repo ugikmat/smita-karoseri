@@ -55,13 +55,18 @@ class ListPenjualanDompulController extends Controller
                         ->where('tanggal_transfer',$tgl)
                         ->where('nama_downline',$downline)->get();
         $total = 0;
+        $total_pembayaran=0;
+        $pembayaran = DetailPenjualanDompul::where('id_penjualan_dompul',$id)->where('deleted',0)->get();
+        foreach ($pembayaran as $key => $value) {
+            $total_pembayaran+=$value->nominal;
+        }
         foreach ($sums as $key => $value) {
             $total+=(($value->qty-$value->qty_program)*$value->harga_dompul);
         }
         $total=number_format($total,0,",",".");
         $penjualanDompul = PenjualanDompul::where('id_penjualan_dompul',$id)->first();
         $detailPenjualanDompul = DetailPenjualanDompul::where('id_penjualan_dompul',$id)->where('deleted',0)->get();
-        return view('penjualan.dompul.list-edit-p-dompul-ro',['datas'=>$datas,'total'=>$total,'penjualanDompul'=>$penjualanDompul,'detailPenjualanDompul'=>$detailPenjualanDompul]);
+        return view('penjualan.dompul.list-edit-p-dompul-ro',['datas'=>$datas,'total'=>$total,'penjualanDompul'=>$penjualanDompul,'detailPenjualanDompul'=>$detailPenjualanDompul,'total_pembayaran'=>$total_pembayaran]);
     }
 
     public function verif($id){

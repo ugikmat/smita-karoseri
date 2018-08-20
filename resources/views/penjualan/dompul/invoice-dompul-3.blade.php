@@ -358,7 +358,7 @@ td{
     });
     $("#pembayaran").on("keydown", "#trf", function(){
           console.log((this).value);
-          if (this.value.length!=0&&!isNaN(this.value)) {
+          if (this.value.length!=0&&!isNaN(parseInt($(this).val().replace(/\D/g,''),10))) {
             console.log(`Value : ${this.value}`);
             bayar = parseInt($(this).val().replace(/\D/g,''),10);
           }else{
@@ -366,7 +366,7 @@ td{
           }
         });
     $("#pembayaran").on("input", "#trf", function(){
-      if (this.value.length!=0&&!isNaN(this.value)) {
+      if (this.value.length!=0&&!isNaN(parseInt($(this).val().replace(/\D/g,''),10))) {
         var n = parseInt($(this).val().replace(/\D/g,''),10);
         (this).value=n.toLocaleString('id-ID');
         var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-bayar;
