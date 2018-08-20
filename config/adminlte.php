@@ -197,20 +197,20 @@ return [
               ],
               [
                 'text'    => 'Pembelian',
-                'icon'    => '',
+                'icon'    => 'share',
                 'submenu' => [
                   [
                     'text'    => 'Pembelian Dompul',
-                    'icon'    => '',
+                    'icon'    => 'share',
                     'submenu' => [
                       [
                         'text'  => 'Invoice Dompul',
-                        'icon'  => '',
+                        'icon'  => 'shopping-cart',
                         'url'   => '/pembelian/sp/pembelian-dompul',
                       ],
                       [
                         'text'  =>  'List Invoice Dompul',
-                        'icon'  => '',
+                        'icon'  => 'file',
                         'url'   => '',
                       ],
                     ],
@@ -221,12 +221,12 @@ return [
                     'submenu' => [
                       [
                         'text'  => 'Invoice SP',
-                        'icon'  => '',
+                        'icon'  => 'shopping-cart',
                         'url'   => '/pembelian/sp/pembelian-sp',
                       ],
                       [
                         'text'  => 'List Invoice SP',
-                        'icon'  => '',
+                        'icon'  => 'file',
                         'url'   => '',
                       ],
                     ],
