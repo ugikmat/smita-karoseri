@@ -43,40 +43,53 @@
 
 <br><br>
 
-<table id="invoice-sp-table" class="table responsive"  width="100%">
-  <tr>
-    <th>Nama Barang</th>
-    <th>Satuan</th>
-    <th>Harga Satuan</th>
-    <th>Tipe Harga</th>
-    <th>Jumlah</th>
-    <th>Harga Total</th>
-  </tr>
-
-  <tr>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-2 top" align="center">
+      <b>Nama Barang</b>
+    </div>
+    <div class="col-xs-2 top" align="center">
+      <b>Satuan</b>
+    </div>
+    <div class="col-xs-2 top" align="center">
+      <b>Harga Satuan</b>
+    </div>
+    <div class="col-xs-2 top" align="center">
+      <b>Tipe Harga</b>
+    </div>
+    <div class="col-xs-2 top" align="center">
+      <b>Jumlah</b>
+    </div>
+    <div class="col-xs-2 top" align="center">
+      <b>Harga Total</b>
+    </div>
+  </div>
+  <br>
+  <div class="row">
     <input type="hidden" name="kode" id="kode" value="">
-    <td>
-    <input type="text" class="form-control" id="nama" name="nama" value="" disabled>
-    </td>
-    <td>
+    <div class="col-xs-2">
+      <input type="text" class="form-control" id="nama" name="nama" value="" disabled>
+    </div>
+    <div class="col-xs-2">
       <input type="text" class="form-control" id="satuan" name="satuan" value="" disabled>
-    </td>
-    <td>
+    </div>
+    <div class="col-xs-2">
       <input type="text" class="form-control" id="harga" name="harga" value="" readonly>
-    </td>
-    <td>
-      <select class="form-control" name="tipe" id="tipe" style="height: calc(3.5rem - 2px); width:100%;">
+    </div>
+    <div class="col-xs-2" align="center">
+      <select class="form-control" name="tipe" id="tipe" style="height: calc(3.5rem - 2px); width:100px;">
             <option  value=""></option>
       </select>
-    </td>
-    <td>
+    </div>
+    <div class="col-xs-2">
       <input type="number" class="form-control" id="jumlah" name="jumlah" value=0 style="width=100%;">
-    </td>
-    <td>
+    </div>
+    <div class="col-xs-2">
       <input type="text" class="form-control" id="total" name="total" readonly value=0>
-    </td>
-  </tr>
-</table>
+    </div>
+  </div>
+  <br>
+</div>
 
 <div class="container-fluid" style="background:white;">
   <br>
