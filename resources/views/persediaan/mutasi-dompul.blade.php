@@ -48,24 +48,22 @@
 <table id="mutasi-dompul-table" class="table responsive" width="100%">
     <thead>
     <tr>
-        <th>No.</th>
-        <th>No Sub Master Dompul</th>
+        <th>Nama Produk</th>
         <th>Stok Awal</th>
         <th >Stok Masuk</th>
         <th >Stok Keluar</th>
         <th >Stok Akhir</th>
     </tr>
     </thead>
-    {{-- <tfoot>
+    <tfoot>
       <tr>
+        <td><b>Total Mutasi</b></td>
         <td></td>
-        <td colspan="2"><b>Total Stok</b></td>
-        <td colspan="3">harganya(dari database)</td>
-        <td colspan="3">harganya(dari database)</td>
-        <td colspan="3">harganya(dari database)</td>
-        <td colspan="3">harganya(dari database)</td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
-    </tfoot> --}}
+    </tfoot>
 </table>
 
 <!--Modal input-->
@@ -137,7 +135,7 @@
             processing: true,
             ajax: `/stok-dompul/data/${$tgl}`,
             columns: [
-                {data: 'indeks'},
+                // {data: 'indeks'},
                 {data: 'id_produk'},
                 {data: 'stok_awal'},
                 {data: 'stok_masuk'},

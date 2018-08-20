@@ -55,7 +55,7 @@
 <table id="mutasi-sp-table" class="table responsive" width="100%">
     <thead>
       <tr>
-        <th>Nama Barang</th>
+        <th>Nama Produk</th>
         <th>Stok Awal</th>
         <th>Stok Masuk</th>
         <th>Stok Keluar</th>
@@ -64,11 +64,11 @@
     </thead>
     <tfoot>
       <tr>
-        <td><b>Total Stok</b></td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
+        <td><b>Total Mutasi</b></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
     </tfoot>
 </table>
@@ -92,14 +92,12 @@
             processing: true,
             ajax: 'mutasi-sp-data',
             columns: [
-                {data: 'id_penjualan_sp'},
-                {data: 'hp_kios'},
-                {data: 'tanggal_penjualan_sp'},
-                {data: 'tanggal_input'},
-                {data: 'grand_total'},
-                {data: 'bayar_tunai'},
-                {data: 'catatan'},
-                {data: 'action', orderable: false, searchable: false}
+              {data: 'indeks'},
+              {data: 'id_produk'},
+              {data: 'stok_awal'},
+              {data: 'stok_masuk'},
+              {data: 'stok_keluar'},
+              {data: 'jumlah_stok'}
             ]
         });
     });
