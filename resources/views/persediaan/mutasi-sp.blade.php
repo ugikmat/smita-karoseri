@@ -92,14 +92,12 @@
             processing: true,
             ajax: 'mutasi-sp-data',
             columns: [
-                {data: 'id_penjualan_sp'},
-                {data: 'hp_kios'},
-                {data: 'tanggal_penjualan_sp'},
-                {data: 'tanggal_input'},
-                {data: 'grand_total'},
-                {data: 'bayar_tunai'},
-                {data: 'catatan'},
-                {data: 'action', orderable: false, searchable: false}
+              {data: 'indeks'},
+              {data: 'id_produk'},
+              {data: 'stok_awal'},
+              {data: 'stok_masuk'},
+              {data: 'stok_keluar'},
+              {data: 'jumlah_stok'}
             ]
         });
     });
