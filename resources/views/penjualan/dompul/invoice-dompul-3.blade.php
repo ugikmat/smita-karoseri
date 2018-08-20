@@ -103,12 +103,28 @@ td{
 
     </div>
   </div>
+  <br>
   <div class="form row">
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
       <b>Total Pembayaran</b>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
         <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="" readonly>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+    </div>
+  </div>
+  <br>
+  <div class="form row">
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <b>Kekurangan Pembayaran</b>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <input type="text" class="form-control" name="selisih" id="selisih" value="" readonly>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
