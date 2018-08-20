@@ -293,7 +293,7 @@ td{
             // to the server, etc.  If a hide callback is not given the item
             // will be deleted.
             hide: function (deleteElement) {
-                if(confirm('Apakah anda yakin ingin menghapus pesanan SP ini?')) {
+                if(confirm('Apakah anda yakin ingin menghapus pembayaran dompul ini?')) {
                     $(this).slideUp(deleteElement);
                 }
             },
