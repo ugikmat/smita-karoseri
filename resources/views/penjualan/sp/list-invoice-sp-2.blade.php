@@ -448,6 +448,7 @@
             $('#total').val(response.total);
             console.log($('#total').val());
             t.ajax.url(`/edit_list_invoice_sp/${id}`).load();
+            $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
 
             // console.log($('#total').val(response.total));
 

@@ -358,6 +358,7 @@ td{
         console.log(response.total);
         t.ajax.url(`/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`).load();
         $('#total').val(response.total.toLocaleString('id-ID'));
+        $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
       }
       }, 'json');
     });
