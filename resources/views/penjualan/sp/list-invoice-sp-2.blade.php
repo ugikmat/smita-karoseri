@@ -74,6 +74,9 @@
 </div>
 <form action="/list_invoice_SP/store" method="post" class="repeater">
   @csrf
+  <div id="deleted">
+
+  </div>
   <input type="hidden" name="id" id="id" value="{{$penjualanSP->id_penjualan_sp}}">
 <table id="list-edit-invoice-table" class="table responsive"  width="100%">
     <thead>
@@ -323,6 +326,7 @@
     }
 });
     $(document).ready(function () {
+      var indeks = 0;
         var repeater = $('.repeater').repeater({
             // (Optional)
             // start with an empty list of repeaters. Set your first (and only)
@@ -355,6 +359,7 @@
                 if(confirm('Apakah anda yakin ingin menghapus pesanan SP ini?')) {
                     $(this).slideUp(deleteElement);
                 }
+                $('#deleted').append(`<input type='hidden' id='delete' name="delete[${indeks++}]" value='${$('#id', $(this)).val()}'>`);
             },
             // (Optional)
             // You can use this if you need to manually re-index the list

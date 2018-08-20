@@ -14,8 +14,8 @@ class CreateUploadDompulsTable extends Migration
     public function up()
     {
         Schema::create('upload_dompuls', function (Blueprint $table) {
-            $table->increments('id_upload');
-            $table->integer('id');
+            $table->bigIncrements('id_upload');
+            $table->integer('id_user');
             $table->integer('id_lokasi');
             $table->integer('id_penjualan_dompul')->nullable();
             $table->string('no_hp_sub_master_dompul');
@@ -38,7 +38,6 @@ class CreateUploadDompulsTable extends Migration
             $table->string('bayar');
             $table->string('tipe_dompul')->default('CVS');
             $table->double('harga_dompul')->default(0);
-            // $table->integer('no_user');
             $table->tinyInteger('status_active')->default(0);
             $table->tinyInteger('status_penjualan')->default(0);
             $table->tinyInteger('deleted')->default(0);

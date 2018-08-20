@@ -63,7 +63,7 @@ class PenjualanSPController extends Controller
             $table->integer('id_sales');
             $table->integer('id_customer');
             $table->string('no_hp_customer')->nullable();
-            $table->string('no_user');
+            $table->string('id_user');
             $table->date('tanggal_penjualan_sp');
             $table->date('tanggal_input');
             $table->string('cash')->default(0);
@@ -93,7 +93,7 @@ class PenjualanSPController extends Controller
         'grand_total'=>0,
         'tanggal_penjualan_sp'=>$tgl,
         'tanggal_input'=>Carbon::now('Asia/Jakarta')->toDateString(),
-        'no_user'=>Auth::user()->id,
+        'id_user'=>Auth::user()->id_user,
         'catatan'=>'none']);
         $bank = $request->get('bank-sp');
         $produks = produk::where('status_produk','1')->get()->count();
@@ -205,7 +205,7 @@ class PenjualanSPController extends Controller
             $table->integer('id_sales');
             $table->integer('id_customer');
             $table->string('no_hp_customer')->nullable();
-            $table->string('no_user');
+            $table->string('id_user');
             $table->date('tanggal_penjualan_sp');
             $table->date('tanggal_input');
             $table->string('cash')->default(0);
@@ -235,7 +235,7 @@ class PenjualanSPController extends Controller
         'grand_total'=>0,
         'tanggal_penjualan_sp'=>$tgl,
         'tanggal_input'=>Carbon::now('Asia/Jakarta')->toDateString(),
-        'no_user'=>Auth::user()->id,
+        'id_user'=>Auth::user()->id_user,
         'catatan'=>'none']);
 
         $tunai = $request->get('total');
@@ -326,8 +326,8 @@ class PenjualanSPController extends Controller
         $penjualanSp->grand_total=str_replace('.', '', $total);
         $penjualanSp->tanggal_penjualan_sp=$data->tanggal_penjualan_sp;
         $penjualanSp->tanggal_input=Carbon::now('Asia/Jakarta')->toDateString();
-        $penjualanSp->no_user=Auth::user()->id;
-        // $penjualanSp->id_lokasi=Auth::user()->id_lokasi;
+        $penjualanSp->id_user=Auth::user()->id_user;
+        $penjualanSp->id_lokasi=Auth::user()->id_lokasi;
         $penjualanSp->save();
 
         foreach ($dataDetail as $key => $value) {

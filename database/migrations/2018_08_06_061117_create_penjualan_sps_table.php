@@ -19,8 +19,9 @@ class CreatePenjualanSpsTable extends Migration
           // $table->integer('id_ho');
           // $table->integer('id_bo');
           $table->integer('id_customer');
+          $table->integer('id_lokasi');
           $table->string('no_hp_customer')->nullable();
-          $table->string('no_user');
+          $table->string('id_user');
           $table->date('tanggal_penjualan_sp');
           $table->date('tanggal_input');
           $table->bigInteger('grand_total')->default(0);

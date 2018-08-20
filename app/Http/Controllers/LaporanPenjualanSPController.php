@@ -40,7 +40,8 @@ class LaporanPenjualanSPController extends Controller
 	sum(IF(metode_pembayaran = 'BCA Cabang', nominal, 0)) AS bca_cabang, 
 	sum(IF(metode_pembayaran = 'Mandiri', nominal, 0)) AS mandiri,
 	sum(IF(metode_pembayaran = 'BNI', nominal, 0)) AS bni, 
-	sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+    sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+                    ->where('deleted',0)
                    ->groupBy('id_penjualan_sp');
         $tgl = Carbon::parse(session('tgl_laporan_sp'));
         $tgl = $tgl->format('Y-m-d');
@@ -78,7 +79,8 @@ class LaporanPenjualanSPController extends Controller
 	sum(IF(metode_pembayaran = 'BCA Cabang', nominal, 0)) AS bca_cabang, 
 	sum(IF(metode_pembayaran = 'Mandiri', nominal, 0)) AS mandiri,
 	sum(IF(metode_pembayaran = 'BNI', nominal, 0)) AS bni, 
-	sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+    sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+                    ->where('deleted',0)
                    ->groupBy('id_penjualan_sp');
         $data = PenjualanProduk::select(DB::raw('master_saless.nm_sales, 
                                 sum(penjualan_sps.grand_total) AS total_penjualan, sum(cash) AS cash, 
@@ -144,7 +146,7 @@ class LaporanPenjualanSPController extends Controller
 	sum(IF(metode_pembayaran = 'BCA Cabang', nominal, 0)) AS bca_cabang, 
 	sum(IF(metode_pembayaran = 'Mandiri', nominal, 0)) AS mandiri,
 	sum(IF(metode_pembayaran = 'BNI', nominal, 0)) AS bni, 
-	sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+	sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))->where('deleted',0)
                    ->groupBy('id_penjualan_sp');
 
         return $datatables->eloquent(PenjualanProduk::select(DB::raw('master_saless.nm_sales, nama_bo,
@@ -153,7 +155,7 @@ class LaporanPenjualanSPController extends Controller
                                 (sum(penjualan_sps.grand_total)-sum(total_bayar)) AS piutang,
                                 COUNT(penjualan_sps.id_penjualan_sp) AS total_transaksi'))
                         ->join('master_saless','master_saless.id_sales','=','penjualan_sps.id_sales')
-                        ->join('users','users.id','=','penjualan_sps.no_user')
+                        ->join('users','users.id_user','=','penjualan_sps.id_user')
                         ->join('bos','bos.id_bo','=','users.id_bo')
                         ->joinSub($total_nominal, 'total_nominal', function($join) {
                             $join->on('penjualan_sps.id_penjualan_sp', '=', 'total_nominal.id_penjualan_sp');
@@ -222,7 +224,8 @@ class LaporanPenjualanSPController extends Controller
 	sum(IF(metode_pembayaran = 'BCA Cabang', nominal, 0)) AS bca_cabang, 
 	sum(IF(metode_pembayaran = 'Mandiri', nominal, 0)) AS mandiri,
 	sum(IF(metode_pembayaran = 'BNI', nominal, 0)) AS bni, 
-	sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+    sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+                    ->where('deleted',0)
                    ->groupBy('id_penjualan_sp');
         return $datatables->eloquent(PenjualanProduk::select(DB::raw('master_customers.nm_cust,
                                 sum(penjualan_sps.grand_total) AS total_penjualan, 
