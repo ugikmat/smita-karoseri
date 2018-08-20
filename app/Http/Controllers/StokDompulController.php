@@ -44,11 +44,20 @@ sum(kartu_stok_dompuls.masuk) AS stok_masuk, sum(kartu_stok_dompuls.keluar) AS s
                         ->where('tanggal_transaksi',$tgl)
                         ->groupBy('kartu_stok_dompuls.id_produk')->get();
         return $datatables->of($stokDompul)
-                        ->addColumn('indeks', function ($detailPenjualanSp) {
+                        ->addColumn('indeks', function ($dataStok) {
                               return '';
                             })
-                            ->addColumn('stok_awal', function ($detailPenjualanSp) {
-                              return '0';
+                            ->addColumn('stok_awal', function ($dataStok) {
+                              return number_format(0,0,'','.');
+                            })
+                            ->addColumn('stok_masuk', function ($dataStok) {
+                              return number_format($dataStok->stok_masuk,0,'','.');
+                            })
+                            ->addColumn('stok_keluar', function ($dataStok) {
+                              return number_format($dataStok->stok_keluar,0,'','.');
+                            })
+                            ->addColumn('jumlah_stok', function ($dataStok) {
+                              return number_format($dataStok->jumlah_stok,0,'','.');
                             })
                           ->make(true);
     }
