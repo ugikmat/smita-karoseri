@@ -1,71 +1,83 @@
 @extends('adminlte::page')
 
-@section('title', 'Penjualan Dompul')
+@section('title', 'Pembelian SP')
 
 @section('content_header')
-    <h1>Review Penjualan Dompul RO</h1>
+    <h1>Pembelian SP</h1>
 @stop
 
 @section('css')
+<link rel="stylesheet" href="{{ asset('/datepicker/css/bootstrap-datepicker.min.css') }}">
 <style>
-td{
-  background-color: white;
-}
+  #kiri{
+    padding-left: 0px;
+  }
 </style>
 @stop
 
 @section('content')
-<div class="row">
-  @isset($datas)
-  <input type="hidden" name="canvaser" id="canvaser" value="{{$datas->nama_canvasser}}" readonly>
-  <input type="hidden" name="tgl" id="tgl" value="{{$tgl}}">
-  @endisset
-
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        HP Kios :
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-        @isset($datas)
-          {{$datas->no_hp_downline}}
-        @endisset
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        Nama Kios :
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-        @isset($datas)
-        <input type="text" name="downline" id="downline" value="{{$datas->nama_downline}}" readonly>
-        @endisset
-      </div>
-    </div>
-  </div>
-
-<form class="invoice-dompul repeater" action="/invoice_dompul/store" method="post">
+<form class="invoice-sp repeater" action="/invoice_sp/verify" method="post">
+<div class="container-fluid  form-inline">
   @csrf
-  <input type="hidden" name="sales" id="sales" value="{{$sales->id_sales}}">
-  <input type="hidden" name="nm_sales" id="nm_sales" value="{{$sales->nm_sales}}">
-  <input type="hidden" name="downline" id="downline" value="{{$datas->no_hp_downline}}">
-  <input type="hidden" name="tgl" id="tgl" value="{{$tgl}}">
-  <input type="hidden" name="user" id="user" value="{{ Auth::user()->id_user }}">
-<table id="invoice-dompul-table" class="table responsive"  width="100%">
-    <thead>
-    <tr>
-        {{-- <th>No</th> --}}
-        <th>Uraian</th>
-        <th>Tipe</th>
-        <th>Harga</th>
-        <th>Jumlah</th>
-        <th>Jumlah Program</th>
-        <th>Harga Total</th>
-    </tr>
-    </thead>
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
+      Tanggal Penjualan : &nbsp;
+      <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="">
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
+        Nama Canvaser : &nbsp;
+        <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="">
+              <option value="" disabled>Pilih Nama Canvaser</option>
+                  <option value=""></option>
+        </select>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
+        Nama Kios : &nbsp;
+        <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="chosen-select" data-placeholder="">
+              <option value="" disabled>Pilih Nama Kios</option>
+                  <option value=""></option>
+        </select>
+    </div>
+  </div>
+</div>
+
+<br><br>
+
+<table id="invoice-sp-table" class="table responsive"  width="100%">
+  <tr>
+    <th>Nama Barang</th>
+    <th>Satuan</th>
+    <th>Harga Satuan</th>
+    <th>Tipe Harga</th>
+    <th>Jumlah</th>
+    <th>Harga Total</th>
+  </tr>
+
+  <tr>
+    <input type="hidden" name="kode" id="kode" value="">
+    <td>
+    <input type="text" class="form-control" id="nama" name="nama" value="" disabled>
+    </td>
+    <td>
+      <input type="text" class="form-control" id="satuan" name="satuan" value="" disabled>
+    </td>
+    <td>
+      <input type="text" class="form-control" id="harga" name="harga" value="" readonly>
+    </td>
+    <td>
+      <select class="form-control" name="tipe" id="tipe" style="height: calc(3.5rem - 2px); width:100%;">
+            <option  value=""></option>
+      </select>
+    </td>
+    <td>
+      <input type="number" class="form-control" id="jumlah" name="jumlah" value=0 style="width=100%;">
+    </td>
+    <td>
+      <input type="text" class="form-control" id="total" name="total" readonly value=0>
+    </td>
+  </tr>
 </table>
-<br>
+
 <div class="container-fluid" style="background:white;">
   <br>
   <div class="form row">
@@ -73,9 +85,7 @@ td{
       <b>Jumlah Tunai</b>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      @isset($total)
-      <input type="text" class="form-control" name="total" id="total" value="{{$total}}" readonly>
-      @endisset
+        <input type="text" class="form-control" name="total" id="total" value="" readonly>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -84,7 +94,6 @@ td{
 
     </div>
   </div>
-  <br>
   <div class="form row">
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
       <b>Total Pembayaran</b>
@@ -99,48 +108,42 @@ td{
 
     </div>
 </div>
-<br>
-<div class="form row">
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <b>Kekurangan Pembayaran</b>
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      <input type="text" class="form-control" name="selisih" id="selisih" value="" readonly>
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-
-  </div>
-</div>
   <hr>
-  <div data-repeater-list="bank">
+  <div data-repeater-list="bank-sp" id="pembayaran">
     <div data-repeater-item>
       <div class="form row">
-
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
           <b>Pembayaran</b>
           <br>
-          <input type="text" id="bank" name="bank" class="form-control" value="" readonly>
+          <select name="bank" id="bank" style="height: calc(3.5rem - 2px); width:100%;" required="required">
+            <option value="">-- Cara Pembayaran --</option>
+            <option value="Cash">Cash</option>
+            <option value="BCA Pusat">BCA Pusat</option>
+            <option value="BCA Cabang">BCA Cabang</option>
+            <option value="BRI">BRI</option>
+            <option value="BNI">BNI</option>
+            <option value="Mandiri">Mandiri</option>
+          </select>
         </div>
         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-3">
           <b>Nominal</b>
           <br>
-          <input type="text" id="trf" name="trf" class="form-control" value="" readonly>
+          <input type="text" id="trf" name="trf" class="form-control" value="" required="required" autocomplete="off">
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
           <b>Catatan</b>
           <br>
-          <input type="text" id="catatan" name="catatan" class="form-control" value="" readonly>
+          <input type="text" id="catatan" name="catatan" class="form-control" value="" autocomplete="off">
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
           <br>
+          <button data-repeater-delete type="button" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
         </div>
       </div>
     <hr>
     </div>
   </div>
+<button data-repeater-create type="button" class="btn btn-warning"> <span class="glyphicon glyphicon-plus"></span> Tambah Pembayaran</button>
 
 <div class="row">
   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -154,21 +157,28 @@ td{
   </div>
   <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
     <br>
-    <button type="button" onclick="goBack()" class="btn btn-danger"><span class="glyphicon glyphicon-chevron-left"></span> Kembali</button>
-    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Simpan</button>
+    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Nota Penjualan</button>
     <br><br>
   </div>
 </div>
 </div>
 
 </form>
+<!-- <table id="invoice-sp-table" class="table responsive" width="100%">
+    <thead>
+    <tr>
+        <th>No.</th>
+        <th>Nama RO</th>
+        <th>Qty Penjualan</th>
+    </tr>
+    </thead>
+</table> -->
 
 @stop
-
 @section('js')
 <script>
     $(document).ready(function () {
-        var repeater = $('.repeater').repeater({
+        $('.repeater').repeater({
             // (Optional)
             // start with an empty list of repeaters. Set your first (and only)
             // "data-repeater-item" with style="display:none;" and pass the
@@ -213,42 +223,14 @@ td{
             // defaults to false.
             isFirstItemUndeletable: false
         });
-        repeater.setList([
-          @foreach($bank as $item)
-          {
-                'bank': "{{$item['bank']}}",
-                'trf' : "{{$item['trf']}}",
-                'catatan' : "{{$item['catatan']}}"
-            },
-          @endforeach
-        ]);
     });
 </script>
-
-<script>
-function goBack() {
-    window.history.back()
-}
+<script type="text/javascript">
+  $(".chosen-select").chosen();
 </script>
+<script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <script>
-    $(function () {
-        var tgl = $('#tgl').val();
-        var canvaser = $('#canvaser').val();
-        var downline = $('#downline').val();
-        var t = $('#invoice-dompul-table').DataTable({
-                  serverSide: true,
-                  processing: true,
-                  searching:  false,
-                  ajax: `/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`,
-                  columns: [
-                      {data: 'produk'},
-                      {data: 'tipe_dompul'},
-                      {data: 'harga_dompul'},
-                      {data: 'jumlah'},
-                      {data: 'jumlah_program'},
-                      {data: 'total_harga'}
-                  ]
-              });
-    });
+$('.datepicker').datepicker({
+  });
 </script>
 @stop

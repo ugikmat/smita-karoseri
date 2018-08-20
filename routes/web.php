@@ -112,6 +112,16 @@ Route::get('/master/user', function() {
   return view ('/penjualan/sp/list-invoice-sp');
 }) -> name('list-invoice-sp');
 
+//Pembelian
+Route::get('/pembelian/dompul/pembelian-dompul', function() {
+  return view ('/pembelian/dompul/pembelian-dompul');
+}) -> name('pembelian-dompul');
+
+Route::get('/pembelian/sp/pembelian-sp', function() {
+  return view ('/pembelian/sp/pembelian-sp');
+}) -> name('pembelian-sp');
+
+
 //monitoring
 Route::get('/penjualan/monitoring/mntr-upload', 'MonitorController@index');
 Route::get('/penjualan/monitoring/mntr-upload/show', 'MonitorController@show');
