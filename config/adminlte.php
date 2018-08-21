@@ -205,7 +205,7 @@ return [
                   ],
                   [
                     'text'  => 'Pembelian SP',
-                    'icon'  => '',
+                    'icon'  => 'share',
                     'submenu' => [
                       [
                         'text'  => 'Invoice SP',
