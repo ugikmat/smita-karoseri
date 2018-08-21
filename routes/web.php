@@ -117,10 +117,7 @@ Route::get('/pembelian/dompul/pembelian-dompul', function() {
   return view ('/pembelian/dompul/pembelian-dompul');
 }) -> name('pembelian-dompul');
 
-Route::get('/pembelian/sp/pembelian-sp', function() {
-  return view ('/pembelian/sp/pembelian-sp');
-}) -> name('pembelian-sp');
-
+Route::get('/pembelian/sp/pembelian-sp', 'PembelianSPController@index');
 
 //monitoring
 Route::get('/penjualan/monitoring/mntr-upload', 'MonitorController@index');

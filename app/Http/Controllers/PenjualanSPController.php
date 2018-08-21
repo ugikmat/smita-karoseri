@@ -40,11 +40,10 @@ class PenjualanSPController extends Controller
     {
         session(['now'=>Carbon::now('Asia/Jakarta')->format('d-m-Y')]);
         $hargaProduks = HargaProduk::where('status_harga_sp','Aktif')->get();
-        $arrHarga = $hargaProduks->mode('harga_sp');
         $produks = produk::where('status_produk','1')->get();
         $saless = Sales::where('status','1')->get();
         $jumlahProduk = $produks->count();
-        return view('penjualan.sp.invoice-sp',['saless'=>$saless,'produks'=>$produks,'hargaProduks'=>$hargaProduks,'jumlah'=>$jumlahProduk,'arrHarga'=>$arrHarga]);
+        return view('penjualan.sp.invoice-sp',['saless'=>$saless,'produks'=>$produks,'hargaProduks'=>$hargaProduks,'jumlah'=>$jumlahProduk]);
     }
     public function set_session(Request $request){
         session(['tipe_harga'=>$request->input('tipe_harga'),'kode_produk'=>$request->input('kode_produk')]);
