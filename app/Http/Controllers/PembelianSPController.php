@@ -45,4 +45,20 @@ class PembelianSPController extends Controller
         $jumlahProduk = $produks->count();
         return view('pembelian.sp.pembelian-sp',['saless'=>$saless,'produks'=>$produks,'hargaProduks'=>$hargaProduks,'jumlah'=>$jumlahProduk]);
     }
+    public function store(Request $request){
+        $tgl = Carbon::parse($request->get('tgl_pembelian'));
+        $tgl = $tgl->format('Y-m-d');
+
+        $tunai = $request->get('total');
+        $bank = $request->get('bank-sp');
+
+        $produks = produk::where('status_produk','1')->get()->count();
+        for ($i=0; $i <$produks ; $i++) {
+            if (!empty($request->get("jumlah{$i}"))) {
+                
+            }
+        }
+
+        return redirect('pembelian.sp.pembelian-sp');
+    }
 }

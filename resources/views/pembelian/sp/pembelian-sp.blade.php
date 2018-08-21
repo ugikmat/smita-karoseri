@@ -16,13 +16,13 @@
 @stop
 
 @section('content')
-<form class="invoice-sp repeater" action="/invoice_sp/verify" method="post">
+<form class="invoice-sp repeater" action="/pembelian/sp/store" method="post">
 <div class="container-fluid  form-inline">
   @csrf
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
       Tanggal Penjualan : &nbsp;
-      <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}">
+      <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_pembelian" name="tgl_pembelian" value="{{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}">
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
         Nama Canvaser : &nbsp;
