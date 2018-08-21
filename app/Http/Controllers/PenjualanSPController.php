@@ -354,8 +354,8 @@ class PenjualanSPController extends Controller
             $stokSP->nomor_referensi= $penjualanSp->id_penjualan_sp;
             $stokSP->jenis_transaksi= 'PENJUALAN';
             $stokSP->keterangan= "{$detailPenjualanSp->tipe_harga}-";
-            $stokSP->masuk= $detailPenjualanSp->jumlah_sp;
-            $stokSP->keluar= 0;
+            $stokSP->masuk= 0;
+            $stokSP->keluar= $detailPenjualanSp->jumlah_sp;
             $stokSP->tanggal_input= $penjualanSp->tanggal_input;
             $stokSP->id_user= $penjualanSp->id_user;
             $stokSP->save();
