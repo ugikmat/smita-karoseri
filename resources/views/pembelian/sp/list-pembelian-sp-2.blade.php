@@ -109,7 +109,7 @@
   </div>
 </div>
   <hr>
-  <div data-repeater-list="bank" id="pembayaran">
+  <div data-repeater-list="bank-sp" id="pembayaran">
     <div data-repeater-item>
       <div class="form row">
         <input type="hidden" id="id" name="id" class="form-control" value="">
