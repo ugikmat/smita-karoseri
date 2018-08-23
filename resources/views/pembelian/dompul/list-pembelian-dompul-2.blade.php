@@ -70,7 +70,7 @@
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
       @isset($total)
-        <input type="text" class="form-control" name="total" id="total" value="{{$total}}" readonly>
+        <input type="text" class="form-control" name="total" id="total" value="" readonly>
       @endisset
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -86,7 +86,7 @@
       <b>Total Pembayaran</b>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="{{number_format($total_pembayaran,0,'','.')}}" readonly>
+        <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="" readonly>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -170,7 +170,6 @@
 @if($penjualanDompul->status_pembayaran==0)
 <button data-repeater-create type="button" class="btn btn-warning"> <span class="glyphicon glyphicon-plus"></span> Tambah Pembayaran</button>
 
-
 <div class="row">
   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -230,7 +229,7 @@
               <div class="x_content">
                 <br />
 
-                  <input type="hidden" name="link" id="link" value="/invoice_dompul/update/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}/{{$datas->produk}}">
+                  <input type="hidden" name="link" id="link" value="">
                   <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Dompul
                       <span class="required">*</span>
