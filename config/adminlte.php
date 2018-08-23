@@ -199,7 +199,7 @@ return [
                       [
                         'text'  =>  'List Invoice Dompul',
                         'icon'  => 'file',
-                        'url'   => '/pembelian/dompul/list-p-dompul',
+                        'url'   => '/pembelian/dompul/list-pembelian-dompul',
                       ],
                     ],
                   ],
@@ -215,7 +215,7 @@ return [
                       [
                         'text'  => 'List Invoice SP',
                         'icon'  => 'file',
-                        'url'   => '/pembelian/splist-p-sp',
+                        'url'   => '/pembelian/sp/list-pembelian-sp',
                       ],
                     ],
                   ],
