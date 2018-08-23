@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Pembelian SP')
+@section('title', 'Pembelian Dompul')
 
 @section('content_header')
-    <h1>Review Pembelian SP RO</h1>
+    <h1>Review Pembelian Dompul RO</h1>
 @stop
 
 @section('css')
@@ -16,7 +16,7 @@ td{
 
 
 @section('content')
-<form class="invoice-sp repeater" action="" method="post">
+<form class="invoice-dompul repeater" action="" method="post">
   @csrf
 <input type="hidden" name="id" id="id" value="">
 <div class="container-fluid form-inline">
@@ -43,7 +43,7 @@ td{
 
 <br>
 
-<table id="invoice-sp-table" class="table responsive"  width="100%">
+<table id="invoice-dompul-table" class="table responsive"  width="100%">
     <thead>
     <tr>
       <th>Nama Barang</th>
@@ -104,7 +104,7 @@ td{
   </div>
 </div>
   <hr>
-  <div data-repeater-list="bank-sp">
+  <div data-repeater-list="bank">
     <div data-repeater-item>
       <div class="form row">
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
@@ -184,7 +184,7 @@ td{
             // to the server, etc.  If a hide callback is not given the item
             // will be deleted.
             hide: function (deleteElement) {
-                if(confirm('Apakah anda yakin ingin menghapus pembayaran SP ini?')) {
+                if(confirm('Apakah anda yakin ingin menghapus pembayaran dompul ini?')) {
                     $(this).slideUp(deleteElement);
                 }
             },
@@ -200,9 +200,9 @@ td{
             // defaults to false.
             isFirstItemUndeletable: false
         });
-        @if(Session::has('bank-sp'))
+        @if(Session::has('bank'))
         repeater.setList([
-          @foreach(session('bank-sp') as $item)
+          @foreach(session('bank') as $item)
           {
                 'bank': "{{$item['bank']}}",
                 'trf' : "{{$item['trf']}}",
@@ -226,11 +226,11 @@ function goBack() {
 });
     $(function () {
         var id = $('#id').val();
-        var t = $('#invoice-sp-table').DataTable({
+        var t = $('#invoice-dompul-table').DataTable({
                   serverSide: true,
                   processing: true,
                   searching:  false,
-                  ajax: `/edit_invoice_sp/${id}`,
+                  ajax: `/edit_invoice_dompul/${id}`,
                   columns: [
                       {data: 'nama_produk'},
                       {data: 'tipe_harga'},
@@ -239,7 +239,7 @@ function goBack() {
                       {data: 'total_harga'}
                   ]
               });
-        console.log('{{session('total_harga_sp')}}');
+        console.log('{{session('total_harga_dompul')}}');
     });
 </script>
 @stop
