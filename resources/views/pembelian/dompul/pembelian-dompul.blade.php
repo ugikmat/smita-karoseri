@@ -16,7 +16,7 @@
 @stop
 
 @section('content')
-<form class="invoice-sp repeater" action="/invoice_sp/verify" method="post">
+<form class="invoice-dompul repeater" action="/invoice_dompul/verify" method="post">
 <div class="container-fluid  form-inline">
   @csrf
   <div class="row">
@@ -138,7 +138,7 @@
   </div>
 </div>
   <hr>
-  <div data-repeater-list="bank-sp" id="pembayaran">
+  <div data-repeater-list="bank" id="pembayaran">
     <div data-repeater-item>
       <div class="form row">
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
