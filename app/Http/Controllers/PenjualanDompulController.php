@@ -257,7 +257,7 @@ class PenjualanDompulController extends Controller
                 $stokDompul->id_sales = $id_sales;
                 $stokDompul->id_lokasi = Auth::user()->id_lokasi;
                 $stokDompul->tanggal_transaksi = $tgl;
-                $stokDompul->nomor_referensi = $penjualanDompul->id_penjualan_dompul;
+                $stokDompul->nomor_referensi = $value->id_upload;
                 $stokDompul->jenis_transaksi = 'PENJUALAN';
                 $stokDompul->keterangan = "{$value->tipe_dompul}-";
                 $stokDompul->masuk = 0;

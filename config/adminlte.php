@@ -148,10 +148,6 @@ return [
                         'url'     => '/penjualan/sp/invoice-sp',
                         'icon'    => 'mobile-phone',
                       ],
-                      // [
-                      //   'text'    => 'lalala',
-                      //   'url'     => '/penjualan/sp/invoice-sp-3',
-                      // ],
                       [
                         'text'    => 'List Invoice SP',
                         'url'     => '/penjualan/sp/list-invoice-sp',
@@ -173,10 +169,6 @@ return [
                         'url'   => '/penjualan/laporan-penjualan/LPdompul',
                         'icon'  => 'briefcase',
                       ],
-                      // [
-                      //   'text'  => 'Dompet Pulsa 2',
-                      //   'url'   => '/penjualan/laporan-penjualan/LPdompul-2',
-                      // ],
                       [
                         'text'  => 'Penjualan Dompul Head',
                         'url'   => '/penjualan/laporan-penjualan/dompul-head',
@@ -187,31 +179,27 @@ return [
                         'url'   => '/penjualan/laporan-penjualan/LPsp',
                         'icon'  => 'briefcase',
                       ],
-                      // [
-                      //   'text'  => 'Starter Pack 2',
-                      //   'url'   => '/penjualan/laporan-penjualan/LPsp-2',
-                      // ],
                     ],
                   ],
                 ],
               ],
               [
                 'text'    => 'Pembelian',
-                'icon'    => '',
+                'icon'    => 'share',
                 'submenu' => [
                   [
                     'text'    => 'Pembelian Dompul',
-                    'icon'    => '',
+                    'icon'    => 'share',
                     'submenu' => [
                       [
                         'text'  => 'Invoice Dompul',
-                        'icon'  => '',
+                        'icon'  => 'shopping-cart',
                         'url'   => '/pembelian/sp/pembelian-dompul',
                       ],
                       [
                         'text'  =>  'List Invoice Dompul',
-                        'icon'  => '',
-                        'url'   => '',
+                        'icon'  => 'file',
+                        'url'   => '/pembelian/dompul/list-p-dompul',
                       ],
                     ],
                   ],
@@ -221,13 +209,13 @@ return [
                     'submenu' => [
                       [
                         'text'  => 'Invoice SP',
-                        'icon'  => '',
+                        'icon'  => 'shopping-cart',
                         'url'   => '/pembelian/sp/pembelian-sp',
                       ],
                       [
                         'text'  => 'List Invoice SP',
-                        'icon'  => '',
-                        'url'   => '',
+                        'icon'  => 'file',
+                        'url'   => '/pembelian/splist-p-sp',
                       ],
                     ],
                   ],

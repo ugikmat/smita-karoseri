@@ -12,6 +12,14 @@
   #kiri{
     padding-left: 0px;
   }
+  .border{
+    border-style: solid;
+    border-width: 1px;
+    padding: 5px;
+  }
+  .top{
+    font-size: 17px;
+  }
 </style>
 @stop
 
@@ -51,49 +59,63 @@
 
 <br><br>
 
-<table id="invoice-sp-table" class="table responsive"  width="100%">
-  <tr>
-    <th>Nama Barang</th>
-    <th>Satuan</th>
-    <th>Harga Satuan</th>
-    <th>Tipe Harga</th>
-    <th>Jumlah</th>
-    <th>Harga Total</th>
-  </tr>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-2 top" align="center">
+      <b>Nama Barang</b>
+    </div>
+    <div class="col-xs-2 top" align="center">
+      <b>Satuan</b>
+    </div>
+    <div class="col-xs-2 top" align="center">
+      <b>Harga Satuan</b>
+    </div>
+    <div class="col-xs-2 top" align="center">
+      <b>Tipe Harga</b>
+    </div>
+    <div class="col-xs-2 top" align="center">
+      <b>Jumlah</b>
+    </div>
+    <div class="col-xs-2 top" align="center">
+      <b>Harga Total</b>
+    </div>
+  </div>
+  <br>
   @foreach($produks as $key => $produk)
-  <tr>
+  <div class="row">
     <input type="hidden" name="kode{{$key+1}}" id="kode{{$key+1}}" value="{{$produk->kode_produk}}">
-    <td>
-    <input type="text" class="form-control" id="nama{{$key+1}}" name="nama{{$key+1}}" value="{{$produk->nama_produk}}" disabled>
-    </td>
-    <td>
+    <div class="col-xs-2">
+      <input type="text" class="form-control" id="nama{{$key+1}}" name="nama{{$key+1}}" value="{{$produk->nama_produk}}" disabled>
+    </div>
+    <div class="col-xs-2">
       <input type="text" class="form-control" id="satuan{{$key+1}}" name="satuan{{$key+1}}" value="{{$produk->satuan}}" disabled>
-    </td>
-    <td>
+    </div>
+    <div class="col-xs-2">
       <input type="text" class="form-control" id="harga{{$key+1}}" name="harga{{$key+1}}" value="{{number_format($hargaProduks->where('id_produk',$produk->kode_produk)->first()['harga_sp'],0,",",".")}}" readonly>
-    </td>
-    <td>
-      <select class="form-control" name="tipe{{$key+1}}" id="tipe{{$key+1}}" style="height: calc(3.5rem - 2px); width:100%;">
+    </div>
+    <div class="col-xs-2" align="center">
+      <select class="form-control" name="tipe{{$key+1}}" id="tipe{{$key+1}}" style="height: calc(3.5rem - 2px); width:100px;">
         @foreach($hargaProduks as $harga)
           @if($harga->id_produk==$produk->kode_produk)
             <option  value="{{$harga->tipe_harga_sp}}">{{$harga->tipe_harga_sp}}</option>
           @endif
         @endforeach
       </select>
-    </td>
-    <td>
+    </div>
+    <div class="col-xs-2">
       <input type="number" class="form-control" id="jumlah{{$key+1}}" name="jumlah{{$key+1}}" value=0 style="width=100%;">
-    </td>
-    <td>
+    </div>
+    <div class="col-xs-2">
       <input type="text" class="form-control" id="total{{$key+1}}" name="total{{$key+1}}" readonly value=0>
-    </td>
-  </tr>
+    </div>
+  </div>
+  <br>
   @endforeach
-</table>
+</div>
 
 <div class="container-fluid" style="background:white;">
   <br>
-  <div class="form row">
+  <div class="row">
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
       <b>Jumlah Tunai</b>
     </div>
@@ -110,7 +132,7 @@
     </div>
   </div>
   <br>
-  <div class="form row">
+  <div class="row">
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
       <b>Total Pembayaran</b>
     </div>
@@ -125,7 +147,7 @@
     </div>
 </div>
 <br>
-<div class="form row">
+<div class="row">
   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
     <b>Kekurangan Pembayaran</b>
   </div>
@@ -240,7 +262,7 @@
             // to the server, etc.  If a hide callback is not given the item
             // will be deleted.
             hide: function (deleteElement) {
-                if(confirm('Are you sure you want to delete this element?')) {
+                if(confirm('Apakah anda yakin ingin menghapus pembayaran SP ini?')) {
                     $(this).slideUp(deleteElement);
                 }
                 var n = parseInt($('#trf', $(this)).val().replace(/\D/g,''),10);

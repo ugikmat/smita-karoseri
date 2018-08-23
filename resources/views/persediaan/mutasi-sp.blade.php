@@ -27,7 +27,11 @@
         Tanggal Penjualan :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{session('now')}}"
+        @if(Session::has('tgl_stok_sp'))
+          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{session('tgl_stok_sp')}}">
+        @else
+          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
+        @endif
       </div>
     </div>
   </div>
@@ -36,8 +40,8 @@
           Nama Canvaser :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
-        <select id="sales" required="required" name="sales" placeholder="Pilih Nama Canvaser" class="chosen-select">
-              <option value="" selected disabled>Pilih Nama Canvaser</option>
+        <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('sales_stok_sp')}}">
+              <option value="" disabled>Pilih Nama Canvaser</option>
               @isset($saless)
                   @foreach ($saless as $data)
                   <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
@@ -47,7 +51,8 @@
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <button class="btn btn-success" type="submit" name="button"><i class="fa fa-caret-square-o-right"></i>  Tampilkan</button>
+      <button type="button" id="save" class="btn btn-success" ><i class="fa fa-caret-square-o-right"></i>Tampilkan Mutasi SP</button>
+      {{-- <button class="btn btn-success" type="submit" name="button"><i class="fa fa-caret-square-o-right"></i>  Tampilkan</button> --}}
     </div>
 </div>
 <br><br>
@@ -55,7 +60,7 @@
 <table id="mutasi-sp-table" class="table responsive" width="100%">
     <thead>
       <tr>
-        <th>Nama Barang</th>
+        <th>Nama Produk</th>
         <th>Stok Awal</th>
         <th>Stok Masuk</th>
         <th>Stok Keluar</th>
@@ -64,11 +69,11 @@
     </thead>
     <tfoot>
       <tr>
-        <td><b>Total Stok</b></td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
-        <td>harganya(dari database)</td>
+        <td><b>Total Mutasi</b></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
     </tfoot>
 </table>
@@ -79,7 +84,9 @@
 @section('js')
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <script type="text/javascript">
-  $(".chosen-select").chosen()
+  $('.chosen-select').chosen();
+  $("#sales").val("{{session('sales_stok_sp')}}");
+  $('#sales').trigger("chosen:updated");
 </script>
 <script>
   $('.datepicker').datepicker({
@@ -87,20 +94,25 @@
 </script>
 <script>
     $(function () {
-        $('#mutasi-sp-table').DataTable({
+        $tgl = $('#tgl_penjualan').val();
+        $sales = $('#sales').val();
+        var t = $('#mutasi-sp-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: 'mutasi-sp-data',
+            ajax: `/stok-sp/data/${$tgl}/${$sales}`,
             columns: [
-                {data: 'id_penjualan_sp'},
-                {data: 'hp_kios'},
-                {data: 'tanggal_penjualan_sp'},
-                {data: 'tanggal_input'},
-                {data: 'grand_total'},
-                {data: 'bayar_tunai'},
-                {data: 'catatan'},
-                {data: 'action', orderable: false, searchable: false}
+              // {data: 'indeks'},
+              {data: 'id_produk'},
+              {data: 'stok_awal'},
+              {data: 'stok_masuk'},
+              {data: 'stok_keluar'},
+              {data: 'jumlah_stok'}
             ]
+        });
+        $('#save').on('click',function(event) {
+          $tgl = $('#tgl_penjualan').val();
+          $sales = $('#sales').val();
+          t.ajax.url(`/stok-sp/data/${$tgl}/${$sales}`).load();
         });
     });
 </script>

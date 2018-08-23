@@ -293,7 +293,7 @@ td{
             // to the server, etc.  If a hide callback is not given the item
             // will be deleted.
             hide: function (deleteElement) {
-                if(confirm('Apakah anda yakin ingin menghapus pesanan SP ini?')) {
+                if(confirm('Apakah anda yakin ingin menghapus pembayaran dompul ini?')) {
                     $(this).slideUp(deleteElement);
                 }
                 var n = parseInt($('#trf', $(this)).val().replace(/\D/g,''),10);
@@ -358,6 +358,7 @@ td{
         console.log(response.total);
         t.ajax.url(`/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`).load();
         $('#total').val(response.total.toLocaleString('id-ID'));
+        $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
       }
       }, 'json');
     });

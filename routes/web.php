@@ -147,14 +147,11 @@ Route::get('/laporan-penjualan/sp/piutang/{id}/{tgl}', 'LaporanPenjualanSPContro
 
 
 //Persediaan
-Route::get('/persediaan/mutasi-dompul', function() {
-  return view ('/persediaan/mutasi-dompul');
-}) -> name('mutasi-dompul');
+Route::get('/persediaan/mutasi-dompul', 'StokDompulController@index');
+Route::get('/stok-dompul/data/{tgl}', 'StokDompulController@data');
 
-Route::get('/persediaan/mutasi-sp', function() {
-  return view ('/persediaan/mutasi-sp');
-}) -> name('mutasi-sp');
-
+Route::get('/persediaan/mutasi-sp', 'StokSpController@index');
+Route::get('/stok-sp/data/{tgl}/{sales}', 'StokSpController@data');
 //upload
 // Route::get('/upload/upload', function() {
 //   return view ('/upload/upload');

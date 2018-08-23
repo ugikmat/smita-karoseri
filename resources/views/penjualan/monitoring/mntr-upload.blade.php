@@ -66,7 +66,7 @@
 </div>
 <br><br>
 
-<table id="m-penjualan-table" class="table responsive cell-border" width="100%">
+<table id="m-penjualan-table" class="table responsive table-bordered" width="100%">
     <thead>
     <tr>
         <th rowspan="2">No.</th>

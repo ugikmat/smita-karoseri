@@ -15,6 +15,7 @@ use App\PenjualanProduk;
 use App\DetailPenjualanProduk;
 use App\HargaProduk;
 use App\PenjualanDompul;
+use App\StokSp;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use Yajra\Datatables\Datatables;
@@ -336,7 +337,7 @@ class PenjualanSPController extends Controller
         foreach ($dataDetail as $key => $value) {
             $detailPenjualanSp = new DetailPenjualanProduk();
                 $detailPenjualanSp->id_penjualan_sp = $penjualanSp->id_penjualan_sp;
-                $detailPenjualanSp->id_customer= $value->id_customer;
+                $detailPenjualanSp->id_customer = $value->id_customer;
                 $detailPenjualanSp->id_produk= $value->id_produk;
                 $detailPenjualanSp->jumlah_sp= str_replace('.', '', $value->jumlah_sp);
                 $detailPenjualanSp->tipe_harga= $value->tipe_harga;
@@ -345,6 +346,19 @@ class PenjualanSPController extends Controller
                 $detailPenjualanSp->harga_beli= str_replace('.', '', $value->harga_beli);
                 $detailPenjualanSp->keterangan_detail_psp= $value->keterangan_detail_psp;
                 $detailPenjualanSp->save();
+            $stokSP = new StokSp();
+            $stokSP->id_produk= $detailPenjualanSp->id_produk;
+            $stokSP->id_sales= $penjualanSp->id_sales;
+            $stokSP->id_lokasi= $penjualanSp->id_lokasi;
+            $stokSP->tanggal_transaksi= $penjualanSp->tanggal_penjualan_sp;
+            $stokSP->nomor_referensi= $penjualanSp->id_penjualan_sp;
+            $stokSP->jenis_transaksi= 'PENJUALAN';
+            $stokSP->keterangan= "{$detailPenjualanSp->tipe_harga}-";
+            $stokSP->masuk= 0;
+            $stokSP->keluar= $detailPenjualanSp->jumlah_sp;
+            $stokSP->tanggal_input= $penjualanSp->tanggal_input;
+            $stokSP->id_user= $penjualanSp->id_user;
+            $stokSP->save();
         }
 
         if (!empty($bank)) {

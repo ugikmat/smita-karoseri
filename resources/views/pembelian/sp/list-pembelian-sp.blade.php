@@ -3,7 +3,7 @@
 @section('title', 'List Invoice')
 
 @section('content_header')
-    <h1>List Penjualan SP</h1>
+    <h1>List Pembelian SP</h1>
 @stop
 
 @section('css')
@@ -11,15 +11,12 @@
 @stop
 
 @section('content')
-{{-- @if (session('tgl'))
-  <input type="hidden" id="tgl"value={{ session('tgl')}}></input>
-@endif --}}
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput">Input Tanggal Penjualan</button>
+<br><br>
 <form action="" method="post">
 <table id="list-invoice-table" class="table responsive" width="100%">
     <thead>
     <tr>
-        {{-- <th>No</th> --}}
         <th>No Penjualan</th>
         <th>Sales</th>
         <th>Hp Kios</th>
@@ -61,11 +58,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      @if(Session::has('sp-list-tgl'))
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" value="{{session('sp-list-tgl')}}" required>
-                      @else
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now()->format('d-m-Y')}}" required>
-                      @endif
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" required value="">
                     </div>
                   </div>
 
@@ -73,9 +66,7 @@
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset"> <i class="fa fa-repeat"></i> Kosongkan</button>
-                      <button class="btn btn-success" type="button" data-dismiss="modal" id="show"> </i> Tampilkan List Penjualan</button>
-                      {{-- <input type="btn" class="btn btn-success" onclick="loadData()" value="Tampilkan List Penjualan"> --}}
-                      {{-- <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-ok"></i>Tampilkan List Penjualan</button> --}}
+                      <button id="show" class="btn btn-success" type="button" data-dismiss="modal"> </i> Tampilkan List Penjualan</button>
                     </div>
                   </div>
                 </form>
@@ -147,41 +138,17 @@
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: `/invoice_sp/list/${$tgl_penjualan}`,
-            // "columnDefs": [ {
-            // "searchable": false,
-            // "orderable": false,
-            // "targets": 0
-            //     } ],
-            // "order": [[ 1, 'asc' ]],
+            ajax: `/invoice_dompul/list/${$tgl_penjualan}`,
             columns: [
                 // {data: 'indeks'},
-                {data: 'id_penjualan_sp'},
+                {data: 'id_penjualan_dompul'},
                 {data: 'nm_sales'},
-                {data: 'no_hp'},
+                {data: 'no_hp_kios'},
                 {data: 'nm_cust'},
-                {data: 'tanggal_penjualan'},
+                {data: 'tanggal_penjualan_dompul'},
                 {data: 'status_verif'},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });
-        // t.on( 'order.dt search.dt', function () {
-        // t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-        //     cell.innerHTML = i+1;
-        //   } );
-        // } ).draw();
-        $('#show').on('click',function (event) {
-          $tgl = $('#tgl').val();
-          console.log($tgl);
-          console.log('Loading Data...');
-          t.ajax.url(`/invoice_sp/list/${$tgl}`).load();
-          console.log('Loaded');
-        });
-    });
-$('#verificationModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var id = button.data('id') // Extract info from data-* attributes
-    $('#verificationForm').attr('action',`/invoice_sp/verify/${id}`);
-  })
 </script>
 @stop

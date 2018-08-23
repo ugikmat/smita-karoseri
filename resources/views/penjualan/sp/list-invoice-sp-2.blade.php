@@ -87,7 +87,6 @@
         <th>Tipe</th>
         <th>Harga</th>
         <th>Jumlah</th>
-        <th>Jumlah Program</th>
         <th>Harga Total</th>
         <th>Action</th>
       @else
@@ -96,7 +95,6 @@
         <th>Tipe</th>
         <th>Harga</th>
         <th>Jumlah</th>
-        <th>Jumlah Program</th>
         <th>Harga Total</th>
       @endif
     </tr>
@@ -261,16 +259,6 @@
                     </div>
                   </div>
 
-                  <div class="form-group row">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Qty Program
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="qty_program" required="required" name="qty_program" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
-                  </div>
-
-
                   <div class="ln_solid"></div>
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -358,7 +346,7 @@
             // to the server, etc.  If a hide callback is not given the item
             // will be deleted.
             hide: function (deleteElement) {
-                if(confirm('Apakah anda yakin ingin menghapus pesanan SP ini?')) {
+                if(confirm('Apakah anda yakin ingin menghapus pembayaran SP ini?')) {
                     $(this).slideUp(deleteElement);
                 }
                 $('#deleted').append(`<input type='hidden' id='delete' name="delete[${indeks++}]" value='${$('#id', $(this)).val()}'>`);
@@ -429,7 +417,6 @@
                       {data: 'tipe_harga'},
                       {data: 'harga'},
                       {data: 'jumlah'},
-                      {data: 'jumlah_program'},
                       {data: 'total_harga'},
                       {data: 'action', orderable: false, searchable: false}
             ]
@@ -445,7 +432,6 @@
                       {data: 'tipe_harga'},
                       {data: 'harga'},
                       {data: 'jumlah'},
-                      {data: 'jumlah_program'},
                       {data: 'total_harga'},
             ]
         });
@@ -462,6 +448,7 @@
             $('#total').val(response.total);
             console.log($('#total').val());
             t.ajax.url(`/edit_list_invoice_sp/${id}`).load();
+            $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
 
             // console.log($('#total').val(response.total));
 
