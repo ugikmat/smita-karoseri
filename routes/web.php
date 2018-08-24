@@ -117,9 +117,13 @@ Route::get('/pembelian/dompul/pembelian-dompul', function() {
   return view ('/pembelian/dompul/pembelian-dompul');
 }) -> name('pembelian-dompul');
 
-Route::get('/pembelian/sp/pembelian-sp', function() {
-  return view ('/pembelian/sp/pembelian-sp');
-}) -> name('pembelian-sp');
+Route::get('/pembelian/sp/list-pembelian-sp', function() {
+  return view ('/pembelian/sp/list-pembelian-sp');
+}) -> name('list-pembelian-sp');
+
+Route::get('/pembelian/sp/list-pembelian-sp', function() {
+  return view ('/pembelian/sp/list-pembelian-sp');
+}) -> name('list-pembelian-sp');
 
 
 //monitoring
