@@ -23,8 +23,8 @@ class CreateTempDetailPembelianDompulsTable extends Migration
             $table->string('tipe_harga');
             $table->integer('harga_satuan');
             $table->bigInteger('harga_total');
-            $table->string('keterangan_detail_psp');
-            $table->tinyInteger('status_detail_psp')->default(1);
+            $table->string('keterangan_detail_pd');
+            $table->tinyInteger('status_detail_pd')->default(1);
             $table->temporary();
         });
     }

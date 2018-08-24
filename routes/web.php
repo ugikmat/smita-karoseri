@@ -120,6 +120,15 @@ Route::get('/pembelian/dompul/pembelian-dompul', function() {
 Route::get('/pembelian/sp/pembelian-sp', 'PembelianSPController@index');
 Route::post('/pembelian/sp/store','PembelianSPController@store');
 
+Route::get('/pembelian/sp/list-pembelian-sp', function() {
+  return view ('/pembelian/sp/list-pembelian-sp');
+}) -> name('list-pembelian-sp');
+
+// Route::get('/pembelian/sp/list-pembelian-sp', function() {
+//   return view ('/pembelian/sp/list-pembelian-sp');
+// }) -> name('list-pembelian-sp');
+
+
 //monitoring
 Route::get('/penjualan/monitoring/mntr-upload', 'MonitorController@index');
 Route::get('/penjualan/monitoring/mntr-upload/show', 'MonitorController@show');
