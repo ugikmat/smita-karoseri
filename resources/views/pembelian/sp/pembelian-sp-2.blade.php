@@ -18,25 +18,25 @@ td{
 @section('content')
 <form class="invoice-sp repeater" action="" method="post">
   @csrf
-<input type="hidden" name="id" id="id" value="">
+<input type="hidden" name="id" id="id" value="{{$pembelianSp->id_temp_pembelian_sp}}">
 <div class="container-fluid form-inline">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      Nama Sales&nbsp;: (nama_sales)
+    Nama Sales&nbsp;: {{$sales->nm_sales}}
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      Nama Kios&nbsp;: (Nama_kios)
+      Nama Supplier&nbsp;: {{$supplier->nama_supplier}}
     </div>
   </div>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      HP Sales&nbsp;: (hp_sales)
+      HP Sales&nbsp;: {{$sales->no_hp}}
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      HP Kios&nbsp;: (hp_kios)
+      HP Supplier&nbsp;: {{$supplier->telepon_supplier}}
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      Tanggal Pembelian&nbsp;: <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl" value="" autocomplete="off" readonly>
+      Tanggal Pembelian&nbsp;: <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl" value="{{$tgl}}" autocomplete="off" readonly>
     </div>
   </div>
 </div>
@@ -63,7 +63,7 @@ td{
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
-        <input type="text" class="form-control" name="total" id="total" value="" readonly>
+        <input type="text" class="form-control" name="total" id="total" value="{{$tunai}}" readonly>
 
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -79,7 +79,7 @@ td{
       <b>Total Pembayaran</b>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="" readonly>
+    <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="{{$total_pembayaran}}" readonly>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -94,7 +94,7 @@ td{
     <b>Kekurangan Pembayaran</b>
   </div>
   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      <input type="text" class="form-control" name="selisih" id="selisih" value="" readonly>
+      <input type="text" class="form-control" name="selisih" id="selisih" value="{{$selisih}}" readonly>
   </div>
   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -230,7 +230,7 @@ function goBack() {
                   serverSide: true,
                   processing: true,
                   searching:  false,
-                  ajax: `/edit_invoice_sp/${id}`,
+                  ajax: `/pembelian_sp_data/${id}`,
                   columns: [
                       {data: 'nama_produk'},
                       {data: 'tipe_harga'},

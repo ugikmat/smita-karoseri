@@ -118,7 +118,9 @@ Route::get('/pembelian/dompul/pembelian-dompul', function() {
 }) -> name('pembelian-dompul');
 
 Route::get('/pembelian/sp/pembelian-sp', 'PembelianSPController@index');
+Route::post('/pembelian/sp/verify','PembelianSPController@verify');
 Route::post('/pembelian/sp/store','PembelianSPController@store');
+Route::get('/pembelian_sp_data/{id}', 'PembelianSPController@data');
 
 Route::get('/pembelian/sp/list-pembelian-sp', function() {
   return view ('/pembelian/sp/list-pembelian-sp');

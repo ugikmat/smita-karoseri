@@ -86,7 +86,9 @@
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <script type="text/javascript">
   $('.chosen-select').chosen();
-  $("#sales").val("{{session('sales_stok_sp')}}");
+  @if(Session::has('sales_stok_sp'))
+    $("#sales").val("{{session('sales_stok_sp')}}");
+  @endif
   $('#sales').trigger("chosen:updated");
 </script>
 <script>

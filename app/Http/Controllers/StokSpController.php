@@ -36,10 +36,12 @@ class StokSpController extends Controller
     {
         // $data = DB::table('temp_detail_penjualan_sps')->get();
         session(['tgl_stok_sp'=>$tgl]);
-        session(['sales_stok_sp'=>$sales]);
+        if (!empty($sales)) {
+          session(['sales_stok_sp'=>$sales]); 
+        }
         $tgl = Carbon::parse($tgl);
         $tgl = $tgl->format('Y-m-d');        
-        $stokDompul = DB::table('kartu_stok_sps')->select(DB::raw("id_produk,
+        $stokSP = DB::table('kartu_stok_sps')->select(DB::raw("id_produk,
         (SELECT sum(awal.masuk)-sum(awal.keluar)
 FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi < '{$tgl}' AND awal.id_produk=kartu_stok_sps.id_produk AND awal.id_sales='{$sales}') AS stok_awal,
 sum(masuk) AS stok_masuk, sum(keluar) AS stok_keluar,
@@ -50,7 +52,7 @@ sum(masuk) AS stok_masuk, sum(keluar) AS stok_keluar,
                         ->where('tanggal_transaksi',$tgl)
                         ->where('id_sales',$sales)
                         ->groupBy('id_produk')->get();
-        return $datatables->of($stokDompul)
+        return $datatables->of($stokSP)
                         ->addColumn('indeks', function ($dataStok) {
                               return '';
                             })

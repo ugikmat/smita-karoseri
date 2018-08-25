@@ -16,7 +16,7 @@
 @stop
 
 @section('content')
-<form class="invoice-sp repeater" action="/pembelian/sp/store" method="post">
+<form class="invoice-sp repeater" action="/pembelian/sp/verify" method="post">
 <div class="container-fluid  form-inline">
   @csrf
   <div class="row">
@@ -27,7 +27,7 @@
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
         Nama Canvaser : &nbsp;
         <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="">
-              <option value="" disabled>Pilih Nama Canvaser</option>
+              <option value="" selected disabled>Pilih Nama Canvaser</option>
               @isset($saless)
                   @foreach ($saless as $data)
                   <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
@@ -36,12 +36,12 @@
         </select>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
-        Nama Kios : &nbsp;
-        <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="chosen-select" data-placeholder="">
-              <option value="" disabled>Pilih Nama Kios</option>
-              @isset($customerarray)
-                  @foreach ($customerarray as $data)
-                  <option value="{{ $data->id_cust }}">{{ $data->nm_cust }}</option>
+        Nama Supplier : &nbsp;
+        <select id="supplier" required="required" name="supplier" placeholder="Pilih Nama Supplier" class="chosen-select" data-placeholder="">
+              <option value="" selected disabled>Pilih Nama Supplier</option>
+              @isset($suppliers)
+                  @foreach ($suppliers as $data)
+                  <option value="{{ $data->id_supplier }}">{{ $data->nama_supplier }}</option>
                   @endforeach
               @endisset
         </select>
@@ -234,9 +234,9 @@
             // defaultValues refer to the value of the input's name attribute.
             // If a default value is not specified for an input, then it will
             // have its value cleared.
-            // defaultValues: {
-            //     'text-input': 'foo'
-            // },
+            defaultValues: {
+                'trf': '0'
+            },
             // (Optional)
             // "show" is called just after an item is added.  The item is hidden
             // at this point.  If a show callback is not given the item will
@@ -301,9 +301,9 @@
 <script type="text/javascript">
   $(".chosen-select").chosen();
   $("#sales").val("{{session('id_sales')}}");
-  $("#customer").val("{{session('id_cust')}}");
+  $("#supplier").val("{{session('id_supplier')}}");
   $("#sales").trigger("chosen:updated");
-  $("#customer").trigger("chosen:updated");
+  $("#supplier").trigger("chosen:updated");
 </script>
 <script type="text/javascript">
 $.ajaxSetup({
