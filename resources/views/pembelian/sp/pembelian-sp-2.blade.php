@@ -16,9 +16,10 @@ td{
 
 
 @section('content')
-<form class="invoice-sp repeater" action="" method="post">
+<form class="invoice-sp repeater" action="/pembelian/sp/store" method="post">
   @csrf
 <input type="hidden" name="id" id="id" value="{{$pembelianSp->id_temp_pembelian_sp}}">
+<input type="hidden" name="id_sales" id="id" value="{{$sales->id_sales}}">
 <div class="container-fluid form-inline">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">

@@ -10,8 +10,11 @@ use App\Sales;
 use App\Customer;
 use App\produk;
 use App\DetailPembayaranSp;
+use App\DetailPembelianProduk;
+use App\DetailPembayaranPembelianProduk;
 use App\UploadDompul;
 use App\PenjualanProduk;
+use App\PembelianProduk;
 use App\DetailPenjualanProduk;
 use App\HargaProduk;
 use App\PenjualanDompul;
@@ -147,17 +150,86 @@ class PembelianSPController extends Controller
         $tgl = Carbon::parse($request->get('tgl_pembelian'));
         $tgl = $tgl->format('Y-m-d');
 
-        $tunai = $request->get('total');
+        $id = $request->get('id');
+        $tunai = $request->get('tunai');
         $bank = $request->get('bank-sp');
+        $total = $request->get('total');
 
-        $produks = produk::where('status_produk','1')->get()->count();
-        for ($i=0; $i <$produks ; $i++) {
-            if (!empty($request->get("jumlah{$i}"))) {
-                
-            }
+        $data = DB::table('temp_pembelian_sps')->where('id_temp_pembelian_sp',$id)->first();
+        $dataDetail = DB::table('temp_detail_pembelian_sps')->where('id_pembelian_sp',$id)->get();
+        $pembelianSp = new PembelianProduk();
+        $pembelianSp->id_supplier=$data->id_supplier;
+        $pembelianSp->grand_total=str_replace('.', '', $total);
+        $pembelianSp->tanggal_pembelian_sp=$data->tanggal_pembelian_sp;
+        $pembelianSp->tanggal_input=Carbon::now('Asia/Jakarta')->toDateString();
+        $pembelianSp->id_user=Auth::user()->id_user;
+        $pembelianSp->id_lokasi=Auth::user()->id_lokasi;
+        $pembelianSp->save();
+
+        foreach ($dataDetail as $key => $value) {
+            $detailPenjualanSp = new DetailPembelianProduk();
+                $detailPenjualanSp->id_pembelian_sp = $pembelianSp->id_pembelian_sp;
+                $detailPenjualanSp->id_supplier = $value->id_supplier;
+                $detailPenjualanSp->id_produk= $value->id_produk;
+                $detailPenjualanSp->jumlah_sp= str_replace('.', '', $value->jumlah_sp);
+                $detailPenjualanSp->tipe_harga= $value->tipe_harga;
+                $detailPenjualanSp->harga_satuan= str_replace('.', '', $value->harga_satuan);
+                $detailPenjualanSp->harga_total= str_replace('.', '', $value->harga_total);
+                $detailPenjualanSp->keterangan_detail_psp= $value->keterangan_detail_psp;
+                $detailPenjualanSp->save();
+            $stokSP = new StokSp();
+            $stokSP->id_produk= $detailPenjualanSp->id_produk;
+            $stokSP->id_sales= $request->get('id_sales');
+            $stokSP->id_lokasi= $pembelianSp->id_lokasi;
+            $stokSP->tanggal_transaksi= $pembelianSp->tanggal_pembelian_sp;
+            $stokSP->nomor_referensi= $pembelianSp->id_pembelian_sp;
+            $stokSP->jenis_transaksi= 'PEMBELIAN';
+            $stokSP->keterangan= "{$detailPenjualanSp->tipe_harga}-";
+            $stokSP->masuk= $detailPenjualanSp->jumlah_sp;
+            $stokSP->keluar= 0;
+            $stokSP->tanggal_input= $pembelianSp->tanggal_input;
+            $stokSP->id_user= $pembelianSp->id_user;
+            $stokSP->save();
         }
 
-        return redirect('pembelian.sp.pembelian-sp');
+        if (!empty($bank)) {
+            foreach ($bank as $key => $value) {
+            $detailPembayaranSp = new DetailPembayaranPembelianProduk();
+            $detailPembayaranSp->id_pembelian_sp =$pembelianSp->id_pembelian_sp;
+            $detailPembayaranSp->metode_pembayaran = $value['bank'];
+
+            $detailPembayaranSp->nominal= str_replace('.', '', $value['trf']);
+            $detailPembayaranSp->catatan = $value['catatan'];
+            switch ($value['bank']) {
+                case 'BCA Pusat':
+                    $detailPembayaranSp->bca_pusat=$value['trf'];
+                    break;
+                case 'BCA Cabang':
+                    $detailPembayaranSp->bca_cabang=$value['trf'];
+                    break;
+                case 'Mandiri':
+                    $detailPembayaranSp->mandiri=$value['trf'];
+                    break;
+                case 'BNI':
+                    $detailPembayaranSp->bni=$value['trf'];
+                    break;
+                case 'BRI':
+                    $detailPembayaranSp->bri=$value['trf'];
+                    break;
+                case 'Cash':
+                    $detailPembayaranSp->cash=$value['trf'];
+                    break;
+                default:
+                    break;
+            }
+            $detailPembayaranSp->save();
+        }
+        $request->session()->forget('bank-sp');
+        }
+        Schema::dropIfExists('temp_pembelian_sps');
+        Schema::dropIfExists('temp_detail_pembelian_sps');
+
+        return redirect('pembelian/sp/pembelian-sp');
     }
 
     /**
@@ -168,7 +240,7 @@ class PembelianSPController extends Controller
      */
     public function data(Datatables $datatables,$id)
     {
-        // $data = DB::table('temp_detail_penjualan_sps')->get();
+        // $data = DB::table('temp_detail_pembelian_sps')->get();
         $detailPenjualan = DB::table('temp_detail_pembelian_sps')->select(DB::raw('master_produks.nama_produk,
         master_produks.satuan,
         temp_detail_pembelian_sps.harga_satuan,
