@@ -108,6 +108,7 @@ Route::get('/edit_list_invoice_sp/{id}', 'ListPenjualanSPController@penjualanDat
 Route::post('/list_invoice_sp/update/{id}/{id_detail}','ListPenjualanSPController@update');
 Route::post('/list_invoice_SP/store','ListPenjualanSPController@store');
 Route::put('/invoice_sp/verify/{id}','ListPenjualanSPController@verif');
+Route::put('/invoice_sp/delete','ListPenjualanSPController@delete');
 
 Route::get('/master/user', function() {
   return view ('/penjualan/sp/list-invoice-sp');

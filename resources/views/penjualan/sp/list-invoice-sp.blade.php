@@ -116,8 +116,9 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="deleteForm" action="" method="POST">
-        @csrf @method('delete')
+      <form id="deleteForm" action="/invoice_sp/delete" method="POST">
+        @csrf @method('put')
+        <input type="hidden" name="id" id="id_penjualan" value="">
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -177,11 +178,11 @@
           t.ajax.url(`/invoice_sp/list/${$tgl}`).load();
           console.log('Loaded');
         });
+        $('#deleteModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) // Button that triggered the modal
+          var id = button.data('id'); // Extract info from data-* attributes
+          $('#id_penjualan').val(id);
+        });
     });
-$('#verificationModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var id = button.data('id') // Extract info from data-* attributes
-    $('#verificationForm').attr('action',`/invoice_sp/verify/${id}`);
-  })
 </script>
 @stop
