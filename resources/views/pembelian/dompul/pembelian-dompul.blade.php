@@ -98,7 +98,7 @@
       <b>Jumlah Tunai</b>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        <input type="text" class="form-control" name="total" id="total" value="" readonly>
+        <input type="text" class="form-control" name="total" id="total" value="0" readonly>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -113,7 +113,7 @@
       <b>Total Pembayaran</b>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="" readonly>
+        <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="0" readonly>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -128,7 +128,7 @@
     <b>Kekurangan Pembayaran</b>
   </div>
   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      <input type="text" class="form-control" name="selisih" id="selisih" value="" readonly>
+      <input type="text" class="form-control" name="selisih" id="selisih" value="0" readonly>
   </div>
   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -157,7 +157,7 @@
         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-3">
           <b>Nominal</b>
           <br>
-          <input type="text" id="trf" name="trf" class="form-control" value="" required="required" autocomplete="off">
+          <input type="text" id="trf" name="trf" class="form-control" value="0" required="required" autocomplete="off">
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
           <b>Catatan</b>
@@ -207,6 +207,8 @@
 @section('js')
 <script>
     $(document).ready(function () {
+        var bayar=0;
+        $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
         $('.repeater').repeater({
             // (Optional)
             // start with an empty list of repeaters. Set your first (and only)
@@ -218,9 +220,9 @@
             // defaultValues refer to the value of the input's name attribute.
             // If a default value is not specified for an input, then it will
             // have its value cleared.
-            // defaultValues: {
-            //     'text-input': 'foo'
-            // },
+            defaultValues: {
+                'trf': '0'
+            },
             // (Optional)
             // "show" is called just after an item is added.  The item is hidden
             // at this point.  If a show callback is not given the item will
@@ -239,6 +241,11 @@
                 if(confirm('Are you sure you want to delete this element?')) {
                     $(this).slideUp(deleteElement);
                 }
+                var n = parseInt($('#trf', $(this)).val().replace(/\D/g,''),10);
+                var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-n;
+                console.log(total);
+                $('#total_pembayaran').val((total).toLocaleString('id-ID'));
+                $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
             },
             // (Optional)
             // You can use this if you need to manually re-index the list
@@ -252,11 +259,35 @@
             // defaults to false.
             isFirstItemUndeletable: false
         });
+        $("#pembayaran").on("keydown", "#trf", function(){
+          console.log((this).value);
+          if (this.value.length!=0&&!isNaN(parseInt($(this).val().replace(/\D/g,''),10))) {
+            console.log(`Value : ${this.value}`);
+            bayar = parseInt($(this).val().replace(/\D/g,''),10);
+          }else{
+            bayar=0;
+          }
+        });
+        $("#pembayaran").on("input", "#trf", function(){
+          if (this.value.length!=0&&!isNaN(parseInt($(this).val().replace(/\D/g,''),10))) {
+            var n = parseInt($(this).val().replace(/\D/g,''),10);
+            (this).value=n.toLocaleString('id-ID');
+            var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-bayar;
+            $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
+          }else{
+            (this).value=0;
+            var n = parseInt($(this).val().replace(/\D/g,''),10);
+            var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-bayar;
+            $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
+          }
+          $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
+        });
     });
 </script>
 <script type="text/javascript">
   $(".chosen-select").chosen();
 </script>
+
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <script>
 $('.datepicker').datepicker({

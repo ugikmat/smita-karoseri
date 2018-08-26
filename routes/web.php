@@ -113,14 +113,21 @@ Route::get('/master/user', function() {
 }) -> name('list-invoice-sp');
 
 //Pembelian
-Route::get('/pembelian/dompul/pembelian-dompul', function() {
-  return view ('/pembelian/dompul/pembelian-dompul');
-}) -> name('pembelian-dompul');
+// Route::get('/pembelian/dompul/pembelian-dompul', function() {
+//   return view ('/pembelian/dompul/pembelian-dompul');
+// }) -> name('pembelian-dompul');
 
 Route::get('/pembelian/sp/pembelian-sp', 'PembelianSPController@index');
 Route::post('/pembelian/sp/verify','PembelianSPController@verify');
 Route::post('/pembelian/sp/store','PembelianSPController@store');
 Route::get('/pembelian_sp_data/{id}', 'PembelianSPController@data');
+
+//Pembelian Dompul
+Route::get('/pembelian/dompul/pembelian-dompul', 'PembelianDompulController@index');
+Route::post('/pembelian/dompul/verify','PembelianDompulController@verify');
+Route::post('/pembelian/dompul/store','PembelianDompulController@store');
+Route::get('/pembelian_dompul_data/{id}', 'PembelianDompulController@data');
+
 
 Route::get('/pembelian/sp/list-pembelian-sp', function() {
   return view ('/pembelian/sp/list-pembelian-sp');

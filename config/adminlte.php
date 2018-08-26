@@ -194,7 +194,7 @@ return [
                       [
                         'text'  => 'Invoice Dompul',
                         'icon'  => 'shopping-cart',
-                        'url'   => '/pembelian/sp/pembelian-dompul',
+                        'url'   => '/pembelian/dompul/pembelian-dompul',
                       ],
                       [
                         'text'  =>  'List Invoice Dompul',
