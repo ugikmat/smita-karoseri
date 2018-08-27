@@ -26,7 +26,7 @@ class UploadDompulController extends Controller {
             $excel->sheet('mySheet', function ($sheet) use($data) {
                 $sheet->fromArray($data);
             });
-        })->download($type);
+        })->export($type);
     }
     public
     function importExcel(Request $request) {
