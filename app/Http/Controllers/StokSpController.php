@@ -42,11 +42,11 @@ class StokSpController extends Controller
         $tgl = Carbon::parse($tgl);
         $tgl = $tgl->format('Y-m-d');        
         $stokSP = DB::table('kartu_stok_sps')->select(DB::raw("id_produk as nama,
-        (SELECT sum(awal.masuk)-sum(awal.keluar)
-FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi < '{$tgl}' AND awal.id_produk=nama AND awal.id_sales='{$sales}') AS stok_awal,
+        COALESCE((SELECT sum(awal.masuk)-sum(awal.keluar)
+FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi < '{$tgl}' AND awal.id_produk=nama AND awal.id_sales='{$sales}'),0) AS stok_awal,
 sum(masuk) AS stok_masuk, sum(keluar) AS stok_keluar,
-(sum(masuk)-sum(keluar)+(SELECT sum(awal.masuk)-sum(awal.keluar)
-FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi < '{$tgl}' AND awal.id_produk=nama AND awal.id_sales='{$sales}')) AS jumlah_stok"))
+(sum(masuk)-sum(keluar)+COALESCE((SELECT sum(awal.masuk)-sum(awal.keluar)
+FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi < '{$tgl}' AND awal.id_produk=nama AND awal.id_sales='{$sales}'),0)) AS jumlah_stok"))
                         // ->join('upload_dompuls',function($join){
                         //     $join->on('kartu_stok_dompuls.id_produk','=','upload_dompuls.produk');
                         // })

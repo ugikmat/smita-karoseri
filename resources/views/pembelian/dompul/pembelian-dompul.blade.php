@@ -22,20 +22,28 @@
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
       Tanggal Penjualan : &nbsp;
-      <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="">
+      <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}">
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
         Nama Canvaser : &nbsp;
         <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="">
-              <option value="" disabled>Pilih Nama Canvaser</option>
-                  <option value=""></option>
+              <option value="" selected disabled>Pilih Nama Canvaser</option>
+              @isset($saless)
+                  @foreach ($saless as $data)
+                  <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
+                  @endforeach
+              @endisset
         </select>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
-        Nama Kios : &nbsp;
-        <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="chosen-select" data-placeholder="">
-              <option value="" disabled>Pilih Nama Kios</option>
-                  <option value=""></option>
+        Nama Supplier : &nbsp;
+        <select id="customer" required="required" name="customer" placeholder="Pilih Nama Supplier" class="chosen-select" data-placeholder="">
+              <option value="" selected disabled>Pilih Nama Supplier</option>
+              @isset($suppliers)
+                  @foreach ($suppliers as $data)
+                  <option value="{{ $data->id_supplier }}">{{ $data->nama_supplier }}</option>
+                  @endforeach
+              @endisset
         </select>
     </div>
   </div>
@@ -47,9 +55,6 @@
   <div class="row">
     <div class="col-xs-2 top" align="center">
       <b>Nama Barang</b>
-    </div>
-    <div class="col-xs-2 top" align="center">
-      <b>TIpe Dompul</b>
     </div>
     <div class="col-xs-2 top" align="center">
       <b>Harga Satuan</b>
@@ -65,29 +70,33 @@
     </div>
   </div>
   <br>
+
+  @foreach($dompuls as $key => $dompul)
   <div class="row">
-    <input type="hidden" name="kode" id="kode" value="">
     <div class="col-xs-2">
-      <input type="text" class="form-control" id="nama" name="nama" value="" disabled>
+      <input type="text" class="form-control" id="nama{{$key+1}}" name="nama{{$key+1}}" value="{{$dompul->produk}}" disabled>
     </div>
     <div class="col-xs-2">
-      <input type="text" class="form-control" id="tipe" name="satuan" value="" disabled>
-    </div>
-    <div class="col-xs-2">
-      <input type="text" class="form-control" id="harga" name="harga" value="" readonly>
+      <input type="text" class="form-control" id="harga{{$key+1}}" name="harga{{$key+1}}" value="{{number_format($hargaDompuls->where('nama_harga_dompul',$dompul->produk)->first()['harga_dompul'],0,",",".")}}" readonly>
     </div>
     <div class="col-xs-2" align="center">
-      <select class="form-control" name="tipe" id="tipe-harga" style="height: calc(3.5rem - 2px); width:100px;">
-            <option  value=""></option>
+      <select class="form-control" name="tipe{{$key+1}}" id="tipe{{$key+1}}" style="height: calc(3.5rem - 2px); width:100px;">
+        @foreach($hargaDompuls as $harga)
+          @if($harga->nama_harga_dompul==$dompul->produk)
+            <option  value="{{$harga->tipe_harga_dompul}}">{{$harga->tipe_harga_dompul}}</option>
+          @endif
+        @endforeach
       </select>
     </div>
     <div class="col-xs-2">
-      <input type="number" class="form-control" id="jumlah" name="jumlah" value=0 style="width=100%;">
+      <input type="number" class="form-control" id="jumlah{{$key+1}}" name="jumlah{{$key+1}}" value=0 style="width=100%;">
     </div>
     <div class="col-xs-2">
-      <input type="text" class="form-control" id="total" name="total" readonly value=0>
+      <input type="text" class="form-control" id="total{{$key+1}}" name="total{{$key+1}}" readonly value=0>
     </div>
   </div>
+  <br>
+  @endforeach
   <br>
 </div>
 
@@ -287,7 +296,57 @@
 <script type="text/javascript">
   $(".chosen-select").chosen();
 </script>
+<script type="text/javascript">
+  $(".chosen-select").chosen();
+  $("#sales").val("{{session('id_sales')}}");
+  $("#supplier").val("{{session('id_supplier')}}");
+  $("#sales").trigger("chosen:updated");
+  $("#supplier").trigger("chosen:updated");
+</script>
+<script type="text/javascript">
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+console.log("{{$hargaDompuls->where('nama_harga_dompul','DP5')->where('tipe_harga_dompul','CVS')->first()['harga_dompul']}}");
+var harga = [];
+var totalHarga = 0;
+for (let index = 0; index < {{$dompuls->count()}}; index++) {
+  harga.push($(`#total${index+1}`).val().replace(/[ .]/g, ''));
+  totalHarga+=parseFloat(harga[index]);
+  console.log(`total Harga ${$(`#total${index+1}`).val().replace(/[ .]/g, '')}`);
+  $(`#jumlah${index+1}`).on('input',function (event) {
+    totalHarga-=parseFloat(harga[index]);
+    $(`#total${index+1}`).val(($(`#harga${index+1}`).val().replace(/[ .]/g, '')*this.value.replace(/[ .]/g, '')).toLocaleString('id-ID'));
+    harga[index]=$(`#total${index+1}`).val().replace(/[ .]/g, '');
+    totalHarga+=parseFloat(harga[index]);
+    console.log(`total Harga ${harga[index]}`);
+    $('#total').val(totalHarga.toLocaleString('id-ID'));
+    $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
+  });
+}
+$('#total').val(totalHarga.toLocaleString('id-ID'));
+console.log(`total Harga`);
+for (let index = 0; index < {{$dompuls->count()}}; index++) {
+  $(`#tipe${index+1}`).on('change',function (event) {
+    totalHarga-=parseFloat(harga[index]);
+    console.log($(`#nama${index+1}`).val());
+    console.log($(this).val());
+    $harga_dompul = "{{$hargaDompuls->where('nama_harga_dompul','"+$(`#nama${index+1}`).val()+"')->where('tipe_harga_dompul','"+$(this).val()+"')->first()['harga_dompul']}}";
+    console.log("{{$hargaDompuls->where('nama_harga_dompul','"+$(`#nama${index+1}`).val()+"')->where('tipe_harga_dompul','"+$(this).val()+"')->first()['harga_dompul']}}");
+    console.log($harga_dompul);    
+    $(`#harga${index+1}`).val($harga_dompul.toLocaleString('id-ID'));
+    $(`#total${index+1}`).val(($(`#harga${index+1}`).val().replace(/[ .]/g, '')*$(`#jumlah${index+1}`).val().replace(/[ .]/g, '')).toLocaleString('id-ID'));
+    harga[index]=$(`#total${index+1}`).val().replace(/[ .]/g, '');
+    totalHarga+=parseFloat(harga[index]);
+    console.log(`total Harga ${totalHarga}`);
+    $('#total').val(totalHarga.toLocaleString('id-ID'));
+    $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
+  });
+}
+</script>
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <script>
 $('.datepicker').datepicker({

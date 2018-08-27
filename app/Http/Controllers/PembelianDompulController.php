@@ -10,6 +10,7 @@ use App\HargaDompul;
 use App\PenjualanDompul;
 use App\DetailPenjualanDompul;
 use App\StokDompul;
+use App\Supplier;
 use App\Dompul;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -35,7 +36,9 @@ class PembelianDompulController extends Controller
     public function index()
     {
         $saless = Sales::where('status','1')->get();
-        $dompuls = HargaDompul::where('status_harga_dompul','Aktif')->get();
-        return view('pembelian.dompul.pembelian-dompul',['saless'=>$saless,'dompuls'=>$dompuls]);
+        $suppliers = Supplier::where('status_supplier','Aktif')->get();
+        $hargaDompuls = HargaDompul::where('status_harga_dompul','Aktif')->get();
+        $dompuls = UploadDompul::select('produk')->where('status_active',1)->distinct()->get();
+        return view('pembelian.dompul.pembelian-dompul',['saless'=>$saless,'dompuls'=>$dompuls,'hargaDompuls'=>$hargaDompuls,'suppliers'=>$suppliers]);
     }
 }
