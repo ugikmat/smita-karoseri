@@ -48,7 +48,7 @@
         <th>Nama Sales</th>
         <th>BO</th>
         <th>Total Transaksi</th>
-        <th>Total Penjualan</th>
+        <th>Total Pembelian</th>
         <th>Tunai</th>
         <th>BCA Pusat</th>
         <th>BCA Cabang</th>
