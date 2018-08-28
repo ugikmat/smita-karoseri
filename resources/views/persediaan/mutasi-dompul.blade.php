@@ -18,7 +18,7 @@
 @stop
 
 @section('content')
-<div class="cotainer-fluid">
+<div class="cotainer-fluid form-inline">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput">Pilih Tanggal Mutasi</button>
@@ -26,24 +26,14 @@
   </div>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Nama Kasir
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-6">
-        : Ugik
-      </div>
+        Nama Kasir : (nama)
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
-        Tanggal Cetak Laporan
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        : {{Carbon\Carbon::now()->format('d/m/Y')}}
-      </div>
+        Tanggal Cetak Laporan : {{Carbon\Carbon::now()->format('d/m/Y')}}
     </div>
   </div>
 </div>
-
+<br><br>
 
 <table id="mutasi-dompul-table" class="table responsive" width="100%">
     <thead>
