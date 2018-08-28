@@ -172,10 +172,10 @@ Route::get('/laporan-penjualan/sp/piutang/{id}/{tgl}', 'LaporanPenjualanSPContro
 
 //Persediaan
 Route::get('/persediaan/mutasi-dompul', 'StokDompulController@index');
-Route::get('/stok-dompul/data/{tgl}', 'StokDompulController@data');
+Route::get('/stok-dompul/data/{tgl_awal}/{tgl_akhir}', 'StokDompulController@data');
 
 Route::get('/persediaan/mutasi-sp', 'StokSpController@index');
-Route::get('/stok-sp/data/{tgl}/{sales}', 'StokSpController@data');
+Route::get('/stok-sp/data/{tgl_awal}/{tgl_akhir}', 'StokSpController@data');
 //upload
 // Route::get('/upload/upload', function() {
 //   return view ('/upload/upload');

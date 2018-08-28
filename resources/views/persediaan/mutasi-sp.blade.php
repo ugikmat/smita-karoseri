@@ -25,18 +25,18 @@
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
         Tanggal Awal :
         @if(Session::has('tgl_stok_sp'))
-          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{session('tgl_stok_sp')}}">
+          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_awal" name="tgl_awal" value="{{session('tgl_stok_sp')}}">
         @else
-          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
+          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_awal" name="tgl_awal" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
         @endif
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
         Tanggal Akhir :
         @if(Session::has('tgl_stok_sp'))
-          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{session('tgl_stok_sp')}}">
+          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_akhir" name="tgl_akhir" value="{{session('tgl_stok_sp')}}">
         @else
-          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
+          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_akhir" name="tgl_akhir" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
         @endif
     </div>
 
@@ -87,12 +87,13 @@
 </script>
 <script>
     $(function () {
-        $tgl = $('#tgl_penjualan').val();
+        $tgl_akhir = $('#tgl_akhir').val();
+        $tgl_awal = $('#tgl_awal').val();
         $sales = $('#sales').val();
         var t = $('#mutasi-sp-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: `/stok-sp/data/${$tgl}/${$sales}`,
+            ajax: `/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`,
             columns: [
               // {data: 'indeks'},
               {data: 'nama_produk'},
@@ -105,9 +106,10 @@
             buttons: ['csv', 'excel', 'print'],
         });
         $('#save').on('click',function(event) {
-          $tgl = $('#tgl_penjualan').val();
+          $tgl_akhir = $('#tgl_akhir').val();
+        $tgl_awal = $('#tgl_awal').val();
           $sales = $('#sales').val();
-          t.ajax.url(`/stok-sp/data/${$tgl}/${$sales}`).load();
+          t.ajax.url(`/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`).load();
         });
     });
 </script>

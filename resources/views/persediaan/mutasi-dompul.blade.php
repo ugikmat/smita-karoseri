@@ -83,9 +83,9 @@
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       @if(Session::has('tgl_stok_dompul'))
-                        <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy" id="tgl" name="tgl" value="{{session('tgl_stok_dompul')}}">
+                        <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy" id="tgl_awal" name="tgl_awal" value="{{session('tgl_stok_dompul')}}">
                       @else
-                        <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy" id="tgl" name="tgl" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
+                        <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy" id="tgl_awal" name="tgl_awal" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
                       @endif
                     </div>
                   </div>
@@ -96,9 +96,9 @@
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       @if(Session::has('tgl_stok_dompul'))
-                        <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy" id="tgl" name="tgl" value="{{session('tgl_stok_dompul')}}">
+                        <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy" id="tgl_akhir" name="tgl_akhir" value="{{session('tgl_stok_dompul')}}">
                       @else
-                        <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy" id="tgl" name="tgl" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
+                        <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy" id="tgl_akhir" name="tgl_akhir" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
                       @endif
                     </div>
                   </div>
@@ -132,11 +132,12 @@
 </script>
 <script>
     $(function () {
-        $tgl =  $('#tgl').val();
+        $tgl_awal =  $('#tgl_awal').val();
+        $tgl_akhir =  $('#tgl_akhir').val();
         var t = $('#mutasi-dompul-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: `/stok-dompul/data/${$tgl}`,
+            ajax: `/stok-dompul/data/${$tgl_awal}/${$tgl_akhir}`,
             columns: [
                 // {data: 'indeks'},
                 {data: 'nama'},
@@ -147,8 +148,9 @@
             ]
         });
         $('#save').on('click',function(event) {
-          $tgl = $('#tgl').val();
-          t.ajax.url(`/stok-dompul/data/${$tgl}`).load();
+          $tgl_awal =  $('#tgl_awal').val();
+          $tgl_akhir =  $('#tgl_akhir').val();
+          t.ajax.url(`/stok-dompul/data/${$tgl_awal}/${$tgl_akhir}`).load();
         });
     });
 </script>
