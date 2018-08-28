@@ -138,6 +138,13 @@ Route::post('/pembelian/dompul/store','PembelianDompulController@store');
 //   return view ('/pembelian/sp/list-pembelian-sp');
 // }) -> name('list-pembelian-sp');
 
+Route::get('/pembelian/laporan-pembelian/Lbeli-dompul', function() {
+  return view ('/pembelian/laporan-pembelian/Lbeli-dompul');
+}) -> name('Lbeli-dompul');
+
+Route::get('/pembelian/laporan-pembelian/Lbeli-sp', function() {
+  return view ('/pembelian/laporan-pembelian/Lbeli-sp');
+}) -> name('Lbeli-sp');
 
 //monitoring
 Route::get('/penjualan/monitoring/mntr-upload', 'MonitorController@index');

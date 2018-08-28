@@ -11,7 +11,7 @@
     'boxed' => 'layout-boxed',
     'fixed' => 'fixed',
     'top-nav' => 'layout-top-nav'
-][config('adminlte.layout')] : '') . (config('adminlte.collapse_sidebar') ? ' sidebar-collapse ' : ''))
+][config('adminlte.layout')] : '') . (config('adminlte.collapse_sidebar') ? ' ' : 'sidebar-collapse '))
 
 @section('body')
     <div class="wrapper">
@@ -142,7 +142,7 @@
 {{-- <script>
   $.widget.bridge('uibutton', $.ui.button);
 </script> --}}
-{{-- 
+{{--
 <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="assets/plugins/morris/morris.min.js"></script>

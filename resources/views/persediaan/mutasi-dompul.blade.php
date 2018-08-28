@@ -18,7 +18,7 @@
 @stop
 
 @section('content')
-<div class="cotainer-fluid">
+<div class="cotainer-fluid form-inline">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput">Pilih Tanggal Mutasi</button>
@@ -26,24 +26,14 @@
   </div>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Nama Kasir
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-6">
-        : Ugik
-      </div>
+        Nama Kasir : (nama)
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
-        Tanggal Cetak Laporan
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        : {{Carbon\Carbon::now()->format('d/m/Y')}}
-      </div>
+        Tanggal Cetak Laporan : {{Carbon\Carbon::now()->format('d/m/Y')}}
     </div>
   </div>
 </div>
-
+<br><br>
 
 <table id="mutasi-dompul-table" class="table responsive" width="100%">
     <thead>
@@ -87,8 +77,21 @@
               </div>
               <div class="x_content">
                 <br />
-                  <div class="form-group kode">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Pilih Tanggal
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Awal
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      @if(Session::has('tgl_stok_dompul'))
+                        <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy" id="tgl" name="tgl" value="{{session('tgl_stok_dompul')}}">
+                      @else
+                        <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy" id="tgl" name="tgl" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
+                      @endif
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Akhir
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
