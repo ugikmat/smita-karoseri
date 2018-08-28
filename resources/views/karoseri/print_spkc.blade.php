@@ -16,7 +16,7 @@
     <div class="col-xs-12">
       <h2 class="page-header">
         <i class="fa fa-truck"></i> Surat Pemesanan Karoseri
-        <small class="pull-right">Date: {{$data['tanggal']}}</small>
+        <small class="pull-right">{{$tgl}}</small>
       </h2>
     </div><!-- /.col -->
   </div>
@@ -43,7 +43,7 @@
       </address>
     </div><!-- /.col -->
     <div class="col-sm-4 invoice-col">
-      <b>No SPK {{$data['id_spkc']}}/SPK/VII/2018</b><br>
+      <b>No SPK {{$data['id_spkc']}}/SPK/{{$rm}}/{{$thn}}</b><br>
       <br>
     </div><!-- /.col -->
   </div><!-- /.row -->
@@ -56,7 +56,7 @@
           <tr>
             <th>Qty</th>
             <th>Jenis Karoseri</th>
-            <th>Keterangan</th>
+            <th>Detail Spesifikasi</th>
             <th>Subtotal</th>
           </tr>
         </thead>
@@ -64,8 +64,8 @@
           <tr>
             <td>{{$data['jumlah_unit']}}</td>
             <td>{{$data['jenis_karoseri']}}</td>
-            <td>{{$data['ket']}}</td>
-            <td><Label>Rp.</label> {{$data['harga_total']}}</td>
+            <td>{!!$data['ket']!!}</td>
+            <td><Label>Rp.</label> {{number_format($data['harga_total']).""}}</td>
           </tr>
         </tbody>
       </table>
@@ -77,7 +77,7 @@
     <div class="col-xs-6">
       <p class="lead">Payment Methods:</p>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <input id="middle-name" class="form-control col-md-7 col-xs-12" name="lokasi" type="text" Value="{{$data['nama']}}" readonly>
+        <input id="middle-name" class="form-control col-md-7 col-xs-12" name="lokasi" type="text" Value="{{$data['keterangan']}}" readonly>
       </div>
 
     </div><!-- /.col -->
@@ -86,7 +86,7 @@
         <table class="table">
           <tr>
             <th style="width:50%">Subtotal:</th>
-            <td><label>Rp.</label>{{$data['harga_total']}}</td>
+            <td><label>Rp.</label>{{number_format($data['harga_total']).""}}</td>
           </tr>
           <tr>
             <th>Pajak (10%)</th>
@@ -94,7 +94,7 @@
           </tr>
           <tr>
             <th>Total:</th>
-            <td><label>Rp.</label>{{$data['harga_total']}}</td>
+            <td><label>Rp.</label>{{number_format($data['harga_total']).""}}</td>
           </tr>
         </table>
       </div>

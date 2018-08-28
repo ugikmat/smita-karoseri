@@ -20,6 +20,15 @@ class DatabaseSeeder extends Seeder
         $this->call(MasterHargaDompulTableSeeder::class);
         $this->call(MasterHargaSPTableSeeder::class);
         $this->call(TipeDompulTableSeeder::class);
+        $this->call(CustomerTableSeeder::class);
+        $this->call(GudangTableSeeder::class);
+        $this->call(LokasiTableSeeder::class);
+        $this->call(PemborongTableSeeder::class);
+        $this->call(SalesTableSeeder::class);
+        $this->call(SupervisorTableSeeder::class);
+        $this->call(CaraBayarTableSeeder::class);
+        $this->call(PPNTableSeeder::class);
+        //$this->call(SPKCTableSeeder::class);
         // $this->call(UploadDompulTableSeeder::class);
     }
 }
