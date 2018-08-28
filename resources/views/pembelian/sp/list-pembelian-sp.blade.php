@@ -58,7 +58,11 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" required value="">
+                        @if(Session::has('sp-list-tgl'))
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" value="{{session('sp-list-tgl')}}" required>
+                      @else
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}" required>
+                      @endif
                     </div>
                   </div>
 
@@ -138,7 +142,7 @@
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: `/invoice_dompul/list/${$tgl_penjualan}`,
+            ajax: `/pembelian_sp/list/${$tgl_penjualan}`,
             columns: [
                 // {data: 'indeks'},
                 {data: 'id_penjualan_dompul'},
@@ -149,6 +153,18 @@
                 {data: 'status_verif'},
                 {data: 'action', orderable: false, searchable: false}
             ]
+        });
+        $('#show').on('click',function (event) {
+          $tgl = $('#tgl').val();
+          console.log($tgl);
+          console.log('Loading Data...');
+          t.ajax.url(`/pembelian_sp/list/${$tgl}`).load();
+          console.log('Loaded');
+        });
+        $('#deleteModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) // Button that triggered the modal
+          var id = button.data('id'); // Extract info from data-* attributes
+          $('#id_penjualan').val(id);
         });
 </script>
 @stop

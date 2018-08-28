@@ -37,7 +37,7 @@
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
         Nama Supplier : &nbsp;
-        <select id="customer" required="required" name="supplier" placeholder="Pilih Nama Supplier" class="chosen-select" data-placeholder="">
+        <select id="supplier" required="required" name="supplier" placeholder="Pilih Nama Supplier" class="chosen-select" data-placeholder="">
               <option value="" selected disabled>Pilih Nama Supplier</option>
               @isset($suppliers)
                   @foreach ($suppliers as $data)
