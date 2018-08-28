@@ -138,6 +138,13 @@ Route::post('/pembelian/dompul/store','PembelianDompulController@store');
 //   return view ('/pembelian/sp/list-pembelian-sp');
 // }) -> name('list-pembelian-sp');
 
+Route::get('/pembelian/laporan-pembelian/Lbeli-dompul', function() {
+  return view ('/pembelian/laporan-pembelian/Lbeli-dompul');
+}) -> name('Lbeli-dompul');
+
+Route::get('/pembelian/laporan-pembelian/Lbeli-sp', function() {
+  return view ('/pembelian/laporan-pembelian/Lbeli-sp');
+}) -> name('Lbeli-sp');
 
 //monitoring
 Route::get('/penjualan/monitoring/mntr-upload', 'MonitorController@index');
@@ -165,10 +172,10 @@ Route::get('/laporan-penjualan/sp/piutang/{id}/{tgl}', 'LaporanPenjualanSPContro
 
 //Persediaan
 Route::get('/persediaan/mutasi-dompul', 'StokDompulController@index');
-Route::get('/stok-dompul/data/{tgl}', 'StokDompulController@data');
+Route::get('/stok-dompul/data/{tgl_awal}/{tgl_akhir}', 'StokDompulController@data');
 
 Route::get('/persediaan/mutasi-sp', 'StokSpController@index');
-Route::get('/stok-sp/data/{tgl}/{sales}', 'StokSpController@data');
+Route::get('/stok-sp/data/{tgl_awal}/{tgl_akhir}', 'StokSpController@data');
 //upload
 // Route::get('/upload/upload', function() {
 //   return view ('/upload/upload');
