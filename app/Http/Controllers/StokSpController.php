@@ -41,18 +41,18 @@ class StokSpController extends Controller
         }
         $tgl = Carbon::parse($tgl);
         $tgl = $tgl->format('Y-m-d');        
-        $stokSP = DB::table('kartu_stok_sps')->select(DB::raw("id_produk as nama,
+        $stokSP = DB::table('kartu_stok_sps')->select(DB::raw("kartu_stok_sps.id_produk as nama, nama_produk,
         COALESCE((SELECT sum(awal.masuk)-sum(awal.keluar)
 FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi < '{$tgl}' AND awal.id_produk=nama AND awal.id_sales='{$sales}'),0) AS stok_awal,
 sum(masuk) AS stok_masuk, sum(keluar) AS stok_keluar,
 (sum(masuk)-sum(keluar)+COALESCE((SELECT sum(awal.masuk)-sum(awal.keluar)
 FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi < '{$tgl}' AND awal.id_produk=nama AND awal.id_sales='{$sales}'),0)) AS jumlah_stok"))
-                        // ->join('upload_dompuls',function($join){
-                        //     $join->on('kartu_stok_dompuls.id_produk','=','upload_dompuls.produk');
-                        // })
+                        ->join('master_produks',function($join){
+                            $join->on('kartu_stok_sps.id_produk','=','master_produks.kode_produk');
+                        })
                         ->where('tanggal_transaksi',$tgl)
                         ->where('id_sales',$sales)
-                        ->groupBy('nama')->get();
+                        ->groupBy('nama','nama_produk')->get();
         return $datatables->of($stokSP)
                         ->addColumn('indeks', function ($dataStok) {
                               return '';

@@ -105,7 +105,7 @@
             ajax: `/stok-sp/data/${$tgl}/${$sales}`,
             columns: [
               // {data: 'indeks'},
-              {data: 'nama'},
+              {data: 'nama_produk'},
               {data: 'stok_awal'},
               {data: 'stok_masuk'},
               {data: 'stok_keluar'},
