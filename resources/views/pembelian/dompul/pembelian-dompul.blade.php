@@ -22,7 +22,7 @@
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
       Tanggal Penjualan : &nbsp;
-      <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}">
+      <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_pembelian" name="tgl_pembelian" value="{{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}">
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
         Nama Canvaser : &nbsp;
@@ -37,7 +37,7 @@
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
         Nama Supplier : &nbsp;
-        <select id="customer" required="required" name="customer" placeholder="Pilih Nama Supplier" class="chosen-select" data-placeholder="">
+        <select id="customer" required="required" name="supplier" placeholder="Pilih Nama Supplier" class="chosen-select" data-placeholder="">
               <option value="" selected disabled>Pilih Nama Supplier</option>
               @isset($suppliers)
                   @foreach ($suppliers as $data)
@@ -73,6 +73,7 @@
 
   @foreach($dompuls as $key => $dompul)
   <div class="row">
+    <input type="hidden" name="id_harga_dompul" id="id_harga_dompul" value="{{$hargaDompuls->where('nama_harga_dompul',$dompul->produk)->first()['id_harga_dompul']}}">
     <div class="col-xs-2">
       <input type="text" class="form-control" id="nama{{$key+1}}" name="nama{{$key+1}}" value="{{$dompul->produk}}" disabled>
     </div>
@@ -217,7 +218,7 @@
 <script>
     $(document).ready(function () {
         var bayar=0;
-        $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
+        $('#selisih').val((parseFloat($('#total').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))).toLocaleString('id-ID'));
         $('.repeater').repeater({
             // (Optional)
             // start with an empty list of repeaters. Set your first (and only)
@@ -250,11 +251,11 @@
                 if(confirm('Are you sure you want to delete this element?')) {
                     $(this).slideUp(deleteElement);
                 }
-                var n = parseInt($('#trf', $(this)).val().replace(/\D/g,''),10);
-                var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-n;
+                var n = parseFloat($('#trf', $(this)).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'));
+                var total = parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-n;
                 console.log(total);
                 $('#total_pembayaran').val((total).toLocaleString('id-ID'));
-                $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
+                $('#selisih').val((parseFloat($('#total').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))).toLocaleString('id-ID'));
             },
             // (Optional)
             // You can use this if you need to manually re-index the list
@@ -270,26 +271,26 @@
         });
         $("#pembayaran").on("keydown", "#trf", function(){
           console.log((this).value);
-          if (this.value.length!=0&&!isNaN(parseInt($(this).val().replace(/\D/g,''),10))) {
+          if (this.value.length!=0&&!isNaN(parseFloat($(this).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.')))) {
             console.log(`Value : ${this.value}`);
-            bayar = parseInt($(this).val().replace(/\D/g,''),10);
+            bayar = parseFloat($(this).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'));
           }else{
             bayar=0;
           }
         });
         $("#pembayaran").on("input", "#trf", function(){
-          if (this.value.length!=0&&!isNaN(parseInt($(this).val().replace(/\D/g,''),10))) {
-            var n = parseInt($(this).val().replace(/\D/g,''),10);
+          if (this.value.length!=0&&!isNaN(parseFloat($(this).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.')))) {
+            var n = parseFloat($(this).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'));
             (this).value=n.toLocaleString('id-ID');
-            var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-bayar;
+            var total = parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-bayar;
             $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
           }else{
             (this).value=0;
-            var n = parseInt($(this).val().replace(/\D/g,''),10);
-            var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-bayar;
+            var n = parseFloat($(this).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'));
+            var total = parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-bayar;
             $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
           }
-          $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
+          $('#selisih').val((parseFloat($('#total').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))).toLocaleString('id-ID'));
         });
     });
 </script>
@@ -315,35 +316,39 @@ var harga = [];
 var totalHarga = 0;
 for (let index = 0; index < {{$dompuls->count()}}; index++) {
   harga.push($(`#total${index+1}`).val().replace(/[ .]/g, ''));
+  console.log(harga[index]);
   totalHarga+=parseFloat(harga[index]);
   console.log(`total Harga ${$(`#total${index+1}`).val().replace(/[ .]/g, '')}`);
   $(`#jumlah${index+1}`).on('input',function (event) {
     totalHarga-=parseFloat(harga[index]);
-    $(`#total${index+1}`).val(($(`#harga${index+1}`).val().replace(/[ .]/g, '')*this.value.replace(/[ .]/g, '')).toLocaleString('id-ID'));
-    harga[index]=$(`#total${index+1}`).val().replace(/[ .]/g, '');
+    $(`#total${index+1}`).val(($(`#harga${index+1}`).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.')*this.value.replace(/[ .]/g, '')).toLocaleString('id-ID'));
+    harga[index]=$(`#total${index+1}`).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.');
     totalHarga+=parseFloat(harga[index]);
     console.log(`total Harga ${harga[index]}`);
     $('#total').val(totalHarga.toLocaleString('id-ID'));
-    $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
+    $('#selisih').val((parseFloat($('#total').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))).toLocaleString('id-ID'));
   });
 }
 $('#total').val(totalHarga.toLocaleString('id-ID'));
 console.log(`total Harga`);
 for (let index = 0; index < {{$dompuls->count()}}; index++) {
   $(`#tipe${index+1}`).on('change',function (event) {
-    totalHarga-=parseFloat(harga[index]);
-    console.log($(`#nama${index+1}`).val());
-    console.log($(this).val());
-    $harga_dompul = "{{$hargaDompuls->where('nama_harga_dompul','"+$(`#nama${index+1}`).val()+"')->where('tipe_harga_dompul','"+$(this).val()+"')->first()['harga_dompul']}}";
-    console.log("{{$hargaDompuls->where('nama_harga_dompul','"+$(`#nama${index+1}`).val()+"')->where('tipe_harga_dompul','"+$(this).val()+"')->first()['harga_dompul']}}");
-    console.log($harga_dompul);    
-    $(`#harga${index+1}`).val($harga_dompul.toLocaleString('id-ID'));
-    $(`#total${index+1}`).val(($(`#harga${index+1}`).val().replace(/[ .]/g, '')*$(`#jumlah${index+1}`).val().replace(/[ .]/g, '')).toLocaleString('id-ID'));
-    harga[index]=$(`#total${index+1}`).val().replace(/[ .]/g, '');
-    totalHarga+=parseFloat(harga[index]);
-    console.log(`total Harga ${totalHarga}`);
-    $('#total').val(totalHarga.toLocaleString('id-ID'));
-    $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
+    //ajax call
+    $.post('/dompul/get_harga/'+$(this).val()+'/'+$(`#nama${index+1}`).val(), function(response){
+    if(response.success)
+    {
+      totalHarga-=parseFloat(harga[index]);
+      console.log(response.harga);
+      $('#id_harga_dompul').val(response.id_harga_dompul);
+      $(`#harga${index+1}`).val(response.harga.harga_dompul.toLocaleString('id-ID'));
+      $(`#total${index+1}`).val(($(`#harga${index+1}`).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.')*$(`#jumlah${index+1}`).val().replace(/[ .]/g, '')).toLocaleString('id-ID'));
+      harga[index]=$(`#total${index+1}`).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.');
+      totalHarga+=parseFloat(harga[index]);
+      console.log(`total Harga ${totalHarga}`);
+      $('#total').val(totalHarga.toLocaleString('id-ID'));
+      $('#selisih').val((parseFloat($('#total').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))).toLocaleString('id-ID'));
+    }
+}, 'json');
   });
 }
 </script>
