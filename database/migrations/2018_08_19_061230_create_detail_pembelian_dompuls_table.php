@@ -17,12 +17,12 @@ class CreateDetailPembelianDompulsTable extends Migration
             $table->increments('id_detail_pembelian_dompul');
             $table->string('id_pembelian_dompul');
             $table->integer('id_supplier');
-            $table->integer('id_harga_dompul');
+            // $table->integer('id_harga_dompul');
             $table->string('produk');
             $table->integer('jumlah');
             $table->string('tipe_harga');
             $table->float('harga_satuan');
-            $table->bigInteger('harga_total');
+            $table->float('harga_total');
             $table->string('keterangan_detail_pd');
             $table->tinyInteger('status_detail_pd')->default(1);
         });
