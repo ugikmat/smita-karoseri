@@ -21,7 +21,7 @@ class CreateDetailPembelianDompulsTable extends Migration
             $table->string('produk');
             $table->integer('jumlah');
             $table->string('tipe_harga');
-            $table->integer('harga_satuan');
+            $table->float('harga_satuan');
             $table->bigInteger('harga_total');
             $table->string('keterangan_detail_pd');
             $table->tinyInteger('status_detail_pd')->default(1);
