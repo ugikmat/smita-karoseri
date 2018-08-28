@@ -43,11 +43,20 @@ class PrintSPKCController extends Controller
 
     public function print($id)
     {
-      $data = SPKC::select(DB::raw('spkcs.*, master_customers.nm_cust, master_customers.jabatan, master_customers.alamat_cust, master_customers.no_hp, banks.nama'))
+      $data = SPKC::select(DB::raw('spkcs.*, master_customers.nm_cust, master_customers.jabatan, master_customers.alamat_cust, master_customers.no_hp, cara_bayars.keterangan'))
                         ->join('master_customers', 'spkcs.id_cust', '=', 'master_customers.id_cust')
-                        ->join('banks', 'spkcs.id_bank', '=', 'banks.id')
+                        ->join('cara_bayars', 'spkcs.id_cb', '=', 'cara_bayars.id')
                         ->where('spkcs.id_spkc', $id)->first();
-      return view('karoseri.print_spkc', ['data' =>  $data]);
+                        $blnindo = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+                        $blnromawi = ['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'];
+                        $tanggal = $data->tanggal;
+                        $tahun = date('Y', strtotime($tanggal));
+                        $bulan = date('m', strtotime($tanggal));
+                        $tgl = date('d', strtotime($tanggal));
+
+      $fix = $tgl.' '.$blnindo[$bulan-1].' '.$tahun;
+      $rom = $blnromawi[$bulan-1];
+      return view('karoseri.print_spkc', ['data' =>  $data, 'tgl' => $fix, 'thn' => $tahun, 'rm' => $rom]);
     }
 
     /**
