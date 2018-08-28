@@ -243,12 +243,22 @@ return [
                 'icon'    => 'share',
                 'submenu' => [
                   [
-                    'text'  => 'Kartu Stok Dompul',
+                    'text'  => 'Mutasi Stok Dompul',
                     'icon'  => 'truck',
                     'url'   => '/persediaan/mutasi-dompul',
                   ],
                   [
-                    'text'  => 'Kartu Stok SP',
+                    'text'  => 'Mutasi Stok SP',
+                    'icon'  => 'tags',
+                    'url'   => '/persediaan/mutasi-sp',
+                  ],
+                  [
+                    'text'  => 'kartu Stok Dompul',
+                    'icon'  => 'truck',
+                    'url'   => '/persediaan/mutasi-dompul',
+                  ],
+                  [
+                    'text'  => 'kartu Stok SP',
                     'icon'  => 'tags',
                     'url'   => '/persediaan/mutasi-sp',
                   ],

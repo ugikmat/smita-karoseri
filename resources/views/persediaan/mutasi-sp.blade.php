@@ -13,6 +13,11 @@
     text-align: center;
     margin: auto;
     padding: 10%;
+  },
+  td{
+    text-align: center;
+    margin: auto;
+    padding: 10%;
   }
 </style>
 @stop
