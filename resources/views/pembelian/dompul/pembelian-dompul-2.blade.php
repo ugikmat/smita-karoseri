@@ -16,9 +16,10 @@ td{
 
 
 @section('content')
-<form class="invoice-dompul repeater" action="" method="post">
+<form class="invoice-dompul repeater" action="/pembelian/dompul/store" method="post">
   @csrf
-<input type="hidden" name="id" id="id" value="">
+<input type="hidden" name="id" id="id" value="{{$pembelianDompul->id_pembelian_dompul}}">
+<input type="hidden" name="id_sales" id="id" value="{{$sales->id_sales}}">
 <div class="container-fluid form-inline">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -36,7 +37,7 @@ td{
       HP Kios&nbsp;: {{$supplier->telepon_supplier}}
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-    Tanggal Pembelian&nbsp;: <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl" value="{{$tgl}}" autocomplete="off" readonly>
+    Tanggal Pembelian&nbsp;: <input class="datepicker" data-date-format="dd-mm-yyyy" name="tgl_pembelian" id="tgl" value="{{$tgl}}" autocomplete="off" readonly>
     </div>
   </div>
 </div>
@@ -63,7 +64,7 @@ td{
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
-        <input type="text" class="form-control" name="total" id="total" value="" readonly>
+        <input type="text" class="form-control" name="total" id="total" value="{{$tunai}}" readonly>
 
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -79,7 +80,7 @@ td{
       <b>Total Pembayaran</b>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="" readonly>
+    <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="{{$total_pembayaran}}" readonly>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -94,7 +95,7 @@ td{
     <b>Kekurangan Pembayaran</b>
   </div>
   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      <input type="text" class="form-control" name="selisih" id="selisih" value="" readonly>
+      <input type="text" class="form-control" name="selisih" id="selisih" value="{{$selisih}}" readonly>
   </div>
   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -230,9 +231,9 @@ function goBack() {
                   serverSide: true,
                   processing: true,
                   searching:  false,
-                  ajax: `/edit_invoice_dompul/${id}`,
+                  ajax: `/pembelian_dompul_data/${id}`,
                   columns: [
-                      {data: 'nama_produk'},
+                      {data: 'produk'},
                       {data: 'tipe_harga'},
                       {data: 'harga'},
                       {data: 'jumlah'},

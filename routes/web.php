@@ -130,6 +130,9 @@ Route::post('/pembelian/dompul/verify','PembelianDompulController@verify');
 Route::post('/pembelian/dompul/store','PembelianDompulController@store');
 Route::get('/pembelian_dompul_data/{id}', 'PembelianDompulController@data');
 Route::post('/dompul/get_harga/{tipe}/{kode}', 'PembelianDompulController@getHarga');
+Route::get('/pembelian_dompul_data/{id}', 'PembelianDompulController@data');
+Route::post('/pembelian/dompul/store','PembelianDompulController@store');
+
 
 Route::get('/pembelian/dompul/list-pembelian-dompul', function() {
   return view ('/pembelian/dompul/list-pembelian-dompul');
