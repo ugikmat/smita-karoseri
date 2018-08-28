@@ -123,6 +123,7 @@ Route::get('/pembelian/sp/pembelian-sp', 'PembelianSPController@index');
 Route::post('/pembelian/sp/verify','PembelianSPController@verify');
 Route::post('/pembelian/sp/store','PembelianSPController@store');
 Route::get('/pembelian_sp_data/{id}', 'PembelianSPController@data');
+Route::get('/pembelian/sp/list-pembelian-sp','ListPembelianSPController@index');
 
 //Pembelian Dompul
 Route::get('/pembelian/dompul/pembelian-dompul', 'PembelianDompulController@index');
@@ -132,15 +133,6 @@ Route::get('/pembelian_dompul_data/{id}', 'PembelianDompulController@data');
 Route::post('/dompul/get_harga/{tipe}/{kode}', 'PembelianDompulController@getHarga');
 Route::get('/pembelian_dompul_data/{id}', 'PembelianDompulController@data');
 Route::post('/pembelian/dompul/store','PembelianDompulController@store');
-
-
-Route::get('/pembelian/dompul/list-pembelian-dompul', function() {
-  return view ('/pembelian/dompul/list-pembelian-dompul');
-}) -> name('list-pembelian-dompul');
-
-Route::get('/pembelian/sp/list-pembelian-sp', function() {
-  return view ('/pembelian/sp/list-pembelian-sp');
-}) -> name('list-pembelian-sp');
 
 // Route::get('/pembelian/sp/list-pembelian-sp', function() {
 //   return view ('/pembelian/sp/list-pembelian-sp');

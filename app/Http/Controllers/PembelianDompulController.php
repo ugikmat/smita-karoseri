@@ -169,8 +169,8 @@ class PembelianDompulController extends Controller
                 $detailPembelianDompul->produk= $value->produk;
                 $detailPembelianDompul->jumlah= str_replace('.', '', $value->jumlah);
                 $detailPembelianDompul->tipe_harga= $value->tipe_harga;
-                $detailPembelianDompul->harga_satuan= str_replace('.', '', $value->harga_satuan);
-                $detailPembelianDompul->harga_total= str_replace('.', '', $value->harga_total);
+                $detailPembelianDompul->harga_satuan= str_replace(',', '.',str_replace('.', '', $value->harga_satuan));
+                $detailPembelianDompul->harga_total= str_replace(',', '.',str_replace('.', '', $value->harga_total));
                 $detailPembelianDompul->keterangan_detail_pd= $value->keterangan_detail_pd;
                 $detailPembelianDompul->save();
             $stokDompul = new StokDompul();
