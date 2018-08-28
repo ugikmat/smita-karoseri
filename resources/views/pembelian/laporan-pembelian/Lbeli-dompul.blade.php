@@ -24,18 +24,13 @@
 
 @section('content')
 
-<div class="cotainer-fluid">
+<div class="cotainer-fluid form-inline">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput" pull-right>Input Tanggal Laporan Pembelian</button>
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Tanggal Cetak Laporan
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        : {{\Carbon\Carbon::now()->format('d-m-Y')}}
-      </div>
+    <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
+      Tanggal Cetak Laporan :&nbsp{{\Carbon\Carbon::now()->format('d-m-Y')}}
     </div>
   </div>
 </div>

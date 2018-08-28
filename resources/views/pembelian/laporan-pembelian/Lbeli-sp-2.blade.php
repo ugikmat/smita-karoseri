@@ -13,71 +13,36 @@
 
 @section('content')
 
-<div class="cotainer-fluid">
+<div class="cotainer-fluid form-inline">
   <div class="row">
-    <input type="hidden" id="tgl" value="{{session('tgl_laporan_sp')}}" readonly>
+    <input type="hidden" id="tgl" value="{{session('tgl_laporan_dompul')}}" readonly>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Tanggal Awal
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        : {{session('tgl_laporan_sp')}}
-      </div>
+        Tanggal Awal : {{session('tgl_laporan_dompul')}}
     </div>
   </div>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Tanggal Akhir
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        : {{session('tgl_laporan_sp')}}
-      </div>
+        Tanggal Akhir : {{session('tgl_laporan_dompul')}}
     </div>
   </div>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Nama Kasir
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        : Joni
-      </div>
+        Nama Kasir : (nama)
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Nama Logistic
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        : gege
-      </div>
+        Nama Logistic : (nama)
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Nama PIC
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        : jhon
-      </div>
+        Nama PIC : (nama)
     </div>
   </div>
   <div class="row">
+    <input type="hidden" id="id_sales" value="{{$sales->id_sales}}" readonly>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        ID Canvaser
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <input type="hidden" id="id_sales" value="{{$sales->id_sales}}" readonly>
-        :<strong>{{$sales->id_sales}}</strong>
-      </div>
+         ID Canvaser :<strong>{{$sales->id_sales}}</strong>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Nama Canvaser
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        : <strong>{{$sales->nm_sales}}</strong>
-      </div>
+        Nama Canvaser : <strong>{{$sales->nm_sales}}</strong>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
 
