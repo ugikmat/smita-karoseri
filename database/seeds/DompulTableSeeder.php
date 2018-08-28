@@ -191,5 +191,14 @@ class DompulTableSeeder extends Seeder
         $subdompul20->tipe_dompul='SD';
         $subdompul20->status_sub_master_dompul='Aktif';
         $subdompul20->save();
+
+        $subdompul21 = new Dompul();
+        $subdompul21->no_hp_master_dompul='081938545995';
+        $subdompul21->no_hp_sub_master_dompul='081938546007';
+        $subdompul21->id_gudang='1';
+        $subdompul21->nama_sub_master_dompul='SUMENEP DISTRO';
+        $subdompul21->tipe_dompul='SD';
+        $subdompul21->status_sub_master_dompul='Aktif';
+        $subdompul21->save();
     }
 }

@@ -116,7 +116,7 @@ return [
         ],
         [
             'text'        => 'XL',
-            'url'         => 'list/users',
+            // 'url'         => 'list/users',
             'icon'        => 'phone-square',
             'submenu'     => [
               [
@@ -130,16 +130,35 @@ return [
                         [
                             'text'  => 'Invoice Dompul',
                             'url'   => '/penjualan/dompul/invoice-dompul',
+                            'icon'  => 'credit-card',
                         ],
                         [
                             'text'  => 'List Invoice Dompul',
                             'url'   => '/penjualan/dompul/list-invoice',
+                            'icon'  => 'file',
                         ],
                       ],
                   ],
                   [
+                    'text'      => 'Penjualan SP',
+                    'icon'      => 'share',
+                    'submenu'   => [
+                      [
+                        'text'    => 'Invoice SP',
+                        'url'     => '/penjualan/sp/invoice-sp',
+                        'icon'    => 'mobile-phone',
+                      ],
+                      [
+                        'text'    => 'List Invoice SP',
+                        'url'     => '/penjualan/sp/list-invoice-sp',
+                        'icon'    =>  'file',
+                      ],
+                    ],
+                  ],
+                  [
                       'text'    => 'Monitoring Upload',
-                      'url'     => '#',
+                      'url'     => '/penjualan/monitoring/mntr-upload',
+                      'icon'    => 'play-circle',
                   ],
                   [
                     'text'    => 'Laporan Penjualan',
@@ -147,28 +166,98 @@ return [
                     'submenu' => [
                       [
                         'text'  => 'Dompet Pulsa',
-                        'url'   => '#',
+                        'url'   => '/penjualan/laporan-penjualan/LPdompul',
+                        'icon'  => 'briefcase',
                       ],
                       [
-                        'text'  => 'Pemjualan Dompul Head',
-                        'url'   => '#',
+                        'text'  => 'Penjualan Dompul Head',
+                        'url'   => '/penjualan/laporan-penjualan/dompul-head',
+                        'icon'  => 'money',
+                      ],
+                      [
+                        'text'  => 'Starter Pack',
+                        'url'   => '/penjualan/laporan-penjualan/LPsp',
+                        'icon'  => 'briefcase',
                       ],
                     ],
                   ],
                 ],
               ],
               [
-                'text'    => 'Persediaan',
+                'text'    => 'Pembelian',
+                'icon'    => 'share',
                 'submenu' => [
                   [
-                    'text'  => 'MutasiDompul',
-                    'url'   => '#',
+                    'text'    => 'Pembelian Dompul',
+                    'icon'    => 'share',
+                    'submenu' => [
+                      [
+                        'text'  => 'Invoice Dompul',
+                        'icon'  => 'shopping-cart',
+                        'url'   => '/pembelian/dompul/pembelian-dompul',
+                      ],
+                      [
+                        'text'  =>  'List Invoice Dompul',
+                        'icon'  => 'file',
+                        'url'   => '/pembelian/dompul/list-pembelian-dompul',
+                      ],
+                    ],
+                  ],
+                  [
+                    'text'  => 'Pembelian SP',
+                    'icon'  => 'share',
+                    'submenu' => [
+                      [
+                        'text'  => 'Invoice SP',
+                        'icon'  => 'shopping-cart',
+                        'url'   => '/pembelian/sp/pembelian-sp',
+                      ],
+                      [
+                        'text'  => 'List Invoice SP',
+                        'icon'  => 'file',
+                        'url'   => '/pembelian/sp/list-pembelian-sp',
+                      ],
+                    ],
+                  ],
+                  [
+                    'text'  => 'Laporan Pembelian',
+                    'icon'  => 'share',
+                    'submenu' => [
+                      [
+                        'text'  => 'Dompet Pulsa',
+                        'icon'  => 'dollar',
+                        'url'   => '/pembelian/laporan-pembelian/Lbeli-dompul',
+                      ],
+                      [
+                        'text'  => 'Starter Pack',
+                        'icon'  => 'credit-card',
+                        'url'   => '/pembelian/laporan-pembelian/Lbeli-sp',
+                      ],
+                    ],
+                  ],
+
+                ],
+              ],
+              [
+                'text'    => 'Persediaan',
+                'icon'    => 'share',
+                'submenu' => [
+                  [
+                    'text'  => 'Kartu Stok Dompul',
+                    'icon'  => 'truck',
+                    'url'   => '/persediaan/mutasi-dompul',
+                  ],
+                  [
+                    'text'  => 'Kartu Stok SP',
+                    'icon'  => 'tags',
+                    'url'   => '/persediaan/mutasi-sp',
                   ],
                 ],
               ],
               [
                 'text'    => 'Upload',
                 'url'     => '/upload/dompul',
+                'icon'    => 'upload',
               ],
             ],
         ],
@@ -278,7 +367,12 @@ return [
             'icon'        => 'tasks',
             'submenu'     => [
               [
-                'text'  => 'Bank',
+                'text'  => 'user',
+                'url'   => '/master/user',
+                'icon'  => 'male',
+              ],
+              [
+                'text'  => 'bank',
                 'url'   => '/master/bank',
                 'icon'  => 'bank',
               ],
@@ -299,10 +393,12 @@ return [
               [
                 'text'  => 'Satuan',
                 'url'   => '/master/satuan',
+                'icon'  => 'inbox',
               ],
               [
                 'text'  => 'Supplier',
                 'url'   => '/master/supplier',
+                'icon'  => 'users',
               ],
               [
                 'text'  => 'Customer',
@@ -312,6 +408,7 @@ return [
               [
                 'text'  => 'Gudang',
                 'url'   => '/gudang',
+                'icon'  => 'briefcase',
               ],
               [
                 'text'  => 'Lokasi',
@@ -321,7 +418,7 @@ return [
               [
                 'text'  => 'Sales',
                 'url'   => '/sales',
-                'icon'  => 'user',
+                'icon'  => 'user-plus',
               ],
               [
                 'text'  => 'Pemborong',
@@ -331,26 +428,33 @@ return [
               [
                 'text'  => 'Supervisor',
                 'url'   => '/supervisor',
-                'icon'  => 'user',
+                'icon'  => 'user-secret',
               ],
               [
                 'text'  => 'Dompul',
                 'url'   => '/master/dompul',
+                'icon'  => 'dollar',
               ],
               [
                 'text'  => 'Harga Dompul',
                 'url'   => '/master/harga_dompul',
                 'icon'  => 'money',
               ],
+
               [
-                'text'  => 'Harga Produk',
+                'text'  => 'SP',
+                'url'   => '/master/produk',
+                'icon'  => 'credit-card',
+              ],
+              [
+                'text'  => 'harga SP',
                 'url'   => '/master/harga_produk',
                 'icon'  => 'money',
               ],
               [
                 'text'  => 'Tipe Dompul',
                 'url'   => '/master/tipe_dompul',
-                'icon'  => 'money',
+                'icon'  => 'tag',
               ],
             ],
         ],

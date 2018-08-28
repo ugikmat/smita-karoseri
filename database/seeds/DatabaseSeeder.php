@@ -30,5 +30,9 @@ class DatabaseSeeder extends Seeder
         $this->call(PPNTableSeeder::class);
         //$this->call(SPKCTableSeeder::class);
         // $this->call(UploadDompulTableSeeder::class);
+        //$this->call(LokasiTableSeeder::class);
+        // $this->call(KartuStokSpTableSeeder::class);
+        $this->call(BoTableSeeder::class);
+        // $this->call(KartuStokDompulTableSeeder::class);
     }
 }

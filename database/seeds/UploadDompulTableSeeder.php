@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Carbon\Carbon;
+use App\UploadDompul;
 
 class UploadDompulTableSeeder extends Seeder
 {

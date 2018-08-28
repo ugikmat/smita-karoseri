@@ -14,6 +14,7 @@ use App\SPKPB;
 use App\View\ViewSPKC;
 use App\PrintPBB;
 use App\PrintPenawaran;
+use App\BO;
 use Illuminate\Support\ServiceProvider;
 class DynamicServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,10 @@ class DynamicServiceProvider extends ServiceProvider
 
         view()->composer('*',function($view){
             $view->with('customerarray', Customer::all());
+        });
+
+        view()->composer('*',function($view){
+            $view->with('bosarray', BO::all());
         });
 
         view()->composer('*',function($view){

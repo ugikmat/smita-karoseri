@@ -14,6 +14,7 @@
     <tr>
       <th>Id Sales</th>
       <th>Nama Sales</th>
+      <th>Id Lokasi</th>
       <th>Alamat Sales</th>
       <th>No Telepon</th>
       <th>Action</th>
@@ -23,6 +24,7 @@
     <tr>
       <th>Id Sales</th>
       <th>Nama Sales</th>
+      <th>Id Lokasi</th>
       <th>Alamat Sales</th>
       <th>No Telepon</th>
     </tr>
@@ -70,6 +72,21 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="text" id="alamat_sales" required="required" name="alamat_sales" class="form-control col-md-7 col-xs-12" value="">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Lokasi
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select name="lokasi" required="required">
+                          @isset($lokasis)
+                            @foreach($lokasis as $lokasi)
+                              <option value='{{$lokasi->id_lokasi}}'>{{$lokasi->nm_lokasi}}</option>
+                            @endforeach
+                          @endisset
+                        </select>
                       </div>
                     </div>
 
@@ -212,6 +229,9 @@
         },
         {
           data: 'nm_sales'
+        },
+        {
+          data: 'id_lokasi'
         },
         {
           data: 'alamat_sales'

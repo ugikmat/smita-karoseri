@@ -69,7 +69,13 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="tipe" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
+                        <select name="tipe" required="required">
+                          @isset($tipes)
+                            @foreach($tipes as $tipe)
+                              <option value="{{$tipe->tipe_dompul}}" id="{{$tipe->tipe_dompul}}">{{$tipe->tipe_dompul}}</option>
+                            @endforeach
+                          @endisset
+                        </select>
                       </div>
                     </div>
 
@@ -143,9 +149,15 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
+                        <select name="tipe" required="required">
+                          @isset($tipes)
+                            @foreach($tipes as $tipe)
+                              <option value="{{$tipe->tipe_dompul}}" id="{{$tipe->tipe_dompul}}">{{$tipe->tipe_dompul}}</option>
+                            @endforeach
+                          @endisset
+                        </select>
+                      </div>
                     </div>
-                  </div>
 
                   <div class="form-group harga">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Harga Produk
@@ -249,7 +261,7 @@
     var modal = $(this)
     $('#editForm').attr('action', `/master/harga_produk/${id}`);
     modal.find('.modal-body .id input').val(id_produk);
-    modal.find('.modal-body .tipe input').val(tipe);
+    modal.find(`.modal-body .tipe #${tipe}`).attr('selected','selected');
     modal.find('.modal-body .harga input').val(harga);
   })
 </script>

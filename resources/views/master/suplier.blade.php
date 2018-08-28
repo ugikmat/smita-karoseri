@@ -104,7 +104,12 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="bank" class="form-control col-md-7 col-xs-12" value="">
+                        <select name="bank" required="required">
+                          {{-- <option value="selected" selected>-- Select Bank --</option> --}}
+                          <option value="BCA">BCA</option>
+                          <option value="BRI">BRI</option>
+                          <option value="BNI">BNI</option>
+                        </select>
                       </div>
                     </div>
 
@@ -205,7 +210,12 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="bank" class="form-control col-md-7 col-xs-12" value="">
+                      <select name="bank" required="required">
+                        <option value="BCA" id="BCA">BCA</option>
+                        <option value="BRI" id="BRI">BRI</option>
+                        <option value="BNI" id="BNI">BNI</option>
+                        <option value="Mandiri" id="Mandiri">Mandiri</option>
+                      </select>
                     </div>
                   </div>
 
@@ -328,7 +338,7 @@
     modal.find('.modal-body .alamat input').val(alamat)
     modal.find('.modal-body .telepon input').val(telepon)
     modal.find('.modal-body .email input').val(email)
-    modal.find('.modal-body .bank input').val(bank)
+    modal.find(`.modal-body .bank #${bank}`).attr('selected','selected');
     modal.find('.modal-body .norek input').val(norek)
     modal.find('.modal-body .status input').val(status)
   })

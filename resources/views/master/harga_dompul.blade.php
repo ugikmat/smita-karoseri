@@ -72,8 +72,14 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Harga Dompul
                         <span class="required">*</span>
                       </label>
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select name="tipe" required="required">
+                          @isset($tipes)
+                            @foreach($tipes as $tipe)
+                              <option value="{{$tipe->tipe_dompul}}" id="{{$tipe->tipe_dompul}}">{{$tipe->tipe_dompul}}</option>
+                            @endforeach
+                          @endisset
+                        </select>
                       </div>
                     </div>
 
@@ -154,9 +160,15 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipe Harga Dompul
                       <span class="required">*</span>
                     </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
-                    </div>
+                   <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select name="tipe" required="required">
+                          @isset($tipes)
+                            @foreach($tipes as $tipe)
+                              <option value="{{$tipe->tipe_dompul}}" id="{{$tipe->tipe_dompul}}">{{$tipe->tipe_dompul}}</option>
+                            @endforeach
+                          @endisset
+                        </select>
+                      </div>
                   </div>
 
                   <div class="form-group harga">
@@ -203,7 +215,7 @@
     <div class="modal-content">
       <form action="" method="POST" id="deleteForm">
         @csrf @method('delete')
-      
+
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -277,7 +289,7 @@
     var modal = $(this)
     $('#editForm').attr('action', `/master/harga_dompul/${id}`);
     modal.find('.modal-body .nama input').val(nama)
-    modal.find('.modal-body .tipe input').val(tipe)
+    modal.find(`.modal-body .tipe #${tipe}`).attr('selected','selected');
     modal.find('.modal-body .harga input').val(harga)
     // modal.find('.modal-body .tanggal input').val(tanggal)
     // modal.find('.modal-body .status input').val(status)
