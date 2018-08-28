@@ -16,7 +16,7 @@
 @stop
 
 @section('content')
-<form class="invoice-dompul repeater" action="/invoice_dompul/verify" method="post">
+<form class="invoice-dompul repeater" action="/pembelian/dompul/verify" method="post">
 <div class="container-fluid  form-inline">
   @csrf
   <div class="row">
@@ -75,7 +75,7 @@
   <div class="row">
     <input type="hidden" name="id_harga_dompul" id="id_harga_dompul" value="{{$hargaDompuls->where('nama_harga_dompul',$dompul->produk)->first()['id_harga_dompul']}}">
     <div class="col-xs-2">
-      <input type="text" class="form-control" id="nama{{$key+1}}" name="nama{{$key+1}}" value="{{$dompul->produk}}" disabled>
+      <input type="text" class="form-control" id="nama{{$key+1}}" name="nama{{$key+1}}" value="{{$dompul->produk}}" readonly>
     </div>
     <div class="col-xs-2">
       <input type="text" class="form-control" id="harga{{$key+1}}" name="harga{{$key+1}}" value="{{number_format($hargaDompuls->where('nama_harga_dompul',$dompul->produk)->first()['harga_dompul'],0,",",".")}}" readonly>

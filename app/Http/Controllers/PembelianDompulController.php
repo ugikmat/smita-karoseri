@@ -100,11 +100,11 @@ class PembelianDompulController extends Controller
                 DB::table('temp_detail_pembelian_dompuls')->insert(['id_pembelian_dompul'=>$id,
                 'id_supplier'=>$request->get('supplier'),
                 'id_harga_dompul'=>$request->get('id_harga_dompul'),
-                'produk'=>$request->get("kode{$i}"),
+                'produk'=>$request->get("nama{$i}"),
                 'jumlah'=>$request->get("jumlah{$i}"),
                 'tipe_harga'=>$request->get("tipe{$i}"),
-                'harga_satuan'=>str_replace('.', '', $request->get("harga{$i}")),
-                'harga_total'=>str_replace('.', '', $request->get("total{$i}")),
+                'harga_satuan'=>str_replace(',', '.',str_replace('.', '', $request->get("harga{$i}"))),
+                'harga_total'=>str_replace(',', '.',str_replace('.', '', $request->get("total{$i}"))),
                 'keterangan_detail_pd'=>'none']);
             }
         }
