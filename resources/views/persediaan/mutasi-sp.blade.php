@@ -23,7 +23,7 @@
   @csrf
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        Tanggal Penjualan :
+        Tanggal Awal :
         @if(Session::has('tgl_stok_sp'))
           <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{session('tgl_stok_sp')}}">
         @else
@@ -32,16 +32,14 @@
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-          Nama Canvaser :
-          <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('sales_stok_sp')}}">
-                <option value="" disabled>Pilih Nama Canvaser</option>
-                @isset($saless)
-                    @foreach ($saless as $data)
-                    <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
-                    @endforeach
-                @endisset
-          </select>
+        Tanggal Akhir :
+        @if(Session::has('tgl_stok_sp'))
+          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{session('tgl_stok_sp')}}">
+        @else
+          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
+        @endif
     </div>
+
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <button type="button" id="save" class="btn btn-success" ><i class="fa fa-caret-square-o-right"></i>Tampilkan Mutasi SP</button>
       {{-- <button class="btn btn-success" type="submit" name="button"><i class="fa fa-caret-square-o-right"></i>  Tampilkan</button> --}}

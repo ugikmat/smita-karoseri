@@ -77,8 +77,21 @@
               </div>
               <div class="x_content">
                 <br />
-                  <div class="form-group kode">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Pilih Tanggal
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Awal
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      @if(Session::has('tgl_stok_dompul'))
+                        <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy" id="tgl" name="tgl" value="{{session('tgl_stok_dompul')}}">
+                      @else
+                        <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy" id="tgl" name="tgl" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
+                      @endif
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Akhir
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
