@@ -110,7 +110,9 @@
               {data: 'stok_masuk'},
               {data: 'stok_keluar'},
               {data: 'jumlah_stok'}
-            ]
+            ],
+            dom: 'Bfrtip',
+            buttons: ['csv', 'excel', 'print'],
         });
         $('#save').on('click',function(event) {
           $tgl = $('#tgl_penjualan').val();
