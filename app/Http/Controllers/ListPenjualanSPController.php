@@ -82,6 +82,11 @@ class ListPenjualanSPController extends Controller
         return response()->json(['success' => true,'total'=>$total]);
     }
 
+    public function delete(Request $request){
+        PenjualanProduk::where('id_penjualan_sp',$request->get('id'))->update(['deleted'=>1]);
+        return redirect('penjualan/sp/list-invoice-sp');
+    }
+
     /**
      * Save transaction
      */
@@ -167,7 +172,8 @@ class ListPenjualanSPController extends Controller
                         ->join('master_saless','master_saless.id_sales','=','penjualan_sps.id_sales')
                         ->join('master_customers','master_customers.id_cust','=','penjualan_sps.id_customer')
                         // ->join('detail_penjualan_dompuls','detail_penjualan_dompuls.id_penjualan_dompul','=','penjualan_dompuls.id_penjualan_dompul')
-                        ->where('tanggal_penjualan_sp',$tgl))
+                        ->where('tanggal_penjualan_sp',$tgl)
+                        ->where('deleted',0))
                         // ->addColumn('indeks', function ($uploadDompul) {
                         //       return '';
                         //     })
@@ -193,13 +199,15 @@ class ListPenjualanSPController extends Controller
                                     href="/penjualan/sp/list-invoice-sp/edit/'.$penjualanSP->id_penjualan_sp.'/'.$penjualanSP->nm_sales.'/'.$penjualanSP->tanggal_penjualan_sp.'/'.$penjualanSP->nm_cust.'">
                                     <i class="glyphicon glyphicon-edit"></i> Edit
                                     </a>
-                                    <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$penjualanSP->id_penjualan_sp.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>';
+                                    <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$penjualanSP->id_penjualan_sp.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanSP->id_penjualan_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
                               } else {
                                   return
                                     '<a class="btn btn-xs btn-primary"
                                     href="/penjualan/sp/list-invoice-sp/edit/'.$penjualanSP->id_penjualan_sp.'/'.$penjualanSP->nm_sales.'/'.$penjualanSP->tanggal_penjualan_sp.'/'.$penjualanSP->nm_cust.'">
                                     <i class="glyphicon glyphicon-edit"></i> Lihat
-                                    </a>';
+                                    </a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanSP->id_penjualan_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
                               }
 
                             })

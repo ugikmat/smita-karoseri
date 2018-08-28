@@ -86,6 +86,7 @@ Route::get('/invoice_dompul/{canvaser}/{tgl}', 'PenjualanDompulController@data')
 Route::get('/edit_invoice_dompul/{canvaser}/{tgl}/{downline}', 'PenjualanDompulController@penjualanData');
 Route::get('/edit_list_invoice_dompul/{sales}/{tgl}/{customer}', 'ListPenjualanDompulController@penjualanData');
 Route::put('/invoice_dompul/verify/{id}', 'ListPenjualanDompulController@verif');
+Route::put('/invoice_dompul/delete', 'ListPenjualanDompulController@delete');
 
 Route::get('/penjualan/sp/invoice-sp', 'PenjualanSPController@index');
 Route::post('/get_harga/{tipe}/{kode}', 'PenjualanSPController@getHarga');
@@ -107,6 +108,7 @@ Route::get('/edit_list_invoice_sp/{id}', 'ListPenjualanSPController@penjualanDat
 Route::post('/list_invoice_sp/update/{id}/{id_detail}','ListPenjualanSPController@update');
 Route::post('/list_invoice_SP/store','ListPenjualanSPController@store');
 Route::put('/invoice_sp/verify/{id}','ListPenjualanSPController@verif');
+Route::put('/invoice_sp/delete','ListPenjualanSPController@delete');
 
 Route::get('/master/user', function() {
   return view ('/penjualan/sp/list-invoice-sp');
@@ -127,7 +129,7 @@ Route::get('/pembelian/dompul/pembelian-dompul', 'PembelianDompulController@inde
 Route::post('/pembelian/dompul/verify','PembelianDompulController@verify');
 Route::post('/pembelian/dompul/store','PembelianDompulController@store');
 Route::get('/pembelian_dompul_data/{id}', 'PembelianDompulController@data');
-
+Route::post('/dompul/get_harga/{tipe}/{kode}', 'PembelianDompulController@getHarga');
 
 Route::get('/pembelian/sp/list-pembelian-sp', function() {
   return view ('/pembelian/sp/list-pembelian-sp');

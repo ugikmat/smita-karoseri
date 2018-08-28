@@ -110,6 +110,9 @@
       <a href="{{ URL::to('downloadExcel/csv') }}">
         <button class="btn btn-success">Download CSV</button>
       </a>
+      <a href="{{ URL::to('downloadExcel/pdf') }}">
+        <button class="btn btn-success">Download PDF</button>
+      </a>
       {{-- <a href="{{ URL::to('/upload/empty') }}">
         <button class="btn btn-warning">Empty Data</button>
       </a> --}}

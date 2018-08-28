@@ -128,6 +128,11 @@ class ListPenjualanDompulController extends Controller
         }
         return redirect('/penjualan/dompul/list-invoice');
     }
+
+    public function delete(Request $request){
+        $penjualanDompul = PenjualanDompul::where('id_penjualan_dompul',$request->get('id'))->update(['deleted'=>1]);
+        return redirect('/penjualan/dompul/list-invoice');
+    }
     /**
      * Process dataTable ajax response.
      *
@@ -153,7 +158,8 @@ class ListPenjualanDompulController extends Controller
                         ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
                         ->join('master_customers','master_customers.no_hp','=','penjualan_dompuls.no_hp_kios')
                         // ->join('detail_penjualan_dompuls','detail_penjualan_dompuls.id_penjualan_dompul','=','penjualan_dompuls.id_penjualan_dompul')
-                        ->where('tanggal_penjualan_dompul',$tgl))
+                        ->where('tanggal_penjualan_dompul',$tgl)
+                        ->where('deleted',0))
                         // ->addColumn('indeks', function ($uploadDompul) {
                         //       return '';
                         //     })
@@ -172,13 +178,15 @@ class ListPenjualanDompulController extends Controller
                                     href="/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
                                     <i class="glyphicon glyphicon-edit"></i> Edit
                                     </a>
-                                    <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>';
+                                    <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
                               } else {
                                   return
                                     '<a class="btn btn-xs btn-primary"
                                     href="/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
                                     <i class="glyphicon glyphicon-edit"></i> Lihat
-                                    </a>';
+                                    </a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
                               }
 
                             })

@@ -117,9 +117,10 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="deleteForm" action="" method="POST">
-        @csrf @method('delete')
+      <form id="deleteForm" action="/invoice_dompul/delete" method="POST">
+        @csrf @method('put')
         <!-- Modal Header -->
+        <input type="hidden" name="id" value="" id="id_penjualan">
         <div class="modal-header">
           <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -176,11 +177,16 @@
           t.ajax.url(`/invoice_dompul/list/${$tgl}`).load();
         }
         $('#show').on('click',loadData);
+        $('#verificationModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) // Button that triggered the modal
+          var id = button.data('id');
+          $('#verificationForm').attr('action',`/invoice_dompul/verify/${id}`);
+        });
+        $('#deleteModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) // Button that triggered the modal
+          var id = button.data('id');
+          $('#id_penjualan').val(id);
+        });
     });
-$('#verificationModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var id = button.data('id') // Extract info from data-* attributes
-    $('#verificationForm').attr('action',`/invoice_dompul/verify/${id}`);
-  })
 </script>
 @stop

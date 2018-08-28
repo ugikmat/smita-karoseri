@@ -35,16 +35,17 @@ class StokDompulController extends Controller
         session(['tgl_stok_dompul'=>$tgl]);
         $tgl = Carbon::parse($tgl);
         $tgl = $tgl->format('Y-m-d');        
-        $stokDompul = DB::table('kartu_stok_dompuls')->select(DB::raw("kartu_stok_dompuls.id_produk,
+        $stokDompul = DB::table('kartu_stok_dompuls')->select(DB::raw("kartu_stok_dompuls.id_produk as nama,
         (SELECT sum(awal.masuk)-sum(awal.keluar)
-FROM kartu_stok_dompuls awal WHERE awal.tanggal_transaksi < '{$tgl}' AND awal.id_produk=kartu_stok_dompuls.id_produk) AS stok_awal,
+FROM kartu_stok_dompuls awal WHERE awal.tanggal_transaksi < '{$tgl}' AND awal.id_produk=nama) AS stok_awal,
 sum(kartu_stok_dompuls.masuk) AS stok_masuk, sum(kartu_stok_dompuls.keluar) AS stok_keluar,
-(sum(kartu_stok_dompuls.masuk)-sum(kartu_stok_dompuls.keluar)) AS jumlah_stok"))
+(sum(kartu_stok_dompuls.masuk)-sum(kartu_stok_dompuls.keluar)+COALESCE((SELECT sum(awal.masuk)-sum(awal.keluar)
+FROM kartu_stok_dompuls awal WHERE awal.tanggal_transaksi < '{$tgl}' AND awal.id_produk=nama),0)) AS jumlah_stok"))
                         // ->join('upload_dompuls',function($join){
                         //     $join->on('kartu_stok_dompuls.id_produk','=','upload_dompuls.produk');
                         // })
                         ->where('tanggal_transaksi',$tgl)
-                        ->groupBy('kartu_stok_dompuls.id_produk')->get();
+                        ->groupBy('nama')->get();
         return $datatables->of($stokDompul)
                         ->addColumn('indeks', function ($dataStok) {
                               return '';
