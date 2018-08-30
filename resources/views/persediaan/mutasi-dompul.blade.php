@@ -145,7 +145,11 @@
                 {data: 'stok_masuk'},
                 {data: 'stok_keluar'},
                 {data: 'jumlah_stok'}
-            ]
+            ],
+            dom: 'lBrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         });
         $('#save').on('click',function(event) {
           $tgl_awal =  $('#tgl_awal').val();

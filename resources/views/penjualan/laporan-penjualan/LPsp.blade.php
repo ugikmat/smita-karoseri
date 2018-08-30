@@ -189,7 +189,11 @@
                 {data: 'bri'},
                 {data: 'bni'},
                 {data: 'piutang'},
-            ]
+            ],
+            dom: 'lBrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         });
         t.on( 'order.dt search.dt', function () {
         t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
