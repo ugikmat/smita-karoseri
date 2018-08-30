@@ -44,11 +44,10 @@
 <table id="lp-dompul-table" class="table responsive" width="100%">
     <thead>
     <tr>
+        <th>No</th>
         <th>Nama Sales</th>
         <th>BO</th>
-        <th>DP5</th>
-        <th>DP10</th>
-        <th>Dompul</th>
+        <th>Total Transaksi</th>
         <th>Total Penjualan</th>
         <th>Tunai</th>
         <th>BCA Pusat</th>
@@ -180,9 +179,7 @@
                 {data: 'index'},
                 {data: 'nm_sales'},
                 {data: 'nama_bo'},
-                {data: 'dp5'},
-                {data: 'dp10'},
-                {data: 'dompul'},
+                {data: 'total_transaksi'},
                 {data: 'total_penjualan'},
                 {data: 'cash'},
                 {data: 'bca_pusat'},
