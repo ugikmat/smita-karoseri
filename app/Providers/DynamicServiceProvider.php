@@ -3,6 +3,7 @@ namespace App\Providers;
 use App\Lokasi;
 use App\Customer;
 use App\Bank;
+use App\Sales;
 use App\CaraBayar;
 use App\Supervisor;
 use App\View\ViewGudang;
@@ -22,6 +23,10 @@ class DynamicServiceProvider extends ServiceProvider
     {
         view()->composer('*',function($view){
             $view->with('lokasiarray', Lokasi::all());
+        });
+
+        view()->composer('*',function($view){
+            $view->with('salesarray', Sales::all());
         });
 
         view()->composer('*',function($view){

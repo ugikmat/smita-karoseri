@@ -149,17 +149,32 @@ class LaporanPenjualanDompulController extends Controller
                     ->where('deleted',0)
                    ->groupBy('id_penjualan_dompul');
 
+        $total_penjualan = DB::table('upload_dompuls')
+                   ->select(DB::raw("id_penjualan_dompul, produk,
+    	sum(IF(produk = 'DOMPUL', qty, 0)) AS dompul,
+        sum(IF(produk = 'DP5', qty, 0)) AS dp5,
+        sum(IF(produk = 'DP10', qty, 0)) AS dp10"))
+                    ->where('deleted',0)
+                    ->where('status_active',1)
+                   ->groupBy('id_penjualan_dompul','produk');
+
         return $datatables->eloquent(PenjualanDompul::select(DB::raw('master_saless.nm_sales, nama_bo,
                                 sum(penjualan_dompuls.grand_total) AS total_penjualan, sum(cash) AS cash, 
                                 sum(bca_pusat) AS bca_pusat, sum(bca_cabang) AS bca_cabang, sum(mandiri) AS mandiri, sum(bni) AS bni, sum(bri) AS bri, 
                                 (sum(penjualan_dompuls.grand_total)-sum(total_bayar)) AS piutang,
-                                COUNT(penjualan_dompuls.id_penjualan_dompul) AS total_transaksi'))
+                                SUM(dompul) AS dompul,
+                                SUM(dp5) AS dp5,
+                                SUM(dp10) AS dp10'))
                         ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
                         ->join('users','users.id_user','=','penjualan_dompuls.id_user')
                         ->join('bos','bos.id_bo','=','users.id_bo')
                         ->joinSub($total_nominal, 'total_nominal', function($join) {
                             $join->on('penjualan_dompuls.id_penjualan_dompul', '=', 'total_nominal.id_penjualan_dompul');
                         })
+                        ->joinSub($total_penjualan, 'total_penjualan', function($join) {
+                            $join->on('penjualan_dompuls.id_penjualan_dompul', '=', 'total_penjualan.id_penjualan_dompul');
+                        })
+                        // ->join('upload_dompuls','upload_dompul.id_penjualan_dompul','=','penjualan_dompul.id_penjualan_dompul')
                         ->where('tanggal_penjualan_dompul',$tgl)
                         ->groupBy('master_saless.nm_sales','nama_bo'))
                         ->addColumn('index', function ($penjualanDompul) {
@@ -168,6 +183,15 @@ class LaporanPenjualanDompulController extends Controller
                             })
                             ->addColumn('total_penjualan', function ($penjualanDompul) {
                               return number_format($penjualanDompul->total_penjualan,0,",",".");
+                            })
+                            ->addColumn('dompul', function ($penjualanDompul) {
+                              return number_format($penjualanDompul->dompul,0,",",".");
+                            })
+                            ->addColumn('dp5', function ($penjualanDompul) {
+                              return number_format($penjualanDompul->dp5,0,",",".");
+                            })
+                            ->addColumn('dp10', function ($penjualanDompul) {
+                              return number_format($penjualanDompul->dp10,0,",",".");
                             })
                             ->addColumn('cash', function ($penjualanDompul) {
                               return number_format($penjualanDompul->cash,0,",",".");

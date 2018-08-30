@@ -1,15 +1,15 @@
 @extends('adminlte::page')
 
-@section('title', 'Laporan Dompul')
+@section('title', 'Laporan SP')
 
 @section('content_header')
-    <h1>Laporan Penjualan Dompul</h1>
+    <h1>Laporan Penjualan CVS SP</h1>
 
 @stop
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('/datepicker/css/bootstrap-datepicker.min.css') }}">
-<style media="screen">
+<style>
   td{
     text-align: center;
   }
@@ -41,16 +41,14 @@
 </div>
 <br><br>
 
-<table id="lp-dompul-table" class="table responsive" width="100%">
+<table id="lp-sp-table" class="table responsive" width="100%">
     <thead>
     <tr>
         <th>No</th>
-        <th>Nama Sales</th>
-        <th>BO</th>
-        <th>DP5</th>
-        <th>DP10</th>
-        <th>DOMPUL</th>
-        <th>Total Penjualan</th>
+        <th>Nama SP</th>
+        <th>Qty</th>
+        <th>Harga Satuan</th>
+        <th>Harga Total</th>
         <th>Tunai</th>
         <th>BCA Pusat</th>
         <th>BCA Cabang</th>
@@ -77,6 +75,7 @@
       </tr>
     </tfoot>
 </table>
+
 <!--Modal input-->
 <div class="modal fade bs-example-modal-lg" id='modalInput' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -86,7 +85,7 @@
         <button type="button" class="close" data-dismiss="modal">
           <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Input Laporan Penjualan Dompul</h4>
+        <h4 class="modal-title" id="myModalLabel">Input Laporan Penjualan SP</h4>
       </div>
       <div class="modal-body">
         <div class="clearfix"></div>
@@ -106,11 +105,20 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                    @if(Session::has('tgl_laporan_dompul'))
-                      <input class="datepicker col-md-7 col-xs-12" id="tgl" data-date-format="dd-mm-yyyy" value="{{session('tgl_laporan_dompul')}}">
+                      @if(Session::has('tgl_laporan_sp'))
+                      <input class="datepicker col-md-7 col-xs-12" id="tgl" data-date-format="dd-mm-yyyy" value="{{session('tgl_laporan_sp')}}">
                     @else
                       <input class="datepicker col-md-7 col-xs-12" id="tgl" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
                     @endif
+                    Nama Canvaser : &nbsp;
+                      <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('id_sales')}}">
+                            <option value="" disabled>Pilih Nama Canvaser</option>
+                            @isset($salesarray)
+                                @foreach ($salesarray as $data)
+                                <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
+                                @endforeach
+                            @endisset
+                      </select>
                     </div>
                   </div>
 
@@ -118,7 +126,7 @@
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                       <button class="btn btn-primary" type="reset"> <i class="fa fa-repeat"></i> Kosongkan</button>
-                      <button type="button" id="save" class="btn btn-success" data-dismiss="modal"><i class="glyphicon glyphicon-ok"></i>Tampilkan Laporan Penjualan Dompul</button>
+                      <button type="button" id="save" class="btn btn-success" data-dismiss="modal"><i class="glyphicon glyphicon-ok"></i>Tampilkan Laporan Penjualan SP</button>
                     </div>
                   </div>
                 </form>
@@ -156,10 +164,10 @@
         }else{
           console.log('No');
         }
-        var t = $('#lp-dompul-table').DataTable({
+        var t = $('#lp-sp-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: `/laporan-penjualan/${$tgl}`,
+            ajax: `/laporan-penjualan/sp-cvs/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -171,7 +179,7 @@
                     targets:1,
                     render: function ( data, type, row, meta ) {
                         if(type === 'display'){
-                            data = `<a class="link-post" href="/penjualan/laporan-penjualan/LPdompul-piutang/${data}">` + data + '</a>';
+                            data = `<a class="link-post" href="/penjualan/laporan-penjualan/LPsp-piutang/${data}">` + data + '</a>';
                         }
                         return data;
                     }
@@ -179,19 +187,17 @@
             ],
             columns: [
                 {data: 'index'},
-                {data: 'nm_sales'},
-                {data: 'nama_bo'},
-                {data: 'dp5'},
-                {data: 'dp10'},
-                {data: 'dompul'},
-                {data: 'total_penjualan'},
-                {data: 'cash'},
-                {data: 'bca_pusat'},
-                {data: 'bca_cabang'},
-                {data: 'mandiri'},
-                {data: 'bri'},
-                {data: 'bni'},
-                {data: 'piutang'},
+                {data: 'nama_produk'},
+                {data: 'index'},
+                {data: 'index'},
+                {data: 'index'},
+                {data: 'index'},
+                {data: 'index'},
+                {data: 'index'},
+                {data: 'index'},
+                {data: 'index'},
+                {data: 'index'},
+                {data: 'index'},
             ],
             dom: 'lBrtip',
         buttons: [
@@ -203,7 +209,7 @@
             cell.innerHTML = i+1;
           } );
         } ).draw();
-        $.post(`/get_laporan_dompul/${$tgl}`, function(response){
+        $.post(`/get_laporan_sp/${$tgl}`, function(response){
             if(response.success)
             {
               console.log('Success..');
@@ -222,8 +228,8 @@
         }, 'json');
         $('#save').on('click',function(event) {
           $tgl = $('#tgl').val();
-          t.ajax.url(`/laporan-penjualan/${$tgl}`).load();
-          $.post(`/get_laporan_dompul/${$tgl}`, function(response){
+          t.ajax.url(`/laporan-penjualan/sp/${$tgl}`).load();
+          $.post(`/get_laporan_sp/${$tgl}`, function(response){
             if(response.success)
             {
               console.log('Success..');
