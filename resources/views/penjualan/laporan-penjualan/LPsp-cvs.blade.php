@@ -34,7 +34,7 @@
         Tanggal Cetak Laporan
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        : {{\Carbon\Carbon::now()->format('d-m-Y')}}
+        : {{\Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}
       </div>
     </div>
   </div>
@@ -44,7 +44,7 @@
 <table id="lp-sp-table" class="table responsive" width="100%">
     <thead>
     <tr>
-        <th>No</th>
+        {{-- <th>No</th> --}}
         <th>Nama SP</th>
         <th>Qty</th>
         <th>Harga Satuan</th>
@@ -60,7 +60,7 @@
     </thead>
     <tfoot>
       <tr>
-        <td></td>
+        {{-- <td></td> --}}
         <td><b>Grand Total</b></td>
         <td></td>
         <td><input type="text" name="qty" id="qty" class="form-control" value="" readonly></td>
@@ -110,8 +110,10 @@
                     @else
                       <input class="datepicker col-md-7 col-xs-12" id="tgl" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
                     @endif
-                    Nama Canvaser : &nbsp;
-                      <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('id_sales')}}">
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" style="padding-left:0px">
+                      Nama Canvaser : &nbsp;
+                      <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('id_sales')}}" value="{{session('id_sales')}}">
                             <option value="" disabled>Pilih Nama Canvaser</option>
                             @isset($salesarray)
                                 @foreach ($salesarray as $data)
@@ -120,6 +122,7 @@
                             @endisset
                       </select>
                     </div>
+                     
                   </div>
 
                   <div class="ln_solid"></div>
@@ -150,33 +153,37 @@
 <script>
   $('.datepicker').datepicker({
   });
+  // $(".chosen-select").chosen();
+  // $("#sales").val("{{session('id_sales')}}");
+  // $("#sales").trigger("chosen:updated");
 </script>
 <script>
   $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
-});
+  });
     $(function () {
         $tgl = $('#tgl').val();
+        $sales = $('#sales').val();
         if($tgl==""){
           $tgl='null';
         }else{
           console.log('No');
         }
+        console.log($sales);
+        if($sales==""){
+          $sales='null';
+        }else{
+          console.log($sales);
+        }
         var t = $('#lp-sp-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: `/laporan-penjualan/sp-cvs/${$tgl}`,
-            "columnDefs": [ {
-            "searchable": false,
-            "orderable": false,
-            "targets": 0
-                } ],
-            "order": [[ 1, 'asc' ]],
+            ajax: `/laporan-penjualan/sp-cvs/${$tgl}/${$sales}`,
             columnDefs: [
                 {
-                    targets:1,
+                    targets:0,
                     render: function ( data, type, row, meta ) {
                         if(type === 'display'){
                             data = `<a class="link-post" href="/penjualan/laporan-penjualan/LPsp-piutang/${data}">` + data + '</a>';
@@ -186,11 +193,11 @@
                 }
             ],
             columns: [
-                {data: 'index'},
+                // {data: 'index'},
                 {data: 'nama_produk'},
-                {data: 'index'},
-                {data: 'index'},
-                {data: 'index'},
+                {data: 'jumlah_sp'},
+                {data: 'harga_satuan'},
+                {data: 'harga_total'},
                 {data: 'index'},
                 {data: 'index'},
                 {data: 'index'},
@@ -204,16 +211,11 @@
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
         });
-        t.on( 'order.dt search.dt', function () {
-        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-            cell.innerHTML = i+1;
-          } );
-        } ).draw();
-        $.post(`/get_laporan_sp/${$tgl}`, function(response){
+        $.post(`/get_laporan_sp_cvs/${$tgl}/${$sales}`, function(response){
             if(response.success)
             {
               console.log('Success..');
-              $('#qty').val(response.qty.toLocaleString('id-ID'));
+              // $('#qty').val(response.qty.toLocaleString('id-ID'));
               $('#total').val(response.total.toLocaleString('id-ID'));
               $('#cash').val(response.cash.toLocaleString('id-ID'));
               $('#bca_pusat').val(response.bca_pusat.toLocaleString('id-ID'));
@@ -228,12 +230,13 @@
         }, 'json');
         $('#save').on('click',function(event) {
           $tgl = $('#tgl').val();
-          t.ajax.url(`/laporan-penjualan/sp/${$tgl}`).load();
-          $.post(`/get_laporan_sp/${$tgl}`, function(response){
+          $sales = $('#sales').val();
+          t.ajax.url(`/laporan-penjualan/sp-cvs/${$tgl}/${$sales}`).load();
+          $.post(`/get_laporan_sp_cvs/${$tgl}/${$sales}`, function(response){
             if(response.success)
             {
               console.log('Success..');
-              $('#qty').val(response.qty.toLocaleString('id-ID'));
+              // $('#qty').val(response.qty.toLocaleString('id-ID'));
               $('#total').val(response.total.toLocaleString('id-ID'));
               $('#cash').val(response.cash.toLocaleString('id-ID'));
               $('#bca_pusat').val(response.bca_pusat.toLocaleString('id-ID'));

@@ -66,7 +66,7 @@ class LaporanCvsSpController extends Controller
         return view('penjualan.laporan-penjualan.LPsp-2',['sales'=>$dataSales,'total_penjualan'=>$total_penjualan,'total_piutang'=>$total_piutang,]);
     }
 
-    public function getData($tgl){
+    public function getData($tgl,$sales){
         if ($tgl!='null') {
             session(['tgl_laporan_sp'=>$tgl]);
             $tgl = Carbon::parse($tgl);
@@ -93,6 +93,7 @@ class LaporanCvsSpController extends Controller
                             $join->on('penjualan_sps.id_penjualan_sp', '=', 'total_nominal.id_penjualan_sp');
                         })
                         ->where('tanggal_penjualan_sp',$tgl)
+                        ->where('penjualan_sps.id_sales',$sales)
                         ->groupBy('master_saless.nm_sales')->get();
                         $qty=0;
                         $total=0;
@@ -132,7 +133,7 @@ class LaporanCvsSpController extends Controller
      * @param \Yajra\Datatables\Datatables $datatables
      * @return \Illuminate\Http\JsonResponse
      */
-    public function data(Datatables $datatables,$tgl_penjualan)
+    public function data(Datatables $datatables,$tgl_penjualan,$sales)
     {
         if ($tgl_penjualan=='null') {
             $tgl = $tgl_penjualan;
@@ -140,14 +141,25 @@ class LaporanCvsSpController extends Controller
             $tgl = Carbon::parse($tgl_penjualan);
             $tgl = $tgl->format('Y-m-d');
         }
-        return $datatables->eloquent(produk::select('nama_produk'))
-                        ->addColumn('index', function ($penjualanDompul) {
+        return $datatables->eloquent(produk::select('nama_produk','jumlah_sp','harga_satuan','harga_total')
+                        ->join('detail_penjualan_sps','detail_penjualan_sps.id_produk','=','master_produks.kode_produk')
+                        ->join('penjualan_sps','penjualan_sps.id_penjualan_sp','=','detail_penjualan_sps.id_penjualan_sp')
+                        ->where('penjualan_sps.id_sales',$sales)
+                        )
+                        
+                        ->addColumn('index', function ($penjualanSP) {
                               return 
                               '';
                             })
-                        //     ->addColumn('total_penjualan', function ($penjualanDompul) {
-                        //       return number_format($penjualanDompul->total_penjualan,0,",",".");
-                        //     })
+                            ->addColumn('jumlah_sp', function ($penjualanSP) {
+                              return number_format($penjualanSP->jumlah_sp,0,",",".");
+                            })
+                            ->addColumn('harga_satuan', function ($penjualanSP) {
+                              return number_format($penjualanSP->harga_satuan,0,",",".");
+                            })
+                            ->addColumn('harga_total', function ($penjualanSP) {
+                              return number_format($penjualanSP->harga_total,0,",",".");
+                            })
                         //     ->addColumn('cash', function ($penjualanDompul) {
                         //       return number_format($penjualanDompul->cash,0,",",".");
                         //     })

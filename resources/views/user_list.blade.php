@@ -29,7 +29,7 @@
             processing: true,
             ajax: '/list/users-data',
             columns: [
-                {data: 'id'},
+                {data: 'id_user'},
                 {data: 'name'},
                 {data: 'email'},
                 {data: 'created_at'},
