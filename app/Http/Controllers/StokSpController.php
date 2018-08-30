@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\StokSp;
 use App\Sales;
+use App\produk;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use Yajra\Datatables\Datatables;
@@ -51,8 +52,13 @@ FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi < '{$tgl_awal}' AND awal.i
                             $join->on('kartu_stok_sps.id_produk','=','master_produks.kode_produk');
                         })
                         ->whereBetween('tanggal_transaksi',[$tgl_awal,$tgl_akhir])
-                        ->groupBy('nama','nama_produk')->get();
-        return $datatables->of($stokSP)
+                        ->groupBy('nama','nama_produk');
+        $produk = produk::select('kode_produk','stok_awal','stok_masuk','stok_keluar','jumlah_stok')
+        ->leftJoinSub($stokSP, 'total_nominal', function($join) {
+                            $join->on('master_produks.kode_produk', '=', 'total_nominal.nama_produk');
+                        })
+        ->where('status_produk',1)->groupBy('kode_produk','stok_awal','stok_masuk','stok_keluar','jumlah_stok')->get();
+        return $datatables->of($produk)
                         ->addColumn('indeks', function ($dataStok) {
                               return '';
                             })
