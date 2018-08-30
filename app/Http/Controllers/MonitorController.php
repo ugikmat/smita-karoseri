@@ -40,7 +40,11 @@ class MonitorController extends Controller
         if(!empty($tgl)){
             $tgl = Carbon::parse($tgl);
             $tgl = $tgl->format('Y-m-d');
-            $monitorUpload = UploadDompul::selectRaw("nama_canvasser AS nama,
+        }else{
+            $tgl = Carbon::now('Asia/Jakarta');
+            $tgl = $tgl->format('Y-m-d');
+        }
+        $monitorUpload = UploadDompul::selectRaw("nama_canvasser AS nama,
     (SELECT sum(qty_program) FROM upload_dompuls WHERE produk = 'DP5' and nama_canvasser = nama) AS qty_program5k,
     (SELECT sum(qty) FROM upload_dompuls WHERE produk = 'DP5' and nama_canvasser = nama) AS qty_non_program5k,
     (SELECT sum(qty_program) FROM upload_dompuls WHERE produk = 'DP10' and nama_canvasser = nama) AS qty_program10k,
@@ -49,12 +53,6 @@ class MonitorController extends Controller
     (SELECT sum(qty) AS rupiah FROM upload_dompuls WHERE produk = 'DOMPUL' and nama_canvasser = nama) AS non_program_rupiah")
                             ->where('tanggal_transfer',$tgl)
                             ->groupBy('nama')->get();
-            $totalQtyProgram5k=0;
-            $totalQtyNonProgram5k=0;
-            $totalQtyProgram10k=0;
-            $totalQtyNonProgram10k=0;
-            $totalQtyProgramRupiah=0;
-            $totalQtyNonProgramRupiah=0;
             foreach ($monitorUpload as $key => $value) {
                 $totalQtyProgram5k+=$value->qty_program5k;
             }
@@ -76,7 +74,6 @@ class MonitorController extends Controller
             $total_5k=$totalQtyNonProgram5k+$totalQtyProgram5k;
             $total_10k=$totalQtyProgram10k+$totalQtyNonProgram10k;
             $total_rupiah=$totalQtyProgramRupiah+$totalQtyNonProgramRupiah;
-        }
         
         return view('penjualan.monitoring.mntr-upload',[
         'totalQtyProgram5k'=>number_format($totalQtyProgram5k,0,",","."),

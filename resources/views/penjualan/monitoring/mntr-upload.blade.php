@@ -27,7 +27,11 @@
         Tanggal Penjualan
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        @if(Session::has('tgl_penjualan'))
         : {{session('tgl_penjualan')}}
+        @else
+        : {{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}
+        @endif
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -205,7 +209,11 @@
                 {data: 'qty_non_program10k'},
                 {data: 'program_rupiah'},
                 {data: 'non_program_rupiah'}
-            ]
+            ],
+            dom: 'lBrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         });
         t.on( 'order.dt search.dt', function () {
         t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
