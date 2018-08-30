@@ -140,12 +140,16 @@
             ajax: `/stok-dompul/data/${$tgl_awal}/${$tgl_akhir}`,
             columns: [
                 // {data: 'indeks'},
-                {data: 'nama'},
+                {data: 'produk'},
                 {data: 'stok_awal'},
                 {data: 'stok_masuk'},
                 {data: 'stok_keluar'},
                 {data: 'jumlah_stok'}
-            ]
+            ],
+            dom: 'lBrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         });
         $('#save').on('click',function(event) {
           $tgl_awal =  $('#tgl_awal').val();

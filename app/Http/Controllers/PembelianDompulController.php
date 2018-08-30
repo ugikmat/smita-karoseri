@@ -13,6 +13,7 @@ use App\PenjualanDompul;
 use App\DetailPenjualanDompul;
 use App\StokDompul;
 use App\Supplier;
+use App\Lokasi;
 use App\Dompul;
 use App\PembelianDompul;
 use App\DetailPembelianDompul;
@@ -41,10 +42,11 @@ class PembelianDompulController extends Controller
     public function index()
     {
         $saless = Sales::where('status','1')->get();
+        $lokasis = Lokasi::where('status_lokasi','1')->get();
         $suppliers = Supplier::where('status_supplier','Aktif')->get();
         $hargaDompuls = HargaDompul::where('status_harga_dompul','Aktif')->get();
         $dompuls = UploadDompul::select('produk')->where('status_active',1)->distinct()->get();
-        return view('pembelian.dompul.pembelian-dompul',['saless'=>$saless,'dompuls'=>$dompuls,'hargaDompuls'=>$hargaDompuls,'suppliers'=>$suppliers]);
+        return view('pembelian.dompul.pembelian-dompul',['saless'=>$saless,'dompuls'=>$dompuls,'hargaDompuls'=>$hargaDompuls,'suppliers'=>$suppliers,'lokasis'=>$lokasis]);
     }
     public function getHarga($tipe,$kode){
         $hargaDompuls = HargaDompul::select('harga_dompul','id_harga_dompul')->where('status_harga_dompul','Aktif')->where('nama_harga_dompul',$kode)->where('tipe_harga_dompul',$tipe)->first();
@@ -125,16 +127,17 @@ class PembelianDompulController extends Controller
         }
         $total=number_format($total,3,",",".");
         session(['total_harga_dompul' => $total]);
-        $sales = Sales::where('id_sales',$request->get('sales'))->first();
+        // $sales = Sales::where('id_sales',$request->get('sales'))->first();
+        $lokasi = Lokasi::where('id_lokasi',$request->get('lokasi'))->first();
         $supplier = Supplier::where('id_supplier',$pembelianDompul->id_supplier)->first();
-        session(['id_sales'=>$request->get('sales'),'id_supplier'=>$pembelianDompul->id_supplier,'bank'=>$request->get('bank')]);
+        session(['id_lokasi'=>$request->get('lokasi'),'id_supplier'=>$pembelianDompul->id_supplier,'bank'=>$request->get('bank')]);
         return view('pembelian.dompul.pembelian-dompul-2',
         [
             'pembelianDompul'=>$pembelianDompul,
             'tgl'=>$tgl,
             'bank'=>$bank,
             'tunai'=>$total,
-            'sales'=>$sales,
+            'lokasi'=>$lokasi,
             'supplier'=>$supplier,
             'total_pembayaran'=>$total_pembayaran,
             'selisih'=>$selisih
@@ -159,7 +162,7 @@ class PembelianDompulController extends Controller
         $PembelianDompul->tanggal_pembelian_dompul=$data->tanggal_pembelian_dompul;
         $PembelianDompul->tanggal_input=Carbon::now('Asia/Jakarta')->toDateString();
         $PembelianDompul->id_user=Auth::user()->id_user;
-        $PembelianDompul->id_lokasi=Auth::user()->id_lokasi;
+        $PembelianDompul->id_lokasi=$request->get('id_lokasi');
         $PembelianDompul->save();
 
         foreach ($dataDetail as $key => $value) {
@@ -175,7 +178,7 @@ class PembelianDompulController extends Controller
                 $detailPembelianDompul->save();
             $stokDompul = new StokDompul();
             $stokDompul->id_produk= $detailPembelianDompul->produk;
-            $stokDompul->id_sales= $request->get('id_sales');
+            // $stokDompul->id_sales= $request->get('id_sales');
             $stokDompul->id_lokasi= $PembelianDompul->id_lokasi;
             $stokDompul->tanggal_transaksi= $PembelianDompul->tanggal_pembelian_dompul;
             $stokDompul->nomor_referensi= $PembelianDompul->id_pembelian_dompul;

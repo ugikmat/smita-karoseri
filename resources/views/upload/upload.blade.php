@@ -133,6 +133,7 @@
       <th>Qty</th>
       <th>Aktif</th>
       <th>Action</th>
+      
     </tr>
   </thead>
   <tfoot>
@@ -499,7 +500,12 @@
           orderable: false,
           searchable: false
         }
+        
       ],
+      dom: 'lBrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
       initComplete: function () {
         this.api().columns().every(function () {
           var column = this;
@@ -579,6 +585,10 @@
           searchable: false
         }
       ],
+      dom: 'lBrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
       initComplete: function () {
         this.api().columns().every(function () {
           var column = this;

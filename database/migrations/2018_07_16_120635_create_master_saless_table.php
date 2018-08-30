@@ -15,7 +15,7 @@ class CreateMasterSalessTable extends Migration
     {
         Schema::create('master_saless', function (Blueprint $table) {
             $table->increments('id_sales');
-            $table->integer('id_lokasi');
+            $table->integer('id_lokasi')->nullable();
             $table->string('nm_sales');
             $table->string('alamat_sales');
             $table->string('no_hp');

@@ -18,9 +18,8 @@
     <thead>
     <tr>
         <th>No Penjualan</th>
-        <th>Sales</th>
-        <th>Hp Kios</th>
-        <th>Nama Kios</th>
+        <th>Supplier</th>
+        <th>Lokasi</th>
         <th>Tanggal Penjualan</th>
         <th>Status Verifikasi</th>
         <th>Action</th>
@@ -138,18 +137,17 @@
 </script>
 <script>
     $(function () {
-        $tgl_penjualan = ($('#tgl').val()=='') ? 'null' : $('#tgl').val();
+        $tgl_pembelian = ($('#tgl').val()=='') ? 'null' : $('#tgl').val();
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: `/pembelian_sp/list/${$tgl_penjualan}`,
+            ajax: `/pembelian_sp/list/${$tgl_pembelian}`,
             columns: [
                 // {data: 'indeks'},
-                {data: 'id_penjualan_dompul'},
-                {data: 'nm_sales'},
-                {data: 'no_hp_kios'},
-                {data: 'nm_cust'},
-                {data: 'tanggal_penjualan_dompul'},
+                {data: 'id_pembelian_sp'},
+                {data: 'nama_supplier'},
+                {data: 'nm_lokasi'},
+                {data: 'tanggal_pembelian_sp'},
                 {data: 'status_verif'},
                 {data: 'action', orderable: false, searchable: false}
             ]
@@ -164,7 +162,8 @@
         $('#deleteModal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget) // Button that triggered the modal
           var id = button.data('id'); // Extract info from data-* attributes
-          $('#id_penjualan').val(id);
+          $('#id_pembelian').val(id);
         });
+    })
 </script>
 @stop

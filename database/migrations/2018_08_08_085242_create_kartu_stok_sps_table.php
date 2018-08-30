@@ -16,7 +16,7 @@ class CreateKartuStokSpsTable extends Migration
         Schema::create('kartu_stok_sps', function (Blueprint $table) {
             $table->increments('id_stok_sp');
             $table->string('id_produk');
-            $table->integer('id_sales');
+            $table->integer('id_sales')->nullable();
             $table->integer('id_lokasi');
             $table->dateTime('tanggal_transaksi');
             $table->string('nomor_referensi', 30);

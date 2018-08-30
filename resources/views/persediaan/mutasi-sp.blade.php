@@ -13,6 +13,11 @@
     text-align: center;
     margin: auto;
     padding: 10%;
+  },
+  td{
+    text-align: center;
+    margin: auto;
+    padding: 10%;
   }
 </style>
 @stop
@@ -96,14 +101,16 @@
             ajax: `/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`,
             columns: [
               // {data: 'indeks'},
-              {data: 'nama_produk'},
+              {data: 'kode_produk'},
               {data: 'stok_awal'},
               {data: 'stok_masuk'},
               {data: 'stok_keluar'},
               {data: 'jumlah_stok'}
             ],
-            dom: 'Bfrtip',
-            buttons: ['csv', 'excel', 'print'],
+            dom: 'lBrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
         });
         $('#save').on('click',function(event) {
           $tgl_akhir = $('#tgl_akhir').val();

@@ -19,11 +19,11 @@ td{
 <form class="invoice-dompul repeater" action="/pembelian/dompul/store" method="post">
   @csrf
 <input type="hidden" name="id" id="id" value="{{$pembelianDompul->id_pembelian_dompul}}">
-<input type="hidden" name="id_sales" id="id" value="{{$sales->id_sales}}">
+<input type="hidden" name="id_lokasi" value="{{$lokasi->id_lokasi}}">
 <div class="container-fluid form-inline">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      Nama Sales&nbsp;: {{$sales->nm_sales}}
+      Nama Lokasi&nbsp;: {{$lokasi->nm_lokasi}}
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       Nama Supplier&nbsp;: {{$supplier->nama_supplier}}
@@ -31,10 +31,10 @@ td{
   </div>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      HP Sales&nbsp;: {{$sales->no_hp}}
+      
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      HP Kios&nbsp;: {{$supplier->telepon_supplier}}
+      HP Supplier&nbsp;: {{$supplier->telepon_supplier}}
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
     Tanggal Pembelian&nbsp;: <input class="datepicker" data-date-format="dd-mm-yyyy" name="tgl_pembelian" id="tgl" value="{{$tgl}}" autocomplete="off" readonly>
