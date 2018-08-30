@@ -183,6 +183,11 @@
           var id = button.data('id'); // Extract info from data-* attributes
           $('#id_penjualan').val(id);
         });
+        $('#verificationModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) // Button that triggered the modal
+          var id = button.data('id'); // Extract info from data-* attributes
+          $('#verificationForm').attr('action',`/invoice_sp/verify/${id}`);
+        });
     });
 </script>
 @stop
