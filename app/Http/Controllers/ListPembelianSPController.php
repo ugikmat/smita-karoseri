@@ -38,62 +38,62 @@ class ListPembelianSPController extends Controller
      * @param \Yajra\Datatables\Datatables $datatables
      * @return \Illuminate\Http\JsonResponse
      */
-    public function data(Datatables $datatables,$tgl_penjualan)
+    public function data(Datatables $datatables,$tgl_pembelian)
     {
-        if ($tgl_penjualan=='null') {
-            $tgl = $tgl_penjualan;
+        if ($tgl_pembelian=='null') {
+            $tgl = $tgl_pembelian;
         }else {
-            session(['sp-list-tgl'=>$tgl_penjualan]);
-            $tgl = Carbon::parse($tgl_penjualan);
+            session(['sp-list-tgl'=>$tgl_pembelian]);
+            $tgl = Carbon::parse($tgl_pembelian);
             $tgl = $tgl->format('Y-m-d');
 
         }
-        return $datatables->eloquent(PembelianProduk::select('id_penjualan_sp',
-        'nm_sales',
-        'master_customers.no_hp',
-        'nm_cust',
-        'tanggal_penjualan_sp',
-        'status_penjualan')
-                        ->join('master_saless','master_saless.id_sales','=','penjualan_sps.id_sales')
-                        ->join('master_customers','master_customers.id_cust','=','penjualan_sps.id_customer')
-                        // ->join('detail_penjualan_dompuls','detail_penjualan_dompuls.id_penjualan_dompul','=','penjualan_dompuls.id_penjualan_dompul')
-                        ->where('tanggal_penjualan_sp',$tgl)
+        return $datatables->eloquent(PembelianProduk::select('id_pembelian_sp',
+        'nama_supplier',
+        'nm_lokasi',
+        'tanggal_pembelian_sp',
+        'status_pembelian')
+                        ->join('master_suppliers','master_suppliers.id_supplier','=','pembelian_sps.id_supplier')
+                        ->join('master_lokasis','master_lokasis.id_lokasi','=','pembelian_sps.id_lokasi')
+                        // ->join('detail_pembelian_dompuls','detail_pembelian_dompuls.id_pembelian_dompul','=','pembelian_dompuls.id_pembelian_dompul')
+                        ->where('tanggal_pembelian_sp',$tgl)
                         ->where('deleted',0))
                         // ->addColumn('indeks', function ($uploadDompul) {
                         //       return '';
                         //     })
-                        ->addColumn('tanggal_penjualan', function ($penjualanSP) {
+                        ->addColumn('tanggal_pembelian', function ($pembelianSP) {
                         
-                            $tgl = Carbon::parse($penjualanSP->tanggal_penjualan_sp);
+                            $tgl = Carbon::parse($pembelianSP->tanggal_pembelian_sp);
                             $tgl = $tgl->format('d/m/Y');
                             return $tgl;
 
                             })
-                        ->addColumn('status_verif', function ($penjualanSP) {
-                              if ($penjualanSP->status_penjualan==0) {
+                        ->addColumn('status_verif', function ($pembelianSP) {
+                              if ($pembelianSP->status_pembelian==0) {
                                   return 'Belum Verifikasi';
                               } else {
                                   return 'Telah Verifikasi';
                               }
 
                             })
-                          ->addColumn('action', function ($penjualanSP) {
-                              if ($penjualanSP->status_penjualan==0) {
-                                  return
-                                    '<a class="btn btn-xs btn-primary"
-                                    href="/penjualan/sp/list-invoice-sp/edit/'.$penjualanSP->id_penjualan_sp.'/'.$penjualanSP->nm_sales.'/'.$penjualanSP->tanggal_penjualan_sp.'/'.$penjualanSP->nm_cust.'">
-                                    <i class="glyphicon glyphicon-edit"></i> Edit
-                                    </a>
-                                    <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$penjualanSP->id_penjualan_sp.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>
-                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanSP->id_penjualan_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
-                              } else {
-                                  return
-                                    '<a class="btn btn-xs btn-primary"
-                                    href="/penjualan/sp/list-invoice-sp/edit/'.$penjualanSP->id_penjualan_sp.'/'.$penjualanSP->nm_sales.'/'.$penjualanSP->tanggal_penjualan_sp.'/'.$penjualanSP->nm_cust.'">
-                                    <i class="glyphicon glyphicon-edit"></i> Lihat
-                                    </a>
-                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanSP->id_penjualan_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
-                              }
+                          ->addColumn('action', function ($pembelianSP) {
+                              return '';
+                            //   if ($pembelianSP->status_pembelian==0) {
+                            //       return
+                            //         '<a class="btn btn-xs btn-primary"
+                            //         href="/pembelian/sp/list-invoice-sp/edit/'.$pembelianSP->id_pembelian_sp.'/'.$pembelianSP->nm_sales.'/'.$pembelianSP->tanggal_pembelian_sp.'/'.$pembelianSP->nm_cust.'">
+                            //         <i class="glyphicon glyphicon-edit"></i> Edit
+                            //         </a>
+                            //         <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$pembelianSP->id_pembelian_sp.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>
+                            //         <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$pembelianSP->id_pembelian_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                            //   } else {
+                            //       return
+                            //         '<a class="btn btn-xs btn-primary"
+                            //         href="/pembelian/sp/list-invoice-sp/edit/'.$pembelianSP->id_pembelian_sp.'/'.$pembelianSP->nm_sales.'/'.$pembelianSP->tanggal_pembelian_sp.'/'.$pembelianSP->nm_cust.'">
+                            //         <i class="glyphicon glyphicon-edit"></i> Lihat
+                            //         </a>
+                            //         <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$pembelianSP->id_pembelian_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                            //   }
 
                             })
                           ->make(true);

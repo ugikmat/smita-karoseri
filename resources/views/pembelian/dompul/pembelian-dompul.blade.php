@@ -25,12 +25,12 @@
       <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_pembelian" name="tgl_pembelian" value="{{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}">
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
-        Nama Canvaser : &nbsp;
-        <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="">
-              <option value="" selected disabled>Pilih Nama Canvaser</option>
-              @isset($saless)
-                  @foreach ($saless as $data)
-                  <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
+        Nama Lokasi : &nbsp;
+        <select id="lokasi" required="required" name="lokasi" class="chosen-select" data-placeholder="">
+              <option value="" selected disabled>Pilih Nama Lokasi</option>
+              @isset($lokasis)
+                  @foreach ($lokasis as $data)
+                  <option value="{{ $data->id_lokasi }}">{{ $data->nm_lokasi }}</option>
                   @endforeach
               @endisset
         </select>

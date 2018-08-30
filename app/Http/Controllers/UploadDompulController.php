@@ -199,8 +199,8 @@ class UploadDompulController extends Controller {
      * @param \Yajra\Datatables\Datatables $datatables
      * @return \Illuminate\Http\JsonResponse
      */
-    public function uploadData(Datatables $datatables) {
-        return $datatables->eloquent(UploadDompul::select(DB::raw('tanggal_transfer,tanggal_upload, IF(status_active=1, "Aktif", "Tidak Aktif") as status_active, COUNT(no_faktur) as jumlah_transaksi, name,nm_lokasi'))
+    public function uploadData(PrintOutTableDataTable $datatables) {
+        return $datatables->dataTable(UploadDompul::select(DB::raw('tanggal_transfer,tanggal_upload, IF(status_active=1, "Aktif", "Tidak Aktif") as status_active, COUNT(no_faktur) as jumlah_transaksi, name,nm_lokasi'))
         ->groupBy('tanggal_transfer','tanggal_upload','status_active','name','nm_lokasi')
         ->join('users','users.id_user','=','upload_dompuls.id_user')
         ->join('master_lokasis','master_lokasis.id_lokasi','=','upload_dompuls.id_lokasi'))
@@ -219,8 +219,8 @@ class UploadDompulController extends Controller {
      * @param \Yajra\Datatables\Datatables $datatables
      * @return \Illuminate\Http\JsonResponse
      */
-    public function data(Datatables $datatables, $transfer, $upload) {
-        return $datatables->eloquent(UploadDompul::where('tanggal_transfer',$transfer)
+    public function data(PrintOutTableDataTable $datatables, $transfer, $upload) {
+        return $datatables->dataTable(UploadDompul::where('tanggal_transfer',$transfer)
                                                 ->where('tanggal_upload',$upload)) 
        ->addColumn('action', function ($uploadDompul) {
                 return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-edit"></i> Edit</a>

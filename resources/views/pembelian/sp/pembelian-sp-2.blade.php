@@ -19,11 +19,11 @@ td{
 <form class="invoice-sp repeater" action="/pembelian/sp/store" method="post">
   @csrf
 <input type="hidden" name="id" id="id" value="{{$pembelianSp->id_temp_pembelian_sp}}">
-<input type="hidden" name="id_sales" id="id" value="{{$sales->id_sales}}">
+<input type="hidden" name="id_lokasi" value="{{$lokasi->id_lokasi}}">
 <div class="container-fluid form-inline">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-    Nama Sales&nbsp;: {{$sales->nm_sales}}
+    Nama Lokasi&nbsp;: {{$lokasi->nm_lokasi}}
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       Nama Supplier&nbsp;: {{$supplier->nama_supplier}}
@@ -31,7 +31,7 @@ td{
   </div>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      HP Sales&nbsp;: {{$sales->no_hp}}
+      
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       HP Supplier&nbsp;: {{$supplier->telepon_supplier}}

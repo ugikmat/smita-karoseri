@@ -501,7 +501,7 @@
         }
         
       ],
-      dom: 'Bfrtip',
+      dom: 'lBrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
@@ -584,7 +584,7 @@
           searchable: false
         }
       ],
-      dom: 'Bfrtip',
+      dom: 'lBrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],

@@ -16,11 +16,7 @@ class PrintOutTableDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
-            ->addColumn('print', 'printouttable.action')
-            ->parameters([
-            'dom' => 'Bfrtip',
-            'buttons' => ['csv', 'excel', 'pdf', 'print', 'reset', 'reload'],
-        ]);
+            ->addColumn('print', 'printouttable.action');
     }
 
     public function ajax()
@@ -38,7 +34,7 @@ class PrintOutTableDataTable extends DataTable
      */
     public function query(UploadDompul $model)
     {
-        $users = UploadDompul::select();
+        $users = UploadDompul::all();
 
         return $this->applyScopes($users);
         // return $model->newQuery()->select('id', 'add-your-columns-here', 'created_at', 'updated_at');

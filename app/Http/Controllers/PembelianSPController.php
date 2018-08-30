@@ -16,6 +16,7 @@ use App\UploadDompul;
 use App\PenjualanProduk;
 use App\PembelianProduk;
 use App\DetailPenjualanProduk;
+use App\Lokasi;
 use App\HargaProduk;
 use App\PenjualanDompul;
 use App\StokSp;
@@ -47,8 +48,9 @@ class PembelianSPController extends Controller
         $produks = produk::where('status_produk','1')->get();
         $suppliers = Supplier::all();
         $saless = Sales::where('status','1')->get();
+        $lokasis = Lokasi::where('status_lokasi','1')->get();
         $jumlahProduk = $produks->count();
-        return view('pembelian.sp.pembelian-sp',['saless'=>$saless,'produks'=>$produks,'hargaProduks'=>$hargaProduks,'jumlah'=>$jumlahProduk,'suppliers'=>$suppliers]);
+        return view('pembelian.sp.pembelian-sp',['lokasis'=>$lokasis,'saless'=>$saless,'produks'=>$produks,'hargaProduks'=>$hargaProduks,'jumlah'=>$jumlahProduk,'suppliers'=>$suppliers]);
     }
 
     public function verify(Request $request){
@@ -128,8 +130,9 @@ class PembelianSPController extends Controller
         $total=number_format($total,0,",",".");
         session(['total_harga_sp' => $total]);
         $sales = Sales::where('id_sales',$request->get('sales'))->first();
+        $lokasi = Lokasi::where('id_lokasi',$request->get('lokasi'))->first();
         $supplier = Supplier::where('id_supplier',$pembelianSp->id_supplier)->first();
-        session(['id_sales'=>$request->get('sales'),'id_supplier'=>$pembelianSp->id_supplier,'bank-sp'=>$request->get('bank-sp')]);
+        session(['id_lokasi'=>$request->get('lokasi'),'id_supplier'=>$pembelianSp->id_supplier,'bank-sp'=>$request->get('bank-sp')]);
 
         // $tunai=number_format($tunai,0,",",".");
         return view('pembelian.sp.pembelian-sp-2',
@@ -138,6 +141,7 @@ class PembelianSPController extends Controller
             'tgl'=>$tgl,
             'bank'=>$bank,
             'tunai'=>$total,
+            'lokasi'=>$lokasi,
             'sales'=>$sales,
             'supplier'=>$supplier,
             'total_pembayaran'=>$total_pembayaran,
@@ -163,7 +167,7 @@ class PembelianSPController extends Controller
         $pembelianSp->tanggal_pembelian_sp=$data->tanggal_pembelian_sp;
         $pembelianSp->tanggal_input=Carbon::now('Asia/Jakarta')->toDateString();
         $pembelianSp->id_user=Auth::user()->id_user;
-        $pembelianSp->id_lokasi=Auth::user()->id_lokasi;
+        $pembelianSp->id_lokasi=$request->get('id_lokasi');
         $pembelianSp->save();
 
         foreach ($dataDetail as $key => $value) {
@@ -179,7 +183,7 @@ class PembelianSPController extends Controller
                 $detailPenjualanSp->save();
             $stokSP = new StokSp();
             $stokSP->id_produk= $detailPenjualanSp->id_produk;
-            $stokSP->id_sales= $request->get('id_sales');
+            // $stokSP->id_sales= $request->get('id_sales');
             $stokSP->id_lokasi= $pembelianSp->id_lokasi;
             $stokSP->tanggal_transaksi= $pembelianSp->tanggal_pembelian_sp;
             $stokSP->nomor_referensi= $pembelianSp->id_pembelian_sp;
