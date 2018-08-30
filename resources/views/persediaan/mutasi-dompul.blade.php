@@ -12,7 +12,9 @@
   th{
     text-align: center;
     margin: auto;
-    padding: 10%;
+  }
+  td{
+    text-align: center;
   }
 </style>
 @stop
@@ -35,7 +37,7 @@
 </div>
 <br><br>
 
-<table id="mutasi-dompul-table" class="table responsive" width="100%">
+<table id="mutasi-dompul-table" class="table responsive table-bordered" width="100%">
     <thead>
     <tr>
         <th>Nama Produk</th>
