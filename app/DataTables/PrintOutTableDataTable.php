@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\User;
+use App\UploadDompul;
 use Yajra\DataTables\Services\DataTable;
 
 class PrintOutTableDataTable extends DataTable
@@ -16,18 +16,32 @@ class PrintOutTableDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
-            ->addColumn('action', 'printouttable.action');
+            ->addColumn('print', 'printouttable.action')
+            ->parameters([
+            'dom' => 'Bfrtip',
+            'buttons' => ['csv', 'excel', 'pdf', 'print', 'reset', 'reload'],
+        ]);
+    }
+
+    public function ajax()
+    {
+        return $this->datatables
+            ->eloquent($this->query())
+            ->make(true);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\User $model
+     * @param \App\UploadDompul $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model)
+    public function query(UploadDompul $model)
     {
-        return $model->newQuery()->select('id', 'add-your-columns-here', 'created_at', 'updated_at');
+        $users = UploadDompul::select();
+
+        return $this->applyScopes($users);
+        // return $model->newQuery()->select('id', 'add-your-columns-here', 'created_at', 'updated_at');
     }
 
     /**
@@ -41,7 +55,10 @@ class PrintOutTableDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->addAction(['width' => '80px'])
-                    ->parameters($this->getBuilderParameters());
+                    ->parameters([
+            'dom' => 'Bfrtip',
+            'buttons' => ['csv', 'excel', 'pdf', 'print', 'reset', 'reload'],
+        ]);
     }
 
     /**

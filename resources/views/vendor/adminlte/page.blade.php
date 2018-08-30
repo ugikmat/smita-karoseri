@@ -189,5 +189,3 @@
   <script src="assets/dist/js/demo.js"></script>
    --}}
 
-   <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
-   <script src="{{ asset('vendor/unisharp/laravel-ckeditor/adapters/jquery.js')}}"></script>

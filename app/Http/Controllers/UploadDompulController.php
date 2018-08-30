@@ -5,6 +5,7 @@ use App\UploadDompul;
 use App\Dompul;
 use App\Sales;
 use App\Customer;
+use App\DataTables\PrintOutTableDataTable;
 use App\HargaDompul;
 use DB;
 use Excel;
