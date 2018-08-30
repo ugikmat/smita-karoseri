@@ -14,6 +14,9 @@ use App\DetailPenjualanDompul;
 use App\StokDompul;
 use App\Supplier;
 use App\Dompul;
+use App\PembelianDompul;
+use App\DetailPembelianDompul;
+use App\DetailPembayaranPembelianDompul;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
@@ -89,13 +92,13 @@ class PembelianDompulController extends Controller
             $table->string('produk');
             $table->integer('jumlah');
             $table->string('tipe_harga');
-            $table->integer('harga_satuan');
-            $table->bigInteger('harga_total');
+            $table->float('harga_satuan');
+            $table->float('harga_total');
             $table->string('keterangan_detail_pd');
             $table->tinyInteger('status_detail_pd')->default(1);
         });
 
-        for ($i=0; $i <$dompuls ; $i++) {
+        for ($i=1; $i <=$dompuls ; $i++) {
             if (!empty($request->get("jumlah{$i}"))) {
                 DB::table('temp_detail_pembelian_dompuls')->insert(['id_pembelian_dompul'=>$id,
                 'id_supplier'=>$request->get('supplier'),
@@ -136,5 +139,138 @@ class PembelianDompulController extends Controller
             'total_pembayaran'=>$total_pembayaran,
             'selisih'=>$selisih
             ]);
+    }
+
+
+    public function store(Request $request){
+        $tgl = Carbon::parse($request->get('tgl_pembelian'));
+        $tgl = $tgl->format('Y-m-d');
+
+        $id = $request->get('id');
+        $tunai = $request->get('tunai');
+        $bank = $request->get('bank');
+        $total = $request->get('total');
+
+        $data = DB::table('temp_pembelian_dompuls')->where('id_pembelian_dompul',$id)->first();
+        $dataDetail = DB::table('temp_detail_pembelian_dompuls')->where('id_pembelian_dompul',$id)->get();
+        $PembelianDompul = new PembelianDompul();
+        $PembelianDompul->id_supplier=$data->id_supplier;
+        $PembelianDompul->grand_total=str_replace(',', '.',str_replace('.', '', $total));
+        $PembelianDompul->tanggal_pembelian_dompul=$data->tanggal_pembelian_dompul;
+        $PembelianDompul->tanggal_input=Carbon::now('Asia/Jakarta')->toDateString();
+        $PembelianDompul->id_user=Auth::user()->id_user;
+        $PembelianDompul->id_lokasi=Auth::user()->id_lokasi;
+        $PembelianDompul->save();
+
+        foreach ($dataDetail as $key => $value) {
+            $detailPembelianDompul = new DetailPembelianDompul();
+                $detailPembelianDompul->id_pembelian_dompul = $PembelianDompul->id_pembelian_dompul;
+                $detailPembelianDompul->id_supplier = $value->id_supplier;
+                $detailPembelianDompul->produk= $value->produk;
+                $detailPembelianDompul->jumlah= str_replace('.', '', $value->jumlah);
+                $detailPembelianDompul->tipe_harga= $value->tipe_harga;
+                $detailPembelianDompul->harga_satuan= str_replace(',', '.',str_replace('.', '', $value->harga_satuan));
+                $detailPembelianDompul->harga_total= str_replace(',', '.',str_replace('.', '', $value->harga_total));
+                $detailPembelianDompul->keterangan_detail_pd= $value->keterangan_detail_pd;
+                $detailPembelianDompul->save();
+            $stokDompul = new StokDompul();
+            $stokDompul->id_produk= $detailPembelianDompul->produk;
+            $stokDompul->id_sales= $request->get('id_sales');
+            $stokDompul->id_lokasi= $PembelianDompul->id_lokasi;
+            $stokDompul->tanggal_transaksi= $PembelianDompul->tanggal_pembelian_dompul;
+            $stokDompul->nomor_referensi= $PembelianDompul->id_pembelian_dompul;
+            $stokDompul->jenis_transaksi= 'PEMBELIAN';
+            $stokDompul->keterangan= "{$detailPembelianDompul->tipe_harga}-";
+            $stokDompul->masuk= $detailPembelianDompul->jumlah;
+            $stokDompul->keluar= 0;
+            $stokDompul->tanggal_input= $PembelianDompul->tanggal_input;
+            $stokDompul->id_user= $PembelianDompul->id_user;
+            $stokDompul->save();
+        }
+
+        if (!empty($bank)) {
+            foreach ($bank as $key => $value) {
+            $detailPembayaranDompul = new DetailPembayaranPembelianDompul();
+            $detailPembayaranDompul->id_pembelian_dompul =$PembelianDompul->id_pembelian_dompul;
+            $detailPembayaranDompul->metode_pembayaran = $value['bank'];
+            
+            $detailPembayaranDompul->nominal=str_replace(',', '.',str_replace('.', '', $value['trf']));
+            $detailPembayaranDompul->catatan = $value['catatan'];
+            switch ($value['bank']) {
+                case 'BCA Pusat':
+                    $detailPembayaranDompul->bca_pusat=$value['trf'];
+                    break;
+                case 'BCA Cabang':
+                    $detailPembayaranDompul->bca_cabang=$value['trf'];
+                    break;
+                case 'Mandiri':
+                    $detailPembayaranDompul->mandiri=$value['trf'];
+                    break;
+                case 'BNI':
+                    $detailPembayaranDompul->bni=$value['trf'];
+                    break;
+                case 'BRI':
+                    $detailPembayaranDompul->bri=$value['trf'];
+                    break;
+                case 'Cash':
+                    $detailPembayaranDompul->cash=$value['trf'];
+                    break;
+                default:
+                    break;
+            }
+            $detailPembayaranDompul->save();
+        }
+        $request->session()->forget('bank');
+        }
+        Schema::dropIfExists('temp_pembelian_dompuls');
+        Schema::dropIfExists('temp_detail_pembelian_dompuls');
+
+        return redirect('pembelian/dompul/pembelian-dompul');
+    }
+
+    /**
+     * Process dataTable ajax response.
+     *
+     * @param \Yajra\Datatables\Datatables $datatables
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function data(Datatables $datatables,$id)
+    {
+       $detailPenjualan = DB::table('temp_detail_pembelian_dompuls')->select(DB::raw('
+        harga_satuan,
+        produk,
+        id_pembelian_dompul,
+        tipe_harga,
+        jumlah,
+        harga_total'))->where('id_pembelian_dompul',$id)->get();
+        $total = 0;
+        foreach ($detailPenjualan as $key => $value) {
+            $total+=$value->harga_total;
+        }
+        $total=number_format($total,0,",",".");
+        session(['total_harga_sp' => $total]);
+        return $datatables->of($detailPenjualan)
+                        ->addColumn('indeks', function ($detailPenjualanDompul) {
+                              return '';
+                            })
+                            ->addColumn('harga', function ($detailPenjualanDompul) {
+                              return number_format($detailPenjualanDompul->harga_satuan,3,",",".");
+                            })
+                            ->addColumn('jumlah', function ($detailPenjualanDompul) {
+                              return number_format($detailPenjualanDompul->jumlah,0,",",".");
+                            })
+                            ->addColumn('total_harga', function ($detailPenjualanDompul) {
+                              return number_format(($detailPenjualanDompul->jumlah)*$detailPenjualanDompul->harga_satuan,3,",",".");
+                            })
+                            ->addColumn('action', function ($detailPenjualanDompul) {
+                                $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$detailPenjualanDompul->produk)->get();
+                                // $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$uploadDompul->produk)->get();
+                              return
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$detailPenjualanDompul->id_pembelian_dompul.'" data-tipe='.$tipe.'><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                            })
+                            // ->addColumn('input', function ($uploadDompul) {
+                            //   return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                            // })->rawColumns(['input'])
+                          ->make(true);
     }
 }
