@@ -299,7 +299,7 @@ return array(
             |--------------------------------------------------------------------------
             | Supported: DomPDF, tcPDF, mPDF
             */
-            'driver'  => 'snappy',
+            'driver'  => 'laravel-snappy',
 
             /*
             |--------------------------------------------------------------------------
@@ -339,7 +339,7 @@ return array(
                 | snappy settings
                 |--------------------------------------------------------------------------
                 */
-                'snappy'   => [
+                'laravel-snappy'   => [
                     'path' => base_path('vendor/barryvdh/laravel-snappy/')
                 ],
             ]
