@@ -180,7 +180,7 @@ return [
                         'icon'  => 'briefcase',
                       ],
                       [
-                        'text'  => 'Penjualan CVS Starter Pack',
+                        'text'  => 'Penjualan CVS SP',
                         'url'   => '/penjualan/laporan-penjualan/Lbeli-cvs-sp',
                         'icon'  => 'briefcase',
                       ],
