@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\StokDompul;
+use App\UploadDompul;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use Yajra\Datatables\Datatables;
@@ -38,7 +39,6 @@ class StokDompulController extends Controller
         
         $tgl_akhir = Carbon::parse($tgl_akhir);
         $tgl_akhir = $tgl_akhir->format('Y-m-d');  
-
         $stokDompul = DB::table('kartu_stok_dompuls')->select(DB::raw("kartu_stok_dompuls.id_produk as nama,
         (SELECT sum(awal.masuk)-sum(awal.keluar)
 FROM kartu_stok_dompuls awal WHERE awal.tanggal_transaksi < '{$tgl_awal}' AND awal.id_produk=nama) AS stok_awal,
@@ -49,8 +49,18 @@ FROM kartu_stok_dompuls awal WHERE awal.tanggal_transaksi < '{$tgl_awal}' AND aw
                         //     $join->on('kartu_stok_dompuls.id_produk','=','upload_dompuls.produk');
                         // })
                         ->whereBetween('tanggal_transaksi',[$tgl_awal,$tgl_akhir])
-                        ->groupBy('nama')->get();
-        return $datatables->of($stokDompul)
+                        ->groupBy('nama');
+
+        $dompuls = UploadDompul::select('produk','stok_awal','stok_masuk','stok_keluar','jumlah_stok')
+        ->leftJoinSub($stokDompul, 'total_nominal', function($join) {
+                            $join->on('upload_dompuls.produk', '=', 'total_nominal.nama');
+                        })
+                        // ->joinSub($stokDompul, 'total_nominal', function($join) {
+                        //     $join->on('upload_dompuls.produk', '=', 'total_nominal.nama');
+                        // })
+                        ->where('status_active',1)->groupBy('produk','stok_awal','stok_masuk','stok_keluar','jumlah_stok')->get();
+        
+        return $datatables->of($dompuls)
                         ->addColumn('indeks', function ($dataStok) {
                               return '';
                             })

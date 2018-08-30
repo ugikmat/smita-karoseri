@@ -140,7 +140,7 @@
             ajax: `/stok-dompul/data/${$tgl_awal}/${$tgl_akhir}`,
             columns: [
                 // {data: 'indeks'},
-                {data: 'nama'},
+                {data: 'produk'},
                 {data: 'stok_awal'},
                 {data: 'stok_masuk'},
                 {data: 'stok_keluar'},

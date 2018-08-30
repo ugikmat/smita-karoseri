@@ -219,22 +219,22 @@ return [
                       ],
                     ],
                   ],
-                  [
-                    'text'  => 'Laporan Pembelian',
-                    'icon'  => 'share',
-                    'submenu' => [
-                      [
-                        'text'  => 'Dompet Pulsa',
-                        'icon'  => 'dollar',
-                        'url'   => '/pembelian/laporan-pembelian/Lbeli-dompul',
-                      ],
-                      [
-                        'text'  => 'Starter Pack',
-                        'icon'  => 'credit-card',
-                        'url'   => '/pembelian/laporan-pembelian/Lbeli-sp',
-                      ],
-                    ],
-                  ],
+                  // [
+                  //   'text'  => 'Laporan Pembelian',
+                  //   'icon'  => 'share',
+                  //   'submenu' => [
+                  //     [
+                  //       'text'  => 'Dompet Pulsa',
+                  //       'icon'  => 'dollar',
+                  //       'url'   => '/pembelian/laporan-pembelian/Lbeli-dompul',
+                  //     ],
+                  //     [
+                  //       'text'  => 'Starter Pack',
+                  //       'icon'  => 'credit-card',
+                  //       'url'   => '/pembelian/laporan-pembelian/Lbeli-sp',
+                  //     ],
+                  //   ],
+                  // ],
 
                 ],
               ],
@@ -252,16 +252,16 @@ return [
                     'icon'  => 'tags',
                     'url'   => '/persediaan/mutasi-sp',
                   ],
-                  [
-                    'text'  => 'kartu Stok Dompul',
-                    'icon'  => 'truck',
-                    'url'   => '/persediaan/mutasi-dompul',
-                  ],
-                  [
-                    'text'  => 'kartu Stok SP',
-                    'icon'  => 'tags',
-                    'url'   => '/persediaan/mutasi-sp',
-                  ],
+                  // [
+                  //   'text'  => 'kartu Stok Dompul',
+                  //   'icon'  => 'truck',
+                  //   'url'   => '/persediaan/mutasi-dompul',
+                  // ],
+                  // [
+                  //   'text'  => 'kartu Stok SP',
+                  //   'icon'  => 'tags',
+                  //   'url'   => '/persediaan/mutasi-sp',
+                  // ],
                 ],
               ],
               [
