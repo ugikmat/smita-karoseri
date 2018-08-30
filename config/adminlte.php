@@ -179,6 +179,11 @@ return [
                         'url'   => '/penjualan/laporan-penjualan/LPsp',
                         'icon'  => 'briefcase',
                       ],
+                      [
+                        'text'  => 'Penjualan CVS Starter Pack',
+                        'url'   => '/penjualan/laporan-penjualan/Lbeli-cvs-sp',
+                        'icon'  => 'briefcase',
+                      ],
                     ],
                   ],
                 ],
