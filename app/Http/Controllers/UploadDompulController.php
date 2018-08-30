@@ -9,6 +9,7 @@ use App\DataTables\PrintOutTableDataTable;
 use App\HargaDompul;
 use DB;
 use Excel;
+use App\StokDompul;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -190,6 +191,24 @@ class UploadDompulController extends Controller {
         uploadDompul::where('tanggal_transfer',$tgl_transfer)
             ->where('tanggal_upload',$tgl_upload)
             ->update(['status_active' => 1]);
+        $dompul = uploadDompul::where('tanggal_transfer',$tgl_transfer)
+            ->where('tanggal_upload',$tgl_upload)->where('status_active',1)->get();
+        foreach ($dompul as $key => $value) {
+            $stokDompul = new StokDompul();
+            $stokDompul->id_produk= $value->produk;
+            // $stokDompul->id_sales= $request->get('id_sales');
+            $stokDompul->id_lokasi= $value->id_lokasi;
+            $stokDompul->tanggal_transaksi= $value->tanggal_transfer;
+            $stokDompul->nomor_referensi= $value->id_upload;
+            $stokDompul->jenis_transaksi= 'PENJUALAN';
+            $stokDompul->keterangan= "{$value->tipe_dompul}-";
+            $stokDompul->masuk= 0;
+            $stokDompul->keluar= $value->qty;
+            $stokDompul->tanggal_input= $value->tanggal_upload;
+            $stokDompul->id_user= $value->id_user;
+            $stokDompul->save();
+        }
+        
         return redirect()->back();
     }
 
