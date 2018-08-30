@@ -186,4 +186,8 @@
   <!-- AdminLTE App -->
   <script src="assets/dist/js/app.min.js"></script>
   <!-- AdminLTE for demo purposes -->
-  <script src="assets/dist/js/demo.js"></script> --}}
+  <script src="assets/dist/js/demo.js"></script>
+   --}}
+
+   <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
+   <script src="{{ asset('vendor/unisharp/laravel-ckeditor/adapters/jquery.js')}}"></script>

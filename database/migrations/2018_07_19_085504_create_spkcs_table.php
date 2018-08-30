@@ -16,17 +16,23 @@ class CreateSpkcsTable extends Migration
         Schema::create('spkcs', function (Blueprint $table) {
           $table->increments('id_spkc');
           $table->string('id_cust');
-          $table->string('id_bank');
+          $table->string('id_cb');
+          $table->string('id_spv')->default(' ');
           $table->string('nm_perusahaan');
           $table->string('jenis_karoseri');
           $table->integer('jumlah_unit');
           $table->double('harga_unit');
+          $table->double('ppn');
           $table->double('harga_total');
+          $table->string('dokumen');
           $table->text('ket');
           $table->date('tanggal');
           $table->string('status')->default('PENDING');
+          $table->string('statuswo')->default('PENDING');
           $table->tinyInteger('vote')->default(1);
       });
+
+
     }
 
     /**

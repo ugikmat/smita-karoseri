@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5f59205508290c157645dc76a3d00ae1",
+    "content-hash": "a3645ce0faff4827a5bd20e5ea182ef4",
     "packages": [
         {
             "name": "barryvdh/laravel-snappy",
@@ -3323,6 +3323,60 @@
             "time": "2017-11-27T11:13:29+00:00"
         },
         {
+            "name": "unisharp/laravel-ckeditor",
+            "version": "4.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/UniSharp/laravel-ckeditor.git",
+                "reference": "5c75f3f9128ec8567955913074795deee5869c5c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/UniSharp/laravel-ckeditor/zipball/5c75f3f9128ec8567955913074795deee5869c5c",
+                "reference": "5c75f3f9128ec8567955913074795deee5869c5c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Unisharp\\Ckeditor\\": "./"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+",
+                "LGPL-2.1+",
+                "MPL-1.1+"
+            ],
+            "authors": [
+                {
+                    "name": "CKSource",
+                    "homepage": "http://cksource.com"
+                },
+                {
+                    "name": "UniSharp Ltd. (Composer Package Maintainer)",
+                    "homepage": "http://www.unisharp.com"
+                }
+            ],
+            "description": "JavaScript WYSIWYG web text editor (for laravel).",
+            "homepage": "http://ckeditor.com",
+            "keywords": [
+                "CKEditor",
+                "editor",
+                "fckeditor",
+                "html",
+                "javascript",
+                "laravel",
+                "richtext",
+                "text",
+                "wysiwyg"
+            ],
+            "time": "2017-11-01T04:33:40+00:00"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v2.5.1",
             "source": {
@@ -3419,16 +3473,16 @@
         },
         {
             "name": "yajra/laravel-datatables-buttons",
-            "version": "v3.2.2",
+            "version": "v3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yajra/laravel-datatables-buttons.git",
-                "reference": "d7ee45d911c8d7224b4f7cb0b76541bfc046c463"
+                "reference": "cdc787c1f786506cce985929e02fb27f78f97a69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yajra/laravel-datatables-buttons/zipball/d7ee45d911c8d7224b4f7cb0b76541bfc046c463",
-                "reference": "d7ee45d911c8d7224b4f7cb0b76541bfc046c463",
+                "url": "https://api.github.com/repos/yajra/laravel-datatables-buttons/zipball/cdc787c1f786506cce985929e02fb27f78f97a69",
+                "reference": "cdc787c1f786506cce985929e02fb27f78f97a69",
                 "shasum": ""
             },
             "require": {
@@ -3479,7 +3533,7 @@
                 "jquery",
                 "laravel"
             ],
-            "time": "2018-07-31T08:07:35+00:00"
+            "time": "2018-08-15T11:57:53+00:00"
         },
         {
             "name": "yajra/laravel-datatables-fractal",

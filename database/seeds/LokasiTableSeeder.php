@@ -12,19 +12,24 @@ class LokasiTableSeeder extends Seeder
      */
     public function run()
     {
-      $lokasi = new Lokasi();
-      $lokasi->nm_lokasi='Pamekasan';
-      $lokasi->status_lokasi=1;
-      $lokasi->save();
+      $sublokasi1 = new Lokasi();
+      $sublokasi1->nm_lokasi='XL Sampang';
+      $sublokasi1->save();
 
-      $lokasi2 = new Lokasi();
-      $lokasi2->nm_lokasi='Sidoarjo';
-      $lokasi2->status_lokasi=1;
-      $lokasi2->save();
+      $sublokasi2 = new Lokasi();
+      $sublokasi2->nm_lokasi='XL Pamekasan';
+      $sublokasi2->save();
 
-      $lokasi3 = new Lokasi();
-      $lokasi3->nm_lokasi='Madiun';
-      $lokasi3->status_lokasi=1;
-      $lokasi3->save();
+      $sublokasi3 = new Lokasi();
+      $sublokasi3->nm_lokasi='XL Bangkalan';
+      $sublokasi3->save();
+
+      $sublokasi4 = new Lokasi();
+      $sublokasi4->nm_lokasi='Wijaya Baru Kedamean';
+      $sublokasi4->save();
+
+      $sublokasi5 = new Lokasi();
+      $sublokasi5->nm_lokasi='Wijaya Baru Putat';
+      $sublokasi5->save();
     }
 }
