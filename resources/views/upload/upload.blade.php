@@ -122,6 +122,7 @@
     </div>
   </div>
 </div>
+<br>
 <table id="tgl-upload-table" class="table responsive" width="100%">
   <thead>
     <tr>

@@ -185,7 +185,7 @@ return [
               ],
               [
                 'text'    => 'Pembelian',
-                'icon'    => 'share',
+                'icon'    => 'shopping-cart',
                 'submenu' => [
                   [
                     'text'    => 'Pembelian Dompul',
@@ -193,7 +193,7 @@ return [
                     'submenu' => [
                       [
                         'text'  => 'Invoice Dompul',
-                        'icon'  => 'shopping-cart',
+                        'icon'  => 'credit-card',
                         'url'   => '/pembelian/dompul/pembelian-dompul',
                       ],
                       [
@@ -209,7 +209,7 @@ return [
                     'submenu' => [
                       [
                         'text'  => 'Invoice SP',
-                        'icon'  => 'shopping-cart',
+                        'icon'  => 'mobile-phone',
                         'url'   => '/pembelian/sp/pembelian-sp',
                       ],
                       [
