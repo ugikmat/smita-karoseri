@@ -32,26 +32,25 @@ class StokSpController extends Controller
      * @param \Yajra\Datatables\Datatables $datatables
      * @return \Illuminate\Http\JsonResponse
      */
-    public function data(Datatables $datatables,$tgl,$sales)
+    public function data(Datatables $datatables,$tgl_awal,$tgl_akhir)
     {
         // $data = DB::table('temp_detail_penjualan_sps')->get();
-        session(['tgl_stok_sp'=>$tgl]);
-        if (!empty($sales)) {
-          session(['sales_stok_sp'=>$sales]); 
-        }
-        $tgl = Carbon::parse($tgl);
-        $tgl = $tgl->format('Y-m-d');        
+        
+        $tgl_awal = Carbon::parse($tgl_awal);
+        $tgl_awal = $tgl_awal->format('Y-m-d');    
+        
+        $tgl_akhir = Carbon::parse($tgl_akhir);
+        $tgl_akhir = $tgl_akhir->format('Y-m-d');    
         $stokSP = DB::table('kartu_stok_sps')->select(DB::raw("kartu_stok_sps.id_produk as nama, nama_produk,
         COALESCE((SELECT sum(awal.masuk)-sum(awal.keluar)
-FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi < '{$tgl}' AND awal.id_produk=nama AND awal.id_sales='{$sales}'),0) AS stok_awal,
+FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi < '{$tgl_awal}' AND awal.id_produk=nama),0) AS stok_awal,
 sum(masuk) AS stok_masuk, sum(keluar) AS stok_keluar,
 (sum(masuk)-sum(keluar)+COALESCE((SELECT sum(awal.masuk)-sum(awal.keluar)
-FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi < '{$tgl}' AND awal.id_produk=nama AND awal.id_sales='{$sales}'),0)) AS jumlah_stok"))
+FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi < '{$tgl_awal}' AND awal.id_produk=nama),0)) AS jumlah_stok"))
                         ->join('master_produks',function($join){
                             $join->on('kartu_stok_sps.id_produk','=','master_produks.kode_produk');
                         })
-                        ->where('tanggal_transaksi',$tgl)
-                        ->where('id_sales',$sales)
+                        ->whereBetween('tanggal_transaksi',[$tgl_awal,$tgl_akhir])
                         ->groupBy('nama','nama_produk')->get();
         return $datatables->of($stokSP)
                         ->addColumn('indeks', function ($dataStok) {
