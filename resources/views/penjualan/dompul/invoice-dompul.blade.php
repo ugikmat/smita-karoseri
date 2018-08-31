@@ -39,7 +39,7 @@
         Nama Kasir
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        : joni
+        : (nama)
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -47,7 +47,7 @@
         Nama Logistik
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        : john
+        : (nama)
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -55,7 +55,7 @@
         Nama PIC
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        : pras
+        : (nama)
       </div>
     </div>
   </div>
@@ -127,7 +127,7 @@
               <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/penjualan/dompul/invoice-dompul">
                   @csrf
                   <div class="form-group row">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">ID Canvasser
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Canvasser
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">

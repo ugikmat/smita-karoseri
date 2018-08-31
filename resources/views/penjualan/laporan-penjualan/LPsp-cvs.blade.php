@@ -24,19 +24,27 @@
 
 @section('content')
 
-<div class="cotainer-fluid">
+<div class="cotainer-fluid form-inline">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput" pull-right>Input Tanggal Laporan Penjualan</button>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Tanggal Cetak Laporan
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      Tanggal Cetak Laporan
         : {{\Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}
-      </div>
     </div>
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
+        Nama Canvaser : &nbsp;
+        <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('id_sales')}}">
+              <option value="" disabled>Pilih Nama Canvaser</option>
+              @isset($saless)
+                  @foreach ($saless as $data)
+                  <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
+                  @endforeach
+              @endisset
+        </select>
+    </div>
+
   </div>
 </div>
 <br><br>
@@ -44,7 +52,6 @@
 <table id="lp-sp-table" class="table responsive" width="100%">
     <thead>
     <tr>
-        {{-- <th>No</th> --}}
         <th>Nama SP</th>
         <th>Qty</th>
         <th>Harga Satuan</th>
@@ -100,7 +107,7 @@
 
                 <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="">
                   @csrf @method('put')
-                  <div class="form-group kode">
+                  <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Pilih Tanggal
                       <span class="required">*</span>
                     </label>
@@ -111,18 +118,22 @@
                       <input class="datepicker col-md-7 col-xs-12" id="tgl" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
                     @endif
                     </div>
-                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" style="padding-left:0px">
-                      Nama Canvaser : &nbsp;
-                      <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('id_sales')}}" value="{{session('id_sales')}}">
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Pilih Nama Canvasser
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('id_sales')}}">
                             <option value="" disabled>Pilih Nama Canvaser</option>
-                            @isset($salesarray)
-                                @foreach ($salesarray as $data)
+                            @isset($saless)
+                                @foreach ($saless as $data)
                                 <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
                                 @endforeach
                             @endisset
                       </select>
                     </div>
-                     
                   </div>
 
                   <div class="ln_solid"></div>
@@ -151,6 +162,7 @@
 @section('js')
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <script>
+  $(".chosen-select").chosen();
   $('.datepicker').datepicker({
   });
   // $(".chosen-select").chosen();
