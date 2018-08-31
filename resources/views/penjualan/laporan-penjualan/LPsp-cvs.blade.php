@@ -162,7 +162,7 @@
 @section('js')
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <script>
-  $(".chosen-select").chosen();
+  $(".chosen-select").chosen({width: "59%"});
   $('.datepicker').datepicker({
   });
   // $(".chosen-select").chosen();
