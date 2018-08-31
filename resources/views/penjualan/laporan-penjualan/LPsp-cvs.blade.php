@@ -33,18 +33,12 @@
       Tanggal Cetak Laporan
         : {{\Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
-        Nama Canvaser : &nbsp;
-        <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('id_sales')}}">
-              <option value="" disabled>Pilih Nama Canvaser</option>
-              @isset($saless)
-                  @foreach ($saless as $data)
-                  <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
-                  @endforeach
-              @endisset
-        </select>
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      Nama Canvasser :
+      @isset($sales)
+        <input type="text" name="canvasser" id="canvasser" value="{{$sales->nm_sales}}" disabled>
+      @endisset
     </div>
-
   </div>
 </div>
 <br><br>
@@ -92,7 +86,7 @@
         <button type="button" class="close" data-dismiss="modal">
           <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Input Laporan Penjualan SP</h4>
+        <h4 class="modal-title" id="myModalLabel">Input Penjualan CVS SP</h4>
       </div>
       <div class="modal-body">
         <div class="clearfix"></div>
@@ -163,7 +157,7 @@
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <script>
   $(function () {
-    $(".chosen-select").chosen();
+    $(".chosen-select").chosen({width:"59%"});
     $('.datepicker').datepicker({
     });
     @if(Session::has('id_sales'))
