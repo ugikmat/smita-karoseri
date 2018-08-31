@@ -64,7 +64,7 @@
       processing: true,
       ajax: '/user-data',
       columns: [{
-          data: 'id'
+          data: 'id_user'
         },
         {
           data: 'name'
