@@ -142,6 +142,7 @@ class LaporanCvsSpController extends Controller
             $tgl = Carbon::parse($tgl_penjualan);
             $tgl = $tgl->format('Y-m-d');
         }
+        session(['id_sales'=>$sales]);
         return $datatables->eloquent(produk::select('nama_produk','jumlah_sp','harga_satuan','harga_total')
                         ->join('detail_penjualan_sps','detail_penjualan_sps.id_produk','=','master_produks.kode_produk')
                         ->join('penjualan_sps','penjualan_sps.id_penjualan_sp','=','detail_penjualan_sps.id_penjualan_sp')
