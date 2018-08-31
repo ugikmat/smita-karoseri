@@ -180,7 +180,7 @@ return [
                         'icon'  => 'briefcase',
                       ],
                       [
-                        'text'  => 'Penjualan CVS Starter Pack',
+                        'text'  => 'Penjualan CVS SP',
                         'url'   => '/penjualan/laporan-penjualan/Lbeli-cvs-sp',
                         'icon'  => 'briefcase',
                       ],
@@ -190,7 +190,7 @@ return [
               ],
               [
                 'text'    => 'Pembelian',
-                'icon'    => 'share',
+                'icon'    => 'shopping-cart',
                 'submenu' => [
                   [
                     'text'    => 'Pembelian Dompul',
@@ -198,7 +198,7 @@ return [
                     'submenu' => [
                       [
                         'text'  => 'Invoice Dompul',
-                        'icon'  => 'shopping-cart',
+                        'icon'  => 'credit-card',
                         'url'   => '/pembelian/dompul/pembelian-dompul',
                       ],
                       [
@@ -214,7 +214,7 @@ return [
                     'submenu' => [
                       [
                         'text'  => 'Invoice SP',
-                        'icon'  => 'shopping-cart',
+                        'icon'  => 'mobile-phone',
                         'url'   => '/pembelian/sp/pembelian-sp',
                       ],
                       [
@@ -382,12 +382,12 @@ return [
             'icon'        => 'tasks',
             'submenu'     => [
               [
-                'text'  => 'user',
+                'text'  => 'User',
                 'url'   => '/master/user',
                 'icon'  => 'male',
               ],
               [
-                'text'  => 'bank',
+                'text'  => 'Bank',
                 'url'   => '/master/bank',
                 'icon'  => 'bank',
               ],
@@ -462,7 +462,7 @@ return [
                 'icon'  => 'credit-card',
               ],
               [
-                'text'  => 'harga SP',
+                'text'  => 'Harga SP',
                 'url'   => '/master/harga_produk',
                 'icon'  => 'money',
               ],

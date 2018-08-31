@@ -29,7 +29,8 @@ class LaporanCvsSpController extends Controller
      * Diplay a list of transaction made before
      */
     public function index(){
-        return view('/penjualan/laporan-penjualan/LPsp-cvs');
+        $saless = Sales::where('status',1)->get();
+        return view('/penjualan/laporan-penjualan/LPsp-cvs',['saless'=>$saless]);
     }
 
     public function detail($sales){
