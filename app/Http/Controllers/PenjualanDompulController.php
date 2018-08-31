@@ -281,9 +281,13 @@ class PenjualanDompulController extends Controller
      */
     public function data(Datatables $datatables,$canvaser,$tgl)
     {
+        if($tgl!='null'){
+            $tgl = Carbon::parse($tgl);
+            $tgl = $tgl->format('Y-m-d');
+        }
         return $datatables->eloquent(UploadDompul::select(DB::raw('nama_downline, COUNT(id_upload) as qty'))
                         ->where('nama_canvasser',$canvaser)
-                        ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
+                        ->where('tanggal_transfer',$tgl)
                         ->where('status_penjualan',0)
                         ->where('status_active',1)
                         ->groupBy('nama_downline'))
@@ -304,6 +308,7 @@ class PenjualanDompulController extends Controller
      */
     public function penjualanData(Datatables $datatables,$canvaser,$tgl,$downline)
     {
+
         return $datatables->eloquent(UploadDompul::select('upload_dompuls.no_faktur','upload_dompuls.produk','upload_dompuls.tipe_dompul','upload_dompuls.qty','upload_dompuls.qty_program','master_harga_dompuls.harga_dompul')
                         ->join('master_harga_dompuls',function($join){
                             $join->on('master_harga_dompuls.nama_harga_dompul','=','upload_dompuls.produk')

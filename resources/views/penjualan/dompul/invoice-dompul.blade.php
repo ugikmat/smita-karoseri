@@ -133,7 +133,7 @@
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       {{-- <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value=""> --}}
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select name="id" required="required" class="form-control col-md-7 col-xs-12">
+                        <select name="id" required="required" class="form-control col-md-7 col-xs-12" id="sales">
                           @isset($saless)
                             @foreach($saless as $sales)
                               <option value="{{$sales->nm_sales}}" id="{{$sales->nm_sales}}">{{$sales->nm_sales}}</option>
@@ -192,16 +192,19 @@
 @section('js')
 <script>
     $(function () {
+        $('#sales').attr('value',"{{session('dompul_sales_id')}}");
         if ($('#tgl').val()==undefined) {
-          var tgl = null;
+          var tgl = 'null';
         } else {
           var tgl = $('#tgl').val();
         }
         if ($('#canvaser').val()==undefined) {
-          var canvaser = null;
+          var canvaser = 'null';
         } else {
           var canvaser = $('#canvaser').val();
         }
+        console.log(tgl);
+        console.log(canvaser);
         var t = $('#invoice-dompul-table').DataTable({
             serverSide: true,
             processing: true,

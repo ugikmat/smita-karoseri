@@ -125,7 +125,7 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('id_sales')}}">
+                      <select id="sales" required="required" name="sales" class="form-control col-md-7 col-xs-12">
                             <option value="" disabled>Pilih Nama Canvaser</option>
                             @isset($saless)
                                 @foreach ($saless as $data)
@@ -162,12 +162,15 @@
 @section('js')
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <script>
-  $(".chosen-select").chosen();
-  $('.datepicker').datepicker({
-  });
-  // $(".chosen-select").chosen();
-  // $("#sales").val("{{session('id_sales')}}");
-  // $("#sales").trigger("chosen:updated");
+  $(function () {
+    $(".chosen-select").chosen();
+    $('.datepicker').datepicker({
+    });
+    @if(Session::has('id_sales'))
+    $("#sales").val("{{session('id_sales')}}");
+    $("#sales").trigger("chosen:updated");
+    @endif
+  })
 </script>
 <script>
   $.ajaxSetup({
