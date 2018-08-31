@@ -125,8 +125,8 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <select id="sales" required="required" name="sales" class="form-control col-md-7 col-xs-12">
-                            <option value="" disabled>Pilih Nama Canvaser</option>
+                      <select id="sales" required="required" name="sales" class="form-control col-md-7 col-xs-12 chosen-select">
+                            <option value="" selected disabled>Pilih Nama Canvaser</option>
                             @isset($saless)
                                 @foreach ($saless as $data)
                                 <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
