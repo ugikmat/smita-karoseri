@@ -239,17 +239,6 @@
                       </select>
                     </div>
                   </div>
-
-                  <div class="form-group row">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Qty Program
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="text" required="required" id="qty_program" name="qty_program" class="form-control col-md-7 col-xs-12" value="" autocomplete="off">
-                    </div>
-                  </div>
-
-
                   <div class="ln_solid"></div>
                   <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -374,6 +363,29 @@
             @endforeach
           @endif
         ]);
+        $("#pembayaran").on("keydown", "#trf", function(){
+          console.log((this).value);
+          if (this.value.length!=0&&!isNaN(parseInt($(this).val().replace(/\D/g,''),10))) {
+            console.log(`Value : ${this.value}`);
+            bayar = parseInt($(this).val().replace(/\D/g,''),10);
+          }else{
+            bayar=0;
+          }
+        });
+    $("#pembayaran").on("input", "#trf", function(){
+      if (this.value.length!=0&&!isNaN(parseInt($(this).val().replace(/\D/g,''),10))) {
+        var n = parseInt($(this).val().replace(/\D/g,''),10);
+        (this).value=n.toLocaleString('id-ID');
+        var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-bayar;
+        $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
+      }else{
+        (this).value=0;
+        var n = parseInt($(this).val().replace(/\D/g,''),10);
+        var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-bayar;
+        $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
+      }
+      $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
+    });
     });
 </script>
 <script>
@@ -430,5 +442,38 @@
         @endif
 
     });
+</script>
+<script>
+  $('#editModal').on('show.bs.modal', function (event) {
+   
+    var tipe = document.getElementById("tipe");
+
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var produk = button.data('produk') // Extract info from data-* attributes
+    var tipe_harga = button.data('tipe')
+    var tipe_dompul = button.data('tipe_dompul')
+    var qty = button.data('qty')
+    var id = button.data('id')
+    var no_faktur = button.data('faktur')
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    while (tipe.firstChild) {
+        tipe.removeChild(tipe.firstChild);
+    }
+    var default_opt = document.createElement('option');
+    default_opt.value = 'default';
+    default_opt.innerHTML = '-- Pilih Tipe Dompul --';
+    tipe.appendChild(default_opt);
+    tipe_harga.forEach(element => {
+      var opt = document.createElement('option');
+      opt.value = element.tipe_harga_dompul;
+      opt.innerHTML = element.tipe_harga_dompul;
+      tipe.appendChild(opt);
+    });
+    tipe.value=tipe_dompul;
+    // $('#qty_program').val(qty.toLocaleString('id-ID'));
+    console.log(produk);
+    $('#link').val(`/pembelian/dompul/list/update/${id}`);
+  })
 </script>
 @stop

@@ -141,7 +141,7 @@
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: `/pembelian_dompul/list/${$tgl_pembelian}`,
+            ajax: `/pembelian_dompul/list-data/${$tgl_pembelian}`,
             columns: [
                 // {data: 'indeks'},
                 {data: 'id_pembelian_dompul'},
@@ -156,7 +156,7 @@
           $tgl = $('#tgl').val();
           console.log($tgl);
           console.log('Loading Data...');
-          t.ajax.url(`/pembelian_dompul/list/${$tgl}`).load();
+          t.ajax.url(`/pembelian_dompul/list-data/${$tgl}`).load();
           console.log('Loaded');
         });
         $('#deleteModal').on('show.bs.modal', function (event) {

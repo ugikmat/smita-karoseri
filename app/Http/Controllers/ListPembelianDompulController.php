@@ -51,6 +51,33 @@ class ListPembelianDompulController extends Controller
     }
 
     /**
+     * Update Upload Dompul tipe and price, back to edit
+     * 
+     */
+    public function update(Request $request,$id_detail){
+        // session(['tunai'=>$request->get('update_tunai'),'catatan'=>$request->get('update_catatan')]);
+        $data =DetailPembelianDompul::where('id_detail_pembelian_dompul',$id_detail)->first();
+        $tipe = $request->get('tipe');
+        if($tipe != 'default') {
+            $data->tipe_harga = $tipe;
+            $data->harga_satuan = HargaDompul::where('nama_harga_dompul',$data->produk)
+                                                    ->where('tipe_harga_dompul',$tipe)
+                                                    ->first()
+                                                    ->harga_dompul;
+            $data->harga_total = $data->harga_satuan*$data->jumlah;
+        }
+        $data->save();
+        $total=0;
+        $sum =DetailPembelianDompul::where('id_pembelian_dompul',$data->id_pembelian_dompul)
+                        ->where('status_detail_pd',1)->get();
+        foreach ($sum as $key => $value) {
+            $total+=$value->harga_total;
+        }
+        PembelianDompul::where('id_pembelian_dompul',$data->id_pembelian_dompul)->update(['grand_total'=>$total]);
+        return response()->json(['success' => true,'total'=>$total]);
+    }
+
+    /**
      * Process dataTable ajax response.
      *
      * @param \Yajra\Datatables\Datatables $datatables
@@ -116,7 +143,9 @@ class ListPembelianDompulController extends Controller
      */
     public function penjualanData(Datatables $datatables,$id)
     {
-        return $datatables->eloquent(DetailPembelianDompul::select('produk',
+        return $datatables->eloquent(DetailPembelianDompul::select(
+                    'id_detail_pembelian_dompul',
+                    'produk',
                     'tipe_harga',
                     'jumlah',
                     'harga_satuan',
@@ -135,7 +164,7 @@ class ListPembelianDompulController extends Controller
                           ->addColumn('action', function ($detailPembelian) {
                               $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$detailPembelian->produk)->get();
                               return
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-tipe='.$tipe.' data-tipe_dompul='.$detailPembelian->tipe_harga.' data-produk="'.$detailPembelian->produk.'" data-qty="'.$detailPembelian->jumlah.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id='.$detailPembelian->id_detail_pembelian_dompul.' data-tipe='.$tipe.' data-tipe_dompul='.$detailPembelian->tipe_harga.' data-produk="'.$detailPembelian->produk.'" data-qty="'.$detailPembelian->jumlah.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
                             })
                           ->make(true);
     }
