@@ -124,13 +124,13 @@ class ListPembelianDompulController extends Controller
                         ->where('id_pembelian_dompul',$id)
                         ->where('status_detail_pd',1))
                         ->addColumn('jumlah', function ($detailPembelian) {
-                              return number_format($detailPembelian->jumlah,3,",",".");
+                              return number_format($detailPembelian->jumlah,0,",",".");
                             })
                         ->addColumn('total_harga', function ($detailPembelian) {
-                              return number_format($detailPembelian->harga_total,0,",",".");
+                              return number_format($detailPembelian->harga_total,3,",",".");
                             })
                             ->addColumn('harga_satuan', function ($detailPembelian) {
-                              return number_format($detailPembelian->harga_satuan,0,",",".");
+                              return number_format($detailPembelian->harga_satuan,3,",",".");
                             })
                           ->addColumn('action', function ($detailPembelian) {
                               $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$detailPembelian->produk)->get();
