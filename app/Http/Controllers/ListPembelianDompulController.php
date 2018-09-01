@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\PembelianDompul;
 use App\DetailPembelianDompul;
+use App\DetailPembayaranPembelianDompul;
 use App\UploadDompul;
 use App\HargaDompul;
 use DB;
@@ -29,6 +30,26 @@ class ListPembelianDompulController extends Controller
     public function index(){
         return view('pembelian.dompul.list-pembelian-dompul');
     }
+
+    public function edit($id){
+        $total_pembayaran=0;
+        $pembayaran = DetailPembayaranPembelianDompul::where('id_pembelian_dompul',$id)->where('deleted',0)->get();
+        foreach ($pembayaran as $key => $value) {
+            $total_pembayaran+=$value->nominal;
+        }
+        $pembelianDompul = PembelianDompul::where('id_pembelian_dompul',$id)->first();
+        $total = $pembelianDompul->grand_total;
+        $total=number_format($total,3,",",".");
+        $total_pembayaran=number_format($total_pembayaran,3,",",".");
+        $detailPembayaranDompul = DetailPembayaranPembelianDompul::where('id_pembelian_dompul',$id)->where('deleted',0)->get();
+        return view('pembelian.dompul.list-pembelian-dompul-2',[
+            // 'datas'=>$datas,
+            'total'=>$total,
+            'pembelianDompul'=>$pembelianDompul,
+            'detailPembayaranDompul'=>$detailPembayaranDompul,
+            'total_pembayaran'=>$total_pembayaran]);
+    }
+
     /**
      * Process dataTable ajax response.
      *
@@ -55,7 +76,7 @@ class ListPembelianDompulController extends Controller
                         // ->join('detail_pembelian_dompuls','detail_pembelian_dompuls.id_pembelian_dompul','=','pembelian_dompuls.id_pembelian_dompul')
                         ->where('tanggal_pembelian_dompul',$tgl)
                         ->where('deleted',0))
-                        // ->addColumn('indeks', function ($uploadDompul) {
+                        // ->addColumn('indeks', function ($detailPembelian) {
                         //       return '';
                         //     })
                          ->addColumn('status_verif', function ($pembelianDompul) {
@@ -67,23 +88,54 @@ class ListPembelianDompulController extends Controller
 
                             })
                           ->addColumn('action', function ($pembelianDompul) {
-                            //   if ($pembelianDompul->status_pembayaran==0) {
-                            //       return
-                            //         '<a class="btn btn-xs btn-primary"
-                            //         href="/pembelian/dompul/list-invoice/edit/'.$pembelianDompul->id_pembelian_dompul.'/'.$pembelianDompul->nm_sales.'/'.$pembelianDompul->tanggal_pembelian_dompul.'/'.$pembelianDompul->nm_cust.'">
-                            //         <i class="glyphicon glyphicon-edit"></i> Edit
-                            //         </a>
-                            //         <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$pembelianDompul->id_pembelian_dompul.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>
-                            //         <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$pembelianDompul->id_pembelian_dompul.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
-                            //   } else {
-                            //       return
-                            //         '<a class="btn btn-xs btn-primary"
-                            //         href="/pembelian/dompul/list-invoice/edit/'.$pembelianDompul->id_pembelian_dompul.'/'.$pembelianDompul->nm_sales.'/'.$pembelianDompul->tanggal_pembelian_dompul.'/'.$pembelianDompul->nm_cust.'">
-                            //         <i class="glyphicon glyphicon-edit"></i> Lihat
-                            //         </a>
-                            //         <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$pembelianDompul->id_pembelian_dompul.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
-                            //   }
+                              if ($pembelianDompul->status_pembayaran==0) {
+                                  return
+                                    '<a class="btn btn-xs btn-primary"
+                                    href="/pembelian/dompul/list-invoice/edit/'.$pembelianDompul->id_pembelian_dompul.'">
+                                    <i class="glyphicon glyphicon-edit"></i> Edit
+                                    </a>
+                                    <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$pembelianDompul->id_pembelian_dompul.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$pembelianDompul->id_pembelian_dompul.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                              } else {
+                                  return
+                                    '<a class="btn btn-xs btn-primary"
+                                    href="/pembelian/dompul/list-invoice/edit/'.$pembelianDompul->id_pembelian_dompul.'">
+                                    <i class="glyphicon glyphicon-edit"></i> Lihat
+                                    </a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$pembelianDompul->id_pembelian_dompul.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                              }
 
+                            })
+                          ->make(true);
+    }
+    /**
+     * Process dataTable ajax response.
+     *
+     * @param \Yajra\Datatables\Datatables $datatables
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function penjualanData(Datatables $datatables,$id)
+    {
+        return $datatables->eloquent(DetailPembelianDompul::select('produk',
+                    'tipe_harga',
+                    'jumlah',
+                    'harga_satuan',
+                    'harga_total')
+                        ->where('id_pembelian_dompul',$id)
+                        ->where('status_detail_pd',1))
+                        ->addColumn('jumlah', function ($detailPembelian) {
+                              return number_format($detailPembelian->jumlah,3,",",".");
+                            })
+                        ->addColumn('total_harga', function ($detailPembelian) {
+                              return number_format($detailPembelian->harga_total,0,",",".");
+                            })
+                            ->addColumn('harga_satuan', function ($detailPembelian) {
+                              return number_format($detailPembelian->harga_satuan,0,",",".");
+                            })
+                          ->addColumn('action', function ($detailPembelian) {
+                              $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$detailPembelian->produk)->get();
+                              return
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-tipe='.$tipe.' data-tipe_dompul='.$detailPembelian->tipe_harga.' data-produk="'.$detailPembelian->produk.'" data-qty="'.$detailPembelian->jumlah.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
                             })
                           ->make(true);
     }

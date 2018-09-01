@@ -7,6 +7,7 @@
 @stop
 
 @section('content')
+<input type="hidden" name="id_pembelian" id="id_pembelian" value="{{$pembelianDompul->id_pembelian_dompul}}">
 <div class="container-fluid form-inline">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -40,13 +41,12 @@
 <table id="list-edit-invoice-table" class="table responsive"  width="100%">
     <thead>
     <tr>
-      @if($penjualanDompul->status_pembayaran==0)
+      @if($pembelianDompul->status_pembayaran==0)
       {{-- <th>No</th> --}}
         <th>Uraian</th>
         <th>Tipe</th>
         <th>Harga</th>
         <th>Jumlah</th>
-        <th>Jumlah Program</th>
         <th>Harga Total</th>
         <th>Action</th>
       @else
@@ -55,7 +55,6 @@
         <th>Tipe</th>
         <th>Harga</th>
         <th>Jumlah</th>
-        <th>Jumlah Program</th>
         <th>Harga Total</th>
       @endif
     </tr>
@@ -70,7 +69,7 @@
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
       @isset($total)
-        <input type="text" class="form-control" name="total" id="total" value="" readonly>
+        <input type="text" class="form-control" name="total" id="total" value="{{$total}}" readonly>
       @endisset
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -86,7 +85,7 @@
       <b>Total Pembayaran</b>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="" readonly>
+        <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="{{$total_pembayaran}}" readonly>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -115,7 +114,7 @@
     <div data-repeater-item>
       <div class="form row">
         <input type="hidden" id="id" name="id" class="form-control" value="">
-        @if($penjualanDompul->status_pembayaran==0)
+        @if($pembelianDompul->status_pembayaran==0)
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
           <b>Pembayaran</b>
           <br>
@@ -167,7 +166,7 @@
     <hr>
     </div>
   </div>
-@if($penjualanDompul->status_pembayaran==0)
+@if($pembelianDompul->status_pembayaran==0)
 <button data-repeater-create type="button" class="btn btn-warning"> <span class="glyphicon glyphicon-plus"></span> Tambah Pembayaran</button>
 
 <div class="row">
@@ -355,21 +354,21 @@
             isFirstItemUndeletable: false
         });
         repeater.setList([
-          @if($penjualanDompul->status_pembayaran==0)
-            @foreach($detailPenjualanDompul as $item)
+          @if($pembelianDompul->status_pembayaran==0)
+            @foreach($detailPembayaranDompul as $item)
             {
-                  'id': "{{$item->id_detail_penjualan}}",
+                  'id': "{{$item->id_detail_pembayaran_dompul}}",
                   'bank': "{{$item->metode_pembayaran}}",
-                  'trf' : "{{number_format($item->nominal,0,",",".")}}",
+                  'trf' : "{{number_format($item->nominal,3,",",".")}}",
                   'catatan' : "{{$item->catatan}}"
               },
             @endforeach
           @else
-            @foreach($detailPenjualanDompul as $item)
+            @foreach($detailPembayaranDompul as $item)
             {
-                  'id': "{{$item->id_detail_penjualan}}",
+                  'id': "{{$item->id_detail_pembayaran_dompul}}",
                   'bank': "{{$item->metode_pembayaran}}",
-                  'trf' : "{{number_format($item->nominal,0,",",".")}}",
+                  'trf' : "{{number_format($item->nominal,3,",",".")}}",
                   'catatan' : "{{$item->catatan}}"
               },
             @endforeach
@@ -384,21 +383,18 @@
   }
 });
     $(function () {
-        var tgl = $('#tgl').val();
-        var sales = $('#sales').val();
-        var customer = $('#customer').val();
-        if($('#status_pembayaran').val()==0){
+        var id_pembelian = $('#id_pembelian').val();
+        @if($pembelianDompul->status_pembayaran==0)
           var t = $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
             searching:  false,
-            ajax: `/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
+            ajax: `/pembelian_dompul/detail/${id_pembelian}`,
             columns: [
               {data: 'produk'},
-              {data: 'tipe_dompul'},
-              {data: 'harga_dompul'},
+              {data: 'tipe_harga'},
+              {data: 'harga_satuan'},
               {data: 'jumlah'},
-              {data: 'jumlah_program'},
               {data: 'total_harga'},
               {data: 'action', orderable: false, searchable: false}
             ]
@@ -411,28 +407,27 @@
           {
             console.log('success')
             console.log(response.total);
-            t.ajax.url(`/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`).load();
+            t.ajax.url(`/pembelian_dompul/detail/${id_pembelian}`).load();
             $('#total').val(response.total.toLocaleString('id-ID'));
             $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
           }
           }, 'json');
         });
-        }else{
+        @else
           $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
             searching:  false,
-            ajax: `/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
+            ajax: `/pembelian_dompul/detail/${id_pembelian}`,
             columns: [
               {data: 'produk'},
-              {data: 'tipe_dompul'},
-              {data: 'harga_dompul'},
+              {data: 'tipe_harga'},
+              {data: 'harga_satuan'},
               {data: 'jumlah'},
-              {data: 'jumlah_program'},
               {data: 'total_harga'}
             ]
         });
-        }
+        @endif
 
     });
 </script>

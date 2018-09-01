@@ -58,7 +58,7 @@
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       @if(Session::has('dompul-list-tgl'))
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" value="{{session('sp-list-tgl')}}" required>
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" value="{{session('dompul-list-tgl')}}" required>
                       @else
                         <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}" required>
                       @endif
@@ -137,11 +137,11 @@
 </script>
 <script>
     $(function () {
-        $tgl_penjualan = ($('#tgl').val()=='') ? 'null' : $('#tgl').val();
+        $tgl_pembelian = ($('#tgl').val()=='') ? 'null' : $('#tgl').val();
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: `/pembelian_dompul/list/${$tgl_penjualan}`,
+            ajax: `/pembelian_dompul/list/${$tgl_pembelian}`,
             columns: [
                 // {data: 'indeks'},
                 {data: 'id_pembelian_dompul'},
