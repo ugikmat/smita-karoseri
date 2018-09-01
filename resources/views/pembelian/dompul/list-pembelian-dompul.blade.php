@@ -58,7 +58,7 @@
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       @if(Session::has('dompul-list-tgl'))
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" value="{{session('sp-list-tgl')}}" required>
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" value="{{session('dompul-list-tgl')}}" required>
                       @else
                         <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}" required>
                       @endif
@@ -89,8 +89,9 @@
 <div class="modal fade" id="verificationModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="" method="POST" id="verificationForm">
+      <form action="/pembelian/dompul/list/verify" method="POST" id="verificationForm">
         @csrf @method('put')
+        <input type="hidden" name="id" value="" id="verify_id_pembelian">
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Apakah Anda Yakin ingin memverifikasi transaksi ini?</h4>
@@ -110,8 +111,9 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="deleteForm" action="" method="POST">
-        @csrf @method('delete')
+      <form id="deleteForm" action="/pembelian/dompul/list/delete" method="POST">
+        @csrf @method('put')
+        <input type="hidden" name="id" value="" id="delete_id_pembelian">
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -137,11 +139,11 @@
 </script>
 <script>
     $(function () {
-        $tgl_penjualan = ($('#tgl').val()=='') ? 'null' : $('#tgl').val();
+        $tgl_pembelian = ($('#tgl').val()=='') ? 'null' : $('#tgl').val();
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: `/pembelian_dompul/list/${$tgl_penjualan}`,
+            ajax: `/pembelian_dompul/list-data/${$tgl_pembelian}`,
             columns: [
                 // {data: 'indeks'},
                 {data: 'id_pembelian_dompul'},
@@ -156,13 +158,18 @@
           $tgl = $('#tgl').val();
           console.log($tgl);
           console.log('Loading Data...');
-          t.ajax.url(`/pembelian_dompul/list/${$tgl}`).load();
+          t.ajax.url(`/pembelian_dompul/list-data/${$tgl}`).load();
           console.log('Loaded');
         });
         $('#deleteModal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget) // Button that triggered the modal
           var id = button.data('id'); // Extract info from data-* attributes
-          $('#id_pembelian').val(id);
+          $('#delete_id_pembelian').val(id);
+        });
+         $('#verificationModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) // Button that triggered the modal
+          var id = button.data('id'); // Extract info from data-* attributes
+          $('#verify_id_pembelian').val(id);
         });
     })
 </script>

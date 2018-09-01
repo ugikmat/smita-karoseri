@@ -63,7 +63,7 @@ class PembelianDompulController extends Controller
             $table->string('id_user');
             $table->date('tanggal_pembelian_dompul');
             $table->date('tanggal_input');
-            $table->bigInteger('grand_total')->default(0);
+            $table->double('grand_total')->default(0);
             $table->tinyInteger('status_pembayaran')->default(0);
             $table->tinyInteger('status_pembelian')->default(0);
             $table->tinyInteger('deleted')->default(0);
@@ -94,8 +94,8 @@ class PembelianDompulController extends Controller
             $table->string('produk');
             $table->integer('jumlah');
             $table->string('tipe_harga');
-            $table->float('harga_satuan');
-            $table->float('harga_total');
+            $table->double('harga_satuan');
+            $table->double('harga_total');
             $table->string('keterangan_detail_pd');
             $table->tinyInteger('status_detail_pd')->default(1);
         });
@@ -170,10 +170,10 @@ class PembelianDompulController extends Controller
                 $detailPembelianDompul->id_pembelian_dompul = $PembelianDompul->id_pembelian_dompul;
                 $detailPembelianDompul->id_supplier = $value->id_supplier;
                 $detailPembelianDompul->produk= $value->produk;
-                $detailPembelianDompul->jumlah= str_replace('.', '', $value->jumlah);
+                $detailPembelianDompul->jumlah= $value->jumlah;
                 $detailPembelianDompul->tipe_harga= $value->tipe_harga;
-                $detailPembelianDompul->harga_satuan= str_replace(',', '.',str_replace('.', '', $value->harga_satuan));
-                $detailPembelianDompul->harga_total= str_replace(',', '.',str_replace('.', '', $value->harga_total));
+                $detailPembelianDompul->harga_satuan= $value->harga_satuan;
+                $detailPembelianDompul->harga_total= $value->harga_total;
                 $detailPembelianDompul->keterangan_detail_pd= $value->keterangan_detail_pd;
                 $detailPembelianDompul->save();
             $stokDompul = new StokDompul();

@@ -210,8 +210,13 @@ Route::get('/pembelian_dompul_data/{id}', 'PembelianDompulController@data');
 Route::post('/pembelian/dompul/store','PembelianDompulController@store');
 //List Pemb Dompul
 Route::get('/pembelian/dompul/list-pembelian-dompul','ListPembelianDompulController@index');
-Route::get('/pembelian_dompul/list/{tgl_pembelian}', 'ListPembelianDompulController@data');
-
+Route::get('/pembelian_dompul/list-data/{tgl_pembelian}', 'ListPembelianDompulController@data');
+Route::get('/pembelian/dompul/list-invoice/edit/{id}', 'ListPembelianDompulController@edit');
+Route::get('/pembelian_dompul/detail/{id}', 'ListPembelianDompulController@penjualanData');
+Route::post('/pembelian/dompul/list/update/{id_detail}','ListPembelianDompulController@update');
+Route::post('/pembelian/dompul/list/store','ListPembelianDompulController@store');
+Route::put('/pembelian/dompul/list/verify','ListPembelianDompulController@verif');
+Route::put('/pembelian/dompul/list/delete','ListPembelianDompulController@delete');
 // Route::get('/pembelian/sp/list-pembelian-sp', function() {
 //   return view ('/pembelian/sp/list-pembelian-sp');
 // }) -> name('list-pembelian-sp');
