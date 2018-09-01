@@ -18,6 +18,13 @@
   }
   .form-control{
     text-align: center;
+    width: auto;
+  }
+  #lp-sp-table{
+    overflow-x: scroll;
+  }
+  input{
+    width: auto;
   }
 </style>
 @stop
@@ -41,7 +48,7 @@
 </div>
 <br><br>
 
-<table id="lp-sp-table" class="table responsive" width="100%">
+<table id="lp-sp-table" class="table responsive table-bordered" width="100%">
     <thead>
     <tr>
         <th>Nama SP</th>
@@ -188,6 +195,7 @@
         var t = $('#lp-sp-table').DataTable({
             serverSide: true,
             processing: true,
+            scrollX: true,
             ajax: `/laporan-penjualan/sp-cvs/${$tgl}/${$sales}`,
             columnDefs: [
                 {
