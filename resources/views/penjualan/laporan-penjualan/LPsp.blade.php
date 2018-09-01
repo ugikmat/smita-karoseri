@@ -18,6 +18,7 @@
   }
   .form-control{
     text-align: center;
+    width: auto;
   }
 </style>
 @stop
@@ -158,6 +159,7 @@
         var t = $('#lp-sp-table').DataTable({
             serverSide: true,
             processing: true,
+            scrollX: true,
             ajax: `/laporan-penjualan/sp/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,
