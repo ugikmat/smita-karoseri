@@ -19,6 +19,9 @@
   .form-control{
     text-align: center;
   }
+  #lp-sp-table{
+    overflow-x: scroll;
+  }
 </style>
 @stop
 
@@ -43,7 +46,7 @@
 </div>
 <br><br>
 
-<table id="lp-sp-table" class="table responsive" width="100%">
+<table id="lp-sp-table" class="table responsive table-bordered" width="100%">
     <thead>
     <tr>
         <th>Nama SP</th>
