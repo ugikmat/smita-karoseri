@@ -116,6 +116,7 @@ class LaporanCvsSpController extends Controller
                             $bri+=$value->bri;
                             $piutang+=$value->piutang;
                         }
+        $nm_sales = Sales::select('nm_sales')->where('id_sales',$sales)->first();
         return response()->json(['success' => true, 'data' => $data
         , 'qty' => $qty
         , 'total' => $total
@@ -125,7 +126,8 @@ class LaporanCvsSpController extends Controller
         , 'mandiri' => $mandiri
         , 'bni' => $bni
         , 'bri' => $bri
-        , 'piutang' => $piutang]);
+        , 'piutang' => $piutang
+        , 'sales' => $nm_sales->nm_sales]);
     }
 
     /**

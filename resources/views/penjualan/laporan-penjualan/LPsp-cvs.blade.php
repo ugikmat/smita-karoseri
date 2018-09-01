@@ -35,9 +35,7 @@
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       Nama Canvasser :
-      @isset($sales)
-        <input type="text" name="canvasser" id="canvasser" value="{{$sales->nm_sales}}" disabled>
-      @endisset
+        <input type="text" name="canvasser" id="canvasser" value="" disabled>
     </div>
   </div>
 </div>
@@ -163,6 +161,7 @@
     @if(Session::has('id_sales'))
     $("#sales").val("{{session('id_sales')}}");
     $("#sales").trigger("chosen:updated");
+
     @endif
   })
 </script>
@@ -233,6 +232,7 @@
               $('#bni').val(response.bni.toLocaleString('id-ID'));
               $('#bri').val(response.bri.toLocaleString('id-ID'));
               $('#piutang').val(response.piutang.toLocaleString('id-ID'));
+              $('#canvasser').val(response.sales);
               console.log('Loaded');
               console.log(response.data);
             }
@@ -254,6 +254,7 @@
               $('#bni').val(response.bni.toLocaleString('id-ID'));
               $('#bri').val(response.bri.toLocaleString('id-ID'));
               $('#piutang').val(response.piutang.toLocaleString('id-ID'));
+              $('#canvasser').val(response.sales);
               console.log('Loaded');
               console.log(response.data);
             }
