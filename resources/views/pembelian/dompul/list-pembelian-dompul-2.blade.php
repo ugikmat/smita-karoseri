@@ -7,7 +7,6 @@
 @stop
 
 @section('content')
-<input type="hidden" name="id_pembelian" id="id_pembelian" value="{{$pembelianDompul->id_pembelian_dompul}}">
 <div class="container-fluid form-inline">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -36,8 +35,12 @@
   </div>
 </div>
 <br>
-<form action="" method="post" class="repeater">
+<form action="/pembelian/dompul/list/store" method="post" class="repeater">
   @csrf
+  <input type="hidden" name="id_pembelian" id="id_pembelian" value="{{$pembelianDompul->id_pembelian_dompul}}">
+  <div id="deleted">
+
+  </div>
 <table id="list-edit-invoice-table" class="table responsive"  width="100%">
     <thead>
     <tr>
@@ -286,7 +289,7 @@
 @section('js')
 <script>
     $(document).ready(function () {
-        $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
+        $('#selisih').val((parseFloat($('#total').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))).toLocaleString('id-ID'));
         var indeks = 0;
         var bayar=0;
         var repeater = $('.repeater').repeater({
@@ -322,11 +325,11 @@
                     $(this).slideUp(deleteElement);
                 }
                 $('#deleted').append(`<input type='hidden' id='delete' name="delete[${indeks++}]" value='${$('#id', $(this)).val()}'>`);
-                var n = parseInt($('#trf', $(this)).val().replace(/\D/g,''),10);
-                var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-n;
+                var n = parseFloat($('#trf', $(this)).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'));
+                var total = parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-n;
                 console.log(total);
                 $('#total_pembayaran').val((total).toLocaleString('id-ID'));
-                $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
+                $('#selisih').val((parseFloat($('#total').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))).toLocaleString('id-ID'));
             },
             // (Optional)
             // You can use this if you need to manually re-index the list
@@ -365,27 +368,27 @@
         ]);
         $("#pembayaran").on("keydown", "#trf", function(){
           console.log((this).value);
-          if (this.value.length!=0&&!isNaN(parseInt($(this).val().replace(/\D/g,''),10))) {
+          if (this.value.length!=0&&!isNaN(parseFloat($(this).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.')))) {
             console.log(`Value : ${this.value}`);
-            bayar = parseInt($(this).val().replace(/\D/g,''),10);
+            bayar = parseFloat($(this).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'));
           }else{
             bayar=0;
           }
         });
-    $("#pembayaran").on("input", "#trf", function(){
-      if (this.value.length!=0&&!isNaN(parseInt($(this).val().replace(/\D/g,''),10))) {
-        var n = parseInt($(this).val().replace(/\D/g,''),10);
-        (this).value=n.toLocaleString('id-ID');
-        var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-bayar;
-        $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
-      }else{
-        (this).value=0;
-        var n = parseInt($(this).val().replace(/\D/g,''),10);
-        var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-bayar;
-        $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
-      }
-      $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
-    });
+        $("#pembayaran").on("input", "#trf", function(){
+          if (this.value.length!=0&&!isNaN(parseFloat($(this).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.')))) {
+            var n = parseFloat($(this).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'));
+            (this).value=n.toLocaleString('id-ID');
+            var total = parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-bayar;
+            $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
+          }else{
+            (this).value=0;
+            var n = parseFloat($(this).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'));
+            var total = parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-bayar;
+            $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
+          }
+          $('#selisih').val((parseFloat($('#total').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))).toLocaleString('id-ID'));
+        });
     });
 </script>
 <script>
@@ -421,7 +424,7 @@
             console.log(response.total);
             t.ajax.url(`/pembelian_dompul/detail/${id_pembelian}`).load();
             $('#total').val(response.total.toLocaleString('id-ID'));
-            $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
+            $('#selisih').val((parseFloat($('#total').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))).toLocaleString('id-ID'));
           }
           }, 'json');
         });

@@ -77,6 +77,71 @@ class ListPembelianDompulController extends Controller
         return response()->json(['success' => true,'total'=>$total]);
     }
 
+    public function verif(Request $request){
+        PembelianDompul::where('id_pembelian_dompul',$request->get('id'))
+                        ->update(['status_pembayaran'=>1
+                        ]);
+        return redirect()->back();
+    }
+
+    public function store(Request $request){
+        $id = $request->get('id_pembelian');
+        $bank = $request->get('bank');
+        $delete = $request->get('delete');
+        $total = $request->get('total');
+        $pembelianDompul = PembelianDompul::where('id_pembelian_dompul',$id)->first();
+        $pembelianDompul->grand_total=str_replace(',', '.', str_replace('.', '', $total));
+        $pembelianDompul->save();
+        if (!empty($delete)) {
+            foreach ($delete as $key => $value) {
+                $detailPembelianDompul = DetailPembayaranPembelianDompul::where('id_detail_pembayaran_dompul',$value)->first();
+                $detailPembelianDompul->deleted = 1;
+                $detailPembelianDompul->save();
+            }
+        }
+        
+        foreach ($bank as $key => $value) {
+            if (empty($value['id'])) {
+                $detailPembelianDompul = new DetailPembayaranPembelianDompul();
+            } else {
+                $detailPembelianDompul = DetailPembayaranPembelianDompul::where('id_detail_pembayaran_dompul',$value['id'])->first();   
+            }
+            $detailPembelianDompul->id_pembelian_dompul = $pembelianDompul->id_pembelian_dompul;
+            $detailPembelianDompul->metode_pembayaran = $value['bank'];
+            $detailPembelianDompul->nominal=str_replace(',', '.', str_replace('.', '', $value['trf']));
+                switch ($value['bank']) {
+                    case 'BCA Pusat':
+                        $detailPembelianDompul->bca_pusat=$value['trf'];
+                        break;
+                    case 'BCA Cabang':
+                        $detailPembelianDompul->bca_cabang=$value['trf'];
+                        break;
+                    case 'Mandiri':
+                        $detailPembelianDompul->mandiri=$value['trf'];
+                        break;
+                    case 'BNI':
+                        $detailPembelianDompul->bni=$value['trf'];
+                        break;
+                    case 'BRI':
+                        $detailPembelianDompul->bri=$value['trf'];
+                        break;
+                    case 'Cash':
+                        $detailPembelianDompul->cash=$value['trf'];
+                        break;
+                    default:
+                        break;
+                }
+            $detailPembelianDompul->catatan = $value['catatan'];
+            $detailPembelianDompul->save();
+        }
+        return redirect('/pembelian/dompul/list-pembelian-dompul');
+    }
+
+    public function delete(Request $request){
+        $pembelianDompul = PembelianDompul::where('id_pembelian_dompul',$request->get('id'))->update(['deleted'=>1]);
+        return redirect('/pembelian/dompul/list-pembelian-dompul');
+    }
+
     /**
      * Process dataTable ajax response.
      *
@@ -97,7 +162,8 @@ class ListPembelianDompulController extends Controller
         'nama_supplier',
         'nm_lokasi',
         'tanggal_pembelian_dompul',
-        'status_pembelian')
+        'status_pembelian',
+        'status_pembayaran')
                         ->join('master_suppliers','master_suppliers.id_supplier','=','pembelian_dompuls.id_supplier')
                         ->join('master_lokasis','master_lokasis.id_lokasi','=','pembelian_dompuls.id_lokasi')
                         // ->join('detail_pembelian_dompuls','detail_pembelian_dompuls.id_pembelian_dompul','=','pembelian_dompuls.id_pembelian_dompul')
