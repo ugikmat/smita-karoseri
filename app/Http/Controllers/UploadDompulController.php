@@ -17,6 +17,15 @@ use Illuminate\Support\Facades\Auth;
 use Faker\Factory as Faker;
 
 class UploadDompulController extends Controller {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public
     function index() {
         return view('upload.upload');
