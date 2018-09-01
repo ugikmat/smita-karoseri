@@ -170,6 +170,11 @@ return [
                         'icon'  => 'briefcase',
                       ],
                       [
+                        'text'  => 'Penjualan CVS Dompul',
+                        'url'   => '/penjualan/laporan-penjualan/LPdompul-cvs',
+                        'icon'  => 'user',
+                      ],
+                      [
                         'text'  => 'Penjualan Dompul Head',
                         'url'   => '/penjualan/laporan-penjualan/dompul-head',
                         'icon'  => 'money',
@@ -182,7 +187,7 @@ return [
                       [
                         'text'  => 'Penjualan CVS SP',
                         'url'   => '/penjualan/laporan-penjualan/Lbeli-cvs-sp',
-                        'icon'  => 'briefcase',
+                        'icon'  => 'user',
                       ],
                     ],
                   ],
