@@ -18,9 +18,13 @@
   }
   .form-control{
     text-align: center;
+    width: auto;
   }
   #lp-sp-table{
     overflow-x: scroll;
+  }
+  input{
+    width: auto;
   }
 </style>
 @stop
@@ -38,8 +42,8 @@
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       Nama Canvasser :
-      @isset($sales)
-        <input type="text" name="canvasser" id="canvasser" value="{{$sales->nm_sales}}" disabled>
+      @isset($datas)
+        <input type="text" name="canvasser" id="canvasser" value="{{$datas->nama_canvasser}}" disabled>
       @endisset
     </div>
   </div>
@@ -192,6 +196,7 @@
         var t = $('#lp-sp-table').DataTable({
             serverSide: true,
             processing: true,
+            "scrollX": true,
             ajax: `/laporan-penjualan/sp-cvs/${$tgl}/${$sales}`,
             columnDefs: [
                 {
