@@ -255,6 +255,10 @@ Route::get('/laporan-penjualan/sp/piutang/{id}/{tgl}', 'LaporanPenjualanSPContro
 Route::get('/penjualan/laporan-penjualan/Lbeli-cvs-sp', 'LaporanCvsSpController@index');
 Route::post('/get_laporan_sp_cvs/{tgl}/{sales}', 'LaporanCvsSpController@getData');
 Route::get('/laporan-penjualan/sp-cvs/{tgl_penjualan}/{sales}', 'LaporanCvsSpController@data');
+
+Route::get('/penjualan/laporan-penjualan/LPdompul-cvs', function() {
+  return view ('/penjualan/laporan-penjualan/LPdompul-cvs');
+}) -> name('LPdompul-cvs');
 //Persediaan
 Route::get('/persediaan/mutasi-dompul', 'StokDompulController@index');
 Route::get('/stok-dompul/data/{tgl_awal}/{tgl_akhir}', 'StokDompulController@data');

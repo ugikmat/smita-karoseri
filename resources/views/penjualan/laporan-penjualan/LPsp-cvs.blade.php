@@ -12,6 +12,7 @@
 <style>
   td{
     text-align: center;
+    white-space: nowrap;
   }
   th{
     text-align: center;
