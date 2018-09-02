@@ -467,6 +467,7 @@
     default_opt.value = 'default';
     default_opt.innerHTML = '-- Pilih Tipe Dompul --';
     tipe.appendChild(default_opt);
+    console.log(tipe_harga);
     tipe_harga.forEach(element => {
       var opt = document.createElement('option');
       opt.value = element.tipe_harga_dompul;

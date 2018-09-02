@@ -89,8 +89,9 @@
 <div class="modal fade" id="verificationModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="" method="POST" id="verificationForm">
+      <form action="/pembelian/sp/list/verify" method="POST" id="verificationForm">
         @csrf @method('put')
+        <input type="hidden" name="id" value="" id="verify_id_pembelian">
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Apakah Anda Yakin ingin memverifikasi transaksi ini?</h4>
@@ -110,8 +111,9 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="deleteForm" action="" method="POST">
-        @csrf @method('delete')
+      <form id="deleteForm" action="/pembelian/sp/list/delete" method="POST">
+        @csrf @method('put')
+        <input type="hidden" name="id" value="" id="delete_id_pembelian">
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -163,6 +165,16 @@
           var button = $(event.relatedTarget) // Button that triggered the modal
           var id = button.data('id'); // Extract info from data-* attributes
           $('#id_pembelian').val(id);
+        });
+        $('#deleteModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) // Button that triggered the modal
+          var id = button.data('id'); // Extract info from data-* attributes
+          $('#delete_id_pembelian').val(id);
+        });
+         $('#verificationModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) // Button that triggered the modal
+          var id = button.data('id'); // Extract info from data-* attributes
+          $('#verify_id_pembelian').val(id);
         });
     })
 </script>
