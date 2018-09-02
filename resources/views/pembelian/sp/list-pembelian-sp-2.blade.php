@@ -35,7 +35,7 @@
   </div>
 </div>
 <br>
-<form action="" method="post" class="repeater">
+<form action="/pembelian/sp/list/store" method="post" class="repeater">
   @csrf
   <input type="hidden" name="id_pembelian" id="id_pembelian" value="{{$pembelianSP->id_pembelian_sp}}">
   <div id="deleted">
@@ -44,7 +44,7 @@
 <table id="list-edit-invoice-table" class="table responsive"  width="100%">
     <thead>
     <tr>
-      @if($pembelianSP->status_pembayaran==0)
+      @if($pembelianSP->status_pembelian==0)
       {{-- <th>No</th> --}}
         <th>Uraian</th>
         <th>Tipe</th>
@@ -115,7 +115,7 @@
     <div data-repeater-item>
       <div class="form row">
         <input type="hidden" id="id" name="id" class="form-control" value="">
-        @if($pembelianSP->status_pembayaran==0)
+        @if($pembelianSP->status_pembelian==0)
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
           <b>Pembayaran</b>
           <br>
@@ -167,7 +167,7 @@
     <hr>
     </div>
   </div>
-@if($pembelianSP->status_pembayaran==0)
+@if($pembelianSP->status_pembelian==0)
 <button data-repeater-create type="button" class="btn btn-warning"> <span class="glyphicon glyphicon-plus"></span> Tambah Pembayaran</button>
 
 <div class="row">
@@ -345,7 +345,7 @@
             isFirstItemUndeletable: false
         });
         repeater.setList([
-          @if($pembelianSP->status_pembayaran==0)
+          @if($pembelianSP->status_pembelian==0)
             @foreach($pembayaran as $item)
             {
                   'id': "{{$item->id_detail_pembayaran_psp}}",
@@ -365,6 +365,29 @@
             @endforeach
           @endif
         ]);
+        $("#pembayaran").on("keydown", "#trf", function(){
+          console.log((this).value);
+          if (this.value.length!=0&&!isNaN(parseFloat($(this).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.')))) {
+            console.log(`Value : ${this.value}`);
+            bayar = parseFloat($(this).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'));
+          }else{
+            bayar=0;
+          }
+        });
+        $("#pembayaran").on("input", "#trf", function(){
+          if (this.value.length!=0&&!isNaN(parseFloat($(this).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.')))) {
+            var n = parseFloat($(this).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'));
+            (this).value=n.toLocaleString('id-ID');
+            var total = parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-bayar;
+            $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
+          }else{
+            (this).value=0;
+            var n = parseFloat($(this).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'));
+            var total = parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-bayar;
+            $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
+          }
+          $('#selisih').val((parseFloat($('#total').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))).toLocaleString('id-ID'));
+        });
     });
 </script>
 <script>
@@ -375,7 +398,7 @@
 });
     $(function () {
         var id_pembelian = $('#id_pembelian').val();
-        @if($pembelianSP->status_pembayaran==0)
+        @if($pembelianSP->status_pembelian==0)
           var t = $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,

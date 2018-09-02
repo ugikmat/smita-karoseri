@@ -32,8 +32,8 @@ class ListPembelianSPController extends Controller
         return view('pembelian.sp.list-pembelian-sp');
     }
 
-    public function verif($id){
-        PembelianProduk::where('id_pembelian_sp',$id)
+    public function verif(Request $request){
+        PembelianProduk::where('id_pembelian_sp',$request->get('id'))
                         ->update(['status_pembelian'=>1
                         ]);
         return redirect()->back();
@@ -54,6 +54,65 @@ class ListPembelianSPController extends Controller
         return view('pembelian/sp/list-pembelian-sp-2',['pembelianSP'=>$pembelianSP,'pembayaran'=>$pembayaran,'total_pembayaran'=>$total_pembayaran]);
     }
 
+    /**
+     * Save transaction
+     */
+    public function store(Request $request){
+        $id = $request->get('id_pembelian');
+        $bank = $request->get('bank-sp');
+        $total = $request->get('total');
+        $delete = $request->get('delete');
+        $pembelianSp = PembelianProduk::where('id_pembelian_sp',$id)->first();
+        // $data = DB::table('temp_penjualan_sps')->where('id_temp_penjualan_sp',$id)->first();
+        $dataDetail = DetailPembelianProduk::where('id_pembelian_sp',$id)->get();
+        // $dataDetail = DB::table('temp_detail_penjualan_sps')->where('id_pembelian_sp',$id)->get();
+        // $pembelianSp = new PembelianProduk();
+        $pembelianSp->grand_total=str_replace('.', '', $total);
+        $pembelianSp->save();
+        if (!empty($delete)) {
+            foreach ($delete as $key => $value) {
+                $detailPembayaranSp = DetailPembayaranPembelianProduk::where('id_detail_pembayaran_psp',$value)->first();
+                $detailPembayaranSp->deleted = 1;
+                $detailPembayaranSp->save();
+            }
+        }
+        foreach ($bank as $key => $value) {
+            if (empty($value['id'])) {
+                $detailPembayaranSp = new DetailPembayaranPembelianProduk();
+                $detailPembayaranSp->id_pembelian_sp = $pembelianSp->id_pembelian_sp;
+            } else {
+                $detailPembayaranSp = DetailPembayaranPembelianProduk::where('id_detail_pembayaran_psp',$value['id'])->first();
+            }
+            $detailPembayaranSp->metode_pembayaran = $value['bank'];
+            $detailPembayaranSp->nominal=str_replace('.','',$value['trf']);
+            $detailPembayaranSp->catatan = $value['catatan'];
+            switch ($value['bank']) {
+                case 'BCA Pusat':
+                    $detailPembayaranSp->bca_pusat=$value['trf'];
+                    break;
+                case 'BCA Cabang':
+                    $detailPembayaranSp->bca_cabang=$value['trf'];
+                    break;
+                case 'Mandiri':
+                    $detailPembayaranSp->mandiri=$value['trf'];
+                    break;
+                case 'BNI':
+                    $detailPembayaranSp->bni=$value['trf'];
+                    break;
+                case 'BRI':
+                    $detailPembayaranSp->bri=$value['trf'];
+                    break;
+                case 'Cash':
+                    $detailPembayaranSp->cash=$value['trf'];
+                    break;
+                default:
+                    break;
+            }
+            $detailPembayaranSp->save();
+        }
+        // session(['tgl_penjualan_sp'=>$pembelianSp->id_sales,'id_cust'=>$pembelianSp->id_customer]);
+        return redirect('/pembelian/sp/list-pembelian-sp');
+    }
 
     /**
      * Process dataTable ajax response.
