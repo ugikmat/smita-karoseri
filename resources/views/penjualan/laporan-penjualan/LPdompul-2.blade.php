@@ -86,7 +86,7 @@
 </div>
 <br><br>
 
-<table id="lp-dompul-2-table" class="table responsive" width="100%">
+<table id="lp-dompul-2-table" class="table responsive table-bordered" width="100%">
     <thead>
     <tr>
         <th>No.</th>

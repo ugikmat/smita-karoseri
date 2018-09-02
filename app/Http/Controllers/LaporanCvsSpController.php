@@ -145,10 +145,12 @@ class LaporanCvsSpController extends Controller
             $tgl = $tgl->format('Y-m-d');
         }
         session(['id_sales'=>$sales]);
-        return $datatables->eloquent(produk::select('nama_produk','jumlah_sp','harga_satuan','harga_total')
+        return $datatables->eloquent(produk::select(DB::raw('nama_produk,SUM(jumlah_sp) as jumlah_sp,harga_satuan,SUM(harga_total) as harga_total'))
                         ->join('detail_penjualan_sps','detail_penjualan_sps.id_produk','=','master_produks.kode_produk')
                         ->join('penjualan_sps','penjualan_sps.id_penjualan_sp','=','detail_penjualan_sps.id_penjualan_sp')
                         ->where('penjualan_sps.id_sales',$sales)
+                        ->where('penjualan_sps.tanggal_penjualan_sp',$tgl)
+                        ->groupBy('nama_produk','harga_satuan')
                         )
                         
                         ->addColumn('index', function ($penjualanSP) {
