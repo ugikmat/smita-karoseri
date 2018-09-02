@@ -40,9 +40,7 @@
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       Nama Canvasser :
-      @isset($datas)
-        <input type="text" name="canvasser" id="canvasser" value="{{$datas->nama_canvasser}}" disabled>
-      @endisset
+        <input type="text" name="canvasser" id="canvasser" value="" disabled>
     </div>
   </div>
 </div>
@@ -195,20 +193,20 @@
             processing: true,
             scrollX: true,
             ajax: `/laporan-penjualan/dompul-cvs/${$tgl}/${$sales}`,
-            columnDefs: [
-                {
-                    targets:0,
-                    render: function ( data, type, row, meta ) {
-                        if(type === 'display'){
-                            data = `<a class="link-post" href="/penjualan/laporan-penjualan/LPdompul-piutang/${data}">` + data + '</a>';
-                        }
-                        return data;
-                    }
-                }
-            ],
+            // columnDefs: [
+            //     {
+            //         targets:0,
+            //         render: function ( data, type, row, meta ) {
+            //             if(type === 'display'){
+            //                 data = `<a class="link-post" href="/penjualan/laporan-penjualan/LPdompul-piutang/${data}">` + data + '</a>';
+            //             }
+            //             return data;
+            //         }
+            //     }
+            // ],
             columns: [
                 // {data: 'index'},
-                {data: 'nama_dompul'},
+                {data: 'produk'},
                 {data: 'jumlah_dompul'},
                 {data: 'harga_satuan'},
                 {data: 'harga_total'},
@@ -238,6 +236,7 @@
               $('#bni').val(response.bni.toLocaleString('id-ID'));
               $('#bri').val(response.bri.toLocaleString('id-ID'));
               $('#piutang').val(response.piutang.toLocaleString('id-ID'));
+              $('#canvasser').val(response.sales);
               console.log('Loaded');
               console.log(response.data);
             }
@@ -259,6 +258,7 @@
               $('#bni').val(response.bni.toLocaleString('id-ID'));
               $('#bri').val(response.bri.toLocaleString('id-ID'));
               $('#piutang').val(response.piutang.toLocaleString('id-ID'));
+              $('#canvasser').val(response.sales);
               console.log('Loaded');
               console.log(response.data);
             }

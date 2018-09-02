@@ -27,10 +27,11 @@ class LaporanCvsDompulController extends Controller
      * Diplay a list of transaction made before
      */
     public function index(){
-        return view('penjualan.laporan-penjualan.LPdompul-cvs');
+      $saless = Sales::where('status',1)->get();
+        return view('penjualan.laporan-penjualan.LPdompul-cvs',['saless'=>$saless]);
     }
 
-    public function getData($tgl){
+    public function getData($tgl,$sales){
         if ($tgl!='null') {
             session(['tgl_laporan_dompul'=>$tgl]);
             $tgl = Carbon::parse($tgl);
@@ -57,6 +58,7 @@ class LaporanCvsDompulController extends Controller
                             $join->on('penjualan_dompuls.id_penjualan_dompul', '=', 'total_nominal.id_penjualan_dompul');
                         })
                         ->where('tanggal_penjualan_dompul',$tgl)
+                        ->where('penjualan_dompuls.id_sales',$sales)
                         ->groupBy('master_saless.nm_sales')->get();
                         $qty=0;
                         $total=0;
@@ -78,6 +80,7 @@ class LaporanCvsDompulController extends Controller
                             $bri+=$value->bri;
                             $piutang+=$value->piutang;
                         }
+        $nm_sales = Sales::select('nm_sales')->where('id_sales',$sales)->first();
         return response()->json(['success' => true, 'data' => $data
         , 'qty' => $qty
         , 'total' => $total
@@ -87,7 +90,8 @@ class LaporanCvsDompulController extends Controller
         , 'mandiri' => $mandiri
         , 'bni' => $bni
         , 'bri' => $bri
-        , 'piutang' => $piutang]);
+        , 'piutang' => $piutang
+        , 'sales' => $nm_sales->nm_sales]);
     }
 
     /**
@@ -96,7 +100,7 @@ class LaporanCvsDompulController extends Controller
      * @param \Yajra\Datatables\Datatables $datatables
      * @return \Illuminate\Http\JsonResponse
      */
-    public function data(Datatables $datatables,$tgl_penjualan)
+    public function data(Datatables $datatables,$tgl_penjualan,$sales)
     {
         if ($tgl_penjualan=='null') {
             $tgl = $tgl_penjualan;
@@ -124,64 +128,31 @@ class LaporanCvsDompulController extends Controller
                     ->where('status_active',1)
                    ->groupBy('id_penjualan_dompul','produk');
 
-        return $datatables->eloquent(PenjualanDompul::select(DB::raw('master_saless.nm_sales, nama_bo,
-                                sum(penjualan_dompuls.grand_total) AS total_penjualan, sum(cash) AS cash, 
-                                sum(bca_pusat) AS bca_pusat, sum(bca_cabang) AS bca_cabang, sum(mandiri) AS mandiri, sum(bni) AS bni, sum(bri) AS bri, 
-                                (sum(penjualan_dompuls.grand_total)-sum(total_bayar)) AS piutang,
-                                SUM(dompul) AS dompul,
-                                SUM(dp5) AS dp5,
-                                SUM(dp10) AS dp10'))
-                        ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
-                        ->join('users','users.id_user','=','penjualan_dompuls.id_user')
-                        ->join('bos','bos.id_bo','=','users.id_bo')
-                        ->joinSub($total_nominal, 'total_nominal', function($join) {
-                            $join->on('penjualan_dompuls.id_penjualan_dompul', '=', 'total_nominal.id_penjualan_dompul');
-                        })
-                        ->joinSub($total_penjualan, 'total_penjualan', function($join) {
-                            $join->on('penjualan_dompuls.id_penjualan_dompul', '=', 'total_penjualan.id_penjualan_dompul');
-                        })
-                        // ->join('upload_dompuls','upload_dompul.id_penjualan_dompul','=','penjualan_dompul.id_penjualan_dompul')
+        return $datatables->eloquent(PenjualanDompul::select(DB::raw('produk, sum(qty) as qty, harga_dompul, 
+                                sum(qty*harga_dompul) AS harga_total'))
+                        // ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
+                        ->join('upload_dompuls','upload_dompuls.id_penjualan_dompul','=','penjualan_dompuls.id_penjualan_dompul')
+                        // ->joinSub($total_nominal, 'total_nominal', function($join) {
+                        //     $join->on('penjualan_dompuls.id_penjualan_dompul', '=', 'total_nominal.id_penjualan_dompul');
+                        // })
+                        // ->joinSub($total_penjualan, 'total_penjualan', function($join) {
+                        //     $join->on('penjualan_dompuls.id_penjualan_dompul', '=', 'total_penjualan.id_penjualan_dompul');
+                        // })
                         ->where('tanggal_penjualan_dompul',$tgl)
-                        ->groupBy('master_saless.nm_sales','nama_bo'))
+                        ->where('penjualan_dompuls.id_sales',$sales)
+                        ->groupBy('id_sales','produk','harga_dompul'))
                         ->addColumn('index', function ($penjualanDompul) {
                               return 
                               '';
                             })
-                            ->addColumn('total_penjualan', function ($penjualanDompul) {
-                              return number_format($penjualanDompul->total_penjualan,0,",",".");
+                            ->addColumn('jumlah_dompul', function ($penjualanDompul) {
+                              return number_format($penjualanDompul->qty,0,",",".");
                             })
-                            ->addColumn('dompul', function ($penjualanDompul) {
-                              return number_format($penjualanDompul->dompul,0,",",".");
+                            ->addColumn('harga_satuan', function ($penjualanDompul) {
+                              return number_format($penjualanDompul->harga_dompul,3,",",".");
                             })
-                            ->addColumn('dp5', function ($penjualanDompul) {
-                              return number_format($penjualanDompul->dp5,0,",",".");
-                            })
-                            ->addColumn('dp10', function ($penjualanDompul) {
-                              return number_format($penjualanDompul->dp10,0,",",".");
-                            })
-                            ->addColumn('cash', function ($penjualanDompul) {
-                              return number_format($penjualanDompul->cash,0,",",".");
-                            })
-                            ->addColumn('bca_pusat', function ($penjualanDompul) {
-                              return number_format($penjualanDompul->bca_pusat,0,",",".");
-                            })
-                            ->addColumn('bca_cabang', function ($penjualanDompul) {
-                              return number_format($penjualanDompul->bca_cabang,0,",",".");
-                            })
-                            ->addColumn('mandiri', function ($penjualanDompul) {
-                              return number_format($penjualanDompul->mandiri,0,",",".");
-                            })
-                            ->addColumn('bni', function ($penjualanDompul) {
-                              return number_format($penjualanDompul->bni,0,",",".");
-                            })
-                            ->addColumn('bri', function ($penjualanDompul) {
-                              return number_format($penjualanDompul->bri,0,",",".");
-                            })
-                            ->addColumn('mandiri', function ($penjualanDompul) {
-                              return number_format($penjualanDompul->mandiri,0,",",".");
-                            })
-                            ->addColumn('piutang', function ($penjualanDompul) {
-                              return number_format($penjualanDompul->piutang,0,",",".");
+                            ->addColumn('harga_total', function ($penjualanDompul) {
+                              return number_format($penjualanDompul->harga_total,3,",",".");
                             })
                             // ->addColumn('piutang', function ($penjualanDompul) {
                             //   return $penjualanDompul->total_penjualan-
