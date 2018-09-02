@@ -221,9 +221,9 @@ Route::put('/pembelian/dompul/list/delete','ListPembelianDompulController@delete
 //   return view ('/pembelian/sp/list-pembelian-sp');
 // }) -> name('list-pembelian-sp');
 
-Route::get('/pembelian/laporan-pembelian/Lbeli-dompul', function() {
-  return view ('/pembelian/laporan-pembelian/Lbeli-dompul');
-}) -> name('Lbeli-dompul');
+// laporan pembelian
+Route::get('/pembelian/laporan-pembelian/Lbeli-dompul', 'LaporanPembelianDompulController@index');
+Route::get('/pembelian/laporan-pembelian/data/{tgl_pembelian}', 'LaporanPembelianDompulController@data');
 
 Route::get('/pembelian/laporan-pembelian/Lbeli-sp', function() {
   return view ('/pembelian/laporan-pembelian/Lbeli-sp');

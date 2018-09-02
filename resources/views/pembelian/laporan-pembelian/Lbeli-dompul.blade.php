@@ -40,10 +40,12 @@
     <thead>
     <tr>
         <th>No</th>
-        <th>Nama Sales</th>
+        <th>Nama Supplier</th>
         <th>BO</th>
-        <th>Total Transaksi</th>
-        <th>Total Pembelian</th>
+        <th>DP5</th>
+        <th>DP10</th>
+        <th>DOMPUL</th>
+        <th>Total Penjualan</th>
         <th>Tunai</th>
         <th>BCA Pusat</th>
         <th>BCA Cabang</th>
@@ -152,7 +154,7 @@
         var t = $('#l-beli-dompul-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: `/laporan-penjualan/${$tgl}`,
+            ajax: `/pembelian/laporan-pembelian/data/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -172,9 +174,11 @@
             ],
             columns: [
                 {data: 'index'},
-                {data: 'nm_sales'},
+                {data: 'nama_supplier'},
                 {data: 'nama_bo'},
-                {data: 'total_transaksi'},
+                {data: 'dp5'},
+                {data: 'dp10'},
+                {data: 'dompul'},
                 {data: 'total_penjualan'},
                 {data: 'cash'},
                 {data: 'bca_pusat'},
