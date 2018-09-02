@@ -186,8 +186,8 @@
           $tgl='null';
         }else{
           console.log('No');
+          console.log($tgl);
         }
-        console.log($sales);
         if($sales==""){
           $sales='null';
         }else{
@@ -198,17 +198,17 @@
             processing: true,
             scrollX: true,
             ajax: `/laporan-penjualan/sp-cvs/${$tgl}/${$sales}`,
-            columnDefs: [
-                {
-                    targets:0,
-                    render: function ( data, type, row, meta ) {
-                        if(type === 'display'){
-                            data = `<a class="link-post" href="/penjualan/laporan-penjualan/LPsp-piutang/${data}">` + data + '</a>';
-                        }
-                        return data;
-                    }
-                }
-            ],
+            // columnDefs: [
+            //     {
+            //         targets:0,
+            //         render: function ( data, type, row, meta ) {
+            //             if(type === 'display'){
+            //                 data = `<a class="link-post" href="/penjualan/laporan-penjualan/LPsp-piutang/${data}">` + data + '</a>';
+            //             }
+            //             return data;
+            //         }
+            //     }
+            // ],
             columns: [
                 // {data: 'index'},
                 {data: 'nama_produk'},
@@ -231,7 +231,7 @@
         $.post(`/get_laporan_sp_cvs/${$tgl}/${$sales}`, function(response){
             if(response.success)
             {
-              console.log('Success..');
+              console.log('Success..data');
               // $('#qty').val(response.qty.toLocaleString('id-ID'));
               $('#total').val(response.total.toLocaleString('id-ID'));
               $('#cash').val(response.cash.toLocaleString('id-ID'));
@@ -244,6 +244,8 @@
               $('#canvasser').val(response.sales);
               console.log('Loaded');
               console.log(response.data);
+              console.log(response.piutang);
+              console.log($('#piutang').val());
             }
         }, 'json');
         $('#save').on('click',function(event) {
@@ -253,9 +255,9 @@
           $.post(`/get_laporan_sp_cvs/${$tgl}/${$sales}`, function(response){
             if(response.success)
             {
-              console.log('Success..');
+              console.log('Success..data');
               // $('#qty').val(response.qty.toLocaleString('id-ID'));
-              $('#total').val(response.total.toLocaleString('id-ID'));
+              $('#total').val(response.total);
               $('#cash').val(response.cash.toLocaleString('id-ID'));
               $('#bca_pusat').val(response.bca_pusat.toLocaleString('id-ID'));
               $('#bca_cabang').val(response.bca_cabang.toLocaleString('id-ID'));
@@ -266,6 +268,8 @@
               $('#canvasser').val(response.sales);
               console.log('Loaded');
               console.log(response.data);
+              console.log(response.piutang);
+              console.log($('#piutang').val());
             }
         }, 'json');
         });
