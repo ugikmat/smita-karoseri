@@ -445,4 +445,35 @@
 
     });
 </script>
+<script>
+  $('#editModal').on('show.bs.modal', function (event) {
+   
+    var tipe = document.getElementById("tipe");
+
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var tipe_harga = button.data('tipe')
+    var tipe_sp = button.data('tipe_harga')
+    var id = button.data('id')
+    var id_detail = button.data('id_detail')
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    while (tipe.firstChild) {
+        tipe.removeChild(tipe.firstChild);
+    }
+    var default_opt = document.createElement('option');
+    default_opt.value = 'default';
+    default_opt.innerHTML = '-- Pilih Tipe Dompul --';
+    tipe.appendChild(default_opt);
+    console.log(tipe_harga);
+    tipe_harga.forEach(element => {
+      var opt = document.createElement('option');
+      opt.value = element.tipe_harga_sp;
+      opt.innerHTML = element.tipe_harga_sp;
+      tipe.appendChild(opt);
+    });
+    tipe.value=tipe_sp;
+    // $('#qty_program').val(qty.toLocaleString('id-ID'));
+    $('#link').val(`/pembelian/sp/list/update/${id_detail}`);
+  })
+</script>
 @stop

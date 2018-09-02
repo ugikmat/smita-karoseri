@@ -54,6 +54,35 @@ class ListPembelianSPController extends Controller
         return view('pembelian/sp/list-pembelian-sp-2',['pembelianSP'=>$pembelianSP,'pembayaran'=>$pembayaran,'total_pembayaran'=>$total_pembayaran]);
     }
 
+    public function update(Request $request,$id_detail){
+        $data = DetailPembelianProduk::where('id_detail_pembelian_sp',$id_detail)->first();
+
+        // $data = DB::table('temp_detail_penjualan_sps')->where('id_temp_penjualan_sp',$id)->first();
+        $tipe = $request->get('tipe');
+        
+        if($tipe != 'default') {
+            // DB::table('temp_detail_penjualan_sps')->where('id_temp_penjualan_sp',$id)
+            // ->update(['tipe_harga'=>$tipe]);
+            $data->tipe_harga=$tipe;
+        }
+            $harga = HargaProduk::where('id_produk',$data->id_produk)->where('tipe_harga_sp',$data->tipe_harga)->first();
+            // DB::table('temp_detail_penjualan_sps')->where('id_temp_penjualan_sp',$id)
+            // ->update(['harga_satuan'=>$harga->harga_sp,
+            // 'harga_beli'=>$qty_program,
+            // 'harga_total'=>($data->jumlah_sp-$qty_program)*$harga->harga_sp]);
+            $data->harga_satuan=$harga->harga_sp;
+            $data->harga_total=($data->jumlah_sp)*$harga->harga_sp;
+            $data->save();
+        $total = 0;
+        $datas = DetailPembelianProduk::where('id_pembelian_sp',$data->id_pembelian_sp)->get();
+        foreach ($datas as $key => $value) {
+            $total+=$value->harga_total;
+        }
+        $total=number_format($total,0,",",".");
+        session(['total_harga_sp' => $total]);
+        return response()->json(['success' => true,'total'=>$total]);
+    }
+
     /**
      * Save transaction
      */
@@ -219,7 +248,7 @@ class ListPembelianSPController extends Controller
                                 $tipe = HargaProduk::select('tipe_harga_sp')->where('id_produk',$detailPembelianSp->id_produk)->get();
                                 // $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$uploadDompul->produk)->get();
                               return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$detailPembelianSp->id_pembelian_sp.'" data-id_detail="'.$detailPembelianSp->id_detail_pembelian_sp.'" data-tipe='.$tipe.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$detailPembelianSp->id_pembelian_sp.'" data-id_detail="'.$detailPembelianSp->id_detail_pembelian_sp.'" data-tipe='.$tipe.' data-tipe_harga="'.$detailPembelianSp->tipe_harga.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
                             })
                             // ->addColumn('input', function ($uploadDompul) {
                             //   return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
