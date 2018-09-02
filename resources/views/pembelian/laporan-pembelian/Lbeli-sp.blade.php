@@ -153,7 +153,7 @@
         var t = $('#l-beli-sp-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: `/laporan-penjualan/sp/${$tgl}`,
+            ajax: `/pembelian/laporan-pembelian/data/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
