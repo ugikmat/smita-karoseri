@@ -37,10 +37,14 @@
 <br>
 <form action="" method="post" class="repeater">
   @csrf
+  <input type="hidden" name="id_pembelian" id="id_pembelian" value="{{$pembelianSP->id_pembelian_sp}}">
+  <div id="deleted">
+
+  </div>
 <table id="list-edit-invoice-table" class="table responsive"  width="100%">
     <thead>
     <tr>
-      @if($penjualanDompul->status_pembayaran==0)
+      @if($pembelianSP->status_pembayaran==0)
       {{-- <th>No</th> --}}
         <th>Uraian</th>
         <th>Tipe</th>
@@ -67,9 +71,7 @@
       <b>Jumlah Tunai</b>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      @isset($total)
-        <input type="text" class="form-control" name="total" id="total" value="" readonly>
-      @endisset
+        <input type="text" class="form-control" name="total" id="total" value="{{number_format($pembelianSP->grand_total,0,',','.')}}" readonly>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -84,7 +86,7 @@
       <b>Total Pembayaran</b>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="" readonly>
+    <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="{{number_format($total_pembayaran,0,',','.')}}" readonly>
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -113,7 +115,7 @@
     <div data-repeater-item>
       <div class="form row">
         <input type="hidden" id="id" name="id" class="form-control" value="">
-        @if($penjualanDompul->status_pembayaran==0)
+        @if($pembelianSP->status_pembayaran==0)
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
           <b>Pembayaran</b>
           <br>
@@ -165,7 +167,7 @@
     <hr>
     </div>
   </div>
-@if($penjualanDompul->status_pembayaran==0)
+@if($pembelianSP->status_pembayaran==0)
 <button data-repeater-create type="button" class="btn btn-warning"> <span class="glyphicon glyphicon-plus"></span> Tambah Pembayaran</button>
 
 <div class="row">
@@ -286,7 +288,7 @@
 @section('js')
 <script>
     $(document).ready(function () {
-        $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
+        $('#selisih').val((parseFloat($('#total').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))).toLocaleString('id-ID'));
         var indeks = 0;
         var bayar=0;
         var repeater = $('.repeater').repeater({
@@ -322,11 +324,11 @@
                     $(this).slideUp(deleteElement);
                 }
                 $('#deleted').append(`<input type='hidden' id='delete' name="delete[${indeks++}]" value='${$('#id', $(this)).val()}'>`);
-                var n = parseInt($('#trf', $(this)).val().replace(/\D/g,''),10);
-                var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-n;
+                var n = parseFloat($('#trf', $(this)).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'));
+                var total = parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-n;
                 console.log(total);
                 $('#total_pembayaran').val((total).toLocaleString('id-ID'));
-                $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
+                $('#selisih').val((parseFloat($('#total').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))).toLocaleString('id-ID'));
             },
             // (Optional)
             // You can use this if you need to manually re-index the list
@@ -343,19 +345,19 @@
             isFirstItemUndeletable: false
         });
         repeater.setList([
-          @if($penjualanDompul->status_pembayaran==0)
-            @foreach($detailPenjualanDompul as $item)
+          @if($pembelianSP->status_pembayaran==0)
+            @foreach($pembayaran as $item)
             {
-                  'id': "{{$item->id_detail_penjualan}}",
+                  'id': "{{$item->id_detail_pembayaran_psp}}",
                   'bank': "{{$item->metode_pembayaran}}",
                   'trf' : "{{number_format($item->nominal,0,",",".")}}",
                   'catatan' : "{{$item->catatan}}"
               },
             @endforeach
           @else
-            @foreach($detailPenjualanDompul as $item)
+            @foreach($pembayaran as $item)
             {
-                  'id': "{{$item->id_detail_penjualan}}",
+                  'id': "{{$item->id_detail_pembayaran_psp}}",
                   'bank': "{{$item->metode_pembayaran}}",
                   'trf' : "{{number_format($item->nominal,0,",",".")}}",
                   'catatan' : "{{$item->catatan}}"
@@ -372,15 +374,13 @@
   }
 });
     $(function () {
-        var tgl = $('#tgl').val();
-        var sales = $('#sales').val();
-        var customer = $('#customer').val();
+        var id_pembelian = $('#id_pembelian').val();
         if($('#status_pembayaran').val()==0){
           var t = $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
             searching:  false,
-            ajax: `/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
+            ajax: `/pembelian_sp/detail/${id_pembelian}`,
             columns: [
               {data: 'produk'},
               {data: 'tipe_dompul'},
@@ -399,7 +399,7 @@
           {
             console.log('success')
             console.log(response.total);
-            t.ajax.url(`/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`).load();
+            t.ajax.url(`/pembelian_sp/detail/${id_pembelian}`).load();
             $('#total').val(response.total.toLocaleString('id-ID'));
             $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
           }
@@ -410,7 +410,7 @@
             serverSide: true,
             processing: true,
             searching:  false,
-            ajax: `/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
+            ajax: `/pembelian_sp/detail/${id_pembelian}`,
             columns: [
               {data: 'produk'},
               {data: 'tipe_dompul'},

@@ -32,6 +32,29 @@ class ListPembelianSPController extends Controller
         return view('pembelian.sp.list-pembelian-sp');
     }
 
+    public function verif($id){
+        PembelianProduk::where('id_pembelian_sp',$id)
+                        ->update(['status_pembelian'=>1
+                        ]);
+        return redirect()->back();
+    }
+
+    public function delete(Request $request){
+        PembelianProduk::where('id_pembelian_sp',$request->get('id'))->update(['deleted'=>1]);
+        return redirect('/pembelian/sp/list-pembelian-sp');
+    }
+
+     public function edit($id){
+        $pembelianSP = PembelianProduk::where('id_pembelian_sp',$id)->first();
+        $pembayaran = DetailPembayaranPembelianProduk::where('id_pembelian_sp',$id)->where('deleted',0)->get();
+        $total_pembayaran=0;
+        foreach ($pembayaran as $key => $value) {
+            $total_pembayaran+=$value->nominal;
+        }
+        return view('pembelian/sp/list-pembelian-sp-2',['pembelianSP'=>$pembelianSP,'pembayaran'=>$pembayaran,'total_pembayaran'=>$total_pembayaran]);
+    }
+
+
     /**
      * Process dataTable ajax response.
      *
@@ -77,23 +100,22 @@ class ListPembelianSPController extends Controller
 
                             })
                           ->addColumn('action', function ($pembelianSP) {
-                              return '';
-                            //   if ($pembelianSP->status_pembelian==0) {
-                            //       return
-                            //         '<a class="btn btn-xs btn-primary"
-                            //         href="/pembelian/sp/list-invoice-sp/edit/'.$pembelianSP->id_pembelian_sp.'/'.$pembelianSP->nm_sales.'/'.$pembelianSP->tanggal_pembelian_sp.'/'.$pembelianSP->nm_cust.'">
-                            //         <i class="glyphicon glyphicon-edit"></i> Edit
-                            //         </a>
-                            //         <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$pembelianSP->id_pembelian_sp.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>
-                            //         <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$pembelianSP->id_pembelian_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
-                            //   } else {
-                            //       return
-                            //         '<a class="btn btn-xs btn-primary"
-                            //         href="/pembelian/sp/list-invoice-sp/edit/'.$pembelianSP->id_pembelian_sp.'/'.$pembelianSP->nm_sales.'/'.$pembelianSP->tanggal_pembelian_sp.'/'.$pembelianSP->nm_cust.'">
-                            //         <i class="glyphicon glyphicon-edit"></i> Lihat
-                            //         </a>
-                            //         <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$pembelianSP->id_pembelian_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
-                            //   }
+                              if ($pembelianSP->status_pembelian==0) {
+                                  return
+                                    '<a class="btn btn-xs btn-primary"
+                                    href="/pembelian/sp/list-invoice/edit/'.$pembelianSP->id_pembelian_sp.'">
+                                    <i class="glyphicon glyphicon-edit"></i> Edit
+                                    </a>
+                                    <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$pembelianSP->id_pembelian_sp.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$pembelianSP->id_pembelian_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                              } else {
+                                  return
+                                    '<a class="btn btn-xs btn-primary"
+                                    href="/pembelian/sp/list-invoice/edit/'.$pembelianSP->id_pembelian_sp.'">
+                                    <i class="glyphicon glyphicon-edit"></i> Lihat
+                                    </a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$pembelianSP->id_pembelian_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                              }
 
                             })
                           ->make(true);
