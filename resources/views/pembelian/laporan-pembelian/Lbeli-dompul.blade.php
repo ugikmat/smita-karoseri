@@ -161,17 +161,17 @@
             "targets": 0
                 } ],
             "order": [[ 1, 'asc' ]],
-            columnDefs: [
-                {
-                    targets:1,
-                    render: function ( data, type, row, meta ) {
-                        if(type === 'display'){
-                            data = `<a class="link-post" href="/penjualan/laporan-penjualan/LPdompul-piutang/${data}">` + data + '</a>';
-                        }
-                        return data;
-                    }
-                }
-            ],
+            // columnDefs: [
+            //     {
+            //         targets:1,
+            //         render: function ( data, type, row, meta ) {
+            //             if(type === 'display'){
+            //                 data = `<a class="link-post" href="/penjualan/laporan-penjualan/LPdompul-piutang/${data}">` + data + '</a>';
+            //             }
+            //             return data;
+            //         }
+            //     }
+            // ],
             columns: [
                 {data: 'index'},
                 {data: 'nama_supplier'},
