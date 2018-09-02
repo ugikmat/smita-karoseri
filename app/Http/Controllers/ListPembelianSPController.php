@@ -120,4 +120,51 @@ class ListPembelianSPController extends Controller
                             })
                           ->make(true);
     }
+    public function penjualanData(Datatables $datatables,$id)
+    {
+        // $data = DB::table('temp_detail_pembelian_sps')->get();
+
+        $detailPembelian = DetailPembelianProduk::select(DB::raw('master_produks.nama_produk, 
+        master_produks.satuan, 
+        detail_pembelian_sps.harga_satuan,
+        detail_pembelian_sps.id_produk,
+        detail_pembelian_sps.id_pembelian_sp,
+        detail_pembelian_sps.id_detail_pembelian_sp,
+        detail_pembelian_sps.tipe_harga, 
+        detail_pembelian_sps.jumlah_sp,
+        detail_pembelian_sps.harga_total'))
+                        ->join('master_produks',function($join){
+                            $join->on('detail_pembelian_sps.id_produk','=','master_produks.kode_produk');
+                        })
+                        ->where('id_pembelian_sp',$id)->get();
+        $total = 0;
+        foreach ($detailPembelian as $key => $value) {
+            $total+=$value->harga_total;
+        }
+        $total=number_format($total,0,",",".");
+        session(['total_harga_sp' => $total]);
+        return $datatables->of($detailPembelian)
+                        ->addColumn('indeks', function ($detailPembelianSp) {
+                              return '';
+                            })
+                            ->addColumn('harga', function ($detailPembelianSp) {
+                              return number_format($detailPembelianSp->harga_satuan,0,",",".");
+                            })
+                            ->addColumn('jumlah', function ($detailPembelianSp) {
+                              return number_format($detailPembelianSp->jumlah_sp,0,",",".");
+                            })
+                            ->addColumn('total_harga', function ($detailPembelianSp) {
+                              return number_format($detailPembelianSp->harga_total,0,",",".");
+                            })
+                            ->addColumn('action', function ($detailPembelianSp) {
+                                $tipe = HargaProduk::select('tipe_harga_sp')->where('id_produk',$detailPembelianSp->id_produk)->get();
+                                // $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$uploadDompul->produk)->get();
+                              return 
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$detailPembelianSp->id_pembelian_sp.'" data-id_detail="'.$detailPembelianSp->id_detail_pembelian_sp.'" data-tipe='.$tipe.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                            })
+                            // ->addColumn('input', function ($uploadDompul) {
+                            //   return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                            // })->rawColumns(['input'])
+                          ->make(true);
+    }
 }

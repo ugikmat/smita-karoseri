@@ -375,18 +375,17 @@
 });
     $(function () {
         var id_pembelian = $('#id_pembelian').val();
-        if($('#status_pembayaran').val()==0){
+        @if($pembelianSP->status_pembayaran==0)
           var t = $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
             searching:  false,
             ajax: `/pembelian_sp/detail/${id_pembelian}`,
             columns: [
-              {data: 'produk'},
-              {data: 'tipe_dompul'},
-              {data: 'harga_dompul'},
+              {data: 'nama_produk'},
+              {data: 'tipe_harga'},
+              {data: 'harga'},
               {data: 'jumlah'},
-              {data: 'jumlah_program'},
               {data: 'total_harga'},
               {data: 'action', orderable: false, searchable: false}
             ]
@@ -405,22 +404,21 @@
           }
           }, 'json');
         });
-        }else{
+        @else
           $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
             searching:  false,
             ajax: `/pembelian_sp/detail/${id_pembelian}`,
             columns: [
-              {data: 'produk'},
-              {data: 'tipe_dompul'},
-              {data: 'harga_dompul'},
+              {data: 'nama_produk'},
+              {data: 'tipe_harga'},
+              {data: 'harga'},
               {data: 'jumlah'},
-              {data: 'jumlah_program'},
-              {data: 'total_harga'}
+              {data: 'total_harga'},
             ]
         });
-        }
+        @endif
 
     });
 </script>
