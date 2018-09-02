@@ -227,7 +227,7 @@
             if(response.success)
             {
               console.log('Success..');
-              // $('.qty').val(response.qty.toLocaleString('id-ID'));
+              $('.qty').val(response.qty.toLocaleString('id-ID'));
               $('.total').val(response.total.toLocaleString('id-ID'));
               $('.cash').val(response.cash.toLocaleString('id-ID'));
               $('.bca_pusat').val(response.bca_pusat.toLocaleString('id-ID'));
@@ -249,7 +249,7 @@
             if(response.success)
             {
               console.log('Success..');
-              // $('#qty').val(response.qty.toLocaleString('id-ID'));
+              $('#qty').val(response.qty.toLocaleString('id-ID'));
               $('.total').val(response.total.toLocaleString('id-ID'));
               $('.cash').val(response.cash.toLocaleString('id-ID'));
               $('.bca_pusat').val(response.bca_pusat.toLocaleString('id-ID'));

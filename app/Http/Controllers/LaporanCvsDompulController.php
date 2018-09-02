@@ -49,11 +49,12 @@ class LaporanCvsDompulController extends Controller
                     ->where('deleted',0)
                    ->groupBy('id_penjualan_dompul');
         $data = PenjualanDompul::select(DB::raw('master_saless.nm_sales, 
-                                sum(penjualan_dompuls.grand_total) AS total_penjualan, sum(cash) AS cash, 
+                                sum(penjualan_dompuls.grand_total) AS total_penjualan, sum(cash) AS cash, sum(qty) as qty,
                                 sum(bca_pusat) AS pusat, sum(bca_cabang) AS cabang, sum(mandiri) AS mandiri, sum(bni) AS bni, sum(bri) AS bri, 
                                 (sum(penjualan_dompuls.grand_total)-sum(total_bayar)) AS piutang,
                                 COUNT(penjualan_dompuls.id_penjualan_dompul) AS total_transaksi'))
                         ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
+                        ->join('upload_dompuls','upload_dompuls.id_penjualan_dompul','=','penjualan_dompuls.id_penjualan_dompul')
                         ->joinSub($total_nominal, 'total_nominal', function($join) {
                             $join->on('penjualan_dompuls.id_penjualan_dompul', '=', 'total_nominal.id_penjualan_dompul');
                         })
@@ -70,7 +71,7 @@ class LaporanCvsDompulController extends Controller
                         $bri=0;
                         $piutang=0;
                         foreach ($data as $key => $value) {
-                            $qty+=$value->total_transaksi;
+                            $qty+=$value->qty;
                             $total+=$value->total_penjualan;
                             $cash+=$value->cash;
                             $bca_pusat+=$value->pusat;
@@ -108,25 +109,25 @@ class LaporanCvsDompulController extends Controller
             $tgl = Carbon::parse($tgl_penjualan);
             $tgl = $tgl->format('Y-m-d');
         }
-        $total_nominal = DB::table('detail_penjualan_dompuls')
-                   ->select(DB::raw("id_penjualan_dompul, sum(nominal) AS total_bayar,
-    	sum(IF(metode_pembayaran = 'Cash', nominal, 0)) AS cash,
-	sum(IF(metode_pembayaran = 'BCA Pusat', nominal, 0)) AS bca_pusat, 
-	sum(IF(metode_pembayaran = 'BCA Cabang', nominal, 0)) AS bca_cabang, 
-	sum(IF(metode_pembayaran = 'Mandiri', nominal, 0)) AS mandiri,
-	sum(IF(metode_pembayaran = 'BNI', nominal, 0)) AS bni, 
-    sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
-                    ->where('deleted',0)
-                   ->groupBy('id_penjualan_dompul');
+    //     $total_nominal = DB::table('detail_penjualan_dompuls')
+    //                ->select(DB::raw("id_penjualan_dompul, sum(nominal) AS total_bayar,
+    // 	sum(IF(metode_pembayaran = 'Cash', nominal, 0)) AS cash,
+	// sum(IF(metode_pembayaran = 'BCA Pusat', nominal, 0)) AS bca_pusat, 
+	// sum(IF(metode_pembayaran = 'BCA Cabang', nominal, 0)) AS bca_cabang, 
+	// sum(IF(metode_pembayaran = 'Mandiri', nominal, 0)) AS mandiri,
+	// sum(IF(metode_pembayaran = 'BNI', nominal, 0)) AS bni, 
+    // sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+    //                 ->where('deleted',0)
+    //                ->groupBy('id_penjualan_dompul');
 
-        $total_penjualan = DB::table('upload_dompuls')
-                   ->select(DB::raw("id_penjualan_dompul, produk,
-    	sum(IF(produk = 'DOMPUL', qty, 0)) AS dompul,
-        sum(IF(produk = 'DP5', qty, 0)) AS dp5,
-        sum(IF(produk = 'DP10', qty, 0)) AS dp10"))
-                    ->where('deleted',0)
-                    ->where('status_active',1)
-                   ->groupBy('id_penjualan_dompul','produk');
+    //     $total_penjualan = DB::table('upload_dompuls')
+    //                ->select(DB::raw("id_penjualan_dompul, produk,
+    // 	sum(IF(produk = 'DOMPUL', qty, 0)) AS dompul,
+    //     sum(IF(produk = 'DP5', qty, 0)) AS dp5,
+    //     sum(IF(produk = 'DP10', qty, 0)) AS dp10"))
+    //                 ->where('deleted',0)
+    //                 ->where('status_active',1)
+    //                ->groupBy('id_penjualan_dompul','produk');
 
         return $datatables->eloquent(PenjualanDompul::select(DB::raw('produk, sum(qty) as qty, harga_dompul, 
                                 sum(qty*harga_dompul) AS harga_total'))
