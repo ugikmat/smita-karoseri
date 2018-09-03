@@ -178,9 +178,9 @@
           <th>HP Kanvacer</th>
           <th>Nama Kanvacer</th>
           <th>Inbox</th>
-          <th>Print</th>
+          {{-- <th>Print</th> --}}
           <th>Bayar</th>
-          <th>Action</th>
+          {{-- <th>Action</th> --}}
         </tr>
       </thead>
       <tfoot>
@@ -201,7 +201,7 @@
           <th>HP Kanvacer</th>
           <th>Nama Kanvacer</th>
           <th>Inbox</th>
-          <th>Print</th>
+          {{-- <th>Print</th> --}}
           <th>Bayar</th>
         </tr>
       </tfoot>
@@ -573,16 +573,11 @@
         {
           data: 'inbox'
         },
-        {
-          data: 'print'
-        },
+        // {
+        //   data: 'print'
+        // },
         {
           data: 'bayar'
-        },
-        {
-          data: 'action',
-          orderable: false,
-          searchable: false
         }
       ],
       dom: 'lBrtip',
