@@ -42,22 +42,21 @@ class StokSpController extends Controller
         
         $tgl_akhir = Carbon::parse($tgl_akhir);
         $tgl_akhir = $tgl_akhir->format('Y-m-d');    
-        $stokSP = DB::table('kartu_stok_sps')->select(DB::raw("kartu_stok_sps.id_produk as nama, nama_produk,
+        $stokSP = DB::table('kartu_stok_sps')->select(DB::raw("kartu_stok_sps.id_produk as nama,
         COALESCE((SELECT sum(awal.masuk)-sum(awal.keluar)
 FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi < '{$tgl_awal}' AND awal.id_produk=nama),0) AS stok_awal,
-sum(masuk) AS stok_masuk, sum(keluar) AS stok_keluar,
-(sum(masuk)-sum(keluar)+COALESCE((SELECT sum(awal.masuk)-sum(awal.keluar)
-FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi < '{$tgl_awal}' AND awal.id_produk=nama),0)) AS jumlah_stok"))
-                        ->join('master_produks',function($join){
-                            $join->on('kartu_stok_sps.id_produk','=','master_produks.kode_produk');
-                        })
-                        ->whereBetween('tanggal_transaksi',[$tgl_awal,$tgl_akhir])
-                        ->groupBy('nama','nama_produk');
-        $produk = produk::select('kode_produk','stok_awal','stok_masuk','stok_keluar','jumlah_stok')
+COALESCE((SELECT sum(awal.masuk)
+FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' AND awal.id_produk=nama),0) AS stok_masuk,
+COALESCE((SELECT sum(awal.keluar)
+FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' AND awal.id_produk=nama),0) AS stok_keluar,
+(sum(masuk)-sum(keluar)) AS jumlah_stok"))
+                        ->whereRaw("tanggal_transaksi < '{$tgl_akhir}'")
+                        ->groupBy('nama');
+        $produk = produk::select('kode_produk','nama_produk','stok_awal','stok_masuk','stok_keluar','jumlah_stok')
         ->leftJoinSub($stokSP, 'total_nominal', function($join) {
-                            $join->on('master_produks.kode_produk', '=', 'total_nominal.nama_produk');
+                            $join->on('master_produks.kode_produk', '=', 'total_nominal.nama');
                         })
-        ->where('status_produk',1)->groupBy('kode_produk','stok_awal','stok_masuk','stok_keluar','jumlah_stok')->get();
+        ->where('status_produk',1)->get();
         return $datatables->of($produk)
                         ->addColumn('indeks', function ($dataStok) {
                               return '';
