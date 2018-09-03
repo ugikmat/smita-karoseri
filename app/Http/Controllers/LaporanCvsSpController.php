@@ -84,13 +84,18 @@ class LaporanCvsSpController extends Controller
     sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
                     ->where('deleted',0)
                    ->groupBy('id_penjualan_sp');
+        $total_penjualan = DetailPenjualanProduk::select(DB::raw('id_penjualan_sp,sum(jumlah_sp) as jumlah_sp'))
+                            ->groupBy('id_penjualan_sp');
         $data = PenjualanProduk::select(DB::raw('master_saless.nm_sales, SUM(jumlah_sp) as jumlah_sp,
                                 sum(penjualan_sps.grand_total) AS total_penjualan, sum(cash) AS cash, 
                                 sum(bca_pusat) AS pusat, sum(bca_cabang) AS cabang, sum(mandiri) AS mandiri, sum(bni) AS bni, sum(bri) AS bri, 
                                 (sum(penjualan_sps.grand_total)-sum(total_bayar)) AS piutang,
                                 COUNT(penjualan_sps.id_penjualan_sp) AS total_transaksi'))
                         ->join('master_saless','master_saless.id_sales','=','penjualan_sps.id_sales')
-                        ->join('detail_penjualan_sps','detail_penjualan_sps.id_penjualan_sp','=','penjualan_sps.id_penjualan_sp')
+                        // ->join('detail_penjualan_sps','detail_penjualan_sps.id_penjualan_sp','=','penjualan_sps.id_penjualan_sp')
+                        ->joinSub($total_penjualan, 'total_penjualan', function($join) {
+                            $join->on('penjualan_sps.id_penjualan_sp', '=', 'total_penjualan.id_penjualan_sp');
+                        })
                         ->joinSub($total_nominal, 'total_nominal', function($join) {
                             $join->on('penjualan_sps.id_penjualan_sp', '=', 'total_nominal.id_penjualan_sp');
                         })
