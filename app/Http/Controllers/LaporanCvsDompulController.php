@@ -48,15 +48,20 @@ class LaporanCvsDompulController extends Controller
     sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
                     ->where('deleted',0)
                    ->groupBy('id_penjualan_dompul');
+        $total_penjualan = UploadDompul::select(DB::raw('id_penjualan_dompul,sum(qty) as qty'))
+                            ->groupBy('id_penjualan_dompul');
         $data = PenjualanDompul::select(DB::raw('master_saless.nm_sales, 
                                 sum(penjualan_dompuls.grand_total) AS total_penjualan, sum(cash) AS cash, sum(qty) as qty,
                                 sum(bca_pusat) AS pusat, sum(bca_cabang) AS cabang, sum(mandiri) AS mandiri, sum(bni) AS bni, sum(bri) AS bri, 
                                 (sum(penjualan_dompuls.grand_total)-sum(total_bayar)) AS piutang,
                                 COUNT(penjualan_dompuls.id_penjualan_dompul) AS total_transaksi'))
                         ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
-                        ->join('upload_dompuls','upload_dompuls.id_penjualan_dompul','=','penjualan_dompuls.id_penjualan_dompul')
+                        // ->join('upload_dompuls','upload_dompuls.id_penjualan_dompul','=','penjualan_dompuls.id_penjualan_dompul')
                         ->joinSub($total_nominal, 'total_nominal', function($join) {
                             $join->on('penjualan_dompuls.id_penjualan_dompul', '=', 'total_nominal.id_penjualan_dompul');
+                        })
+                        ->joinSub($total_penjualan, 'total_penjualan', function($join) {
+                            $join->on('penjualan_dompuls.id_penjualan_dompul', '=', 'total_penjualan.id_penjualan_dompul');
                         })
                         ->where('tanggal_penjualan_dompul',$tgl)
                         ->where('penjualan_dompuls.id_sales',$sales)
