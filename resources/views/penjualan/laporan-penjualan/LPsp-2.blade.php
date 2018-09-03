@@ -6,7 +6,11 @@
     <h1>Detail Piutang SP</h1>
 
 @stop
-
+<style>
+  td{
+    white-space: nowrap;
+  }
+</style>
 @section('css')
 
 @stop

@@ -16,6 +16,7 @@
   }
   th{
     text-align: center;
+    white-space: nowrap;
   }
   .form-control{
     text-align: center;

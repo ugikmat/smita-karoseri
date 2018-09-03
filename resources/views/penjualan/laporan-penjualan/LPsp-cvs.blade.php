@@ -11,11 +11,11 @@
 <link rel="stylesheet" href="{{ asset('/datepicker/css/bootstrap-datepicker.min.css') }}">
 <style>
   td{
-    text-align: center;
     white-space: nowrap;
   }
   th{
     text-align: center;
+    white-space: nowrap;
   }
   .form-control{
     text-align: center;
@@ -26,6 +26,9 @@
   }
   input{
     width: auto;
+  }
+  .kiri{
+    text-align: center;
   }
 </style>
 @stop
@@ -198,17 +201,17 @@
             processing: true,
             scrollX: true,
             ajax: `/laporan-penjualan/sp-cvs/${$tgl}/${$sales}`,
-            // columnDefs: [
-            //     {
-            //         targets:0,
-            //         render: function ( data, type, row, meta ) {
-            //             if(type === 'display'){
-            //                 data = `<a class="link-post" href="/penjualan/laporan-penjualan/LPsp-piutang/${data}">` + data + '</a>';
-            //             }
-            //             return data;
-            //         }
-            //     }
-            // ],
+            columnDefs: [
+                {
+                    targets:[1,2,3,4,5,6,7,8,9,10],
+                    render: function ( data, type, row, meta ) {
+                        if(type === 'display'){
+                            data = `<p class="kiri">` + data + '</p>';
+                        }
+                        return data;
+                    }
+                }
+            ],
             columns: [
                 // {data: 'index'},
                 {data: 'nama_produk'},
