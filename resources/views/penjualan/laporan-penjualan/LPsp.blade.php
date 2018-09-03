@@ -66,15 +66,15 @@
         <td></td>
         <td><b>Grand Total</b></td>
         <td></td>
-        <td><input type="text" name="qty" id="qty" class="form-control" value="" readonly></td>
-        <td><input type="text" name="total" id="total" class="form-control" value="" readonly></td>
-        <td><input type="text" name="cash" id="cash" class="form-control" value="" readonly></td>
-        <td><input type="text" name="bca_pusat" id="bca_pusat" class="form-control" value="" readonly></td>
-        <td><input type="text" name="bca_cabang" id="bca_cabang" class="form-control" value="" readonly></td>
-        <td><input type="text" name="mandiri" id="mandiri" class="form-control" value="" readonly></td>
-        <td><input type="text" name="bri" id="bri" class="form-control" value="" readonly></td>
-        <td><input type="text" name="bni" id="bni" class="form-control" value="" readonly></td>
-        <td><input type="text" name="piutang" id="piutang" class="form-control" value="" readonly></td>
+        <td><input type="text" name="qty" id="qty" class="form-control qty" value="" readonly></td>
+        <td><input type="text" name="total" id="total" class="form-control total" value="" readonly></td>
+        <td><input type="text" name="cash" id="cash" class="form-control cash" value="" readonly></td>
+        <td><input type="text" name="bca_pusat" id="bca_pusat" class="form-control bca_pusat" value="" readonly></td>
+        <td><input type="text" name="bca_cabang" id="bca_cabang" class="form-control bca_cabang" value="" readonly></td>
+        <td><input type="text" name="mandiri" id="mandiri" class="form-control mandiri" value="" readonly></td>
+        <td><input type="text" name="bri" id="bri" class="form-control bri" value="" readonly></td>
+        <td><input type="text" name="bni" id="bni" class="form-control bni" value="" readonly></td>
+        <td><input type="text" name="piutang" id="piutang" class="form-control piutang" value="" readonly></td>
       </tr>
     </tfoot>
 </table>
@@ -208,15 +208,15 @@
             if(response.success)
             {
               console.log('Success..');
-              $('#qty').val(response.qty.toLocaleString('id-ID'));
-              $('#total').val(response.total.toLocaleString('id-ID'));
-              $('#cash').val(response.cash.toLocaleString('id-ID'));
-              $('#bca_pusat').val(response.bca_pusat.toLocaleString('id-ID'));
-              $('#bca_cabang').val(response.bca_cabang.toLocaleString('id-ID'));
-              $('#mandiri').val(response.mandiri.toLocaleString('id-ID'));
-              $('#bni').val(response.bni.toLocaleString('id-ID'));
-              $('#bri').val(response.bri.toLocaleString('id-ID'));
-              $('#piutang').val(response.piutang.toLocaleString('id-ID'));
+              $('.qty').val(response.qty.toLocaleString('id-ID'));
+              $('.total').val(response.total.toLocaleString('id-ID'));
+              $('.cash').val(response.cash.toLocaleString('id-ID'));
+              $('.bca_pusat').val(response.bca_pusat.toLocaleString('id-ID'));
+              $('.bca_cabang').val(response.bca_cabang.toLocaleString('id-ID'));
+              $('.mandiri').val(response.mandiri.toLocaleString('id-ID'));
+              $('.bni').val(response.bni.toLocaleString('id-ID'));
+              $('.bri').val(response.bri.toLocaleString('id-ID'));
+              $('.piutang').val(response.piutang.toLocaleString('id-ID'));
               console.log('Loaded');
               console.log(response.data);
             }
@@ -228,15 +228,15 @@
             if(response.success)
             {
               console.log('Success..');
-              $('#qty').val(response.qty.toLocaleString('id-ID'));
-              $('#total').val(response.total.toLocaleString('id-ID'));
-              $('#cash').val(response.cash.toLocaleString('id-ID'));
-              $('#bca_pusat').val(response.bca_pusat.toLocaleString('id-ID'));
-              $('#bca_cabang').val(response.bca_cabang.toLocaleString('id-ID'));
-              $('#mandiri').val(response.mandiri.toLocaleString('id-ID'));
-              $('#bni').val(response.bni.toLocaleString('id-ID'));
-              $('#bri').val(response.bri.toLocaleString('id-ID'));
-              $('#piutang').val(response.piutang.toLocaleString('id-ID'));
+              $('.qty').val(response.qty.toLocaleString('id-ID'));
+              $('.total').val(response.total.toLocaleString('id-ID'));
+              $('.cash').val(response.cash.toLocaleString('id-ID'));
+              $('.bca_pusat').val(response.bca_pusat.toLocaleString('id-ID'));
+              $('.bca_cabang').val(response.bca_cabang.toLocaleString('id-ID'));
+              $('.mandiri').val(response.mandiri.toLocaleString('id-ID'));
+              $('.bni').val(response.bni.toLocaleString('id-ID'));
+              $('.bri').val(response.bri.toLocaleString('id-ID'));
+              $('.piutang').val(response.piutang.toLocaleString('id-ID'));
               console.log('Loaded');
               console.log(response.data);
             }

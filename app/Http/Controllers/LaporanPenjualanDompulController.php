@@ -81,18 +81,34 @@ class LaporanPenjualanDompulController extends Controller
     sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
                     ->where('deleted',0)
                    ->groupBy('id_penjualan_dompul');
+
+        $total_penjualan = DB::table('upload_dompuls')
+                   ->select(DB::raw("id_penjualan_dompul, produk,
+    	sum(IF(produk = 'DOMPUL', qty, 0)) AS dompul,
+        sum(IF(produk = 'DP5', qty, 0)) AS dp5,
+        sum(IF(produk = 'DP10', qty, 0)) AS dp10"))
+                    ->where('deleted',0)
+                    ->where('status_active',1)
+                   ->groupBy('id_penjualan_dompul','produk');
         $data = PenjualanDompul::select(DB::raw('master_saless.nm_sales, 
                                 sum(penjualan_dompuls.grand_total) AS total_penjualan, sum(cash) AS cash, 
                                 sum(bca_pusat) AS pusat, sum(bca_cabang) AS cabang, sum(mandiri) AS mandiri, sum(bni) AS bni, sum(bri) AS bri, 
                                 (sum(penjualan_dompuls.grand_total)-sum(total_bayar)) AS piutang,
-                                COUNT(penjualan_dompuls.id_penjualan_dompul) AS total_transaksi'))
+                                SUM(dompul) AS dompul,
+                                SUM(dp5) AS dp5,
+                                SUM(dp10) AS dp10'))
                         ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
                         ->joinSub($total_nominal, 'total_nominal', function($join) {
                             $join->on('penjualan_dompuls.id_penjualan_dompul', '=', 'total_nominal.id_penjualan_dompul');
                         })
+                        ->joinSub($total_penjualan, 'total_penjualan', function($join) {
+                            $join->on('penjualan_dompuls.id_penjualan_dompul', '=', 'total_penjualan.id_penjualan_dompul');
+                        })
                         ->where('tanggal_penjualan_dompul',$tgl)
                         ->groupBy('master_saless.nm_sales')->get();
-                        $qty=0;
+                        $dp5=0;
+                        $dp10=0;
+                        $dompul=0;
                         $total=0;
                         $cash=0;
                         $bca_pusat=0;
@@ -102,7 +118,9 @@ class LaporanPenjualanDompulController extends Controller
                         $bri=0;
                         $piutang=0;
                         foreach ($data as $key => $value) {
-                            $qty+=$value->total_transaksi;
+                            $dp5+=$value->dp5;
+                            $dp10+=$value->dp10;
+                            $dompul+=$value->dompul;
                             $total+=$value->total_penjualan;
                             $cash+=$value->cash;
                             $bca_pusat+=$value->pusat;
@@ -113,7 +131,9 @@ class LaporanPenjualanDompulController extends Controller
                             $piutang+=$value->piutang;
                         }
         return response()->json(['success' => true, 'data' => $data
-        , 'qty' => $qty
+        , 'dp5' => $dp5
+        , 'dp10' => $dp10
+        , 'dompul' => $dompul
         , 'total' => $total
         , 'cash' => $cash
         , 'bca_pusat' => $bca_pusat
