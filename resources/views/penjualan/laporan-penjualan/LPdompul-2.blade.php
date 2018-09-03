@@ -8,7 +8,11 @@
 @stop
 
 @section('css')
-
+<style>
+  td{
+    white-space: nowrap;
+  }
+</style>
 @stop
 
 @section('content')
