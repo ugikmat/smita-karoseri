@@ -28,11 +28,22 @@
 <div class="container-fluid  form-inline">
   @csrf
   <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" id="kiri">
       Tanggal Penjualan : &nbsp;
       <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}">
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" id="kiri">
+        Lokasi : &nbsp;
+        <select name="lokasi" required="required" class="form-control" id="lokasi">
+          <option value="" disabled selected>Pilih Lokasi</option>
+          @isset($lokasiarray)
+            @foreach($lokasiarray as $lokasi)
+              <option value="{{$lokasi->nm_lokasi}}" id="{{$lokasi->nm_lokasi}}">{{$lokasi->nm_lokasi}}</option>
+            @endforeach
+          @endisset
+        </select>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" id="kiri">
         Nama Canvaser : &nbsp;
         <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('id_sales')}}">
               <option value="" disabled>Pilih Nama Canvaser</option>
@@ -43,7 +54,7 @@
               @endisset
         </select>
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4" id="kiri">
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" id="kiri">
         Nama Kios : &nbsp;
         <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="chosen-select" data-placeholder="{{session('id_cust')}}">
               <option value="" disabled>Pilih Nama Kios</option>
