@@ -23,15 +23,34 @@
 <div class="cotainer-fluid form-inline">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput">Pilih Tanggal Mutasi</button>
+        Tanggal Awal&emsp;&nbsp;&nbsp;:
+        @if(Session::has('tgl_stok_sp'))
+          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_awal" name="tgl_awal" value="{{session('tgl_stok_sp')}}">
+        @else
+          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_awal" name="tgl_awal" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
+        @endif
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+        Tanggal Akhir&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+        @if(Session::has('tgl_stok_sp'))
+          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_akhir" name="tgl_akhir" value="{{session('tgl_stok_sp')}}">
+        @else
+          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_akhir" name="tgl_akhir" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
+        @endif
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <button type="button" id="save" class="btn btn-success" ><i class="fa fa-caret-square-o-right"></i>Tampilkan Mutasi Dompul</button>
     </div>
   </div>
+  <br>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        Nama Kasir : (nama)
+        Nama Kasir&emsp;&emsp;: (nama)
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        Tanggal Cetak Laporan : {{Carbon\Carbon::now()->format('d/m/Y')}}
+        Tanggal Cetak Laporan&emsp;: {{Carbon\Carbon::now()->format('d/m/Y')}}
     </div>
   </div>
 </div>
