@@ -57,8 +57,21 @@
 
                 <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="">
                   @csrf @method('put')
-                  <div class="form-group kode">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Pilih Tanggal
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Awal
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      @if(Session::has('dompul-list-tgl'))
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" required value="{{session('dompul-list-tgl')}}">
+                      @else
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" required value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
+                      @endif
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Akhir
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
