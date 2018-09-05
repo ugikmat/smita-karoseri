@@ -138,6 +138,7 @@
                             @endforeach
                           @endisset
                         </select>
+                      </div>
                     </div>
                   </div>
 
