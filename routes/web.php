@@ -183,9 +183,9 @@ Route::post('/list_invoice_SP/store','ListPenjualanSPController@store');
 Route::put('/invoice_sp/verify/{id}','ListPenjualanSPController@verif');
 Route::put('/invoice_sp/delete','ListPenjualanSPController@delete');
 
-Route::get('/master/user', function() {
-  return view ('/penjualan/sp/list-invoice-sp');
-}) -> name('list-invoice-sp');
+// Route::get('/master/user', function() {
+//   return view ('/penjualan/sp/list-invoice-sp');
+// }) -> name('list-invoice-sp');
 
 //Pembelian
 // Route::get('/pembelian/dompul/pembelian-dompul', function() {
@@ -286,6 +286,7 @@ Route::get('/upload/empty', 'UploadDompulController@empty');
 Route::get('/master/user', function() {
   return view ('/master/user');
 }) -> name('user');
+
 Route::get('/user-data', 'UsersController@data');
 
 Route::resource('master/bank', 'BankController');

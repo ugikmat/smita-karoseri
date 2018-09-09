@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\UserLokasi;
+use App\Lokasi;
+use DB;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -65,11 +67,19 @@ class UsersController extends Controller
      */
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(User::query())
+        $datas = User::select(DB::raw("users.id_user,users.name,users.email, GROUP_CONCAT(master_lokasis.nm_lokasi SEPARATOR ', ') as nm_lokasi"))
+                    ->join('users_lokasi','users_lokasi.id_user','=','users.id_user')
+                    ->join('master_lokasis','master_lokasis.id_lokasi','=','users_lokasi.id_lokasi')
+                    ->groupBy('users.id_user','users.name','users.email')
+                    ->get();
+        return $datatables->of($datas)
                           ->editColumn('name', function ($user) {
                               return '<a>' . $user->name . '</a>';
                           })
-                          ->addColumn('action', function ($user) {return '<a href="#edit-'.$user->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';})
+                          ->addColumn('action', function ($user) {
+                              return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id='.$user->id_user.'><i class="glyphicon glyphicon-edit"></i> Hapus</a>
+                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$user->id_user.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                            })
                           ->rawColumns(['name', 'action'])
                           ->make(true);
     }
