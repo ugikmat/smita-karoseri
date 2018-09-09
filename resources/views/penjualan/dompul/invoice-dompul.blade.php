@@ -218,6 +218,11 @@
         } else {
           var canvaser = $('#canvaser').val();
         }
+        if ($('#lokasi').val()==undefined) {
+          var lokasi = 'null';
+        } else {
+          var lokasi = $('#lokasi').val();
+        }
         console.log(tgl);
         console.log(canvaser);
         var t = $('#invoice-dompul-table').DataTable({
@@ -235,7 +240,7 @@
                     targets:1,
                     render: function ( data, type, row, meta ) {
                         if(type === 'display'){
-                            data = `<a class="link-post" href="/penjualan/dompul/${canvaser}/${tgl}/${data}">` + data + '</a>';
+                            data = `<a class="link-post" href="/penjualan/dompul/${canvaser}/${tgl}/${data}/${lokasi}">` + data + '</a>';
                         }
                         return data;
                     }

@@ -150,7 +150,7 @@ Route::get('/penjualan/dompul/list-invoice', 'ListPenjualanDompulController@inde
 Route::get('/penjualan/dompul/list-invoice/edit/{id}/{canvaser}/{tgl}/{downline}', 'ListPenjualanDompulController@edit');
 Route::get('/penjualan/dompul/invoice-dompul', 'PenjualanDompulController@index');
 Route::post('/penjualan/dompul/invoice-dompul', 'PenjualanDompulController@show');
-Route::get('/penjualan/dompul/{canvaser}/{tgl}/{downline}', 'PenjualanDompulController@edit');
+Route::get('/penjualan/dompul/{canvaser}/{tgl}/{downline}/{lokasi}', 'PenjualanDompulController@edit');
 Route::post('/invoice_dompul/store','PenjualanDompulController@store');
 Route::post('/list_invoice_dompul/update','ListPenjualanDompulController@update');
 Route::get('/invoice_dompul/list/{tgl_penjualan}', 'ListPenjualanDompulController@data');

@@ -35,10 +35,11 @@ class PenjualanDompulController extends Controller
     public function index()
     {
         $saless = Sales::where('status','1')->get();
-        $lokasis = Lokasi::where('status_lokasi','1')
+        $lokasis = Lokasi::select('master_lokasis.id_lokasi','master_lokasis.nm_lokasi')
                     ->join('users_lokasi','users_lokasi.id_lokasi','=','master_lokasis.id_lokasi')
                     ->join('users','users.id_user','=','users_lokasi.id_user')
                     ->where('users.id_user',Auth::user()->id_user)
+                    ->where('status_lokasi','1')
                     ->get();
         return view('penjualan.dompul.invoice-dompul',['saless'=>$saless,'lokasis'=>$lokasis]);
     }
@@ -59,7 +60,7 @@ class PenjualanDompulController extends Controller
     /**
      * Display a list of transaction
      */
-    public function edit($canvaser,$tgl,$downline)
+    public function edit($canvaser,$tgl,$downline,$lokasi)
     {   $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser','produk','tanggal_transfer')
                         ->where('nama_canvasser',$canvaser)
                         ->where('status_penjualan',0)
@@ -86,7 +87,7 @@ class PenjualanDompulController extends Controller
             $total+=(($value->qty-$value->qty_program)*$value->harga_dompul);
         }
         $total=number_format($total,0,",",".");
-        return view('penjualan.dompul.invoice-dompul-3',['datas'=>$datas,'tgl'=>$tgl,'total'=>$total]);
+        return view('penjualan.dompul.invoice-dompul-3',['datas'=>$datas,'tgl'=>$tgl,'total'=>$total,'lokasi'=>$lokasi]);
     }
     /**
      * Update Upload Dompul tipe and price, back to edit
@@ -187,6 +188,7 @@ class PenjualanDompulController extends Controller
             'sales'=>$sales,
             'total_pembayaran'=>$total_pembayaran,
             'selisih'=>$selisih,
+            'lokasi'=>$request->get('lokasi'),
             ]);
     }
     /**
@@ -208,6 +210,7 @@ class PenjualanDompulController extends Controller
         $penjualanDompul->id_sales=$id_sales;
         $penjualanDompul->no_hp_kios=$hp_downline;
         $penjualanDompul->id_user=$user;
+        $penjualanDompul->id_lokasi=$request->get('lokasi');
         $penjualanDompul->id_bo=Auth::user()->id_bo;
         $penjualanDompul->tanggal_penjualan_dompul=$tgl;
         $penjualanDompul->tanggal_input=$tgl_input;
@@ -261,7 +264,7 @@ class PenjualanDompulController extends Controller
                 $stokDompul = new StokDompul();
                 $stokDompul->id_produk = $value->produk;
                 $stokDompul->id_sales = $id_sales;
-                $stokDompul->id_lokasi = Auth::user()->id_lokasi;
+                $stokDompul->id_lokasi = $request->get('lokasi');
                 $stokDompul->tanggal_transaksi = $tgl;
                 $stokDompul->nomor_referensi = $value->id_upload;
                 $stokDompul->jenis_transaksi = 'PENJUALAN';
