@@ -175,10 +175,11 @@
     $(function () {
         $tgl_awal = ($('#tgl_awal').val()=='') ? 'null' : $('#tgl_awal').val();
         $tgl_akhir = ($('#tgl_akhir').val()=='') ? 'null' : $('#tgl_akhir').val();
+        $lokasi = $('#lokasi').val();
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: `/invoice_sp/list/${$tgl_awal}/${$tgl_akhir}`,
+            ajax: `/invoice_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}`,
             // "columnDefs": [ {
             // "searchable": false,
             // "orderable": false,
@@ -204,8 +205,9 @@
         $('#show').on('click',function (event) {
           $tgl_awal = ($('#tgl_awal').val()=='') ? 'null' : $('#tgl_awal').val();
         $tgl_akhir = ($('#tgl_akhir').val()=='') ? 'null' : $('#tgl_akhir').val();
+        $lokasi = $('#lokasi').val();
           console.log('Loading Data...');
-          t.ajax.url(`/invoice_sp/list/${$tgl_awal}/${$tgl_akhir}`).load();
+          t.ajax.url(`/invoice_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}`).load();
           console.log('Loaded');
         });
         $('#deleteModal').on('show.bs.modal', function (event) {
