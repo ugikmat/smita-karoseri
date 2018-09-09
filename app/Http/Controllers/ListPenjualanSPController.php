@@ -11,6 +11,8 @@ use App\DetailPenjualanProduk;
 use App\DetailPembayaranSp;
 use App\PenjualanProduk;
 use App\HargaProduk;
+use App\Lokasi;
+use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
 
@@ -29,7 +31,13 @@ class ListPenjualanSPController extends Controller
      * Diplay a list of transaction made before
      */
     public function index(){
-        return view('penjualan.sp.list-invoice-sp');
+        $lokasis = Lokasi::select('master_lokasis.id_lokasi','master_lokasis.nm_lokasi')
+                    ->join('users_lokasi','users_lokasi.id_lokasi','=','master_lokasis.id_lokasi')
+                    ->join('users','users.id_user','=','users_lokasi.id_user')
+                    ->where('users.id_user',Auth::user()->id_user)
+                    ->where('status_lokasi','1')
+                    ->get();
+        return view('penjualan.sp.list-invoice-sp',['lokasis'=>$lokasis]);
     }
 
     public function verif($id){
