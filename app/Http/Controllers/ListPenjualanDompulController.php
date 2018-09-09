@@ -139,14 +139,16 @@ class ListPenjualanDompulController extends Controller
      * @param \Yajra\Datatables\Datatables $datatables
      * @return \Illuminate\Http\JsonResponse
      */
-    public function data(Datatables $datatables,$tgl_penjualan)
+    public function data(Datatables $datatables,$tgl_awal,$tgl_akhir)
     {
-        if ($tgl_penjualan=='null') {
-            $tgl = $tgl_penjualan;
+        if ($tgl_awal=='null') {
+            $tgl = $tgl_awal;
         }else {
-            session(['dompul-list-tgl'=>$tgl_penjualan]);
-            $tgl = Carbon::parse($tgl_penjualan);
-            $tgl = $tgl->format('Y-m-d');
+            session(['dompul-list-tgl'=>$tgl_awal]);
+            $tgl_awal = Carbon::parse($tgl_awal);
+            $tgl_awal = $tgl_awal->format('Y-m-d');
+            $tgl_akhir = Carbon::parse($tgl_akhir);
+            $tgl_akhir = $tgl_akhir->format('Y-m-d');
 
         }
         return $datatables->eloquent(PenjualanDompul::select('penjualan_dompuls.id_penjualan_dompul',
@@ -158,7 +160,7 @@ class ListPenjualanDompulController extends Controller
                         ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
                         ->join('master_customers','master_customers.no_hp','=','penjualan_dompuls.no_hp_kios')
                         // ->join('detail_penjualan_dompuls','detail_penjualan_dompuls.id_penjualan_dompul','=','penjualan_dompuls.id_penjualan_dompul')
-                        ->where('tanggal_penjualan_dompul',$tgl)
+                        ->whereBetween('tanggal_penjualan_dompul',[$tgl_awal,$tgl_akhir])
                         ->where('deleted',0))
                         // ->addColumn('indeks', function ($uploadDompul) {
                         //       return '';

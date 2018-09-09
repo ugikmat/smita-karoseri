@@ -63,9 +63,9 @@
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       @if(Session::has('dompul-list-tgl'))
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" required value="{{session('dompul-list-tgl')}}">
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl_awal" id="tgl_awal" data-date-format="dd-mm-yyyy" required value="{{session('dompul-list-tgl')}}">
                       @else
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" required value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl_awal" id="tgl_awal" data-date-format="dd-mm-yyyy" required value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
                       @endif
                     </div>
                   </div>
@@ -76,9 +76,9 @@
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       @if(Session::has('dompul-list-tgl'))
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" required value="{{session('dompul-list-tgl')}}">
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl_akhir" id="tgl_akhir" data-date-format="dd-mm-yyyy" required value="{{session('dompul-list-tgl')}}">
                       @else
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" required value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl_akhir" id="tgl_akhir" data-date-format="dd-mm-yyyy" required value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
                       @endif
                     </div>
                   </div>
@@ -158,11 +158,12 @@
 </script>
 <script>
     $(function () {
-        $tgl_penjualan = ($('#tgl').val()=='') ? 'null' : $('#tgl').val();
+        $tgl_awal = ($('#tgl_awal').val()=='') ? 'null' : $('#tgl_awal').val();
+        $tgl_akhir = ($('#tgl_akhir').val()=='') ? 'null' : $('#tgl_akhir').val();
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: `/invoice_dompul/list/${$tgl_penjualan}`,
+            ajax: `/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}`,
             // "columnDefs": [ {
             // "searchable": false,
             // "orderable": false,
@@ -186,8 +187,9 @@
         //   } );
         // } ).draw();
         function loadData() {
-          $tgl = $('#tgl').val();
-          t.ajax.url(`/invoice_dompul/list/${$tgl}`).load();
+          $tgl_awal = ($('#tgl_awal').val()=='') ? 'null' : $('#tgl_awal').val();
+          $tgl_akhir = ($('#tgl_akhir').val()=='') ? 'null' : $('#tgl_akhir').val();
+          t.ajax.url(`/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}`).load();
         }
         $('#show').on('click',loadData);
         $('#verificationModal').on('show.bs.modal', function (event) {
