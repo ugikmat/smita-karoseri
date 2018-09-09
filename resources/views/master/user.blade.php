@@ -144,7 +144,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <form action="" method="POST" id="deleteForm">
-        @csrf @method('delete')
+        @csrf @method('put')
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -223,7 +223,7 @@
     var id = button.data('id'); // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/master/user/${id}`);
+    $('#deleteForm').attr('action', `/delete/user/${id}`);
   })
 </script>
 @stop

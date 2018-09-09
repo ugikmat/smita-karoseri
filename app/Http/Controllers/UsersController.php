@@ -59,6 +59,12 @@ class UsersController extends Controller
         return redirect ('/tambah_user/add-user');
     }
 
+    public function delete($id)
+    {
+        User::where('id_user',$id)->update(['deleted'=>1]);
+        return redirect ('/master/user');
+    }
+
     /**
      * Process dataTable ajax response.
      *
@@ -68,8 +74,9 @@ class UsersController extends Controller
     public function data(Datatables $datatables)
     {
         $datas = User::select(DB::raw("users.id_user,users.name,users.email, GROUP_CONCAT(master_lokasis.nm_lokasi SEPARATOR ', ') as nm_lokasi"))
-                    ->join('users_lokasi','users_lokasi.id_user','=','users.id_user')
-                    ->join('master_lokasis','master_lokasis.id_lokasi','=','users_lokasi.id_lokasi')
+                    ->leftJoin('users_lokasi','users_lokasi.id_user','=','users.id_user')
+                    ->leftJoin('master_lokasis','master_lokasis.id_lokasi','=','users_lokasi.id_lokasi')
+                    ->where('users.deleted',0)
                     ->groupBy('users.id_user','users.name','users.email')
                     ->get();
         return $datatables->of($datas)

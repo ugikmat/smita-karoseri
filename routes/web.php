@@ -22,9 +22,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('penjualan/dompul', 'Penjualan\DompulController@index');
 Route::get('penjualan/dompul-data', 'Penjualan\DompulController@data');
 
-Route::get('list/users', 'UsersController@index');
-Route::get('list/users-data', 'UsersController@data');
-
 Route::resource('bank', 'BankController');
 Route::get('bank-data', 'BankController@data');
 
@@ -287,6 +284,11 @@ Route::get('/master/user', function() {
   return view ('/master/user');
 }) -> name('user');
 
+// Route::get('list/users', 'UsersController@index');
+// Route::get('list/users-data', 'UsersController@data');
+Route::get('/tambah_user/add-user', 'UsersController@add');
+Route::post('/new/user', 'UsersController@store');
+Route::put('/delete/user/{id}', 'UsersController@delete');
 Route::get('/user-data', 'UsersController@data');
 
 Route::resource('master/bank', 'BankController');
@@ -465,6 +467,3 @@ Route::get('/laporan/lap_progress_pb', function() {
 Route::get('/laporan/lap_progress_detailpb', function() {
   return view ('/laporan/lap_progress_detailpb');
 }) -> name('laporan-lap_progress_detailpb');
-
-Route::get('/tambah_user/add-user', 'UsersController@add');
-Route::post('/new/user', 'UsersController@store');
