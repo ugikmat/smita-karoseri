@@ -25,18 +25,18 @@
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
         Tanggal Awal&emsp;&nbsp;&nbsp;:
         @if(Session::has('tgl_stok_dompul'))
-          <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy" id="tgl_awal" name="tgl_awal" value="{{session('tgl_stok_dompul')}}">
+          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_awal" name="tgl_awal" value="{{session('tgl_stok_dompul')}}">
         @else
-          <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy" id="tgl_awal" name="tgl_awal" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
+          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_awal" name="tgl_awal" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
         @endif
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
         Tanggal Akhir&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;:
         @if(Session::has('tgl_stok_dompul'))
-          <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy" id="tgl_akhir" name="tgl_akhir" value="{{session('tgl_stok_dompul')}}">
+          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_akhir" name="tgl_akhir" value="{{session('tgl_stok_dompul')}}">
         @else
-          <input class="datepicker col-md-7 col-xs-12" data-date-format="dd-mm-yyyy" id="tgl_akhir" name="tgl_akhir" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
+          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_akhir" name="tgl_akhir" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
         @endif
     </div>
 

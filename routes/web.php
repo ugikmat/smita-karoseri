@@ -464,3 +464,7 @@ Route::get('/laporan/lap_progress_pb', function() {
 Route::get('/laporan/lap_progress_detailpb', function() {
   return view ('/laporan/lap_progress_detailpb');
 }) -> name('laporan-lap_progress_detailpb');
+
+Route::get('/tambah_user/add-user', function() {
+  return view ('/tambah_user/add-user');
+}) -> name('add-user');
