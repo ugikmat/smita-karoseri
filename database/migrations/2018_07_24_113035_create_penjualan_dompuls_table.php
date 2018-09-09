@@ -20,6 +20,7 @@ class CreatePenjualanDompulsTable extends Migration
             $table->integer('id_bo');
             $table->string('no_hp_kios');
             $table->string('id_user');
+            $table->string('id_lokasi');
             $table->date('tanggal_penjualan_dompul');
             $table->date('tanggal_input');
             $table->bigInteger('grand_total');
