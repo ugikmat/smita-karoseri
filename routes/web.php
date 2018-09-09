@@ -287,6 +287,7 @@ Route::get('/upload/empty', 'UploadDompulController@empty');
 Route::get('/master/user', 'UsersController@index');
 // Route::get('list/users-data', 'UsersController@data');
 Route::get('/tambah_user/add-user', 'UsersController@add');
+Route::get('/user/edit/{id}', 'UsersController@edit');
 Route::post('/new/user', 'UsersController@store');
 Route::put('/delete/user/{id}', 'UsersController@delete');
 Route::put('/update/user', 'UsersController@update');

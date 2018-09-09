@@ -33,6 +33,20 @@ class UsersController extends Controller
         return view('/master/user');
     }
 
+    public function edit($id)
+    {
+        $datas = User::select(DB::raw("users.id_user,users.name,users.id_bo,users.username,users.level_user,users.email, GROUP_CONCAT(master_lokasis.nm_lokasi SEPARATOR ', ') as nm_lokasi"))
+                    ->leftJoin('users_lokasi','users_lokasi.id_user','=','users.id_user')
+                    ->leftJoin('master_lokasis','master_lokasis.id_lokasi','=','users_lokasi.id_lokasi')
+                    ->where('users.id_user',$id)
+                    ->where('users.deleted',0)
+                    ->groupBy('users.id_user','users.name','users.email','users.username','users.level_user','users.id_bo')
+                    ->first();
+        $lokasi = UserLokasi::select('id_lokasi')->where('id_user',$id)->first();
+        $lokasi_data = UserLokasi::select('id_lokasi')->where('id_user',$id)->get();
+        return view('/user/user-edit',['data'=>$datas,'lokasi'=>$lokasi,'lokasi_data'=>$lokasi_data]);
+    }
+
     public function add()
     {
         return view ('/tambah_user/add-user');
@@ -111,7 +125,7 @@ class UsersController extends Controller
                           })
                           ->addColumn('action', function ($user) {
                               $lokasi = UserLokasi::where('id_user',$user->id_user)->get();
-                              return "<a class='btn btn-xs btn-primary' data-toggle='modal' data-target='#editModal' data-id='$user->id_user' data-lokasi='$lokasi' data-user='$user'><i class='glyphicon glyphicon-edit'></i> Edit</a>
+                              return "<a class='btn btn-xs btn-primary' href='/user/edit/$user->id_user'><i class='glyphicon glyphicon-edit'></i> Edit</a>
                               <a class='btn btn-xs btn-danger' data-toggle='modal' data-target='#deleteModal' data-id='$user->id_user'><i class='glyphicon glyphicon-remove'></i> Hapus</a>";
                             })
                           ->rawColumns(['name', 'action'])
