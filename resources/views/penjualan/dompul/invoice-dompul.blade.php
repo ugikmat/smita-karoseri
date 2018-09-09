@@ -146,10 +146,10 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select name="id" required="required" class="form-control col-md-7 col-xs-12" id="sales">
+                    <select name="id" required="required" class="form-control col-md-7 col-xs-12" id="sales" value='{{session('dompul_sales_id')}}'>
                           @isset($saless)
                             @foreach($saless as $sales)
-                              <option value="{{$sales->nm_sales}}" id="{{$sales->nm_sales}}">{{$sales->nm_sales}}</option>
+                              <option value="{{$sales->id_sales}}" id="{{$sales->nm_sales}}">{{$sales->nm_sales}}</option>
                             @endforeach
                           @endisset
                         </select>
@@ -204,7 +204,9 @@
 @section('js')
 <script>
     $(function () {
-        $('#sales').attr('value',"{{session('dompul_sales_id')}}");
+        
+        $('#sales').val('{{session('dompul_sales_id')}}').change();
+        // $('#sales').attr('value',"{{session('dompul_sales_id')}}");
         if ($('#tgl').val()==undefined) {
           var tgl = 'null';
         } else {

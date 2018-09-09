@@ -34,6 +34,7 @@ class PenjualanDompulController extends Controller
     public function index()
     {
         $saless = Sales::where('status','1')->get();
+        $lokasis = Lokasi::where('status_lokasi','1')->get();
         return view('penjualan.dompul.invoice-dompul',['saless'=>$saless]);
     }
     /**

@@ -34,8 +34,8 @@
   </tfoot>
 </table> -->
 
-<form class="repeater" action="index.html" method="post">
-
+<form class="repeater" action="/new/user" method="post">
+@csrf
 <div class="container-fluid form-inline">
   <div class="row">
     <div class="col-xs-6 col-sm-6">
@@ -86,7 +86,7 @@
           <select name="lokasi" required="required" class="form-control" id="lokasi" style="height: calc(3.5rem - 2px); width:177px;"3>
             @isset($lokasiarray)
               @foreach($lokasiarray as $lokasi)
-                <option value="{{$lokasi->nm_lokasi}}" id="{{$lokasi->nm_lokasi}}">{{$lokasi->nm_lokasi}}</option>
+                <option value="{{$lokasi->id_lokasi}}" id="{{$lokasi->nm_lokasi}}">{{$lokasi->nm_lokasi}}</option>
               @endforeach
             @endisset
           </select>
@@ -98,7 +98,9 @@
   </div>
 <button data-repeater-create type="button" class="btn btn-warning"> <span class="glyphicon glyphicon-plus"></span> Tambah Pembayaran</button>
 </div>
-
+<br>
+  <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Tambah User</button>
+<br><br>
 </form>
 
 
@@ -153,7 +155,7 @@
         })
     });
 </script>
-<script>
+{{-- <script>
   $(function () {
     $('#user-table').DataTable({
       serverSide: true,
@@ -189,7 +191,7 @@
       }
     });
   });
-</script>
+</script> --}}
 <script>
   $('#editModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
@@ -211,8 +213,8 @@
 </script>
 <script>
   $('#deleteModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var id = button.data('id') // Extract info from data-* attributes
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var id = button.data('id'); // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     $('#deleteForm').attr('action', `/master/user/${id}`);
