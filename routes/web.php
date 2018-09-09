@@ -280,11 +280,11 @@ Route::get('/upload/tgl', 'UploadDompulController@uploadData');
 Route::get('/upload/empty', 'UploadDompulController@empty');
 
 //Master
-Route::get('/master/user', function() {
-  return view ('/master/user');
-}) -> name('user');
+// Route::get('/master/user', function() {
+//   return view ('/master/user');
+// }) -> name('user');
 
-// Route::get('list/users', 'UsersController@index');
+Route::get('/master/user', 'UsersController@index');
 // Route::get('list/users-data', 'UsersController@data');
 Route::get('/tambah_user/add-user', 'UsersController@add');
 Route::post('/new/user', 'UsersController@store');

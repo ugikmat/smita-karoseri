@@ -30,7 +30,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('user_list');
+        return view('/master/user');
     }
 
     public function add()
@@ -105,7 +105,8 @@ class UsersController extends Controller
                               return '<a>' . $user->name . '</a>';
                           })
                           ->addColumn('action', function ($user) {
-                              return "<a class='btn btn-xs btn-primary' data-toggle='modal' data-target='#editModal' data-id='$user->id_user' data-user='$user'><i class='glyphicon glyphicon-edit'></i> Edit</a>
+                              $lokasi = UserLokasi::where('id_user',$user->id_user)->get();
+                              return "<a class='btn btn-xs btn-primary' data-toggle='modal' data-target='#editModal' data-id='$user->id_user' data-lokasi='$lokasi' data-user='$user'><i class='glyphicon glyphicon-edit'></i> Edit</a>
                               <a class='btn btn-xs btn-danger' data-toggle='modal' data-target='#deleteModal' data-id='$user->id_user'><i class='glyphicon glyphicon-remove'></i> Hapus</a>";
                             })
                           ->rawColumns(['name', 'action'])
