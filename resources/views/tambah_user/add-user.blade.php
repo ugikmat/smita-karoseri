@@ -39,6 +39,13 @@
 <div class="container-fluid form-inline">
   <div class="row">
     <div class="col-xs-6 col-sm-6">
+      Nama&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;:&emsp;
+      <input type="text" id="name" name="name" class="form-control" value="" autocomplete="off" required>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-xs-6 col-sm-6">
       Username&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;:&emsp;
       <input type="text" id="username" name="username" class="form-control" value="" autocomplete="off" required>
     </div>
@@ -67,6 +74,19 @@
   <br>
   <div class="row">
     <div class="col-xs-6 col-sm-6">
+      BO&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;:&emsp;
+      <select class="" name="bo" id="bo" style="height: calc(3.5rem - 2px); width:177px;" required>
+        @isset($bosarray)
+              @foreach($bosarray as $bo)
+                <option value="{{$bo->id_bo}}" id="{{$bo->nama_bo}}">{{$bo->nama_bo}}</option>
+              @endforeach
+            @endisset
+      </select>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-xs-6 col-sm-6">
       Level User&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;:&emsp;
       <select class="" name="level" id="level" style="height: calc(3.5rem - 2px); width:177px;" required>
         <option value="Canvaser">Canvaser</option>
@@ -75,6 +95,7 @@
         <option value="Kepala Cabang">Kepala Cabang</option>
         <option value="Keuangan">Super Admin</option>
       </select>
+      
     </div>
   </div>
   <br>
@@ -83,7 +104,7 @@
       <div class="row">
         <div class="col-xs-6 col-sm-6">
           Lokasi&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&emsp;
-          <select name="lokasi" required="required" class="form-control" id="lokasi" style="height: calc(3.5rem - 2px); width:177px;"3>
+          <select name="lokasi" required class="form-control" id="lokasi" style="height: calc(3.5rem - 2px); width:177px;">
             @isset($lokasiarray)
               @foreach($lokasiarray as $lokasi)
                 <option value="{{$lokasi->id_lokasi}}" id="{{$lokasi->nm_lokasi}}">{{$lokasi->nm_lokasi}}</option>
@@ -96,7 +117,7 @@
       <br>
     </div>
   </div>
-<button data-repeater-create type="button" class="btn btn-warning"> <span class="glyphicon glyphicon-plus"></span> Tambah Pembayaran</button>
+<button data-repeater-create type="button" class="btn btn-warning"> <span class="glyphicon glyphicon-plus"></span> Tambah Lokasi</button>
 </div>
 <br>
   <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Tambah User</button>
@@ -119,9 +140,9 @@
             // defaultValues refer to the value of the input's name attribute.
             // If a default value is not specified for an input, then it will
             // have its value cleared.
-            // defaultValues: {
-            //     'text-input': 'foo'
-            // },
+            defaultValues: {
+                'lokasi': 1
+            },
             // (Optional)
             // "show" is called just after an item is added.  The item is hidden
             // at this point.  If a show callback is not given the item will

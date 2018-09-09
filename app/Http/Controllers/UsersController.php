@@ -40,9 +40,9 @@ class UsersController extends Controller
     {
         $user = User::create([
             'username' => $request->get('username'),
-            'name' => $request->get('username'),
+            'name' => $request->get('name'),
             'id_lokasi' => 0,
-            'id_bo' => 0,
+            'id_bo' => $request->get('bo'),
             'level_user' => $request->get('level'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
