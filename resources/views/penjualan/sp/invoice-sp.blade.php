@@ -36,9 +36,9 @@
         Lokasi : &nbsp;
         <select name="lokasi" required="required" class="form-control" id="lokasi">
           <option value="" disabled selected>Pilih Lokasi</option>
-          @isset($lokasiarray)
-            @foreach($lokasiarray as $lokasi)
-              <option value="{{$lokasi->nm_lokasi}}" id="{{$lokasi->nm_lokasi}}">{{$lokasi->nm_lokasi}}</option>
+          @isset($lokasis)
+            @foreach($lokasis as $lokasi)
+              <option value="{{$lokasi->id_lokasi}}" id="{{$lokasi->nm_lokasi}}">{{$lokasi->nm_lokasi}}</option>
             @endforeach
           @endisset
         </select>

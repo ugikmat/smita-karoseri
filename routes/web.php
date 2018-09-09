@@ -168,7 +168,7 @@ Route::post('/get_harga/{tipe}/{kode}', 'PenjualanSPController@getHarga');
 // }) -> name('invoice-sp-3');
 
 Route::post('/penjualan/sp/invoice-sp/edit', 'PenjualanSPController@edit');
-Route::get('/penjualan/sp/invoice-sp/edit/{id}', 'PenjualanSPController@showEdit');
+Route::get('/penjualan/sp/invoice-sp/edit/{id}/{lokasi}', 'PenjualanSPController@showEdit');
 Route::get('/edit_invoice_sp/{id}', 'PenjualanSPController@data');
 Route::post('/invoice_sp/update/{id}','PenjualanSPController@update');
 Route::post('/invoice_sp/verify','PenjualanSPController@verify');
