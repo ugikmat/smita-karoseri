@@ -59,6 +59,11 @@ class UsersController extends Controller
         return redirect ('/tambah_user/add-user');
     }
 
+    public function getData($id){
+        $lokasi = UserLokasi::where('id_user',$id)->get();
+        return response()->json(['success' => true, 'lokasi' => $lokasi]);
+    }
+
     public function update(Request $request)
     {
         $user = User::where('id_user',$request->get('id'))->first();

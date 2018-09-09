@@ -264,6 +264,37 @@
             // defaults to false.
             isFirstItemUndeletable: false
         });
+        $('#editModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) // Button that triggered the modal
+          var id = button.data('id')
+          // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+          // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+          var modal = $(this)
+          // $('#editForm').attr('action', `/update/user`);
+          console.log(button.data('user'));
+          console.log(button.data('lokasi'));
+          // console.log(modal.find('#editModal .modal-body #nama'));
+          // console.log(modal.find('#editModal'));
+          // console.log(modal.find('.modal-body input#name').val());
+          // console.log(modal.find('.modal-body select'));
+          // console.log(modal.find('.modal-body input'));
+          // console.log(modal.find('.modal-body'));
+          // console.log(modal.find('#nama'));
+          modal.find('.modal-body input#name').val(button.data('user').name);
+          modal.find('.modal-body input#username').val(button.data('user').username);
+          modal.find('.modal-body input#id').val(button.data('user').id_user);
+          // modal.find('.modal-body .lokasi input').val(lokasi);
+          modal.find('.modal-body select#bo').val(button.data('user').id_bo).change();
+          modal.find('.modal-body select#level').val(button.data('user').level_user).change();
+          modal.find('.modal-body input#email').val(button.data('user').email);
+          // repeater.setList([
+          //   button.data('lokasi').forEach(element => {
+          //     {
+          //       'lokasi': element.id_lokasi,
+          //     },
+          //   });
+          // ]);
+        });
     });
 </script>
 <script>
@@ -304,37 +335,7 @@
   });
 </script>
 <script>
-          $('#editModal').on('show.bs.modal', function (event) {
-          var button = $(event.relatedTarget) // Button that triggered the modal
-          var id = button.data('id')
-          // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-          // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-          var modal = $(this)
-          // $('#editForm').attr('action', `/update/user`);
-          console.log(button.data('user'));
-          console.log(button.data('lokasi'));
-          // console.log(modal.find('#editModal .modal-body #nama'));
-          // console.log(modal.find('#editModal'));
-          // console.log(modal.find('.modal-body input#name').val());
-          // console.log(modal.find('.modal-body select'));
-          // console.log(modal.find('.modal-body input'));
-          // console.log(modal.find('.modal-body'));
-          // console.log(modal.find('#nama'));
-          modal.find('.modal-body input#name').val(button.data('user').name);
-          modal.find('.modal-body input#username').val(button.data('user').username);
-          modal.find('.modal-body input#id').val(button.data('user').id_user);
-          // modal.find('.modal-body .lokasi input').val(lokasi);
-          modal.find('.modal-body select#bo').val(button.data('user').id_bo).change();
-          modal.find('.modal-body select#level').val(button.data('user').level_user).change();
-          modal.find('.modal-body input#email').val(button.data('user').email);
-          // repeater.setList([
-          //   button.data('lokasi').forEach(element => {
-          //     {
-          //       'lokasi': element.id_lokasi,
-          //     },
-          //   });
-          // ]);
-        })
+          
 </script>
 <script>
   $('#deleteModal').on('show.bs.modal', function (event) {
