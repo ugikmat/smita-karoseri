@@ -127,22 +127,34 @@
               <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/penjualan/dompul/invoice-dompul">
                   @csrf
                   <div class="form-group row">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Canvasser
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Pilih Lokasi
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      {{-- <input type="text" id="first-name" required="required" name="id" class="form-control col-md-7 col-xs-12" value=""> --}}
-                      <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select name="id" required="required" class="form-control col-md-7 col-xs-12" id="sales">
-                          @isset($saless)
-                            @foreach($saless as $sales)
-                              <option value="{{$sales->nm_sales}}" id="{{$sales->nm_sales}}">{{$sales->nm_sales}}</option>
+                        <select name="lokasi" required="required" class="form-control col-md-7 col-xs-12" id="lokasi">
+                          @isset($lokasis)
+                            @foreach($lokasis as $lokasi)
+                              <option value="{{$lokasi->id_lokasi}}" id="{{$lokasi->nm_lokasi}}">{{$lokasi->nm_lokasi}}</option>
                             @endforeach
                           @endisset
                         </select>
                       </div>
                     </div>
-                  </div>
+
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Canvasser
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select name="id" required="required" class="form-control col-md-7 col-xs-12" id="sales" value='{{session('dompul_sales_id')}}'>
+                          @isset($saless)
+                            @foreach($saless as $sales)
+                              <option value="{{$sales->id_sales}}" id="{{$sales->nm_sales}}">{{$sales->nm_sales}}</option>
+                            @endforeach
+                          @endisset
+                        </select>
+                      </div>
+                    </div>
 
                   <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">No. Penjualan
@@ -192,7 +204,10 @@
 @section('js')
 <script>
     $(function () {
-        $('#sales').attr('value',"{{session('dompul_sales_id')}}");
+        @if(Session::has('dompul_sales_id'))
+          $('#sales').val("{{session('dompul_sales_id')}}").change();
+        @endif
+        // $('#sales').attr('value',"{{session('dompul_sales_id')}}");
         if ($('#tgl').val()==undefined) {
           var tgl = 'null';
         } else {
@@ -202,6 +217,11 @@
           var canvaser = 'null';
         } else {
           var canvaser = $('#canvaser').val();
+        }
+        if ($('#lokasi').val()==undefined) {
+          var lokasi = 'null';
+        } else {
+          var lokasi = $('#lokasi').val();
         }
         console.log(tgl);
         console.log(canvaser);
@@ -220,7 +240,7 @@
                     targets:1,
                     render: function ( data, type, row, meta ) {
                         if(type === 'display'){
-                            data = `<a class="link-post" href="/penjualan/dompul/${canvaser}/${tgl}/${data}">` + data + '</a>';
+                            data = `<a class="link-post" href="/penjualan/dompul/${canvaser}/${tgl}/${data}/${lokasi}">` + data + '</a>';
                         }
                         return data;
                     }

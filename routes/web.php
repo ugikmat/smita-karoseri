@@ -150,10 +150,10 @@ Route::get('/penjualan/dompul/list-invoice', 'ListPenjualanDompulController@inde
 Route::get('/penjualan/dompul/list-invoice/edit/{id}/{canvaser}/{tgl}/{downline}', 'ListPenjualanDompulController@edit');
 Route::get('/penjualan/dompul/invoice-dompul', 'PenjualanDompulController@index');
 Route::post('/penjualan/dompul/invoice-dompul', 'PenjualanDompulController@show');
-Route::get('/penjualan/dompul/{canvaser}/{tgl}/{downline}', 'PenjualanDompulController@edit');
+Route::get('/penjualan/dompul/{canvaser}/{tgl}/{downline}/{lokasi}', 'PenjualanDompulController@edit');
 Route::post('/invoice_dompul/store','PenjualanDompulController@store');
 Route::post('/list_invoice_dompul/update','ListPenjualanDompulController@update');
-Route::get('/invoice_dompul/list/{tgl_penjualan}', 'ListPenjualanDompulController@data');
+Route::get('/invoice_dompul/list/{tgl_awal}/{tgl_akhir}', 'ListPenjualanDompulController@data');
 Route::post('/invoice_dompul/update/{canvaser}/{tgl}/{downline}/{produk}/{no_faktur}/{status_penjualan}', 'PenjualanDompulController@update');
 Route::get('/invoice_dompul/{canvaser}/{tgl}', 'PenjualanDompulController@data');
 Route::get('/edit_invoice_dompul/{canvaser}/{tgl}/{downline}', 'PenjualanDompulController@penjualanData');
@@ -168,7 +168,7 @@ Route::post('/get_harga/{tipe}/{kode}', 'PenjualanSPController@getHarga');
 // }) -> name('invoice-sp-3');
 
 Route::post('/penjualan/sp/invoice-sp/edit', 'PenjualanSPController@edit');
-Route::get('/penjualan/sp/invoice-sp/edit/{id}', 'PenjualanSPController@showEdit');
+Route::get('/penjualan/sp/invoice-sp/edit/{id}/{lokasi}', 'PenjualanSPController@showEdit');
 Route::get('/edit_invoice_sp/{id}', 'PenjualanSPController@data');
 Route::post('/invoice_sp/update/{id}','PenjualanSPController@update');
 Route::post('/invoice_sp/verify','PenjualanSPController@verify');
@@ -176,7 +176,7 @@ Route::post('/invoice_sp/store','PenjualanSPController@store');
 
 Route::get('/penjualan/sp/list-invoice-sp', 'ListPenjualanSPController@index');
 Route::get('/penjualan/sp/list-invoice-sp/edit/{id_penjualan_sp}/{sales}/{tgl}/{customer}', 'ListPenjualanSPController@edit');
-Route::get('/invoice_sp/list/{tgl}', 'ListPenjualanSPController@data');
+Route::get('/invoice_sp/list/{tgl_awal}/{tgl_akhir}', 'ListPenjualanSPController@data');
 Route::get('/edit_list_invoice_sp/{id}', 'ListPenjualanSPController@penjualanData');
 Route::post('/list_invoice_sp/update/{id}/{id_detail}','ListPenjualanSPController@update');
 Route::post('/list_invoice_SP/store','ListPenjualanSPController@store');
@@ -464,3 +464,6 @@ Route::get('/laporan/lap_progress_pb', function() {
 Route::get('/laporan/lap_progress_detailpb', function() {
   return view ('/laporan/lap_progress_detailpb');
 }) -> name('laporan-lap_progress_detailpb');
+
+Route::get('/tambah_user/add-user', 'UsersController@add');
+Route::post('/new/user', 'UsersController@store');

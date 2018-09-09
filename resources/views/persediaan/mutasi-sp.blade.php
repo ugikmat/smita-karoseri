@@ -47,9 +47,8 @@
 
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <button type="button" id="save" class="btn btn-success" ><i class="fa fa-caret-square-o-right"></i>Tampilkan Mutasi SP</button>
-      {{-- <button class="btn btn-success" type="submit" name="button"><i class="fa fa-caret-square-o-right"></i>  Tampilkan</button> --}}
     </div>
-      </div>
+  </div>
 </div>
 <br><br>
 

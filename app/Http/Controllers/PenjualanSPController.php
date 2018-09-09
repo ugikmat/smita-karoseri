@@ -16,6 +16,7 @@ use App\DetailPenjualanProduk;
 use App\HargaProduk;
 use App\PenjualanDompul;
 use App\StokSp;
+use App\Lokasi;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use Yajra\Datatables\Datatables;
@@ -43,7 +44,13 @@ class PenjualanSPController extends Controller
         $produks = produk::where('status_produk','1')->get();
         $saless = Sales::where('status','1')->get();
         $jumlahProduk = $produks->count();
-        return view('penjualan.sp.invoice-sp',['saless'=>$saless,'produks'=>$produks,'hargaProduks'=>$hargaProduks,'jumlah'=>$jumlahProduk]);
+        $lokasis = Lokasi::select('master_lokasis.id_lokasi','master_lokasis.nm_lokasi')
+                    ->join('users_lokasi','users_lokasi.id_lokasi','=','master_lokasis.id_lokasi')
+                    ->join('users','users.id_user','=','users_lokasi.id_user')
+                    ->where('users.id_user',Auth::user()->id_user)
+                    ->where('status_lokasi','1')
+                    ->get();
+        return view('penjualan.sp.invoice-sp',['saless'=>$saless,'produks'=>$produks,'hargaProduks'=>$hargaProduks,'jumlah'=>$jumlahProduk,'lokasis'=>$lokasis]);
     }
     public function set_session(Request $request){
         session(['tipe_harga'=>$request->input('tipe_harga'),'kode_produk'=>$request->input('kode_produk')]);
@@ -149,12 +156,13 @@ class PenjualanSPController extends Controller
         session(['total_harga_sp' => $total]);
         $sales = Sales::where('id_sales',$penjualanSp->id_sales)->first();
         $customer = Customer::where('id_cust',$penjualanSp->id_customer)->first();
+        $lokasi = $request->get('lokasi');
         session(['id_sales'=>$penjualanSp->id_sales,'id_cust'=>$penjualanSp->id_customer,'bank-sp'=>$request->get('bank-sp')]);
         // return view('/penjualan/sp/invoice-sp-2',['penjualanSp'=>$penjualanSp,'sales'=>$sales,'customer'=>$customer,'bank'=>$bank,'data'=>$detailPenjualan]);
-        return redirect("/penjualan/sp/invoice-sp/edit/{$penjualanSp->id_temp_penjualan_sp}");
+        return redirect("/penjualan/sp/invoice-sp/edit/{$penjualanSp->id_temp_penjualan_sp}/{$lokasi}");
     }
 
-    public function showEdit($id){
+    public function showEdit($id,$lokasi){
         $penjualanSp = DB::table('temp_penjualan_sps')->where('id_temp_penjualan_sp',$id)->first();
         $sales = Sales::where('id_sales',$penjualanSp->id_sales)->first();
         $customer = Customer::where('id_cust',$penjualanSp->id_customer)->first();
@@ -171,7 +179,7 @@ class PenjualanSPController extends Controller
                             $join->on('temp_detail_penjualan_sps.id_produk','=','master_produks.kode_produk');
                         })
                         ->where('id_penjualan_sp',$penjualanSp->id_temp_penjualan_sp)->get();
-        return view('/penjualan/sp/invoice-sp-2',['penjualanSp'=>$penjualanSp,'sales'=>$sales,'customer'=>$customer,'data'=>$detailPenjualan]);
+        return view('/penjualan/sp/invoice-sp-2',['penjualanSp'=>$penjualanSp,'sales'=>$sales,'customer'=>$customer,'data'=>$detailPenjualan,'lokasi'=>$lokasi]);
     }
 
     public function update(Request $request, $id){
@@ -295,6 +303,7 @@ class PenjualanSPController extends Controller
         session(['total_harga_sp' => $total]);
         $sales = Sales::where('id_sales',$penjualanSp->id_sales)->first();
         $customer = Customer::where('id_cust',$penjualanSp->id_customer)->first();
+        $lokasi = $request->get('lokasi');
         session(['id_sales'=>$penjualanSp->id_sales,'id_cust'=>$penjualanSp->id_customer,'bank-sp'=>$request->get('bank-sp')]);
 
         // $tunai=number_format($tunai,0,",",".");
@@ -307,7 +316,8 @@ class PenjualanSPController extends Controller
             'sales'=>$sales,
             'customer'=>$customer,
             'total_pembayaran'=>$total_pembayaran,
-            'selisih'=>$selisih
+            'selisih'=>$selisih,
+            'lokasi'=>$lokasi
             ]);
     }
 
@@ -330,7 +340,7 @@ class PenjualanSPController extends Controller
         $penjualanSp->tanggal_penjualan_sp=$data->tanggal_penjualan_sp;
         $penjualanSp->tanggal_input=Carbon::now('Asia/Jakarta')->toDateString();
         $penjualanSp->id_user=Auth::user()->id_user;
-        $penjualanSp->id_lokasi=Auth::user()->id_lokasi;
+        $penjualanSp->id_lokasi=$request->get('lokasi');
         $penjualanSp->save();
 
         foreach ($dataDetail as $key => $value) {

@@ -47,6 +47,7 @@ td{
 
 <form class="invoice-dompul repeater" action="/invoice_dompul/store" method="post">
   @csrf
+  <input type="hidden" name="lokasi" id="lokasi" value="{{$lokasi}}">
   <input type="hidden" name="sales" id="sales" value="{{$sales->id_sales}}">
   <input type="hidden" name="nm_sales" id="nm_sales" value="{{$sales->nm_sales}}">
   <input type="hidden" name="downline" id="downline" value="{{$datas->no_hp_downline}}">
