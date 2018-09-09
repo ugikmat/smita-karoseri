@@ -10,6 +10,7 @@ use App\HargaDompul;
 use App\PenjualanDompul;
 use App\DetailPenjualanDompul;
 use App\StokDompul;
+use App\Lokasi;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
@@ -34,8 +35,12 @@ class PenjualanDompulController extends Controller
     public function index()
     {
         $saless = Sales::where('status','1')->get();
-        $lokasis = Lokasi::where('status_lokasi','1')->get();
-        return view('penjualan.dompul.invoice-dompul',['saless'=>$saless]);
+        $lokasis = Lokasi::where('status_lokasi','1')
+                    ->join('users_lokasi','users_lokasi.id_lokasi','=','master_lokasis.id_lokasi')
+                    ->join('users','users.id_user','=','users_lokasi.id_user')
+                    ->where('users.id_user',Auth::user()->id_user)
+                    ->get();
+        return view('penjualan.dompul.invoice-dompul',['saless'=>$saless,'lokasis'=>$lokasis]);
     }
     /**
      * Display a list of sales based on name

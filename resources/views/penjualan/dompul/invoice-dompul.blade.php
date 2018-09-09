@@ -132,9 +132,9 @@
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <select name="lokasi" required="required" class="form-control col-md-7 col-xs-12" id="lokasi">
-                          @isset($lokasiarray)
-                            @foreach($lokasiarray as $lokasi)
-                              <option value="{{$lokasi->nm_lokasi}}" id="{{$lokasi->nm_lokasi}}">{{$lokasi->nm_lokasi}}</option>
+                          @isset($lokasis)
+                            @foreach($lokasis as $lokasi)
+                              <option value="{{$lokasi->id_lokasi}}" id="{{$lokasi->nm_lokasi}}">{{$lokasi->nm_lokasi}}</option>
                             @endforeach
                           @endisset
                         </select>
