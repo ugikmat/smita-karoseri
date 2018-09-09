@@ -59,6 +59,27 @@ class UsersController extends Controller
         return redirect ('/tambah_user/add-user');
     }
 
+    public function update(Request $request)
+    {
+        $user = User::where('id_user',$request->get('id'))->first();
+        if(Hash::check($request->get('oldpassword'), $user->password)&&$request->get('password')==$request->get('konfirmasi')){
+            $user->password=Hash::make($request->get('password'));
+            $user->save();
+            $error='Berhasil';
+        }else{
+            $error='Iya Error';
+        }
+        User::where('id_user',$request->get('id'))->update([
+            'username' => $request->get('username'),
+            'name' => $request->get('name'),
+            // 'id_lokasi' => 0,
+            'id_bo' => $request->get('bo'),
+            'level_user' => $request->get('level'),
+            'email' => $request->get('email'),
+            ]);
+        return redirect ('/master/user')->with(['error'=>$error]);
+    }
+
     public function delete($id)
     {
         User::where('id_user',$id)->update(['deleted'=>1]);
@@ -73,11 +94,11 @@ class UsersController extends Controller
      */
     public function data(Datatables $datatables)
     {
-        $datas = User::select(DB::raw("users.id_user,users.name,users.username,users.level_user,users.email, GROUP_CONCAT(master_lokasis.nm_lokasi SEPARATOR ', ') as nm_lokasi"))
+        $datas = User::select(DB::raw("users.id_user,users.name,users.id_bo,users.username,users.level_user,users.email, GROUP_CONCAT(master_lokasis.nm_lokasi SEPARATOR ', ') as nm_lokasi"))
                     ->leftJoin('users_lokasi','users_lokasi.id_user','=','users.id_user')
                     ->leftJoin('master_lokasis','master_lokasis.id_lokasi','=','users_lokasi.id_lokasi')
                     ->where('users.deleted',0)
-                    ->groupBy('users.id_user','users.name','users.email','users.username','users.level_user')
+                    ->groupBy('users.id_user','users.name','users.email','users.username','users.level_user','users.id_bo')
                     ->get();
         return $datatables->of($datas)
                           ->editColumn('name', function ($user) {

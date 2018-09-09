@@ -158,11 +158,11 @@
                 <div class="x_content">
                   <br />
 
-                  <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
-                    @csrf
+                  <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/update/user" id="editForm">
+                    @csrf @method('put')
                     <input type="hidden" name="id" id="id">
                     <div class="form-group row">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Username
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -180,20 +180,20 @@
                     </div>
 
                     <div class="form-group row">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Password
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Password Lama
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="password" id="oldpassword" name="oldpassword" class="form-control col-md-7 col-xs-12" required="required" value="">
+                        <input type="password" id="oldpassword" name="oldpassword" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
                     <div class="form-group row">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Password
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Password Baru
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="password" id="password" name="password" class="form-control col-md-7 col-xs-12" required="required" value="">
+                        <input type="password" id="password" name="password" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
@@ -202,7 +202,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="password" id="konfirmasi" name="konfirmasi" class="form-control col-md-7 col-xs-12" required="required" value="">
+                        <input type="password" id="konfirmasi" name="konfirmasi" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
 
@@ -212,6 +212,21 @@
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <input type="email" id="email" name="email" class="form-control col-md-7 col-xs-12" required="required" value="">
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">BO
+                        <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select id="bo" required="required" name="bo" placeholder="Pilih Level User" class="form-control col-md-7 col-xs-12">
+                          @isset($bosarray)
+                            @foreach ($bosarray as $value)
+                              <option value="{{$value->id_bo}}">{{$value->nama_bo}}</option>
+                            @endforeach
+                          @endisset
+                        </select>
                       </div>
                     </div>
 
@@ -235,7 +250,7 @@
                     <div class="form-group">
                       <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         <button class="btn btn-primary" type="reset">Reset</button>
-                        <button type="submit" class="btn btn-success" data-dismiss="modal">Simpan</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
                       </div>
                     </div>
                   </form>
@@ -320,19 +335,20 @@
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    $('#editForm').attr('action', `/edit/user/${id}`);
+    // $('#editForm').attr('action', `/update/user`);
     console.log(button.data('user'));
-    console.log(modal.find('#editModal .modal-body #nama'));
-    console.log(modal.find('#editModal'));
-    console.log(modal.find('.modal-body input#name').val());
-    console.log(modal.find('.modal-body select'));
-    console.log(modal.find('.modal-body input'));
-    console.log(modal.find('.modal-body'));
-    console.log(modal.find('#nama'));
+    // console.log(modal.find('#editModal .modal-body #nama'));
+    // console.log(modal.find('#editModal'));
+    // console.log(modal.find('.modal-body input#name').val());
+    // console.log(modal.find('.modal-body select'));
+    // console.log(modal.find('.modal-body input'));
+    // console.log(modal.find('.modal-body'));
+    // console.log(modal.find('#nama'));
     modal.find('.modal-body input#name').val(button.data('user').name);
     modal.find('.modal-body input#username').val(button.data('user').username);
     modal.find('.modal-body input#id').val(button.data('user').id_user);
     // modal.find('.modal-body .lokasi input').val(lokasi);
+    modal.find('.modal-body select#bo').val(button.data('user').id_bo).change();
     modal.find('.modal-body select#level').val(button.data('user').level_user).change();
     modal.find('.modal-body input#email').val(button.data('user').email);
 

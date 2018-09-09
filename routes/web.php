@@ -289,6 +289,7 @@ Route::get('/master/user', function() {
 Route::get('/tambah_user/add-user', 'UsersController@add');
 Route::post('/new/user', 'UsersController@store');
 Route::put('/delete/user/{id}', 'UsersController@delete');
+Route::put('/update/user', 'UsersController@update');
 Route::get('/user-data', 'UsersController@data');
 
 Route::resource('master/bank', 'BankController');
