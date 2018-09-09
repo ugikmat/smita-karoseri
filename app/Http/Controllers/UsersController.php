@@ -73,19 +73,19 @@ class UsersController extends Controller
      */
     public function data(Datatables $datatables)
     {
-        $datas = User::select(DB::raw("users.id_user,users.name,users.email, GROUP_CONCAT(master_lokasis.nm_lokasi SEPARATOR ', ') as nm_lokasi"))
+        $datas = User::select(DB::raw("users.id_user,users.name,users.username,users.level_user,users.email, GROUP_CONCAT(master_lokasis.nm_lokasi SEPARATOR ', ') as nm_lokasi"))
                     ->leftJoin('users_lokasi','users_lokasi.id_user','=','users.id_user')
                     ->leftJoin('master_lokasis','master_lokasis.id_lokasi','=','users_lokasi.id_lokasi')
                     ->where('users.deleted',0)
-                    ->groupBy('users.id_user','users.name','users.email')
+                    ->groupBy('users.id_user','users.name','users.email','users.username','users.level_user')
                     ->get();
         return $datatables->of($datas)
                           ->editColumn('name', function ($user) {
                               return '<a>' . $user->name . '</a>';
                           })
                           ->addColumn('action', function ($user) {
-                              return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id='.$user->id_user.'><i class="glyphicon glyphicon-edit"></i> Hapus</a>
-                              <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$user->id_user.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                              return "<a class='btn btn-xs btn-primary' data-toggle='modal' data-target='#editModal' data-id='$user->id_user' data-user='$user'><i class='glyphicon glyphicon-edit'></i> Edit</a>
+                              <a class='btn btn-xs btn-danger' data-toggle='modal' data-target='#deleteModal' data-id='$user->id_user'><i class='glyphicon glyphicon-remove'></i> Hapus</a>";
                             })
                           ->rawColumns(['name', 'action'])
                           ->make(true);
