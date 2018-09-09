@@ -204,8 +204,9 @@
 @section('js')
 <script>
     $(function () {
-        
-        $('#sales').val('{{session('dompul_sales_id')}}').change();
+        @if(Session::has('dompul_sales_id'))
+          $('#sales').val("{{session('dompul_sales_id')}}").change();
+        @endif
         // $('#sales').attr('value',"{{session('dompul_sales_id')}}");
         if ($('#tgl').val()==undefined) {
           var tgl = 'null';
