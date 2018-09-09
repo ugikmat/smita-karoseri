@@ -62,9 +62,9 @@
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       @if(Session::has('sp-list-tgl'))
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" value="{{session('sp-list-tgl')}}" required>
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl_awal" id="tgl_awal" data-date-format="dd-mm-yyyy" value="{{session('sp-list-tgl')}}" required>
                       @else
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now()->format('d-m-Y')}}" required>
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl_awal" id="tgl_awal" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now()->format('d-m-Y')}}" required>
                       @endif
                     </div>
                   </div>
@@ -75,9 +75,9 @@
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       @if(Session::has('sp-list-tgl'))
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" value="{{session('sp-list-tgl')}}" required>
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl_akhir" id="tgl_akhir" data-date-format="dd-mm-yyyy" value="{{session('sp-list-tgl')}}" required>
                       @else
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl" id="tgl" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now()->format('d-m-Y')}}" required>
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl_akhir" id="tgl_akhir" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now()->format('d-m-Y')}}" required>
                       @endif
                     </div>
                   </div>
@@ -157,11 +157,12 @@
 </script>
 <script>
     $(function () {
-        $tgl_penjualan = ($('#tgl').val()=='') ? 'null' : $('#tgl').val();
+        $tgl_awal = ($('#tgl_awal').val()=='') ? 'null' : $('#tgl_awal').val();
+        $tgl_akhir = ($('#tgl_akhir').val()=='') ? 'null' : $('#tgl_akhir').val();
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: `/invoice_sp/list/${$tgl_penjualan}`,
+            ajax: `/invoice_sp/list/${$tgl_awal}/${$tgl_akhir}`,
             // "columnDefs": [ {
             // "searchable": false,
             // "orderable": false,
@@ -185,10 +186,10 @@
         //   } );
         // } ).draw();
         $('#show').on('click',function (event) {
-          $tgl = $('#tgl').val();
-          console.log($tgl);
+          $tgl_awal = ($('#tgl_awal').val()=='') ? 'null' : $('#tgl_awal').val();
+        $tgl_akhir = ($('#tgl_akhir').val()=='') ? 'null' : $('#tgl_akhir').val();
           console.log('Loading Data...');
-          t.ajax.url(`/invoice_sp/list/${$tgl}`).load();
+          t.ajax.url(`/invoice_sp/list/${$tgl_awal}/${$tgl_akhir}`).load();
           console.log('Loaded');
         });
         $('#deleteModal').on('show.bs.modal', function (event) {
