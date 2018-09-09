@@ -8,7 +8,9 @@ use App\PenjualanDompul;
 use App\DetailPenjualanDompul;
 use App\UploadDompul;
 use App\HargaDompul;
+use App\Lokasi;
 use DB;
+use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
 
@@ -27,7 +29,13 @@ class ListPenjualanDompulController extends Controller
      * Diplay a list of transaction made before
      */
     public function index(){
-        return view('penjualan.dompul.list-invoice');
+        $lokasis = Lokasi::select('master_lokasis.id_lokasi','master_lokasis.nm_lokasi')
+                    ->join('users_lokasi','users_lokasi.id_lokasi','=','master_lokasis.id_lokasi')
+                    ->join('users','users.id_user','=','users_lokasi.id_user')
+                    ->where('users.id_user',Auth::user()->id_user)
+                    ->where('status_lokasi','1')
+                    ->get();
+        return view('penjualan.dompul.list-invoice',['lokasis'=>$lokasis]);
     }
 
     public function edit($id,$canvaser,$tgl,$downline){
@@ -139,7 +147,7 @@ class ListPenjualanDompulController extends Controller
      * @param \Yajra\Datatables\Datatables $datatables
      * @return \Illuminate\Http\JsonResponse
      */
-    public function data(Datatables $datatables,$tgl_awal,$tgl_akhir)
+    public function data(Datatables $datatables,$tgl_awal,$tgl_akhir,$lokasi)
     {
         if ($tgl_awal=='null') {
             $tgl = $tgl_awal;
@@ -151,7 +159,8 @@ class ListPenjualanDompulController extends Controller
             $tgl_akhir = $tgl_akhir->format('Y-m-d');
 
         }
-        return $datatables->eloquent(PenjualanDompul::select('penjualan_dompuls.id_penjualan_dompul',
+        if($lokasi=='all'){
+            $datas = PenjualanDompul::select('penjualan_dompuls.id_penjualan_dompul',
         'master_saless.nm_sales',
         'penjualan_dompuls.no_hp_kios',
         'master_customers.nm_cust',
@@ -161,7 +170,23 @@ class ListPenjualanDompulController extends Controller
                         ->join('master_customers','master_customers.no_hp','=','penjualan_dompuls.no_hp_kios')
                         // ->join('detail_penjualan_dompuls','detail_penjualan_dompuls.id_penjualan_dompul','=','penjualan_dompuls.id_penjualan_dompul')
                         ->whereBetween('tanggal_penjualan_dompul',[$tgl_awal,$tgl_akhir])
-                        ->where('deleted',0))
+                        ->where('deleted',0);
+        }else{
+            $datas = PenjualanDompul::select('penjualan_dompuls.id_penjualan_dompul',
+        'master_saless.nm_sales',
+        'penjualan_dompuls.no_hp_kios',
+        'master_customers.nm_cust',
+        'penjualan_dompuls.tanggal_penjualan_dompul',
+        'penjualan_dompuls.status_pembayaran')
+                        ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
+                        ->join('master_customers','master_customers.no_hp','=','penjualan_dompuls.no_hp_kios')
+                        // ->join('detail_penjualan_dompuls','detail_penjualan_dompuls.id_penjualan_dompul','=','penjualan_dompuls.id_penjualan_dompul')
+                        ->whereBetween('tanggal_penjualan_dompul',[$tgl_awal,$tgl_akhir])
+                        ->where('penjualan_dompuls.id_lokasi',$lokasi)
+                        ->where('deleted',0);
+
+        }
+        return $datatables->of($datas)
                         // ->addColumn('indeks', function ($uploadDompul) {
                         //       return '';
                         //     })

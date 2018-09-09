@@ -82,6 +82,22 @@
                       @endif
                     </div>
                   </div>
+                  
+                  <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Lokasi
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <select name="lokasi" required="required" class="form-control col-md-7 col-xs-12" id="lokasi">
+                        <option value="all" id="all">Semua</option>
+                          @isset($lokasis)
+                            @foreach($lokasis as $lokasi)
+                              <option value="{{$lokasi->id_lokasi}}" id="{{$lokasi->nm_lokasi}}">{{$lokasi->nm_lokasi}}</option>
+                            @endforeach
+                          @endisset
+                        </select>
+                    </div>
+                  </div>
 
                   <div class="ln_solid"></div>
                   <div class="form-group">
@@ -160,10 +176,11 @@
     $(function () {
         $tgl_awal = ($('#tgl_awal').val()=='') ? 'null' : $('#tgl_awal').val();
         $tgl_akhir = ($('#tgl_akhir').val()=='') ? 'null' : $('#tgl_akhir').val();
+        $lokasi = $('#lokasi').val();
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: `/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}`,
+            ajax: `/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}`,
             // "columnDefs": [ {
             // "searchable": false,
             // "orderable": false,
@@ -187,9 +204,10 @@
         //   } );
         // } ).draw();
         function loadData() {
+          $lokasi = $('#lokasi').val();
           $tgl_awal = ($('#tgl_awal').val()=='') ? 'null' : $('#tgl_awal').val();
           $tgl_akhir = ($('#tgl_akhir').val()=='') ? 'null' : $('#tgl_akhir').val();
-          t.ajax.url(`/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}`).load();
+          t.ajax.url(`/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}`).load();
         }
         $('#show').on('click',loadData);
         $('#verificationModal').on('show.bs.modal', function (event) {

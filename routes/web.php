@@ -153,7 +153,7 @@ Route::post('/penjualan/dompul/invoice-dompul', 'PenjualanDompulController@show'
 Route::get('/penjualan/dompul/{canvaser}/{tgl}/{downline}/{lokasi}', 'PenjualanDompulController@edit');
 Route::post('/invoice_dompul/store','PenjualanDompulController@store');
 Route::post('/list_invoice_dompul/update','ListPenjualanDompulController@update');
-Route::get('/invoice_dompul/list/{tgl_awal}/{tgl_akhir}', 'ListPenjualanDompulController@data');
+Route::get('/invoice_dompul/list/{tgl_awal}/{tgl_akhir}/{lokasi}', 'ListPenjualanDompulController@data');
 Route::post('/invoice_dompul/update/{canvaser}/{tgl}/{downline}/{produk}/{no_faktur}/{status_penjualan}', 'PenjualanDompulController@update');
 Route::get('/invoice_dompul/{canvaser}/{tgl}', 'PenjualanDompulController@data');
 Route::get('/edit_invoice_dompul/{canvaser}/{tgl}/{downline}', 'PenjualanDompulController@penjualanData');
