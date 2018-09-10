@@ -95,7 +95,7 @@
         <option value="Kepala Cabang">Kepala Cabang</option>
         <option value="Keuangan">Super Admin</option>
       </select>
-      
+
     </div>
   </div>
   <br>
@@ -134,7 +134,7 @@
             // start with an empty list of repeaters. Set your first (and only)
             // "data-repeater-item" with style="display:none;" and pass the
             // following configuration flag
-            initEmpty: true,
+            // initEmpty: true,
             // (Optional)
             // "defaultValues" sets the values of added items.  The keys of
             // defaultValues refer to the value of the input's name attribute.
