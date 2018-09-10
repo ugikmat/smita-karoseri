@@ -321,10 +321,14 @@
 </script>
 <script type="text/javascript">
   $(".chosen-select").chosen();
-  $("#sales").val("{{session('id_sales')}}");
-  $("#customer").val("{{session('id_cust')}}");
-  $("#sales").trigger("chosen:updated");
-  $("#customer").trigger("chosen:updated");
+  @if(Session::has('id_sales'))
+    $("#sales").val("{{session('id_sales')}}");
+    $("#sales").trigger("chosen:updated");
+  @endif
+  @if(Session::has('id_cust'))
+    $("#customer").val("{{session('id_cust')}}");
+    $("#customer").trigger("chosen:updated");
+  @endif
 </script>
 <script type="text/javascript">
 $.ajaxSetup({
