@@ -14,7 +14,7 @@
     <tr>
       <th>Id Sales</th>
       <th>Nama Sales</th>
-      <th>Id Lokasi</th>
+      <th>Nama Lokasi</th>
       <th>Alamat Sales</th>
       <th>No Telepon</th>
       <th>Action</th>
@@ -24,7 +24,7 @@
     <tr>
       <th>Id Sales</th>
       <th>Nama Sales</th>
-      <th>Id Lokasi</th>
+      <th>Nama Lokasi</th>
       <th>Alamat Sales</th>
       <th>No Telepon</th>
     </tr>
@@ -231,7 +231,7 @@
           data: 'nm_sales'
         },
         {
-          data: 'id_lokasi'
+          data: 'nm_lokasi'
         },
         {
           data: 'alamat_sales'

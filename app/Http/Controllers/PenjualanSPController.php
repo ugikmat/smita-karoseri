@@ -44,13 +44,14 @@ class PenjualanSPController extends Controller
         $produks = produk::where('status_produk','1')->get();
         $saless = Sales::where('status','1')->get();
         $jumlahProduk = $produks->count();
+        $kios = Customer::select(DB::raw("id_cust,CONCAT(nm_cust, '(', no_hp,')') as nm_customer"))->where('status',1)->get();
         $lokasis = Lokasi::select('master_lokasis.id_lokasi','master_lokasis.nm_lokasi')
                     ->join('users_lokasi','users_lokasi.id_lokasi','=','master_lokasis.id_lokasi')
                     ->join('users','users.id_user','=','users_lokasi.id_user')
                     ->where('users.id_user',Auth::user()->id_user)
                     ->where('status_lokasi','1')
                     ->get();
-        return view('penjualan.sp.invoice-sp',['saless'=>$saless,'produks'=>$produks,'hargaProduks'=>$hargaProduks,'jumlah'=>$jumlahProduk,'lokasis'=>$lokasis]);
+        return view('penjualan.sp.invoice-sp',['saless'=>$saless,'produks'=>$produks,'hargaProduks'=>$hargaProduks,'jumlah'=>$jumlahProduk,'lokasis'=>$lokasis,'kios'=>$kios]);
     }
     public function set_session(Request $request){
         session(['tipe_harga'=>$request->input('tipe_harga'),'kode_produk'=>$request->input('kode_produk')]);

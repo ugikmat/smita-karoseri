@@ -73,7 +73,7 @@ class UsersController extends Controller
                 'id_user' => $user->id_user
             ]);
         }
-        return redirect ('/tambah_user/add-user');
+        return redirect ('/master/user');
     }
 
     public function getData($id){
@@ -134,7 +134,7 @@ class UsersController extends Controller
      */
     public function data(Datatables $datatables)
     {
-        $datas = User::select(DB::raw("users.id_user,users.name,users.id_bo,users.level_user,users.username,users.level_user,users.email, GROUP_CONCAT(master_lokasis.nm_lokasi SEPARATOR ', ') as nm_lokasi"))
+        $datas = User::select(DB::raw("users.id_user,users.name,users.level_user,users.id_bo,users.username,users.level_user,users.email, GROUP_CONCAT(master_lokasis.nm_lokasi SEPARATOR ', ') as nm_lokasi"))
                     ->leftJoin('users_lokasi','users_lokasi.id_user','=','users.id_user')
                     ->leftJoin('master_lokasis','master_lokasis.id_lokasi','=','users_lokasi.id_lokasi')
                     ->where('users.deleted',0)
