@@ -102,7 +102,7 @@
     <div class='repeater'>
         <div data-repeater-list="lokasi-user" id="lokasi-user">
             <div data-repeater-item>
-                <div class="row">
+                <div class="form-group row">
                     <input type="hidden" id="id_users_lokasi" name="id_users_lokasi" class="form-control" value="">
                     <div class="col-xs-6 col-sm-6">
                         Lokasi&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&emsp;
@@ -183,7 +183,7 @@
             // defaults to false.
             isFirstItemUndeletable: false
         });
-    
+
         repeater.setList([
             @foreach($lokasi_data as $value)
               {

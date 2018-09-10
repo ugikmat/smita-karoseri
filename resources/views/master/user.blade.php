@@ -22,6 +22,7 @@
     <tr>
       <th>Id</th>
       <th>Nama</th>
+      <th>Level User</th>
       <th>Email</th>
       <th>Lokasi</th>
       <th>action</th>
@@ -31,6 +32,7 @@
     <tr>
       <th>Id</th>
       <th>Nama</th>
+      <th>Level User</th>
       <th>Email</th>
       <th>Lokasi</th>
     </tr>
@@ -310,6 +312,9 @@
           data: 'name'
         },
         {
+          data: 'level_user'
+        },
+        {
           data: 'email'
         },
         {
@@ -335,7 +340,7 @@
   });
 </script>
 <script>
-          
+
 </script>
 <script>
   $('#deleteModal').on('show.bs.modal', function (event) {
