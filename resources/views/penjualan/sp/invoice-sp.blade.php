@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="{{ asset('/datepicker/css/bootstrap-datepicker.min.css') }}">
 <style>
   #kiri{
-    padding-left: 0px;
+    padding: 0px;
   }
   .border{
     border-style: solid;
@@ -28,11 +28,11 @@
 <div class="container-fluid  form-inline">
   @csrf
   <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" id="kiri">
+    <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2" id="kiri">
       Tanggal Penjualan : &nbsp;
       <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}">
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" id="kiri">
+    <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2" id="kiri" style="margin-left:20px;">
         Lokasi : &nbsp;
         <select name="lokasi" required="required" class="form-control" id="lokasi">
           <option value="" disabled selected>Pilih Lokasi</option>
