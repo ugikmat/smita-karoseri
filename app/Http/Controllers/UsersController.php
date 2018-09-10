@@ -40,10 +40,13 @@ class UsersController extends Controller
                     ->leftJoin('master_lokasis','master_lokasis.id_lokasi','=','users_lokasi.id_lokasi')
                     ->where('users.id_user',$id)
                     ->where('users.deleted',0)
+                    // ->where('master_lokasis.deleted',0)
+                    ->where('users_lokasi.deleted',0)
                     ->groupBy('users.id_user','users.name','users.email','users.username','users.level_user','users.id_bo')
                     ->first();
         $lokasi = UserLokasi::select('id_lokasi')->where('id_user',$id)->first();
-        $lokasi_data = UserLokasi::select('id_lokasi')->where('id_user',$id)->get();
+        $lokasi_data = UserLokasi::select('id_lokasi','id_users_lokasi')->where('id_user',$id)
+        ->where('deleted',0)->get();
         return view('/user/user-edit',['data'=>$datas,'lokasi'=>$lokasi,'lokasi_data'=>$lokasi_data]);
     }
 
@@ -80,6 +83,7 @@ class UsersController extends Controller
 
     public function update(Request $request)
     {
+        $lokasi_user = $request->get('lokasi-user');
         $user = User::where('id_user',$request->get('id'))->first();
         if(Hash::check($request->get('oldpassword'), $user->password)&&$request->get('password')==$request->get('konfirmasi')){
             $user->password=Hash::make($request->get('password'));
@@ -96,6 +100,23 @@ class UsersController extends Controller
             'level_user' => $request->get('level'),
             'email' => $request->get('email'),
             ]);
+        foreach ($lokasi_user as $key => $value) {
+            if (empty($value['id_users_lokasi'])) {
+                UserLokasi::create([
+                    'id_lokasi' => $value['lokasi'],
+                    'id_user' => $request->get('id')
+                ]);
+            } else {
+                UserLokasi::where('id_users_lokasi',$value['id_users_lokasi'])->update(['id_lokasi'=>$value['lokasi']]);
+            }
+        }
+        $delete = $request->get('delete');
+
+        if (!empty($delete)) {
+            foreach ($delete as $key => $value) {
+                UserLokasi::where('id_users_lokasi',$value)->update(['deleted'=>1]);
+            }
+        }
         return redirect ('/master/user')->with(['error'=>$error]);
     }
 
@@ -117,6 +138,8 @@ class UsersController extends Controller
                     ->leftJoin('users_lokasi','users_lokasi.id_user','=','users.id_user')
                     ->leftJoin('master_lokasis','master_lokasis.id_lokasi','=','users_lokasi.id_lokasi')
                     ->where('users.deleted',0)
+                    // ->where('master_lokasis.deleted',0)
+                    ->where('users_lokasi.deleted',0)
                     ->groupBy('users.id_user','users.name','users.email','users.username','users.level_user','users.id_bo')
                     ->get();
         return $datatables->of($datas)

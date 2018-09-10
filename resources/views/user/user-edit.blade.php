@@ -11,7 +11,10 @@
 @stop @section('content')
 <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/update/user" id="editForm">
     @csrf @method('put')
-    <input type="hidden" name="id" id="id">
+    <input type="hidden" name="id" id="id" value="{{$data->id_user}}">
+    <div id="deleted">
+
+  </div>
     <div class="form-group row">
         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama
             <span class="required">*</span>
@@ -100,6 +103,7 @@
         <div data-repeater-list="lokasi-user" id="lokasi-user">
             <div data-repeater-item>
                 <div class="row">
+                    <input type="hidden" id="id_users_lokasi" name="id_users_lokasi" class="form-control" value="">
                     <div class="col-xs-6 col-sm-6">
                         Lokasi&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&emsp;
                         <select name="lokasi" required class="form-control" id="lokasi" style="height: calc(3.5rem - 2px); width:177px;">
@@ -132,6 +136,7 @@
     $(document).ready(function () {
         $('#bo').val({{$data->id_bo}}).change();
         $('#level').val('{{$data->level_user}}').change();
+        var indeks =0;
         var repeater = $('.repeater').repeater({
             // (Optional)
             // start with an empty list of repeaters. Set your first (and only)
@@ -143,9 +148,9 @@
             // defaultValues refer to the value of the input's name attribute.
             // If a default value is not specified for an input, then it will
             // have its value cleared.
-            // defaultValues: {
-            //     'lokasi': 1
-            // },
+            defaultValues: {
+                'lokasi': 1
+            },
             // (Optional)
             // "show" is called just after an item is added.  The item is hidden
             // at this point.  If a show callback is not given the item will
@@ -164,6 +169,7 @@
                 if (confirm('Apakah anda yakin ingin menghapus Lokasi?')) {
                     $(this).slideUp(deleteElement);
                 }
+                $('#deleted').append(`<input type='hidden' id='delete' name="delete[${indeks++}]" value='${$('#id_users_lokasi', $(this)).val()}'>`);
             },
             // (Optional)
             // You can use this if you need to manually re-index the list
@@ -181,7 +187,8 @@
         repeater.setList([
             @foreach($lokasi_data as $value)
               {
-                'lokasi': {{$value->id_lokasi}}
+                'lokasi': {{$value->id_lokasi}},
+                'id_users_lokasi':{{$value->id_users_lokasi}}
               },
             @endforeach
           ]);
