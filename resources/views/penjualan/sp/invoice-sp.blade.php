@@ -58,9 +58,9 @@
         Nama Kios : &nbsp;
         <select id="customer" required="required" name="customer" placeholder="Pilih Nama Kios" class="chosen-select" data-placeholder="{{session('id_cust')}}">
               <option value="" disabled>Pilih Nama Kios</option>
-              @isset($customerarray)
-                  @foreach ($customerarray as $data)
-                  <option value="{{ $data->id_cust }}">{{ $data->nm_cust }}</option>
+              @isset($kios)
+                  @foreach ($kios as $data)
+                  <option value="{{ $data->id_cust }}">{{ $data->nm_customer }}</option>
                   @endforeach
               @endisset
         </select>
