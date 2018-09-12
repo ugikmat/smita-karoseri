@@ -23,7 +23,7 @@ class ListPenjualanDompulController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','canvaser','kasir','head','supervisor','admin']);
     }
     /**
      * Diplay a list of transaction made before

@@ -19,7 +19,7 @@ class HargaDompulController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','kasir','head','supervisor','admin']);
     }
     /**
      * Display a listing of the resource.

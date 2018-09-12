@@ -30,7 +30,7 @@ class PenjualanSPController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','canvaser','kasir','head','supervisor','admin']);
     }
     /**
      * Display a listing of the resource.

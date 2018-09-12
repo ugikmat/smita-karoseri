@@ -19,7 +19,7 @@ class StokDompulController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','kasir','head','supervisor','admin']);
     }
     public function index(){
         return view('persediaan.mutasi-dompul');

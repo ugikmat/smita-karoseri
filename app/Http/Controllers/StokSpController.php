@@ -21,7 +21,7 @@ class StokSpController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','kasir','head','supervisor','admin']);
     }
     public function index(){
         $saless = Sales::where('status',1)->get();
