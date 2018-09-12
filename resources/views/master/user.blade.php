@@ -17,6 +17,9 @@
 @stop
 
 @section('content')
+@if(Session::has('error'))
+  <input type="text"  value="{{session('error')}}">
+@endif
 <table id="user-table" class="table responsive" width="100%">
   <thead>
     <tr>
