@@ -26,7 +26,9 @@
       <th>Diskon</th>
       <th>Komisi</th>
       <th>Status Produk</th>
+      @if(Auth::user()->level_user!='Kasir')
       <th>action</th>
+      @endif
     </tr>
   </thead>
   <tfoot>
@@ -394,11 +396,13 @@
         {
           data: 'status_produk'
         },
+        @if(Auth::user()->level_user!='Kasir')
         {
           data: 'action',
           orderable: false,
           searchable: false
         }
+        @endif
       ],
       initComplete: function () {
         this.api().columns().every(function () {

@@ -31,9 +31,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->level_user!='Super Admin') {
-            return redirect('/');
-        }
+        // if (Auth::user()->level_user!='Super Admin') {
+        //     return redirect('/');
+        // }
         return view('/master/user');
     }
 

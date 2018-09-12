@@ -23,7 +23,7 @@
 <table id="user-table" class="table responsive" width="100%">
   <thead>
     <tr>
-      <th>Id</th>
+      <th>No</th>
       <th>Nama</th>
       <th>Level User</th>
       <th>Email</th>
@@ -33,7 +33,7 @@
   </thead>
   <tfoot>
     <tr>
-      <th>Id</th>
+      <th>No</th>
       <th>Nama</th>
       <th>Level User</th>
       <th>Email</th>
@@ -304,7 +304,7 @@
 </script>
 <script>
   $(function () {
-    $('#user-table').DataTable({
+    var t = $('#user-table').DataTable({
       serverSide: true,
       processing: true,
       stateSave: true,
@@ -341,6 +341,11 @@
         });
       }
     });
+    t.on( 'order.dt search.dt', function () {
+        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+          } );
+        } ).draw();
   });
 </script>
 <script>
