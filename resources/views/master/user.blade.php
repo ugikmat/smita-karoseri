@@ -304,6 +304,7 @@
     $('#user-table').DataTable({
       serverSide: true,
       processing: true,
+      stateSave: true,
       ajax: '/user-data',
       columns: [{
           data: 'id_user'

@@ -199,6 +199,7 @@
         var t = $('#lp-sp-table').DataTable({
             serverSide: true,
             processing: true,
+            stateSave: true,
             scrollX: true,
             ajax: `/laporan-penjualan/sp-cvs/${$tgl}/${$sales}`,
             columnDefs: [

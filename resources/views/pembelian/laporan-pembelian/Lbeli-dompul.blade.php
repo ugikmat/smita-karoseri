@@ -154,6 +154,7 @@
         var t = $('#l-beli-dompul-table').DataTable({
             serverSide: true,
             processing: true,
+            stateSave: true,
             ajax: `/pembelian/laporan-pembelian/data/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,

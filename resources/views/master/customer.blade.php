@@ -260,6 +260,7 @@ Karoseri
     $('#customers-table').DataTable({
       serverSide: true,
       processing: true,
+      stateSave: true,
       ajax: '/master-customer',
       columns: [{
           data: 'id_cust'

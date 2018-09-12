@@ -228,6 +228,7 @@
         var t = $('#invoice-dompul-table').DataTable({
             serverSide: true,
             processing: true,
+            stateSave: true,
             ajax: `/invoice_dompul/${canvaser}/${tgl}`,
             "columnDefs": [ {
             "searchable": false,

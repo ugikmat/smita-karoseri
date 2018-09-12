@@ -82,6 +82,7 @@
   var t = $('#l-beli-sp-2-table').DataTable({
             serverSide: true,
             processing: true,
+            stateSave: true,
             ajax: '/laporan-penjualan/sp/piutang/'+id+'/'+tgl,
             "columnDefs": [ {
             "searchable": false,

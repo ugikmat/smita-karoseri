@@ -475,6 +475,7 @@
     $('#tgl-upload-table').DataTable({
       serverSide: true,
       processing: true,
+      stateSave: true,
       ajax: '/upload/tgl',
       columns: [
         {
@@ -523,6 +524,7 @@
     var table = $('#upload-table').DataTable({
       serverSide: true,
       processing: true,
+      stateSave: true,
       //Just Dummy Date
       ajax: '/upload/null/null',
       columns: [{

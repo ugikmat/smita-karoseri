@@ -179,6 +179,7 @@
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
+            stateSave: true,
             ajax: `/invoice_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}`,
             // "columnDefs": [ {
             // "searchable": false,

@@ -260,6 +260,7 @@ function goBack() {
         var t = $('#invoice-sp-table').DataTable({
                   serverSide: true,
                   processing: true,
+                  stateSave: true,
                   searching:  false,
                   ajax: `/edit_invoice_sp/${id}`,
                   columns: [

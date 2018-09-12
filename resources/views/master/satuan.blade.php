@@ -241,6 +241,7 @@
     $('#satuan-table').DataTable({
       serverSide: true,
       processing: true,
+      stateSave: true,
       ajax: '/satuan-data',
       columns: [{
           data: 'id_satuan'

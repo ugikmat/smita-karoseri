@@ -162,6 +162,7 @@
             serverSide: true,
             processing: true,
             scrollX: true,
+            stateSave: true,
             ajax: `/laporan-penjualan/sp/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,

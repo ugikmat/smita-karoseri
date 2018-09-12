@@ -236,6 +236,7 @@
     $('#harga-dompul-table').DataTable({
       serverSide: true,
       processing: true,
+      stateSave: true,
       ajax: '/harga-dompul-data',
       columns: [{
           data: 'id_harga_dompul'
