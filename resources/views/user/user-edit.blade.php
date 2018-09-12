@@ -16,7 +16,7 @@
 
   </div>
 
-  <div class="container-fluid form-inline">
+  <div class="container-fluid form-inline repeater">
     <div class="row">
       <div class="col-xs-6 col-sm-6">
         Nama&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;:&emsp;
