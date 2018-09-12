@@ -142,6 +142,7 @@
         $tgl_pembelian = ($('#tgl').val()=='') ? 'null' : $('#tgl').val();
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
+            stateSave: true,
             processing: true,
             ajax: `/pembelian_sp/list/${$tgl_pembelian}`,
             columns: [

@@ -329,6 +329,7 @@ $.ajaxSetup({
         var t = $('#invoice-sp-table').DataTable({
                   serverSide: true,
                   processing: true,
+                  stateSave: true,
                   ajax: `/edit_invoice_sp/${id}`,
                   columns: [
                       {data: 'nama_produk'},

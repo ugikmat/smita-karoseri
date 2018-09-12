@@ -410,6 +410,7 @@
           var t= $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
+            stateSave: true,
             searching:  false,
             ajax: `/edit_list_invoice_sp/${id}`,
             columns: [
@@ -426,6 +427,7 @@
             serverSide: true,
             processing: true,
             searching:  false,
+            stateSave: true,
             ajax: `/edit_list_invoice_sp/${id}`,
             columns: [
               {data: 'nama_produk'},

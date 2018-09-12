@@ -338,6 +338,7 @@ td{
         var t = $('#invoice-dompul-table').DataTable({
                   serverSide: true,
                   processing: true,
+                  stateSave: true,
                   ajax: `/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`,
                   columns: [
                       {data: 'produk'},

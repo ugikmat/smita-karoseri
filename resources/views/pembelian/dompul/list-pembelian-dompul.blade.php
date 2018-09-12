@@ -143,6 +143,7 @@
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
+            stateSave: true,
             ajax: `/pembelian_dompul/list-data/${$tgl_pembelian}`,
             columns: [
                 // {data: 'indeks'},

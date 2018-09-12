@@ -72,7 +72,7 @@
       <tr>
         {{-- <td></td> --}}
         <td><b>Grand Total</b></td>
-        <td><input type="text" name="qty" id="qty" class="form-control qty" value="" readonly></td>
+        <td></td>
         <td></td>
         <td><input type="text" name="total" id="total" class="form-control total" value="" readonly></td>
         <td><input type="text" name="cash" id="cash" class="form-control cash" value="" readonly></td>
@@ -199,6 +199,7 @@
         var t = $('#lp-sp-table').DataTable({
             serverSide: true,
             processing: true,
+            stateSave: true,
             scrollX: true,
             ajax: `/laporan-penjualan/sp-cvs/${$tgl}/${$sales}`,
             columnDefs: [
@@ -235,7 +236,7 @@
             if(response.success)
             {
               console.log('Success..data');
-               $('.qty').val(response.qty.toLocaleString('id-ID'));
+              //  $('.qty').val(response.qty.toLocaleString('id-ID'));
               $('.total').val(response.total.toLocaleString('id-ID'));
               $('.cash').val(response.cash.toLocaleString('id-ID'));
               $('.bca_pusat').val(response.bca_pusat.toLocaleString('id-ID'));
@@ -259,7 +260,7 @@
             if(response.success)
             {
               console.log('Success..data');
-               $('.qty').val(response.qty.toLocaleString('id-ID'));
+              //  $('.qty').val(response.qty.toLocaleString('id-ID'));
               $('.total').val(response.total.toLocaleString('id-ID'));
               $('.cash').val(response.cash.toLocaleString('id-ID'));
               $('.bca_pusat').val(response.bca_pusat.toLocaleString('id-ID'));

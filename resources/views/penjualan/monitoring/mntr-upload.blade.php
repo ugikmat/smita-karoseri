@@ -199,6 +199,7 @@
         var t = $('#m-penjualan-table').DataTable({
             serverSide: true,
             processing: true,
+            stateSave: true,
             ajax: `/monitor-data/${tgl}`,
             columns: [
                 {data: 'index'},

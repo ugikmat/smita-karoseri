@@ -175,6 +175,7 @@
   $(function () {
     $('#dompul-table').DataTable({
       serverSide: true,
+      stateSave: true,
       processing: true,
       ajax: '/tipe-dompul-data',
       columns: [{

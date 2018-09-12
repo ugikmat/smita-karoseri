@@ -9,6 +9,7 @@ use App\Lokasi;
 use DB;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -30,6 +31,9 @@ class UsersController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->level_user!='Super Admin') {
+            return redirect('/');
+        }
         return view('/master/user');
     }
 
@@ -85,7 +89,7 @@ class UsersController extends Controller
     {
         $lokasi_user = $request->get('lokasi-user');
         $user = User::where('id_user',$request->get('id'))->first();
-        if(Hash::check($request->get('oldpassword'), $user->password)&&$request->get('password')==$request->get('konfirmasi')){
+        if($request->get('password')==$request->get('konfirmasi')){
             $user->password=Hash::make($request->get('password'));
             $user->save();
             $error='Berhasil';

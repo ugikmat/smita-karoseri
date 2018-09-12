@@ -355,6 +355,7 @@
   $(function () {
     $('#produk-table').DataTable({
       serverSide: true,
+      stateSave: true,
       processing: true,
       ajax: '/produk-data',
       columns: [{

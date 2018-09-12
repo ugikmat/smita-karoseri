@@ -432,6 +432,7 @@
           $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
+            stateSave: true,
             searching:  false,
             ajax: `/pembelian_dompul/detail/${id_pembelian}`,
             columns: [

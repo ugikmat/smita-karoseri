@@ -17,6 +17,9 @@
 @stop
 
 @section('content')
+@if(Session::has('error'))
+  <input type="text"  value="{{session('error')}}">
+@endif
 <table id="user-table" class="table responsive" width="100%">
   <thead>
     <tr>
@@ -151,6 +154,7 @@
     $('#user-table').DataTable({
       serverSide: true,
       processing: true,
+      stateSave: true,
       ajax: '/user-data',
       columns: [{
           data: 'id_user'

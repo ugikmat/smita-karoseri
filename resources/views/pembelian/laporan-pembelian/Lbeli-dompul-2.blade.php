@@ -82,6 +82,7 @@
   var t = $('#l-beli-dompul-2-table').DataTable({
             serverSide: true,
             processing: true,
+            stateSave: true,
             ajax: '/laporan-penjualan/piutang/'+id+'/'+tgl,
             "columnDefs": [ {
             "searchable": false,

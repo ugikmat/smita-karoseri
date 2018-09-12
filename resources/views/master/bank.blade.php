@@ -168,6 +168,7 @@
       serverSide: true,
       processing: true,
       responsive: true,
+      stateSave: true,
       ajax: '/bank-data',
       columns: [{
           data: 'id_bank'

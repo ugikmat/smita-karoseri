@@ -222,6 +222,7 @@
   $(function () {
     $('#sales-table').DataTable({
       serverSide: true,
+      stateSave: true,
       processing: true,
       ajax: '/master-sales',
       columns: [{

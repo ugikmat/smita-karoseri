@@ -213,6 +213,7 @@
   $(function () {
     $('#harga-produk-table').DataTable({
       serverSide: true,
+      stateSave: true,
       processing: true,
       ajax: '/harga-produk-data',
       columns: [{
