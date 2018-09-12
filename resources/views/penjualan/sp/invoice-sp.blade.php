@@ -34,7 +34,7 @@
     </div>
     <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2" id="kiri" style="margin-left:20px;">
         Lokasi : &nbsp;
-        <select name="lokasi" required="required" class="form-control" id="lokasi">
+        <select name="lokasi" required="required" class="form-control chosen-select" id="lokasi">
           <option value="" disabled selected>Pilih Lokasi</option>
           @isset($lokasis)
             @foreach($lokasis as $lokasi)
