@@ -93,7 +93,7 @@
         <option value="Kasir">Kasir</option>
         <option value="Supervisor">Supervisor</option>
         <option value="Kepala Cabang">Kepala Cabang</option>
-        <option value="Keuangan">Super Admin</option>
+        <option value="Super Admin">Super Admin</option>
       </select>
 
     </div>
