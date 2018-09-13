@@ -16,7 +16,8 @@ class UserCanvaser
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->level_user!='Canvaser') {
+        $permission = array("Kasir", "Canvaser", "Supervisor", "Super Admin", "Kepala Cabang");
+        if (!in_array(Auth::user()->level_user, $os)) {
             return redirect('/');
         }
         return $next($request);
