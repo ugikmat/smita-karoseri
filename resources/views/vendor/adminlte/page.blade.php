@@ -58,7 +58,7 @@
 
                     <ul class="nav navbar-nav">
                       <li>
-                        <a href="/tambah_user/add-user">
+                        <a href="/user/change_password">
                           <i class=""> Change Password</i>
                         </a>
                       </li>

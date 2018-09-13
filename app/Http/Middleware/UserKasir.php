@@ -17,7 +17,7 @@ class UserKasir
     public function handle($request, Closure $next)
     {
         $permission = array("Kasir", "Supervisor", "Super Admin", "Kepala Cabang");
-        if (!in_array(Auth::user()->level_user, $os)) {
+        if (!in_array(Auth::user()->level_user, $permission)) {
             return redirect('/');
         }
         return $next($request);

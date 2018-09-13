@@ -25,7 +25,7 @@ class PenjualanDompulController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth']);
+        $this->middleware(['auth','canvaser']);
     }
     /**
      * Display a listing of the resource.

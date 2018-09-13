@@ -8,18 +8,13 @@
 @stop
 
 @section('content')
-<form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/update/user" id="editForm">
+<form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/user/reset" id="editForm">
     @csrf @method('put')
-    <input type="hidden" name="id" id="id" value="{{$data->id_user}}">
-    <div id="deleted">
-
-  </div>
-
   <div class="container-fluid form-inline">
   <div class="row">
     <div class="col-xs-6 col-sm-6">
       Password lama&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;:&emsp;
-      <input type="text" id="username" name="username" class="form-control" value="" autocomplete="off" required>
+      <input type="password" id="oldpassword" name="oldpassword" class="form-control" value="" autocomplete="off" required>
     </div>
   </div>
   <br>
