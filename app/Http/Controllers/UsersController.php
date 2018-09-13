@@ -22,7 +22,7 @@ class UsersController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','admin','head','supervisor']);
+        $this->middleware(['auth']);
     }
     /**
      * Display index page.
@@ -61,6 +61,9 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
+        if($request->get('password')!=$request->get('konfirmasi')){
+            return redirect()->back();
+        }
         $user = User::create([
             'username' => $request->get('username'),
             'name' => $request->get('name'),
@@ -122,6 +125,19 @@ class UsersController extends Controller
             }
         }
         return redirect ('/master/user')->with(['error'=>$error]);
+    }
+
+    public function change(){
+        return view('user.change-password');
+    }
+
+    public function reset(Request $request){
+        if(Hash::check($request->get('oldpassword'),Auth::user()->password)&&$request->get('password')==$request->get('konfirmasi')){
+            User::where('id_user',Auth::user()->id_user)->update(['password'=>Hash::make($request->get('password'))]);
+        }else{
+            return redirect()->back();
+        }
+        return redirect('/');
     }
 
     public function delete($id)

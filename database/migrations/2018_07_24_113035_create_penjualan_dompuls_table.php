@@ -15,12 +15,12 @@ class CreatePenjualanDompulsTable extends Migration
     {
         Schema::create('penjualan_dompuls', function (Blueprint $table) {
             $table->increments('id_penjualan_dompul');
+            $table->string('id_lokasi');
             $table->integer('id_sales');
             // $table->integer('id_ho');
             $table->integer('id_bo');
             $table->string('no_hp_kios');
             $table->string('id_user');
-            $table->string('id_lokasi');
             $table->date('tanggal_penjualan_dompul');
             $table->date('tanggal_input');
             $table->bigInteger('grand_total');
