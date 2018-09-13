@@ -193,6 +193,12 @@
 </script>
 <script>
     $(function () {
+        @if(Session::has('id_sales'))
+          $('#sales').val("{{session('id_sales')}}").change();
+        @endif
+        @if(Session::has('lokasi_penjualan'))
+          $('#lokasi').val("{{session('lokasi_penjualan')}}").change();
+        @endif
         $tgl_awal = ($('#tgl_awal').val()=='') ? 'null' : $('#tgl_awal').val();
         $tgl_akhir = ($('#tgl_akhir').val()=='') ? 'null' : $('#tgl_akhir').val();
         $lokasi = $('#lokasi').val();

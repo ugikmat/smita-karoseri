@@ -331,6 +331,10 @@
     $("#customer").val("{{session('id_cust')}}");
     $("#customer").trigger("chosen:updated");
   @endif
+  @if(Session::has('lokasi_penjualan'))
+    $("#lokasi").val("{{session('lokasi_penjualan')}}");
+    $("#lokasi").trigger("chosen:updated");
+  @endif
 </script>
 <script type="text/javascript">
 $.ajaxSetup({

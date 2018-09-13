@@ -139,6 +139,7 @@
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <select name="lokasi" required="required" class="form-control col-md-7 col-xs-12" id="lokasi">
+                          <option value="" disabled>Pilih Lokasi</option>
                           @isset($lokasis)
                             @foreach($lokasis as $lokasi)
                               <option value="{{$lokasi->id_lokasi}}" id="{{$lokasi->nm_lokasi}}">{{$lokasi->nm_lokasi}}</option>
@@ -217,6 +218,9 @@
     $(function () {
         @if(Session::has('dompul_sales_id'))
           $('#sales').val("{{session('dompul_sales_id')}}").change();
+        @endif
+        @if(Session::has('lokasi_penjualan'))
+          $('#lokasi').val("{{session('lokasi_penjualan')}}").change();
         @endif
         // $('#sales').attr('value',"{{session('dompul_sales_id')}}");
         if ($('#tgl').val()==undefined) {

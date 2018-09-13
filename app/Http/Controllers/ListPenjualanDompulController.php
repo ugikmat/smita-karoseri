@@ -178,9 +178,11 @@ class ListPenjualanDompulController extends Controller
                         ->whereBetween('tanggal_penjualan_dompul',[$tgl_awal,$tgl_akhir])
                         ->where('deleted',0);
         if($lokasi!='all'){
+            session(['lokasi_penjualan'=>$lokasi]);
             $datas = $datas->where('penjualan_dompuls.id_lokasi',$lokasi);
         }
         if($sales!='all'){
+            session(['id_sales'=>$sales]);
             $datas = $datas->where('penjualan_dompuls.id_sales',$sales);
         }
         return $datatables->of($datas)
