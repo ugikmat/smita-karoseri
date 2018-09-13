@@ -291,8 +291,8 @@ Route::get('/user/edit/{id}', 'UsersController@edit');
 Route::post('/new/user', 'UsersController@store');
 Route::put('/delete/user/{id}', 'UsersController@delete');
 Route::put('/update/user', 'UsersController@update');
-Route::put('/user/reset', 'UsersPasswordController@change');
-Route::get('/user/change_password', 'UsersPasswordController@index');
+Route::put('/user/reset', 'UserPasswordController@change');
+Route::get('/user/change_password', 'UserPasswordController@index');
 Route::get('/user-data', 'UsersController@data');
 
 Route::resource('master/bank', 'BankController');

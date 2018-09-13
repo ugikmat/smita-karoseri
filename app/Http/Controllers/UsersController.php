@@ -22,7 +22,7 @@ class UsersController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','kasir']);
+        $this->middleware(['auth','head']);
     }
     /**
      * Display index page.

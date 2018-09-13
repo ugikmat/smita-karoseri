@@ -13,7 +13,7 @@ class LaporanDompulHeadController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','head']);
     }
     /**
      * Diplay a list of transaction made before

@@ -16,7 +16,8 @@ class UserSupervisor
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->level_user!='Supervisor') {
+        $permission = array("Supervisor", "Super Admin");
+        if (!in_array(Auth::user()->level_user, $permission)) {
             return redirect('/');
         }
         return $next($request);
