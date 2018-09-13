@@ -88,8 +88,12 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select name="id" required="required" class="form-control col-md-7 col-xs-12" id="sales" value='{{session('dompul_sales_id')}}'>
+                    <select name="sales" required="required" class="form-control col-md-7 col-xs-12" id="sales" value='{{session('dompul_sales_id')}}'>
+                          
                           @isset($saless)
+                          @if($saless->count()>1)
+                            <option value="all" id="all">- Semua Canvaser -</option>
+                          @endif
                             @foreach($saless as $sales)
                               <option value="{{$sales->id_sales}}" id="{{$sales->nm_sales}}">{{$sales->nm_sales}}</option>
                             @endforeach
@@ -192,11 +196,12 @@
         $tgl_awal = ($('#tgl_awal').val()=='') ? 'null' : $('#tgl_awal').val();
         $tgl_akhir = ($('#tgl_akhir').val()=='') ? 'null' : $('#tgl_akhir').val();
         $lokasi = $('#lokasi').val();
+        $sales = $('#sales').val();
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
             stateSave: true,
-            ajax: `/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}`,
+            ajax: `/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`,
             // "columnDefs": [ {
             // "searchable": false,
             // "orderable": false,
@@ -223,7 +228,8 @@
           $lokasi = $('#lokasi').val();
           $tgl_awal = ($('#tgl_awal').val()=='') ? 'null' : $('#tgl_awal').val();
           $tgl_akhir = ($('#tgl_akhir').val()=='') ? 'null' : $('#tgl_akhir').val();
-          t.ajax.url(`/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}`).load();
+          $sales = $('#sales').val();
+          t.ajax.url(`/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`).load();
         }
         $('#show').on('click',loadData);
         $('#verificationModal').on('show.bs.modal', function (event) {

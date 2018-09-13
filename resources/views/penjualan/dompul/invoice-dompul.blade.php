@@ -22,7 +22,7 @@
         @if (Session::has('tgl_penjualan_dompul'))
           <input type="input" disabled id="tgl" value={{ session('tgl_penjualan_dompul')}}>
         @else
-          <input type="input" disabled id="tgl" value={{ Carbon\Carbon::now()->format('d-m-Y')}}>
+          <input type="input" disabled id="tgl" value={{ Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}>
         @endif
       </div>
     </div>
@@ -65,9 +65,13 @@
         ID Canvaser
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
+        @isset($sales)
+            : {{$sales->id_sales}}
+        @else
         @if (Session::has('dompul_sales_id'))
             : {{ session('dompul_sales_id') }}
         @endif
+        @endisset
       </div>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -75,19 +79,22 @@
         Nama Canvaser :
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        @if (Session::has('dompul_sales_nama'))
-          <input type="input" disabled id="canvaser"value='{{ session('dompul_sales_nama')}}'>
-        @endif
+        @isset($sales)
+            <input type="input" disabled id="canvaser"value='{{$sales->nm_sales}}'>
+        @else
+          @if (Session::has('dompul_sales_nama'))
+            <input type="input" disabled id="canvaser"value='{{ session('dompul_sales_nama')}}'>
+          @endif
+        @endisset
       </div>
+      
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
         Tanggal Cetak Penjualan :
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        @if (session('now'))
-            {{ session('now') }}
-        @endif
+            {{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}
       </div>
     </div>
   </div>
@@ -147,10 +154,14 @@
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                     <select name="id" required="required" class="form-control col-md-7 col-xs-12" id="sales" value='{{session('dompul_sales_id')}}'>
+                          @isset($sales)
+                            <option value="{{$sales->id_sales}}" id="{{$sales->nm_sales}}">{{$sales->nm_sales}}</option>
+                          @else
                           @isset($saless)
-                            @foreach($saless as $sales)
-                              <option value="{{$sales->id_sales}}" id="{{$sales->nm_sales}}">{{$sales->nm_sales}}</option>
+                            @foreach($saless as $sls)
+                              <option value="{{$sls->id_sales}}" id="{{$sls->nm_sales}}">{{$sls->nm_sales}}</option>
                             @endforeach
+                          @endisset
                           @endisset
                         </select>
                       </div>
