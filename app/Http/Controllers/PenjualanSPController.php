@@ -42,7 +42,11 @@ class PenjualanSPController extends Controller
         session(['now'=>Carbon::now('Asia/Jakarta')->format('d-m-Y')]);
         $hargaProduks = HargaProduk::where('status_harga_sp','Aktif')->get();
         $produks = produk::where('status_produk','1')->get();
-        $saless = Sales::where('status','1')->get();
+        if (Auth::user()->level_user=='Canvaser') {
+            $saless = Sales::where('nm_sales',Auth::user()->name)->where('status','1')->get();
+        } else {
+            $saless = Sales::where('status','1')->get();
+        }
         $jumlahProduk = $produks->count();
         $kios = Customer::select(DB::raw("id_cust,CONCAT(nm_cust, '(', no_hp,')') as nm_customer"))->where('status',1)->get();
         $lokasis = Lokasi::select('master_lokasis.id_lokasi','master_lokasis.nm_lokasi')

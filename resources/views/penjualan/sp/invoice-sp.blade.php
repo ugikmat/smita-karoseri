@@ -46,8 +46,10 @@
     <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" id="kiri">
         Nama Canvaser : &nbsp;
         <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('id_sales')}}">
-              <option value="" disabled>Pilih Nama Canvaser</option>
               @isset($saless)
+                  @if($saless->count()>1)
+                    <option value="" disabled>Pilih Nama Canvaser</option>
+                  @endif
                   @foreach ($saless as $data)
                   <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
                   @endforeach

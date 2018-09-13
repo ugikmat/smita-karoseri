@@ -37,7 +37,12 @@ class ListPenjualanSPController extends Controller
                     ->where('users.id_user',Auth::user()->id_user)
                     ->where('status_lokasi','1')
                     ->get();
-        return view('penjualan.sp.list-invoice-sp',['lokasis'=>$lokasis]);
+        if (Auth::user()->level_user=='Canvaser') {
+            $saless = Sales::where('nm_sales',Auth::user()->name)->where('status','1')->get();
+        } else {
+            $saless = Sales::where('status','1')->get();
+        }
+        return view('penjualan.sp.list-invoice-sp',['lokasis'=>$lokasis,'saless'=>$saless]);
     }
 
     public function verif($id){
@@ -161,7 +166,7 @@ class ListPenjualanSPController extends Controller
      * @param \Yajra\Datatables\Datatables $datatables
      * @return \Illuminate\Http\JsonResponse
      */
-    public function data(Datatables $datatables,$tgl_awal,$tgl_akhir,$lokasi)
+    public function data(Datatables $datatables,$tgl_awal,$tgl_akhir,$lokasi,$sales)
     {
         if ($tgl_awal=='null') {
             $tgl = $tgl_awal;
@@ -173,8 +178,7 @@ class ListPenjualanSPController extends Controller
             $tgl_akhir = $tgl_akhir->format('Y-m-d');
 
         }
-        if($lokasi=='all'){
-            $datas = PenjualanProduk::select('id_penjualan_sp',
+        $datas = PenjualanProduk::select('id_penjualan_sp',
         'nm_sales',
         'master_customers.no_hp',
         'nm_cust',
@@ -185,19 +189,11 @@ class ListPenjualanSPController extends Controller
                         // ->join('detail_penjualan_dompuls','detail_penjualan_dompuls.id_penjualan_dompul','=','penjualan_dompuls.id_penjualan_dompul')
                         ->whereBetween('tanggal_penjualan_sp',[$tgl_awal,$tgl_akhir])
                         ->where('deleted',0);   
-        }else{
-            $datas = PenjualanProduk::select('id_penjualan_sp',
-        'nm_sales',
-        'master_customers.no_hp',
-        'nm_cust',
-        'tanggal_penjualan_sp',
-        'status_penjualan')
-                        ->join('master_saless','master_saless.id_sales','=','penjualan_sps.id_sales')
-                        ->join('master_customers','master_customers.id_cust','=','penjualan_sps.id_customer')
-                        // ->join('detail_penjualan_dompuls','detail_penjualan_dompuls.id_penjualan_dompul','=','penjualan_dompuls.id_penjualan_dompul')
-                        ->whereBetween('tanggal_penjualan_sp',[$tgl_awal,$tgl_akhir])
-                        ->where('penjualan_sps.id_lokasi',$lokasi)                        
-                        ->where('deleted',0);
+        if($lokasi!='all'){
+            $datas = $datas->where('penjualan_sps.id_lokasi',$lokasi);
+        }
+        if($sales!='all'){
+            $datas = $datas->where('penjualan_sps.id_sales',$sales);
         }
         return $datatables->of($datas)
                         // ->addColumn('indeks', function ($uploadDompul) {
