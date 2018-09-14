@@ -153,6 +153,7 @@
         var t = $('#l-beli-sp-table').DataTable({
             serverSide: true,
             processing: true,
+            lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             stateSave: true,
             ajax: `/pembelian/laporan-pembelian/data/${$tgl}`,
             "columnDefs": [ {

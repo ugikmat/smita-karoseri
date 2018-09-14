@@ -192,6 +192,7 @@
         var t = $('#lp-dompul-table').DataTable({
             serverSide: true,
             processing: true,
+            lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             stateSave: true,
             scrollX: true,
             ajax: `/laporan-penjualan/dompul-cvs/${$tgl}/${$sales}`,
