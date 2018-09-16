@@ -81,7 +81,7 @@ class ListPenjualanDompulController extends Controller
         PenjualanDompul::where('id_penjualan_dompul',$id)
                         ->update(['status_pembayaran'=>1
                         ]);
-        $request->session()->flash('status', 'Berhasil melakukan verivikasi!');
+        $request->session()->flash('status', 'Berhasil melakukan verifikasi!');
         return redirect()->back();
     }
 
