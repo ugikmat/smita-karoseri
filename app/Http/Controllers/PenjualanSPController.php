@@ -411,6 +411,7 @@ class PenjualanSPController extends Controller
         }
         Schema::dropIfExists('temp_penjualan_sps');
         Schema::dropIfExists('temp_detail_penjualan_sps');
+        $request->session()->flash('status','');
         return redirect('/penjualan/sp/invoice-sp');
     }
 
