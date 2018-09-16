@@ -81,6 +81,7 @@ class ListPenjualanDompulController extends Controller
         PenjualanDompul::where('id_penjualan_dompul',$id)
                         ->update(['status_pembayaran'=>1
                         ]);
+        $request->session()->flash('status', 'Berhasil melakukan verivikasi!');
         return redirect()->back();
     }
 
@@ -134,11 +135,13 @@ class ListPenjualanDompulController extends Controller
             $detailPenjualanDompul->catatan = $value['catatan'];
             $detailPenjualanDompul->save();
         }
+        $request->session()->flash('status', 'Berhasil melakukan edit!');
         return redirect('/penjualan/dompul/list-invoice');
     }
 
     public function delete(Request $request){
         $penjualanDompul = PenjualanDompul::where('id_penjualan_dompul',$request->get('id'))->update(['deleted'=>1]);
+        $request->session()->flash('status', 'Berhasil menghapus List Invoice!');
         return redirect('/penjualan/dompul/list-invoice');
     }
     /**
