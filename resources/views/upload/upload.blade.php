@@ -96,7 +96,28 @@
   background: #f1f3f5;
 }
 </style>
-@stop @section('content')
+
+<style media="screen">
+  #myProgress {
+    width: 100%;
+    background-color: #ddd;
+  }
+
+  #myBar {
+    width: 0%;
+    height: 30px;
+    background-color: #4CAF50;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+  }
+</style>
+@stop
+
+@section('content')
+<div id="myProgress">
+  <div id="myBar">0%</div>
+</div>
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -133,7 +154,7 @@
       <th>Qty</th>
       <th>Aktif</th>
       <th>Action</th>
-      
+
     </tr>
   </thead>
   <tfoot>
@@ -233,7 +254,7 @@
             <label for="import_file">File</label>
             <input type='file' name='import_file' id='import_file' class='form-control' accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
             <br>
-            <input type='submit' class='btn btn-info' value='Upload' id='upload'>
+            <input type='submit' class='btn btn-info' value='Upload' id='upload' onclick="move()">
           </div>
         </form>
         <!-- Preview-->
@@ -502,7 +523,7 @@
           orderable: false,
           searchable: false
         }
-        
+
       ],
       dom: 'lBrtip',
         buttons: [
@@ -586,9 +607,9 @@
       ],
       dom: 'lBrtip',
         buttons: [
-            'copy', 'csv', 'excel', 'print',{ 
-          extend: 'pdfHtml5', 
-          orientation: 'landscape', 
+            'copy', 'csv', 'excel', 'print',{
+          extend: 'pdfHtml5',
+          orientation: 'landscape',
           pageSize: 'LEGAL' }
         ],
       initComplete: function () {
@@ -624,5 +645,21 @@
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <script>
   $('.datepicker').datepicker({});
+</script>
+<script>
+  function move() {
+    var elem = document.getElementById("myBar");
+    var width = 10;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+      } else {
+        width++;
+        elem.style.width = width + '%';
+        elem.innerHTML = width * 1  + '%';
+      }
+    }
+  }
 </script>
 @stop
