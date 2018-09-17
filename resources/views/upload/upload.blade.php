@@ -119,6 +119,16 @@
   <div id="myBar">0%</div>
 </div>
 <div class="container-fluid">
+  @if (Session::has('status'))
+  <div class="alert alert-success">
+    {{Session('status')}}
+  </div>
+  @endif
+  @if (Session::has('error'))
+  <div class="alert alert-success">
+    {{Session('error')}}
+  </div>
+  @endif
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadModal">Upload</button>
