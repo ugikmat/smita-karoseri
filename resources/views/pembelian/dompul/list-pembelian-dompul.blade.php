@@ -11,6 +11,11 @@
 @stop
 
 @section('content')
+@if (Session::has('status'))
+<div class="alert alert-success">
+  {{Session('status')}}
+</div>
+@endif
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput">Input Tanggal Penjualan</button>
 <br><br>
 <form action="" method="post">
