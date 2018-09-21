@@ -262,7 +262,7 @@ function goBack() {
                   processing: true,
                   stateSave: true,
                   searching:  false,
-                  ajax: `/edit_invoice_sp/${id}`,
+                  ajax: `/operasional/smita/edit_invoice_sp/${id}`,
                   columns: [
                       {data: 'nama_produk'},
                       {data: 'tipe_harga'},
