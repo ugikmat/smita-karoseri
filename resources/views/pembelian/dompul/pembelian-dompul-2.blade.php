@@ -31,7 +31,7 @@ td{
   </div>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      
+
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       HP Supplier&nbsp;: {{$supplier->telepon_supplier}}
@@ -232,7 +232,7 @@ function goBack() {
                   processing: true,
                   searching:  false,
                   stateSave: true,
-                  ajax: `/pembelian_dompul_data/${id}`,
+                  ajax: `/operasional/smita/pembelian_dompul_data/${id}`,
                   columns: [
                       {data: 'produk'},
                       {data: 'tipe_harga'},
