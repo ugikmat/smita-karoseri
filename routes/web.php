@@ -484,6 +484,5 @@ Route::get('/laporan-piutang/sp/{tgl_penjualan}', 'LaporanPiutangSpController@da
 
 Route::get('/persediaan/mutasi-sp-cvs', 'StockCVSSpController@index');
 
-Route::get('/persediaan/mutasi-sp-semua-cvs', function() {
-  return view ('/persediaan/mutasi-sp-semua-cvs');
-}) -> name('mutasi-sp-semua-cvs');
+Route::get('/persediaan/mutasi-sp-semua-cvs', 'StokCVSSpAllController@index');
+Route::get('/stok-sp/all/data/{tgl_awal}/{tgl_akhir}', 'StokCVSSpAllController@data');
