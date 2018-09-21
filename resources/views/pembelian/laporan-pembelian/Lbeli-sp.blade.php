@@ -155,7 +155,7 @@
             processing: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             stateSave: true,
-            ajax: `/pembelian/laporan-pembelian/data/${$tgl}`,
+            ajax: `/operasional/smita/pembelian/laporan-pembelian/data/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
