@@ -167,7 +167,7 @@
       serverSide: true,
       stateSave: true,
       processing: true,
-      ajax: '/master-lokasi',
+      ajax: '/operasional/smita/master-lokasi',
       columns: [{
           data: 'id_lokasi'
         },

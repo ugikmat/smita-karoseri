@@ -242,7 +242,7 @@
       serverSide: true,
       processing: true,
       stateSave: true,
-      ajax: '/dompul-data',
+      ajax: '/operasional/smita/dompul-data',
       columns: [{
           data: 'id_dompul'
         },

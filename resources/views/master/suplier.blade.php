@@ -275,7 +275,7 @@
       serverSide: true,
       processing: true,
       stateSave: true,
-      ajax: '/supplier-data',
+      ajax: '/operasional/smita/supplier-data',
       columns: [{
           data: 'id_supplier'
         },

@@ -225,7 +225,7 @@
       stateSave: true,
       processing: true,
       lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-      ajax: '/master-sales',
+      ajax: '/operasional/smita/master-sales',
       columns: [{
           data: 'id_sales'
         },

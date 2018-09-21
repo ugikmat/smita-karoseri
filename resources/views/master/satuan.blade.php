@@ -242,7 +242,7 @@
       serverSide: true,
       processing: true,
       stateSave: true,
-      ajax: '/satuan-data',
+      ajax: '/operasional/smita/satuan-data',
       columns: [{
           data: 'id_satuan'
         },

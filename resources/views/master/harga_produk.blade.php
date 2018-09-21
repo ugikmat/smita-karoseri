@@ -224,7 +224,7 @@
       serverSide: true,
       stateSave: true,
       processing: true,
-      ajax: '/harga-produk-data',
+      ajax: '/operasional/smita/harga-produk-data',
       columns: [{
           data: 'id_harga_sp'
         },

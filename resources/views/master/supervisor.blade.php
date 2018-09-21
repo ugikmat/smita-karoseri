@@ -13,7 +13,7 @@
     box-sizing: border-box;
   }
 </style>
-@stop 
+@stop
 @section('content')
 <table id="spv-table" class="table table-bordered">
     <thead>
@@ -207,7 +207,7 @@
         $('#spv-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/master-supervisor',
+            ajax: '/operasional/smita/master-supervisor',
             columns: [
                 {data: 'id_spv'},
                 {data: 'nm_spv'},
