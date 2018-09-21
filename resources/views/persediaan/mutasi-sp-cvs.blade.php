@@ -103,6 +103,7 @@
 </script>
 <script>
     $(function () {
+        $sales = $('#sales').val();
         $tgl_akhir = $('#tgl_akhir').val();
         $tgl_awal = $('#tgl_awal').val();
         $sales = $('#sales').val();
@@ -111,7 +112,7 @@
             processing: true,
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-            ajax: `/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`,
+            ajax: `/stok-sp/data/${$sales}/${$tgl_awal}/${$tgl_akhir}`,
             columns: [
               // {data: 'indeks'},
               {data: 'nama_produk'},
@@ -129,7 +130,7 @@
           $tgl_akhir = $('#tgl_akhir').val();
         $tgl_awal = $('#tgl_awal').val();
           $sales = $('#sales').val();
-          t.ajax.url(`/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`).load();
+          t.ajax.url(`/stok-sp/data/${$sales}/${$tgl_awal}/${$tgl_akhir}`).load();
         });
     });
 </script>
