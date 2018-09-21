@@ -189,6 +189,11 @@ return [
                         'url'   => '/penjualan/laporan-penjualan/Lbeli-cvs-sp',
                         'icon'  => 'user',
                       ],
+                      [
+                        'text'  => 'Piutang SP',
+                        'url'   => '/penjualan/laporan-penjualan/LP-piutang-sp',
+                        'icon'  => 'file',
+                      ],
                     ],
                   ],
                 ],

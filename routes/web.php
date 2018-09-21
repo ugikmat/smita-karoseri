@@ -478,6 +478,10 @@ Route::get('/laporan/lap_progress_detailpb', function() {
 
 
 
+Route::get('/penjualan/laporan-penjualan/LP-piutang-sp', function() {
+  return view ('/penjualan/laporan-penjualan/LP-piutang-sp');
+}) -> name('LP-piutang-sp');
+
 Route::get('/persediaan/mutasi-sp-cvs', function() {
   return view ('/persediaan/mutasi-sp-cvs');
 }) -> name('mutasi-sp-cvs');
