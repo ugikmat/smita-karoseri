@@ -49,6 +49,7 @@ class ListPenjualanSPController extends Controller
         PenjualanProduk::where('id_penjualan_sp',$id)
                         ->update(['status_penjualan'=>1
                         ]);
+        $request->session()->flash('status', 'Berhasil melakukan verifikasi!');
         return redirect()->back();
     }
 
@@ -70,7 +71,7 @@ class ListPenjualanSPController extends Controller
         // $data = DB::table('temp_detail_penjualan_sps')->where('id_temp_penjualan_sp',$id)->first();
         $tipe = $request->get('tipe');
         $qty_program = $request->get('qty_program');
-        
+
         if($tipe != 'default') {
             // DB::table('temp_detail_penjualan_sps')->where('id_temp_penjualan_sp',$id)
             // ->update(['tipe_harga'=>$tipe]);
@@ -97,6 +98,7 @@ class ListPenjualanSPController extends Controller
 
     public function delete(Request $request){
         PenjualanProduk::where('id_penjualan_sp',$request->get('id'))->update(['deleted'=>1]);
+        $request->session()->flash('status', 'Berhasil menghapus List Invoice!');
         return redirect('penjualan/sp/list-invoice-sp');
     }
 
@@ -157,6 +159,7 @@ class ListPenjualanSPController extends Controller
             $detailPembayaranSp->save();
         }
         // session(['tgl_penjualan_sp'=>$penjualanSp->id_sales,'id_cust'=>$penjualanSp->id_customer]);
+        $request->session()->flash('status', 'Berhasil melakukan edit!');
         return redirect('/penjualan/sp/list-invoice-sp');
     }
 
@@ -188,7 +191,7 @@ class ListPenjualanSPController extends Controller
                         ->join('master_customers','master_customers.id_cust','=','penjualan_sps.id_customer')
                         // ->join('detail_penjualan_dompuls','detail_penjualan_dompuls.id_penjualan_dompul','=','penjualan_dompuls.id_penjualan_dompul')
                         ->whereBetween('tanggal_penjualan_sp',[$tgl_awal,$tgl_akhir])
-                        ->where('deleted',0);   
+                        ->where('deleted',0);
         if($lokasi!='all'){
             session(['lokasi_penjualan'=>$lokasi]);
             $datas = $datas->where('penjualan_sps.id_lokasi',$lokasi);
@@ -202,7 +205,7 @@ class ListPenjualanSPController extends Controller
                         //       return '';
                         //     })
                         ->addColumn('tanggal_penjualan', function ($penjualanSP) {
-                        
+
                             $tgl = Carbon::parse($penjualanSP->tanggal_penjualan_sp);
                             $tgl = $tgl->format('d/m/Y');
                             return $tgl;
@@ -241,14 +244,14 @@ class ListPenjualanSPController extends Controller
     {
         // $data = DB::table('temp_detail_penjualan_sps')->get();
 
-        $detailPenjualan = DetailPenjualanProduk::select(DB::raw('master_produks.nama_produk, 
-        master_produks.satuan, 
+        $detailPenjualan = DetailPenjualanProduk::select(DB::raw('master_produks.nama_produk,
+        master_produks.satuan,
         detail_penjualan_sps.harga_satuan,
         detail_penjualan_sps.harga_beli,
         detail_penjualan_sps.id_produk,
         detail_penjualan_sps.id_penjualan_sp,
         detail_penjualan_sps.id_detail_penjualan_sp,
-        detail_penjualan_sps.tipe_harga, 
+        detail_penjualan_sps.tipe_harga,
         detail_penjualan_sps.jumlah_sp,
         detail_penjualan_sps.harga_total'))
                         ->join('master_produks',function($join){
@@ -280,7 +283,7 @@ class ListPenjualanSPController extends Controller
                             ->addColumn('action', function ($detailPenjualanSp) {
                                 $tipe = HargaProduk::select('tipe_harga_sp')->where('id_produk',$detailPenjualanSp->id_produk)->get();
                                 // $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$uploadDompul->produk)->get();
-                              return 
+                              return
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$detailPenjualanSp->id_penjualan_sp.'" data-id_detail="'.$detailPenjualanSp->id_detail_penjualan_sp.'" data-tipe='.$tipe.' data-qty="'.$detailPenjualanSp->harga_beli.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
                             })
                             // ->addColumn('input', function ($uploadDompul) {

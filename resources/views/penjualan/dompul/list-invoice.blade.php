@@ -11,6 +11,11 @@
 @stop
 
 @section('content')
+@if (Session::has('status'))
+<div class="alert alert-success">
+  {{session('status')}}
+</div>
+@endif
 {{-- @if (session('tgl'))
   <input type="hidden" id="tgl"value={{ session('tgl')}}></input>
 @endif --}}
@@ -89,7 +94,7 @@
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                     <select name="sales" required="required" class="form-control col-md-7 col-xs-12" id="sales" value='{{session('dompul_sales_id')}}'>
-                          
+
                           @isset($saless)
                           @if($saless->count()>1)
                             <option value="all" id="all">- Semua Canvaser -</option>

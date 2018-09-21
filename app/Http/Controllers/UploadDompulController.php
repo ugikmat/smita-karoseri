@@ -126,7 +126,7 @@ class UploadDompulController extends Controller {
                                     ];
                                 }
                                 $sub_master[] = $value->nama_sub_master;
-                                
+
                             }
                             // $hargaDompul[] = ['nama_harga_dompul' => $value->produk ,
                             //     'harga_dompul' => $value->harga_dompul ,
@@ -153,7 +153,7 @@ class UploadDompulController extends Controller {
                                 'alamat_sales' => $faker->address,
                                 'id_lokasi' => 0,
                                 'no_hp' => $value->hp_kanvacer
-                            ];   
+                            ];
                                 $kanvacer[] = $value->nama_kanvacer;
                             }
                         }
@@ -181,9 +181,10 @@ class UploadDompulController extends Controller {
                 } catch (Exception $e) {
 
                 }
-                
+
             }
         }
+        $request->session()->flash('status','Berhasil melakukan upload!');
         return redirect('/upload/dompul');
 
     }
@@ -193,6 +194,7 @@ class UploadDompulController extends Controller {
      */
     public function empty() {
         UploadDompul::truncate();
+        $request->session()->flash('error','Gagal melakukan upload!');
         return redirect()->back();
     }
 
@@ -217,7 +219,7 @@ class UploadDompulController extends Controller {
             $stokDompul->id_user= $value->id_user;
             $stokDompul->save();
         }
-        
+        $request->session()->flash('status','Berhasil melakukan aktivasi!');
         return redirect()->back();
     }
 
@@ -237,7 +239,7 @@ class UploadDompulController extends Controller {
                     return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#detailModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-edit"></i> Lihat Data</a>';
                 } else {
                     return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#detailModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-edit"></i> Lihat Data</a>
-                <a class = "btn btn-xs btn-warning" data-toggle="modal" data-target="#activationModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-remove"></i> Aktifasi</a>';   
+                <a class = "btn btn-xs btn-warning" data-toggle="modal" data-target="#activationModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-remove"></i> Aktifasi</a>';
                 }
             })->make(true);
     }
@@ -249,7 +251,7 @@ class UploadDompulController extends Controller {
      */
     public function data(PrintOutTableDataTable $datatables, $transfer, $upload) {
         return $datatables->dataTable(UploadDompul::where('tanggal_transfer',$transfer)
-                                                ->where('tanggal_upload',$upload)) 
+                                                ->where('tanggal_upload',$upload))
        ->addColumn('action', function ($uploadDompul) {
                 return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                 <a class = "btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$uploadDompul->id_upload.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
