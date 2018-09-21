@@ -17,6 +17,11 @@
 
 @section('content')
 <form class="invoice-sp repeater" action="/pembelian/sp/verify" method="post">
+  @if (Session::has('status'))
+  <div class="alert alert-success">
+    <strong>Berhasil!</strong> Transaksi pembelian SP selesai
+  </div>
+  @endif
 <div class="container-fluid  form-inline">
   @csrf
   <div class="row">

@@ -17,6 +17,11 @@
 
 @section('content')
 <form class="invoice-dompul repeater" action="/pembelian/dompul/verify" method="post">
+  @if (Session::has('status'))
+  <div class="alert alert-success">
+    <strong>Berhasil!</strong> Transaksi pembelian Dompul selesai
+  </div>
+  @endif
 <div class="container-fluid  form-inline">
   @csrf
   <div class="row">

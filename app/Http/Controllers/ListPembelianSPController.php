@@ -36,11 +36,13 @@ class ListPembelianSPController extends Controller
         PembelianProduk::where('id_pembelian_sp',$request->get('id'))
                         ->update(['status_pembelian'=>1
                         ]);
+        $request->session()->flash('status','Berhasil melakukan verifikasi!');
         return redirect()->back();
     }
 
     public function delete(Request $request){
         PembelianProduk::where('id_pembelian_sp',$request->get('id'))->update(['deleted'=>1]);
+        $request->session()->flash('status','Berhasil menghapus List Invoice!');
         return redirect('/pembelian/sp/list-pembelian-sp');
     }
 
@@ -59,7 +61,7 @@ class ListPembelianSPController extends Controller
 
         // $data = DB::table('temp_detail_penjualan_sps')->where('id_temp_penjualan_sp',$id)->first();
         $tipe = $request->get('tipe');
-        
+
         if($tipe != 'default') {
             // DB::table('temp_detail_penjualan_sps')->where('id_temp_penjualan_sp',$id)
             // ->update(['tipe_harga'=>$tipe]);
@@ -140,6 +142,7 @@ class ListPembelianSPController extends Controller
             $detailPembayaranSp->save();
         }
         // session(['tgl_penjualan_sp'=>$pembelianSp->id_sales,'id_cust'=>$pembelianSp->id_customer]);
+        $request->session()->flash('status','Berhasil melakukan edit!');
         return redirect('/pembelian/sp/list-pembelian-sp');
     }
 
@@ -173,7 +176,7 @@ class ListPembelianSPController extends Controller
                         //       return '';
                         //     })
                         ->addColumn('tanggal_pembelian', function ($pembelianSP) {
-                        
+
                             $tgl = Carbon::parse($pembelianSP->tanggal_pembelian_sp);
                             $tgl = $tgl->format('d/m/Y');
                             return $tgl;
@@ -212,13 +215,13 @@ class ListPembelianSPController extends Controller
     {
         // $data = DB::table('temp_detail_pembelian_sps')->get();
 
-        $detailPembelian = DetailPembelianProduk::select(DB::raw('master_produks.nama_produk, 
-        master_produks.satuan, 
+        $detailPembelian = DetailPembelianProduk::select(DB::raw('master_produks.nama_produk,
+        master_produks.satuan,
         detail_pembelian_sps.harga_satuan,
         detail_pembelian_sps.id_produk,
         detail_pembelian_sps.id_pembelian_sp,
         detail_pembelian_sps.id_detail_pembelian_sp,
-        detail_pembelian_sps.tipe_harga, 
+        detail_pembelian_sps.tipe_harga,
         detail_pembelian_sps.jumlah_sp,
         detail_pembelian_sps.harga_total'))
                         ->join('master_produks',function($join){
@@ -247,7 +250,7 @@ class ListPembelianSPController extends Controller
                             ->addColumn('action', function ($detailPembelianSp) {
                                 $tipe = HargaProduk::select('tipe_harga_sp')->where('id_produk',$detailPembelianSp->id_produk)->get();
                                 // $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$uploadDompul->produk)->get();
-                              return 
+                              return
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$detailPembelianSp->id_pembelian_sp.'" data-id_detail="'.$detailPembelianSp->id_detail_pembelian_sp.'" data-tipe='.$tipe.' data-tipe_harga="'.$detailPembelianSp->tipe_harga.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
                             })
                             // ->addColumn('input', function ($uploadDompul) {

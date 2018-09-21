@@ -196,7 +196,7 @@ class PembelianDompulController extends Controller
             $detailPembayaranDompul = new DetailPembayaranPembelianDompul();
             $detailPembayaranDompul->id_pembelian_dompul =$PembelianDompul->id_pembelian_dompul;
             $detailPembayaranDompul->metode_pembayaran = $value['bank'];
-            
+
             $detailPembayaranDompul->nominal=str_replace(',', '.',str_replace('.', '', $value['trf']));
             $detailPembayaranDompul->catatan = $value['catatan'];
             switch ($value['bank']) {
@@ -228,6 +228,7 @@ class PembelianDompulController extends Controller
         Schema::dropIfExists('temp_pembelian_dompuls');
         Schema::dropIfExists('temp_detail_pembelian_dompuls');
 
+        $request->session()->flash('status','');
         return redirect('pembelian/dompul/pembelian-dompul');
     }
 

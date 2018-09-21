@@ -233,6 +233,7 @@ class PembelianSPController extends Controller
         Schema::dropIfExists('temp_pembelian_sps');
         Schema::dropIfExists('temp_detail_pembelian_sps');
 
+        $request->session()->flash('status','');
         return redirect('pembelian/sp/pembelian-sp');
     }
 

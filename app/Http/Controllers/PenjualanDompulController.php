@@ -60,7 +60,7 @@ class PenjualanDompulController extends Controller
         return redirect('/penjualan/dompul/invoice-dompul');
         // return view('penjualan.dompul.invoice-dompul')->with(['sales'=>$sales,'tgl'=>$this->nama_tgl,'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
     }
-    
+
 
     /**
      * Display a list of transaction
@@ -96,7 +96,7 @@ class PenjualanDompulController extends Controller
     }
     /**
      * Update Upload Dompul tipe and price, back to edit
-     * 
+     *
      */
     public function update(Request $request,$canvaser,$tgl,$downline,$produk,$no_faktur,$status_penjualan){
         // session(['tunai'=>$request->get('update_tunai'),'catatan'=>$request->get('update_catatan')]);
@@ -111,7 +111,7 @@ class PenjualanDompulController extends Controller
         $tipe = $request->get('tipe');
         $qty_program = str_replace('.', '', $request->get('qty_program'));
         $status_penjualans=$status_penjualan;
-        
+
         if($tipe != 'default') {
             $data->tipe_dompul = $tipe;
             $data->harga_dompul = HargaDompul::where('nama_harga_dompul',$produk)
@@ -119,7 +119,7 @@ class PenjualanDompulController extends Controller
                                                     ->first()
                                                     ->harga_dompul;
         }
-        
+
         if (!is_null($qty_program)||!$qty_program==='') {
             $data->qty_program = $qty_program;
         }
@@ -139,7 +139,7 @@ class PenjualanDompulController extends Controller
 
     /**
      * Verification before submit
-     * 
+     *
      */
     public function verify(Request $request,$canvaser,$tgl,$downline){
         $tunai = $request->get('tunai');
@@ -147,7 +147,7 @@ class PenjualanDompulController extends Controller
         $total_pembayaran = $request->get('pembayaran');
         $selisih = $request->get('selisih');
         session(['bank'=>$bank]);
-        for ($key=0; $key <count($bank) ; $key++) { 
+        for ($key=0; $key <count($bank) ; $key++) {
             // $bank[$key]['trf']=number_format($bank[$key]['trf'],0,",",".");
             if (empty($bank[$key]['bank'])) {
                 array_splice($bank, $key,1);
@@ -253,7 +253,7 @@ class PenjualanDompulController extends Controller
                 $detailPenjualanDompul->save();
             }
         }
-        
+
         $dataPenjualan = UploadDompul::where('tanggal_transfer',$tgl)
                     ->where('no_hp_downline',$hp_downline)
                     ->where('nama_canvasser',$nm_sales)
@@ -280,12 +280,12 @@ class PenjualanDompulController extends Controller
                 $stokDompul->id_user = $user;
                 $stokDompul->save();
         }
-
+        $request->session()->flash('status','');
         return redirect('/penjualan/dompul/invoice-dompul')->with('tgl',$request->get('tgl'))->with('sales',$sales);
 
     }
 
-    
+
 
      /**
      * Process dataTable ajax response.
@@ -345,11 +345,11 @@ class PenjualanDompulController extends Controller
                             })
                           ->addColumn('action', function ($uploadDompul) {
                               $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$uploadDompul->produk)->get();
-                              return 
+                              return
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-tipe='.$tipe.' data-tipe_dompul='.$uploadDompul->tipe_dompul.' data-produk="'.$uploadDompul->produk.'" data-faktur="'.$uploadDompul->no_faktur.'" data-qty="'.$uploadDompul->qty_program.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
                             })
                           ->make(true);
     }
 
-    
+
 }

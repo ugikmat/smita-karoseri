@@ -13,6 +13,12 @@
 
 @section('content')
 <div class="container-fluid">
+
+  @if (Session::has('status'))
+  <div class="alert alert-success">
+    <strong>Berhasil!</strong> Transaksi penjualan Dompul anda berhasil
+  </div>
+  @endif
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
@@ -87,7 +93,7 @@
           @endif
         @endisset
       </div>
-      
+
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
