@@ -150,7 +150,7 @@
             stateSave: true,
             processing: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-            ajax: `/pembelian_sp/list/${$tgl_pembelian}`,
+            ajax: `/operasional/smita/pembelian_sp/list/${$tgl_pembelian}`,
             columns: [
                 // {data: 'indeks'},
                 {data: 'id_pembelian_sp'},
