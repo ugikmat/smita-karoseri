@@ -251,7 +251,7 @@
             processing: true,
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-            ajax: `/invoice_dompul/${canvaser}/${tgl}`,
+            ajax: `/operasional/smita/invoice_dompul/${canvaser}/${tgl}`,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
