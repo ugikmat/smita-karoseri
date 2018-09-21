@@ -241,7 +241,7 @@ function goBack() {
                   processing: true,
                   stateSave: true,
                   searching:  false,
-                  ajax: `/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`,
+                  ajax: `/operasional/smita/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`,
                   columns: [
                       {data: 'produk'},
                       {data: 'tipe_dompul'},

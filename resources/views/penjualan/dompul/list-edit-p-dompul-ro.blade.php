@@ -468,7 +468,7 @@
             processing: true,
             searching:  false,
             stateSave: true,
-            ajax: `/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
+            ajax: `/operasional/smita/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
             columns: [
               {data: 'produk'},
               {data: 'tipe_dompul'},

@@ -339,7 +339,7 @@ td{
                   serverSide: true,
                   processing: true,
                   stateSave: true,
-                  ajax: `/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`,
+                  ajax: `/operasional/smita/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`,
                   columns: [
                       {data: 'produk'},
                       {data: 'tipe_dompul'},
