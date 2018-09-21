@@ -62,7 +62,14 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="id-produk" required="required" name="id" class="form-control col-md-7 col-xs-12" value="">
+                        {{-- <input type="text" id="id-produk" required="required" name="id" class="form-control col-md-7 col-xs-12" value=""> --}}
+                        <select name="tipe" required="required">
+                          @isset($produks)
+                            @foreach($produks as $produk)
+                              <option value="{{$produk->kode_produk}}" id="{{$produk->kode_produk}}">{{$produk->nama_produk}}</option>
+                            @endforeach
+                          @endisset
+                        </select>
                       </div>
                     </div>
 
