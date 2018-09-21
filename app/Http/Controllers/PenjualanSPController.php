@@ -30,7 +30,7 @@ class PenjualanSPController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','canvaser']);
     }
     /**
      * Display a listing of the resource.
@@ -42,15 +42,20 @@ class PenjualanSPController extends Controller
         session(['now'=>Carbon::now('Asia/Jakarta')->format('d-m-Y')]);
         $hargaProduks = HargaProduk::where('status_harga_sp','Aktif')->get();
         $produks = produk::where('status_produk','1')->get();
-        $saless = Sales::where('status','1')->get();
+        if (Auth::user()->level_user=='Canvaser') {
+            $saless = Sales::where('nm_sales',Auth::user()->name)->where('status','1')->get();
+        } else {
+            $saless = Sales::where('status','1')->get();
+        }
         $jumlahProduk = $produks->count();
+        $kios = Customer::select(DB::raw("id_cust,CONCAT(nm_cust, '(', no_hp,')') as nm_customer"))->where('status',1)->get();
         $lokasis = Lokasi::select('master_lokasis.id_lokasi','master_lokasis.nm_lokasi')
                     ->join('users_lokasi','users_lokasi.id_lokasi','=','master_lokasis.id_lokasi')
                     ->join('users','users.id_user','=','users_lokasi.id_user')
                     ->where('users.id_user',Auth::user()->id_user)
                     ->where('status_lokasi','1')
                     ->get();
-        return view('penjualan.sp.invoice-sp',['saless'=>$saless,'produks'=>$produks,'hargaProduks'=>$hargaProduks,'jumlah'=>$jumlahProduk,'lokasis'=>$lokasis]);
+        return view('penjualan.sp.invoice-sp',['saless'=>$saless,'produks'=>$produks,'hargaProduks'=>$hargaProduks,'jumlah'=>$jumlahProduk,'lokasis'=>$lokasis,'kios'=>$kios]);
     }
     public function set_session(Request $request){
         session(['tipe_harga'=>$request->input('tipe_harga'),'kode_produk'=>$request->input('kode_produk')]);
@@ -157,7 +162,7 @@ class PenjualanSPController extends Controller
         $sales = Sales::where('id_sales',$penjualanSp->id_sales)->first();
         $customer = Customer::where('id_cust',$penjualanSp->id_customer)->first();
         $lokasi = $request->get('lokasi');
-        session(['id_sales'=>$penjualanSp->id_sales,'id_cust'=>$penjualanSp->id_customer,'bank-sp'=>$request->get('bank-sp')]);
+        session(['id_sales'=>$penjualanSp->id_sales,'id_cust'=>$penjualanSp->id_customer,'bank-sp'=>$request->get('bank-sp'),'lokasi_penjualan'=>$request->get('lokasi')]);
         // return view('/penjualan/sp/invoice-sp-2',['penjualanSp'=>$penjualanSp,'sales'=>$sales,'customer'=>$customer,'bank'=>$bank,'data'=>$detailPenjualan]);
         return redirect("/penjualan/sp/invoice-sp/edit/{$penjualanSp->id_temp_penjualan_sp}/{$lokasi}");
     }

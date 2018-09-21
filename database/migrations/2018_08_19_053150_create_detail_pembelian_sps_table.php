@@ -17,6 +17,7 @@ class CreateDetailPembelianSpsTable extends Migration
             $table->increments('id_detail_pembelian_sp');
             $table->string('id_pembelian_sp');
             $table->integer('id_supplier');
+            $table->integer('id_lokasi');
             $table->string('id_produk');
             $table->integer('jumlah_sp');
             $table->string('tipe_harga');

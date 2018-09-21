@@ -467,6 +467,7 @@
             serverSide: true,
             processing: true,
             searching:  false,
+            stateSave: true,
             ajax: `/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
             columns: [
               {data: 'produk'},
@@ -496,6 +497,7 @@
           $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
+            stateSave: true,
             searching:  false,
             ajax: `/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
             columns: [

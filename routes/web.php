@@ -150,7 +150,7 @@ Route::post('/penjualan/dompul/invoice-dompul', 'PenjualanDompulController@show'
 Route::get('/penjualan/dompul/{canvaser}/{tgl}/{downline}/{lokasi}', 'PenjualanDompulController@edit');
 Route::post('/invoice_dompul/store','PenjualanDompulController@store');
 Route::post('/list_invoice_dompul/update','ListPenjualanDompulController@update');
-Route::get('/invoice_dompul/list/{tgl_awal}/{tgl_akhir}/{lokasi}', 'ListPenjualanDompulController@data');
+Route::get('/invoice_dompul/list/{tgl_awal}/{tgl_akhir}/{lokasi}/{sales}', 'ListPenjualanDompulController@data');
 Route::post('/invoice_dompul/update/{canvaser}/{tgl}/{downline}/{produk}/{no_faktur}/{status_penjualan}', 'PenjualanDompulController@update');
 Route::get('/invoice_dompul/{canvaser}/{tgl}', 'PenjualanDompulController@data');
 Route::get('/edit_invoice_dompul/{canvaser}/{tgl}/{downline}', 'PenjualanDompulController@penjualanData');
@@ -173,7 +173,7 @@ Route::post('/invoice_sp/store','PenjualanSPController@store');
 
 Route::get('/penjualan/sp/list-invoice-sp', 'ListPenjualanSPController@index');
 Route::get('/penjualan/sp/list-invoice-sp/edit/{id_penjualan_sp}/{sales}/{tgl}/{customer}', 'ListPenjualanSPController@edit');
-Route::get('/invoice_sp/list/{tgl_awal}/{tgl_akhir}/{lokasi}', 'ListPenjualanSPController@data');
+Route::get('/invoice_sp/list/{tgl_awal}/{tgl_akhir}/{lokasi}/{sales}', 'ListPenjualanSPController@data');
 Route::get('/edit_list_invoice_sp/{id}', 'ListPenjualanSPController@penjualanData');
 Route::post('/list_invoice_sp/update/{id}/{id_detail}','ListPenjualanSPController@update');
 Route::post('/list_invoice_SP/store','ListPenjualanSPController@store');
@@ -291,6 +291,8 @@ Route::get('/user/edit/{id}', 'UsersController@edit');
 Route::post('/new/user', 'UsersController@store');
 Route::put('/delete/user/{id}', 'UsersController@delete');
 Route::put('/update/user', 'UsersController@update');
+Route::put('/user/reset', 'UserPasswordController@change');
+Route::get('/user/change_password', 'UserPasswordController@index');
 Route::get('/user-data', 'UsersController@data');
 
 Route::resource('master/bank', 'BankController');

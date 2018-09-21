@@ -22,7 +22,7 @@ class CreateTempPembelianDompulsTable extends Migration
             $table->string('id_user');
             $table->date('tanggal_pembelian_dompul');
             $table->date('tanggal_input');
-            $table->bigInteger('grand_total');
+            $table->double('grand_total');
             $table->tinyInteger('status_pembayaran')->default(0);
             $table->tinyInteger('status_pembelian')->default(0);
             $table->tinyInteger('deleted')->default(0);

@@ -11,12 +11,6 @@ class MasterCustomerTableSeeder extends Seeder
      */
     public function run()
     {
-      $table->string('nm_cust');
-      $table->string('alamat_cust');
-      $table->string('no_hp');
-      $table->string('jabatan');
-      $table->tinyInteger('status')->default(1);
-
       $cust1 = new Customer();
       $cust1->nm_cust='SASMITA CELL';
       $cust1->alamat_cust='Bangkalan';

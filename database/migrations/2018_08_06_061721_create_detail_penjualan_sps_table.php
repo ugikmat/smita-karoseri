@@ -16,6 +16,7 @@ class CreateDetailPenjualanSpsTable extends Migration
         Schema::create('detail_penjualan_sps', function (Blueprint $table) {
             $table->increments('id_detail_penjualan_sp');
             $table->string('id_penjualan_sp');
+            $table->integer('id_sales');
             $table->integer('id_customer');
             $table->integer('id_lokasi');
             $table->string('id_produk');

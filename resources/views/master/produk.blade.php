@@ -26,7 +26,9 @@
       <th>Diskon</th>
       <th>Komisi</th>
       <th>Status Produk</th>
+      @if(Auth::user()->level_user!='Kasir')
       <th>action</th>
+      @endif
     </tr>
   </thead>
   <tfoot>
@@ -355,7 +357,9 @@
   $(function () {
     $('#produk-table').DataTable({
       serverSide: true,
+      stateSave: true,
       processing: true,
+      lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
       ajax: '/produk-data',
       columns: [{
           data: 'id_produk'
@@ -393,11 +397,13 @@
         {
           data: 'status_produk'
         },
+        @if(Auth::user()->level_user!='Kasir')
         {
           data: 'action',
           orderable: false,
           searchable: false
         }
+        @endif
       ],
       initComplete: function () {
         this.api().columns().every(function () {

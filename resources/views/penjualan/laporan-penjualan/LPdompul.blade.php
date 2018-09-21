@@ -163,6 +163,8 @@
         var t = $('#lp-dompul-table').DataTable({
             serverSide: true,
             processing: true,
+            stateSave: true,
+            lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             scrollX: true,
             ajax: `/laporan-penjualan/${$tgl}`,
             "columnDefs": [ {

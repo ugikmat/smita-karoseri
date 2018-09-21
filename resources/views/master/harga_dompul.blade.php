@@ -20,7 +20,9 @@
       <th>Harga Dompul</th>
       <th>Tanggal Update</th>
       <th>Status</th>
+      @if(Auth::user()->level_user!='Kasir')
       <th>Action</th>
+      @endif
     </tr>
   </thead>
   <tfoot>
@@ -236,6 +238,7 @@
     $('#harga-dompul-table').DataTable({
       serverSide: true,
       processing: true,
+      stateSave: true,
       ajax: '/harga-dompul-data',
       columns: [{
           data: 'id_harga_dompul'
@@ -255,11 +258,13 @@
         {
           data: 'status_harga_dompul'
         },
+        @if(Auth::user()->level_user!='Kasir')
         {
           data: 'action',
           orderable: false,
           searchable: false
         }
+        @endif
       ],
       initComplete: function () {
         this.api().columns().every(function () {

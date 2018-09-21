@@ -17,7 +17,7 @@ class HargaProdukController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','kasir']);
     }
     /**
      * Display a listing of the resource.

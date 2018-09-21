@@ -17,6 +17,7 @@ class CreateTempDetailPenjualanSpsTable extends Migration
             $table->increments('id_temp_detail_psp');
             $table->string('id_penjualan_sp');
             $table->integer('id_customer');
+            $table->integer('id_lokasi');
             $table->string('id_produk');
             $table->integer('jumlah_sp');
             $table->string('tipe_harga');

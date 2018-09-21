@@ -21,7 +21,7 @@ class StokSpController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','kasir']);
     }
     public function index(){
         $saless = Sales::where('status',1)->get();
@@ -50,7 +50,7 @@ FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi BETWEEN '{$tgl_awal}' AND 
 COALESCE((SELECT sum(awal.keluar)
 FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' AND awal.id_produk=nama),0) AS stok_keluar,
 (sum(masuk)-sum(keluar)) AS jumlah_stok"))
-                        ->whereRaw("tanggal_transaksi < '{$tgl_akhir}'")
+                        ->whereRaw("tanggal_transaksi <= '{$tgl_akhir}'")
                         ->groupBy('nama');
         $produk = produk::select('kode_produk','nama_produk','stok_awal','stok_masuk','stok_keluar','jumlah_stok')
         ->leftJoinSub($stokSP, 'total_nominal', function($join) {

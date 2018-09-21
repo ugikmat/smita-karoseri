@@ -97,6 +97,8 @@
         var t = $('#mutasi-sp-table').DataTable({
             serverSide: true,
             processing: true,
+            stateSave: true,
+            lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             ajax: `/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`,
             columns: [
               // {data: 'indeks'},

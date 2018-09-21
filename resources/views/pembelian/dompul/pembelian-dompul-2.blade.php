@@ -231,6 +231,7 @@ function goBack() {
                   serverSide: true,
                   processing: true,
                   searching:  false,
+                  stateSave: true,
                   ajax: `/pembelian_dompul_data/${id}`,
                   columns: [
                       {data: 'produk'},

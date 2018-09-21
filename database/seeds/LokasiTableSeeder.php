@@ -12,17 +12,17 @@ class LokasiTableSeeder extends Seeder
      */
     public function run()
     {
-      $sublokasi1 = new Lokasi();
-      $sublokasi1->nm_lokasi='XL Sampang';
-      $sublokasi1->save();
-
-      $sublokasi2 = new Lokasi();
-      $sublokasi2->nm_lokasi='XL Pamekasan';
-      $sublokasi2->save();
-
-      $sublokasi3 = new Lokasi();
-      $sublokasi3->nm_lokasi='XL Bangkalan';
-      $sublokasi3->save();
+      // $sublokasi1 = new Lokasi();
+      // $sublokasi1->nm_lokasi='XL Sampang';
+      // $sublokasi1->save();
+      //
+      // $sublokasi2 = new Lokasi();
+      // $sublokasi2->nm_lokasi='XL Pamekasan';
+      // $sublokasi2->save();
+      //
+      // $sublokasi3 = new Lokasi();
+      // $sublokasi3->nm_lokasi='XL Bangkalan';
+      // $sublokasi3->save();
 
       $sublokasi4 = new Lokasi();
       $sublokasi4->nm_lokasi='Wijaya Baru Kedamean';
@@ -31,6 +31,7 @@ class LokasiTableSeeder extends Seeder
       $sublokasi5 = new Lokasi();
       $sublokasi5->nm_lokasi='Wijaya Baru Putat';
       $sublokasi5->save();
+      
       $lokasi2 = new Lokasi();
       $lokasi2->nm_lokasi='Sumenep';
       $lokasi2->status_lokasi=1;

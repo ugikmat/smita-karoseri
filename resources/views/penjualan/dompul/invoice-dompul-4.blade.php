@@ -239,6 +239,7 @@ function goBack() {
         var t = $('#invoice-dompul-table').DataTable({
                   serverSide: true,
                   processing: true,
+                  stateSave: true,
                   searching:  false,
                   ajax: `/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`,
                   columns: [

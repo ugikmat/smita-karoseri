@@ -25,7 +25,7 @@ class PenjualanDompulController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','canvaser']);
     }
     /**
      * Display a listing of the resource.
@@ -41,7 +41,12 @@ class PenjualanDompulController extends Controller
                     ->where('users.id_user',Auth::user()->id_user)
                     ->where('status_lokasi','1')
                     ->get();
-        return view('penjualan.dompul.invoice-dompul',['saless'=>$saless,'lokasis'=>$lokasis]);
+        if (Auth::user()->level_user=='Canvaser') {
+            $sales = Sales::where('nm_sales',Auth::user()->name)->where('status','1')->first();
+            return view('penjualan.dompul.invoice-dompul',['saless'=>$saless,'lokasis'=>$lokasis,'sales'=>$sales]);
+        }else{
+            return view('penjualan.dompul.invoice-dompul',['saless'=>$saless,'lokasis'=>$lokasis]);
+        }
     }
     /**
      * Display a list of sales based on name
@@ -51,7 +56,7 @@ class PenjualanDompulController extends Controller
     public function show(Request $request)
     {
         $sales = Sales::where('status','1')->where('id_sales',$request->get('id'))->first();
-        session(['dompul_sales_id'=>$sales->id_sales,'dompul_sales_nama'=>$sales->nm_sales,'tgl_penjualan_dompul'=>$request->get('tgl'),'now'=>Carbon::now('Asia/Jakarta')->format('d-m-Y')]);
+        session(['dompul_sales_id'=>$sales->id_sales,'dompul_sales_nama'=>$sales->nm_sales,'tgl_penjualan_dompul'=>$request->get('tgl'),'now'=>Carbon::now('Asia/Jakarta')->format('d-m-Y'),'lokasi_penjualan'=>$request->get('lokasi')]);
         return redirect('/penjualan/dompul/invoice-dompul');
         // return view('penjualan.dompul.invoice-dompul')->with(['sales'=>$sales,'tgl'=>$this->nama_tgl,'now'=>Carbon::now('Asia/Jakarta')->toDateString()]);
     }

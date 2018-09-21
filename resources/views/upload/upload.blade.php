@@ -162,7 +162,7 @@
     <table id="upload-table" class="table responsive" width="100%">
       <thead>
         <tr>
-          <th>ID</th>
+          <th>No</th>
           <th>HP Sub Master</th>
           <th>Nama Sub Master</th>
           <th>Tanggal TRX</th>
@@ -185,7 +185,7 @@
       </thead>
       <tfoot>
         <tr>
-          <th>ID</th>
+          <th>No</th>
           <th>HP Sub Master</th>
           <th>Nama Sub Master</th>
           <th>Tanggal TRX</th>
@@ -475,6 +475,8 @@
     $('#tgl-upload-table').DataTable({
       serverSide: true,
       processing: true,
+      stateSave: true,
+      lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
       ajax: '/upload/tgl',
       columns: [
         {
@@ -523,6 +525,8 @@
     var table = $('#upload-table').DataTable({
       serverSide: true,
       processing: true,
+      stateSave: true,
+      lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
       //Just Dummy Date
       ajax: '/upload/null/null',
       columns: [{
@@ -582,7 +586,10 @@
       ],
       dom: 'lBrtip',
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            'copy', 'csv', 'excel', 'print',{ 
+          extend: 'pdfHtml5', 
+          orientation: 'landscape', 
+          pageSize: 'LEGAL' }
         ],
       initComplete: function () {
         this.api().columns().every(function () {
@@ -595,6 +602,12 @@
         });
       }
     });
+     table.on( 'order.dt search.dt', function () {
+        table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+          } );
+        } ).draw();
+
   $('#detailModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var transfer = button.data('transfer') // Extract info from data-* attributes

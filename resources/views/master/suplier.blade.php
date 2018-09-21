@@ -274,6 +274,7 @@
     $('#suplier-table').DataTable({
       serverSide: true,
       processing: true,
+      stateSave: true,
       ajax: '/supplier-data',
       columns: [{
           data: 'id_supplier'

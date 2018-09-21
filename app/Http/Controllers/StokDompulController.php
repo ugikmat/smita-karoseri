@@ -19,7 +19,7 @@ class StokDompulController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','kasir']);
     }
     public function index(){
         return view('persediaan.mutasi-dompul');
@@ -59,7 +59,7 @@ FROM kartu_stok_dompuls awal WHERE awal.tanggal_transaksi BETWEEN '{$tgl_awal}' 
 COALESCE((SELECT sum(awal.keluar)
 FROM kartu_stok_dompuls awal WHERE awal.tanggal_transaksi BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' AND awal.id_produk=nama),0) AS stok_keluar,
 (sum(masuk)-sum(keluar)) AS jumlah_stok"))
-                        ->whereRaw("tanggal_transaksi < '{$tgl_akhir}'")
+                        ->whereRaw("tanggal_transaksi <= '{$tgl_akhir}'")
                         ->groupBy('nama');
         $dompuls = UploadDompul::select('produk','stok_awal','stok_masuk','stok_keluar','jumlah_stok')
         ->leftJoinSub($stokDompul, 'total_nominal', function($join) {

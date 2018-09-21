@@ -15,6 +15,7 @@ class CreateTempPenjualanSpsTable extends Migration
     {
         Schema::create('temp_penjualan_sps', function (Blueprint $table) {
             $table->increments('id_temp_penjualan_sp');
+            $table->integer('id_lokasi');
             $table->integer('id_sales');
             // $table->integer('id_ho');
             // $table->integer('id_bo');

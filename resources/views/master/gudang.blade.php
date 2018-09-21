@@ -200,6 +200,7 @@
     $('#gdg-table').DataTable({
       serverSide: true,
       processing: true,
+      stateSave: true,
       ajax: '/master-gudang',
       columns: [{
           data: 'id_gudang'

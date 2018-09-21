@@ -9,6 +9,7 @@ use App\Lokasi;
 use DB;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,7 +22,7 @@ class UsersController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','head']);
     }
     /**
      * Display index page.
@@ -30,6 +31,9 @@ class UsersController extends Controller
      */
     public function index()
     {
+        // if (Auth::user()->level_user!='Super Admin') {
+        //     return redirect('/');
+        // }
         return view('/master/user');
     }
 
@@ -57,6 +61,9 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
+        if($request->get('password')!=$request->get('konfirmasi')){
+            return redirect()->back();
+        }
         $user = User::create([
             'username' => $request->get('username'),
             'name' => $request->get('name'),
@@ -73,7 +80,7 @@ class UsersController extends Controller
                 'id_user' => $user->id_user
             ]);
         }
-        return redirect ('/tambah_user/add-user');
+        return redirect ('/master/user');
     }
 
     public function getData($id){
@@ -85,7 +92,7 @@ class UsersController extends Controller
     {
         $lokasi_user = $request->get('lokasi-user');
         $user = User::where('id_user',$request->get('id'))->first();
-        if(Hash::check($request->get('oldpassword'), $user->password)&&$request->get('password')==$request->get('konfirmasi')){
+        if($request->get('password')==$request->get('konfirmasi')){
             $user->password=Hash::make($request->get('password'));
             $user->save();
             $error='Berhasil';
@@ -134,7 +141,7 @@ class UsersController extends Controller
      */
     public function data(Datatables $datatables)
     {
-        $datas = User::select(DB::raw("users.id_user,users.name,users.id_bo,users.username,users.level_user,users.email, GROUP_CONCAT(master_lokasis.nm_lokasi SEPARATOR ', ') as nm_lokasi"))
+        $datas = User::select(DB::raw("users.id_user,users.name,users.level_user,users.id_bo,users.username,users.level_user,users.email, GROUP_CONCAT(master_lokasis.nm_lokasi SEPARATOR ', ') as nm_lokasi"))
                     ->leftJoin('users_lokasi','users_lokasi.id_user','=','users.id_user')
                     ->leftJoin('master_lokasis','master_lokasis.id_lokasi','=','users_lokasi.id_lokasi')
                     ->where('users.deleted',0)

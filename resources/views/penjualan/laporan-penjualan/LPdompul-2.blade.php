@@ -121,6 +121,7 @@
   var t = $('#lp-dompul-2-table').DataTable({
             serverSide: true,
             processing: true,
+            stateSave: true,
             ajax: '/laporan-penjualan/piutang/'+id+'/'+tgl,
             "columnDefs": [ {
             "searchable": false,

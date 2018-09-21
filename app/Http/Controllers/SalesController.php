@@ -18,7 +18,7 @@ class SalesController extends Controller
      */
      public function __construct()
      {
-         $this->middleware('auth');
+         $this->middleware(['auth','head']);
      }
      /**
       * Display index page.
@@ -114,7 +114,8 @@ class SalesController extends Controller
 
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(Sales::where('status', '1'))
+        return $datatables->eloquent(Sales::where('status', '1')
+                                ->leftJoin('master_lokasis','master_lokasis.id_lokasi','=','master_saless.id_lokasi'))
                           ->addColumn('action', function ($sales) {
                               return
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"

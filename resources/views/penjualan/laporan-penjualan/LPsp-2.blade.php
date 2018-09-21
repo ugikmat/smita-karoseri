@@ -120,6 +120,7 @@
   console.log('/laporan-penjualan/sp/piutang/'+id);
   var t = $('#lp-sp-2-table').DataTable({
             serverSide: true,
+            stateSave: true,
             processing: true,
             ajax: '/laporan-penjualan/sp/piutang/'+id+'/'+tgl,
             "columnDefs": [ {

@@ -83,6 +83,25 @@
                   </div>
 
                   <div class="form-group row">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Canvasser
+                      <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select name="sales" required="required" class="form-control col-md-7 col-xs-12" id="sales" value='{{session('dompul_sales_id')}}'>
+                          
+                          @isset($saless)
+                          @if($saless->count()>1)
+                            <option value="all" id="all">- Semua Canvaser -</option>
+                          @endif
+                            @foreach($saless as $sales)
+                              <option value="{{$sales->id_sales}}" id="{{$sales->nm_sales}}">{{$sales->nm_sales}}</option>
+                            @endforeach
+                          @endisset
+                        </select>
+                      </div>
+                    </div>
+
+                  <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Lokasi
                       <span class="required">*</span>
                     </label>
@@ -173,13 +192,22 @@
 </script>
 <script>
     $(function () {
+      @if(Session::has('id_sales'))
+          $('#sales').val("{{session('id_sales')}}").change();
+        @endif
+        @if(Session::has('lokasi_penjualan'))
+          $('#lokasi').val("{{session('lokasi_penjualan')}}").change();
+        @endif
         $tgl_awal = ($('#tgl_awal').val()=='') ? 'null' : $('#tgl_awal').val();
         $tgl_akhir = ($('#tgl_akhir').val()=='') ? 'null' : $('#tgl_akhir').val();
         $lokasi = $('#lokasi').val();
+        $sales = $('#sales').val();
         var t = $('#list-invoice-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: `/invoice_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}`,
+            stateSave: true,
+            lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
+            ajax: `/invoice_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`,
             // "columnDefs": [ {
             // "searchable": false,
             // "orderable": false,
@@ -206,8 +234,9 @@
           $tgl_awal = ($('#tgl_awal').val()=='') ? 'null' : $('#tgl_awal').val();
         $tgl_akhir = ($('#tgl_akhir').val()=='') ? 'null' : $('#tgl_akhir').val();
         $lokasi = $('#lokasi').val();
+        $sales = $('#sales').val();
           console.log('Loading Data...');
-          t.ajax.url(`/invoice_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}`).load();
+          t.ajax.url(`/invoice_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`).load();
           console.log('Loaded');
         });
         $('#deleteModal').on('show.bs.modal', function (event) {
