@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\PenjualanDompul;
 use App\DetailPenjualanDompul;
 use App\UploadDompul;
-use App\HargaDompul;
 use App\Sales;
 use App\Lokasi;
 use DB;
@@ -199,13 +198,22 @@ class ListPenjualanDompulController extends Controller
                             })
                           ->addColumn('action', function ($penjualanDompul) {
                               if ($penjualanDompul->status_pembayaran==0) {
-                                  return
+                                  if(Auth::user()->level_user=='Supervisor'){
+                                      return
                                     '<a class="btn btn-xs btn-primary"
                                     href="/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
                                     <i class="glyphicon glyphicon-edit"></i> Edit
                                     </a>
                                     <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>
                                     <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                                  }else{
+                                      return
+                                    '<a class="btn btn-xs btn-primary"
+                                    href="/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
+                                    <i class="glyphicon glyphicon-edit"></i> Edit
+                                    </a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                                  }
                               } else {
                                   return
                                     '<a class="btn btn-xs btn-primary"
