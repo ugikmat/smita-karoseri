@@ -139,24 +139,24 @@
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             scrollX: true,
             stateSave: true,
-            ajax: `/laporan-penjualan/sp/${$tgl}`,
+            ajax: `/laporan-piutang/sp/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
             "targets": 0
                 } ],
             "order": [[ 1, 'asc' ]],
-            columnDefs: [
-                {
-                    targets:1,
-                    render: function ( data, type, row, meta ) {
-                        if(type === 'display'){
-                            data = `<a class="link-post" href="/penjualan/laporan-penjualan/LPsp-piutang/${data}">` + data + '</a>';
-                        }
-                        return data;
-                    }
-                }
-            ],
+            // columnDefs: [
+            //     {
+            //         targets:1,
+            //         render: function ( data, type, row, meta ) {
+            //             if(type === 'display'){
+            //                 data = `<a class="link-post" href="/penjualan/laporan-penjualan/LPsp-piutang/${data}">` + data + '</a>';
+            //             }
+            //             return data;
+            //         }
+            //     }
+            // ],
             columns: [
                 {data: 'index'},
                 {data: 'nm_sales'},
@@ -172,43 +172,43 @@
             cell.innerHTML = i+1;
           } );
         } ).draw();
-        $.post(`/get_laporan_sp/${$tgl}`, function(response){
-            if(response.success)
-            {
-              console.log('Success..');
-              $('.qty').val(response.qty.toLocaleString('id-ID'));
-              $('.total').val(response.total.toLocaleString('id-ID'));
-              $('.cash').val(response.cash.toLocaleString('id-ID'));
-              $('.bca_pusat').val(response.bca_pusat.toLocaleString('id-ID'));
-              $('.bca_cabang').val(response.bca_cabang.toLocaleString('id-ID'));
-              $('.mandiri').val(response.mandiri.toLocaleString('id-ID'));
-              $('.bni').val(response.bni.toLocaleString('id-ID'));
-              $('.bri').val(response.bri.toLocaleString('id-ID'));
-              $('.piutang').val(response.piutang.toLocaleString('id-ID'));
-              console.log('Loaded');
-              console.log(response.data);
-            }
-        }, 'json');
+        // $.post(`/get_laporan_sp/${$tgl}`, function(response){
+        //     if(response.success)
+        //     {
+        //       console.log('Success..');
+        //       $('.qty').val(response.qty.toLocaleString('id-ID'));
+        //       $('.total').val(response.total.toLocaleString('id-ID'));
+        //       $('.cash').val(response.cash.toLocaleString('id-ID'));
+        //       $('.bca_pusat').val(response.bca_pusat.toLocaleString('id-ID'));
+        //       $('.bca_cabang').val(response.bca_cabang.toLocaleString('id-ID'));
+        //       $('.mandiri').val(response.mandiri.toLocaleString('id-ID'));
+        //       $('.bni').val(response.bni.toLocaleString('id-ID'));
+        //       $('.bri').val(response.bri.toLocaleString('id-ID'));
+        //       $('.piutang').val(response.piutang.toLocaleString('id-ID'));
+        //       console.log('Loaded');
+        //       console.log(response.data);
+        //     }
+        // }, 'json');
         $('#save').on('click',function(event) {
           $tgl = $('#tgl').val();
-          t.ajax.url(`/laporan-penjualan/sp/${$tgl}`).load();
-          $.post(`/get_laporan_sp/${$tgl}`, function(response){
-            if(response.success)
-            {
-              console.log('Success..');
-              $('.qty').val(response.qty.toLocaleString('id-ID'));
-              $('.total').val(response.total.toLocaleString('id-ID'));
-              $('.cash').val(response.cash.toLocaleString('id-ID'));
-              $('.bca_pusat').val(response.bca_pusat.toLocaleString('id-ID'));
-              $('.bca_cabang').val(response.bca_cabang.toLocaleString('id-ID'));
-              $('.mandiri').val(response.mandiri.toLocaleString('id-ID'));
-              $('.bni').val(response.bni.toLocaleString('id-ID'));
-              $('.bri').val(response.bri.toLocaleString('id-ID'));
-              $('.piutang').val(response.piutang.toLocaleString('id-ID'));
-              console.log('Loaded');
-              console.log(response.data);
-            }
-        }, 'json');
+          t.ajax.url(`/laporan-piutang/sp/${$tgl}`).load();
+        //   $.post(`/get_laporan_sp/${$tgl}`, function(response){
+        //     if(response.success)
+        //     {
+        //       console.log('Success..');
+        //       $('.qty').val(response.qty.toLocaleString('id-ID'));
+        //       $('.total').val(response.total.toLocaleString('id-ID'));
+        //       $('.cash').val(response.cash.toLocaleString('id-ID'));
+        //       $('.bca_pusat').val(response.bca_pusat.toLocaleString('id-ID'));
+        //       $('.bca_cabang').val(response.bca_cabang.toLocaleString('id-ID'));
+        //       $('.mandiri').val(response.mandiri.toLocaleString('id-ID'));
+        //       $('.bni').val(response.bni.toLocaleString('id-ID'));
+        //       $('.bri').val(response.bri.toLocaleString('id-ID'));
+        //       $('.piutang').val(response.piutang.toLocaleString('id-ID'));
+        //       console.log('Loaded');
+        //       console.log(response.data);
+        //     }
+        // }, 'json');
         });
     });
 </script>
