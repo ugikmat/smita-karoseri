@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\HargaProduk;
+use App\produk;
 use App\TipeDompul;
 use Yajra\Datatables\Datatables;
 
@@ -27,7 +28,8 @@ class HargaProdukController extends Controller
     public function index()
     {
         $tipes = TipeDompul::where('status_tipe_dompul','Aktif')->get();
-        return view('master.harga_produk',['tipes'=>$tipes]);
+        $produks = produk::all();
+        return view('master.harga_produk',['tipes'=>$tipes,'produks'=>$produks]);
     }
 
     /**

@@ -26,6 +26,11 @@
 @section('content')
 <form class="invoice-sp repeater" action="/invoice_sp/verify" method="post">
 <div class="container-fluid  form-inline">
+  @if (Session::has('status'))
+  <div class="alert alert-success">
+    <strong>Berhasil!</strong> Transaksi penjualan SP anda berhasil
+  </div>
+  @endif
   @csrf
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2" id="kiri">

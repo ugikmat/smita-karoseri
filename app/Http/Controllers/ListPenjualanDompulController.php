@@ -7,8 +7,8 @@ use App\Http\Controllers\Controller;
 use App\PenjualanDompul;
 use App\DetailPenjualanDompul;
 use App\UploadDompul;
-use App\HargaDompul;
 use App\Sales;
+use App\HargaDompul;
 use App\Lokasi;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +24,7 @@ class ListPenjualanDompulController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','canvaser']);
+        $this->middleware(['auth','canvaser','kasir','head','supervisor','admin']);
     }
     /**
      * Diplay a list of transaction made before
@@ -36,11 +36,12 @@ class ListPenjualanDompulController extends Controller
                     ->where('users.id_user',Auth::user()->id_user)
                     ->where('status_lokasi','1')
                     ->get();
-        if (Auth::user()->level_user=='Canvaser') {
-            $saless = Sales::where('nm_sales',Auth::user()->name)->where('status','1')->get();
-        } else {
-            $saless = Sales::where('status','1')->get();
+        if(Auth::user()->level_user=='Canvaser'){
+            $saless = Sales::all();
+        }else{
+            $saless = Sales::where('nm_sales',Auth::user()->name)->get();
         }
+        
         return view('penjualan.dompul.list-invoice',['lokasis'=>$lokasis,'saless'=>$saless]);
     }
 
@@ -87,6 +88,7 @@ class ListPenjualanDompulController extends Controller
         PenjualanDompul::where('id_penjualan_dompul',$id)
                         ->update(['status_pembayaran'=>1
                         ]);
+        $request->session()->flash('status', 'Berhasil melakukan verifikasi!');
         return redirect()->back();
     }
 
@@ -105,12 +107,12 @@ class ListPenjualanDompulController extends Controller
                 $detailPenjualanDompul->save();
             }
         }
-        
+
         foreach ($bank as $key => $value) {
             if (empty($value['id'])) {
                 $detailPenjualanDompul = new DetailPenjualanDompul();
             } else {
-                $detailPenjualanDompul = DetailPenjualanDompul::where('id_detail_penjualan',$value['id'])->first();   
+                $detailPenjualanDompul = DetailPenjualanDompul::where('id_detail_penjualan',$value['id'])->first();
             }
             $detailPenjualanDompul->id_penjualan_dompul = $penjualanDompul->id_penjualan_dompul;
             $detailPenjualanDompul->metode_pembayaran = $value['bank'];
@@ -140,11 +142,13 @@ class ListPenjualanDompulController extends Controller
             $detailPenjualanDompul->catatan = $value['catatan'];
             $detailPenjualanDompul->save();
         }
+        $request->session()->flash('status', 'Berhasil melakukan edit!');
         return redirect('/penjualan/dompul/list-invoice');
     }
 
     public function delete(Request $request){
         $penjualanDompul = PenjualanDompul::where('id_penjualan_dompul',$request->get('id'))->update(['deleted'=>1]);
+        $request->session()->flash('status', 'Berhasil menghapus List Invoice!');
         return redirect('/penjualan/dompul/list-invoice');
     }
     /**
@@ -153,7 +157,7 @@ class ListPenjualanDompulController extends Controller
      * @param \Yajra\Datatables\Datatables $datatables
      * @return \Illuminate\Http\JsonResponse
      */
-    public function data(Datatables $datatables,$tgl_awal,$tgl_akhir,$lokasi,$sales)
+    public function data(Datatables $datatables,$tgl_awal,$tgl_akhir,$lokasi)
     {
         if ($tgl_awal=='null') {
             $tgl = $tgl_awal;
@@ -165,8 +169,8 @@ class ListPenjualanDompulController extends Controller
             $tgl_akhir = $tgl_akhir->format('Y-m-d');
 
         }
-        
-        $datas = PenjualanDompul::select('penjualan_dompuls.id_penjualan_dompul',
+        if($lokasi=='all'){
+            $datas = PenjualanDompul::select('penjualan_dompuls.id_penjualan_dompul',
         'master_saless.nm_sales',
         'penjualan_dompuls.no_hp_kios',
         'master_customers.nm_cust',
@@ -177,13 +181,20 @@ class ListPenjualanDompulController extends Controller
                         // ->join('detail_penjualan_dompuls','detail_penjualan_dompuls.id_penjualan_dompul','=','penjualan_dompuls.id_penjualan_dompul')
                         ->whereBetween('tanggal_penjualan_dompul',[$tgl_awal,$tgl_akhir])
                         ->where('deleted',0);
-        if($lokasi!='all'){
-            session(['lokasi_penjualan'=>$lokasi]);
-            $datas = $datas->where('penjualan_dompuls.id_lokasi',$lokasi);
-        }
-        if($sales!='all'){
-            session(['id_sales'=>$sales]);
-            $datas = $datas->where('penjualan_dompuls.id_sales',$sales);
+        }else{
+            $datas = PenjualanDompul::select('penjualan_dompuls.id_penjualan_dompul',
+        'master_saless.nm_sales',
+        'penjualan_dompuls.no_hp_kios',
+        'master_customers.nm_cust',
+        'penjualan_dompuls.tanggal_penjualan_dompul',
+        'penjualan_dompuls.status_pembayaran')
+                        ->join('master_saless','master_saless.id_sales','=','penjualan_dompuls.id_sales')
+                        ->join('master_customers','master_customers.no_hp','=','penjualan_dompuls.no_hp_kios')
+                        // ->join('detail_penjualan_dompuls','detail_penjualan_dompuls.id_penjualan_dompul','=','penjualan_dompuls.id_penjualan_dompul')
+                        ->whereBetween('tanggal_penjualan_dompul',[$tgl_awal,$tgl_akhir])
+                        ->where('penjualan_dompuls.id_lokasi',$lokasi)
+                        ->where('deleted',0);
+
         }
         return $datatables->of($datas)
                         // ->addColumn('indeks', function ($uploadDompul) {
@@ -199,13 +210,22 @@ class ListPenjualanDompulController extends Controller
                             })
                           ->addColumn('action', function ($penjualanDompul) {
                               if ($penjualanDompul->status_pembayaran==0) {
-                                  return
+                                  if(Auth::user()->level_user=='Supervisor'){
+                                      return
                                     '<a class="btn btn-xs btn-primary"
                                     href="/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
                                     <i class="glyphicon glyphicon-edit"></i> Edit
                                     </a>
                                     <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>
                                     <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                                  }else{
+                                      return
+                                    '<a class="btn btn-xs btn-primary"
+                                    href="/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
+                                    <i class="glyphicon glyphicon-edit"></i> Edit
+                                    </a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                                  }
                               } else {
                                   return
                                     '<a class="btn btn-xs btn-primary"

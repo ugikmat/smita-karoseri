@@ -189,6 +189,11 @@ return [
                         'url'   => '/penjualan/laporan-penjualan/Lbeli-cvs-sp',
                         'icon'  => 'user',
                       ],
+                      [
+                        'text'  => 'Piutang SP',
+                        'url'   => '/penjualan/laporan-penjualan/LP-piutang-sp',
+                        'icon'  => 'file',
+                      ],
                     ],
                   ],
                 ],
@@ -262,6 +267,16 @@ return [
                     'icon'  => 'tags',
                     'url'   => '/persediaan/mutasi-sp',
                   ],
+                  [
+                    'text'  => 'Mutasi Stok SP CVS',
+                    'icon'  => 'user',
+                    'url'   => '/persediaan/mutasi-sp-cvs',
+                  ],
+                  [
+                    'text'  => 'Mutasi Stok SP semua CVS',
+                    'icon'  => 'users',
+                    'url'   => '/persediaan/mutasi-sp-semua-cvs',
+                  ],
                   // [
                   //   'text'  => 'kartu Stok Dompul',
                   //   'icon'  => 'truck',
@@ -281,106 +296,106 @@ return [
               ],
             ],
         ],
-        [
-            'text'        => 'Karoseri',
-            'icon'        => 'truck',
-            'submenu'     => [
-              [
-                'text'    => 'Transaksi',
-                'icon'    => 'money',
-                'submenu' => [
-                  [
-                      'text'  => 'Penawaran Karoseri',
-                      'url'   => 'karoseri/minta_karoseri',
-                      'icon'  => 'truck',
-                  ],
-                  [
-                      'text'  => 'SPKC',
-                      'url'   => 'karoseri/spkc',
-                      'icon'  => 'user-plus',
-                  ],
-                  [
-                      'text'  => 'Work order',
-                      'url'   => 'karoseri/wo',
-                      'icon'  => 'opencart',
-                  ],
-                  [
-                      'text'  => 'PBB',
-                      'url'   => 'karoseri/pbb',
-                      'icon'  => 'server',
-                  ],
-                  [
-                      'text'  => 'SPKPB',
-                      'url'   => 'karoseri/spkpb',
-                      'icon'  => 'users',
-                  ],
-                  [
-                      'text'  => 'Kasbon',
-                      'url'   => 'karoseri/kasbon',
-                      'icon'  => 'money',
-                  ],
-                  [
-                      'text'  => 'BAP',
-                      'url'   => 'karoseri/bap',
-                      'icon'  => 'newspaper-o',
-                  ],
-                  [
-                      'text'  => 'Surat Jalan',
-                      'url'   => 'karoseri/surat_jalan',
-                      'icon'  => 'envelope-o',
-                  ],
-                ],
-              ],
-              [
-              'text'    => 'Laporan',
-              'icon'    => 'tasks',
-              'submenu' => [
-                [
-                    'text'    => 'SPKC',
-                    'url'   => 'laporan/lap_spkc',
-                    'icon'    => 'truck',
-                ],
-                [
-                    'text'    => 'Penjualan per Customer',
-                    'url'   => 'laporan/lap_penjualan',
-                    'icon'    => 'truck',
-                ],
-                [
-                    'text'    => 'Penjualan per Unit',
-                    'url'   => 'laporan/lap_penjualan_unit',
-                    'icon'    => 'truck',
-                ],
-                [
-                    'text'    => 'Progress',
-                    'icon'    => 'truck',
-                    'submenu' => [
-                      [
-                          'text'    => 'Progress Unit',
-                          'url'   => 'laporan/lap_progress',
-                          'icon'    => 'truck',
-                      ],
-                      [
-                          'text'    => 'Progress Pemborong',
-                          'url'   => 'laporan/lap_progress_pb',
-                          'icon'    => 'truck',
-                      ],
-                      [
-                      'text'    => 'Detail Pemborong',
-                      'url'   => 'laporan/lap_progress_detailpb',
-                      'icon'    => 'truck',
-                      ],
-                  ],
-                ],
-              ],
-            ],
-
-            /*[
-                'text'    => 'Produksi',
-                'url'   => 'karoseri/qc_tambah',
-                'icon'    => 'truck',
-              ],*/
-            ],
-        ],
+        // [
+        //     'text'        => 'Karoseri',
+        //     'icon'        => 'truck',
+        //     'submenu'     => [
+        //       [
+        //         'text'    => 'Transaksi',
+        //         'icon'    => 'money',
+        //         'submenu' => [
+        //           [
+        //               'text'  => 'Penawaran Karoseri',
+        //               'url'   => 'karoseri/minta_karoseri',
+        //               'icon'  => 'truck',
+        //           ],
+        //           [
+        //               'text'  => 'SPKC',
+        //               'url'   => 'karoseri/spkc',
+        //               'icon'  => 'user-plus',
+        //           ],
+        //           [
+        //               'text'  => 'Work order',
+        //               'url'   => 'karoseri/wo',
+        //               'icon'  => 'opencart',
+        //           ],
+        //           [
+        //               'text'  => 'PBB',
+        //               'url'   => 'karoseri/pbb',
+        //               'icon'  => 'server',
+        //           ],
+        //           [
+        //               'text'  => 'SPKPB',
+        //               'url'   => 'karoseri/spkpb',
+        //               'icon'  => 'users',
+        //           ],
+        //           [
+        //               'text'  => 'Kasbon',
+        //               'url'   => 'karoseri/kasbon',
+        //               'icon'  => 'money',
+        //           ],
+        //           [
+        //               'text'  => 'BAP',
+        //               'url'   => 'karoseri/bap',
+        //               'icon'  => 'newspaper-o',
+        //           ],
+        //           [
+        //               'text'  => 'Surat Jalan',
+        //               'url'   => 'karoseri/surat_jalan',
+        //               'icon'  => 'envelope-o',
+        //           ],
+        //         ],
+        //       ],
+        //       [
+        //       'text'    => 'Laporan',
+        //       'icon'    => 'tasks',
+        //       'submenu' => [
+        //         [
+        //             'text'    => 'SPKC',
+        //             'url'   => 'laporan/lap_spkc',
+        //             'icon'    => 'truck',
+        //         ],
+        //         [
+        //             'text'    => 'Penjualan per Customer',
+        //             'url'   => 'laporan/lap_penjualan',
+        //             'icon'    => 'truck',
+        //         ],
+        //         [
+        //             'text'    => 'Penjualan per Unit',
+        //             'url'   => 'laporan/lap_penjualan_unit',
+        //             'icon'    => 'truck',
+        //         ],
+        //         [
+        //             'text'    => 'Progress',
+        //             'icon'    => 'truck',
+        //             'submenu' => [
+        //               [
+        //                   'text'    => 'Progress Unit',
+        //                   'url'   => 'laporan/lap_progress',
+        //                   'icon'    => 'truck',
+        //               ],
+        //               [
+        //                   'text'    => 'Progress Pemborong',
+        //                   'url'   => 'laporan/lap_progress_pb',
+        //                   'icon'    => 'truck',
+        //               ],
+        //               [
+        //               'text'    => 'Detail Pemborong',
+        //               'url'   => 'laporan/lap_progress_detailpb',
+        //               'icon'    => 'truck',
+        //               ],
+        //           ],
+        //         ],
+        //       ],
+        //     ],
+        //
+        //     /*[
+        //         'text'    => 'Produksi',
+        //         'url'   => 'karoseri/qc_tambah',
+        //         'icon'    => 'truck',
+        //       ],*/
+        //     ],
+        // ],
 
         [
             'text'        => 'Master',
@@ -405,10 +420,6 @@ return [
                 'text'  => 'PPN',
                 'url'   => '/ppn',
                 'icon'  => 'money',
-              ],
-              [
-                'text'  => 'Produk',
-                'url'   => '/master/produk'
               ],
               [
                 'text'  => 'Satuan',
@@ -440,11 +451,11 @@ return [
                 'url'   => '/sales',
                 'icon'  => 'user-plus',
               ],
-              [
-                'text'  => 'Pemborong',
-                'url'   => '/pemborong',
-                'icon'  => 'users',
-              ],
+              // [
+              //   'text'  => 'Pemborong',
+              //   'url'   => '/pemborong',
+              //   'icon'  => 'users',
+              // ],
               [
                 'text'  => 'Supervisor',
                 'url'   => '/supervisor',
