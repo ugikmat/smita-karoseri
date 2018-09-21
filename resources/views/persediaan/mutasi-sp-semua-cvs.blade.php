@@ -95,10 +95,11 @@
             columns: [
               // {data: 'indeks'},
               {data: 'nama_produk'},
-              {data: 'stok_awal'},
-              {data: 'stok_masuk'},
-              {data: 'stok_keluar'},
-              {data: 'jumlah_stok'}
+              @isset($saless)
+                @foreach($saless as $sales)
+                  {data: "{{$sales->nm_sales}}"}
+                @endforeach
+              @endisset
             ],
             dom: 'lBrtip',
         buttons: [
