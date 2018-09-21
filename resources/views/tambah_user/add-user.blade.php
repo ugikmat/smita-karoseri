@@ -181,7 +181,7 @@
     $('#user-table').DataTable({
       serverSide: true,
       processing: true,
-      ajax: '/user-data',
+      ajax: '/operasional/smita/user-data',
       columns: [{
           data: 'id_user'
         },
