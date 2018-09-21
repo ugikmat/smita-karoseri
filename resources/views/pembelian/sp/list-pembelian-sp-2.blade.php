@@ -403,7 +403,7 @@
             serverSide: true,
             processing: true,
             searching:  false,
-            ajax: `/pembelian_sp/detail/${id_pembelian}`,
+            ajax: `/operasional/smita/pembelian_sp/detail/${id_pembelian}`,
             columns: [
               {data: 'nama_produk'},
               {data: 'tipe_harga'},
@@ -447,7 +447,7 @@
 </script>
 <script>
   $('#editModal').on('show.bs.modal', function (event) {
-   
+
     var tipe = document.getElementById("tipe");
 
     var button = $(event.relatedTarget) // Button that triggered the modal
