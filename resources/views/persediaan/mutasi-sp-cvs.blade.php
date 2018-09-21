@@ -50,7 +50,7 @@
         <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('id_sales')}}">
               <option value="" disabled>Pilih Nama canvaser</option>
               @isset($saless)
-                  @foreach ($saless as $data) 
+                  @foreach ($saless as $data)
                   <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
                   @endforeach
               @endisset
@@ -111,7 +111,7 @@
             processing: true,
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-            ajax: `/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`,
+            ajax: `/operasional/smita/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`,
             columns: [
               // {data: 'indeks'},
               {data: 'nama_produk'},
