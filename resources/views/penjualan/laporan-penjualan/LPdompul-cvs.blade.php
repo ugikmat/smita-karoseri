@@ -195,7 +195,7 @@
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             stateSave: true,
             scrollX: true,
-            ajax: `/laporan-penjualan/dompul-cvs/${$tgl}/${$sales}`,
+            ajax: `/operasional/smita/laporan-penjualan/dompul-cvs/${$tgl}/${$sales}`,
             // columnDefs: [
             //     {
             //         targets:0,

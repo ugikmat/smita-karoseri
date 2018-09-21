@@ -202,7 +202,7 @@
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             stateSave: true,
             scrollX: true,
-            ajax: `/laporan-penjualan/sp-cvs/${$tgl}/${$sales}`,
+            ajax: `/operasional/smita/laporan-penjualan/sp-cvs/${$tgl}/${$sales}`,
             columnDefs: [
                 {
                     targets:[1,2,3,4,5,6,7,8,9,10],

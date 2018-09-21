@@ -166,7 +166,7 @@
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             scrollX: true,
-            ajax: `/laporan-penjualan/${$tgl}`,
+            ajax: `/operasional/smita/laporan-penjualan/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
