@@ -115,9 +115,6 @@
 @stop
 
 @section('content')
-<div id="myProgress">
-  <div id="myBar">0%</div>
-</div>
 <div class="container-fluid">
   @if (Session::has('status'))
   <div class="alert alert-success">
