@@ -412,7 +412,7 @@
             processing: true,
             stateSave: true,
             searching:  false,
-            ajax: `/edit_list_invoice_sp/${id}`,
+            ajax: `/operasional/smita/edit_list_invoice_sp/${id}`,
             columns: [
               {data: 'nama_produk'},
                       {data: 'tipe_harga'},
