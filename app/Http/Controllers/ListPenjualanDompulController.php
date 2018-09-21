@@ -36,7 +36,13 @@ class ListPenjualanDompulController extends Controller
                     ->where('users.id_user',Auth::user()->id_user)
                     ->where('status_lokasi','1')
                     ->get();
-        return view('penjualan.dompul.list-invoice',['lokasis'=>$lokasis]);
+        if(Auth::user()->level_user=='Canvaser'){
+            $saless = Sales::all();
+        }else{
+            $saless = Sales::where('nm_sales',Auth::user()->name)->get();
+        }
+        
+        return view('penjualan.dompul.list-invoice',['lokasis'=>$lokasis,'saless'=>$saless]);
     }
 
     public function edit($id,$canvaser,$tgl,$downline){
