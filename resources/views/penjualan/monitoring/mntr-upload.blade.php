@@ -201,7 +201,7 @@
             processing: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             stateSave: true,
-            ajax: `/monitor-data/${tgl}`,
+            ajax: `/operasional/smita/monitor-data/${tgl}`,
             columns: [
                 {data: 'index'},
                 {data: 'nama'},
