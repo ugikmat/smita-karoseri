@@ -167,7 +167,7 @@
     $('#carabayar-table').DataTable({
       serverSide: true,
       processing: true,
-      ajax: '/master-cara_bayar',
+      ajax: '/operasional/smita/master-cara_bayar',
       columns: [{
           data: 'id'
         },

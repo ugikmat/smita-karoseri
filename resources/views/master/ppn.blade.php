@@ -121,7 +121,7 @@
       serverSide: true,
       processing: true,
       responsive: true,
-      ajax: '/master-ppn',
+      ajax: '/operasional/smita/master-ppn',
       columns: [{
           data: 'id_ppn'
         },

@@ -156,7 +156,7 @@
       processing: true,
       stateSave: true,
       lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-      ajax: '/user-data',
+      ajax: '/operasional/smita/user-data',
       columns: [{
           data: 'id_user'
         },

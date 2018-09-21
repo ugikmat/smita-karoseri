@@ -178,7 +178,7 @@
       stateSave: true,
       lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
       processing: true,
-      ajax: '/tipe-dompul-data',
+      ajax: '/operasional/smita/tipe-dompul-data',
       columns: [{
           data: 'id_tipe_dompul'
         },
