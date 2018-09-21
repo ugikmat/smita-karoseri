@@ -487,5 +487,5 @@ Route::get('/persediaan/mutasi-sp-cvs', function() {
 }) -> name('mutasi-sp-cvs');
 
 Route::get('/persediaan/mutasi-sp-semua-cvs', function() {
-  return view ('/persediaan/mutasi-semua-sp-cvs');
+  return view ('/persediaan/mutasi-sp-semua-cvs');
 }) -> name('mutasi-sp-semua-cvs');

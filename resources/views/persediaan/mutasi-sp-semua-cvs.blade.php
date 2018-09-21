@@ -52,26 +52,13 @@
 </div>
 <br><br>
 
-<table id="mutasi-sp-table" class="table responsive" width="100%">
+<table id="mutasi-sp-semua-cvs-table" class="table responsive" width="100%">
     <thead>
       <tr>
         <th>Nama Produk</th>
-        @isset($saless)
-            @foreach ($saless as $data)
-            <th></th>
-            @endforeach
-        @endisset
+        <th>semua cvs</th>
       </tr>
     </thead>
-    <tfoot>
-      <tr>
-        <td><b>Total Mutasi</b></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </tfoot>
 </table>
 
 
@@ -95,7 +82,7 @@
         $tgl_akhir = $('#tgl_akhir').val();
         $tgl_awal = $('#tgl_awal').val();
         $sales = $('#sales').val();
-        var t = $('#mutasi-sp-table').DataTable({
+        var t = $('#mutasi-sp-semua-cvs-table').DataTable({
             serverSide: true,
             processing: true,
             stateSave: true,
