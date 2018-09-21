@@ -471,3 +471,17 @@ Route::get('/laporan/lap_progress_pb', function() {
 Route::get('/laporan/lap_progress_detailpb', function() {
   return view ('/laporan/lap_progress_detailpb');
 }) -> name('laporan-lap_progress_detailpb');
+
+
+
+
+
+
+
+Route::get('/persediaan/mutasi-sp-cvs', function() {
+  return view ('/persediaan/mutasi-sp-cvs');
+}) -> name('mutasi-sp-cvs');
+
+Route::get('/persediaan/mutasi-sp-semua-cvs', function() {
+  return view ('/persediaan/mutasi-semua-sp-cvs');
+}) -> name('mutasi-sp-semua-cvs');
