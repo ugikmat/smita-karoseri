@@ -107,7 +107,7 @@ class ListPenjualanDompulController extends Controller
                 $detailPenjualanDompul->save();
             }
         }
-
+        if(!empty($bank)){
         foreach ($bank as $key => $value) {
             if (empty($value['id'])) {
                 $detailPenjualanDompul = new DetailPenjualanDompul();
@@ -142,6 +142,7 @@ class ListPenjualanDompulController extends Controller
             $detailPenjualanDompul->catatan = $value['catatan'];
             $detailPenjualanDompul->save();
         }
+      }
         $request->session()->flash('status', 'Berhasil melakukan edit!');
         return redirect('/penjualan/dompul/list-invoice');
     }

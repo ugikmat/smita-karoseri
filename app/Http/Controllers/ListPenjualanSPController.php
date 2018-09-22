@@ -124,39 +124,41 @@ class ListPenjualanSPController extends Controller
                 $detailPembayaranSp->save();
             }
         }
-        foreach ($bank as $key => $value) {
-            if (empty($value['id'])) {
-                $detailPembayaranSp = new DetailPembayaranSp();
-                $detailPembayaranSp->id_penjualan_sp = $penjualanSp->id_penjualan_sp;
-            } else {
-                $detailPembayaranSp = DetailPembayaranSp::where('id_detail_pembayaran_sp',$value['id'])->first();
-            }
-            $detailPembayaranSp->metode_pembayaran = $value['bank'];
-            $detailPembayaranSp->nominal=str_replace('.','',$value['trf']);
-            $detailPembayaranSp->catatan = $value['catatan'];
-            switch ($value['bank']) {
-                case 'BCA Pusat':
-                    $detailPembayaranSp->bca_pusat=$value['trf'];
-                    break;
-                case 'BCA Cabang':
-                    $detailPembayaranSp->bca_cabang=$value['trf'];
-                    break;
-                case 'Mandiri':
-                    $detailPembayaranSp->mandiri=$value['trf'];
-                    break;
-                case 'BNI':
-                    $detailPembayaranSp->bni=$value['trf'];
-                    break;
-                case 'BRI':
-                    $detailPembayaranSp->bri=$value['trf'];
-                    break;
-                case 'Cash':
-                    $detailPembayaranSp->cash=$value['trf'];
-                    break;
-                default:
-                    break;
-            }
-            $detailPembayaranSp->save();
+        if(!empty($bank)){
+          foreach ($bank as $key => $value) {
+              if (empty($value['id'])) {
+                  $detailPembayaranSp = new DetailPembayaranSp();
+                  $detailPembayaranSp->id_penjualan_sp = $penjualanSp->id_penjualan_sp;
+              } else {
+                  $detailPembayaranSp = DetailPembayaranSp::where('id_detail_pembayaran_sp',$value['id'])->first();
+              }
+              $detailPembayaranSp->metode_pembayaran = $value['bank'];
+              $detailPembayaranSp->nominal=str_replace('.','',$value['trf']);
+              $detailPembayaranSp->catatan = $value['catatan'];
+              switch ($value['bank']) {
+                  case 'BCA Pusat':
+                      $detailPembayaranSp->bca_pusat=$value['trf'];
+                      break;
+                  case 'BCA Cabang':
+                      $detailPembayaranSp->bca_cabang=$value['trf'];
+                      break;
+                  case 'Mandiri':
+                      $detailPembayaranSp->mandiri=$value['trf'];
+                      break;
+                  case 'BNI':
+                      $detailPembayaranSp->bni=$value['trf'];
+                      break;
+                  case 'BRI':
+                      $detailPembayaranSp->bri=$value['trf'];
+                      break;
+                  case 'Cash':
+                      $detailPembayaranSp->cash=$value['trf'];
+                      break;
+                  default:
+                      break;
+              }
+              $detailPembayaranSp->save();
+          }
         }
         // session(['tgl_penjualan_sp'=>$penjualanSp->id_sales,'id_cust'=>$penjualanSp->id_customer]);
         $request->session()->flash('status', 'Berhasil melakukan edit!');

@@ -100,7 +100,7 @@ class ListPembelianDompulController extends Controller
                 $detailPembelianDompul->save();
             }
         }
-
+        if(!empty($bank)){
         foreach ($bank as $key => $value) {
             if (empty($value['id'])) {
                 $detailPembelianDompul = new DetailPembayaranPembelianDompul();
@@ -135,6 +135,7 @@ class ListPembelianDompulController extends Controller
             $detailPembelianDompul->catatan = $value['catatan'];
             $detailPembelianDompul->save();
         }
+      }
         $request->session()->flash('status','Berhasil melakukan edit!');
         return redirect('/pembelian/dompul/list-pembelian-dompul');
     }

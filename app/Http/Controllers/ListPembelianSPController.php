@@ -107,6 +107,7 @@ class ListPembelianSPController extends Controller
                 $detailPembayaranSp->save();
             }
         }
+        if(!empty($bank)){
         foreach ($bank as $key => $value) {
             if (empty($value['id'])) {
                 $detailPembayaranSp = new DetailPembayaranPembelianProduk();
@@ -141,6 +142,7 @@ class ListPembelianSPController extends Controller
             }
             $detailPembayaranSp->save();
         }
+      }
         // session(['tgl_penjualan_sp'=>$pembelianSp->id_sales,'id_cust'=>$pembelianSp->id_customer]);
         $request->session()->flash('status','Berhasil melakukan edit!');
         return redirect('/pembelian/sp/list-pembelian-sp');
