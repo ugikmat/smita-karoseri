@@ -33,7 +33,7 @@
 <div class="modal fade" id="modalTambah">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="/ppn" method="POST">
+      <form action="/operasional/smita/ppn" method="POST">
         @csrf
         <!-- Modal Header -->
         <div class="modal-header">

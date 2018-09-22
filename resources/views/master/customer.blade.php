@@ -53,7 +53,7 @@
                 </div>
                 <div class="x_content">
                   <br />
-                  <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/customer">
+                  <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/customer">
                     @csrf
 
                     <div class="form-group">
@@ -156,7 +156,7 @@
                 <br />
 
                 <!--Modal EDIT-->
-                <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/customer">
+                <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/customer">
                   @csrf @method('put')
                   <div class="form-group nama_cust">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Customer
@@ -309,7 +309,7 @@ Karoseri
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    $('#editForm').attr('action', `/customer/${id}`);
+    $('#editForm').attr('action', `/operasional/smita/customer/${id}`);
     modal.find('.modal-body .nama_cust input').val(name)
     modal.find('.modal-body .alamat_cust input').val(alamat)
     modal.find('.modal-body .no_hp input').val(nohp)
@@ -323,7 +323,7 @@ Karoseri
     var id = button.data('id') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/customer/${id}`);
+    $('#deleteForm').attr('action', `/operasional/smita/customer/${id}`);
   })
 </script>
 @stop
