@@ -58,7 +58,7 @@
 
                     <ul class="nav navbar-nav">
                       <li>
-                        <a href="/user/change_password">
+                        <a href="/operasional/smita/user/change_password">
                           <i class=""> Change Password</i>
                         </a>
                       </li>
