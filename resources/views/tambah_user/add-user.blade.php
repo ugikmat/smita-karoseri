@@ -91,8 +91,7 @@
       <select class="" name="level" id="level" style="height: calc(3.5rem - 2px); width:177px;" required>
         <option value="Canvaser">Canvaser</option>
         <option value="Kasir">Kasir</option>
-        <option value="Supervisor">Supervisor</option>
-        <option value="Kepala Cabang">Kepala Cabang</option>
+        <option value="Supervisor">Supervisor</option>3
         <option value="Super Admin">Super Admin</option>
       </select>
 

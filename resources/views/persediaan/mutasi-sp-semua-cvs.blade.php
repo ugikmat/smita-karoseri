@@ -13,7 +13,7 @@
     text-align: center;
     margin: auto;
     padding: 10%;
-  },
+  }
   td{
     text-align: center;
     margin: auto;
@@ -90,6 +90,7 @@
             serverSide: true,
             processing: true,
             stateSave: true,
+            scrollX: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             ajax: `/operasional/smita/stok-sp/all/data/${$tgl_awal}/${$tgl_akhir}`,
             columns: [
