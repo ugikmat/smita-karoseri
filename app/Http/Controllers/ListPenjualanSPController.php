@@ -45,7 +45,7 @@ class ListPenjualanSPController extends Controller
         return view('penjualan.sp.list-invoice-sp',['lokasis'=>$lokasis,'saless'=>$saless]);
     }
 
-    public function verif($id){
+    public function verif(Request $request,$id){
         PenjualanProduk::where('id_penjualan_sp',$id)
                         ->update(['status_penjualan'=>1
                         ]);
@@ -221,13 +221,22 @@ class ListPenjualanSPController extends Controller
                             })
                           ->addColumn('action', function ($penjualanSP) {
                               if ($penjualanSP->status_penjualan==0) {
-                                  return
+                                  if(Auth::user()->level_user=='Supervisor'||Auth::user()->level_user=='Super Admin'){
+                                    return
                                     '<a class="btn btn-xs btn-primary"
                                     href="/penjualan/sp/list-invoice-sp/edit/'.$penjualanSP->id_penjualan_sp.'/'.$penjualanSP->nm_sales.'/'.$penjualanSP->tanggal_penjualan_sp.'/'.$penjualanSP->nm_cust.'">
                                     <i class="glyphicon glyphicon-edit"></i> Edit
                                     </a>
                                     <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$penjualanSP->id_penjualan_sp.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>
                                     <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanSP->id_penjualan_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                                  }else {
+                                    return
+                                    '<a class="btn btn-xs btn-primary"
+                                    href="/penjualan/sp/list-invoice-sp/edit/'.$penjualanSP->id_penjualan_sp.'/'.$penjualanSP->nm_sales.'/'.$penjualanSP->tanggal_penjualan_sp.'/'.$penjualanSP->nm_cust.'">
+                                    <i class="glyphicon glyphicon-edit"></i> Edit
+                                    </a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanSP->id_penjualan_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';  
+                                  }
                               } else {
                                   return
                                     '<a class="btn btn-xs btn-primary"
