@@ -56,7 +56,11 @@
     <thead>
       <tr>
         <th>Nama Produk</th>
-        <th>semua cvs</th>
+        @isset($saless)
+          @foreach($saless as $sales)
+            <th>{{$sales->nm_sales}}</th>
+          @endforeach
+        @endisset
       </tr>
     </thead>
 </table>
@@ -87,14 +91,15 @@
             processing: true,
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-            ajax: `/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`,
+            ajax: `/stok-sp/all/data/${$tgl_awal}/${$tgl_akhir}`,
             columns: [
               // {data: 'indeks'},
               {data: 'nama_produk'},
-              {data: 'stok_awal'},
-              {data: 'stok_masuk'},
-              {data: 'stok_keluar'},
-              {data: 'jumlah_stok'}
+              @isset($saless)
+                @foreach($saless as $sales)
+                  {data: "{{$sales->nm_sales}}"},
+                @endforeach
+              @endisset
             ],
             dom: 'lBrtip',
         buttons: [
@@ -105,7 +110,7 @@
           $tgl_akhir = $('#tgl_akhir').val();
         $tgl_awal = $('#tgl_awal').val();
           $sales = $('#sales').val();
-          t.ajax.url(`/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`).load();
+          t.ajax.url(`/stok-sp/all/data/${$tgl_awal}/${$tgl_akhir}`).load();
         });
     });
 </script>
