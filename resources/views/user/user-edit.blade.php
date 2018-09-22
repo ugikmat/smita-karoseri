@@ -80,6 +80,7 @@
   <br>
   <div data-repeater-list="lokasi-user" id="lokasi-user">
     <div data-repeater-item>
+      <input type="hidden" name="id_users_lokasi" id="id_users_lokasi">
       <div class="row">
         <div class="col-xs-6 col-sm-6">
           Lokasi&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&emsp;
