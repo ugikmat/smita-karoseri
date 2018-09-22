@@ -42,7 +42,7 @@
   </tfoot>
 </table>
 <br>
-<a href="/tambah_user/add-user">
+<a href="/operasional/smita/tambah_user/add-user">
   <button type="button" name="button"> <i class="fa fa-user-plus"></i> Tambah User</button>
 </a>
 
