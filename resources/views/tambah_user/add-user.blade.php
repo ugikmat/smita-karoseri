@@ -224,7 +224,7 @@
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    $('#editForm').attr('action', `/master/supplier/${id}`);
+    $('#editForm').attr('action', `/operasional/smita/master/supplier/${id}`);
     modal.find('.modal-body .nama input').val(name)
     modal.find('.modal-body .id input').val(id)
     modal.find('.modal-body .lokasi input').val(lokasi)
@@ -238,7 +238,7 @@
     var id = button.data('id'); // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/master/user/${id}`);
+    $('#deleteForm').attr('action', `/operasional/smita/master/user/${id}`);
   })
 </script>
 @stop
