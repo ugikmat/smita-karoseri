@@ -255,7 +255,7 @@
       </div>
       <div class="modal-body">
         <!-- Form -->
-        <form method='post' action='/importExcel' enctype="multipart/form-data">
+        <form method='post' action='/operasional/smita/importExcel' enctype="multipart/form-data">
           @csrf
           <div class="form-group">
             <label for="import_file">File</label>

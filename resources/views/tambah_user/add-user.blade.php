@@ -34,7 +34,7 @@
   </tfoot>
 </table> -->
 
-<form class="repeater" action="/new/user" method="post">
+<form class="repeater" action="/operasional/smita/new/user" method="post">
 @csrf
 <div class="container-fluid form-inline">
   <div class="row">
