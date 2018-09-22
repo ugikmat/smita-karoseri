@@ -269,7 +269,7 @@ return [
                       [
                         'text'  => 'Mutasi Stok Dompul',
                         'icon'  => 'truck',
-                        'url'   => '/persediaan/mutasi-dompul',
+                        'url'   => '/persediaan/dompul/mutasi-dompul',
                       ],
                     ],
                   ],
@@ -280,22 +280,22 @@ return [
                       [
                         'text'  => 'Mutasi Stok SP',
                         'icon'  => 'tags',
-                        'url'   => '/persediaan/mutasi-sp',
+                        'url'   => '/persediaan/sp/mutasi-sp',
                       ],
                       [
                         'text'  => 'Mutasi Stok SP CVS',
                         'icon'  => 'user',
-                        'url'   => '/persediaan/mutasi-sp-cvs',
+                        'url'   => '/persediaan/sp/mutasi-sp-cvs',
                       ],
                       [
                         'text'  => 'Mutasi Stok SP semua CVS',
                         'icon'  => 'users',
-                        'url'   => '/persediaan/mutasi-sp-semua-cvs',
+                        'url'   => '/persediaan/sp/mutasi-sp-semua-cvs',
                       ],
                       [
                         'text'  => 'Pengambilan SP',
                         'icon'  => 'paste',
-                        'url'   => '',
+                        'url'   => '/persediaan/sp/pengambilan-sp',
                       ],
                     ],
                   ],
