@@ -43,7 +43,7 @@ class ListPembelianSPController extends Controller
     public function delete(Request $request){
         PembelianProduk::where('id_pembelian_sp',$request->get('id'))->update(['deleted'=>1]);
         $request->session()->flash('status','Berhasil menghapus List Invoice!');
-        return redirect('/operasional/smita/pembelian/sp/list-pembelian-sp');
+        return redirect('/pembelian/sp/list-pembelian-sp');
     }
 
      public function edit($id){
@@ -143,7 +143,7 @@ class ListPembelianSPController extends Controller
         }
         // session(['tgl_penjualan_sp'=>$pembelianSp->id_sales,'id_cust'=>$pembelianSp->id_customer]);
         $request->session()->flash('status','Berhasil melakukan edit!');
-        return redirect('/operasional/smita/pembelian/sp/list-pembelian-sp');
+        return redirect('/pembelian/sp/list-pembelian-sp');
     }
 
     /**

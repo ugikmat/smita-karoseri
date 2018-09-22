@@ -80,7 +80,7 @@ class UsersController extends Controller
                 'id_user' => $user->id_user
             ]);
         }
-        return redirect ('/operasional/smita/master/user');
+        return redirect ('/master/user');
     }
 
     public function getData($id){
@@ -124,13 +124,13 @@ class UsersController extends Controller
                 UserLokasi::where('id_users_lokasi',$value)->update(['deleted'=>1]);
             }
         }
-        return redirect ('/operasional/smita/master/user')->with(['error'=>$error]);
+        return redirect ('/master/user')->with(['error'=>$error]);
     }
 
     public function delete($id)
     {
         User::where('id_user',$id)->update(['deleted'=>1]);
-        return redirect ('/operasional/smita/master/user');
+        return redirect ('/master/user');
     }
 
     /**

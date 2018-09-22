@@ -54,7 +54,7 @@ class DompulController extends Controller
         $dompul->tipe_dompul =$request->get('tipe');
         $dompul->status_sub_master_dompul ="Aktif";
         $dompul->save();
-        return redirect('/operasional/smita/master/dompul');
+        return redirect('/master/dompul');
     }
 
     /**
@@ -95,7 +95,7 @@ class DompulController extends Controller
         $dompul->nama_sub_master_dompul =$request->get('nama-sub');
         $dompul->tipe_dompul =$request->get('tipe');
         $dompul->save();
-        return redirect('/operasional/smita/master/dompul');
+        return redirect('/master/dompul');
     }
 
     /**
@@ -109,7 +109,7 @@ class DompulController extends Controller
         $dompul = Dompul::where('id_dompul',$id)->first();
         $dompul->status_sub_master_dompul="Non Aktif";
         $dompul->save();
-        return redirect('/operasional/smita/master/dompul');
+        return redirect('/master/dompul');
 
     }
 

@@ -136,13 +136,13 @@ class ListPembelianDompulController extends Controller
             $detailPembelianDompul->save();
         }
         $request->session()->flash('status','Berhasil melakukan edit!');
-        return redirect('/operasional/smita/pembelian/dompul/list-pembelian-dompul');
+        return redirect('/pembelian/dompul/list-pembelian-dompul');
     }
 
     public function delete(Request $request){
         $pembelianDompul = PembelianDompul::where('id_pembelian_dompul',$request->get('id'))->update(['deleted'=>1]);
         $request->session()->flash('status','Berhasil menghapus List Invoice!');
-        return redirect('/operasional/smita/pembelian/dompul/list-pembelian-dompul');
+        return redirect('/pembelian/dompul/list-pembelian-dompul');
     }
 
     /**

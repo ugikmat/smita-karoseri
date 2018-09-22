@@ -56,7 +56,7 @@ class HargaProdukController extends Controller
         $hargaProduk->harga_sp = $request->get('harga');
         $hargaProduk->status_harga_sp = "Aktif";
         $hargaProduk->save();
-        return redirect('/operasional/smita/master/harga_produk');
+        return redirect('/master/harga_produk');
     }
 
     /**
@@ -95,7 +95,7 @@ class HargaProdukController extends Controller
         $hargaProduk->tipe_harga_sp = $request->get('tipe');
         $hargaProduk->harga_sp = $request->get('harga');
         $hargaProduk->save();
-        return redirect('/operasional/smita/master/harga_produk');
+        return redirect('/master/harga_produk');
     }
 
     /**
@@ -109,7 +109,7 @@ class HargaProdukController extends Controller
         $hargaProduk = HargaProduk::where('id_harga_sp',$id)->first();
         $hargaProduk->status_harga_sp = "Non Aktif";
         $hargaProduk->save();
-        return redirect('/operasional/smita/master/harga_produk');
+        return redirect('/master/harga_produk');
     }
     /**
      * Process dataTable ajax response.

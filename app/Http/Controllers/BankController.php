@@ -53,7 +53,7 @@ class BankController extends Controller
         $bank->kode_bank = $request->get('kode');
         $bank->status_bank = "Aktif";
         $bank->save();
-        return redirect('/operasional/smita/master/bank');
+        return redirect('/master/bank');
     }
 
     /**
@@ -94,7 +94,7 @@ class BankController extends Controller
         $bank->nama_bank = $request->get('nama');
         $bank->kode_bank = $request->get('kode');;
         $bank->save();
-        return redirect('/operasional/smita/master/bank');
+        return redirect('/master/bank');
     }
 
     /**

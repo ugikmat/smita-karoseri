@@ -52,7 +52,7 @@ class SupervisorController extends Controller
       $spv->no_hp = $request->get('no_hp');
       $spv->save();
 
-      return redirect('/operasional/smita/supervisor');
+      return redirect('/supervisor');
     }
 
     /**
@@ -92,7 +92,7 @@ class SupervisorController extends Controller
         $spv->no_hp = $request->get('no_hp_upt');
         $spv->save();
 
-        return redirect('/operasional/smita/supervisor');
+        return redirect('/supervisor');
     }
 
     /**
@@ -104,7 +104,7 @@ class SupervisorController extends Controller
     public function destroy($id)
     {
       $spv = Supervisor::where('id_spv', $id)->update(['status' => 0]);
-      return redirect('/operasional/smita/supervisor');
+      return redirect('/supervisor');
     }
 
     public function data(Datatables $datatables)

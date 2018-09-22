@@ -49,7 +49,7 @@ class TipeDompulController extends Controller
         $tipeDompul = new TipeDompul();
         $tipeDompul->tipe_dompul = $request->get('tipe');
         $tipeDompul->save();
-        return redirect('/operasional/smita/master/tipe_dompul');
+        return redirect('/master/tipe_dompul');
     }
 
     /**

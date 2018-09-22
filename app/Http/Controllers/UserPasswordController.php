@@ -34,6 +34,6 @@ class UserPasswordController extends Controller
         }else{
             return redirect()->back();
         }
-        return redirect('/operasional/smita');
+        return redirect('');
     }
 }

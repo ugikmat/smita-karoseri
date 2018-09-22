@@ -51,7 +51,7 @@ class LokasiController extends Controller
       $lok->nm_lokasi = $request->get('nm_lokasi');
       $lok->save();
 
-      return redirect('/operasional/smita/lokasi');
+      return redirect('/lokasi');
     }
 
     /**
@@ -89,7 +89,7 @@ class LokasiController extends Controller
       $lok->nm_lokasi = $request->get('nm_lokasi_upt');
       $lok->save();
 
-      return redirect('/operasional/smita/lokasi');
+      return redirect('/lokasi');
     }
 
     /**
@@ -101,7 +101,7 @@ class LokasiController extends Controller
     public function destroy($id)
     {
       $lok = Lokasi::where('id_lokasi', $id)->update(['status_lokasi' => 0]);
-      return redirect('/operasional/smita/lokasi');
+      return redirect('/lokasi');
     }
 
     public function data(Datatables $datatables)
