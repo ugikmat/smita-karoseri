@@ -226,10 +226,12 @@ Route::put('/pembelian/dompul/list/delete','ListPembelianDompulController@delete
 
 // laporan pembelian
 Route::get('/pembelian/laporan-pembelian/Lbeli-dompul', 'LaporanPembelianDompulController@index');
-Route::get('/pembelian/laporan-pembelian/data/{tgl_pembelian}', 'LaporanPembelianDompulController@data');
+Route::get('/pembelian/laporan-pembelian/dompul/data/{tgl_pembelian}', 'LaporanPembelianDompulController@data');
+Route::post('/pembelian/get_laporan_dompul/{tgl}', 'LaporanPembelianDompulController@getData');
 
 Route::get('/pembelian/laporan-pembelian/Lbeli-sp', 'LaporanPembelianSPController@index');
-Route::get('/pembelian/laporan-pembelian/data/{tgl_pembelian}', 'LaporanPembelianSPController@data');
+Route::get('/pembelian/laporan-pembelian/sp/data/{tgl_pembelian}', 'LaporanPembelianSPController@data');
+Route::post('/pembelian/get_laporan_sp/{tgl}', 'LaporanPembelianSPController@getData');
 
 //monitoring
 Route::get('/penjualan/monitoring/mntr-upload', 'MonitorController@index');

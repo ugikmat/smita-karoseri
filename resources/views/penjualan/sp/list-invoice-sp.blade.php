@@ -66,10 +66,10 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      @if(Session::has('sp-list-tgl'))
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl_awal" id="tgl_awal" data-date-format="dd-mm-yyyy" value="{{session('sp-list-tgl')}}" required>
+                      @if(Session::has('sp-list-tgl-awal'))
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl_awal" id="tgl_awal" data-date-format="dd-mm-yyyy" value="{{session('sp-list-tgl-awal')}}" required>
                       @else
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl_awal" id="tgl_awal" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now()->format('d-m-Y')}}" required>
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl_awal" id="tgl_awal" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}" required>
                       @endif
                     </div>
                   </div>
@@ -79,10 +79,10 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      @if(Session::has('sp-list-tgl'))
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl_akhir" id="tgl_akhir" data-date-format="dd-mm-yyyy" value="{{session('sp-list-tgl')}}" required>
+                      @if(Session::has('sp-list-tgl-akhir'))
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl_akhir" id="tgl_akhir" data-date-format="dd-mm-yyyy" value="{{session('sp-list-tgl-akhir')}}" required>
                       @else
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl_akhir" id="tgl_akhir" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now()->format('d-m-Y')}}" required>
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl_akhir" id="tgl_akhir" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}" required>
                       @endif
                     </div>
                   </div>
@@ -197,8 +197,8 @@
 </script>
 <script>
     $(function () {
-      @if(Session::has('id_sales'))
-          $('#sales').val("{{session('id_sales')}}").change();
+      @if(Session::has('sp-list-sales'))
+          $('#sales').val("{{session('sp-list-sales')}}").change();
         @endif
         @if(Session::has('lokasi_penjualan'))
           $('#lokasi').val("{{session('lokasi_penjualan')}}").change();

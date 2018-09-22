@@ -174,7 +174,7 @@ class ListPenjualanSPController extends Controller
         if ($tgl_awal=='null') {
             $tgl = $tgl_awal;
         }else {
-            session(['dompul-list-tgl'=>$tgl_awal]);
+            session(['sp-list-tgl-awal'=>$tgl_awal,'sp-list-tgl-akhir'=>$tgl_akhir,'lokasi_penjualan'=>$lokasi,'sp-list-sales'=>$sales]);
             $tgl_awal = Carbon::parse($tgl_awal);
             $tgl_awal = $tgl_awal->format('Y-m-d');
             $tgl_akhir = Carbon::parse($tgl_akhir);
