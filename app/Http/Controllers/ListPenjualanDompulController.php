@@ -41,7 +41,7 @@ class ListPenjualanDompulController extends Controller
         }else{
             $saless = Sales::where('nm_sales',Auth::user()->name)->get();
         }
-        
+
         return view('penjualan.dompul.list-invoice',['lokasis'=>$lokasis,'saless'=>$saless]);
     }
 
@@ -84,7 +84,7 @@ class ListPenjualanDompulController extends Controller
         return view('penjualan.dompul.list-edit-p-dompul-ro',['datas'=>$datas,'total'=>$total,'penjualanDompul'=>$penjualanDompul,'detailPenjualanDompul'=>$detailPenjualanDompul,'total_pembayaran'=>$total_pembayaran]);
     }
 
-    public function verif($id){
+    public function verif(Request $request, $id){
         PenjualanDompul::where('id_penjualan_dompul',$id)
                         ->update(['status_pembayaran'=>1
                         ]);
