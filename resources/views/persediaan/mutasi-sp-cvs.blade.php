@@ -13,7 +13,7 @@
     text-align: center;
     margin: auto;
     padding: 10%;
-  },
+  }
   td{
     text-align: center;
     margin: auto;
@@ -50,7 +50,7 @@
         <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('id_sales')}}">
               <option value="" disabled>Pilih Nama canvaser</option>
               @isset($saless)
-                  @foreach ($saless as $data) 
+                  @foreach ($saless as $data)
                   <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
                   @endforeach
               @endisset
