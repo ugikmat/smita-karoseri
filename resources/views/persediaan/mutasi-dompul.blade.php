@@ -111,7 +111,7 @@
         $('#save').on('click',function(event) {
           $tgl_awal =  $('#tgl_awal').val();
           $tgl_akhir =  $('#tgl_akhir').val();
-          t.ajax.url(`/stok-dompul/data/${$tgl_awal}/${$tgl_akhir}`).load();
+          t.ajax.url(`/operasional/smita/stok-dompul/data/${$tgl_awal}/${$tgl_akhir}`).load();
         });
     });
 </script>

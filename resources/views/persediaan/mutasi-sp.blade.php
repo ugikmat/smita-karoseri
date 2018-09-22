@@ -117,7 +117,7 @@
           $tgl_akhir = $('#tgl_akhir').val();
         $tgl_awal = $('#tgl_awal').val();
           $sales = $('#sales').val();
-          t.ajax.url(`/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`).load();
+          t.ajax.url(`/operasional/smita/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`).load();
         });
     });
 </script>
