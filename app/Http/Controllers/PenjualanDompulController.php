@@ -146,6 +146,7 @@ class PenjualanDompulController extends Controller
         $bank = $request->get('bank');
         $total_pembayaran = $request->get('pembayaran');
         $selisih = $request->get('selisih');
+        if(!empty($bank)){
         session(['bank'=>$bank]);
         for ($key=0; $key <count($bank) ; $key++) {
             // $bank[$key]['trf']=number_format($bank[$key]['trf'],0,",",".");
@@ -154,6 +155,7 @@ class PenjualanDompulController extends Controller
                 $key--;
             }
         }
+      }
         // foreach ($bank as $key => $value) {
         //     $bank[$key]['trf']=number_format($bank[$key]['trf'],0,",",".");
         //     if (empty($value['bank'])) {
