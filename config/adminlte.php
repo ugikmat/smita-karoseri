@@ -263,35 +263,42 @@ return [
                 'icon'    => 'share',
                 'submenu' => [
                   [
-                    'text'  => 'Mutasi Stok Dompul',
-                    'icon'  => 'truck',
-                    'url'   => '/persediaan/mutasi-dompul',
+                    'text'    => 'Dompul',
+                    'icon'    => '',
+                    'submenu' => [
+                      [
+                        'text'  => 'Mutasi Stok Dompul',
+                        'icon'  => 'truck',
+                        'url'   => '/persediaan/mutasi-dompul',
+                      ],
+                    ],
                   ],
                   [
-                    'text'  => 'Mutasi Stok SP',
-                    'icon'  => 'tags',
-                    'url'   => '/persediaan/mutasi-sp',
+                    'text'    => 'SP',
+                    'icon'    => '',
+                    'submenu' => [
+                      [
+                        'text'  => 'Mutasi Stok SP',
+                        'icon'  => 'tags',
+                        'url'   => '/persediaan/mutasi-sp',
+                      ],
+                      [
+                        'text'  => 'Mutasi Stok SP CVS',
+                        'icon'  => 'user',
+                        'url'   => '/persediaan/mutasi-sp-cvs',
+                      ],
+                      [
+                        'text'  => 'Mutasi Stok SP semua CVS',
+                        'icon'  => 'users',
+                        'url'   => '/persediaan/mutasi-sp-semua-cvs',
+                      ],
+                      [
+                        'text'  => 'Pengambilan SP',
+                        'icon'  => 'paste',
+                        'url'   => '',
+                      ],
+                    ],
                   ],
-                  [
-                    'text'  => 'Mutasi Stok SP CVS',
-                    'icon'  => 'user',
-                    'url'   => '/persediaan/mutasi-sp-cvs',
-                  ],
-                  [
-                    'text'  => 'Mutasi Stok SP semua CVS',
-                    'icon'  => 'users',
-                    'url'   => '/persediaan/mutasi-sp-semua-cvs',
-                  ],
-                  // [
-                  //   'text'  => 'kartu Stok Dompul',
-                  //   'icon'  => 'truck',
-                  //   'url'   => '/persediaan/mutasi-dompul',
-                  // ],
-                  // [
-                  //   'text'  => 'kartu Stok SP',
-                  //   'icon'  => 'tags',
-                  //   'url'   => '/persediaan/mutasi-sp',
-                  // ],
                 ],
               ],
               [
