@@ -24,7 +24,7 @@ class ListPenjualanDompulController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','canvaser','kasir','head','supervisor','admin']);
+        $this->middleware(['auth','canvaser']);
     }
     /**
      * Diplay a list of transaction made before
@@ -37,9 +37,9 @@ class ListPenjualanDompulController extends Controller
                     ->where('status_lokasi','1')
                     ->get();
         if(Auth::user()->level_user=='Canvaser'){
-            $saless = Sales::all();
-        }else{
             $saless = Sales::where('nm_sales',Auth::user()->name)->get();
+        }else{
+            $saless = Sales::all();
         }
         
         return view('penjualan.dompul.list-invoice',['lokasis'=>$lokasis,'saless'=>$saless]);
@@ -210,7 +210,7 @@ class ListPenjualanDompulController extends Controller
                             })
                           ->addColumn('action', function ($penjualanDompul) {
                               if ($penjualanDompul->status_pembayaran==0) {
-                                  if(Auth::user()->level_user=='Supervisor'){
+                                  if(Auth::user()->level_user!='Supervisor'||Auth::user()->level_user!='Super Admin'){
                                       return
                                     '<a class="btn btn-xs btn-primary"
                                     href="/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
