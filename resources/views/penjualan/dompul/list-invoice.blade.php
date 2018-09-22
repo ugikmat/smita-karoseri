@@ -241,7 +241,7 @@
           $tgl_awal = ($('#tgl_awal').val()=='') ? 'null' : $('#tgl_awal').val();
           $tgl_akhir = ($('#tgl_akhir').val()=='') ? 'null' : $('#tgl_akhir').val();
           $sales = $('#sales').val();
-          t.ajax.url(`/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`).load();
+          t.ajax.url(`/operasional/smita/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`).load();
         }
         $('#show').on('click',loadData);
         $('#verificationModal').on('show.bs.modal', function (event) {

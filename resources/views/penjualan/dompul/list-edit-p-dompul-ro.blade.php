@@ -487,7 +487,7 @@
           {
             console.log('success')
             console.log(response.total);
-            t.ajax.url(`/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`).load();
+            t.ajax.url(`/operasional/smita/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`).load();
             $('#total').val(response.total.toLocaleString('id-ID'));
             $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
           }
@@ -499,7 +499,7 @@
             processing: true,
             stateSave: true,
             searching:  false,
-            ajax: `/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
+            ajax: `/operasional/smita/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
             columns: [
               {data: 'produk'},
               {data: 'tipe_dompul'},
@@ -544,7 +544,7 @@
     tipe.value=tipe_dompul;
     $('#qty_program').val(qty.toLocaleString('id-ID'));
     console.log(produk);
-    $('#link').val(`/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
+    $('#link').val(`/operasional/smita/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
   })
 </script>
 @stop

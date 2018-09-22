@@ -358,7 +358,7 @@ td{
       {
         console.log('success')
         console.log(response.total);
-        t.ajax.url(`/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`).load();
+        t.ajax.url(`/operasional/smita/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`).load();
         $('#total').val(response.total.toLocaleString('id-ID'));
         $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
       }
@@ -434,7 +434,7 @@ td{
     tipe.value=tipe_dompul;
     $('#qty_program').val(qty.toLocaleString('id-ID'));
     console.log(produk);
-    $('#link').val(`/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/0`);
+    $('#link').val(`/operasional/smita/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/0`);
   })
 </script>
 @stop

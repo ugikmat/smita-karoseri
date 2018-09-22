@@ -263,7 +263,7 @@
                     targets:1,
                     render: function ( data, type, row, meta ) {
                         if(type === 'display'){
-                            data = `<a class="link-post" href="/penjualan/dompul/${canvaser}/${tgl}/${data}/${lokasi}">` + data + '</a>';
+                            data = `<a class="link-post" href="/operasional/smita/penjualan/dompul/${canvaser}/${tgl}/${data}/${lokasi}">` + data + '</a>';
                         }
                         return data;
                     }
