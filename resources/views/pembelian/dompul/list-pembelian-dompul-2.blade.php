@@ -35,7 +35,7 @@
   </div>
 </div>
 <br>
-<form action="/pembelian/dompul/list/store" method="post" class="repeater">
+<form action="/operasional/smita/pembelian/dompul/list/store" method="post" class="repeater">
   @csrf
   <input type="hidden" name="id_pembelian" id="id_pembelian" value="{{$pembelianDompul->id_pembelian_dompul}}">
   <div id="deleted">

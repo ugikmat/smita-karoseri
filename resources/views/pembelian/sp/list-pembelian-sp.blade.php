@@ -94,7 +94,7 @@
 <div class="modal fade" id="verificationModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="/pembelian/sp/list/verify" method="POST" id="verificationForm">
+      <form action="/operasional/smita/pembelian/sp/list/verify" method="POST" id="verificationForm">
         @csrf @method('put')
         <input type="hidden" name="id" value="" id="verify_id_pembelian">
         <!-- Modal Header -->

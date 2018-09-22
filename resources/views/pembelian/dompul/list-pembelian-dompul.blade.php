@@ -94,7 +94,7 @@
 <div class="modal fade" id="verificationModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="/pembelian/dompul/list/verify" method="POST" id="verificationForm">
+      <form action="/operasional/smita/pembelian/dompul/list/verify" method="POST" id="verificationForm">
         @csrf @method('put')
         <input type="hidden" name="id" value="" id="verify_id_pembelian">
         <!-- Modal Header -->
@@ -116,7 +116,7 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="deleteForm" action="/pembelian/dompul/list/delete" method="POST">
+      <form id="deleteForm" action="/operasional/smita/pembelian/dompul/list/delete" method="POST">
         @csrf @method('put')
         <input type="hidden" name="id" value="" id="delete_id_pembelian">
         <!-- Modal Header -->
