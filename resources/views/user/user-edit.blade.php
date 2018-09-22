@@ -71,7 +71,7 @@
         <option value="Canvaser">Canvaser</option>
         <option value="Kasir">Kasir</option>
         <option value="Supervisor">Supervisor</option>
-        <option value="Keuangan">Super Admin</option>
+        <option value="Super admin">Super Admin</option>
       </select>
 
     </div>
