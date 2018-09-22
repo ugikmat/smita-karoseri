@@ -155,7 +155,7 @@
             // (Optional)
             // Removes the delete button from the first list item,
             // defaults to false.
-            isFirstItemUndeletable: false
+            isFirstItemUndeletable: true
         });
 
         repeater.setList([
