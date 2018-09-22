@@ -108,7 +108,7 @@ class BankController extends Controller
         $bank = Bank::where('id_bank',$id)->first();
         $bank->status_bank = "non Aktif";
         $bank->save();
-        return redirect('/operasional/smita/master/bank');
+        return redirect('/master/bank');
     }
 
     /**

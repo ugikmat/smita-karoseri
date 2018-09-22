@@ -212,7 +212,7 @@
         }, 'json');
         $('#save').on('click',function(event) {
           $tgl = $('#tgl').val();
-          t.ajax.url(`/operasional/smita/pembelian/laporan-pembelian/dompul/data/${$tgl}`).load();
+          t.ajax.url(`/operasional/smita/pembelian/laporan-pembelian/sp/data/${$tgl}`).load();
           $.post(`/operasional/smita/pembelian/get_laporan_sp/${$tgl}`, function(response){
             if(response.success)
             {
