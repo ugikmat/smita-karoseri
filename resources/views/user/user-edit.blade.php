@@ -71,8 +71,7 @@
         <option value="Canvaser">Canvaser</option>
         <option value="Kasir">Kasir</option>
         <option value="Supervisor">Supervisor</option>
-        <option value="Kepala Cabang">Kepala Cabang</option>
-        <option value="Keuangan">Super Admin</option>
+        <option value="Super admin">Super Admin</option>
       </select>
 
     </div>
@@ -157,7 +156,7 @@
             // (Optional)
             // Removes the delete button from the first list item,
             // defaults to false.
-            isFirstItemUndeletable: false
+            isFirstItemUndeletable: true
         });
 
         repeater.setList([
