@@ -505,7 +505,7 @@
       processing: true,
       stateSave: true,
       lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-      ajax: '/upload/tgl',
+      ajax: '/operasional/smita/upload/tgl',
       columns: [
         {
           data: 'tanggal_transfer'
@@ -556,7 +556,7 @@
       stateSave: true,
       lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
       //Just Dummy Date
-      ajax: '/upload/null/null',
+      ajax: '/operasional/smita/upload/null/null',
       columns: [{
           data: 'id_upload'
         },
@@ -640,13 +640,13 @@
     var button = $(event.relatedTarget) // Button that triggered the modal
     var transfer = button.data('transfer') // Extract info from data-* attributes
     var upload = button.data('upload')
-    table.ajax.url(`/upload/${transfer}/${upload}`).load();
+    table.ajax.url(`/operasional/smita/upload/${transfer}/${upload}`).load();
   })
   $('#activationModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var transfer = button.data('transfer') // Extract info from data-* attributes
     var upload = button.data('upload')
-    $('#activationForm').attr('action',`/upload/aktifasi/${transfer}/${upload}`);
+    $('#activationForm').attr('action',`/operasional/smita/upload/aktifasi/${transfer}/${upload}`);
   })
 </script>
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
