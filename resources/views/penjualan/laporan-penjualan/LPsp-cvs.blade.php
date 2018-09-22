@@ -256,8 +256,8 @@
         $('#save').on('click',function(event) {
           $tgl = $('#tgl').val();
           $sales = $('#sales').val();
-          t.ajax.url(`/laporan-penjualan/sp-cvs/${$tgl}/${$sales}`).load();
-          $.post(`/get_laporan_sp_cvs/${$tgl}/${$sales}`, function(response){
+          t.ajax.url(`/operasional/smita/laporan-penjualan/sp-cvs/${$tgl}/${$sales}`).load();
+          $.post(`/operasional/smita/get_laporan_sp_cvs/${$tgl}/${$sales}`, function(response){
             if(response.success)
             {
               console.log('Success..data');

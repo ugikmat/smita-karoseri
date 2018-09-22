@@ -225,8 +225,8 @@
         }, 'json');
         $('#save').on('click',function(event) {
           $tgl = $('#tgl').val();
-          t.ajax.url(`/laporan-penjualan/sp/${$tgl}`).load();
-          $.post(`/get_laporan_sp/${$tgl}`, function(response){
+          t.ajax.url(`/operasional/smita/laporan-penjualan/sp/${$tgl}`).load();
+          $.post(`/operasional/smita/get_laporan_sp/${$tgl}`, function(response){
             if(response.success)
             {
               console.log('Success..');
