@@ -74,7 +74,7 @@
   </div>
 </div>
 <br>
-<form action="/list_invoice_dompul/update" method="post" class="repeater">
+<form action="/operasional/smita/list_invoice_dompul/update" method="post" class="repeater">
   @csrf
   <input type="hidden" name="id" id="id" value="{{$datas->id_penjualan_dompul}}">
   <div id="deleted">

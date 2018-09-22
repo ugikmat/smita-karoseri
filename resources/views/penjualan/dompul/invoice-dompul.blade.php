@@ -137,7 +137,7 @@
               <div class="x_content">
                 <br />
 
-              <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/penjualan/dompul/invoice-dompul">
+              <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/penjualan/dompul/invoice-dompul">
                   @csrf
                   <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Pilih Lokasi

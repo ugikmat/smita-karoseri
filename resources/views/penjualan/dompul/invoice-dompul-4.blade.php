@@ -45,7 +45,7 @@ td{
     </div>
   </div>
 
-<form class="invoice-dompul repeater" action="/invoice_dompul/store" method="post">
+<form class="invoice-dompul repeater" action="/operasional/smita/invoice_dompul/store" method="post">
   @csrf
   <input type="hidden" name="lokasi" id="lokasi" value="{{$lokasi}}">
   <input type="hidden" name="sales" id="sales" value="{{$sales->id_sales}}">

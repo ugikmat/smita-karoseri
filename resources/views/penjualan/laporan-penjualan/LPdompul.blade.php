@@ -210,7 +210,7 @@
             cell.innerHTML = i+1;
           } );
         } ).draw();
-        $.post(`/get_laporan_dompul/${$tgl}`, function(response){
+        $.post(`/operasional/smita/get_laporan_dompul/${$tgl}`, function(response){
             if(response.success)
             {
               console.log('Success..');

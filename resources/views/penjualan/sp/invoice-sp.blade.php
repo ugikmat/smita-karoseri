@@ -24,7 +24,7 @@
 @stop
 
 @section('content')
-<form class="invoice-sp repeater" action="/invoice_sp/verify" method="post">
+<form class="invoice-sp repeater" action="/operasional/smita/invoice_sp/verify" method="post">
 <div class="container-fluid  form-inline">
   @if (Session::has('status'))
   <div class="alert alert-success">

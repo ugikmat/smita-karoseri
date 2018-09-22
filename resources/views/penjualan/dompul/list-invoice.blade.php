@@ -170,7 +170,7 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="deleteForm" action="/invoice_dompul/delete" method="POST">
+      <form id="deleteForm" action="/operasional/smita/invoice_dompul/delete" method="POST">
         @csrf @method('put')
         <!-- Modal Header -->
         <input type="hidden" name="id" value="" id="id_penjualan">
@@ -247,7 +247,7 @@
         $('#verificationModal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget) // Button that triggered the modal
           var id = button.data('id');
-          $('#verificationForm').attr('action',`/invoice_dompul/verify/${id}`);
+          $('#verificationForm').attr('action',`/operasional/smita/invoice_dompul/verify/${id}`);
         });
         $('#deleteModal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget) // Button that triggered the modal

@@ -16,7 +16,7 @@ td{
 
 
 @section('content')
-<form class="invoice-sp repeater" action="/invoice_sp/store" method="post">
+<form class="invoice-sp repeater" action="/operasional/smita/invoice_sp/store" method="post">
   @csrf
   <input type="hidden" name="lokasi" value="{{$lokasi}}">
 <input type="hidden" name="id" id="id" value="{{$penjualanSp->id_temp_penjualan_sp}}">

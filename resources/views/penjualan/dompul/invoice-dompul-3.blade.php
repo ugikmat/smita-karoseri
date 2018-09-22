@@ -68,7 +68,7 @@ td{
     </div>
   </div>
 </div>
-<form class="invoice-dompul repeater" action="/penjualan/dompul/verify/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}" method="post">
+<form class="invoice-dompul repeater" action="/operasional/smita/penjualan/dompul/verify/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}" method="post">
   @csrf
   <input type="hidden" name="lokasi" value="{{$lokasi}}">
 <table id="invoice-dompul-table" class="table responsive"  width="100%">

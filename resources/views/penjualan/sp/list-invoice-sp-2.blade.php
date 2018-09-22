@@ -72,7 +72,7 @@
     </div>
   </div>
 </div>
-<form action="/list_invoice_SP/store" method="post" class="repeater">
+<form action="/operasional/smita/list_invoice_SP/store" method="post" class="repeater">
   @csrf
   <div id="deleted">
 
