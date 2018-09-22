@@ -162,7 +162,7 @@ class ListPenjualanDompulController extends Controller
         if ($tgl_awal=='null') {
             $tgl = $tgl_awal;
         }else {
-            session(['dompul-list-tgl'=>$tgl_awal]);
+            session(['dompul-list-tgl-awal'=>$tgl_awal,'dompul-list-tgl-akhir'=>$tgl_akhir,'lokasi_penjualan'=>$lokasi,'dompul-list-sales'=>$sales]);
             $tgl_awal = Carbon::parse($tgl_awal);
             $tgl_awal = $tgl_awal->format('Y-m-d');
             $tgl_akhir = Carbon::parse($tgl_akhir);
