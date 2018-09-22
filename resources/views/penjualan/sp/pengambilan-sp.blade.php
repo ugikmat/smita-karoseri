@@ -118,109 +118,22 @@
   </div>
   <br>
   @endforeach
-</div>
-
-<div class="container-fluid" style="background:white;">
-  <br>
   <div class="row">
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      <b>Jumlah Tunai</b>
-    </div>
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-
-        <input type="text" class="form-control" name="total" id="total" value="{{session('total_harga_sp')}}" readonly>
 
     </div>
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 
     </div>
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
     </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      <b>Total Pembayaran</b>
-    </div>
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-        <input type="text" class="form-control" name="pembayaran" id="total_pembayaran" value="0" readonly>
-    </div>
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-
-    </div>
-    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-
-    </div>
-</div>
-<br>
-<div class="row">
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-    <b>Kekurangan Pembayaran</b>
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-      <input type="text" class="form-control" name="selisih" id="selisih" value="0" readonly>
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-
-  </div>
-</div>
-  <hr>
-  <div data-repeater-list="bank-sp" id="pembayaran">
-    <div data-repeater-item>
-      <div class="form row">
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
-          <b>Pembayaran</b>
-          <br>
-          <select name="bank" id="bank" style="height: calc(3.5rem - 2px); width:100%;" required="required">
-            <option value="">-- Cara Pembayaran --</option>
-            <option value="Cash">Cash</option>
-            <option value="BCA Pusat">BCA Pusat</option>
-            <option value="BCA Cabang">BCA Cabang</option>
-            <option value="BRI">BRI</option>
-            <option value="BNI">BNI</option>
-            <option value="Mandiri">Mandiri</option>
-          </select>
-        </div>
-        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-3">
-          <b>Nominal</b>
-          <br>
-          <input type="text" id="trf" name="trf" class="form-control" value="" required="required" autocomplete="off">
-        </div>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-          <b>Catatan</b>
-          <br>
-          <input type="text" id="catatan" name="catatan" class="form-control" value="" autocomplete="off">
-        </div>
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-          <br>
-          <button data-repeater-delete type="button" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
-        </div>
-      </div>
-    <hr>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      <br>
+      <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Nota Penjualan</button>
+      <br><br>
     </div>
   </div>
-<button data-repeater-create type="button" class="btn btn-warning"> <span class="glyphicon glyphicon-plus"></span> Tambah Pembayaran</button>
-
-<div class="row">
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-
-  </div>
-  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-
-  </div>
-  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-
-  </div>
-  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-    <br>
-    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Nota Penjualan</button>
-    <br><br>
-  </div>
-</div>
 </div>
 
 </form>
