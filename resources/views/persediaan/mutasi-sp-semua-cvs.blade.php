@@ -88,7 +88,7 @@
         $sales = $('#sales').val();
         var t = $('#mutasi-sp-semua-cvs-table').DataTable({
             serverSide: true,
-            // processing: true,
+            processing: true,
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             ajax: `/stok-sp/all/data/${$tgl_awal}/${$tgl_akhir}`,
@@ -97,7 +97,7 @@
               {data: 'nama_produk'},
               @isset($saless)
                 @foreach($saless as $sales)
-                  {data: "{{$sales->nm_sales}}"}
+                  {data: "{{$sales->nm_sales}}"},
                 @endforeach
               @endisset
             ],

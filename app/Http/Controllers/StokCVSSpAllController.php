@@ -40,7 +40,7 @@ class StokCVSSpAllController extends Controller
         $tgl_awal = $tgl_awal->format('Y-m-d');    
         
         $tgl_akhir = Carbon::parse($tgl_akhir);
-        $tgl_akhir = $tgl_akhir->format('Y-m-d');    
+        $tgl_akhir = $tgl_akhir->format('Y-m-d'); 
         $stokSP = DB::table('kartu_stok_sps')->select(DB::raw("kartu_stok_sps.id_produk as nama,
         COALESCE((SELECT sum(awal.masuk)-sum(awal.keluar)
 FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi < '{$tgl_awal}' AND awal.id_produk=nama),0) AS stok_awal,
@@ -57,7 +57,28 @@ FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi BETWEEN '{$tgl_awal}' AND 
                             $join->on('master_produks.kode_produk', '=', 'total_nominal.nama');
                         })
         ->where('status_produk',1)->get();
-        return $datatables->of($produk)
+        $table = $datatables->of($produk);
+        // $table->addColumn('indeks', function ($dataStok) {
+        //                       return '';
+        //                     });
+        $saless = Sales::select('nm_sales','id_sales')->where('status',1)->get();
+        foreach ($saless as $key => $sales) {
+          $table = $table->addColumn($sales->nm_sales, function ($dataStok) use ($sales, &$tgl_akhir) {
+                              $sum = DB::table('kartu_stok_sps')->select(DB::raw("id_sales,kartu_stok_sps.id_produk,(sum(masuk)-sum(keluar)) AS jumlah_stok"))
+                              // ->rightJoin('master_produks','master_produks.kode_produk','=','kartu_stok_sps.id_produk')
+                              ->whereRaw("tanggal_transaksi <= '{$tgl_akhir}'")
+                              ->where('kartu_stok_sps.id_sales',$sales->id_sales)
+                              ->where('kartu_stok_sps.id_produk',$dataStok->kode_produk)
+                              ->groupBy('id_sales','kartu_stok_sps.id_produk')
+                              ->first();
+                              if ($sum==null) {
+                                return number_format(0,0,'','.');
+                              } else {
+                                return number_format($sum->jumlah_stok,0,'','.');
+                              }                              
+                            });
+        }
+        return $table
                         ->addColumn('indeks', function ($dataStok) {
                               return '';
                             })
