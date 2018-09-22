@@ -116,7 +116,7 @@ return [
         ],
         [
             'text'        => 'XL',
-            'url'         => 'list/users',
+            // 'url'         => 'list/users',
             'icon'        => 'phone-square',
             'submenu'     => [
               [
@@ -130,16 +130,35 @@ return [
                         [
                             'text'  => 'Invoice Dompul',
                             'url'   => '/penjualan/dompul/invoice-dompul',
+                            'icon'  => 'credit-card',
                         ],
                         [
                             'text'  => 'List Invoice Dompul',
                             'url'   => '/penjualan/dompul/list-invoice',
+                            'icon'  => 'file',
                         ],
                       ],
                   ],
                   [
+                    'text'      => 'Penjualan SP',
+                    'icon'      => 'share',
+                    'submenu'   => [
+                      [
+                        'text'    => 'Invoice SP',
+                        'url'     => '/penjualan/sp/invoice-sp',
+                        'icon'    => 'mobile-phone',
+                      ],
+                      [
+                        'text'    => 'List Invoice SP',
+                        'url'     => '/penjualan/sp/list-invoice-sp',
+                        'icon'    =>  'file',
+                      ],
+                    ],
+                  ],
+                  [
                       'text'    => 'Monitoring Upload',
-                      'url'     => '#',
+                      'url'     => '/penjualan/monitoring/mntr-upload',
+                      'icon'    => 'play-circle',
                   ],
                   [
                     'text'    => 'Laporan Penjualan',
@@ -147,137 +166,329 @@ return [
                     'submenu' => [
                       [
                         'text'  => 'Dompet Pulsa',
-                        'url'   => '#',
+                        'url'   => '/penjualan/laporan-penjualan/LPdompul',
+                        'icon'  => 'briefcase',
                       ],
                       [
-                        'text'  => 'Pemjualan Dompul Head',
-                        'url'   => '#',
+                        'text'  => 'Penjualan CVS Dompul',
+                        'url'   => '/penjualan/laporan-penjualan/LPdompul-cvs',
+                        'icon'  => 'user',
+                      ],
+                      [
+                        'text'  => 'Penjualan Dompul Head',
+                        'url'   => '/penjualan/laporan-penjualan/dompul-head',
+                        'icon'  => 'money',
+                      ],
+                      [
+                        'text'  => 'Starter Pack',
+                        'url'   => '/penjualan/laporan-penjualan/LPsp',
+                        'icon'  => 'briefcase',
+                      ],
+                      [
+                        'text'  => 'Penjualan CVS SP',
+                        'url'   => '/penjualan/laporan-penjualan/Lbeli-cvs-sp',
+                        'icon'  => 'user',
+                      ],
+                      [
+                        'text'  => 'Piutang SP',
+                        'url'   => '/penjualan/laporan-penjualan/LP-piutang-sp',
+                        'icon'  => 'file',
                       ],
                     ],
                   ],
                 ],
               ],
               [
-                'text'    => 'Persediaan',
+                'text'    => 'Pembelian',
+                'icon'    => 'shopping-cart',
                 'submenu' => [
                   [
-                    'text'  => 'MutasiDompul',
-                    'url'   => '#',
+                    'text'    => 'Pembelian Dompul',
+                    'icon'    => 'share',
+                    'submenu' => [
+                      [
+                        'text'  => 'Invoice Dompul',
+                        'icon'  => 'credit-card',
+                        'url'   => '/pembelian/dompul/pembelian-dompul',
+                      ],
+                      [
+                        'text'  =>  'List Invoice Dompul',
+                        'icon'  => 'file',
+                        'url'   => '/pembelian/dompul/list-pembelian-dompul',
+                      ],
+                    ],
                   ],
+                  [
+                    'text'  => 'Pembelian SP',
+                    'icon'  => 'share',
+                    'submenu' => [
+                      [
+                        'text'  => 'Invoice SP',
+                        'icon'  => 'mobile-phone',
+                        'url'   => '/pembelian/sp/pembelian-sp',
+                      ],
+                      [
+                        'text'  => 'List Invoice SP',
+                        'icon'  => 'file',
+                        'url'   => '/pembelian/sp/list-pembelian-sp',
+                      ],
+                    ],
+                  ],
+                  [
+                    'text'  => 'Laporan Pembelian',
+                    'icon'  => 'share',
+                    'submenu' => [
+                      [
+                        'text'  => 'Dompet Pulsa',
+                        'icon'  => 'dollar',
+                        'url'   => '/pembelian/laporan-pembelian/Lbeli-dompul',
+                      ],
+                      [
+                        'text'  => 'Starter Pack',
+                        'icon'  => 'credit-card',
+                        'url'   => '/pembelian/laporan-pembelian/Lbeli-sp',
+                      ],
+                    ],
+                  ],
+
+                ],
+              ],
+              [
+                'text'    => 'Persediaan',
+                'icon'    => 'share',
+                'submenu' => [
+                  [
+                    'text'  => 'Mutasi Stok Dompul',
+                    'icon'  => 'truck',
+                    'url'   => '/persediaan/mutasi-dompul',
+                  ],
+                  [
+                    'text'  => 'Mutasi Stok SP',
+                    'icon'  => 'tags',
+                    'url'   => '/persediaan/mutasi-sp',
+                  ],
+                  [
+                    'text'  => 'Mutasi Stok SP CVS',
+                    'icon'  => 'user',
+                    'url'   => '/persediaan/mutasi-sp-cvs',
+                  ],
+                  [
+                    'text'  => 'Mutasi Stok SP semua CVS',
+                    'icon'  => 'users',
+                    'url'   => '/persediaan/mutasi-sp-semua-cvs',
+                  ],
+                  // [
+                  //   'text'  => 'kartu Stok Dompul',
+                  //   'icon'  => 'truck',
+                  //   'url'   => '/persediaan/mutasi-dompul',
+                  // ],
+                  // [
+                  //   'text'  => 'kartu Stok SP',
+                  //   'icon'  => 'tags',
+                  //   'url'   => '/persediaan/mutasi-sp',
+                  // ],
                 ],
               ],
               [
                 'text'    => 'Upload',
                 'url'     => '/upload/dompul',
+                'icon'    => 'upload',
               ],
             ],
         ],
-        [
-            'text'        => 'Karoseri',
-            'icon'        => 'truck',
-            'submenu'     => [
-              [
-                'text'    => 'SPKC',
-                'icon'    => 'user',
-                'submenu' => [
-                  [
-                      'text'    => 'Permintaan Karoseri',
-                      'url'   => 'karoseri/minta_karoseri',
-                      'icon'    => 'truck',
-                  ],
-                  [
-                      'text'  => 'SPKC',
-                      'url'   => 'karoseri/spkc',
-                      'icon'    => 'user-plus',
-                  ],
-                ],
-              ],
-            ],
-        ],
+        // [
+        //     'text'        => 'Karoseri',
+        //     'icon'        => 'truck',
+        //     'submenu'     => [
+        //       [
+        //         'text'    => 'Transaksi',
+        //         'icon'    => 'money',
+        //         'submenu' => [
+        //           [
+        //               'text'  => 'Penawaran Karoseri',
+        //               'url'   => 'karoseri/minta_karoseri',
+        //               'icon'  => 'truck',
+        //           ],
+        //           [
+        //               'text'  => 'SPKC',
+        //               'url'   => 'karoseri/spkc',
+        //               'icon'  => 'user-plus',
+        //           ],
+        //           [
+        //               'text'  => 'Work order',
+        //               'url'   => 'karoseri/wo',
+        //               'icon'  => 'opencart',
+        //           ],
+        //           [
+        //               'text'  => 'PBB',
+        //               'url'   => 'karoseri/pbb',
+        //               'icon'  => 'server',
+        //           ],
+        //           [
+        //               'text'  => 'SPKPB',
+        //               'url'   => 'karoseri/spkpb',
+        //               'icon'  => 'users',
+        //           ],
+        //           [
+        //               'text'  => 'Kasbon',
+        //               'url'   => 'karoseri/kasbon',
+        //               'icon'  => 'money',
+        //           ],
+        //           [
+        //               'text'  => 'BAP',
+        //               'url'   => 'karoseri/bap',
+        //               'icon'  => 'newspaper-o',
+        //           ],
+        //           [
+        //               'text'  => 'Surat Jalan',
+        //               'url'   => 'karoseri/surat_jalan',
+        //               'icon'  => 'envelope-o',
+        //           ],
+        //         ],
+        //       ],
+        //       [
+        //       'text'    => 'Laporan',
+        //       'icon'    => 'tasks',
+        //       'submenu' => [
+        //         [
+        //             'text'    => 'SPKC',
+        //             'url'   => 'laporan/lap_spkc',
+        //             'icon'    => 'truck',
+        //         ],
+        //         [
+        //             'text'    => 'Penjualan per Customer',
+        //             'url'   => 'laporan/lap_penjualan',
+        //             'icon'    => 'truck',
+        //         ],
+        //         [
+        //             'text'    => 'Penjualan per Unit',
+        //             'url'   => 'laporan/lap_penjualan_unit',
+        //             'icon'    => 'truck',
+        //         ],
+        //         [
+        //             'text'    => 'Progress',
+        //             'icon'    => 'truck',
+        //             'submenu' => [
+        //               [
+        //                   'text'    => 'Progress Unit',
+        //                   'url'   => 'laporan/lap_progress',
+        //                   'icon'    => 'truck',
+        //               ],
+        //               [
+        //                   'text'    => 'Progress Pemborong',
+        //                   'url'   => 'laporan/lap_progress_pb',
+        //                   'icon'    => 'truck',
+        //               ],
+        //               [
+        //               'text'    => 'Detail Pemborong',
+        //               'url'   => 'laporan/lap_progress_detailpb',
+        //               'icon'    => 'truck',
+        //               ],
+        //           ],
+        //         ],
+        //       ],
+        //     ],
+        //
+        //     /*[
+        //         'text'    => 'Produksi',
+        //         'url'   => 'karoseri/qc_tambah',
+        //         'icon'    => 'truck',
+        //       ],*/
+        //     ],
+        // ],
 
         [
             'text'        => 'Master',
             'icon'        => 'tasks',
             'submenu'     => [
               [
-                'text'  => 'bank',
+                'text'  => 'User',
+                'url'   => '/master/user',
+                'icon'  => 'male',
+              ],
+              [
+                'text'  => 'Bank',
                 'url'   => '/master/bank',
                 'icon'  => 'bank',
               ],
               [
-                'text'  => 'produk',
-                'url'   => '/master/produk'
+                'text'  => 'Cara Bayar',
+                'url'   => '/master/cara_bayar',
+                'icon'  => 'money',
               ],
               [
-                'text'  => 'satuan',
+                'text'  => 'PPN',
+                'url'   => '/ppn',
+                'icon'  => 'money',
+              ],
+              [
+                'text'  => 'Satuan',
                 'url'   => '/master/satuan',
+                'icon'  => 'inbox',
               ],
               [
-                'text'  => 'suplier',
+                'text'  => 'Supplier',
                 'url'   => '/master/supplier',
+                'icon'  => 'users',
               ],
               [
-                'text'  => 'customer',
+                'text'  => 'Customer',
                 'url'   => '/customer',
                 'icon'  => 'user',
               ],
               [
-                'text'  => 'gudang',
+                'text'  => 'Gudang',
                 'url'   => '/gudang',
+                'icon'  => 'briefcase',
               ],
               [
-                'text'  => 'lokasi',
+                'text'  => 'Lokasi',
                 'url'   => '/lokasi',
                 'icon'  => 'location-arrow',
               ],
               [
-                'text'  => 'sales',
+                'text'  => 'Sales',
                 'url'   => '/sales',
-                'icon'  => 'user',
+                'icon'  => 'user-plus',
               ],
+              // [
+              //   'text'  => 'Pemborong',
+              //   'url'   => '/pemborong',
+              //   'icon'  => 'users',
+              // ],
               [
-                'text'  => 'pemborong',
-                'url'   => '/pemborong',
-                'icon'  => 'users',
-              ],
-              [
-                'text'  => 'supervisor',
+                'text'  => 'Supervisor',
                 'url'   => '/supervisor',
-                'icon'  => 'user',
+                'icon'  => 'user-secret',
               ],
               [
-                'text'  => 'dompul',
+                'text'  => 'Dompul',
                 'url'   => '/master/dompul',
+                'icon'  => 'dollar',
               ],
               [
-                'text'  => 'harga dompul',
+                'text'  => 'Harga Dompul',
                 'url'   => '/master/harga_dompul',
                 'icon'  => 'money',
               ],
+
               [
-                'text'  => 'harga produk',
+                'text'  => 'SP',
+                'url'   => '/master/produk',
+                'icon'  => 'credit-card',
+              ],
+              [
+                'text'  => 'Harga SP',
                 'url'   => '/master/harga_produk',
                 'icon'  => 'money',
               ],
               [
-                'text'  => 'tipe dompul',
+                'text'  => 'Tipe Dompul',
                 'url'   => '/master/tipe_dompul',
-                'icon'  => 'money',
+                'icon'  => 'tag',
               ],
             ],
         ],
-
-        // 'ACCOUNT SETTINGS',
-        // [
-        //     'text' => 'Profile',
-        //     'url'  => 'admin/settings',
-        //     'icon' => 'user',
-        // ],
-        // [
-        //     'text' => 'Change Password',
-        //     'url'  => 'admin/settings',
-        //     'icon' => 'lock',
-        // ],
     ],
 
     /*

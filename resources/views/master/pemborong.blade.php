@@ -218,6 +218,7 @@
     $(function () {
         $('#pb-table').DataTable({
             serverSide: true,
+            stateSave: true,
             processing: true,
             ajax: '/master-pemborong',
             columns: [

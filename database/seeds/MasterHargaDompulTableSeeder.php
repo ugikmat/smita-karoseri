@@ -70,7 +70,7 @@ class MasterHargaDompulTableSeeder extends Seeder
 
       $hargadompul9 = new HargaDompul();
       $hargadompul9->nama_harga_dompul='DP5';
-      $hargadompul9->tipe_harga_dompul='Sidebar';
+      $hargadompul9->tipe_harga_dompul='SDE';
       $hargadompul9->harga_dompul=5500;
       $hargadompul9->status_harga_dompul='Aktif';
       $hargadompul9->save();
@@ -151,5 +151,75 @@ class MasterHargaDompulTableSeeder extends Seeder
       $hargadompul20->harga_dompul=5450;
       $hargadompul20->status_harga_dompul='Aktif';
       $hargadompul20->save();
+
+      $hargadompul21 = new HargaDompul();
+      $hargadompul21->nama_harga_dompul='DP10';
+      $hargadompul21->tipe_harga_dompul='CVS3';
+      $hargadompul21->harga_dompul=10450;
+      $hargadompul21->status_harga_dompul='Aktif';
+      $hargadompul21->save();
+
+      $hargadompul22 = new HargaDompul();
+      $hargadompul22->nama_harga_dompul='DP5';
+      $hargadompul22->tipe_harga_dompul='SERVER1';
+      $hargadompul22->harga_dompul=5400;
+      $hargadompul22->status_harga_dompul='Aktif';
+      $hargadompul22->save();
+
+      $hargadompul23 = new HargaDompul();
+      $hargadompul23->nama_harga_dompul='DP10';
+      $hargadompul23->tipe_harga_dompul='SERVER1';
+      $hargadompul23->harga_dompul=10400;
+      $hargadompul23->status_harga_dompul='Aktif';
+      $hargadompul23->save();
+
+      $hargadompul24 = new HargaDompul();
+      $hargadompul24->nama_harga_dompul='DP5';
+      $hargadompul24->tipe_harga_dompul='SERVER2';
+      $hargadompul24->harga_dompul=5300;
+      $hargadompul24->status_harga_dompul='Aktif';
+      $hargadompul24->save();
+
+      $hargadompul25 = new HargaDompul();
+      $hargadompul25->nama_harga_dompul='DP10';
+      $hargadompul25->tipe_harga_dompul='SERVER2';
+      $hargadompul25->harga_dompul=10300;
+      $hargadompul25->status_harga_dompul='Aktif';
+      $hargadompul25->save();
+
+      $hargadompul26 = new HargaDompul();
+      $hargadompul26->nama_harga_dompul='DOMPUL';
+      $hargadompul26->tipe_harga_dompul='CVS1';
+      $hargadompul26->harga_dompul=0.985;
+      $hargadompul26->status_harga_dompul='Aktif';
+      $hargadompul26->save();
+
+      $hargadompul27 = new HargaDompul();
+      $hargadompul27->nama_harga_dompul='DOMPUL';
+      $hargadompul27->tipe_harga_dompul='SERVER1';
+      $hargadompul27->harga_dompul=0.985;
+      $hargadompul27->status_harga_dompul='Aktif';
+      $hargadompul27->save();
+
+      $hargadompul28 = new HargaDompul();
+      $hargadompul28->nama_harga_dompul='DOMPUL';
+      $hargadompul28->tipe_harga_dompul='CVS2';
+      $hargadompul28->harga_dompul=0.985;
+      $hargadompul28->status_harga_dompul='Aktif';
+      $hargadompul28->save();
+
+      $hargadompul29 = new HargaDompul();
+      $hargadompul29->nama_harga_dompul='DOMPUL';
+      $hargadompul29->tipe_harga_dompul='CVS3';
+      $hargadompul29->harga_dompul=0.985;
+      $hargadompul29->status_harga_dompul='Aktif';
+      $hargadompul29->save();
+
+      $hargadompul30 = new HargaDompul();
+      $hargadompul30->nama_harga_dompul='DOMPUL';
+      $hargadompul30->tipe_harga_dompul='SERVER2';
+      $hargadompul30->harga_dompul=0.985;
+      $hargadompul30->status_harga_dompul='Aktif';
+      $hargadompul30->save();
     }
 }

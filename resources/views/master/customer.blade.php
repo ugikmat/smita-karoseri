@@ -260,7 +260,9 @@ Karoseri
     $('#customers-table').DataTable({
       serverSide: true,
       processing: true,
-      ajax: '/master-customer',
+      lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
+      stateSave: true,
+      ajax: '/operasional/smita/master-customer',
       columns: [{
           data: 'id_cust'
         },

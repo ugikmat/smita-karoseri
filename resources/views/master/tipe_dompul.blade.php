@@ -3,7 +3,7 @@
 @section('title', 'Tipe Dompul')
 
 @section('content_header')
-<h1>Master TIpe Dompul</h1>
+<h1>Master Tipe Dompul</h1>
 
 @stop @section('css')
 <style>
@@ -59,7 +59,7 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="tipe" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
+                        <input type="text" id="first-name" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
                       </div>
                     </div>
                     <div class="ln_solid"></div>
@@ -114,7 +114,19 @@
                         <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="text" id="tipe" required="required" name="tipe" class="form-control col-md-7 col-xs-12" value="">
+                        <select name="tipe" required="required">
+                          <option value="selected" selected>dompul sekarang</option>
+                          <option value="ds">DS</option>
+                          <option value="cvs">CVS</option>
+                          <option value="hi">HI</option>
+                          <option value="server">SERVER</option>
+                          <option value="sde">SDE</option>
+                          <option value="cvs1">CVS1</option>
+                          <option value="cvs2">CVS2</option>
+                          <option value="cvs3">CVS3</option>
+                          <option value="server1">SERVER1</option>
+                          <option value="server2">SERVER2</option>
+                        </select>
                       </div>
                     </div>
                   <div class="ln_solid"></div>
@@ -163,8 +175,10 @@
   $(function () {
     $('#dompul-table').DataTable({
       serverSide: true,
+      stateSave: true,
+      lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
       processing: true,
-      ajax: '/tipe-dompul-data',
+      ajax: '/operasional/smita/tipe-dompul-data',
       columns: [{
           data: 'id_tipe_dompul'
         },

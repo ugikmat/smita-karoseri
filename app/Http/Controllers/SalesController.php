@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Sales;
+use App\Lokasi;
 use Yajra\Datatables\Datatables;
 
 
@@ -17,7 +18,7 @@ class SalesController extends Controller
      */
      public function __construct()
      {
-         $this->middleware('auth');
+         $this->middleware(['auth','head']);
      }
      /**
       * Display index page.
@@ -26,7 +27,8 @@ class SalesController extends Controller
       */
     public function index()
     {
-        return view('master.sales');
+        $lokasis = Lokasi::all();
+        return view('master.sales',['lokasis'=>$lokasis]);
     }
 
     /**
@@ -50,6 +52,7 @@ class SalesController extends Controller
       $sales = new Sales;
 
       $sales->nm_sales = $request->get('nm_sales');
+      $sales->id_lokasi = $request->get('lokasi');
       $sales->alamat_sales = $request->get('alamat_sales');
       $sales->no_hp = $request->get('no_hp');
       $sales->save();
@@ -111,7 +114,8 @@ class SalesController extends Controller
 
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(Sales::where('status', '1'))
+        return $datatables->eloquent(Sales::where('status', '1')
+                                ->leftJoin('master_lokasis','master_lokasis.id_lokasi','=','master_saless.id_lokasi'))
                           ->addColumn('action', function ($sales) {
                               return
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"

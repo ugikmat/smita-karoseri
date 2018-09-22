@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Permintaan')
+@section('title', 'SPKC')
 
 @section('content_header')
     <h1>Surat Pemesanan Kendaraan Customer</h1>
@@ -29,7 +29,7 @@
             <div class="modal-body">
                <div class="clearfix"></div>
 
-<div class="row">
+<!--<div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
@@ -76,30 +76,40 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
-          </div>
+          </div>-->
         </div>
       </div>
       </section>
 <!-- Modal Tambah -->
 
 <!-- DataTable -->
-<div class="col-xs-12">
-<div class="box">
   <div class="box-header">
   </div><!-- /.box-header -->
   <div class="box-body">
-    <table id="spkc-table" class="table table-bordered table-striped">
+    <table id="spkc-table" class="table table-bordered table-striped table-responsive">
       <thead>
     <tr>
-        <th>No ID</th><!-- /.sebagai ID -->
+        <th>No SPKC</th><!-- /.sebagai ID -->
         <th>Nama Customer</th>
-        <th>Tanggal Permintaan</th>
-        <th>Status</th>
+        <th>Tanggal</th>
+        <th>Status Dokumen</th>
+        <th>Work Order</th>
         <th>Action</th>
     </tr>
     </thead>
+    <tfoot>
+  <tr>
+      <th>No SPKC</th><!-- /.sebagai ID -->
+      <th>Nama Customer</th>
+      <th>Tanggal</th>
+      <th>Status Dokumen</th>
+      <th>Work Order</th>
+      <th>Action</th>
+  </tr>
+</tfoot>
 
 </table>
+
 <!-- DataTable -->
 
 
@@ -112,7 +122,7 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
           </button>
-          <h4 class="modal-title" id="myModalLabel">Edit Permintaan</h4>
+          <h4 class="modal-title" id="myModalLabel">Check SPKC</h4>
         </div>
         <div class="modal-body">
            <div class="clearfix"></div>
@@ -125,6 +135,14 @@
       <div class="x_content">
         <br />
         <form action="#" class="form-horizontal form-label-left">
+
+          <div class="form-group tanggalacc">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal<span class="required"></span></label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="tanggal_acc" name="tanggal_acc" type="date" class="ferry ferry-from" readonly>
+              </div>
+            </div>
+
           <div class="form-group namacustomeracc">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Customer <span class="required"></span>
             </label>
@@ -139,6 +157,13 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="text" id="nm_perusahaan_acc" required="required" name="nm_perusahaan_acc" class="form-control col-md-7 col-xs-12" readonly>
                 </div>
+            </div>
+
+            <div class="form-group alamatacc">
+              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Alamat <span class="required"></span></label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="alamat_cust_acc" class="form-control col-md-7 col-xs-12" name="alamat_cust_acc" type="text" readonly>
+              </div>
             </div>
 
           <div class="form-group jabatanacc">
@@ -184,31 +209,29 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Cara Pembayaran <span class="required"></span>
                 </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input id="id_bank_acc" class="form-control col-md-7 col-xs-12" name="id_bank_acc" type="text" readonly>
+                    <input id="cara_bayar_acc" class="form-control col-md-7 col-xs-12" name="cara_bayar_acc" type="text" readonly>
                   </div>
                 </div>
 
             <!-- textarea -->
             <div class="form-group keteranganacc">
-              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Keterangan <span class="required"></span></label>
+              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Detail Spesifikasi <span class="required"></span></label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <textarea id="ket_acc" name="ket_acc" class="form-control" rows="3" placeholder="Keterangan ..."readonly></textarea>
                 </div>
               </div>
+              <div class="form-group berkas">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">File<span class="required"></span>
+                  </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input id="download" name="download" class="col-md-8 col-xs-12" type="text" readonly>
+                      <a href="" target="_blank" id="unduh" type="submit" name="unduh" class="btn btn-warning"><i class="glyphicon glyphicon-download"></i>Unduh File</a>
+                    </div>
+                  </div>
 
-          <div class="form-group alamatacc">
-            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Alamat <span class="required"></span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <input id="alamat_cust_acc" class="form-control col-md-7 col-xs-12" name="alamat_cust_acc" type="text" readonly>
-            </div>
-          </div>
 
-          <div class="form-group tanggalacc">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal<span class="required"></span></label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="tanggal_acc" name="tanggal_acc" type="date" class="ferry ferry-from" readonly>
-              </div>
-            </div>
+
+
 
           <div class="ln_solid"></div>
           <!-- BUAT ACC ATAU TIDAK -->
@@ -232,6 +255,65 @@
       </div>
       </section>
             <!-- modals-edit -->
+
+            <section class="content-header">
+              <div class="modal fade bs-example-modal-lg" id='createWO' data-target="#modal2" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                      </button>
+                      <h4 class="modal-title" id="myModalLabel">Create WO</h4>
+                    </div>
+                    <div class="modal-body">
+                       <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <form id="formWO" action="" class="form-horizontal form-label-left" method="post">
+                      @csrf
+                      @method('put')
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Supervisor<span class="required"></span>
+                          </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <select id="id_spv" required name="id_spv" class="form-control col-md-7 col-xs-12">
+                                <option selected disabled value="">Pilih Supervisor</option>
+                                @foreach ($supervisorarray as $data)
+                                 <option value="{{$data->id_spv}}">{{$data->nm_spv}}</option>
+                                @endforeach
+                              </select>
+                            </div>
+                          </div>
+
+
+                      <div class="ln_solid"></div>
+                      <!-- BUAT ACC ATAU TIDAK -->
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                          <input type="submit" class="btn btn-success" Value="Create WO">
+                          {{-- <button type="button" class="btn btn-primary" data-dismiss="modal">Simpan</button> --}}
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </section>
+
 </div>
 
 <!--Modal Hapus-->
@@ -261,6 +343,7 @@
 <script>
     $(function () {
         $('#spkc-table').DataTable({
+            responsive: true,
             serverSide: true,
             processing: true,
             ajax: '/karoseri-spkc',
@@ -269,6 +352,7 @@
                 {data: 'nm_cust'},
                 {data: 'tanggal'},
                 {data: 'status'},
+                {data: 'statuswo'},
                 {data: 'action', orderable: false, searchable: false}
             ]
         });
@@ -284,7 +368,8 @@
   var harga = button.data('harga')
   var total = button.data('total')
   var ket = button.data('ket')
-  var bank = button.data('bank')
+  var berkas = button.data('berkas')
+  var carabayar = button.data('carabayar')
   var alamat = button.data('alamat')
   var tanggal = button.data('tanggal')
   var status= button.data('status')
@@ -295,8 +380,9 @@
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
   $('#jenis_karoseri_acc').val(jenis)
-  $('#id_bank_acc').val(bank)
+  $('#cara_bayar_acc').val(carabayar)
   $('#print').attr('href', `/printKu/`+id);
+  $('#unduh').attr('href', `/unduh/`+berkas);
   //$('#setuju').attr('href', `/permintaan/${id}`);
   modal.find('.modal-body .namacustomeracc input').val(name)
   modal.find('.modal-body .namaperusahaanacc input').val(namep)
@@ -309,6 +395,21 @@
   modal.find('.modal-body .alamatacc input').val(alamat)
   modal.find('.modal-body .tanggalacc input').val(tanggal)
   modal.find('.modal-body .status input').val(status)
+  modal.find('.modal-body .berkas input').val(berkas)
+  })
+
+  $('#createWO').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var name = button.data('name')// Extract info from data-*
+  var id = button.data('id')
+
+
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  //$('#setuju').attr('href', `/permintaan/${id}`);
+  $('#formWO').attr('action', `/spkc/${id}`);
+  modal.find('.modal-body .namacustomeracc input').val(name)
   })
 
   $('#deleteModal').on('show.bs.modal', function (event) {

@@ -16,7 +16,7 @@ class TipeDompulController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','head']);
     }
     /**
      * Display a listing of the resource.
@@ -85,6 +85,7 @@ class TipeDompulController extends Controller
     {
         $tipeDompul = TipeDompul::where('id_tipe_dompul',$id)->first();
         $tipeDompul->tipe_dompul = $request->get('tipe');
+        $tipeDompul->status_tipe_dompul = "Aktif";
         $tipeDompul->save();
         return redirect('/master/tipe_dompul');
     }

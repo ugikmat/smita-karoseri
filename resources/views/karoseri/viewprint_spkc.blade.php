@@ -88,8 +88,8 @@ bootstrap.min.css') }} "rel="stylesheet">
                  <tr>
                  <td style="padding-left:10px" width="50px" >No.SPK</td>
                  <td width="8px">:</td>
-                 <td width="500px"> {{$data['id_spkc']}}/SPK/VII/2018</td>
-                 <td><label>{{$data['tanggal']}}<br><br></td>
+                 <td width="500px"> {{$data['id_spkc']}}/SPK/{{$rm}}/{{$thn}}</td>
+                 <td><label>{{$tgl}}<br><br></td>
                  </tr>
 
                  <tr>
@@ -138,7 +138,7 @@ bootstrap.min.css') }} "rel="stylesheet">
                  <tr>
                  <td style="padding-left:10px" width="50px" >Harga/unit</td>
                  <td width="5px">:</td>
-                 <td width="500px"><label>Rp.</label>{{$data['harga_unit']}}</td>
+                 <td width="500px"><label>Rp.</label>{{number_format($data['harga_unit']).""}}</td>
                  <td></td>
                  </tr>
 
@@ -152,21 +152,21 @@ bootstrap.min.css') }} "rel="stylesheet">
                  <tr>
                  <td style="padding-left:10px" width="50px">Total</td>
                  <td width="5px">:</td>
-                 <td width="500px"><label>Rp.</label>{{$data['harga_total']}}</td>
+                 <td width="500px"><label>Rp.</label>{{number_format($data['harga_total']).""}}</td>
                  <td></td>
                  </tr>
 
                  <tr>
-                 <td style="padding-left:10px" width="50px" >Bank</td>
+                 <td style="padding-left:10px" width="50px" >Cara Pembayaran</td>
                  <td width="5px">:</td>
-                 <td width="500px">{{$data['nama']}}</td>
+                 <td width="500px">{{$data['keterangan']}}</td>
                  <td></td>
                  </tr>
 
                  <tr>
-                 <td style="padding-left:10px" width="50px" >Keterangan</td>
+                 <td style="padding-left:10px" width="50px" >Detail Spesifikasi</td>
                  <td width="5px">:</td>
-                 <td width="500px">{{$data['ket']}}</td>
+                 <td width="500px">{!!$data['ket']!!}</td>
                  <td></td>
                  </tr>
 

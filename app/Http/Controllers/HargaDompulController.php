@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\HargaDompul;
+use App\TipeDompul;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
 
@@ -18,7 +19,7 @@ class HargaDompulController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','kasir']);
     }
     /**
      * Display a listing of the resource.
@@ -27,7 +28,8 @@ class HargaDompulController extends Controller
      */
     public function index()
     {
-        return view('master.harga_dompul');
+        $tipes = TipeDompul::where('status_tipe_dompul','Aktif')->get();
+        return view('master.harga_dompul',['tipes'=>$tipes]);
     }
 
     /**

@@ -11,7 +11,7 @@
     'boxed' => 'layout-boxed',
     'fixed' => 'fixed',
     'top-nav' => 'layout-top-nav'
-][config('adminlte.layout')] : '') . (config('adminlte.collapse_sidebar') ? ' sidebar-collapse ' : ''))
+][config('adminlte.layout')] : '') . (config('adminlte.collapse_sidebar') ? ' ' : 'sidebar-collapse '))
 
 @section('body')
     <div class="wrapper">
@@ -57,6 +57,11 @@
                 <div class="navbar-custom-menu">
 
                     <ul class="nav navbar-nav">
+                      <li>
+                        <a href="/user/change_password">
+                          <i class=""> Change Password</i>
+                        </a>
+                      </li>
                         <li>
                             @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
                                 <a href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">
@@ -142,7 +147,7 @@
 {{-- <script>
   $.widget.bridge('uibutton', $.ui.button);
 </script> --}}
-{{-- 
+{{--
 <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="assets/plugins/morris/morris.min.js"></script>
@@ -186,4 +191,5 @@
   <!-- AdminLTE App -->
   <script src="assets/dist/js/app.min.js"></script>
   <!-- AdminLTE for demo purposes -->
-  <script src="assets/dist/js/demo.js"></script> --}}
+  <script src="assets/dist/js/demo.js"></script>
+   --}}

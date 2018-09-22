@@ -19,7 +19,9 @@
       <th>Nama Sub Master Dompul</th>
       <th>Tipe Dompul</th>
       <th>Status</th>
+      @if(Auth::user()->level_user!='Kasir')
       <th>Action</th>
+      @endif
     </tr>
   </thead>
   <tfoot>
@@ -239,7 +241,8 @@
     $('#dompul-table').DataTable({
       serverSide: true,
       processing: true,
-      ajax: '/dompul-data',
+      stateSave: true,
+      ajax: '/operasional/smita/dompul-data',
       columns: [{
           data: 'id_dompul'
         },
@@ -261,11 +264,13 @@
         {
           data: 'status_sub_master_dompul'
         },
+        @if(Auth::user()->level_user!='Kasir')
         {
           data: 'action',
           orderable: false,
           searchable: false
         }
+        @endif
       ],
       initComplete: function () {
         this.api().columns().every(function () {

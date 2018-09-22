@@ -168,7 +168,8 @@
       serverSide: true,
       processing: true,
       responsive: true,
-      ajax: '/bank-data',
+      stateSave: true,
+      ajax: '/operasional/smita/bank-data',
       columns: [{
           data: 'id_bank'
         },

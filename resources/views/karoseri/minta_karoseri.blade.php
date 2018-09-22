@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Permintaan')
+@section('title', 'Penawaran')
 
 @section('content_header')
-    <h1>Permintaan Karoseri</h1>
+    <h1>Penawaran Karoseri</h1>
 
 @stop
 
@@ -11,12 +11,13 @@
 
 <ol class="breadcrumb">
   <li><a href="#"><i class="fa fa-truck"></i> Karoseri</a></li>
-  <li class="active">Permintaan Karoseri</li>
+  <li class="active">Penawaran Karoseri</li>
 </ol>
 
 <!-- Modal Tambah -->
 <section class="content-header">
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">Tambah</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">Buat Penawaran Baru</button>
+
       <div class="modal fade bs-example-modal-lg" id='modal1' tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -24,7 +25,7 @@
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
               </button>
-              <h4 class="modal-title" id="myModalLabel">Tambah Permintaan</h4>
+              <h4 class="modal-title" id="myModalLabel">Tambah Penawaran</h4>
             </div>
             <div class="modal-body">
                <div class="clearfix"></div>
@@ -38,8 +39,15 @@
       <div class="x_content">
         <br />
 
-        <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/permintaan">
+        <form method="post" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data" action="/permintaan">
           @csrf
+
+          <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal<span class="required"></span></label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="tanggal" name="tanggal" type="date" class="ferry ferry-from">
+              </div>
+            </div>
 
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Customer <span class="required"></span>
@@ -63,6 +71,13 @@
                 </div>
             </div>
 
+            <div class="form-group">
+              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Alamat <span class="required"></span></label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="alamat_cust" class="form-control col-md-7 col-xs-12" name="alamat_cust" type="text" readonly>
+              </div>
+            </div>
+
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jabatan<span class="required"></span>
               </label>
@@ -75,8 +90,8 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jenis Karoseri <span class="required"></span>
               </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select id="jenis_karoseri" required name="jenis_karoseri" class="form-control col-md-7 col-xs-12">
-                        <option selected disabled value="1">Pilih Jenis Karoseri</option>
+                    <select id="jenis_karoseri"  name="jenis_karoseri" class="form-control col-md-7 col-xs-12" required>
+                        <option selected disabled value="">Pilih Jenis Karoseri</option>
                         <option value="Wings Box">Wings Box</option>
                         <option value="Fix Side">Fix Side</option>
                         <option value="Flat Deck">Flat Deck</option>
@@ -108,15 +123,20 @@
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">PPN <span class="required"></span>
                 </label>
-                  <div class="checkbox">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select id="id_ppn" name="id_ppn" class="form-control col-md-7 col-xs-12">
+                              <option selected disabled value="">Pilih PPN</option>
+                              @foreach ($ppnarray as $data)
+                               <option value="{{ $data->id_ppn }}">{{ $data->jenis_ppn }}</option>
+                              @endforeach
+                          </select>
                         <label>
+                          Centang box dibawah jika Field PPN diisi <br>
                           <input id="ppn" name="ppn" type="checkbox" class="ppn">
-                          <input id="ppnh" name="ppnh" type="text" class="ppn" hidden>
+                          <input id="ppnh" name="ppnh" type="hidden" class="ppnh">
                         </label>
                     </div>
                   </div>
-                </div>
             <!-- checkbox -->
 
             <div class="form-group">
@@ -130,10 +150,10 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Cara Pembayaran <span class="required"></span>
                 </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select id="id_bank" required name="id_bank" class="form-control col-md-7 col-xs-12">
-                      <option selected disabled value="">Pilih BANK</option>
-                      @foreach ($bankarray as $data)
-                       <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                    <select id="cara_bayar" required name="cara_bayar" class="form-control col-md-7 col-xs-12">
+                      <option selected disabled value="">Pilih Cara Pembayaran</option>
+                      @foreach ($carabayararray as $data)
+                       <option value="{{$data->id}}">{{$data->keterangan}}</option>
                       @endforeach
                     </select>
                   </div>
@@ -141,25 +161,21 @@
 
             <!-- textarea -->
             <div class="form-group">
-              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Keterangan <span class="required"></span></label>
+              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Detail Spesifikasi <span class="required"></span></label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <textarea id="ket" name="ket" class="form-control" rows="3" placeholder="Keterangan ..."></textarea>
                 </div>
               </div>
 
-          <div class="form-group">
-            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Alamat <span class="required"></span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <input id="alamat_cust" class="form-control col-md-7 col-xs-12" name="alamat_cust" type="text" readonly>
-            </div>
-          </div>
+
 
           <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal<span class="required"></span></label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="tanggal" name="tanggal" type="date" class="ferry ferry-from">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Upload File <span class="required"></span>
+              </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input id="file" name="file" type="file" required>
+                </div>
               </div>
-            </div>
 
           <div class="ln_solid"></div>
           <div class="form-group">
@@ -185,8 +201,6 @@
 <!-- Modal Tambah -->
 
 <!-- DataTable -->
-<div class="col-xs-12">
-<div class="box">
   <div class="box-header">
   </div><!-- /.box-header -->
   <div class="box-body">
@@ -195,11 +209,22 @@
     <tr>
         <th>No ID</th><!-- /.sebagai ID -->
         <th>Nama Customer</th>
-        <th>Tanggal Permintaan</th>
+        <th>Tanggal Penawaran</th>
+        <th>Dokumen</th>
         <th>Status</th>
         <th>Action</th>
     </tr>
     </thead>
+    <tfoot>
+  <tr>
+      <th>No ID</th><!-- /.sebagai ID -->
+      <th>Nama Customer</th>
+      <th>Tanggal Penawaran</th>
+      <th>Dokumen</th>
+      <th>Status</th>
+      <th>Action</th>
+  </tr>
+</tfoot>
 </table>
 <!-- DataTable -->
 
@@ -213,7 +238,7 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
           </button>
-          <h4 class="modal-title" id="myModalLabel">Edit Permintaan</h4>
+          <h4 class="modal-title" id="myModalLabel">Edit Penawaran</h4>
         </div>
         <div class="modal-body">
            <div class="clearfix"></div>
@@ -229,6 +254,12 @@
         <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
           @csrf
           @method('put')
+          <div class="form-group tanggal">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal<span class="required"></span></label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="tanggal_upt" name="tanggal_upt" type="date" class="ferry ferry-from" required>
+              </div>
+            </div>
 
           <div class="form-group namacustomer">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Customer <span class="required"></span>
@@ -244,6 +275,13 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="text" id="nm_perusahaan_upt" required="required" name="nm_perusahaan_upt" class="form-control col-md-7 col-xs-12">
                 </div>
+            </div>
+
+            <div class="form-group alamat">
+              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Alamat <span class="required"></span></label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="alamat_cust_upt" class="form-control col-md-7 col-xs-12" name="alamat_cust_upt" type="text" readonly>
+              </div>
             </div>
 
           <div class="form-group jabatan">
@@ -288,7 +326,7 @@
             </div>
 
 
-            <!-- checkbox -->
+            <!-- checkbox
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">PPN <span class="required"></span>
                 </label>
@@ -301,7 +339,7 @@
                     </div>
                   </div>
                 </div>
-            <!-- checkbox -->
+            checkbox -->
 
             <div class="form-group hargatotal">
               <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Harga Total <span class="required"></span></label>
@@ -310,40 +348,37 @@
               </div>
             </div>
 
-            <div class="form-group carabayar">
+            <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Cara Pembayaran <span class="required"></span>
                 </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select id="id_bank_upt" required name="id_bank_upt" class="form-control col-md-7 col-xs-12">
-                      <option selected disabled value="">Pilih BANK</option>
-                      @foreach ($bankarray as $data)
-                       <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                    <select id="cara_bayar_upt" required name="cara_bayar_upt" class="form-control col-md-7 col-xs-12">
+                      <option selected disabled value="">Pilih Cara Pembayaran</option>
+                      @foreach ($carabayararray as $data)
+                       <option value="{{$data->id}}">{{$data->keterangan}}</option>
                       @endforeach
                     </select>
                   </div>
                 </div>
 
+
             <!-- textarea -->
             <div class="form-group keterangan">
-              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Keterangan <span class="required"></span></label>
+              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Detail Spesifikasi <span class="required"></span></label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <textarea id="ket_upt" name="ket_upt" class="form-control" rows="3" placeholder="Keterangan ..."></textarea>
                 </div>
               </div>
 
-          <div class="form-group alamat">
-            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Alamat <span class="required"></span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <input id="alamat_cust_upt" class="form-control col-md-7 col-xs-12" name="alamat_cust_upt" type="text" readonly>
-            </div>
-          </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">File <span class="required"></span>
+                  </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input id="file_upt" name="file_upt" type="file">
+                    </div>
+                  </div>
 
-          <div class="form-group tanggal">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal<span class="required"></span></label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="tanggal_upt" name="tanggal_upt" type="date" class="ferry ferry-from">
-              </div>
-            </div>
+
 
           <div class="ln_solid"></div>
           <div class="form-group">
@@ -374,7 +409,7 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
           </button>
-          <h4 class="modal-title" id="myModalLabel">Edit Permintaan</h4>
+          <h4 class="modal-title" id="myModalLabel">Aksi Penawaran</h4>
         </div>
         <div class="modal-body">
            <div class="clearfix"></div>
@@ -389,6 +424,12 @@
 
         <form id="accForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="">
           @csrf
+          <div class="form-group tanggalacc">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal<span class="required"></span></label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="tanggal_acc" name="tanggal_acc" type="date" class="ferry ferry-from" readonly>
+              </div>
+            </div>
 
           <div class="form-group namacustomeracc">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Customer <span class="required"></span>
@@ -404,6 +445,13 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="text" id="nm_perusahaan_acc" required="required" name="nm_perusahaan_acc" class="form-control col-md-7 col-xs-12" readonly>
                 </div>
+            </div>
+
+            <div class="form-group alamatacc">
+              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Alamat <span class="required"></span></label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="alamat_cust_acc" class="form-control col-md-7 col-xs-12" name="alamat_cust_acc" type="text" readonly>
+              </div>
             </div>
 
           <div class="form-group jabatanacc">
@@ -449,31 +497,30 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Cara Pembayaran <span class="required"></span>
                 </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input id="id_bank_acc" class="form-control col-md-7 col-xs-12" name="id_bank_acc" type="text" readonly>
+                    <input id="cara_bayar_acc" class="form-control col-md-7 col-xs-12" name="cara_bayar_acc" type="text" readonly>
                   </div>
                 </div>
 
             <!-- textarea -->
             <div class="form-group keteranganacc">
-              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Keterangan <span class="required"></span></label>
+              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Detail Spesifikasi <span class="required"></span></label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <textarea id="ket_acc" name="ket_acc" class="form-control" rows="3" placeholder="Keterangan ..."readonly></textarea>
+                    <textarea id="ket_acc" name="ket_acc" class="form-control" rows="3" placeholder="Keterangan ..." readonly></textarea>
                 </div>
               </div>
 
-          <div class="form-group alamatacc">
-            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Alamat <span class="required"></span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <input id="alamat_cust_acc" class="form-control col-md-7 col-xs-12" name="alamat_cust_acc" type="text" readonly>
-            </div>
-          </div>
+              <div class="form-group berkas">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">File<span class="required"></span>
+                  </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input id="download" name="download" class="col-md-8 col-xs-12" type="text" readonly>
+                      <a href="" target="_blank" id="unduh" type="submit" name="unduh" class="btn btn-warning"><i class="glyphicon glyphicon-download"></i>Unduh File</a>
+                    </div>
+                  </div>
 
-          <div class="form-group tanggalacc">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal<span class="required"></span></label>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="tanggal_acc" name="tanggal_acc" type="date" class="ferry ferry-from" readonly>
-              </div>
-            </div>
+
+
+
 
           <div class="ln_solid"></div>
           <!-- BUAT ACC ATAU TIDAK -->
@@ -534,6 +581,7 @@
                 {data: 'id_spkc'},
                 {data: 'nm_cust'},
                 {data: 'tanggal'},
+                {data: 'dokumen'},
                 {data: 'status'},
                 {data: 'action', orderable: false, searchable: false}
             ]
@@ -566,6 +614,7 @@ $(document).ready(function(){
                   $(".sum").keyup(function(){
                     unit = $('.jml').val()
                     harga = $('.hrg').val()
+                    noppn = $('.ppnh').val(0)
 
                     hasil = unit * harga
                     $(".ht").val(hasil)
@@ -583,12 +632,14 @@ $(document).ready(function(){
                     ppn = (tot * 0.1) + tot
                     noppn = tot - (v * x)
 
-                    if($(this).is(':checked'))
+                    if($(this).is(':checked')){
                     $(".ht").val(ppn)
-                    //$("#ppnh").val(ppn10)
-                    else
+                    $(".ppnh").val(ppn10)
+                    }
+                    else{
                     $(".ht").val(noppn)
-                    //$("#ppnh").val(ppn11)
+                    $(".ppnh").val(0)
+                    }
 
                   })
 
@@ -615,6 +666,9 @@ $(document).ready(function(){
 </script>
 
 <script>
+CKEDITOR.replace( 'ket' );
+CKEDITOR.replace( 'ket_upt' );
+
   $('#editModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
   var name = button.data('name')// Extract info from data-* attributes
@@ -625,7 +679,7 @@ $(document).ready(function(){
   var harga = button.data('harga')
   var total = button.data('total')
   var ket = button.data('ket')
-  var bank = button.data('bank')
+  var carabayar = button.data('carabayar')
   var alamat = button.data('alamat')
   var tanggal = button.data('tanggal')
   var status= button.data('status')
@@ -634,7 +688,7 @@ $(document).ready(function(){
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
   $('#jenis_karoseri_upt').val(jenis)
-  $('#id_bank_upt').val(bank)
+  $('#cara_bayar_upt').val(carabayar)
   $('#editForm').attr('action', `/permintaan/${id}`);
   //$('#setuju').attr('href', `/permintaan/${id}`);
   modal.find('.modal-body .namacustomer input').val(name)
@@ -648,10 +702,12 @@ $(document).ready(function(){
   modal.find('.modal-body .alamat input').val(alamat)
   modal.find('.modal-body .tanggal input').val(tanggal)
   modal.find('.modal-body .status input').val(status)
-  })
-</script>
 
-<script>
+    CKEDITOR.instances.ket_upt.setData(ket,function()  {
+      this.checkDirty();
+    });
+  })
+
   $('#accModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
   var name = button.data('name')// Extract info from data-* attributes
@@ -662,8 +718,9 @@ $(document).ready(function(){
   var harga = button.data('harga')
   var total = button.data('total')
   var ket = button.data('ket')
-  var bank = button.data('bank')
+  var carabayar = button.data('carabayar')
   var alamat = button.data('alamat')
+  var berkas = button.data('berkas')
   var tanggal = button.data('tanggal')
   var status= button.data('status')
   var id = button.data('id')
@@ -671,8 +728,9 @@ $(document).ready(function(){
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
   $('#jenis_karoseri_acc').val(jenis)
-  $('#id_bank_acc').val(bank)
+  $('#cara_bayar_acc').val(carabayar)
   $('#accForm').attr('action', `/accept/${id}`);
+  $('#unduh').attr('href', `/unduh/`+berkas);
   //$('#setuju').attr('href', `/permintaan/${id}`);
   modal.find('.modal-body .namacustomeracc input').val(name)
   modal.find('.modal-body .namaperusahaanacc input').val(namep)
@@ -685,10 +743,9 @@ $(document).ready(function(){
   modal.find('.modal-body .alamatacc input').val(alamat)
   modal.find('.modal-body .tanggalacc input').val(tanggal)
   modal.find('.modal-body .status input').val(status)
+  modal.find('.modal-body .berkas input').val(berkas)
   })
-</script>
 
-<script>
   $('#deleteModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
   var id = button.data('id')// Extract info from data-* attributes
@@ -696,7 +753,7 @@ $(document).ready(function(){
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   $('#deleteForm').attr('action', `/permintaan/${id}`);
   })
-</script>
 
+</script>
 
 @stop

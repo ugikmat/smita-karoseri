@@ -17,7 +17,7 @@ class ProdukController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','kasir']);
     }
     /**
      * Display a listing of the resource.
@@ -58,7 +58,7 @@ class ProdukController extends Controller
         $produk->tarif_pajak = $request->get('pajak');
         $produk->diskon = $request->get('diskon');
         $produk->komisi = $request->get('komisi');
-        $produk->status_produk = "tersedia";
+        $produk->status_produk = 1;
         $produk->save();
         return redirect('master/produk');
     }
@@ -124,7 +124,7 @@ class ProdukController extends Controller
     public function destroy($id)
     {
         $produk = produk::where('id_produk',$id)->first();
-        $produk->status_produk = "tidak tersedia";
+        $produk->status_produk = 0;
         $produk->save();
         return redirect('master/produk');
     }
@@ -137,7 +137,7 @@ class ProdukController extends Controller
      */
     public function data(Datatables $datatables)
     {
-        return $datatables->eloquent(produk::where('status_produk', "tersedia"))
+        return $datatables->eloquent(produk::where('status_produk', 1))
                           ->addColumn('action', function ($produk) {
                               return
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$produk->id_produk.'" data-name="'.$produk->nama_produk.'"

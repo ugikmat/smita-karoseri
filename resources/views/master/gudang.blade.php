@@ -200,7 +200,8 @@
     $('#gdg-table').DataTable({
       serverSide: true,
       processing: true,
-      ajax: '/master-gudang',
+      stateSave: true,
+      ajax: '/operasional/smita/master-gudang',
       columns: [{
           data: 'id_gudang'
         },
@@ -231,7 +232,7 @@
 </script>
 
   <script>
-  
+
   $('#editModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var name = button.data('name')// Extract info from data-* attributes
