@@ -45,7 +45,7 @@ class ListPenjualanSPController extends Controller
         return view('penjualan.sp.list-invoice-sp',['lokasis'=>$lokasis,'saless'=>$saless]);
     }
 
-    public function verif($id){
+    public function verif(Request $request,$id){
         PenjualanProduk::where('id_penjualan_sp',$id)
                         ->update(['status_penjualan'=>1
                         ]);
