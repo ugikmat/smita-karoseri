@@ -116,7 +116,7 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="deleteForm" action="/pembelian/sp/list/delete" method="POST">
+      <form id="deleteForm" action="/operasional/smita/pembelian/sp/list/delete" method="POST">
         @csrf @method('put')
         <input type="hidden" name="id" value="" id="delete_id_pembelian">
         <!-- Modal Header -->

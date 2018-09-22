@@ -13,7 +13,7 @@ use Carbon\Carbon;
 
 class StockCVSSpController extends Controller
 {
-    
+
     /**
      * Create a new controller instance.
      *
@@ -25,7 +25,7 @@ class StockCVSSpController extends Controller
     }
     public function index(){
         $saless = Sales::where('status',1)->get();
-        return view('persediaan.mutasi-sp-cvs',['saless'=>$saless]);
+        return view('persediaan.sp.mutasi-sp-cvs',['saless'=>$saless]);
     }
     /**
      * Process dataTable ajax response.
@@ -36,12 +36,12 @@ class StockCVSSpController extends Controller
     public function data(Datatables $datatables,$sales,$tgl_awal,$tgl_akhir)
     {
         // $data = DB::table('temp_detail_penjualan_sps')->get();
-        
+
         $tgl_awal = Carbon::parse($tgl_awal);
-        $tgl_awal = $tgl_awal->format('Y-m-d');    
-        
+        $tgl_awal = $tgl_awal->format('Y-m-d');
+
         $tgl_akhir = Carbon::parse($tgl_akhir);
-        $tgl_akhir = $tgl_akhir->format('Y-m-d');    
+        $tgl_akhir = $tgl_akhir->format('Y-m-d');
         $stokSP = DB::table('kartu_stok_sps')->select(DB::raw("kartu_stok_sps.id_produk as nama,
         COALESCE((SELECT sum(awal.masuk)-sum(awal.keluar)
 FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi < '{$tgl_awal}' AND awal.id_produk=nama),0) AS stok_awal,

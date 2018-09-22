@@ -264,10 +264,10 @@ Route::get('/penjualan/laporan-penjualan/LPdompul-cvs', 'LaporanCvsDompulControl
 Route::post('/get_laporan_dompul_cvs/{tgl}/{sales}', 'LaporanCvsDompulController@getData');
 Route::get('/laporan-penjualan/dompul-cvs/{tgl_penjualan}/{sales}', 'LaporanCvsDompulController@data');
 //Persediaan
-Route::get('/persediaan/mutasi-dompul', 'StokDompulController@index');
+Route::get('/persediaan/dompul/mutasi-dompul', 'StokDompulController@index');
 Route::get('/stok-dompul/data/{tgl_awal}/{tgl_akhir}', 'StokDompulController@data');
 
-Route::get('/persediaan/mutasi-sp', 'StokSpController@index');
+Route::get('/persediaan/sp/mutasi-sp', 'StokSpController@index');
 Route::get('/stok-sp/data/{tgl_awal}/{tgl_akhir}', 'StokSpController@data');
 Route::get('/stok-sp/data/{sales}/{tgl_awal}/{tgl_akhir}', 'StockCVSSpController@data');
 //upload
@@ -484,9 +484,9 @@ Route::get('/laporan/lap_progress_detailpb', function() {
 Route::get('/penjualan/laporan-penjualan/LP-piutang-sp','LaporanPiutangSpController@index');
 Route::get('/laporan-piutang/sp/{tgl_penjualan}', 'LaporanPiutangSpController@data');
 
-Route::get('/persediaan/mutasi-sp-cvs', 'StockCVSSpController@index');
+Route::get('/persediaan/sp/mutasi-sp-cvs', 'StockCVSSpController@index');
 
-Route::get('/persediaan/mutasi-sp-semua-cvs', 'StokCVSSpAllController@index');
+Route::get('/persediaan/sp/mutasi-sp-semua-cvs', 'StokCVSSpAllController@index');
 Route::get('/stok-sp/all/data/{tgl_awal}/{tgl_akhir}', 'StokCVSSpAllController@data');
 
 Route::get('/persediaan/sp/pengambilan-sp', function() {
