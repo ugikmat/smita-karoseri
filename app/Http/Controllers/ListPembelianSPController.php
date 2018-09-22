@@ -194,7 +194,7 @@ class ListPembelianSPController extends Controller
                               if ($pembelianSP->status_pembelian==0) {
                                   return
                                     '<a class="btn btn-xs btn-primary"
-                                    href="/pembelian/sp/list-invoice/edit/'.$pembelianSP->id_pembelian_sp.'">
+                                    href="/operasional/smita/pembelian/sp/list-invoice/edit/'.$pembelianSP->id_pembelian_sp.'">
                                     <i class="glyphicon glyphicon-edit"></i> Edit
                                     </a>
                                     <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$pembelianSP->id_pembelian_sp.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>
@@ -202,7 +202,7 @@ class ListPembelianSPController extends Controller
                               } else {
                                   return
                                     '<a class="btn btn-xs btn-primary"
-                                    href="/pembelian/sp/list-invoice/edit/'.$pembelianSP->id_pembelian_sp.'">
+                                    href="/operasional/smita/pembelian/sp/list-invoice/edit/'.$pembelianSP->id_pembelian_sp.'">
                                     <i class="glyphicon glyphicon-edit"></i> Lihat
                                     </a>
                                     <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$pembelianSP->id_pembelian_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
