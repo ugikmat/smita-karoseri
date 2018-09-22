@@ -71,7 +71,6 @@
         <option value="Canvaser">Canvaser</option>
         <option value="Kasir">Kasir</option>
         <option value="Supervisor">Supervisor</option>
-        <option value="Kepala Cabang">Kepala Cabang</option>
         <option value="Keuangan">Super Admin</option>
       </select>
 
