@@ -164,7 +164,7 @@ class PenjualanSPController extends Controller
         $lokasi = $request->get('lokasi');
         session(['id_sales'=>$penjualanSp->id_sales,'id_cust'=>$penjualanSp->id_customer,'bank-sp'=>$request->get('bank-sp'),'lokasi_penjualan'=>$request->get('lokasi')]);
         // return view('/penjualan/sp/invoice-sp-2',['penjualanSp'=>$penjualanSp,'sales'=>$sales,'customer'=>$customer,'bank'=>$bank,'data'=>$detailPenjualan]);
-        return redirect("/penjualan/sp/invoice-sp/edit/{$penjualanSp->id_temp_penjualan_sp}/{$lokasi}");
+        return redirect("/operasional/smita/penjualan/sp/invoice-sp/edit/{$penjualanSp->id_temp_penjualan_sp}/{$lokasi}");
     }
 
     public function showEdit($id,$lokasi){
@@ -412,7 +412,7 @@ class PenjualanSPController extends Controller
         Schema::dropIfExists('temp_penjualan_sps');
         Schema::dropIfExists('temp_detail_penjualan_sps');
         $request->session()->flash('status','');
-        return redirect('/penjualan/sp/invoice-sp');
+        return redirect('/operasional/smita/penjualan/sp/invoice-sp');
     }
 
     /**

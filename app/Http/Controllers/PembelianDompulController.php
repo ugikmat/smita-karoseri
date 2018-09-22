@@ -229,7 +229,7 @@ class PembelianDompulController extends Controller
         Schema::dropIfExists('temp_detail_pembelian_dompuls');
 
         $request->session()->flash('status','');
-        return redirect('pembelian/dompul/pembelian-dompul');
+        return redirect('/operasional/smita/pembelian/dompul/pembelian-dompul');
     }
 
     /**

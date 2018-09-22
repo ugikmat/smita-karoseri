@@ -99,7 +99,7 @@ class ListPenjualanSPController extends Controller
     public function delete(Request $request){
         PenjualanProduk::where('id_penjualan_sp',$request->get('id'))->update(['deleted'=>1]);
         $request->session()->flash('status', 'Berhasil menghapus List Invoice!');
-        return redirect('penjualan/sp/list-invoice-sp');
+        return redirect('/operasional/smita/penjualan/sp/list-invoice-sp');
     }
 
     /**
@@ -160,7 +160,7 @@ class ListPenjualanSPController extends Controller
         }
         // session(['tgl_penjualan_sp'=>$penjualanSp->id_sales,'id_cust'=>$penjualanSp->id_customer]);
         $request->session()->flash('status', 'Berhasil melakukan edit!');
-        return redirect('/penjualan/sp/list-invoice-sp');
+        return redirect('/operasional/smita/penjualan/sp/list-invoice-sp');
     }
 
     /**
@@ -235,7 +235,7 @@ class ListPenjualanSPController extends Controller
                                     href="/penjualan/sp/list-invoice-sp/edit/'.$penjualanSP->id_penjualan_sp.'/'.$penjualanSP->nm_sales.'/'.$penjualanSP->tanggal_penjualan_sp.'/'.$penjualanSP->nm_cust.'">
                                     <i class="glyphicon glyphicon-edit"></i> Edit
                                     </a>
-                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanSP->id_penjualan_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';  
+                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanSP->id_penjualan_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
                                   }
                               } else {
                                   return

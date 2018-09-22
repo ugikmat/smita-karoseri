@@ -53,7 +53,7 @@ class BankController extends Controller
         $bank->kode_bank = $request->get('kode');
         $bank->status_bank = "Aktif";
         $bank->save();
-        return redirect('master/bank');
+        return redirect('/operasional/smita/master/bank');
     }
 
     /**
@@ -94,7 +94,7 @@ class BankController extends Controller
         $bank->nama_bank = $request->get('nama');
         $bank->kode_bank = $request->get('kode');;
         $bank->save();
-        return redirect('master/bank');
+        return redirect('/operasional/smita/master/bank');
     }
 
     /**
@@ -108,7 +108,7 @@ class BankController extends Controller
         $bank = Bank::where('id_bank',$id)->first();
         $bank->status_bank = "non Aktif";
         $bank->save();
-        return redirect('master/bank');
+        return redirect('/operasional/smita/master/bank');
     }
 
     /**
@@ -121,7 +121,7 @@ class BankController extends Controller
     {
         return $datatables->eloquent(Bank::where('status_bank','Aktif'))
                           ->addColumn('action', function ($bank) {
-                              return 
+                              return
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$bank->id_bank.'" data-name="'.$bank->nama_bank.'" data-kode="'.$bank->kode_bank.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                               <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$bank->id_bank.'" data-name="'.$bank->nama_bank.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })

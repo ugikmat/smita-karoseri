@@ -56,7 +56,7 @@ class HargaProdukController extends Controller
         $hargaProduk->harga_sp = $request->get('harga');
         $hargaProduk->status_harga_sp = "Aktif";
         $hargaProduk->save();
-        return redirect('/master/harga_produk');
+        return redirect('/operasional/smita/master/harga_produk');
     }
 
     /**
@@ -95,7 +95,7 @@ class HargaProdukController extends Controller
         $hargaProduk->tipe_harga_sp = $request->get('tipe');
         $hargaProduk->harga_sp = $request->get('harga');
         $hargaProduk->save();
-        return redirect('/master/harga_produk');
+        return redirect('/operasional/smita/master/harga_produk');
     }
 
     /**
@@ -109,7 +109,7 @@ class HargaProdukController extends Controller
         $hargaProduk = HargaProduk::where('id_harga_sp',$id)->first();
         $hargaProduk->status_harga_sp = "Non Aktif";
         $hargaProduk->save();
-        return redirect('/master/harga_produk');
+        return redirect('/operasional/smita/master/harga_produk');
     }
     /**
      * Process dataTable ajax response.
@@ -121,7 +121,7 @@ class HargaProdukController extends Controller
     {
         return $datatables->eloquent(HargaProduk::where('status_harga_sp','Aktif'))
                           ->addColumn('action', function ($hargaProduk) {
-                              return 
+                              return
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$hargaProduk->id_harga_sp.'" data-id_produk="'.$hargaProduk->id_produk.'" data-tipe="'.$hargaProduk->tipe_harga_sp.'" data-harga="'.$hargaProduk->harga_sp.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                               <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$hargaProduk->id_harga_sp.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })

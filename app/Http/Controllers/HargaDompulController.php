@@ -57,7 +57,7 @@ class HargaDompulController extends Controller
         $hargaProduk->tanggal_update = Carbon::now('Asia/Jakarta')->toDateTimeString();
         $hargaProduk->status_harga_dompul = "Aktif";
         $hargaProduk->save();
-        return redirect('/master/harga_dompul');
+        return redirect('/operasional/smita/master/harga_dompul');
     }
 
     /**
@@ -97,7 +97,7 @@ class HargaDompulController extends Controller
         $hargaProduk->harga_dompul = $request->get('harga');
         $hargaProduk->tanggal_update = Carbon::now('Asia/Jakarta')->toDateTimeString();
         $hargaProduk->save();
-        return redirect('/master/harga_dompul');
+        return redirect('/operasional/smita/master/harga_dompul');
     }
 
     /**
@@ -111,7 +111,7 @@ class HargaDompulController extends Controller
         $hargaProduk = HargaDompul::where('id_harga_dompul',$id)->first();
         $hargaProduk->status_harga_dompul = "Non Aktif";
         $hargaProduk->save();
-        return redirect('/master/harga_dompul');
+        return redirect('/operasional/smita/master/harga_dompul');
     }
     /**
      * Process dataTable ajax response.
@@ -123,8 +123,8 @@ class HargaDompulController extends Controller
     {
         return $datatables->eloquent(HargaDompul::where('status_harga_dompul','Aktif'))
                           ->addColumn('action', function ($hargaDompul) {
-                              return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$hargaDompul->id_harga_dompul.'" 
+                              return
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$hargaDompul->id_harga_dompul.'"
                               data-nama="'.$hargaDompul->nama_harga_dompul.'"
                               data-tipe="'.$hargaDompul->tipe_harga_dompul.'"
                               data-harga="'.$hargaDompul->harga_dompul.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>

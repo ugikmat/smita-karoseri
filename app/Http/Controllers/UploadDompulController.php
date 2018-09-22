@@ -185,7 +185,7 @@ class UploadDompulController extends Controller {
             }
         }
         $request->session()->flash('status','Berhasil melakukan upload!');
-        return redirect('/upload/dompul');
+        return redirect('/operasional/smita/upload/dompul');
 
     }
     /**

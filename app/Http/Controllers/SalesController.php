@@ -57,7 +57,7 @@ class SalesController extends Controller
       $sales->no_hp = $request->get('no_hp');
       $sales->save();
 
-      return redirect('/sales');
+      return redirect('/operasional/smita/sales');
     }
 
     /**

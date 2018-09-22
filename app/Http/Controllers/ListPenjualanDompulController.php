@@ -143,13 +143,13 @@ class ListPenjualanDompulController extends Controller
             $detailPenjualanDompul->save();
         }
         $request->session()->flash('status', 'Berhasil melakukan edit!');
-        return redirect('/penjualan/dompul/list-invoice');
+        return redirect('/operasional/smita/penjualan/dompul/list-invoice');
     }
 
     public function delete(Request $request){
         $penjualanDompul = PenjualanDompul::where('id_penjualan_dompul',$request->get('id'))->update(['deleted'=>1]);
         $request->session()->flash('status', 'Berhasil menghapus List Invoice!');
-        return redirect('/penjualan/dompul/list-invoice');
+        return redirect('/operasional/smita/penjualan/dompul/list-invoice');
     }
     /**
      * Process dataTable ajax response.
