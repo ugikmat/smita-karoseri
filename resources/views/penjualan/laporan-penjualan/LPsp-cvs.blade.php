@@ -233,7 +233,7 @@
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
         });
-        $.post(`/get_laporan_sp_cvs/${$tgl}/${$sales}`, function(response){
+        $.post(`/operasional/smita/get_laporan_sp_cvs/${$tgl}/${$sales}`, function(response){
             if(response.success)
             {
               console.log('Success..data');

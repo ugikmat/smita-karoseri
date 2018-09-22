@@ -478,7 +478,7 @@
     tipe.value=tipe_dompul;
     // $('#qty_program').val(qty.toLocaleString('id-ID'));
     console.log(produk);
-    $('#link').val(`/pembelian/dompul/list/update/${id}`);
+    $('#link').val(`/operasional/smita/pembelian/dompul/list/update/${id}`);
   })
 </script>
 @stop
