@@ -422,7 +422,7 @@
           {
             console.log('success')
             console.log(response.total);
-            t.ajax.url(`/pembelian_dompul/detail/${id_pembelian}`).load();
+            t.ajax.url(`/operasional/smita/pembelian_dompul/detail/${id_pembelian}`).load();
             $('#total').val(response.total.toLocaleString('id-ID'));
             $('#selisih').val((parseFloat($('#total').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))).toLocaleString('id-ID'));
           }
@@ -434,7 +434,7 @@
             processing: true,
             stateSave: true,
             searching:  false,
-            ajax: `/pembelian_dompul/detail/${id_pembelian}`,
+            ajax: `/operasional/smita/pembelian_dompul/detail/${id_pembelian}`,
             columns: [
               {data: 'produk'},
               {data: 'tipe_harga'},

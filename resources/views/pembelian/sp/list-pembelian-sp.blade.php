@@ -165,7 +165,7 @@
           $tgl = $('#tgl').val();
           console.log($tgl);
           console.log('Loading Data...');
-          t.ajax.url(`/pembelian_sp/list/${$tgl}`).load();
+          t.ajax.url(`/operasional/smita/pembelian_sp/list/${$tgl}`).load();
           console.log('Loaded');
         });
         $('#deleteModal').on('show.bs.modal', function (event) {

@@ -339,7 +339,7 @@ console.log(`total Harga`);
 for (let index = 0; index < {{$dompuls->count()}}; index++) {
   $(`#tipe${index+1}`).on('change',function (event) {
     //ajax call
-    $.post('/dompul/get_harga/'+$(this).val()+'/'+$(`#nama${index+1}`).val(), function(response){
+    $.post('/operasional/smita/dompul/get_harga/'+$(this).val()+'/'+$(`#nama${index+1}`).val(), function(response){
     if(response.success)
     {
       totalHarga-=parseFloat(harga[index]);
