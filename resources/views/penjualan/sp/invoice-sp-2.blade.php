@@ -351,7 +351,7 @@ $.ajaxSetup({
         console.log($('#total').val());
         $('#total').val(response.total);
         console.log($('#total').val());
-        t.ajax.url(`/edit_invoice_sp/${id}`).load();
+        t.ajax.url(`/operasional/smita/edit_invoice_sp/${id}`).load();
 
         // console.log($('#total').val(response.total));
 
@@ -384,7 +384,7 @@ $.ajaxSetup({
       tipe.appendChild(opt);
     });
     // $('#editForm').attr('action', `/invoice_sp/update/${id}`);
-    $('#link').val(`/invoice_sp/update/${id}`);
+    $('#link').val(`/operasional/smita/invoice_sp/update/${id}`);
   })
 </script>
 @stop

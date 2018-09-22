@@ -374,7 +374,7 @@ for (let index = 0; index < {{$jumlah}}; index++) {
 
   $(`#tipe${index+1}`).on('change',function (event) {
     //ajax call
-    $.post('/get_harga/'+$(this).val()+'/'+$(`#kode${index+1}`).val(), function(response){
+    $.post('/operasional/smita/get_harga/'+$(this).val()+'/'+$(`#kode${index+1}`).val(), function(response){
     if(response.success)
     {
       totalHarga-=parseFloat(harga[index]);
