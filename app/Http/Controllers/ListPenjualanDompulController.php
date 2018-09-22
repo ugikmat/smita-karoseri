@@ -36,10 +36,10 @@ class ListPenjualanDompulController extends Controller
                     ->where('users.id_user',Auth::user()->id_user)
                     ->where('status_lokasi','1')
                     ->get();
-        if(Auth::user()->level_user=='Canvaser'){
-            $saless = Sales::where('nm_sales',Auth::user()->name)->get();
-        }else{
+        if(Auth::user()->level_user!='Canvaser'){
             $saless = Sales::all();
+        }else{
+            $saless = Sales::where('nm_sales',Auth::user()->name)->get();
         }
 
         return view('penjualan.dompul.list-invoice',['lokasis'=>$lokasis,'saless'=>$saless]);
@@ -157,12 +157,12 @@ class ListPenjualanDompulController extends Controller
      * @param \Yajra\Datatables\Datatables $datatables
      * @return \Illuminate\Http\JsonResponse
      */
-    public function data(Datatables $datatables,$tgl_awal,$tgl_akhir,$lokasi)
+    public function data(Datatables $datatables,$tgl_awal,$tgl_akhir,$lokasi,$sales)
     {
         if ($tgl_awal=='null') {
             $tgl = $tgl_awal;
         }else {
-            session(['dompul-list-tgl'=>$tgl_awal]);
+            session(['dompul-list-tgl-awal'=>$tgl_awal,'dompul-list-tgl-akhir'=>$tgl_akhir,'lokasi_penjualan'=>$lokasi,'dompul-list-sales'=>$sales]);
             $tgl_awal = Carbon::parse($tgl_awal);
             $tgl_awal = $tgl_awal->format('Y-m-d');
             $tgl_akhir = Carbon::parse($tgl_akhir);
@@ -195,6 +195,9 @@ class ListPenjualanDompulController extends Controller
                         ->where('penjualan_dompuls.id_lokasi',$lokasi)
                         ->where('deleted',0);
 
+        }
+        if($sales!='all'){
+            $datas = $datas->where('penjualan_dompuls.id_sales',$sales);
         }
         return $datatables->of($datas)
                         // ->addColumn('indeks', function ($uploadDompul) {

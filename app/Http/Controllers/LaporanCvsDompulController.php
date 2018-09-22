@@ -32,7 +32,7 @@ class LaporanCvsDompulController extends Controller
     }
 
     public function getData($tgl,$sales){
-        if ($tgl!='null') {
+        if ($tgl!='null'&&$tgl!='undefined') {
             session(['tgl_laporan_dompul'=>$tgl]);
             $tgl = Carbon::parse($tgl);
             $tgl = $tgl->format('Y-m-d');
