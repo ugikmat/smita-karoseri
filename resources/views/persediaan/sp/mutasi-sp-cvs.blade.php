@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Persediaan')
+@section('title', 'Persediaan SP')
 
 @section('content_header')
     <h1>Mutasi SP per CVS</h1>

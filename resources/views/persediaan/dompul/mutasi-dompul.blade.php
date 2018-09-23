@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Persediaan')
+@section('title', 'Persediaan Dompul')
 
 @section('content_header')
     <h1>Mutasi Dompul</h1>
