@@ -90,7 +90,7 @@
 
 @section('js')
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   $('.chosen-select').chosen();
   @if(Session::has('sales_stok_dompul'))
     $("#sales").val("{{session('sales_stok_dompul')}}");
@@ -133,5 +133,5 @@
           t.ajax.url(`/operasional/smita/stok-dompul/data/${$sales}/${$tgl_awal}/${$tgl_akhir}`).load();
         });
     });
-</script>
+</script> -->
 @stop
