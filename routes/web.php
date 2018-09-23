@@ -484,6 +484,18 @@ Route::get('/laporan/lap_progress_detailpb', function() {
 Route::get('/penjualan/laporan-penjualan/LP-piutang-sp','LaporanPiutangSpController@index');
 Route::get('/laporan-piutang/sp/{tgl_penjualan}', 'LaporanPiutangSpController@data');
 
+Route::get('/penjualan/laporan-penjualan/LP-piutang-dompul', function() {
+  return view ('/penjualan/laporan-penjualan/LP-piutang-dompul');
+}) -> name('LP-piutang-dompul');
+
+Route::get('/persediaan/dompul/mutasi-dompul-cvs', function() {
+  return view ('/persediaan/dompul/mutasi-dompul-cvs');
+}) -> name('mutasi-dompul-cvs');
+
+Route::get('/persediaan/dompul/mutasi-dompul-semua-cvs', function() {
+  return view ('/persediaan/dompul/mutasi-dompul-semua-cvs');
+}) -> name('mutasi-dompul-semua-cvs');
+
 Route::get('/persediaan/sp/mutasi-sp-cvs', 'StockCVSSpController@index');
 
 Route::get('/persediaan/sp/mutasi-sp-semua-cvs', 'StokCVSSpAllController@index');
