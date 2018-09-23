@@ -180,6 +180,11 @@ return [
                         'icon'  => 'user',
                       ],
                       [
+                        'text'  => 'Piutang Dompul',
+                        'url'   => '/penjualan/laporan-penjualan/LP-piutang-dompul',
+                        'icon'  => 'file',
+                      ],
+                      [
                         'text'  => 'Penjualan Dompul Head',
                         'url'   => '/penjualan/laporan-penjualan/dompul-head',
                         'icon'  => 'money',
@@ -271,6 +276,16 @@ return [
                         'icon'  => 'truck',
                         'url'   => '/persediaan/dompul/mutasi-dompul',
                       ],
+                      [
+                        'text'  => 'Dompul per CVS',
+                        'icon'  => 'user',
+                        'url'   => '/persediaan/dompul/mutasi-dompul-cvs',
+                      ],
+                      [
+                        'text'  => 'Dompul semua CVS',
+                        'icon'  => 'users',
+                        'url'   => '/persediaan/dompul/mutasi-dompul-semua-cvs',
+                      ],
                     ],
                   ],
                   [
@@ -283,12 +298,12 @@ return [
                         'url'   => '/persediaan/sp/mutasi-sp',
                       ],
                       [
-                        'text'  => 'Mutasi Stok SP CVS',
+                        'text'  => 'SP per CVS',
                         'icon'  => 'user',
                         'url'   => '/persediaan/sp/mutasi-sp-cvs',
                       ],
                       [
-                        'text'  => 'Mutasi Stok SP semua CVS',
+                        'text'  => 'SP semua CVS',
                         'icon'  => 'users',
                         'url'   => '/persediaan/sp/mutasi-sp-semua-cvs',
                       ],
