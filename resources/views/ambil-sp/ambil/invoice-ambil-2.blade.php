@@ -16,7 +16,9 @@ td{
 
 
 @section('content')
-<form class="invoice-ambil-sp repeater" action="" method="post">
+
+<!-- sama kayak invoice-sp-2 -->
+<form class="invoice-ambil-sp" action="" method="post">
   @csrf
   <input type="hidden" name="lokasi" value="{{$lokasi}}">
 <input type="hidden" name="id" id="id" value="{{$penjualanSp->id_temp_penjualan_sp}}">
@@ -30,11 +32,6 @@ td{
         <input type="text" name="canvasser" id="canvasser" value="{{$sales->nm_sales}}" disabled>
       </div>
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-
-    </div>
-  </div>
-  <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4">
           No HP Canvaser :
@@ -68,7 +65,13 @@ td{
     </thead>
 </table>
 <br>
-<a href="{{URL::previous()}}"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-chevron-left"></span> Kembali</button></a>
+<div class="container form-inline">
+  <div class="row">
+    <a href="{{URL::previous()}}"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-chevron-left"></span> Kembali</button></a>
+    <!-- ngelink ke awal, invoice ambil -->
+    <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Simpan</button>
+  </div>
+</div>
 
 </form>
 
@@ -76,6 +79,8 @@ td{
 
 @section('js')
 <script>
+    // ga ada pembayaran sama sekali
+    // nampilin yg diambil aja
     $(document).ready(function () {
         @if(Session::has('bank-sp'))
         repeater.setList([
