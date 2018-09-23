@@ -15,7 +15,7 @@ td{
 @stop
 
 @section('content')
-<form class="invoice-sp repeater" action="/invoice_sp/verify" method="post">
+<form class="invoice-sp repeater" action="/operasional/smita/invoice_sp/verify" method="post">
   @csrf
   <input type="hidden" name="id" id="id" value="{{$penjualanSp->id_temp_penjualan_sp}}">
   <input type="hidden" name="lokasi" value="{{$lokasi}}">
@@ -330,7 +330,7 @@ $.ajaxSetup({
                   serverSide: true,
                   processing: true,
                   stateSave: true,
-                  ajax: `/edit_invoice_sp/${id}`,
+                  ajax: `/operasional/smita/edit_invoice_sp/${id}`,
                   columns: [
                       {data: 'nama_produk'},
                       {data: 'tipe_harga'},
@@ -351,7 +351,7 @@ $.ajaxSetup({
         console.log($('#total').val());
         $('#total').val(response.total);
         console.log($('#total').val());
-        t.ajax.url(`/edit_invoice_sp/${id}`).load();
+        t.ajax.url(`/operasional/smita/edit_invoice_sp/${id}`).load();
 
         // console.log($('#total').val(response.total));
 
@@ -384,7 +384,7 @@ $.ajaxSetup({
       tipe.appendChild(opt);
     });
     // $('#editForm').attr('action', `/invoice_sp/update/${id}`);
-    $('#link').val(`/invoice_sp/update/${id}`);
+    $('#link').val(`/operasional/smita/invoice_sp/update/${id}`);
   })
 </script>
 @stop

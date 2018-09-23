@@ -54,7 +54,7 @@ class DompulController extends Controller
         $dompul->tipe_dompul =$request->get('tipe');
         $dompul->status_sub_master_dompul ="Aktif";
         $dompul->save();
-        return redirect('master/dompul');
+        return redirect('/master/dompul');
     }
 
     /**
@@ -76,7 +76,7 @@ class DompulController extends Controller
      */
     public function edit($id)
     {
-        
+
     }
 
     /**
@@ -95,7 +95,7 @@ class DompulController extends Controller
         $dompul->nama_sub_master_dompul =$request->get('nama-sub');
         $dompul->tipe_dompul =$request->get('tipe');
         $dompul->save();
-        return redirect('master/dompul');
+        return redirect('/master/dompul');
     }
 
     /**
@@ -109,7 +109,7 @@ class DompulController extends Controller
         $dompul = Dompul::where('id_dompul',$id)->first();
         $dompul->status_sub_master_dompul="Non Aktif";
         $dompul->save();
-        return redirect('master/dompul');
+        return redirect('/master/dompul');
 
     }
 
@@ -123,7 +123,7 @@ class DompulController extends Controller
     {
         return $datatables->eloquent(Dompul::where('status_sub_master_dompul',"Aktif"))
                           ->addColumn('action', function ($dompul) {
-                              return 
+                              return
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$dompul->id_dompul.'" data-hp-master="'.$dompul->no_hp_master_dompul.'" data-hp-sub="'.$dompul->no_hp_sub_master_dompul.'" data-gudang="'.$dompul->id_gudang.'" data-nama-sub="'.$dompul->nama_sub_master_dompul.'" data-tipe="'.$dompul->tipe_dompul.'" data-status="'.$dompul->status_sub_master_dompul.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                               <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$dompul->id_dompul.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })

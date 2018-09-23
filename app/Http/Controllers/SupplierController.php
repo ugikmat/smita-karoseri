@@ -57,7 +57,7 @@ class SupplierController extends Controller
         $supplier->norek_supplier = $request->get('norek');
         $supplier->status_supplier = "Aktif";
         $supplier->save();
-        return redirect('master/supplier');
+        return redirect('/master/supplier');
     }
 
     /**
@@ -99,7 +99,7 @@ class SupplierController extends Controller
         $supplier->bank_supplier = $request->get('bank');
         $supplier->norek_supplier = $request->get('norek');
         $supplier->save();
-        return redirect('master/supplier');
+        return redirect('/master/supplier');
     }
 
     /**
@@ -113,7 +113,7 @@ class SupplierController extends Controller
         $supplier = Supplier::where('id_supplier',$id)->first();
         $supplier->status_supplier="tidak Aktif";
         $supplier->save();
-        return redirect('master/supplier');
+        return redirect('/master/supplier');
     }
 
         /**

@@ -9,7 +9,7 @@
     }
 </style>
 @stop @section('content')
-<form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/update/user" id="editForm">
+<form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/update/user" id="editForm">
     @csrf @method('put')
     <input type="hidden" name="id" id="id" value="{{$data->id_user}}">
     <div id="deleted">
@@ -71,8 +71,7 @@
         <option value="Canvaser">Canvaser</option>
         <option value="Kasir">Kasir</option>
         <option value="Supervisor">Supervisor</option>
-        <option value="Kepala Cabang">Kepala Cabang</option>
-        <option value="Keuangan">Super Admin</option>
+        <option value="Super admin">Super Admin</option>
       </select>
 
     </div>
@@ -80,6 +79,7 @@
   <br>
   <div data-repeater-list="lokasi-user" id="lokasi-user">
     <div data-repeater-item>
+      <input type="hidden" name="id_users_lokasi" id="id_users_lokasi">
       <div class="row">
         <div class="col-xs-6 col-sm-6">
           Lokasi&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:&emsp;
@@ -156,7 +156,7 @@
             // (Optional)
             // Removes the delete button from the first list item,
             // defaults to false.
-            isFirstItemUndeletable: false
+            isFirstItemUndeletable: true
         });
 
         repeater.setList([

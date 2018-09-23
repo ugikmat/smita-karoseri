@@ -226,10 +226,12 @@ Route::put('/pembelian/dompul/list/delete','ListPembelianDompulController@delete
 
 // laporan pembelian
 Route::get('/pembelian/laporan-pembelian/Lbeli-dompul', 'LaporanPembelianDompulController@index');
-Route::get('/pembelian/laporan-pembelian/data/{tgl_pembelian}', 'LaporanPembelianDompulController@data');
+Route::get('/pembelian/laporan-pembelian/dompul/data/{tgl_pembelian}', 'LaporanPembelianDompulController@data');
+Route::post('/pembelian/get_laporan_dompul/{tgl}', 'LaporanPembelianDompulController@getData');
 
 Route::get('/pembelian/laporan-pembelian/Lbeli-sp', 'LaporanPembelianSPController@index');
-Route::get('/pembelian/laporan-pembelian/data/{tgl_pembelian}', 'LaporanPembelianSPController@data');
+Route::get('/pembelian/laporan-pembelian/sp/data/{tgl_pembelian}', 'LaporanPembelianSPController@data');
+Route::post('/pembelian/get_laporan_sp/{tgl}', 'LaporanPembelianSPController@getData');
 
 //monitoring
 Route::get('/penjualan/monitoring/mntr-upload', 'MonitorController@index');
@@ -262,10 +264,10 @@ Route::get('/penjualan/laporan-penjualan/LPdompul-cvs', 'LaporanCvsDompulControl
 Route::post('/get_laporan_dompul_cvs/{tgl}/{sales}', 'LaporanCvsDompulController@getData');
 Route::get('/laporan-penjualan/dompul-cvs/{tgl_penjualan}/{sales}', 'LaporanCvsDompulController@data');
 //Persediaan
-Route::get('/persediaan/mutasi-dompul', 'StokDompulController@index');
+Route::get('/persediaan/dompul/mutasi-dompul', 'StokDompulController@index');
 Route::get('/stok-dompul/data/{tgl_awal}/{tgl_akhir}', 'StokDompulController@data');
 
-Route::get('/persediaan/mutasi-sp', 'StokSpController@index');
+Route::get('/persediaan/sp/mutasi-sp', 'StokSpController@index');
 Route::get('/stok-sp/data/{tgl_awal}/{tgl_akhir}', 'StokSpController@data');
 Route::get('/stok-sp/data/{sales}/{tgl_awal}/{tgl_akhir}', 'StockCVSSpController@data');
 //upload
@@ -482,7 +484,11 @@ Route::get('/laporan/lap_progress_detailpb', function() {
 Route::get('/penjualan/laporan-penjualan/LP-piutang-sp','LaporanPiutangSpController@index');
 Route::get('/laporan-piutang/sp/{tgl_penjualan}', 'LaporanPiutangSpController@data');
 
-Route::get('/persediaan/mutasi-sp-cvs', 'StockCVSSpController@index');
+Route::get('/persediaan/sp/mutasi-sp-cvs', 'StockCVSSpController@index');
 
-Route::get('/persediaan/mutasi-sp-semua-cvs', 'StokCVSSpAllController@index');
+Route::get('/persediaan/sp/mutasi-sp-semua-cvs', 'StokCVSSpAllController@index');
 Route::get('/stok-sp/all/data/{tgl_awal}/{tgl_akhir}', 'StokCVSSpAllController@data');
+
+Route::get('/persediaan/sp/pengambilan-sp', function() {
+  return view ('/persediaan/sp/pengambilan-sp');
+}) -> name('pengambilan-sp');

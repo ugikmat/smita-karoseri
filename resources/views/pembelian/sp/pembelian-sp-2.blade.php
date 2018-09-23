@@ -16,7 +16,7 @@ td{
 
 
 @section('content')
-<form class="invoice-sp repeater" action="/pembelian/sp/store" method="post">
+<form class="invoice-sp repeater" action="/operasional/smita/pembelian/sp/store" method="post">
   @csrf
 <input type="hidden" name="id" id="id" value="{{$pembelianSp->id_temp_pembelian_sp}}">
 <input type="hidden" name="id_lokasi" value="{{$lokasi->id_lokasi}}">
@@ -31,7 +31,7 @@ td{
   </div>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      
+
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       HP Supplier&nbsp;: {{$supplier->telepon_supplier}}
@@ -167,9 +167,9 @@ td{
             // defaultValues refer to the value of the input's name attribute.
             // If a default value is not specified for an input, then it will
             // have its value cleared.
-            // defaultValues: {
-            //     'text-input': 'foo'
-            // },
+            defaultValues: {
+                'trf': '0'
+            },
             // (Optional)
             // "show" is called just after an item is added.  The item is hidden
             // at this point.  If a show callback is not given the item will
@@ -231,7 +231,7 @@ function goBack() {
                   serverSide: true,
                   processing: true,
                   searching:  false,
-                  ajax: `/pembelian_sp_data/${id}`,
+                  ajax: `/operasional/smita/pembelian_sp_data/${id}`,
                   columns: [
                       {data: 'nama_produk'},
                       {data: 'tipe_harga'},

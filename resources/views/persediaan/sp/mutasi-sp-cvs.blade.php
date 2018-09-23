@@ -3,7 +3,7 @@
 @section('title', 'Persediaan')
 
 @section('content_header')
-    <h1>Mutasi SP</h1>
+    <h1>Mutasi SP per CVS</h1>
 @stop
 
 @section('css')
@@ -13,7 +13,7 @@
     text-align: center;
     margin: auto;
     padding: 10%;
-  },
+  }
   td{
     text-align: center;
     margin: auto;
@@ -27,7 +27,7 @@
   <form class="invoice-sp repeater" action="" method="post">
   @csrf
   <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
         Tanggal Awal :
         @if(Session::has('tgl_stok_sp'))
           <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_awal" name="tgl_awal" value="{{session('tgl_stok_sp')}}">
@@ -36,7 +36,7 @@
         @endif
     </div>
 
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
         Tanggal Akhir :
         @if(Session::has('tgl_stok_sp'))
           <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_akhir" name="tgl_akhir" value="{{session('tgl_stok_sp')}}">
@@ -45,14 +45,26 @@
         @endif
     </div>
 
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        Nama Canvaser : &nbsp;
+        <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('id_sales')}}">
+              <option value="" disabled>Pilih Nama canvaser</option>
+              @isset($saless)
+                  @foreach ($saless as $data)
+                  <option value="{{ $data->id_sales }}">{{ $data->nm_sales }}</option>
+                  @endforeach
+              @endisset
+        </select>
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
       <button type="button" id="save" class="btn btn-success" ><i class="fa fa-caret-square-o-right"></i>Tampilkan Mutasi SP</button>
     </div>
   </div>
 </div>
 <br><br>
 
-<table id="mutasi-sp-table" class="table responsive" width="100%">
+<table id="mutasi-sp-cvs-table" class="table responsive" width="100%">
     <thead>
       <tr>
         <th>Nama Produk</th>
@@ -91,15 +103,20 @@
 </script>
 <script>
     $(function () {
+        $sales = $('#sales').val();
         $tgl_akhir = $('#tgl_akhir').val();
         $tgl_awal = $('#tgl_awal').val();
         $sales = $('#sales').val();
-        var t = $('#mutasi-sp-table').DataTable({
+        var t = $('#mutasi-sp-cvs-table').DataTable({
             serverSide: true,
             processing: true,
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-            ajax: `/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`,
+<<<<<<< HEAD:resources/views/persediaan/mutasi-sp-cvs.blade.php
+            ajax: `/operasional/smita/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`,
+=======
+            ajax: `/operasional/smita/stok-sp/data/${$sales}/${$tgl_awal}/${$tgl_akhir}`,
+>>>>>>> 4d8e7f5b5456c0cd942f4e9c5ab58a9756b41c50:resources/views/persediaan/sp/mutasi-sp-cvs.blade.php
             columns: [
               // {data: 'indeks'},
               {data: 'nama_produk'},
@@ -117,7 +134,7 @@
           $tgl_akhir = $('#tgl_akhir').val();
         $tgl_awal = $('#tgl_awal').val();
           $sales = $('#sales').val();
-          t.ajax.url(`/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`).load();
+          t.ajax.url(`/operasional/smita/stok-sp/data/${$sales}/${$tgl_awal}/${$tgl_akhir}`).load();
         });
     });
 </script>

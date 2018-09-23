@@ -16,7 +16,7 @@ td{
 
 
 @section('content')
-<form class="invoice-dompul repeater" action="/pembelian/dompul/store" method="post">
+<form class="invoice-dompul repeater" action="/operasional/smita/pembelian/dompul/store" method="post">
   @csrf
 <input type="hidden" name="id" id="id" value="{{$pembelianDompul->id_pembelian_dompul}}">
 <input type="hidden" name="id_lokasi" value="{{$lokasi->id_lokasi}}">
@@ -31,7 +31,7 @@ td{
   </div>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      
+
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       HP Supplier&nbsp;: {{$supplier->telepon_supplier}}
@@ -167,9 +167,9 @@ td{
             // defaultValues refer to the value of the input's name attribute.
             // If a default value is not specified for an input, then it will
             // have its value cleared.
-            // defaultValues: {
-            //     'text-input': 'foo'
-            // },
+            defaultValues: {
+                'trf': '0'
+            },
             // (Optional)
             // "show" is called just after an item is added.  The item is hidden
             // at this point.  If a show callback is not given the item will
@@ -232,7 +232,7 @@ function goBack() {
                   processing: true,
                   searching:  false,
                   stateSave: true,
-                  ajax: `/pembelian_dompul_data/${id}`,
+                  ajax: `/operasional/smita/pembelian_dompul_data/${id}`,
                   columns: [
                       {data: 'produk'},
                       {data: 'tipe_harga'},

@@ -66,10 +66,10 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      @if(Session::has('sp-list-tgl'))
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl_awal" id="tgl_awal" data-date-format="dd-mm-yyyy" value="{{session('sp-list-tgl')}}" required>
+                      @if(Session::has('sp-list-tgl-awal'))
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl_awal" id="tgl_awal" data-date-format="dd-mm-yyyy" value="{{session('sp-list-tgl-awal')}}" required>
                       @else
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl_awal" id="tgl_awal" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now()->format('d-m-Y')}}" required>
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl_awal" id="tgl_awal" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}" required>
                       @endif
                     </div>
                   </div>
@@ -79,10 +79,10 @@
                       <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      @if(Session::has('sp-list-tgl'))
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl_akhir" id="tgl_akhir" data-date-format="dd-mm-yyyy" value="{{session('sp-list-tgl')}}" required>
+                      @if(Session::has('sp-list-tgl-akhir'))
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl_akhir" id="tgl_akhir" data-date-format="dd-mm-yyyy" value="{{session('sp-list-tgl-akhir')}}" required>
                       @else
-                        <input class="datepicker col-md-7 col-xs-12" name="tgl_akhir" id="tgl_akhir" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now()->format('d-m-Y')}}" required>
+                        <input class="datepicker col-md-7 col-xs-12" name="tgl_akhir" id="tgl_akhir" data-date-format="dd-mm-yyyy" value="{{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}" required>
                       @endif
                     </div>
                   </div>
@@ -169,7 +169,7 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="deleteForm" action="/invoice_sp/delete" method="POST">
+      <form id="deleteForm" action="/operasional/smita/invoice_sp/delete" method="POST">
         @csrf @method('put')
         <input type="hidden" name="id" id="id_penjualan" value="">
         <!-- Modal Header -->
@@ -197,8 +197,8 @@
 </script>
 <script>
     $(function () {
-      @if(Session::has('id_sales'))
-          $('#sales').val("{{session('id_sales')}}").change();
+      @if(Session::has('sp-list-sales'))
+          $('#sales').val("{{session('sp-list-sales')}}").change();
         @endif
         @if(Session::has('lokasi_penjualan'))
           $('#lokasi').val("{{session('lokasi_penjualan')}}").change();
@@ -212,7 +212,7 @@
             processing: true,
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-            ajax: `/invoice_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`,
+            ajax: `/operasional/smita/invoice_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`,
             // "columnDefs": [ {
             // "searchable": false,
             // "orderable": false,
@@ -241,7 +241,7 @@
         $lokasi = $('#lokasi').val();
         $sales = $('#sales').val();
           console.log('Loading Data...');
-          t.ajax.url(`/invoice_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`).load();
+          t.ajax.url(`/operasional/smita/invoice_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`).load();
           console.log('Loaded');
         });
         $('#deleteModal').on('show.bs.modal', function (event) {
@@ -252,7 +252,7 @@
         $('#verificationModal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget) // Button that triggered the modal
           var id = button.data('id'); // Extract info from data-* attributes
-          $('#verificationForm').attr('action',`/invoice_sp/verify/${id}`);
+          $('#verificationForm').attr('action',`/operasional/smita/invoice_sp/verify/${id}`);
         });
     });
 </script>

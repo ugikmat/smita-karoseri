@@ -60,7 +60,7 @@ class ProdukController extends Controller
         $produk->komisi = $request->get('komisi');
         $produk->status_produk = 1;
         $produk->save();
-        return redirect('master/produk');
+        return redirect('/master/produk');
     }
 
     /**
@@ -111,8 +111,7 @@ class ProdukController extends Controller
         $produk->diskon = $request->get('diskon');
         $produk->komisi = $request->get('komisi');
         $produk->save();
-        return redirect('master/produk');
-        return redirect('master/produk');
+        return redirect('/master/produk');
     }
 
     /**

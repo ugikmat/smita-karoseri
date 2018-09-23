@@ -68,7 +68,7 @@ td{
     </div>
   </div>
 </div>
-<form class="invoice-dompul repeater" action="/penjualan/dompul/verify/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}" method="post">
+<form class="invoice-dompul repeater" action="/operasional/smita/penjualan/dompul/verify/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}" method="post">
   @csrf
   <input type="hidden" name="lokasi" value="{{$lokasi}}">
 <table id="invoice-dompul-table" class="table responsive"  width="100%">
@@ -276,9 +276,9 @@ td{
             // defaultValues refer to the value of the input's name attribute.
             // If a default value is not specified for an input, then it will
             // have its value cleared.
-            // defaultValues: {
-            //     'text-input': 'foo'
-            // },
+            defaultValues: {
+                'trf': '0'
+            },
             // (Optional)
             // "show" is called just after an item is added.  The item is hidden
             // at this point.  If a show callback is not given the item will
@@ -339,7 +339,7 @@ td{
                   serverSide: true,
                   processing: true,
                   stateSave: true,
-                  ajax: `/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`,
+                  ajax: `/operasional/smita/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`,
                   columns: [
                       {data: 'produk'},
                       {data: 'tipe_dompul'},
@@ -358,7 +358,7 @@ td{
       {
         console.log('success')
         console.log(response.total);
-        t.ajax.url(`/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`).load();
+        t.ajax.url(`/operasional/smita/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`).load();
         $('#total').val(response.total.toLocaleString('id-ID'));
         $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
       }
@@ -434,7 +434,7 @@ td{
     tipe.value=tipe_dompul;
     $('#qty_program').val(qty.toLocaleString('id-ID'));
     console.log(produk);
-    $('#link').val(`/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/0`);
+    $('#link').val(`/operasional/smita/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/0`);
   })
 </script>
 @stop

@@ -13,7 +13,7 @@
     box-sizing: border-box;
   }
 </style>
-@stop 
+@stop
 @section('content')
 <table id="spv-table" class="table table-bordered">
     <thead>
@@ -57,7 +57,7 @@
       <div class="x_content">
         <br />
 
-        <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/supervisor">
+        <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/supervisor">
           @csrf
 
           <div class="form-group">
@@ -207,7 +207,7 @@
         $('#spv-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/master-supervisor',
+            ajax: '/operasional/smita/master-supervisor',
             columns: [
                 {data: 'id_spv'},
                 {data: 'nm_spv'},
@@ -238,7 +238,7 @@
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
-  $('#editForm').attr('action', `/supervisor/${id}`);
+  $('#editForm').attr('action', `/operasional/smita/supervisor/${id}`);
   modal.find('.modal-body .nama_spv input').val(name)
   modal.find('.modal-body .alamat_spv input').val(alamat)
   modal.find('.modal-body .nohp input').val(nohp)
@@ -250,7 +250,7 @@
   var id = button.data('id')// Extract info from data-* attributes
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  $('#deleteForm').attr('action', `/supervisor/${id}`);
+  $('#deleteForm').attr('action', `/operasional/smita/supervisor/${id}`);
   })
 </script>
 @stop

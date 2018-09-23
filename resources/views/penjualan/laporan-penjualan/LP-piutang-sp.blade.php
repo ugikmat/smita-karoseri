@@ -139,7 +139,11 @@
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             scrollX: true,
             stateSave: true,
+<<<<<<< HEAD
             ajax: `/operasional/smita/laporan-penjualan/sp/${$tgl}`,
+=======
+            ajax: `/operasional/smita/laporan-piutang/sp/${$tgl}`,
+>>>>>>> 4d8e7f5b5456c0cd942f4e9c5ab58a9756b41c50
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -191,7 +195,7 @@
         // }, 'json');
         $('#save').on('click',function(event) {
           $tgl = $('#tgl').val();
-          t.ajax.url(`/laporan-piutang/sp/${$tgl}`).load();
+          t.ajax.url(`/operasional/smita/laporan-piutang/sp/${$tgl}`).load();
         //   $.post(`/get_laporan_sp/${$tgl}`, function(response){
         //     if(response.success)
         //     {

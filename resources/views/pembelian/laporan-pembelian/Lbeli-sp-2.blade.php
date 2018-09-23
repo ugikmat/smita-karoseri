@@ -83,7 +83,7 @@
             serverSide: true,
             processing: true,
             stateSave: true,
-            ajax: '/laporan-penjualan/sp/piutang/'+id+'/'+tgl,
+            ajax: '/operasional/smita/laporan-penjualan/sp/piutang/'+id+'/'+tgl,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,

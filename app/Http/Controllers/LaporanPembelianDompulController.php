@@ -48,10 +48,10 @@ class LaporanPembelianDompulController extends Controller
         $total_nominal = DB::table('detail_pembayaran_pembelian_dompuls')
                    ->select(DB::raw("id_pembelian_dompul, sum(nominal) AS total_bayar,
     	sum(IF(metode_pembayaran = 'Cash', nominal, 0)) AS cash,
-	sum(IF(metode_pembayaran = 'BCA Pusat', nominal, 0)) AS bca_pusat, 
-	sum(IF(metode_pembayaran = 'BCA Cabang', nominal, 0)) AS bca_cabang, 
+	sum(IF(metode_pembayaran = 'BCA Pusat', nominal, 0)) AS bca_pusat,
+	sum(IF(metode_pembayaran = 'BCA Cabang', nominal, 0)) AS bca_cabang,
 	sum(IF(metode_pembayaran = 'Mandiri', nominal, 0)) AS mandiri,
-	sum(IF(metode_pembayaran = 'BNI', nominal, 0)) AS bni, 
+	sum(IF(metode_pembayaran = 'BNI', nominal, 0)) AS bni,
     sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
                     ->where('deleted',0)
                    ->groupBy('id_pembelian_dompul');
@@ -65,8 +65,8 @@ class LaporanPembelianDompulController extends Controller
                    ->groupBy('id_pembelian_dompul','produk');
 
         return $datatables->eloquent(PembelianDompul::select(DB::raw('master_suppliers.nama_supplier, nama_bo,
-                                sum(pembelian_dompuls.grand_total) AS total_penjualan, sum(cash) AS cash, 
-                                sum(bca_pusat) AS bca_pusat, sum(bca_cabang) AS bca_cabang, sum(mandiri) AS mandiri, sum(bni) AS bni, sum(bri) AS bri, 
+                                sum(pembelian_dompuls.grand_total) AS total_penjualan, sum(cash) AS cash,
+                                sum(bca_pusat) AS bca_pusat, sum(bca_cabang) AS bca_cabang, sum(mandiri) AS mandiri, sum(bni) AS bni, sum(bri) AS bri,
                                 (sum(pembelian_dompuls.grand_total)-sum(total_bayar)) AS piutang,
                                 SUM(dompul) AS dompul,
                                 SUM(dp5) AS dp5,
@@ -84,7 +84,7 @@ class LaporanPembelianDompulController extends Controller
                         ->where('tanggal_pembelian_dompul',$tgl)
                         ->groupBy('master_suppliers.nama_supplier','nama_bo'))
                         ->addColumn('index', function ($pembelianDompul) {
-                              return 
+                              return
                               '';
                             })
                             ->addColumn('total_penjualan', function ($pembelianDompul) {
@@ -133,5 +133,86 @@ class LaporanPembelianDompulController extends Controller
                             //     $pembelianDompul->bni);
                             // })
                           ->make(true);
+    }
+    public function getData($tgl){
+        if ($tgl!='null') {
+            session(['tgl_laporan_dompul'=>$tgl]);
+            $tgl = Carbon::parse($tgl);
+            $tgl = $tgl->format('Y-m-d');
+
+        }
+        $total_nominal = DB::table('detail_pembayaran_pembelian_dompuls')
+                   ->select(DB::raw("id_pembelian_dompul, sum(nominal) AS total_bayar,
+    	sum(IF(metode_pembayaran = 'Cash', nominal, 0)) AS cash,
+	sum(IF(metode_pembayaran = 'BCA Pusat', nominal, 0)) AS bca_pusat,
+	sum(IF(metode_pembayaran = 'BCA Cabang', nominal, 0)) AS bca_cabang,
+	sum(IF(metode_pembayaran = 'Mandiri', nominal, 0)) AS mandiri,
+	sum(IF(metode_pembayaran = 'BNI', nominal, 0)) AS bni,
+    sum(IF(metode_pembayaran = 'BRI', nominal, 0)) AS bri"))
+                    ->where('deleted',0)
+                   ->groupBy('id_pembelian_dompul');
+
+        $total_penjualan = DB::table('detail_pembelian_dompuls')
+                   ->select(DB::raw("id_pembelian_dompul, produk,
+    	sum(IF(produk = 'DOMPUL', jumlah, 0)) AS dompul,
+        sum(IF(produk = 'DP5', jumlah, 0)) AS dp5,
+        sum(IF(produk = 'DP10', jumlah, 0)) AS dp10"))
+                    ->where('status_detail_pd',1)
+                   ->groupBy('id_pembelian_dompul','produk');
+        $data = PembelianDompul::select(DB::raw('master_suppliers.nama_supplier, nama_bo,
+                                sum(pembelian_dompuls.grand_total) AS total_penjualan, sum(cash) AS cash,
+                                sum(bca_pusat) AS bca_pusat, sum(bca_cabang) AS bca_cabang, sum(mandiri) AS mandiri, sum(bni) AS bni, sum(bri) AS bri,
+                                (sum(pembelian_dompuls.grand_total)-sum(total_bayar)) AS piutang,
+                                SUM(dompul) AS dompul,
+                                SUM(dp5) AS dp5,
+                                SUM(dp10) AS dp10'))
+                        ->join('master_suppliers','master_suppliers.id_supplier','=','pembelian_dompuls.id_supplier')
+                        ->join('users','users.id_user','=','pembelian_dompuls.id_user')
+                        ->join('bos','bos.id_bo','=','users.id_bo')
+                        ->joinSub($total_nominal, 'total_nominal', function($join) {
+                            $join->on('pembelian_dompuls.id_pembelian_dompul', '=', 'total_nominal.id_pembelian_dompul');
+                        })
+                        ->joinSub($total_penjualan, 'total_penjualan', function($join) {
+                            $join->on('pembelian_dompuls.id_pembelian_dompul', '=', 'total_penjualan.id_pembelian_dompul');
+                        })
+                        // ->join('upload_dompuls','upload_dompul.id_pembelian_dompul','=','penjualan_dompul.id_pembelian_dompul')
+                        ->where('tanggal_pembelian_dompul',$tgl)
+                        ->groupBy('master_suppliers.nama_supplier','nama_bo')->get();
+                        $dp5=0;
+                        $dp10=0;
+                        $dompul=0;
+                        $total=0;
+                        $cash=0;
+                        $bca_pusat=0;
+                        $bca_cabang=0;
+                        $mandiri=0;
+                        $bni=0;
+                        $bri=0;
+                        $piutang=0;
+                        foreach ($data as $key => $value) {
+                            $dp5+=$value->dp5;
+                            $dp10+=$value->dp10;
+                            $dompul+=$value->dompul;
+                            $total+=$value->total_penjualan;
+                            $cash+=$value->cash;
+                            $bca_pusat+=$value->bca_pusat;
+                            $bca_cabang+=$value->bca_cabang;
+                            $mandiri+=$value->mandiri;
+                            $bni+=$value->bni;
+                            $bri+=$value->bri;
+                            $piutang+=$value->piutang;
+                        }
+        return response()->json(['success' => true, 'data' => $data
+        , 'dp5' => $dp5
+        , 'dp10' => $dp10
+        , 'dompul' => $dompul
+        , 'total' => $total
+        , 'cash' => $cash
+        , 'bca_pusat' => $bca_pusat
+        , 'bca_cabang' => $bca_cabang
+        , 'mandiri' => $mandiri
+        , 'bni' => $bni
+        , 'bri' => $bri
+        , 'piutang' => $piutang]);
     }
 }

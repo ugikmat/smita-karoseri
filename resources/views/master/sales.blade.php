@@ -54,7 +54,7 @@
                 <div class="x_content">
                   <br />
 
-                  <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/sales">
+                  <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/sales">
                     @csrf
 
                     <div class="form-group">
@@ -145,7 +145,7 @@
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/sales">
+                <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/sales">
                   @csrf @method('put')
 
                   <div class="form-group nama_sales">
@@ -225,7 +225,7 @@
       stateSave: true,
       processing: true,
       lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-      ajax: '/master-sales',
+      ajax: '/operasional/smita/master-sales',
       columns: [{
           data: 'id_sales'
         },
@@ -271,7 +271,7 @@
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    $('#editForm').attr('action', `/sales/${id}`);
+    $('#editForm').attr('action', `/operasional/smita/sales/${id}`);
     modal.find('.modal-body .nama_sales input').val(name)
     modal.find('.modal-body .alamat_sales input').val(alamat)
     modal.find('.modal-body .no_hp input').val(nohp)
@@ -284,7 +284,7 @@
     var id = button.data('id') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/sales/${id}`);
+    $('#deleteForm').attr('action', `/operasional/smita/sales/${id}`);
   })
 </script>
 @stop

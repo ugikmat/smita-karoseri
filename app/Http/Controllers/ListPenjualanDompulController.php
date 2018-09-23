@@ -24,7 +24,7 @@ class ListPenjualanDompulController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','canvaser','kasir','head','supervisor','admin']);
+        $this->middleware(['auth','canvaser']);
     }
     /**
      * Diplay a list of transaction made before
@@ -36,12 +36,12 @@ class ListPenjualanDompulController extends Controller
                     ->where('users.id_user',Auth::user()->id_user)
                     ->where('status_lokasi','1')
                     ->get();
-        if(Auth::user()->level_user=='Canvaser'){
+        if(Auth::user()->level_user!='Canvaser'){
             $saless = Sales::all();
         }else{
             $saless = Sales::where('nm_sales',Auth::user()->name)->get();
         }
-        
+
         return view('penjualan.dompul.list-invoice',['lokasis'=>$lokasis,'saless'=>$saless]);
     }
 
@@ -84,7 +84,7 @@ class ListPenjualanDompulController extends Controller
         return view('penjualan.dompul.list-edit-p-dompul-ro',['datas'=>$datas,'total'=>$total,'penjualanDompul'=>$penjualanDompul,'detailPenjualanDompul'=>$detailPenjualanDompul,'total_pembayaran'=>$total_pembayaran]);
     }
 
-    public function verif($id){
+    public function verif(Request $request, $id){
         PenjualanDompul::where('id_penjualan_dompul',$id)
                         ->update(['status_pembayaran'=>1
                         ]);
@@ -107,7 +107,7 @@ class ListPenjualanDompulController extends Controller
                 $detailPenjualanDompul->save();
             }
         }
-
+        if(!empty($bank)){
         foreach ($bank as $key => $value) {
             if (empty($value['id'])) {
                 $detailPenjualanDompul = new DetailPenjualanDompul();
@@ -142,6 +142,7 @@ class ListPenjualanDompulController extends Controller
             $detailPenjualanDompul->catatan = $value['catatan'];
             $detailPenjualanDompul->save();
         }
+      }
         $request->session()->flash('status', 'Berhasil melakukan edit!');
         return redirect('/penjualan/dompul/list-invoice');
     }
@@ -157,12 +158,12 @@ class ListPenjualanDompulController extends Controller
      * @param \Yajra\Datatables\Datatables $datatables
      * @return \Illuminate\Http\JsonResponse
      */
-    public function data(Datatables $datatables,$tgl_awal,$tgl_akhir,$lokasi)
+    public function data(Datatables $datatables,$tgl_awal,$tgl_akhir,$lokasi,$sales)
     {
         if ($tgl_awal=='null') {
             $tgl = $tgl_awal;
         }else {
-            session(['dompul-list-tgl'=>$tgl_awal]);
+            session(['dompul-list-tgl-awal'=>$tgl_awal,'dompul-list-tgl-akhir'=>$tgl_akhir,'lokasi_penjualan'=>$lokasi,'dompul-list-sales'=>$sales]);
             $tgl_awal = Carbon::parse($tgl_awal);
             $tgl_awal = $tgl_awal->format('Y-m-d');
             $tgl_akhir = Carbon::parse($tgl_akhir);
@@ -196,6 +197,9 @@ class ListPenjualanDompulController extends Controller
                         ->where('deleted',0);
 
         }
+        if($sales!='all'){
+            $datas = $datas->where('penjualan_dompuls.id_sales',$sales);
+        }
         return $datatables->of($datas)
                         // ->addColumn('indeks', function ($uploadDompul) {
                         //       return '';
@@ -210,10 +214,10 @@ class ListPenjualanDompulController extends Controller
                             })
                           ->addColumn('action', function ($penjualanDompul) {
                               if ($penjualanDompul->status_pembayaran==0) {
-                                  if(Auth::user()->level_user=='Supervisor'){
+                                  if(Auth::user()->level_user!='Supervisor'||Auth::user()->level_user!='Super Admin'){
                                       return
                                     '<a class="btn btn-xs btn-primary"
-                                    href="/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
+                                    href="/operasional/smita/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
                                     <i class="glyphicon glyphicon-edit"></i> Edit
                                     </a>
                                     <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>
@@ -221,7 +225,7 @@ class ListPenjualanDompulController extends Controller
                                   }else{
                                       return
                                     '<a class="btn btn-xs btn-primary"
-                                    href="/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
+                                    href="/operasional/smita/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
                                     <i class="glyphicon glyphicon-edit"></i> Edit
                                     </a>
                                     <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
@@ -229,7 +233,7 @@ class ListPenjualanDompulController extends Controller
                               } else {
                                   return
                                     '<a class="btn btn-xs btn-primary"
-                                    href="/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
+                                    href="/operasional/smita/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
                                     <i class="glyphicon glyphicon-edit"></i> Lihat
                                     </a>
                                     <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';

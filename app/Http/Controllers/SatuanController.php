@@ -104,7 +104,7 @@ class SatuanController extends Controller
         }
         $satuan->nilai_konversi = $request->get('nilai');
         $satuan->save();
-        return redirect('master/satuan');
+        return redirect('/master/satuan');
     }
 
     /**
@@ -118,7 +118,7 @@ class SatuanController extends Controller
         $satuan = Satuan::find($id);
         $satuan->status_satuan="tidak tersedia";
         $satuan->save();
-        return redirect('master/satuan');
+        return redirect('/master/satuan');
     }
 
     /**

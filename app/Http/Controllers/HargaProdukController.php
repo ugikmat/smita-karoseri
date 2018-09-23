@@ -121,7 +121,7 @@ class HargaProdukController extends Controller
     {
         return $datatables->eloquent(HargaProduk::where('status_harga_sp','Aktif'))
                           ->addColumn('action', function ($hargaProduk) {
-                              return 
+                              return
                               '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$hargaProduk->id_harga_sp.'" data-id_produk="'.$hargaProduk->id_produk.'" data-tipe="'.$hargaProduk->tipe_harga_sp.'" data-harga="'.$hargaProduk->harga_sp.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>
                               <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="'.$hargaProduk->id_harga_sp.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                             })
