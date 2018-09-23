@@ -505,3 +505,11 @@ Route::get('/ambil-sp/ambil/invoice-ambil', function() {
 oute::get('/ambil-sp/ambil/list-invoice-ambil', function() {
   return view ('/ambil-sp/ambil/list-invoice-ambil');
 }) -> name('list-invoice-ambil');
+
+Route::get('/ambil-sp/kembali/invoice-kembali', function() {
+  return view ('/ambil-sp/kembali/invoice-kembali');
+}) -> name('invoice-kembali');
+
+oute::get('/ambil-sp/kembali/list-invoice-kembali', function() {
+  return view ('/ambil-sp/kembali/list-invoice-kembali');
+}) -> name('list-invoice-kembali');
