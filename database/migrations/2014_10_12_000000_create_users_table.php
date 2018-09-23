@@ -17,11 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id_user');
             $table->integer('id_lokasi');
             $table->integer('id_bo');
-<<<<<<< HEAD
-            $table->string('username')unique();
-=======
             $table->string('username')->unique();
->>>>>>> upstream/front
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
