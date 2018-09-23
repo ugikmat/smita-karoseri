@@ -47,7 +47,7 @@
                 </div>
                 <div class="x_content">
                   <br />
-                  <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/carabayar">
+                  <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/carabayar">
                     @csrf
 
                     <div class="form-group">
@@ -167,7 +167,7 @@
     $('#carabayar-table').DataTable({
       serverSide: true,
       processing: true,
-      ajax: '/master-cara_bayar',
+      ajax: '/operasional/smita/master-cara_bayar',
       columns: [{
           data: 'id'
         },
@@ -202,7 +202,7 @@
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    $('#editForm').attr('action', `/carabayar/${id}`);
+    $('#editForm').attr('action', `/operasional/smita/carabayar/${id}`);
     modal.find('.modal-body .keterangan input').val(name)
   })
 </script>
@@ -213,7 +213,7 @@
     var id = button.data('id') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/carabayar/${id}`);
+    $('#deleteForm').attr('action', `/operasional/smita/carabayar/${id}`);
   })
 </script>
 @stop

@@ -202,7 +202,7 @@
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             stateSave: true,
             scrollX: true,
-            ajax: `/laporan-penjualan/sp-cvs/${$tgl}/${$sales}`,
+            ajax: `/operasional/smita/laporan-penjualan/sp-cvs/${$tgl}/${$sales}`,
             columnDefs: [
                 {
                     targets:[1,2,3,4,5,6,7,8,9,10],
@@ -233,7 +233,7 @@
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
         });
-        $.post(`/get_laporan_sp_cvs/${$tgl}/${$sales}`, function(response){
+        $.post(`/operasional/smita/get_laporan_sp_cvs/${$tgl}/${$sales}`, function(response){
             if(response.success)
             {
               console.log('Success..data');
@@ -256,8 +256,8 @@
         $('#save').on('click',function(event) {
           $tgl = $('#tgl').val();
           $sales = $('#sales').val();
-          t.ajax.url(`/laporan-penjualan/sp-cvs/${$tgl}/${$sales}`).load();
-          $.post(`/get_laporan_sp_cvs/${$tgl}/${$sales}`, function(response){
+          t.ajax.url(`/operasional/smita/laporan-penjualan/sp-cvs/${$tgl}/${$sales}`).load();
+          $.post(`/operasional/smita/get_laporan_sp_cvs/${$tgl}/${$sales}`, function(response){
             if(response.success)
             {
               console.log('Success..data');

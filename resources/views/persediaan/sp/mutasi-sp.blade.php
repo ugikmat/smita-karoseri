@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Persediaan')
+@section('title', 'Persediaan SP')
 
 @section('content_header')
     <h1>Mutasi SP</h1>
@@ -12,12 +12,10 @@
   th{
     text-align: center;
     margin: auto;
-    padding: 10%;
-  },
+
+  }
   td{
     text-align: center;
-    margin: auto;
-    padding: 10%;
   }
 </style>
 @stop
@@ -99,7 +97,7 @@
             processing: true,
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-            ajax: `/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`,
+            ajax: `/operasional/smita/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`,
             columns: [
               // {data: 'indeks'},
               {data: 'nama_produk'},
@@ -117,7 +115,7 @@
           $tgl_akhir = $('#tgl_akhir').val();
         $tgl_awal = $('#tgl_awal').val();
           $sales = $('#sales').val();
-          t.ajax.url(`/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`).load();
+          t.ajax.url(`/operasional/smita/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`).load();
         });
     });
 </script>

@@ -54,7 +54,7 @@
                 <div class="x_content">
                   <br />
 
-                  <form id="tambahForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/master/satuan">
+                  <form id="tambahForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/master/satuan">
                     @csrf
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Satuan
@@ -242,7 +242,7 @@
       serverSide: true,
       processing: true,
       stateSave: true,
-      ajax: '/satuan-data',
+      ajax: '/operasional/smita/satuan-data',
       columns: [{
           data: 'id_satuan'
         },
@@ -289,7 +289,7 @@
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    $('#editForm').attr('action', `/master/satuan/${id}`);
+    $('#editForm').attr('action', `/operasional/smita/master/satuan/${id}`);
     modal.find('.modal-body .nama input').val(name)
     modal.find('.modal-body .id input').val(id)
     modal.find('.modal-body .tipe input').val(tipe)
@@ -304,7 +304,7 @@
     var id = button.data('id') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/master/satuan/${id}`);
+    $('#deleteForm').attr('action', `/operasional/smita/master/satuan/${id}`);
   })
 </script>
 @stop

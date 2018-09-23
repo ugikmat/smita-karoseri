@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Persediaan')
+@section('title', 'Persediaan SP')
 
 @section('content_header')
     <h1>Mutasi SP per CVS</h1>
@@ -13,7 +13,7 @@
     text-align: center;
     margin: auto;
     padding: 10%;
-  },
+  }
   td{
     text-align: center;
     margin: auto;
@@ -112,7 +112,11 @@
             processing: true,
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
+<<<<<<< HEAD:resources/views/persediaan/mutasi-sp-cvs.blade.php
             ajax: `/operasional/smita/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`,
+=======
+            ajax: `/operasional/smita/stok-sp/data/${$sales}/${$tgl_awal}/${$tgl_akhir}`,
+>>>>>>> 4d8e7f5b5456c0cd942f4e9c5ab58a9756b41c50:resources/views/persediaan/sp/mutasi-sp-cvs.blade.php
             columns: [
               // {data: 'indeks'},
               {data: 'nama_produk'},
@@ -130,7 +134,7 @@
           $tgl_akhir = $('#tgl_akhir').val();
         $tgl_awal = $('#tgl_awal').val();
           $sales = $('#sales').val();
-          t.ajax.url(`/stok-sp/data/${$sales}/${$tgl_awal}/${$tgl_akhir}`).load();
+          t.ajax.url(`/operasional/smita/stok-sp/data/${$sales}/${$tgl_awal}/${$tgl_akhir}`).load();
         });
     });
 </script>

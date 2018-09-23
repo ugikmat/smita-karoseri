@@ -60,7 +60,9 @@
         <td></td>
         <td><b>Grand Total</b></td>
         <td></td>
-        <td><input type="text" name="qty" id="qty" class="form-control" value="" readonly></td>
+        <td><input type="text" name="dp5" id="dp5" class="form-control" value="" readonly></td>
+        <td><input type="text" name="dp10" id="dp10" class="form-control" value="" readonly></td>
+        <td><input type="text" name="dompul" id="dompul" class="form-control" value="" readonly></td>
         <td><input type="text" name="total" id="total" class="form-control" value="" readonly></td>
         <td><input type="text" name="cash" id="cash" class="form-control" value="" readonly></td>
         <td><input type="text" name="bca_pusat" id="bca_pusat" class="form-control" value="" readonly></td>
@@ -156,7 +158,7 @@
             processing: true,
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-            ajax: `/pembelian/laporan-pembelian/data/${$tgl}`,
+            ajax: `/operasional/smita/pembelian/laporan-pembelian/dompul/data/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -196,11 +198,13 @@
             cell.innerHTML = i+1;
           } );
         } ).draw();
-        $.post(`/get_laporan_dompul/${$tgl}`, function(response){
+        $.post(`/operasional/smita/pembelian/get_laporan_dompul/${$tgl}`, function(response){
             if(response.success)
             {
               console.log('Success..');
-              $('#qty').val(response.qty.toLocaleString('id-ID'));
+              $('#dp5').val(response.dp5.toLocaleString('id-ID'));
+              $('#dp10').val(response.dp10.toLocaleString('id-ID'));
+              $('#dompul').val(response.dompul.toLocaleString('id-ID'));
               $('#total').val(response.total.toLocaleString('id-ID'));
               $('#cash').val(response.cash.toLocaleString('id-ID'));
               $('#bca_pusat').val(response.bca_pusat.toLocaleString('id-ID'));
@@ -215,12 +219,14 @@
         }, 'json');
         $('#save').on('click',function(event) {
           $tgl = $('#tgl').val();
-          t.ajax.url(`/laporan-penjualan/${$tgl}`).load();
-          $.post(`/get_laporan_dompul/${$tgl}`, function(response){
+          t.ajax.url(`/operasional/smita/pembelian/laporan-pembelian/dompul/data/${$tgl}`).load();
+          $.post(`/operasional/smita/pembelian/get_laporan_dompul/${$tgl}`, function(response){
             if(response.success)
             {
               console.log('Success..');
-              $('#qty').val(response.qty.toLocaleString('id-ID'));
+              $('#dp5').val(response.dp5.toLocaleString('id-ID'));
+              $('#dp10').val(response.dp10.toLocaleString('id-ID'));
+              $('#dompul').val(response.dompul.toLocaleString('id-ID'));
               $('#total').val(response.total.toLocaleString('id-ID'));
               $('#cash').val(response.cash.toLocaleString('id-ID'));
               $('#bca_pusat').val(response.bca_pusat.toLocaleString('id-ID'));

@@ -123,8 +123,8 @@ class HargaDompulController extends Controller
     {
         return $datatables->eloquent(HargaDompul::where('status_harga_dompul','Aktif'))
                           ->addColumn('action', function ($hargaDompul) {
-                              return 
-                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$hargaDompul->id_harga_dompul.'" 
+                              return
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$hargaDompul->id_harga_dompul.'"
                               data-nama="'.$hargaDompul->nama_harga_dompul.'"
                               data-tipe="'.$hargaDompul->tipe_harga_dompul.'"
                               data-harga="'.$hargaDompul->harga_dompul.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>

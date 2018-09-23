@@ -22,7 +22,7 @@ class StokDompulController extends Controller
         $this->middleware(['auth','kasir']);
     }
     public function index(){
-        return view('persediaan.mutasi-dompul');
+        return view('persediaan.dompul.mutasi-dompul');
     }
     /**
      * Process dataTable ajax response.
@@ -35,14 +35,14 @@ class StokDompulController extends Controller
         // $data = DB::table('temp_detail_penjualan_sps')->get();
         // session(['tgl_stok_dompul'=>$tgl]);
         $tgl_awal = Carbon::parse($tgl_awal);
-        $tgl_awal = $tgl_awal->format('Y-m-d');  
-        
+        $tgl_awal = $tgl_awal->format('Y-m-d');
+
         $tgl_akhir = Carbon::parse($tgl_akhir);
-        $tgl_akhir = $tgl_akhir->format('Y-m-d');  
+        $tgl_akhir = $tgl_akhir->format('Y-m-d');
 //         $stokDompul = DB::table('kartu_stok_dompuls')->select(DB::raw("kartu_stok_dompuls.id_produk as nama,
 //         (SELECT sum(awal.masuk)-sum(awal.keluar)
 // FROM kartu_stok_dompuls awal WHERE awal.tanggal_transaksi < '{$tgl_awal}' AND awal.id_produk=nama) AS stok_awal,
-// sum(kartu_stok_dompuls.masuk) AS stok_masuk, 
+// sum(kartu_stok_dompuls.masuk) AS stok_masuk,
 // sum(kartu_stok_dompuls.keluar) AS stok_keluar,
 // (sum(kartu_stok_dompuls.masuk)-sum(kartu_stok_dompuls.keluar)+COALESCE((SELECT sum(awal.masuk)-sum(awal.keluar)
 // FROM kartu_stok_dompuls awal WHERE awal.tanggal_transaksi < '{$tgl_awal}' AND awal.id_produk=nama),0)) AS jumlah_stok"))
@@ -69,7 +69,7 @@ FROM kartu_stok_dompuls awal WHERE awal.tanggal_transaksi BETWEEN '{$tgl_awal}' 
                         //     $join->on('upload_dompuls.produk', '=', 'total_nominal.nama');
                         // })
                         ->where('status_active',1)->groupBy('produk','stok_awal','stok_masuk','stok_keluar','jumlah_stok')->get();
-        
+
         return $datatables->of($dompuls)
                         ->addColumn('indeks', function ($dataStok) {
                               return '';

@@ -49,7 +49,7 @@
                 </div>
                 <div class="x_content">
                   <br />
-                  <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/gudang">
+                  <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/gudang">
                     @csrf
 
                     <div class="form-group">
@@ -201,7 +201,7 @@
       serverSide: true,
       processing: true,
       stateSave: true,
-      ajax: '/master-gudang',
+      ajax: '/operasional/smita/master-gudang',
       columns: [{
           data: 'id_gudang'
         },
@@ -232,7 +232,7 @@
 </script>
 
   <script>
-  
+
   $('#editModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var name = button.data('name')// Extract info from data-* attributes
@@ -242,7 +242,7 @@
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
     $('#id_lokasi_upt').val(id)
-    $('#editForm').attr('action', `/gudang/${id}`);
+    $('#editForm').attr('action', `/operasional/smita/gudang/${id}`);
     modal.find('.modal-body .nama_gudang input').val(name)
     modal.find('.modal-body .nama_lokasi .lok_awal option').val(lokasi)
   })
@@ -252,7 +252,7 @@
     var id = button.data('id') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/gudang/${id}`);
+    $('#deleteForm').attr('action', `/operasional/smita/gudang/${id}`);
   })
 </script>
 

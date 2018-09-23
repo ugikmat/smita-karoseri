@@ -192,13 +192,13 @@ class UploadDompulController extends Controller {
      * Drop row on Upload Dompul Table
      *
      */
-    public function empty() {
+    public function empty(Request $request) {
         UploadDompul::truncate();
         $request->session()->flash('error','Gagal melakukan upload!');
         return redirect()->back();
     }
 
-    public function aktifasi($tgl_transfer, $tgl_upload){
+    public function aktifasi($tgl_transfer, $tgl_upload, Request $request){
         uploadDompul::where('tanggal_transfer',$tgl_transfer)
             ->where('tanggal_upload',$tgl_upload)
             ->update(['status_active' => 1]);

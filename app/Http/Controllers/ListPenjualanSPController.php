@@ -45,7 +45,7 @@ class ListPenjualanSPController extends Controller
         return view('penjualan.sp.list-invoice-sp',['lokasis'=>$lokasis,'saless'=>$saless]);
     }
 
-    public function verif($id){
+    public function verif(Request $request,$id){
         PenjualanProduk::where('id_penjualan_sp',$id)
                         ->update(['status_penjualan'=>1
                         ]);
@@ -99,7 +99,7 @@ class ListPenjualanSPController extends Controller
     public function delete(Request $request){
         PenjualanProduk::where('id_penjualan_sp',$request->get('id'))->update(['deleted'=>1]);
         $request->session()->flash('status', 'Berhasil menghapus List Invoice!');
-        return redirect('penjualan/sp/list-invoice-sp');
+        return redirect('/penjualan/sp/list-invoice-sp');
     }
 
     /**
@@ -124,39 +124,41 @@ class ListPenjualanSPController extends Controller
                 $detailPembayaranSp->save();
             }
         }
-        foreach ($bank as $key => $value) {
-            if (empty($value['id'])) {
-                $detailPembayaranSp = new DetailPembayaranSp();
-                $detailPembayaranSp->id_penjualan_sp = $penjualanSp->id_penjualan_sp;
-            } else {
-                $detailPembayaranSp = DetailPembayaranSp::where('id_detail_pembayaran_sp',$value['id'])->first();
-            }
-            $detailPembayaranSp->metode_pembayaran = $value['bank'];
-            $detailPembayaranSp->nominal=str_replace('.','',$value['trf']);
-            $detailPembayaranSp->catatan = $value['catatan'];
-            switch ($value['bank']) {
-                case 'BCA Pusat':
-                    $detailPembayaranSp->bca_pusat=$value['trf'];
-                    break;
-                case 'BCA Cabang':
-                    $detailPembayaranSp->bca_cabang=$value['trf'];
-                    break;
-                case 'Mandiri':
-                    $detailPembayaranSp->mandiri=$value['trf'];
-                    break;
-                case 'BNI':
-                    $detailPembayaranSp->bni=$value['trf'];
-                    break;
-                case 'BRI':
-                    $detailPembayaranSp->bri=$value['trf'];
-                    break;
-                case 'Cash':
-                    $detailPembayaranSp->cash=$value['trf'];
-                    break;
-                default:
-                    break;
-            }
-            $detailPembayaranSp->save();
+        if(!empty($bank)){
+          foreach ($bank as $key => $value) {
+              if (empty($value['id'])) {
+                  $detailPembayaranSp = new DetailPembayaranSp();
+                  $detailPembayaranSp->id_penjualan_sp = $penjualanSp->id_penjualan_sp;
+              } else {
+                  $detailPembayaranSp = DetailPembayaranSp::where('id_detail_pembayaran_sp',$value['id'])->first();
+              }
+              $detailPembayaranSp->metode_pembayaran = $value['bank'];
+              $detailPembayaranSp->nominal=str_replace('.','',$value['trf']);
+              $detailPembayaranSp->catatan = $value['catatan'];
+              switch ($value['bank']) {
+                  case 'BCA Pusat':
+                      $detailPembayaranSp->bca_pusat=$value['trf'];
+                      break;
+                  case 'BCA Cabang':
+                      $detailPembayaranSp->bca_cabang=$value['trf'];
+                      break;
+                  case 'Mandiri':
+                      $detailPembayaranSp->mandiri=$value['trf'];
+                      break;
+                  case 'BNI':
+                      $detailPembayaranSp->bni=$value['trf'];
+                      break;
+                  case 'BRI':
+                      $detailPembayaranSp->bri=$value['trf'];
+                      break;
+                  case 'Cash':
+                      $detailPembayaranSp->cash=$value['trf'];
+                      break;
+                  default:
+                      break;
+              }
+              $detailPembayaranSp->save();
+          }
         }
         // session(['tgl_penjualan_sp'=>$penjualanSp->id_sales,'id_cust'=>$penjualanSp->id_customer]);
         $request->session()->flash('status', 'Berhasil melakukan edit!');
@@ -174,7 +176,7 @@ class ListPenjualanSPController extends Controller
         if ($tgl_awal=='null') {
             $tgl = $tgl_awal;
         }else {
-            session(['dompul-list-tgl'=>$tgl_awal]);
+            session(['sp-list-tgl-awal'=>$tgl_awal,'sp-list-tgl-akhir'=>$tgl_akhir,'lokasi_penjualan'=>$lokasi,'sp-list-sales'=>$sales]);
             $tgl_awal = Carbon::parse($tgl_awal);
             $tgl_awal = $tgl_awal->format('Y-m-d');
             $tgl_akhir = Carbon::parse($tgl_akhir);
@@ -221,17 +223,26 @@ class ListPenjualanSPController extends Controller
                             })
                           ->addColumn('action', function ($penjualanSP) {
                               if ($penjualanSP->status_penjualan==0) {
-                                  return
+                                  if(Auth::user()->level_user=='Supervisor'||Auth::user()->level_user=='Super Admin'){
+                                    return
                                     '<a class="btn btn-xs btn-primary"
-                                    href="/penjualan/sp/list-invoice-sp/edit/'.$penjualanSP->id_penjualan_sp.'/'.$penjualanSP->nm_sales.'/'.$penjualanSP->tanggal_penjualan_sp.'/'.$penjualanSP->nm_cust.'">
+                                    href="/operasional/smita/penjualan/sp/list-invoice-sp/edit/'.$penjualanSP->id_penjualan_sp.'/'.$penjualanSP->nm_sales.'/'.$penjualanSP->tanggal_penjualan_sp.'/'.$penjualanSP->nm_cust.'">
                                     <i class="glyphicon glyphicon-edit"></i> Edit
                                     </a>
                                     <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$penjualanSP->id_penjualan_sp.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>
                                     <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanSP->id_penjualan_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                                  }else {
+                                    return
+                                    '<a class="btn btn-xs btn-primary"
+                                    href="/operasional/smita/penjualan/sp/list-invoice-sp/edit/'.$penjualanSP->id_penjualan_sp.'/'.$penjualanSP->nm_sales.'/'.$penjualanSP->tanggal_penjualan_sp.'/'.$penjualanSP->nm_cust.'">
+                                    <i class="glyphicon glyphicon-edit"></i> Edit
+                                    </a>
+                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanSP->id_penjualan_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                                  }
                               } else {
                                   return
                                     '<a class="btn btn-xs btn-primary"
-                                    href="/penjualan/sp/list-invoice-sp/edit/'.$penjualanSP->id_penjualan_sp.'/'.$penjualanSP->nm_sales.'/'.$penjualanSP->tanggal_penjualan_sp.'/'.$penjualanSP->nm_cust.'">
+                                    href="/operasional/smita/penjualan/sp/list-invoice-sp/edit/'.$penjualanSP->id_penjualan_sp.'/'.$penjualanSP->nm_sales.'/'.$penjualanSP->tanggal_penjualan_sp.'/'.$penjualanSP->nm_cust.'">
                                     <i class="glyphicon glyphicon-edit"></i> Lihat
                                     </a>
                                     <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanSP->id_penjualan_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';

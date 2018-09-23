@@ -72,7 +72,7 @@
     </div>
   </div>
 </div>
-<form action="/list_invoice_SP/store" method="post" class="repeater">
+<form action="/operasional/smita/list_invoice_SP/store" method="post" class="repeater">
   @csrf
   <div id="deleted">
 
@@ -156,7 +156,7 @@
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
           <b>Pembayaran</b>
           <br>
-          <select name="bank" id="bank" style="height: calc(3.5rem - 2px); width:100%">
+          <select name="bank" id="bank" style="height: calc(3.5rem - 2px); width:100%" required>
             <option value="">-- Cara Pembayaran --</option>
             <option value="Cash">Cash</option>
             <option value="BCA Pusat">BCA Pusat</option>
@@ -169,12 +169,12 @@
         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-3">
           <b>Nominal</b>
           <br>
-          <input type="text" id="trf" name="trf" class="form-control" value="">
+          <input type="text" id="trf" name="trf" class="form-control" value="" autocomplete="off" required>
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
           <b>Catatan</b>
           <br>
-          <input type="text" id="catatan" name="catatan" class="form-control" value="">
+          <input type="text" id="catatan" name="catatan" class="form-control" value="" autocomplete="off">
         </div>
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
           <br>
@@ -328,9 +328,9 @@
             // defaultValues refer to the value of the input's name attribute.
             // If a default value is not specified for an input, then it will
             // have its value cleared.
-            // defaultValues: {
-            //     'text-input': 'foo'
-            // },
+            defaultValues: {
+                'trf': '0'
+            },
             // (Optional)
             // "show" is called just after an item is added.  The item is hidden
             // at this point.  If a show callback is not given the item will
@@ -412,7 +412,7 @@
             processing: true,
             stateSave: true,
             searching:  false,
-            ajax: `/edit_list_invoice_sp/${id}`,
+            ajax: `/operasional/smita/edit_list_invoice_sp/${id}`,
             columns: [
               {data: 'nama_produk'},
                       {data: 'tipe_harga'},
@@ -428,7 +428,7 @@
             processing: true,
             searching:  false,
             stateSave: true,
-            ajax: `/edit_list_invoice_sp/${id}`,
+            ajax: `/operasional/smita/edit_list_invoice_sp/${id}`,
             columns: [
               {data: 'nama_produk'},
                       {data: 'tipe_harga'},
@@ -449,7 +449,7 @@
             console.log($('#total').val());
             $('#total').val(response.total);
             console.log($('#total').val());
-            t.ajax.url(`/edit_list_invoice_sp/${id}`).load();
+            t.ajax.url(`/operasional/smita/edit_list_invoice_sp/${id}`).load();
             $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
 
             // console.log($('#total').val(response.total));
@@ -490,7 +490,7 @@
     });
     console.log(produk);
     // $('#editForm').attr('action', `/invoice_sp/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
-    $('#link').val(`/list_invoice_sp/update/${id}/${id_detail}`);
+    $('#link').val(`/operasional/smita/list_invoice_sp/update/${id}/${id_detail}`);
   })
 </script>
 @stop

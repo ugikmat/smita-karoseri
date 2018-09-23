@@ -100,7 +100,7 @@ class ListPembelianDompulController extends Controller
                 $detailPembelianDompul->save();
             }
         }
-
+        if(!empty($bank)){
         foreach ($bank as $key => $value) {
             if (empty($value['id'])) {
                 $detailPembelianDompul = new DetailPembayaranPembelianDompul();
@@ -135,6 +135,7 @@ class ListPembelianDompulController extends Controller
             $detailPembelianDompul->catatan = $value['catatan'];
             $detailPembelianDompul->save();
         }
+      }
         $request->session()->flash('status','Berhasil melakukan edit!');
         return redirect('/pembelian/dompul/list-pembelian-dompul');
     }
@@ -187,7 +188,7 @@ class ListPembelianDompulController extends Controller
                               if ($pembelianDompul->status_pembayaran==0) {
                                   return
                                     '<a class="btn btn-xs btn-primary"
-                                    href="/pembelian/dompul/list-invoice/edit/'.$pembelianDompul->id_pembelian_dompul.'">
+                                    href="/operasional/smita/pembelian/dompul/list-invoice/edit/'.$pembelianDompul->id_pembelian_dompul.'">
                                     <i class="glyphicon glyphicon-edit"></i> Edit
                                     </a>
                                     <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$pembelianDompul->id_pembelian_dompul.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>
@@ -195,7 +196,7 @@ class ListPembelianDompulController extends Controller
                               } else {
                                   return
                                     '<a class="btn btn-xs btn-primary"
-                                    href="/pembelian/dompul/list-invoice/edit/'.$pembelianDompul->id_pembelian_dompul.'">
+                                    href="/operasional/smita/pembelian/dompul/list-invoice/edit/'.$pembelianDompul->id_pembelian_dompul.'">
                                     <i class="glyphicon glyphicon-edit"></i> Lihat
                                     </a>
                                     <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$pembelianDompul->id_pembelian_dompul.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';

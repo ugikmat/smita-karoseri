@@ -255,9 +255,23 @@
       </div>
       <div class="modal-body">
         <!-- Form -->
-        <form method='post' action='/importExcel' enctype="multipart/form-data">
+        <form method='post' action='/operasional/smita/importExcel' enctype="multipart/form-data">
           @csrf
-          <div class="form-group">
+          <div class="form-group row">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Lokasi
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <select id="id_lokasi" required="required" name="id_lokasi" placeholder="Pilih Lokasi" class="form-control col-md-7 col-xs-12">
+                <option value="" selected disabled>Pilih Lokasi</option>
+                @isset($lokasiarray)
+                  @foreach ($lokasiarray as $data)
+                    <option value="{{ $data->id_lokasi }}">{{ $data->nm_lokasi }}</option>
+                  @endforeach
+                @endisset
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
             <label for="import_file">File</label>
             <input type='file' name='import_file' id='import_file' class='form-control' accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
             <br>
@@ -505,7 +519,7 @@
       processing: true,
       stateSave: true,
       lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-      ajax: '/upload/tgl',
+      ajax: '/operasional/smita/upload/tgl',
       columns: [
         {
           data: 'tanggal_transfer'
@@ -556,7 +570,7 @@
       stateSave: true,
       lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
       //Just Dummy Date
-      ajax: '/upload/null/null',
+      ajax: '/operasional/smita/upload/null/null',
       columns: [{
           data: 'id_upload'
         },
@@ -640,13 +654,13 @@
     var button = $(event.relatedTarget) // Button that triggered the modal
     var transfer = button.data('transfer') // Extract info from data-* attributes
     var upload = button.data('upload')
-    table.ajax.url(`/upload/${transfer}/${upload}`).load();
+    table.ajax.url(`/operasional/smita/upload/${transfer}/${upload}`).load();
   })
   $('#activationModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var transfer = button.data('transfer') // Extract info from data-* attributes
     var upload = button.data('upload')
-    $('#activationForm').attr('action',`/upload/aktifasi/${transfer}/${upload}`);
+    $('#activationForm').attr('action',`/operasional/smita/upload/aktifasi/${transfer}/${upload}`);
   })
 </script>
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>

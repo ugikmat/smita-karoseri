@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Laporan SP')
+@section('title', 'Laporan Dompul')
 
 @section('content_header')
-    <h1>Laporan Piutang Penjualan SP</h1>
+    <h1>Laporan Piutang Penjualan Dompul</h1>
 
 @stop
 
@@ -44,7 +44,7 @@
 </div>
 <br><br>
 
-<table id="lp-sp-table" class="table responsive table-bordered" width="100%">
+<table id="lp-piutang-dompul-table" class="table responsive table-bordered" width="100%">
     <thead>
     <tr>
         <th>No</th>
@@ -133,17 +133,13 @@
         }else{
           console.log('No');
         }
-        var t = $('#lp-sp-table').DataTable({
+        var t = $('#lp-piutang-dompul-table').DataTable({
             serverSide: true,
             processing: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             scrollX: true,
             stateSave: true,
-<<<<<<< HEAD
-            ajax: `/operasional/smita/laporan-penjualan/sp/${$tgl}`,
-=======
-            ajax: `/operasional/smita/laporan-piutang/sp/${$tgl}`,
->>>>>>> 4d8e7f5b5456c0cd942f4e9c5ab58a9756b41c50
+            ajax: `/operasional/smita/laporan-piutang/dompul/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -195,7 +191,7 @@
         // }, 'json');
         $('#save').on('click',function(event) {
           $tgl = $('#tgl').val();
-          t.ajax.url(`/operasional/smita/laporan-piutang/sp/${$tgl}`).load();
+          t.ajax.url(`/operasional/smita/laporan-piutang/dompul/${$tgl}`).load();
         //   $.post(`/get_laporan_sp/${$tgl}`, function(response){
         //     if(response.success)
         //     {
