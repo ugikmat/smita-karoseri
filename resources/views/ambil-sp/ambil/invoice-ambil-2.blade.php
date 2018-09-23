@@ -60,9 +60,17 @@ td{
       <th>Tipe Harga</th>
       <th>Harga Satuan</th>
       <th>Jumlah</th>
-      <th>Harga Total</th>
     </tr>
     </thead>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>Total Pengambilan</td>
+        <!-- totale seng diambil, sum jumlah -->
+        <td>totale piro</td>
+      </tr>
+    </tfoot>
 </table>
 <br>
 <div class="container form-inline">

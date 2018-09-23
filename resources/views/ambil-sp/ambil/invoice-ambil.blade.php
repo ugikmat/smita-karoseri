@@ -69,6 +69,7 @@
 <br><br>
 
 <!-- semua produk (sp) ditampilkan -->
+<!-- gausa atek harga total -->
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-2 top" align="center">
@@ -86,9 +87,9 @@
     <div class="col-xs-2 top" align="center">
       <b>Jumlah</b>
     </div>
-    <div class="col-xs-2 top" align="center">
+    <!-- <div class="col-xs-2 top" align="center">
       <b>Harga Total</b>
-    </div>
+    </div> -->
   </div>
   <br>
   @foreach($produks as $key => $produk)
