@@ -175,6 +175,11 @@ return [
                         'icon'  => 'user',
                       ],
                       [
+                        'text'  => 'Piutang Dompul',
+                        'url'   => '/penjualan/laporan-penjualan/LP-piutang-dompul',
+                        'icon'  => 'file',
+                      ],
+                      [
                         'text'  => 'Penjualan Dompul Head',
                         'url'   => '/penjualan/laporan-penjualan/dompul-head',
                         'icon'  => 'money',

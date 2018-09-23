@@ -478,6 +478,9 @@ Route::get('/laporan/lap_progress_detailpb', function() {
 
 
 
+Route::get('/penjualan/laporan-penjualan/LP-piutang-dompul', function() {
+  return view ('/penjualan/laporan-penjualan/LP-piutang-dompul');
+}) -> name('LP-piutang-dompul');
 
 Route::get('/penjualan/laporan-penjualan/LP-piutang-sp','LaporanPiutangSpController@index');
 Route::get('/laporan-piutang/sp/{tgl_penjualan}', 'LaporanPiutangSpController@data');
