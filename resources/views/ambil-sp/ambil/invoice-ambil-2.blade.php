@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Penjualan sp')
+@section('title', 'Pengambilan SP')
 
 @section('content_header')
-    <h1>Review Penjualan sp RO</h1>
+    <h1>Review Pengambilan SP</h1>
 @stop
 
 @section('css')
@@ -116,7 +116,7 @@ function goBack() {
 });
     $(function () {
         var id = $('#id').val();
-        var t = $('#invoice-sp-table').DataTable({
+        var t = $('#invoice-ambil-sp-table').DataTable({
                   serverSide: true,
                   processing: true,
                   stateSave: true,

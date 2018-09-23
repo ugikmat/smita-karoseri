@@ -24,19 +24,22 @@
 @stop
 
 @section('content')
-<form class="invoice-ambil-sp repeater" action="" method="post">
+
+<!-- sama kayak invoice ambil garis besarnya -->
+
+<form class="invoice-kembali-sp repeater" action="" method="post">
 <div class="container-fluid  form-inline">
 
   <!-- alert biasa -->
   @if (Session::has('status'))
   <div class="alert alert-success">
-    <strong>Berhasil!</strong> Transaksi pengambilan SP anda berhasil
+    <strong>Berhasil!</strong> Transaksi pengembalian SP anda berhasil
   </div>
   @endif
   @csrf
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2" id="kiri">
-      Tanggal Pengambilan : &nbsp;
+      Tanggal Pengembalian : &nbsp;
       <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}">
     </div>
     <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2" id="kiri" style="margin-left:20px;">
@@ -68,7 +71,7 @@
 
 <br><br>
 
-<!-- semua produk (sp) ditampilkan -->
+<!-- hanya produk (sp) yg diambil yg ditampilkan -->
 <!-- gausa atek harga total -->
 <div class="container-fluid">
   <div class="row">
@@ -134,8 +137,8 @@
     </div>
     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
       <br>
-      <!-- link ke invoice-ambil-2 -->
-      <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Ambil SP</button>
+      <!-- link ke invoice-kembali-2 -->
+      <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> balikkan SP</button>
       <br><br>
     </div>
   </div>
