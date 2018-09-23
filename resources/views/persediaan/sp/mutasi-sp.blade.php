@@ -26,7 +26,7 @@
   @csrf
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        Tanggal Awal :
+        <strong>Tanggal Awal :</strong>
         @if(Session::has('tgl_stok_sp'))
           <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_awal" name="tgl_awal" value="{{session('tgl_stok_sp')}}">
         @else
@@ -35,7 +35,7 @@
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        Tanggal Akhir :
+        <strong>Tanggal Akhir :</strong>
         @if(Session::has('tgl_stok_sp'))
           <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_akhir" name="tgl_akhir" value="{{session('tgl_stok_sp')}}">
         @else

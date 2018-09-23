@@ -146,7 +146,7 @@
       </a> --}}
     </div>
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      Tanggal : {{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}
+      <strong>Tanggal :</strong> {{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}
     </div>
   </div>
 </div>

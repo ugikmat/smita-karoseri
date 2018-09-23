@@ -39,11 +39,11 @@
   @csrf
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2" id="kiri">
-      Tanggal Pengembalian : &nbsp;
+      <strong>Tanggal Pengembalian :</strong> &nbsp;
       <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_penjualan" name="tgl_penjualan" value="{{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}">
     </div>
     <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2" id="kiri" style="margin-left:20px;">
-        Lokasi : &nbsp;
+        <strong>Lokasi :</strong> &nbsp;
         <select name="lokasi" required="required" class="form-control chosen-select" id="lokasi">
           <option value="" disabled selected>Pilih Lokasi</option>
           @isset($lokasis)
@@ -54,7 +54,7 @@
         </select>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" id="kiri">
-        Nama Canvaser : &nbsp;
+        <strong>Nama Canvaser :</strong> &nbsp;
         <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('id_sales')}}">
               @isset($saless)
                   @if($saless->count()>1)

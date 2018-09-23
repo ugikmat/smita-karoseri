@@ -23,7 +23,7 @@
 <div class="cotainer-fluid form-inline">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        Tanggal Awal&emsp;&nbsp;&nbsp;:
+        <strong>Tanggal Awal&emsp;&nbsp;&nbsp;:</strong>
         @if(Session::has('tgl_stok_dompul'))
           <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_awal" name="tgl_awal" value="{{session('tgl_stok_dompul')}}">
         @else
@@ -32,7 +32,7 @@
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        Tanggal Akhir&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+        <strong>Tanggal Akhir&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;:</strong>
         @if(Session::has('tgl_stok_dompul'))
           <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_akhir" name="tgl_akhir" value="{{session('tgl_stok_dompul')}}">
         @else
@@ -47,10 +47,10 @@
   <br>
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        Nama Kasir&emsp;&emsp;: (nama)
+        <strong>Nama Kasir&emsp;&emsp;:</strong> (nama)
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        Tanggal Cetak Laporan&emsp;: {{Carbon\Carbon::now()->format('d/m/Y')}}
+        <strong>Tanggal Cetak Laporan&emsp;:</strong> {{Carbon\Carbon::now()->format('d/m/Y')}}
     </div>
   </div>
 </div>
