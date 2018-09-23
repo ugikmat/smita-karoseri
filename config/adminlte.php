@@ -264,6 +264,29 @@ return [
                 ],
               ],
               [
+                'text'    => 'Pengambilan SP',
+                'icon'    => 'paste',
+                'submenu' => [
+                  [
+                    'text'  => 'Pengambilan',
+                    'icon'  => 'share',
+                    'submenu' => [
+                      [
+                        'text'  => 'Invoice Pengambilan',
+                        'icon'  => 'export',
+                        'url'   => '/ambil-sp/ambil/invoice-ambil',
+                      ],
+                      [
+                        'text'  => 'List Invoice',
+                        'icon'  => 'file',
+                        'url'   => '/ambil-sp/ambil/list-invoice-ambil',
+                      ],
+                    ],
+                  ],
+                  [],
+                ],
+              ],
+              [
                 'text'    => 'Persediaan',
                 'icon'    => 'share',
                 'submenu' => [

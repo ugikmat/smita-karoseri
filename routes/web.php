@@ -496,3 +496,12 @@ Route::get('/stok-sp/all/data/{tgl_awal}/{tgl_akhir}', 'StokCVSSpAllController@d
 Route::get('/persediaan/sp/pengambilan-sp', function() {
   return view ('/persediaan/sp/pengambilan-sp');
 }) -> name('pengambilan-sp');
+
+
+Route::get('/ambil-sp/ambil/invoice-ambil', function() {
+  return view ('/ambil-sp/ambil/invoice-ambil');
+}) -> name('invoice-ambil');
+
+oute::get('/ambil-sp/ambil/list-invoice-ambil', function() {
+  return view ('/ambil-sp/ambil/list-invoice-ambil');
+}) -> name('list-invoice-ambil');
