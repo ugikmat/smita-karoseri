@@ -257,7 +257,21 @@
         <!-- Form -->
         <form method='post' action='/operasional/smita/importExcel' enctype="multipart/form-data">
           @csrf
-          <div class="form-group">
+          <div class="form-group row">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Lokasi
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <select id="id_lokasi" required="required" name="id_lokasi" placeholder="Pilih Lokasi" class="form-control col-md-7 col-xs-12">
+                <option value="" selected disabled>Pilih Lokasi</option>
+                @isset($lokasiarray)
+                  @foreach ($lokasiarray as $data)
+                    <option value="{{ $data->id_lokasi }}">{{ $data->nm_lokasi }}</option>
+                  @endforeach
+                @endisset
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
             <label for="import_file">File</label>
             <input type='file' name='import_file' id='import_file' class='form-control' accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
             <br>
