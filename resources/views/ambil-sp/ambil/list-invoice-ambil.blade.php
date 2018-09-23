@@ -23,7 +23,7 @@
 {{-- @if (session('tgl'))
   <input type="hidden" id="tgl"value={{ session('tgl')}}></input>
 @endif --}}
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput">Input Tanggal Penjualan</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput">Input Tanggal Pengambilan</button>
 <form action="" method="post">
 <table id="list-invoice-table" class="table responsive" width="100%">
     <thead>
