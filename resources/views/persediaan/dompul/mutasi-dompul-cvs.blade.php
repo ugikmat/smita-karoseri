@@ -64,7 +64,7 @@
 </div>
 <br><br>
 
-<table id="mutasi-Dompul-cvs-table" class="table responsive" width="100%">
+<table id="mutasi-dompul-cvs-table" class="table responsive" width="100%">
     <thead>
       <tr>
         <th>Nama Produk</th>
@@ -90,7 +90,7 @@
 
 @section('js')
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
   $('.chosen-select').chosen();
   @if(Session::has('sales_stok_dompul'))
     $("#sales").val("{{session('sales_stok_dompul')}}");
@@ -115,7 +115,7 @@
             ajax: `/operasional/smita/stok-dompul/data/${$sales}/${$tgl_awal}/${$tgl_akhir}`,
             columns: [
               // {data: 'indeks'},
-              {data: 'nama_produk'},
+              {data: 'produk'},
               {data: 'stok_awal'},
               {data: 'stok_masuk'},
               {data: 'stok_keluar'},
@@ -133,5 +133,5 @@
           t.ajax.url(`/operasional/smita/stok-dompul/data/${$sales}/${$tgl_awal}/${$tgl_akhir}`).load();
         });
     });
-</script> -->
+</script>
 @stop

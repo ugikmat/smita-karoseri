@@ -139,7 +139,7 @@
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             scrollX: true,
             stateSave: true,
-            ajax: `/laporan-piutang/dompul/${$tgl}`,
+            ajax: `/operasional/smita/laporan-piutang/dompul/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,

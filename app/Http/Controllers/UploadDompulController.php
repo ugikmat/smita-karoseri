@@ -207,7 +207,7 @@ class UploadDompulController extends Controller {
         foreach ($dompul as $key => $value) {
             $stokDompul = new StokDompul();
             $stokDompul->id_produk= $value->produk;
-            // $stokDompul->id_sales= $request->get('id_sales');
+            $stokDompul->id_sales= Sales::where('nm_sales',$value->nama_canvasser)->first()->id_sales;
             $stokDompul->id_lokasi= $value->id_lokasi;
             $stokDompul->tanggal_transaksi= $value->tanggal_transfer;
             $stokDompul->nomor_referensi= $value->id_upload;
