@@ -112,11 +112,7 @@
             processing: true,
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-<<<<<<< HEAD:resources/views/persediaan/mutasi-sp-cvs.blade.php
-            ajax: `/operasional/smita/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`,
-=======
             ajax: `/operasional/smita/stok-sp/data/${$sales}/${$tgl_awal}/${$tgl_akhir}`,
->>>>>>> 4d8e7f5b5456c0cd942f4e9c5ab58a9756b41c50:resources/views/persediaan/sp/mutasi-sp-cvs.blade.php
             columns: [
               // {data: 'indeks'},
               {data: 'nama_produk'},
