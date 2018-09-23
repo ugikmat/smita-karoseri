@@ -46,6 +46,18 @@
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+      <strong>Lokasi :</strong> &nbsp;
+      <select name="lokasi" required="required" class="form-control chosen-select" id="lokasi">
+        <option value="" disabled selected>Pilih Lokasi</option>
+        @isset($lokasis)
+          @foreach($lokasis as $lokasi)
+            <option value="{{$lokasi->id_lokasi}}" id="{{$lokasi->nm_lokasi}}">{{$lokasi->nm_lokasi}}</option>
+          @endforeach
+        @endisset
+      </select>
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <button type="button" id="save" class="btn btn-success" ><i class="fa fa-caret-square-o-right"></i>Tampilkan Mutasi SP</button>
     </div>
   </div>
