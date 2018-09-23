@@ -481,12 +481,11 @@ Route::get('/laporan-piutang/sp/{tgl_penjualan}', 'LaporanPiutangSpController@da
 Route::get('/penjualan/laporan-penjualan/LP-piutang-dompul','LaporanPiutangDompulController@index');
 Route::get('/laporan-piutang/dompul/{tgl_penjualan}', 'LaporanPiutangDompulController@data');
 
-Route::get('/persediaan/dompul/mutasi-dompul-cvs', function() {
-  return view ('/persediaan/dompul/mutasi-dompul-cvs');
-}) -> name('mutasi-dompul-cvs');
-
 Route::get('/persediaan/dompul/mutasi-dompul-cvs', 'StokCVSDompulController@index');
 Route::get('/stok-dompul/data/{sales}/{tgl_awal}/{tgl_akhir}', 'StokCVSDompulController@data');
+
+Route::get('/persediaan/dompul/mutasi-dompul-semua-cvs', 'StokCVSDompulAllController@index');
+Route::get('/stok-dompul/all/data/{tgl_awal}/{tgl_akhir}', 'StokCVSDompulAllController@data');
 
 Route::get('/persediaan/sp/mutasi-sp-cvs', 'StockCVSSpController@index');
 Route::get('/stok-sp/data/{sales}/{tgl_awal}/{tgl_akhir}', 'StockCVSSpController@data');

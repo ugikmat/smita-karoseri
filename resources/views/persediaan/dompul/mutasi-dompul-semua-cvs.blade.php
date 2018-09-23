@@ -70,7 +70,7 @@
 
 @section('js')
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
   $('.chosen-select').chosen();
   @if(Session::has('sales_stok_dompul'))
     $("#sales").val("{{session('sales_stok_dompul')}}");
@@ -95,7 +95,7 @@
             ajax: `/operasional/smita/stok-dompul/all/data/${$tgl_awal}/${$tgl_akhir}`,
             columns: [
               // {data: 'indeks'},
-              {data: 'nama_produk'},
+              {data: 'produk'},
               @isset($saless)
                 @foreach($saless as $sales)
                   {data: "{{$sales->nm_sales}}"},
@@ -114,5 +114,5 @@
           t.ajax.url(`/operasional/smita/stok-dompul/all/data/${$tgl_awal}/${$tgl_akhir}`).load();
         });
     });
-</script> -->
+</script>
 @stop
