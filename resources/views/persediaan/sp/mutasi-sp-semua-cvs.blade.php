@@ -24,13 +24,13 @@
 
 @section('content')
 <div class="container-fluid form-inline">
-  <form class="invoice-sp repeater" action="" method="post">
+  <form class="invoice-sp repeater" action="/persediaan/sp/mutasi-sp-semua-cvs/show" method="post">
   @csrf
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
         <strong>Tanggal Awal :</strong>
-        @if(Session::has('tgl_stok_sp'))
-          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_awal" name="tgl_awal" value="{{session('tgl_stok_sp')}}">
+        @if(Session::has('tgl_awal_stok_sp'))
+          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_awal" name="tgl_awal" value="{{session('tgl_awal_stok_sp')}}">
         @else
           <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_awal" name="tgl_awal" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
         @endif
@@ -38,8 +38,8 @@
 
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
         <strong>Tanggal Akhir :</strong>
-        @if(Session::has('tgl_stok_sp'))
-          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_akhir" name="tgl_akhir" value="{{session('tgl_stok_sp')}}">
+        @if(Session::has('tgl_akhir_stok_sp'))
+          <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_akhir" name="tgl_akhir" value="{{session('tgl_akhir_stok_sp')}}">
         @else
           <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_akhir" name="tgl_akhir" value="{{Carbon\Carbon::now()->format('d-m-Y')}}">
         @endif
@@ -58,9 +58,10 @@
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <button type="button" id="save" class="btn btn-success" ><i class="fa fa-caret-square-o-right"></i>Tampilkan Mutasi SP</button>
+      <button type="submit" class="btn btn-success" ><i class="fa fa-caret-square-o-right"></i>Tampilkan Mutasi SP</button>
     </div>
   </div>
+  </form>
 </div>
 <br><br>
 
@@ -84,10 +85,10 @@
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <script type="text/javascript">
   $('.chosen-select').chosen();
-  @if(Session::has('sales_stok_sp'))
-    $("#sales").val("{{session('sales_stok_sp')}}");
+  @if(Session::has('mutasi_lokasi'))
+    $("#lokasi").val("{{session('mutasi_lokasi')}}");
+    $('#lokasi').trigger("chosen:updated");
   @endif
-  $('#sales').trigger("chosen:updated");
 </script>
 <script>
   $('.datepicker').datepicker({

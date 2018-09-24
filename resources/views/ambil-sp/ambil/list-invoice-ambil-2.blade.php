@@ -7,19 +7,18 @@
 @stop
 
 @section('content')
-<input type="hidden" name="tgl" id="tgl" value="{{$penjualanSP->tanggal_penjualan_sp}}">
-<input type="hidden" name="customer" id="customer" value="{{$customer->nm_cust}}">
+<input type="hidden" name="tgl" id="tgl" value="{{$pengambilanSP->tanggal_pengambilan_sp}}">
 <input type="hidden" name="sales" id="sales" value="{{$sales->nm_sales}}">
 <div class="container-fluid">
   <div class="row">
-    <!-- kalo ga ada no penjualan ato no embo pokoe, hapus ae -->
+    <!-- kalo ga ada no pengambilan ato no embo pokoe, hapus ae -->
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
         No Penjualan
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
         <strong>
-        : {{$penjualanSP->id_penjualan_sp}}
+        : {{$pengambilanSP->id_pengambilan_sp}}
         </strong>
       </div>
     </div>
@@ -54,25 +53,25 @@
   <div id="deleted">
 
   </div>
-  <input type="hidden" name="id" id="id" value="{{$penjualanSP->id_penjualan_sp}}">
+  <input type="hidden" name="id" id="id" value="{{$pengambilanSP->id_pengambilan_sp}}">
 <table id="list-edit-invoice-table" class="table responsive"  width="100%">
     <thead>
     <tr>
-      @if($penjualanSP->status_penjualan==0)
+      @if($pengambilanSP->status_pengambilan==0)
         <th>Nama Barang</th>
         <th>Tipe Harga</th>
-        <th>Harga Satuan</th>
+        {{-- <th>Harga Satuan</th> --}}
         <th>Jumlah</th>
         <th>Action</th>
       @else
         <th>Nama Barang</th>
         <th>Tipe Harga</th>
-        <th>Harga Satuan</th>
+        {{-- <th>Harga Satuan</th> --}}
         <th>Jumlah</th>
       @endif
     </tr>
     </thead>
-    <tfoot>
+    {{-- <tfoot>
       <tr>
         <td></td>
         <td></td>
@@ -80,9 +79,11 @@
         <!-- totale seng diambil, sum jumlah -->
         <td>totale piro</td>
       </tr>
-    </tfoot>
+    </tfoot> --}}
 </table>
-<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Simpan</button>
+@if($pengambilanSP->status_pengambilan==0)
+{{-- <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Simpan</button> --}}
+@endif
 
 </form>
 
@@ -215,19 +216,17 @@
 <script>
     $(function () {
         var id = $('#id').val();
-        if({{$penjualanSP->status_penjualan}}==0){
+        if({{$pengambilanSP->status_pengambilan}}==0){
           var t= $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
             stateSave: true,
             searching:  false,
-            ajax: `/operasional/smita/edit_list_invoice_sp/${id}`,
+            ajax: `/pengambilan_sp/detail/${id}`,
             columns: [
               {data: 'nama_produk'},
                       {data: 'tipe_harga'},
-                      {data: 'harga'},
                       {data: 'jumlah'},
-                      {data: 'total_harga'},
                       {data: 'action', orderable: false, searchable: false}
             ]
         });
@@ -237,32 +236,23 @@
             processing: true,
             searching:  false,
             stateSave: true,
-            ajax: `/operasional/smita/edit_list_invoice_sp/${id}`,
+            ajax: `/pengambilan_sp/detail/${id}`,
             columns: [
               {data: 'nama_produk'},
                       {data: 'tipe_harga'},
-                      {data: 'harga'},
                       {data: 'jumlah'},
-                      {data: 'total_harga'},
             ]
         });
         }
         $(`#save`).on('click',function (event) {
           //ajax call
-            $.post(`${$('#link').val()}`, { tipe: $('#tipe').val(), qty_program: $('#qty_program').val() })
+            $.post(`${$('#link').val()}`, { tipe: $('#tipe').val(), jumlah: $('#jumlah').val() })
             .done(function(response){
           if(response.success)
           {
             console.log('success')
-            console.log(response.total);
-            console.log($('#total').val());
-            $('#total').val(response.total);
-            console.log($('#total').val());
-            t.ajax.url(`/operasional/smita/edit_list_invoice_sp/${id}`).load();
-            $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
-
-            // console.log($('#total').val(response.total));
-
+            
+            t.ajax.url(`/operasional/smita/pengambilan_sp/detail/${id}`).load();
           }
           }, 'json');
         });
@@ -273,15 +263,15 @@
   $('#editModal').on('show.bs.modal', function (event) {
     var tgl = $('#tgl').val();
     var canvaser = $('#sales').val();
-    var downline = $('#customer').val();
+    // var downline = $('#customer').val();
     var tipe = document.getElementById("tipe");
-
     var button = $(event.relatedTarget) // Button that triggered the modal
     var produk = button.data('produk') // Extract info from data-* attributes
     var tipe_harga = button.data('tipe')
     var no_faktur = button.data('faktur')
     var id = button.data('id')
     var id_detail = button.data('id_detail')
+    $('#jumlah').val(button.data('qty'));
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     while (tipe.firstChild) {
@@ -299,7 +289,7 @@
     });
     console.log(produk);
     // $('#editForm').attr('action', `/invoice_sp/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
-    $('#link').val(`/operasional/smita/list_invoice_sp/update/${id}/${id_detail}`);
+    $('#link').val(`/pengambilan_sp/update/${id}/${id_detail}`);
   })
 </script>
 @stop

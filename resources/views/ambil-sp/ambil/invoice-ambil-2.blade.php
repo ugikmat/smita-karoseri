@@ -18,10 +18,10 @@ td{
 @section('content')
 
 <!-- sama kayak invoice-sp-2 -->
-<form class="invoice-ambil-sp" action="" method="post">
+<form class="invoice-ambil-sp" action="/ambil-sp/store" method="post">
   @csrf
   <input type="hidden" name="lokasi" value="{{$lokasi}}">
-<input type="hidden" name="id" id="id" value="{{$penjualanSp->id_temp_penjualan_sp}}">
+<input type="hidden" name="id" id="id" value="{{$pengambilanSp->id_pengambilan_sp}}">
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -47,7 +47,7 @@ td{
         Tanggal Pengambilan :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl" value="{{Carbon\Carbon::parse($penjualanSp->tanggal_penjualan_sp)->format('d/m/Y')}}" readonly>
+            <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl" value="{{Carbon\Carbon::parse($pengambilanSp->tanggal_pengambilan_sp)->format('d/m/Y')}}" readonly>
       </div>
     </div>
   </div>
@@ -58,11 +58,11 @@ td{
     <tr>
       <th>Nama Barang</th>
       <th>Tipe Harga</th>
-      <th>Harga Satuan</th>
+      {{-- <th>Harga Satuan</th> --}}
       <th>Jumlah</th>
     </tr>
     </thead>
-    <tfoot>
+    {{-- <tfoot>
       <tr>
         <td></td>
         <td></td>
@@ -70,7 +70,7 @@ td{
         <!-- totale seng diambil, sum jumlah -->
         <td>totale piro</td>
       </tr>
-    </tfoot>
+    </tfoot> --}}
 </table>
 <br>
 <div class="container form-inline">
@@ -86,23 +86,6 @@ td{
 @stop
 
 @section('js')
-<script>
-    // ga ada pembayaran sama sekali
-    // nampilin yg diambil aja
-    $(document).ready(function () {
-        @if(Session::has('bank-sp'))
-        repeater.setList([
-          @foreach(session('bank-sp') as $item)
-          {
-                'bank': "{{$item['bank']}}",
-                'trf' : "{{$item['trf']}}",
-                'catatan' : "{{$item['catatan']}}"
-            },
-          @endforeach
-        ]);
-        @endif
-    });
-</script>
 <script>
 function goBack() {
     window.history.back()
@@ -121,13 +104,11 @@ function goBack() {
                   processing: true,
                   stateSave: true,
                   searching:  false,
-                  ajax: `/operasional/smita/edit_invoice_sp/${id}`,
+                  ajax: `/operasional/smita/ambil-sp/data/${id}`,
                   columns: [
                       {data: 'nama_produk'},
                       {data: 'tipe_harga'},
-                      {data: 'harga'},
                       {data: 'jumlah'},
-                      {data: 'total_harga'}
                   ]
               });
         console.log('{{session('total_harga_sp')}}');

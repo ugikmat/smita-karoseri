@@ -24,7 +24,7 @@
 @stop
 
 @section('content')
-<form class="invoice-ambil-sp repeater" action="" method="post">
+<form class="invoice-ambil-sp repeater" action="/ambil-sp/verify" method="post">
 <div class="container-fluid  form-inline">
 
   <!-- alert biasa -->

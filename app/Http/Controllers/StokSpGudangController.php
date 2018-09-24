@@ -11,10 +11,9 @@ use DB;
 use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
 
-class StokSpController extends Controller
+class StokSpGudangController extends Controller
 {
-
-    /**
+     /**
      * Create a new controller instance.
      *
      * @return void
@@ -25,7 +24,7 @@ class StokSpController extends Controller
     }
     public function index(){
         $saless = Sales::where('status',1)->get();
-        return view('persediaan.sp.mutasi-sp',['saless'=>$saless]);
+        return view('persediaan/sp/mutasi-sp-gudang',['saless'=>$saless]);
     }
     /**
      * Process dataTable ajax response.
@@ -52,8 +51,9 @@ FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi BETWEEN '{$tgl_awal}' AND 
 (sum(masuk)-sum(keluar)) AS jumlah_stok"))
                         ->whereRaw("tanggal_transaksi <= '{$tgl_akhir}'")
                         ->where(function ($query) {
-                            $query->where('keterangan', 'PENJUALAN')
-                                  ->orWhere('keterangan', 'PEMBELIAN');
+                            $query->where('keterangan', 'PENGAMBILAN')
+                                  ->orWhere('keterangan', 'PEMBELIAN')
+                                  ->orWhere('keterangan', 'PENGEMBALIAN');
                         })
                         ->groupBy('nama');
         $produk = produk::select('kode_produk','nama_produk','stok_awal','stok_masuk','stok_keluar','jumlah_stok')

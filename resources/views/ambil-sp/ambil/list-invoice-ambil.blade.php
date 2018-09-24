@@ -169,9 +169,9 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="deleteForm" action="/operasional/smita/invoice_sp/delete" method="POST">
+      <form id="deleteForm" action="/operasional/smita/pengambilan_sp/delete" method="POST">
         @csrf @method('put')
-        <input type="hidden" name="id" id="id_penjualan" value="">
+        <input type="hidden" name="id" id="id_pengambilan" value="">
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -200,8 +200,8 @@
       @if(Session::has('sp-list-sales'))
           $('#sales').val("{{session('sp-list-sales')}}").change();
         @endif
-        @if(Session::has('lokasi_penjualan'))
-          $('#lokasi').val("{{session('lokasi_penjualan')}}").change();
+        @if(Session::has('lokasi_pengambilan'))
+          $('#lokasi').val("{{session('lokasi_pengambilan')}}").change();
         @endif
         $tgl_awal = ($('#tgl_awal').val()=='') ? 'null' : $('#tgl_awal').val();
         $tgl_akhir = ($('#tgl_akhir').val()=='') ? 'null' : $('#tgl_akhir').val();
@@ -212,7 +212,7 @@
             processing: true,
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-            ajax: `/operasional/smita/invoice_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`,
+            ajax: `/pengambilan_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`,
             // "columnDefs": [ {
             // "searchable": false,
             // "orderable": false,
@@ -221,11 +221,9 @@
             // "order": [[ 1, 'asc' ]],
             columns: [
                 // {data: 'indeks'},
-                {data: 'id_penjualan_sp'},
+                {data: 'id_pengambilan_sp'},
                 {data: 'nm_sales'},
-                {data: 'no_hp'},
-                {data: 'nm_cust'},
-                {data: 'tanggal_penjualan'},
+                {data: 'tanggal_pengambilan'},
                 {data: 'status_verif'},
                 {data: 'action', orderable: false, searchable: false}
             ]
@@ -241,18 +239,18 @@
         $lokasi = $('#lokasi').val();
         $sales = $('#sales').val();
           console.log('Loading Data...');
-          t.ajax.url(`/operasional/smita/invoice_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`).load();
+          t.ajax.url(`/operasional/smita/pengambilan_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`).load();
           console.log('Loaded');
         });
         $('#deleteModal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget) // Button that triggered the modal
           var id = button.data('id'); // Extract info from data-* attributes
-          $('#id_penjualan').val(id);
+          $('#id_pengambilan').val(id);
         });
         $('#verificationModal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget) // Button that triggered the modal
           var id = button.data('id'); // Extract info from data-* attributes
-          $('#verificationForm').attr('action',`/operasional/smita/invoice_sp/verify/${id}`);
+          $('#verificationForm').attr('action',`/operasional/smita/pengambilan_sp/verify/${id}`);
         });
     });
 </script>

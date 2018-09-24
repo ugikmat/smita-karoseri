@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\StokSp;
 use App\Sales;
+use App\Lokasi;
 use App\produk;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -23,9 +24,32 @@ class StokCVSSpAllController extends Controller
         $this->middleware(['auth','kasir']);
     }
     public function index(){
-        $saless = Sales::where('status',1)->get();
-        return view('persediaan.sp.mutasi-sp-semua-cvs',['saless'=>$saless]);
+        $lokasis = Lokasi::where('status_lokasi',1)
+        ->join('users_lokasi','users_lokasi.id_lokasi','=','master_lokasis.id_lokasi')
+        ->join('users','users.id_user','=','users_lokasi.id_user')
+        ->where('users.id_user',Auth::user()->id_user)
+          ->get();
+        if (empty(session('mutasi_lokasi'))) {
+          $saless = Sales::where('status',1)
+        ->join('users','users.name','=','master_saless.nm_sales')
+        ->join('users_lokasi','users_lokasi.id_user','=','users.id_user')
+        ->where('users_lokasi.id_lokasi',$lokasis->first()->id_lokasi)
+        ->get();
+        } else {
+          $saless = Sales::where('status',1)
+        ->join('users','users.name','=','master_saless.nm_sales')
+        ->join('users_lokasi','users_lokasi.id_user','=','users.id_user')
+        ->where('users_lokasi.id_lokasi',session('mutasi_lokasi'))
+        ->get();
+        }
+        return view('persediaan.sp.mutasi-sp-semua-cvs',['saless'=>$saless,'lokasis'=>$lokasis]);
     }
+
+    public function show(Request $request){
+      session(['mutasi_lokasi'=>$request->get('lokasi'),'tgl_akhir_stok_sp'=>$request->get('tgl_akhir'),'tgl_awal_stok_sp'=>$request->get('tgl_awal')]);
+      return redirect('/persediaan/sp/mutasi-sp-semua-cvs');
+    }
+
     /**
      * Process dataTable ajax response.
      *
@@ -50,6 +74,10 @@ COALESCE((SELECT sum(awal.keluar)
 FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi BETWEEN '{$tgl_awal}' AND '{$tgl_akhir}' AND awal.id_produk=nama),0) AS stok_keluar,
 (sum(masuk)-sum(keluar)) AS jumlah_stok"))
                         ->whereRaw("tanggal_transaksi <= '{$tgl_akhir}'")
+                        ->where(function ($query) {
+                            $query->where('keterangan', 'PENGAMBILAN')
+                                  ->orWhere('keterangan', 'PENGEMBALIAN');
+                        })
                         ->groupBy('nama');
 
         $produk = produk::select('kode_produk','nama_produk','stok_awal','stok_masuk','stok_keluar','jumlah_stok')
