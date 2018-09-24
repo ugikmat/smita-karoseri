@@ -69,7 +69,7 @@ class SalesTableSeeder extends Seeder
         $subsales8->save();
 
         $subsales9 = new Sales();
-        $subsales8->id_lokasi=3;
+        $subsales9->id_lokasi=3;
         $subsales9->nm_sales='BKL-MOH HAMIDI';
         $subsales9->alamat_sales='Bangkalan';
         $subsales9->no_hp='087819557949';

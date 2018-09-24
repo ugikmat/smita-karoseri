@@ -124,12 +124,12 @@ class MasterHargaDompulTableSeeder extends Seeder
       $hargadompul16->status_harga_dompul='Aktif';
       $hargadompul16->save();
 
-      $hargadompul17 = new HargaDompul();
-      $hargadompul17->nama_harga_dompul='DP10';
-      $hargadompul17->tipe_harga_dompul='CVS2';
-      $hargadompul17->harga_dompul=10350;
-      $hargadompul17->status_harga_dompul='Aktif';
-      $hargadompul17->save();
+      // $hargadompul17 = new HargaDompul();
+      // $hargadompul17->nama_harga_dompul='DP10';
+      // $hargadompul17->tipe_harga_dompul='CVS2';
+      // $hargadompul17->harga_dompul=10350;
+      // $hargadompul17->status_harga_dompul='Aktif';
+      // $hargadompul17->save();
 
       $hargadompul18 = new HargaDompul();
       $hargadompul18->nama_harga_dompul='DP5';
