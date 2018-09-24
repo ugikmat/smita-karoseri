@@ -64,6 +64,25 @@ class ListPengambilanSPController extends Controller
         return redirect('/ambil-sp/ambil/list-invoice-ambil');
     }
 
+    public function update(Request $request, $id,$id_detail){
+        $data = DetailPengambilanProduk::where('id_detail_pengambilan_sp',$id_detail)->first();
+
+        // $data = DB::table('temp_detail_pengambilan_sps')->where('id_temp_pengambilan_sp',$id)->first();
+        $tipe = $request->get('tipe');
+        $jumlah_sp = $request->get('jumlah');
+
+        if($tipe != 'default') {
+            // DB::table('temp_detail_pengambilan_sps')->where('id_temp_pengambilan_sp',$id)
+            // ->update(['tipe_harga'=>$tipe]);
+            $data->tipe_harga=$tipe;
+        }
+            $harga = HargaProduk::where('id_produk',$data->id_produk)->where('tipe_harga_sp',$data->tipe_harga)->first();
+            $data->jumlah_sp=$jumlah_sp;
+            $data->save();
+        return response()->json(['success' => true]);
+    }
+
+
     /**
      * Process dataTable ajax response.
      *
@@ -122,7 +141,7 @@ class ListPengambilanSPController extends Controller
                                   if(Auth::user()->level_user=='Supervisor'||Auth::user()->level_user=='Super Admin'){
                                     return
                                     '<a class="btn btn-xs btn-primary"
-                                    href="/operasional/smita/pengambilan/sp/list-invoice-sp/edit/'.$pengambilanSP->id_pengambilan_sp.'/'.$pengambilanSP->nm_sales.'/'.$pengambilanSP->tanggal_pengambilan_sp.'">
+                                    href="/pengambilan/sp/list-invoice-sp/edit/'.$pengambilanSP->id_pengambilan_sp.'/'.$pengambilanSP->nm_sales.'/'.$pengambilanSP->tanggal_pengambilan_sp.'">
                                     <i class="glyphicon glyphicon-edit"></i> Edit
                                     </a>
                                     <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$pengambilanSP->id_pengambilan_sp.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>
@@ -130,7 +149,7 @@ class ListPengambilanSPController extends Controller
                                   }else {
                                     return
                                     '<a class="btn btn-xs btn-primary"
-                                    href="/operasional/smita/pengambilan/sp/list-invoice-sp/edit/'.$pengambilanSP->id_pengambilan_sp.'/'.$pengambilanSP->nm_sales.'/'.$pengambilanSP->tanggal_pengambilan_sp.'">
+                                    href="/pengambilan/sp/list-invoice-sp/edit/'.$pengambilanSP->id_pengambilan_sp.'/'.$pengambilanSP->nm_sales.'/'.$pengambilanSP->tanggal_pengambilan_sp.'">
                                     <i class="glyphicon glyphicon-edit"></i> Edit
                                     </a>
                                     <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$pengambilanSP->id_pengambilan_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
@@ -145,6 +164,40 @@ class ListPengambilanSPController extends Controller
                               }
 
                             })
+                          ->make(true);
+    }
+    public function pengambilanData(Datatables $datatables,$id)
+    {
+        // $data = DB::table('temp_detail_pengambilan_sps')->get();
+
+        $detailPengambilan = DetailPengambilanProduk::select(DB::raw('master_produks.nama_produk,
+        master_produks.satuan,
+        detail_pengambilan_sps.id_produk,
+        detail_pengambilan_sps.id_pengambilan_sp,
+        detail_pengambilan_sps.id_detail_pengambilan_sp,
+        detail_pengambilan_sps.tipe_harga,
+        detail_pengambilan_sps.jumlah_sp'))
+                        ->join('master_produks',function($join){
+                            $join->on('detail_pengambilan_sps.id_produk','=','master_produks.kode_produk');
+                        })
+                        ->where('id_pengambilan_sp',$id)->get();
+       
+        return $datatables->of($detailPengambilan)
+                        ->addColumn('indeks', function ($detailPengambilanSp) {
+                              return '';
+                            })
+                            ->addColumn('jumlah', function ($detailPengambilanSp) {
+                              return number_format($detailPengambilanSp->jumlah_sp,0,",",".");
+                            })
+                            ->addColumn('action', function ($detailPengambilanSp) {
+                                $tipe = HargaProduk::select('tipe_harga_sp')->where('id_produk',$detailPengambilanSp->id_produk)->get();
+                                // $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$uploadDompul->produk)->get();
+                              return
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$detailPengambilanSp->id_pengambilan_sp.'" data-id_detail="'.$detailPengambilanSp->id_detail_pengambilan_sp.'" data-tipe='.$tipe.' data-qty="'.$detailPengambilanSp->jumlah_sp.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                            })
+                            // ->addColumn('input', function ($uploadDompul) {
+                            //   return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                            // })->rawColumns(['input'])
                           ->make(true);
     }
 }

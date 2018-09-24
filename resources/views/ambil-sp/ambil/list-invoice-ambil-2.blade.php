@@ -7,18 +7,18 @@
 @stop
 
 @section('content')
-<input type="hidden" name="tgl" id="tgl" value="{{$pengembalianSP->tanggal_pengembalian_sp}}">
+<input type="hidden" name="tgl" id="tgl" value="{{$pengambilanSP->tanggal_pengambilan_sp}}">
 <input type="hidden" name="sales" id="sales" value="{{$sales->nm_sales}}">
 <div class="container-fluid">
   <div class="row">
-    <!-- kalo ga ada no pengembalian ato no embo pokoe, hapus ae -->
+    <!-- kalo ga ada no pengambilan ato no embo pokoe, hapus ae -->
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
         No Penjualan
       </div>
       <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
         <strong>
-        : {{$pengembalianSP->id_pengembalian_sp}}
+        : {{$pengambilanSP->id_pengambilan_sp}}
         </strong>
       </div>
     </div>
@@ -53,11 +53,11 @@
   <div id="deleted">
 
   </div>
-  <input type="hidden" name="id" id="id" value="{{$pengembalianSP->id_pengembalian_sp}}">
+  <input type="hidden" name="id" id="id" value="{{$pengambilanSP->id_pengambilan_sp}}">
 <table id="list-edit-invoice-table" class="table responsive"  width="100%">
     <thead>
     <tr>
-      @if($pengembalianSP->status_pengembalian==0)
+      @if($pengambilanSP->status_pengambilan==0)
         <th>Nama Barang</th>
         <th>Tipe Harga</th>
         {{-- <th>Harga Satuan</th> --}}
@@ -81,8 +81,8 @@
       </tr>
     </tfoot> --}}
 </table>
-@if($pengembalianSP->status_pengembalian==0)
-<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Simpan</button>
+@if($pengambilanSP->status_pengambilan==0)
+{{-- <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Simpan</button> --}}
 @endif
 
 </form>
@@ -216,13 +216,13 @@
 <script>
     $(function () {
         var id = $('#id').val();
-        if({{$pengembalianSP->status_pengembalian}}==0){
+        if({{$pengambilanSP->status_pengambilan}}==0){
           var t= $('#list-edit-invoice-table').DataTable({
             serverSide: true,
             processing: true,
             stateSave: true,
             searching:  false,
-            ajax: `/pengembalian_sp/detail/${id}`,
+            ajax: `/pengambilan_sp/detail/${id}`,
             columns: [
               {data: 'nama_produk'},
                       {data: 'tipe_harga'},
@@ -236,7 +236,7 @@
             processing: true,
             searching:  false,
             stateSave: true,
-            ajax: `/pengembalian_sp/detail/${id}`,
+            ajax: `/pengambilan_sp/detail/${id}`,
             columns: [
               {data: 'nama_produk'},
                       {data: 'tipe_harga'},
@@ -252,7 +252,7 @@
           {
             console.log('success')
             
-            t.ajax.url(`/operasional/smita/pengembalian_sp/detail/${id}`).load();
+            t.ajax.url(`/operasional/smita/pengambilan_sp/detail/${id}`).load();
           }
           }, 'json');
         });
@@ -289,7 +289,7 @@
     });
     console.log(produk);
     // $('#editForm').attr('action', `/invoice_sp/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
-    $('#link').val(`/pengembalian_sp/update/${id}/${id_detail}`);
+    $('#link').val(`/pengambilan_sp/update/${id}/${id_detail}`);
   })
 </script>
 @stop

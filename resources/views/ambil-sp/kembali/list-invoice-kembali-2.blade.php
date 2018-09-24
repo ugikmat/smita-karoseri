@@ -82,7 +82,7 @@
       </tr>
     </tfoot>
 </table>
-<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Simpan</button>
+{{-- <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Simpan</button> --}}
 
 </form>
 
