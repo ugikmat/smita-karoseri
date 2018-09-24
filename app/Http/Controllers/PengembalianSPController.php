@@ -158,8 +158,8 @@ class PengembalianSPController extends Controller
             $stokSP->nomor_referensi= $pengembalianSp->id_pengembalian_sp;
             $stokSP->jenis_transaksi= 'PENGEMBALIAN';
             $stokSP->keterangan= "{$detailPengambilanSp->tipe_harga}-";
-            $stokSP->masuk= 0;
-            $stokSP->keluar= $detailPengambilanSp->jumlah_sp;
+            $stokSP->masuk= $detailPengambilanSp->jumlah_sp;
+            $stokSP->keluar= 0;
             $stokSP->tanggal_input= $pengembalianSp->tanggal_input;
             $stokSP->id_user= $pengembalianSp->id_user;
             $stokSP->save();

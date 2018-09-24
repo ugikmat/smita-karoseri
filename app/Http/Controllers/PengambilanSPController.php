@@ -158,8 +158,8 @@ class PengambilanSPController extends Controller
             $stokSP->nomor_referensi= $pengambilanSp->id_pengambilan_sp;
             $stokSP->jenis_transaksi= 'PENGAMBILAN';
             $stokSP->keterangan= "{$detailPengambilanSp->tipe_harga}-";
-            $stokSP->masuk= $detailPengambilanSp->jumlah_sp;
-            $stokSP->keluar= 0;
+            $stokSP->masuk= 0;
+            $stokSP->keluar= $detailPengambilanSp->jumlah_sp;
             $stokSP->tanggal_input= $pengambilanSp->tanggal_input;
             $stokSP->id_user= $pengambilanSp->id_user;
             $stokSP->save();
