@@ -491,6 +491,7 @@ Route::get('/persediaan/sp/mutasi-sp-cvs', 'StockCVSSpController@index');
 Route::get('/stok-sp/data/{sales}/{tgl_awal}/{tgl_akhir}', 'StockCVSSpController@data');
 
 Route::get('/persediaan/sp/mutasi-sp-semua-cvs', 'StokCVSSpAllController@index');
+Route::post('/persediaan/sp/mutasi-sp-semua-cvs/show', 'StokCVSSpAllController@show');
 Route::get('/stok-sp/all/data/{tgl_awal}/{tgl_akhir}', 'StokCVSSpAllController@data');
 
 Route::get('/persediaan/sp/pengambilan-sp', function() {
@@ -498,11 +499,11 @@ Route::get('/persediaan/sp/pengambilan-sp', function() {
 }) -> name('pengambilan-sp');
 
 
-Route::get('/ambil-sp/ambil/invoice-ambil', function() {
-  return view ('/ambil-sp/ambil/invoice-ambil');
-}) -> name('invoice-ambil');
+Route::get('/ambil-sp/ambil/invoice-ambil', 'PengambilanSPController@index');
+Route::post('/ambil-sp/verify','PengambilanSPController@verify');
+Route::post('/ambil-sp/store','PengambilanSPController@store');
 
-oute::get('/ambil-sp/ambil/list-invoice-ambil', function() {
+Route::get('/ambil-sp/ambil/list-invoice-ambil', function() {
   return view ('/ambil-sp/ambil/list-invoice-ambil');
 }) -> name('list-invoice-ambil');
 
@@ -510,6 +511,6 @@ Route::get('/ambil-sp/kembali/invoice-kembali', function() {
   return view ('/ambil-sp/kembali/invoice-kembali');
 }) -> name('invoice-kembali');
 
-oute::get('/ambil-sp/kembali/list-invoice-kembali', function() {
+Route::get('/ambil-sp/kembali/list-invoice-kembali', function() {
   return view ('/ambil-sp/kembali/list-invoice-kembali');
 }) -> name('list-invoice-kembali');
