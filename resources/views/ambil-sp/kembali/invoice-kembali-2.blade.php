@@ -18,10 +18,10 @@ td{
 @section('content')
 
 <!-- sama kayak invoice-ambil-2 -->
-<form class="invoice-kembali-sp" action="" method="post">
+<form class="invoice-kembali-sp" action="/operasional/smita/kembali-sp/store" method="post">
   @csrf
   <input type="hidden" name="lokasi" value="{{$lokasi}}">
-<input type="hidden" name="id" id="id" value="{{$penjualanSp->id_temp_penjualan_sp}}">
+<input type="hidden" name="id" id="id" value="{{$pengembalianSp->id_pengembalian_sp}}">
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
@@ -47,7 +47,7 @@ td{
         Tanggal Pengembalian :
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-            <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl" value="{{Carbon\Carbon::parse($penjualanSp->tanggal_penjualan_sp)->format('d/m/Y')}}" readonly>
+            <input class="datepicker" data-date-format="dd-mm-yyyy" id="tgl" value="{{Carbon\Carbon::parse($pengembalianSp->tanggal_pengembalian_sp)->format('d/m/Y')}}" readonly>
       </div>
     </div>
   </div>
@@ -58,11 +58,10 @@ td{
     <tr>
       <th>Nama Barang</th>
       <th>Tipe Harga</th>
-      <th>Harga Satuan</th>
       <th>Jumlah</th>
     </tr>
     </thead>
-    <tfoot>
+    {{-- <tfoot>
       <tr>
         <td></td>
         <td></td>
@@ -70,7 +69,7 @@ td{
         <!-- totale seng di kembalikan, sum jumlah -->
         <td>totale piro</td>
       </tr>
-    </tfoot>
+    </tfoot> --}}
 </table>
 <br>
 <div class="container form-inline">
@@ -121,13 +120,11 @@ function goBack() {
                   processing: true,
                   stateSave: true,
                   searching:  false,
-                  ajax: `/operasional/smita/edit_invoice_sp/${id}`,
+                  ajax: `/operasional/smita/kembali-sp/data/${id}`,
                   columns: [
                       {data: 'nama_produk'},
                       {data: 'tipe_harga'},
-                      {data: 'harga'},
-                      {data: 'jumlah'},
-                      {data: 'total_harga'}
+                      {data: 'jumlah'}
                   ]
               });
         console.log('{{session('total_harga_sp')}}');

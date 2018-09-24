@@ -156,10 +156,10 @@ class PengembalianSPController extends Controller
             $stokSP->id_lokasi= $pengembalianSp->id_lokasi;
             $stokSP->tanggal_transaksi= $pengembalianSp->tanggal_pengembalian_sp;
             $stokSP->nomor_referensi= $pengembalianSp->id_pengembalian_sp;
-            $stokSP->jenis_transaksi= 'PENGAMBILAN';
+            $stokSP->jenis_transaksi= 'PENGEMBALIAN';
             $stokSP->keterangan= "{$detailPengambilanSp->tipe_harga}-";
-            $stokSP->masuk= $detailPengambilanSp->jumlah_sp;
-            $stokSP->keluar= 0;
+            $stokSP->masuk= 0;
+            $stokSP->keluar= $detailPengambilanSp->jumlah_sp;
             $stokSP->tanggal_input= $pengembalianSp->tanggal_input;
             $stokSP->id_user= $pengembalianSp->id_user;
             $stokSP->save();
@@ -168,7 +168,7 @@ class PengembalianSPController extends Controller
         Schema::dropIfExists('temp_pengembalian_sps');
         Schema::dropIfExists('temp_detail_pengembalian_sps');
         $request->session()->flash('status','');
-        return redirect('/ambil-sp/kembali/invoice-kembali');
+        return redirect('/ambil-sp/ambil/invoice-kembali');
     }
 
     /**

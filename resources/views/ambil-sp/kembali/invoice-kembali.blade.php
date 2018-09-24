@@ -27,7 +27,8 @@
 
 <!-- sama kayak invoice ambil garis besarnya -->
 
-<form class="invoice-kembali-sp repeater" action="" method="post">
+<form class="invoice-kembali-sp repeater" action="/operasional/smita//kembali-sp/verify" method="post">
+  @csrf
 <div class="container-fluid  form-inline">
 
   <!-- alert biasa -->
@@ -36,7 +37,6 @@
     <strong>Berhasil!</strong> Transaksi pengembalian SP anda berhasil
   </div>
   @endif
-  @csrf
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2" id="kiri">
       <strong>Tanggal Pengembalian :</strong> &nbsp;
@@ -157,44 +157,11 @@
 
 @stop
 @section('js')
-<script>
-    $(document).ready(function () {
-
-        // ga ada pembayaran sama sekali
-        $("#pembayaran").on("keydown", "#trf", function(){
-          console.log((this).value);
-          if (this.value.length!=0&&!isNaN(parseInt($(this).val().replace(/\D/g,''),10))) {
-            console.log(`Value : ${this.value}`);
-            bayar = parseInt($(this).val().replace(/\D/g,''),10);
-          }else{
-            bayar=0;
-          }
-        });
-    $("#pembayaran").on("input", "#trf", function(){
-      if (this.value.length!=0&&!isNaN(parseInt($(this).val().replace(/\D/g,''),10))) {
-        var n = parseInt($(this).val().replace(/\D/g,''),10);
-        (this).value=n.toLocaleString('id-ID');
-        var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-bayar;
-        $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
-      }else{
-        (this).value=0;
-        var n = parseInt($(this).val().replace(/\D/g,''),10);
-        var total = parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)-bayar;
-        $('#total_pembayaran').val((total+n).toLocaleString('id-ID'));
-      }
-      $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
-    });
-    });
-</script>
 <script type="text/javascript">
   $(".chosen-select").chosen();
   @if(Session::has('id_sales'))
     $("#sales").val("{{session('id_sales')}}");
     $("#sales").trigger("chosen:updated");
-  @endif
-  @if(Session::has('id_cust'))
-    $("#customer").val("{{session('id_cust')}}");
-    $("#customer").trigger("chosen:updated");
   @endif
   @if(Session::has('lokasi_penjualan'))
     $("#lokasi").val("{{session('lokasi_penjualan')}}");
@@ -220,7 +187,6 @@ for (let index = 0; index < {{$jumlah}}; index++) {
     totalHarga+=parseFloat(harga[index]);
     console.log(`total Harga ${harga[index]}`);
     $('#total').val(totalHarga.toLocaleString('id-ID'));
-    $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
   });
   // $(`#tipe${index+1}`).on('change',function (event) {
   //   $.session.set("tipe_harga", this.value);
@@ -245,7 +211,6 @@ for (let index = 0; index < {{$jumlah}}; index++) {
       totalHarga+=parseFloat(harga[index]);
       console.log(`total Harga ${totalHarga}`);
       $('#total').val(totalHarga.toLocaleString('id-ID'));
-      $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
     }
 }, 'json');
   });

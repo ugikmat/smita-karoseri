@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use DB;
+use Illuminate\Http\Request;
 use App\Sales;
 use App\Customer;
 use App\DetailPengambilanProduk;
@@ -45,7 +46,7 @@ class ListPengambilanSPController extends Controller
     }
 
     public function verif(Request $request,$id){
-        PenjualanProduk::where('id_pengambilan_sp',$id)
+        PengambilanProduk::where('id_pengambilan_sp',$id)
                         ->update(['status_pengambilan'=>1
                         ]);
         $request->session()->flash('status', 'Berhasil melakukan verifikasi!');
@@ -54,11 +55,11 @@ class ListPengambilanSPController extends Controller
 
     public function edit($id_pengambilan_sp, $sales, $tgl){
         $sales = Sales::where('nm_sales',$sales)->first();
-        $pengambilanSP = PenjualanProduk::where('id_pengambilan_sp',$id_pengambilan_sp)->first();
+        $pengambilanSP = PengambilanProduk::where('id_pengambilan_sp',$id_pengambilan_sp)->first();
         return view('ambil-sp/ambil/list-invoice-ambil-2',['sales'=>$sales,'pengambilanSP'=>$pengambilanSP]);
     }
     public function delete(Request $request){
-        PenjualanProduk::where('id_pengambilan_sp',$request->get('id'))->update(['deleted'=>1]);
+        PengambilanProduk::where('id_pengambilan_sp',$request->get('id'))->update(['deleted'=>1]);
         $request->session()->flash('status', 'Berhasil menghapus List Invoice!');
         return redirect('/ambil-sp/ambil/list-invoice-ambil');
     }

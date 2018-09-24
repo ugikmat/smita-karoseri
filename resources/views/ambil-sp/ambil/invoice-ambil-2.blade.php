@@ -104,7 +104,7 @@ function goBack() {
                   processing: true,
                   stateSave: true,
                   searching:  false,
-                  ajax: `/ambil-sp/data/${id}`,
+                  ajax: `/operasional/smita/ambil-sp/data/${id}`,
                   columns: [
                       {data: 'nama_produk'},
                       {data: 'tipe_harga'},

@@ -513,11 +513,16 @@ Route::post('/pengambilan_sp/store','ListPengambilanSPController@store');
 Route::put('/pengambilan_sp/verify/{id}','ListPengambilanSPController@verif');
 Route::put('/pengambilan_sp/delete','ListPengambilanSPController@delete');
 
-Route::get('/ambil-sp/kembali/invoice-kembali', 'PengembalianSPController@index');
-Route::post('/ambil-sp/verify','PengembalianSPController@verify');
-Route::post('/ambil-sp/store','PengembalianSPController@store');
-Route::get('/ambil-sp/data/{id}','PengembalianSPController@data');
+Route::get('/ambil-sp/ambil/invoice-kembali', 'PengembalianSPController@index');
+Route::post('/kembali-sp/verify','PengembalianSPController@verify');
+Route::post('/kembali-sp/store','PengembalianSPController@store');
+Route::get('/kembali-sp/data/{id}','PengembalianSPController@data');
 
-Route::get('/ambil-sp/kembali/list-invoice-kembali', function() {
-  return view ('/ambil-sp/kembali/list-invoice-kembali');
-}) -> name('list-invoice-kembali');
+Route::get('/ambil-sp/ambil/list-invoice-kembali', 'ListPengembalianSPController@index');
+Route::get('/pengembalian_sp/list/{tgl_awal}/{tgl_akhir}/{lokasi}/{sales}', 'ListPengembalianSPController@data');
+Route::get('/pengembalian/sp/list-invoice-sp/edit/{id_penjualan_sp}/{sales}/{tgl}', 'ListPengembalianSPController@edit');
+Route::get('/pengembalian_sp/detail/{id}', 'ListPengembalianSPController@penjualanData');
+Route::post('/pengembalian_sp/update/{id}/{id_detail}','ListPengembalianSPController@update');
+Route::post('/pengembalian_sp/store','ListPengembalianSPController@store');
+Route::put('/pengembalian_sp/verify/{id}','ListPengembalianSPController@verif');
+Route::put('/pengembalian_sp/delete','ListPengembalianSPController@delete');
