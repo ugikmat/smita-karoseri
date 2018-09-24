@@ -502,6 +502,7 @@ Route::get('/persediaan/sp/pengambilan-sp', function() {
 Route::get('/ambil-sp/ambil/invoice-ambil', 'PengambilanSPController@index');
 Route::post('/ambil-sp/verify','PengambilanSPController@verify');
 Route::post('/ambil-sp/store','PengambilanSPController@store');
+Route::get('/ambil-sp/data/{id}','PengambilanSPController@data');
 
 Route::get('/ambil-sp/ambil/list-invoice-ambil', function() {
   return view ('/ambil-sp/ambil/list-invoice-ambil');
