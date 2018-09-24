@@ -37,7 +37,7 @@ class ProdukSeeder extends Seeder
         $sp2->tarif_pajak=0;
         $sp2->diskon=0;
         $sp2->komisi=0;
-        $sp2->status_produk=0;
+        $sp2->status_produk=1;
         $sp2->save();
 
         $sp3 = new produk();
@@ -51,7 +51,7 @@ class ProdukSeeder extends Seeder
         $sp3->tarif_pajak=0;
         $sp3->diskon=0;
         $sp3->komisi=0;
-        $sp3->status_produk=0;
+        $sp3->status_produk=1;
         $sp3->save();
 
         $sp4 = new produk();
@@ -65,7 +65,7 @@ class ProdukSeeder extends Seeder
         $sp4->tarif_pajak=0;
         $sp4->diskon=0;
         $sp4->komisi=0;
-        $sp4->status_produk=0;
+        $sp4->status_produk=1;
         $sp4->save();
 
         $sp5 = new produk();
@@ -289,7 +289,7 @@ class ProdukSeeder extends Seeder
         $sp19->tarif_pajak=0;
         $sp19->diskon=0;
         $sp19->komisi=0;
-        $sp19->status_produk=0;
+        $sp19->status_produk=1;
         $sp19->save();
 
         $sp20 = new produk();
@@ -303,7 +303,7 @@ class ProdukSeeder extends Seeder
         $sp20->tarif_pajak=0;
         $sp20->diskon=0;
         $sp20->komisi=0;
-        $sp20->status_produk=0;
+        $sp20->status_produk=1;
         $sp20->save();
 
         // $sp27 = new produk();
@@ -583,7 +583,7 @@ class ProdukSeeder extends Seeder
         $sp38->tarif_pajak=0;
         $sp38->diskon=0;
         $sp38->komisi=0;
-        $sp38->status_produk='1';
+        $sp38->status_produk=1;
         $sp38->save();
 
         $sp39 = new produk();
@@ -611,7 +611,7 @@ class ProdukSeeder extends Seeder
         $sp40->tarif_pajak=0;
         $sp40->diskon=0;
         $sp40->komisi=0;
-        $sp40->status_produk='1';
+        $sp40->status_produk=1;
         $sp40->save();
 
         $sp41 = new produk();
@@ -852,18 +852,6 @@ class ProdukSeeder extends Seeder
         // $sp21->status_produk=1;
         // $sp21->save();
 
-
-
-
-
-
-
-
-
-
-
-
-
         // $sp28 = new produk();
         // $sp28->kode_produk='BG11053';
         // $sp28->nama_produk='SP WHITELIST 6GB convertan 16GB';
@@ -990,75 +978,75 @@ class ProdukSeeder extends Seeder
         // $sp46->status_produk=1;
         // $sp46->save();
 
-        $sp47 = new produk();
-        $sp47->kode_produk='BG10034';
-        $sp47->nama_produk='SP0KDATALTEOP HOTRODXFLASH 10GB 60D';
-        $sp47->kategori_produk='SP';
-        $sp47->satuan='PCS';
-        $sp47->jenis='GOODS';
-        $sp47->BOM='YA';
-        $sp47->harga_jual=0;
-        $sp47->tarif_pajak=0;
-        $sp47->diskon=0;
-        $sp47->komisi=0;
-        $sp47->status_produk=0;
-        $sp47->save();
-
-        $sp48 = new produk();
-        $sp48->kode_produk='BG10033';
-        $sp48->nama_produk='SP0KDATALTEOP HOTRODXFLASH 6GB 60D';
-        $sp48->kategori_produk='SP';
-        $sp48->satuan='PCS';
-        $sp48->jenis='GOODS';
-        $sp48->BOM='YA';
-        $sp48->harga_jual=0;
-        $sp48->tarif_pajak=0;
-        $sp48->diskon=0;
-        $sp48->komisi=0;
-        $sp48->status_produk=0;
-        $sp48->save();
-
-        $sp49 = new produk();
-        $sp49->kode_produk='BG10031';
-        $sp49->nama_produk='SP0KDATALTEOP HOTRODXFLASH 2GB 60D';
-        $sp49->kategori_produk='SP';
-        $sp49->satuan='PCS';
-        $sp49->jenis='GOODS';
-        $sp49->BOM='YA';
-        $sp49->harga_jual=0;
-        $sp49->tarif_pajak=0;
-        $sp49->diskon=0;
-        $sp49->komisi=0;
-        $sp49->status_produk=0;
-        $sp49->save();
-
-        $sp50 = new produk();
-        $sp50->kode_produk='BG10030';
-        $sp50->nama_produk='SP0KDATALTEOP HOTRODXFLASH 1 GB 60D';
-        $sp50->kategori_produk='SP';
-        $sp50->satuan='PCS';
-        $sp50->jenis='GOODS';
-        $sp50->BOM='YA';
-        $sp50->harga_jual=0;
-        $sp50->tarif_pajak=0;
-        $sp50->diskon=0;
-        $sp50->komisi=0;
-        $sp50->status_produk=0;
-        $sp50->save();
-
-        $sp52 = new produk();
-        $sp52->kode_produk='BG10004';
-        $sp52->nama_produk='NOCAN SP0K DATALTEOP';
-        $sp52->kategori_produk='SP';
-        $sp52->satuan='PCS';
-        $sp52->jenis='GOODS';
-        $sp52->BOM='YA';
-        $sp52->harga_jual=0;
-        $sp52->tarif_pajak=0;
-        $sp52->diskon=0;
-        $sp52->komisi=0;
-        $sp52->status_produk=1;
-        $sp52->save();
+        // $sp47 = new produk();
+        // $sp47->kode_produk='BG10034';
+        // $sp47->nama_produk='SP0KDATALTEOP HOTRODXFLASH 10GB 60D';
+        // $sp47->kategori_produk='SP';
+        // $sp47->satuan='PCS';
+        // $sp47->jenis='GOODS';
+        // $sp47->BOM='YA';
+        // $sp47->harga_jual=0;
+        // $sp47->tarif_pajak=0;
+        // $sp47->diskon=0;
+        // $sp47->komisi=0;
+        // $sp47->status_produk=0;
+        // $sp47->save();
+        //
+        // $sp48 = new produk();
+        // $sp48->kode_produk='BG10033';
+        // $sp48->nama_produk='SP0KDATALTEOP HOTRODXFLASH 6GB 60D';
+        // $sp48->kategori_produk='SP';
+        // $sp48->satuan='PCS';
+        // $sp48->jenis='GOODS';
+        // $sp48->BOM='YA';
+        // $sp48->harga_jual=0;
+        // $sp48->tarif_pajak=0;
+        // $sp48->diskon=0;
+        // $sp48->komisi=0;
+        // $sp48->status_produk=0;
+        // $sp48->save();
+        //
+        // $sp49 = new produk();
+        // $sp49->kode_produk='BG10031';
+        // $sp49->nama_produk='SP0KDATALTEOP HOTRODXFLASH 2GB 60D';
+        // $sp49->kategori_produk='SP';
+        // $sp49->satuan='PCS';
+        // $sp49->jenis='GOODS';
+        // $sp49->BOM='YA';
+        // $sp49->harga_jual=0;
+        // $sp49->tarif_pajak=0;
+        // $sp49->diskon=0;
+        // $sp49->komisi=0;
+        // $sp49->status_produk=0;
+        // $sp49->save();
+        //
+        // $sp50 = new produk();
+        // $sp50->kode_produk='BG10030';
+        // $sp50->nama_produk='SP0KDATALTEOP HOTRODXFLASH 1 GB 60D';
+        // $sp50->kategori_produk='SP';
+        // $sp50->satuan='PCS';
+        // $sp50->jenis='GOODS';
+        // $sp50->BOM='YA';
+        // $sp50->harga_jual=0;
+        // $sp50->tarif_pajak=0;
+        // $sp50->diskon=0;
+        // $sp50->komisi=0;
+        // $sp50->status_produk=0;
+        // $sp50->save();
+        //
+        // $sp52 = new produk();
+        // $sp52->kode_produk='BG10004';
+        // $sp52->nama_produk='NOCAN SP0K DATALTEOP';
+        // $sp52->kategori_produk='SP';
+        // $sp52->satuan='PCS';
+        // $sp52->jenis='GOODS';
+        // $sp52->BOM='YA';
+        // $sp52->harga_jual=0;
+        // $sp52->tarif_pajak=0;
+        // $sp52->diskon=0;
+        // $sp52->komisi=0;
+        // $sp52->status_produk=1;
+        // $sp52->save();
 
 
 
