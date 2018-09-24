@@ -112,8 +112,6 @@ class MasterHargaSPTableSeeder extends Seeder
 
       $hargasp15 = new HargaProduk();
       $hargasp15->id_produk='BG9037';
-      $sp8->kode_produk='BG9037';
-      $sp8->nama_produk='XTREAM 1';
       $hargasp15->tipe_harga_sp='CVS';
       $hargasp15->harga_sp=600000;
       $hargasp15->status_harga_sp='Aktif';
