@@ -222,7 +222,7 @@
             processing: true,
             stateSave: true,
             searching:  false,
-            ajax: `/pengambilan_sp/detail/${id}`,
+            ajax: `/operasional/smita/pengambilan_sp/detail/${id}`,
             columns: [
               {data: 'nama_produk'},
                       {data: 'tipe_harga'},
@@ -236,7 +236,7 @@
             processing: true,
             searching:  false,
             stateSave: true,
-            ajax: `/pengambilan_sp/detail/${id}`,
+            ajax: `/operasional/smita/pengambilan_sp/detail/${id}`,
             columns: [
               {data: 'nama_produk'},
                       {data: 'tipe_harga'},
@@ -251,7 +251,7 @@
           if(response.success)
           {
             console.log('success')
-            
+
             t.ajax.url(`/operasional/smita/pengambilan_sp/detail/${id}`).load();
           }
           }, 'json');
@@ -289,7 +289,7 @@
     });
     console.log(produk);
     // $('#editForm').attr('action', `/invoice_sp/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
-    $('#link').val(`/pengambilan_sp/update/${id}/${id_detail}`);
+    $('#link').val(`/operasional/smita/pengambilan_sp/update/${id}/${id_detail}`);
   })
 </script>
 @stop

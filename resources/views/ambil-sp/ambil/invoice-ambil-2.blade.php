@@ -18,7 +18,7 @@ td{
 @section('content')
 
 <!-- sama kayak invoice-sp-2 -->
-<form class="invoice-ambil-sp" action="/ambil-sp/store" method="post">
+<form class="invoice-ambil-sp" action="/operasional/smita/ambil-sp/store" method="post">
   @csrf
   <input type="hidden" name="lokasi" value="{{$lokasi}}">
 <input type="hidden" name="id" id="id" value="{{$pengambilanSp->id_pengambilan_sp}}">
