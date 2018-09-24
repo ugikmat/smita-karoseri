@@ -314,16 +314,16 @@ return [
                         'icon'  => 'truck',
                         'url'   => '/persediaan/dompul/mutasi-dompul',
                       ],
-                      [
-                        'text'  => 'Dompul per CVS',
-                        'icon'  => 'user',
-                        'url'   => '/persediaan/dompul/mutasi-dompul-cvs',
-                      ],
-                      [
-                        'text'  => 'Dompul semua CVS',
-                        'icon'  => 'users',
-                        'url'   => '/persediaan/dompul/mutasi-dompul-semua-cvs',
-                      ],
+                      // [
+                      //   'text'  => 'Dompul per CVS',
+                      //   'icon'  => 'user',
+                      //   'url'   => '/persediaan/dompul/mutasi-dompul-cvs',
+                      // ],
+                      // [
+                      //   'text'  => 'Dompul semua CVS',
+                      //   'icon'  => 'users',
+                      //   'url'   => '/persediaan/dompul/mutasi-dompul-semua-cvs',
+                      // ],
                     ],
                   ],
                   [
