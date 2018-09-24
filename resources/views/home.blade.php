@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'Sistem Inventori')
+@section('title', 'Home')
 
 @section('content_header')
     <h1>Dashboard</h1>
 @stop
 
 @section('content')
-    <p>You are logged in {{ Auth::user()->name }}!</p>
+    <p>Selamat datang <strong>{{ Auth::user()->name }}</strong>!</p>
 @stop

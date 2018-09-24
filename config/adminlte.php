@@ -303,7 +303,7 @@ return [
               ],
               [
                 'text'    => 'Persediaan',
-                'icon'    => 'share',
+                'icon'    => 'folder-open-o',
                 'submenu' => [
                   [
                     'text'    => 'Dompul',
