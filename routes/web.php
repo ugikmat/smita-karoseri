@@ -513,3 +513,7 @@ Route::get('/ambil-sp/kembali/invoice-kembali', function() {
 oute::get('/ambil-sp/kembali/list-invoice-kembali', function() {
   return view ('/ambil-sp/kembali/list-invoice-kembali');
 }) -> name('list-invoice-kembali');
+
+Route::get('/persediaan/sp/mutasi-sp-gudang', function() {
+  return view ('/persediaan/sp/mutasi-sp-gudang');
+}) -> name('mutasi-sp-gudang');
