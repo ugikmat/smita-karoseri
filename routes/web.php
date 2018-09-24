@@ -506,8 +506,8 @@ Route::get('/ambil-sp/data/{id}','PengambilanSPController@data');
 
 Route::get('/ambil-sp/ambil/list-invoice-ambil', 'ListPengambilanSPController@index');
 Route::get('/pengambilan_sp/list/{tgl_awal}/{tgl_akhir}/{lokasi}/{sales}', 'ListPengambilanSPController@data');
-Route::get('/pengambilan/sp/list-invoice-sp/edit/{id_penjualan_sp}/{sales}/{tgl}', 'ListPengambilanSPController@edit');
-Route::get('/pengambilan_sp/detail/{id}', 'ListPengambilanSPController@penjualanData');
+Route::get('/pengambilan/sp/list-invoice-sp/edit/{id_pengambilan_sp}/{sales}/{tgl}', 'ListPengambilanSPController@edit');
+Route::get('/pengambilan_sp/detail/{id}', 'ListPengambilanSPController@pengambilanData');
 Route::post('/pengambilan_sp/update/{id}/{id_detail}','ListPengambilanSPController@update');
 Route::post('/pengambilan_sp/store','ListPengambilanSPController@store');
 Route::put('/pengambilan_sp/verify/{id}','ListPengambilanSPController@verif');
@@ -526,3 +526,22 @@ Route::post('/pengembalian_sp/update/{id}/{id_detail}','ListPengembalianSPContro
 Route::post('/pengembalian_sp/store','ListPengembalianSPController@store');
 Route::put('/pengembalian_sp/verify/{id}','ListPengembalianSPController@verif');
 Route::put('/pengembalian_sp/delete','ListPengembalianSPController@delete');
+// Route::get('/ambil-sp/ambil/invoice-ambil', function() {
+//   return view ('/ambil-sp/ambil/invoice-ambil');
+// }) -> name('invoice-ambil');
+
+// oute::get('/ambil-sp/ambil/list-invoice-ambil', function() {
+//   return view ('/ambil-sp/ambil/list-invoice-ambil');
+// }) -> name('list-invoice-ambil');
+
+// Route::get('/ambil-sp/kembali/invoice-kembali', function() {
+//   return view ('/ambil-sp/kembali/invoice-kembali');
+// }) -> name('invoice-kembali');
+
+// oute::get('/ambil-sp/kembali/list-invoice-kembali', function() {
+//   return view ('/ambil-sp/kembali/list-invoice-kembali');
+// }) -> name('list-invoice-kembali');
+
+Route::get('/persediaan/sp/mutasi-sp-gudang', function() {
+  return view ('/persediaan/sp/mutasi-sp-gudang');
+}) -> name('mutasi-sp-gudang');

@@ -273,7 +273,7 @@ return [
                     'submenu' => [
                       [
                         'text'  => 'Invoice Pengambilan',
-                        'icon'  => 'export',
+                        'icon'  => 'circle-left',
                         'url'   => '/ambil-sp/ambil/invoice-ambil',
                       ],
                       [
@@ -289,7 +289,7 @@ return [
                     'submenu' => [
                       [
                         'text'  => 'Invoice Pengembalian',
-                        'icon'  => 'import',
+                        'icon'  => 'circle-right',
                         'url'   => '/ambil-sp/ambil/invoice-kembali',
                       ],
                       [
@@ -336,6 +336,11 @@ return [
                         'url'   => '/persediaan/sp/mutasi-sp',
                       ],
                       [
+                        'text'  => 'Mutasi Stok SP Gudang',
+                        'icon'  => 'truck',
+                        'url'   => '/persediaan/sp/mutasi-sp-gudang',
+                      ],
+                      [
                         'text'  => 'SP per CVS',
                         'icon'  => 'user',
                         'url'   => '/persediaan/sp/mutasi-sp-cvs',
@@ -345,11 +350,11 @@ return [
                         'icon'  => 'users',
                         'url'   => '/persediaan/sp/mutasi-sp-semua-cvs',
                       ],
-                      [
-                        'text'  => 'Pengambilan SP',
-                        'icon'  => 'paste',
-                        'url'   => '/persediaan/sp/pengambilan-sp',
-                      ],
+                      // [
+                      //   'text'  => 'Pengambilan SP',
+                      //   'icon'  => 'paste',
+                      //   'url'   => '/persediaan/sp/pengambilan-sp',
+                      // ],
                     ],
                   ],
                 ],
