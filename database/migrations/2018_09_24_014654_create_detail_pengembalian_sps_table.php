@@ -21,8 +21,6 @@ class CreateDetailPengembalianSpsTable extends Migration
             $table->string('id_produk');
             $table->integer('jumlah_sp');
             $table->string('tipe_harga');
-            $table->integer('harga_satuan');
-            $table->bigInteger('harga_total');
             $table->string('keterangan_detail_psp');
             $table->tinyInteger('status_detail_psp')->default(1);
         });
