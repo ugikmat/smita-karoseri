@@ -521,7 +521,7 @@ Route::get('/kembali-sp/data/{id}','PengembalianSPController@data');
 Route::get('/ambil-sp/ambil/list-invoice-kembali', 'ListPengembalianSPController@index');
 Route::get('/pengembalian_sp/list/{tgl_awal}/{tgl_akhir}/{lokasi}/{sales}', 'ListPengembalianSPController@data');
 Route::get('/pengembalian/sp/list-invoice-sp/edit/{id_penjualan_sp}/{sales}/{tgl}', 'ListPengembalianSPController@edit');
-Route::get('/pengembalian_sp/detail/{id}', 'ListPengembalianSPController@penjualanData');
+Route::get('/pengembalian_sp/detail/{id}', 'ListPengembalianSPController@pengembalianData');
 Route::post('/pengembalian_sp/update/{id}/{id_detail}','ListPengembalianSPController@update');
 Route::post('/pengembalian_sp/store','ListPengembalianSPController@store');
 Route::put('/pengembalian_sp/verify/{id}','ListPengembalianSPController@verif');

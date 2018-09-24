@@ -14,7 +14,7 @@ use App\UploadDompul;
 use App\PengembalianProduk;
 use App\DetailPengembalianProduk;
 use App\HargaProduk;
-use App\PenjualanDompul;
+use App\PengembalianDompul;
 use App\StokSp;
 use App\Lokasi;
 use Illuminate\Support\Facades\Auth;
@@ -63,6 +63,25 @@ class ListPengembalianSPController extends Controller
         $pengembalianSP = PengembalianProduk::where('id_pengembalian_sp',$id_pengembalian_sp)->first();
         return view('ambil-sp/ambil/list-invoice-ambil-2',['sales'=>$sales,'pengembalianSP'=>$pengembalianSP]);
     }
+
+   public function update(Request $request, $id,$id_detail){
+        $data = DetailPengembalianProduk::where('id_detail_pengembalian_sp',$id_detail)->first();
+
+        // $data = DB::table('temp_detail_pengembalian_sps')->where('id_temp_pengembalian_sp',$id)->first();
+        $tipe = $request->get('tipe');
+        $jumlah_sp = $request->get('jumlah');
+
+        if($tipe != 'default') {
+            // DB::table('temp_detail_pengembalian_sps')->where('id_temp_pengembalian_sp',$id)
+            // ->update(['tipe_harga'=>$tipe]);
+            $data->tipe_harga=$tipe;
+        }
+            $harga = HargaProduk::where('id_produk',$data->id_produk)->where('tipe_harga_sp',$data->tipe_harga)->first();
+            $data->jumlah_sp=$jumlah_sp;
+            $data->save();
+        return response()->json(['success' => true]);
+    }
+
     public function delete(Request $request){
         PengembalianProduk::where('id_pengembalian_sp',$request->get('id'))->update(['deleted'=>1]);
         $request->session()->flash('status', 'Berhasil menghapus List Invoice!');
@@ -127,7 +146,7 @@ class ListPengembalianSPController extends Controller
                                   if(Auth::user()->level_user=='Supervisor'||Auth::user()->level_user=='Super Admin'){
                                     return
                                     '<a class="btn btn-xs btn-primary"
-                                    href="/operasional/smita/pengembalian/sp/list-invoice-sp/edit/'.$pengembalianSP->id_pengembalian_sp.'/'.$pengembalianSP->nm_sales.'/'.$pengembalianSP->tanggal_pengembalian_sp.'">
+                                    href="/pengembalian/sp/list-invoice-sp/edit/'.$pengembalianSP->id_pengembalian_sp.'/'.$pengembalianSP->nm_sales.'/'.$pengembalianSP->tanggal_pengembalian_sp.'">
                                     <i class="glyphicon glyphicon-edit"></i> Edit
                                     </a>
                                     <a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationModal" data-id='.$pengembalianSP->id_pengembalian_sp.'><i class="glyphicon glyphicon-edit"></i> Verifikasi</a>
@@ -143,13 +162,47 @@ class ListPengembalianSPController extends Controller
                               } else {
                                   return
                                     '<a class="btn btn-xs btn-primary"
-                                    href="/operasional/smita/pengembalian/sp/list-invoice-sp/edit/'.$pengembalianSP->id_pengembalian_sp.'/'.$pengembalianSP->nm_sales.'/'.$pengembalianSP->tanggal_pengembalian_sp.'">
+                                    href="/pengembalian/sp/list-invoice-sp/edit/'.$pengembalianSP->id_pengembalian_sp.'/'.$pengembalianSP->nm_sales.'/'.$pengembalianSP->tanggal_pengembalian_sp.'">
                                     <i class="glyphicon glyphicon-edit"></i> Lihat
                                     </a>
                                     <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$pengembalianSP->id_pengembalian_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
                               }
 
                             })
+                          ->make(true);
+    }
+    public function pengembalianData(Datatables $datatables,$id)
+    {
+        // $data = DB::table('temp_detail_pengembalian_sps')->get();
+
+        $detailPengembalian = DetailPengembalianProduk::select(DB::raw('master_produks.nama_produk,
+        master_produks.satuan,
+        detail_pengembalian_sps.id_produk,
+        detail_pengembalian_sps.id_pengembalian_sp,
+        detail_pengembalian_sps.id_detail_pengembalian_sp,
+        detail_pengembalian_sps.tipe_harga,
+        detail_pengembalian_sps.jumlah_sp'))
+                        ->join('master_produks',function($join){
+                            $join->on('detail_pengembalian_sps.id_produk','=','master_produks.kode_produk');
+                        })
+                        ->where('id_pengembalian_sp',$id)->get();
+       
+        return $datatables->of($detailPengembalian)
+                        ->addColumn('indeks', function ($detailPengembalianSp) {
+                              return '';
+                            })
+                            ->addColumn('jumlah', function ($detailPengembalianSp) {
+                              return number_format($detailPengembalianSp->jumlah_sp,0,",",".");
+                            })
+                            ->addColumn('action', function ($detailPengembalianSp) {
+                                $tipe = HargaProduk::select('tipe_harga_sp')->where('id_produk',$detailPengembalianSp->id_produk)->get();
+                                // $tipe = HargaDompul::select('tipe_harga_dompul')->where('nama_harga_dompul',$uploadDompul->produk)->get();
+                              return
+                              '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal" data-id="'.$detailPengembalianSp->id_pengembalian_sp.'" data-id_detail="'.$detailPengembalianSp->id_detail_pengembalian_sp.'" data-tipe='.$tipe.' data-qty="'.$detailPengembalianSp->jumlah_sp.'"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                            })
+                            // ->addColumn('input', function ($uploadDompul) {
+                            //   return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#editModal"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                            // })->rawColumns(['input'])
                           ->make(true);
     }
 }
