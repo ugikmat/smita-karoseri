@@ -491,8 +491,38 @@ Route::get('/persediaan/sp/mutasi-sp-cvs', 'StockCVSSpController@index');
 Route::get('/stok-sp/data/{sales}/{tgl_awal}/{tgl_akhir}', 'StockCVSSpController@data');
 
 Route::get('/persediaan/sp/mutasi-sp-semua-cvs', 'StokCVSSpAllController@index');
+Route::post('/persediaan/sp/mutasi-sp-semua-cvs/show', 'StokCVSSpAllController@show');
 Route::get('/stok-sp/all/data/{tgl_awal}/{tgl_akhir}', 'StokCVSSpAllController@data');
 
 Route::get('/persediaan/sp/pengambilan-sp', function() {
   return view ('/persediaan/sp/pengambilan-sp');
 }) -> name('pengambilan-sp');
+
+
+Route::get('/ambil-sp/ambil/invoice-ambil', 'PengambilanSPController@index');
+Route::post('/ambil-sp/verify','PengambilanSPController@verify');
+Route::post('/ambil-sp/store','PengambilanSPController@store');
+Route::get('/ambil-sp/data/{id}','PengambilanSPController@data');
+
+Route::get('/ambil-sp/ambil/list-invoice-ambil', 'ListPengambilanSPController@index');
+Route::get('/pengambilan_sp/list/{tgl_awal}/{tgl_akhir}/{lokasi}/{sales}', 'ListPengambilanSPController@data');
+Route::get('/pengambilan/sp/list-invoice-sp/edit/{id_penjualan_sp}/{sales}/{tgl}', 'ListPengambilanSPController@edit');
+Route::get('/pengambilan_sp/detail/{id}', 'ListPengambilanSPController@penjualanData');
+Route::post('/pengambilan_sp/update/{id}/{id_detail}','ListPengambilanSPController@update');
+Route::post('/pengambilan_sp/store','ListPengambilanSPController@store');
+Route::put('/pengambilan_sp/verify/{id}','ListPengambilanSPController@verif');
+Route::put('/pengambilan_sp/delete','ListPengambilanSPController@delete');
+
+Route::get('/ambil-sp/ambil/invoice-kembali', 'PengembalianSPController@index');
+Route::post('/kembali-sp/verify','PengembalianSPController@verify');
+Route::post('/kembali-sp/store','PengembalianSPController@store');
+Route::get('/kembali-sp/data/{id}','PengembalianSPController@data');
+
+Route::get('/ambil-sp/ambil/list-invoice-kembali', 'ListPengembalianSPController@index');
+Route::get('/pengembalian_sp/list/{tgl_awal}/{tgl_akhir}/{lokasi}/{sales}', 'ListPengembalianSPController@data');
+Route::get('/pengembalian/sp/list-invoice-sp/edit/{id_penjualan_sp}/{sales}/{tgl}', 'ListPengembalianSPController@edit');
+Route::get('/pengembalian_sp/detail/{id}', 'ListPengembalianSPController@pengembalianData');
+Route::post('/pengembalian_sp/update/{id}/{id_detail}','ListPengembalianSPController@update');
+Route::post('/pengembalian_sp/store','ListPengembalianSPController@store');
+Route::put('/pengembalian_sp/verify/{id}','ListPengembalianSPController@verif');
+Route::put('/pengembalian_sp/delete','ListPengembalianSPController@delete');

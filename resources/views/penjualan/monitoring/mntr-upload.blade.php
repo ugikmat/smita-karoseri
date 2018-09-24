@@ -24,7 +24,7 @@
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Tanggal Penjualan
+        <strong>Tanggal Penjualan</strong>
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         @if(Session::has('tgl_penjualan'))
@@ -39,32 +39,6 @@
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput" pull-right>Input Tanggal Penjualan</button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Nama Kasir
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-6">
-        : Ugik
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Nama Logistik
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-6">
-        : Jovi
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Nama PIC
-      </div>
-      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-6">
-        : Pras
-      </div>
     </div>
   </div>
 </div>

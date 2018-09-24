@@ -30,7 +30,7 @@
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput" pull-right>Input Tanggal Laporan Pembelian</button>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8">
-      Tanggal Cetak Laporan :&nbsp{{\Carbon\Carbon::now()->format('d-m-Y')}}
+      <strong>Tanggal Cetak Laporan :</strong>&nbsp{{\Carbon\Carbon::now()->format('d-m-Y')}}
     </div>
   </div>
 </div>

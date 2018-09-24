@@ -22,7 +22,7 @@
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Tanggal Penjualan :
+        <strong>Tanggal Penjualan :</strong>
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
         @if (Session::has('tgl_penjualan_dompul'))
@@ -42,33 +42,7 @@
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Nama Kasir
-      </div>
-      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        : (nama)
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Nama Logistik
-      </div>
-      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        : (nama)
-      </div>
-    </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Nama PIC
-      </div>
-      <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
-        : (nama)
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        ID Canvaser
+        <strong>ID Canvaser</strong>
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
         @isset($sales)
@@ -82,7 +56,7 @@
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Nama Canvaser :
+        <strong>Nama Canvaser :</strong>
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
         @isset($sales)
@@ -97,7 +71,7 @@
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
-        Tanggal Cetak Penjualan :
+        <strong>Tanggal Cetak Penjualan :</strong>
       </div>
       <div class="col-xs-6 col-sm-8 col-md-8 col-lg-8">
             {{Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}

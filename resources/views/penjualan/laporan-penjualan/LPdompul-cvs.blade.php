@@ -36,11 +36,11 @@
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput" pull-right>Input Tanggal Laporan Penjualan</button>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      Tanggal Cetak Laporan
+      <strong>Tanggal Cetak Laporan</strong>
         : {{\Carbon\Carbon::now('Asia/Jakarta')->format('d-m-Y')}}
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
-      Nama Canvasser :
+      <strong>Nama Canvasser :</strong>
         <input type="text" name="canvasser" id="canvasser" value="" disabled>
     </div>
   </div>

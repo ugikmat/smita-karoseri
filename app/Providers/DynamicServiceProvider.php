@@ -49,9 +49,9 @@ class DynamicServiceProvider extends ServiceProvider
             $view->with('supervisorarray', Supervisor::all());
         });
 
-        // view()->composer('*',function($view){
-        //     $view->with('gudangarray', ViewGudang::all());
-        // });
+        view()->composer('*',function($view){
+            $view->with('gudangarray', ViewGudang::all());
+        });
 
         view()->composer('*',function($view){
             $view->with('produkarray', produk::all());

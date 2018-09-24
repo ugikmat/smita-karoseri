@@ -264,12 +264,50 @@ return [
                 ],
               ],
               [
+                'text'    => 'Pengambilan SP',
+                'icon'    => 'paste',
+                'submenu' => [
+                  [
+                    'text'  => 'Pengambilan',
+                    'icon'  => 'share',
+                    'submenu' => [
+                      [
+                        'text'  => 'Invoice Pengambilan',
+                        'icon'  => 'export',
+                        'url'   => '/ambil-sp/ambil/invoice-ambil',
+                      ],
+                      [
+                        'text'  => 'List Invoice Ambil',
+                        'icon'  => 'file',
+                        'url'   => '/ambil-sp/ambil/list-invoice-ambil',
+                      ],
+                    ],
+                  ],
+                  [
+                    'text'    => 'Pengembalian',
+                    'icon'    => 'share',
+                    'submenu' => [
+                      [
+                        'text'  => 'Invoice Pengembalian',
+                        'icon'  => 'import',
+                        'url'   => '/ambil-sp/ambil/invoice-kembali',
+                      ],
+                      [
+                        'text'  => 'List Invoice Kembali',
+                        'icon'  => 'file',
+                        'url'   => '/ambil-sp/ambil/list-invoice-kembali',
+                      ],
+                    ],
+                  ],
+                ],
+              ],
+              [
                 'text'    => 'Persediaan',
                 'icon'    => 'share',
                 'submenu' => [
                   [
                     'text'    => 'Dompul',
-                    'icon'    => '',
+                    'icon'    => 'wallet',
                     'submenu' => [
                       [
                         'text'  => 'Mutasi Stok Dompul',
@@ -290,7 +328,7 @@ return [
                   ],
                   [
                     'text'    => 'SP',
-                    'icon'    => '',
+                    'icon'    => 'credit-card',
                     'submenu' => [
                       [
                         'text'  => 'Mutasi Stok SP',

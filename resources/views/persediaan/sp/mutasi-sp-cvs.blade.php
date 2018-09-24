@@ -28,7 +28,7 @@
   @csrf
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-        Tanggal Awal :
+        <strong>Tanggal Awal :</strong>
         @if(Session::has('tgl_stok_sp'))
           <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_awal" name="tgl_awal" value="{{session('tgl_stok_sp')}}">
         @else
@@ -37,7 +37,7 @@
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-        Tanggal Akhir :
+        <strong>Tanggal Akhir :</strong>
         @if(Session::has('tgl_stok_sp'))
           <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_akhir" name="tgl_akhir" value="{{session('tgl_stok_sp')}}">
         @else
@@ -46,7 +46,7 @@
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-        Nama Canvaser : &nbsp;
+        <strong>Nama Canvaser :</strong> &nbsp;
         <select id="sales" required="required" name="sales" class="chosen-select" data-placeholder="{{session('id_sales')}}">
               <option value="" disabled>Pilih Nama canvaser</option>
               @isset($saless)
@@ -112,11 +112,7 @@
             processing: true,
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-<<<<<<< HEAD:resources/views/persediaan/mutasi-sp-cvs.blade.php
-            ajax: `/operasional/smita/stok-sp/data/${$tgl_awal}/${$tgl_akhir}`,
-=======
             ajax: `/operasional/smita/stok-sp/data/${$sales}/${$tgl_awal}/${$tgl_akhir}`,
->>>>>>> 4d8e7f5b5456c0cd942f4e9c5ab58a9756b41c50:resources/views/persediaan/sp/mutasi-sp-cvs.blade.php
             columns: [
               // {data: 'indeks'},
               {data: 'nama_produk'},

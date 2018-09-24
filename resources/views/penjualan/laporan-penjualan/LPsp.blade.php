@@ -34,10 +34,10 @@
     </div>
     <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        Tanggal Cetak Laporan
+        <strong>Tanggal Cetak Laporan :</strong>
       </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        : {{\Carbon\Carbon::now()->format('d-m-Y')}}
+         {{\Carbon\Carbon::now()->format('d-m-Y')}}
       </div>
     </div>
   </div>
