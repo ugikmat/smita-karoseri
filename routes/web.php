@@ -544,3 +544,7 @@ Route::put('/pengembalian_sp/delete','ListPengembalianSPController@delete');
 
 Route::get('/persediaan/sp/mutasi-sp-gudang', 'StokSpGudangController@index');
 Route::get('/stok-sp/gudang/data/{tgl_awal}/{tgl_akhir}', 'StokSpGudangController@data');
+
+Route::get('/penjualan/dompul/list-invoice-cvs', function() {
+  return view ('/penjualan/dompul/list-invoice-cvs');
+}) -> name('list-invoice-cvs');

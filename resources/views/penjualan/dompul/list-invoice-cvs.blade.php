@@ -87,25 +87,6 @@
                   </div>
 
                   <div class="form-group row">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Canvasser
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select name="sales" required="required" class="form-control col-md-7 col-xs-12" id="sales" value='{{session('dompul_sales_id')}}'>
-
-                          @isset($saless)
-                          @if($saless->count()>1)
-                            <option value="all" id="all">- Semua Canvaser -</option>
-                          @endif
-                            @foreach($saless as $sales)
-                              <option value="{{$sales->id_sales}}" id="{{$sales->nm_sales}}">{{$sales->nm_sales}}</option>
-                            @endforeach
-                          @endisset
-                        </select>
-                      </div>
-                    </div>
-
-                  <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Lokasi
                       <span class="required">*</span>
                     </label>
