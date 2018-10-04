@@ -91,7 +91,27 @@ class ListPenjualanDompulController extends Controller
         $request->session()->flash('status', 'Berhasil melakukan verifikasi!');
         return redirect()->back();
     }
+    public function verifAll(Request $request){
+        $tgl_awal = $request->get('verif_tgl_awal');
+        $tgl_akhir = $request->get('verif_tgl_akhir');
+        $lokasi = $request->get('verif_lokasi');
+        $sales = $request->get('verif_canvaser');
+        if($lokasi=='all'){
+            $datas = PenjualanDompul::whereBetween('tanggal_penjualan_dompul',[$tgl_awal,$tgl_akhir])
+                        ->where('deleted',0);
+        }else{
+            $datas = PenjualanDompul::whereBetween('tanggal_penjualan_dompul',[$tgl_awal,$tgl_akhir])
+                        ->where('penjualan_dompuls.id_lokasi',$lokasi)
+                        ->where('deleted',0);
 
+        }
+        if($sales!='all'){
+            $datas = $datas->where('penjualan_dompuls.id_sales',$sales);
+        }
+        $datas->update(['status_pembayaran'=>1]);
+        $request->session()->flash('status', 'Berhasil melakukan verifikasi!');
+        return redirect()->back();
+    }
     public function update(Request $request){
         $id = $request->get('id');
         $bank = $request->get('bank');

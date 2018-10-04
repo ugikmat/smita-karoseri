@@ -37,7 +37,7 @@
     </thead>
 </table>
 </form>
-
+<a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationAllModal" data-id="1"><i class="glyphicon glyphicon-edit"></i> Verifikasi Semua</a>
 <!--Modal input-->
 <div class="modal fade bs-example-modal-lg" id='modalInput' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -166,6 +166,31 @@
   </div>
 </div>
 
+<!--Modal Verifikasi All-->
+<div class="modal fade" id="verificationAllModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="/operasional/smita/invoice_dompul/all/verify" method="POST" id="verificationAllForm">
+        @csrf @method('put')
+        <input type="hidden" name="verif_tgl_awal" value="" id="verif_tgl_awal">
+        <input type="hidden" name="verif_tgl_akhir" value="" id="verif_tgl_akhir">
+        <input type="hidden" name="verif_canvaser" value="" id="verif_canvaser">
+        <input type="hidden" name="verif_lokasi" value="" id="verif_lokasi">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Apakah Anda Yakin ingin memverifikasi semua transaksi didaftar?</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+          <button type="submit" class="btn btn-success">Verifikasi</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <!--Modal Hapus-->
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
@@ -248,6 +273,12 @@
           var button = $(event.relatedTarget) // Button that triggered the modal
           var id = button.data('id');
           $('#verificationForm').attr('action',`/operasional/smita/invoice_dompul/verify/${id}`);
+        });
+        $('#verificationAllModal').on('show.bs.modal', function (event) {
+          $('#verif_tgl_awal').val($('#tgl_awal').val());
+          $('#verif_tgl_akhir').val($('#tgl_akhir').val());
+          $('#verif_canvaser').val($('#sales').val());
+          $('#verif_lokasi').val($('#lokasi').val());
         });
         $('#deleteModal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget) // Button that triggered the modal

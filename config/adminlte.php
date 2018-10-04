@@ -174,11 +174,11 @@ return [
                         'url'   => '/penjualan/laporan-penjualan/LPdompul',
                         'icon'  => 'briefcase',
                       ],
-                    //   [
-                    //     'text'  => 'Penjualan CVS Dompul',
-                    //     'url'   => '/penjualan/laporan-penjualan/LPdompul-cvs',
-                    //     'icon'  => 'user',
-                    //   ],
+                      [
+                        'text'  => 'Penjualan CVS Dompul',
+                        'url'   => '/penjualan/laporan-penjualan/LPdompul-cvs',
+                        'icon'  => 'user',
+                      ],
                       [
                         'text'  => 'Piutang Dompul',
                         'url'   => '/penjualan/laporan-penjualan/LP-piutang-dompul',

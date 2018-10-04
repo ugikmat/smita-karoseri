@@ -156,6 +156,7 @@ Route::get('/invoice_dompul/{canvaser}/{tgl}', 'PenjualanDompulController@data')
 Route::get('/edit_invoice_dompul/{canvaser}/{tgl}/{downline}', 'PenjualanDompulController@penjualanData');
 Route::get('/edit_list_invoice_dompul/{sales}/{tgl}/{customer}', 'ListPenjualanDompulController@penjualanData');
 Route::put('/invoice_dompul/verify/{id}', 'ListPenjualanDompulController@verif');
+Route::put('/invoice_dompul/all/verify', 'ListPenjualanDompulController@verifAll');
 Route::put('/invoice_dompul/delete', 'ListPenjualanDompulController@delete');
 
 Route::get('/penjualan/sp/invoice-sp', 'PenjualanSPController@index');
