@@ -206,8 +206,7 @@ class ListPembelianSPController extends Controller
                                     '<a class="btn btn-xs btn-primary"
                                     href="/operasional/smita/pembelian/sp/list-invoice/edit/'.$pembelianSP->id_pembelian_sp.'">
                                     <i class="glyphicon glyphicon-edit"></i> Lihat
-                                    </a>
-                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$pembelianSP->id_pembelian_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                                    </a>';
                               }
 
                             })

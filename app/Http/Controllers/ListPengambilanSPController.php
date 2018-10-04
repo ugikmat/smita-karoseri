@@ -159,8 +159,7 @@ class ListPengambilanSPController extends Controller
                                     '<a class="btn btn-xs btn-primary"
                                     href="/operasional/smita/pengambilan/sp/list-invoice-sp/edit/'.$pengambilanSP->id_pengambilan_sp.'/'.$pengambilanSP->nm_sales.'/'.$pengambilanSP->tanggal_pengambilan_sp.'">
                                     <i class="glyphicon glyphicon-edit"></i> Lihat
-                                    </a>
-                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$pengambilanSP->id_pengambilan_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                                    </a>';
                               }
 
                             })

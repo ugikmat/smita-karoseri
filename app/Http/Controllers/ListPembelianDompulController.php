@@ -198,8 +198,7 @@ class ListPembelianDompulController extends Controller
                                     '<a class="btn btn-xs btn-primary"
                                     href="/operasional/smita/pembelian/dompul/list-invoice/edit/'.$pembelianDompul->id_pembelian_dompul.'">
                                     <i class="glyphicon glyphicon-edit"></i> Lihat
-                                    </a>
-                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$pembelianDompul->id_pembelian_dompul.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                                    </a>';
                               }
 
                             })

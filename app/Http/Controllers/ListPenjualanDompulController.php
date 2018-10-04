@@ -94,6 +94,10 @@ class ListPenjualanDompulController extends Controller
     public function verifAll(Request $request){
         $tgl_awal = $request->get('verif_tgl_awal');
         $tgl_akhir = $request->get('verif_tgl_akhir');
+        $tgl_awal = Carbon::parse($tgl_awal);
+        $tgl_awal = $tgl_awal->format('Y-m-d');
+        $tgl_akhir = Carbon::parse($tgl_akhir);
+        $tgl_akhir = $tgl_akhir->format('Y-m-d');
         $lokasi = $request->get('verif_lokasi');
         $sales = $request->get('verif_canvaser');
         if($lokasi=='all'){
@@ -255,8 +259,7 @@ class ListPenjualanDompulController extends Controller
                                     '<a class="btn btn-xs btn-primary"
                                     href="/operasional/smita/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
                                     <i class="glyphicon glyphicon-edit"></i> Lihat
-                                    </a>
-                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                                    </a>';
                               }
 
                             })
