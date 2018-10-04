@@ -153,11 +153,11 @@ return [
                         'url'     => '/penjualan/sp/list-invoice-sp',
                         'icon'    =>  'file',
                       ],
-                      [
-                        'text'    => 'Pengambilan SP',
-                        'url'     => '/penjualan/sp/pengambilan-sp',
-                        'icon'    =>  'paste',
-                      ],
+                    //   [
+                    //     'text'    => 'Pengambilan SP',
+                    //     'url'     => '/penjualan/sp/pengambilan-sp',
+                    //     'icon'    =>  'paste',
+                    //   ],
                     ],
                   ],
                   [
@@ -174,11 +174,11 @@ return [
                         'url'   => '/penjualan/laporan-penjualan/LPdompul',
                         'icon'  => 'briefcase',
                       ],
-                      [
-                        'text'  => 'Penjualan CVS Dompul',
-                        'url'   => '/penjualan/laporan-penjualan/LPdompul-cvs',
-                        'icon'  => 'user',
-                      ],
+                    //   [
+                    //     'text'  => 'Penjualan CVS Dompul',
+                    //     'url'   => '/penjualan/laporan-penjualan/LPdompul-cvs',
+                    //     'icon'  => 'user',
+                    //   ],
                       [
                         'text'  => 'Piutang Dompul',
                         'url'   => '/penjualan/laporan-penjualan/LP-piutang-dompul',
@@ -303,7 +303,7 @@ return [
               ],
               [
                 'text'    => 'Persediaan',
-                'icon'    => 'share',
+                'icon'    => 'folder-open-o',
                 'submenu' => [
                   [
                     'text'    => 'Dompul',
@@ -314,16 +314,16 @@ return [
                         'icon'  => 'truck',
                         'url'   => '/persediaan/dompul/mutasi-dompul',
                       ],
-                      [
-                        'text'  => 'Dompul per CVS',
-                        'icon'  => 'user',
-                        'url'   => '/persediaan/dompul/mutasi-dompul-cvs',
-                      ],
-                      [
-                        'text'  => 'Dompul semua CVS',
-                        'icon'  => 'users',
-                        'url'   => '/persediaan/dompul/mutasi-dompul-semua-cvs',
-                      ],
+                      // [
+                      //   'text'  => 'Dompul per CVS',
+                      //   'icon'  => 'user',
+                      //   'url'   => '/persediaan/dompul/mutasi-dompul-cvs',
+                      // ],
+                      // [
+                      //   'text'  => 'Dompul semua CVS',
+                      //   'icon'  => 'users',
+                      //   'url'   => '/persediaan/dompul/mutasi-dompul-semua-cvs',
+                      // ],
                     ],
                   ],
                   [

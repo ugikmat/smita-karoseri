@@ -254,11 +254,16 @@
         <h4 class="modal-title">Upload Excel</h4>
       </div>
       <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+              <div class="x_content">
         <!-- Form -->
         <form method='post' action='/operasional/smita/importExcel' enctype="multipart/form-data">
           @csrf
           <div class="form-group row">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Lokasi
+              <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <select id="id_lokasi" required="required" name="id_lokasi" placeholder="Pilih Lokasi" class="form-control col-md-7 col-xs-12">
@@ -271,17 +276,30 @@
               </select>
             </div>
           </div>
+
           <div class="form-group row">
-            <label for="import_file">File</label>
-            <input type='file' name='import_file' id='import_file' class='form-control' accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-            <br>
-            <input type='submit' class='btn btn-info' value='Upload' id='upload' onclick="move()">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="import_file">File
+              <span class="required">*</span>
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <input type='file' name='import_file' required="required" id='import_file' class='form-control' accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+              <button class="btn btn-warning" type="reset">Reset</button>
+              <input type='submit' class='btn btn-info' value='Upload' id='upload' onclick="move()"> 
+            </div>
           </div>
         </form>
-        <!-- Preview-->
-        <div id='preview'></div>
+</div>
+</div>
+</div>
+</div>
       </div>
-
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
 </div>

@@ -64,7 +64,7 @@ class LaporanPiutangDompulController extends Controller
                     ->where('status_active',1)
                    ->groupBy('id_penjualan_dompul','produk');
 
-        return $datatables->eloquent(PenjualanDompul::select(DB::raw('master_saless.nm_sales, nama_bo,
+        return $datatables->eloquent(PenjualanDompul::select(DB::raw('master_saless.nm_sales,
                                 sum(penjualan_dompuls.grand_total) AS total_penjualan, sum(cash) AS cash, 
                                 sum(bca_pusat) AS bca_pusat, sum(bca_cabang) AS bca_cabang, sum(mandiri) AS mandiri, sum(bni) AS bni, sum(bri) AS bri, 
                                 (sum(penjualan_dompuls.grand_total)-sum(total_bayar)) AS piutang,
@@ -81,7 +81,7 @@ class LaporanPiutangDompulController extends Controller
                             $join->on('penjualan_dompuls.id_penjualan_dompul', '=', 'total_penjualan.id_penjualan_dompul');
                         })
                         ->whereRaw("tanggal_penjualan_dompul <= '{$tgl}'")
-                        ->groupBy('master_saless.nm_sales','nama_bo'))
+                        ->groupBy('master_saless.nm_sales'))
                         ->addColumn('index', function ($penjualanDompul) {
                               return 
                               '';

@@ -24,7 +24,7 @@ class StokCVSSpAllController extends Controller
         $this->middleware(['auth','kasir']);
     }
     public function index(){
-        $lokasis = Lokasi::where('status_lokasi',1)
+        $lokasis = Lokasi::select('master_lokasis.id_lokasi','master_lokasis.nm_lokasi')->where('status_lokasi',1)
         ->join('users_lokasi','users_lokasi.id_lokasi','=','master_lokasis.id_lokasi')
         ->join('users','users.id_user','=','users_lokasi.id_user')
         ->where('users.id_user',Auth::user()->id_user)
@@ -34,12 +34,14 @@ class StokCVSSpAllController extends Controller
         ->join('users','users.name','=','master_saless.nm_sales')
         ->join('users_lokasi','users_lokasi.id_user','=','users.id_user')
         ->where('users_lokasi.id_lokasi',$lokasis->first()->id_lokasi)
+        ->take(30)
         ->get();
         } else {
           $saless = Sales::where('status',1)
         ->join('users','users.name','=','master_saless.nm_sales')
         ->join('users_lokasi','users_lokasi.id_user','=','users.id_user')
         ->where('users_lokasi.id_lokasi',session('mutasi_lokasi'))
+        ->take(30)
         ->get();
         }
         return view('persediaan.sp.mutasi-sp-semua-cvs',['saless'=>$saless,'lokasis'=>$lokasis]);
