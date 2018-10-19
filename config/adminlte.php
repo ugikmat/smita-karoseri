@@ -158,11 +158,11 @@ return [
                         'url'     => '/penjualan/sp/list-invoice-sp',
                         'icon'    =>  'file',
                       ],
-                      [
-                        'text'    => 'Pengambilan SP',
-                        'url'     => '/penjualan/sp/pengambilan-sp',
-                        'icon'    =>  'paste',
-                      ],
+                    //   [
+                    //     'text'    => 'Pengambilan SP',
+                    //     'url'     => '/penjualan/sp/pengambilan-sp',
+                    //     'icon'    =>  'paste',
+                    //   ],
                     ],
                   ],
                   [

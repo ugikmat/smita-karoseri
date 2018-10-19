@@ -91,7 +91,31 @@ class ListPenjualanDompulController extends Controller
         $request->session()->flash('status', 'Berhasil melakukan verifikasi!');
         return redirect()->back();
     }
+    public function verifAll(Request $request){
+        $tgl_awal = $request->get('verif_tgl_awal');
+        $tgl_akhir = $request->get('verif_tgl_akhir');
+        $tgl_awal = Carbon::parse($tgl_awal);
+        $tgl_awal = $tgl_awal->format('Y-m-d');
+        $tgl_akhir = Carbon::parse($tgl_akhir);
+        $tgl_akhir = $tgl_akhir->format('Y-m-d');
+        $lokasi = $request->get('verif_lokasi');
+        $sales = $request->get('verif_canvaser');
+        if($lokasi=='all'){
+            $datas = PenjualanDompul::whereBetween('tanggal_penjualan_dompul',[$tgl_awal,$tgl_akhir])
+                        ->where('deleted',0);
+        }else{
+            $datas = PenjualanDompul::whereBetween('tanggal_penjualan_dompul',[$tgl_awal,$tgl_akhir])
+                        ->where('penjualan_dompuls.id_lokasi',$lokasi)
+                        ->where('deleted',0);
 
+        }
+        if($sales!='all'){
+            $datas = $datas->where('penjualan_dompuls.id_sales',$sales);
+        }
+        $datas->update(['status_pembayaran'=>1]);
+        $request->session()->flash('status', 'Berhasil melakukan verifikasi!');
+        return redirect()->back();
+    }
     public function update(Request $request){
         $id = $request->get('id');
         $bank = $request->get('bank');
@@ -235,8 +259,7 @@ class ListPenjualanDompulController extends Controller
                                     '<a class="btn btn-xs btn-primary"
                                     href="/operasional/smita/penjualan/dompul/list-invoice/edit/'.$penjualanDompul->id_penjualan_dompul.'/'.$penjualanDompul->nm_sales.'/'.$penjualanDompul->tanggal_penjualan_dompul.'/'.$penjualanDompul->nm_cust.'">
                                     <i class="glyphicon glyphicon-edit"></i> Lihat
-                                    </a>
-                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$penjualanDompul->id_penjualan_dompul.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                                    </a>';
                               }
 
                             })

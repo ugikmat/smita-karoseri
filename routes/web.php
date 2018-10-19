@@ -156,6 +156,7 @@ Route::get('/invoice_dompul/{canvaser}/{tgl}', 'PenjualanDompulController@data')
 Route::get('/edit_invoice_dompul/{canvaser}/{tgl}/{downline}', 'PenjualanDompulController@penjualanData');
 Route::get('/edit_list_invoice_dompul/{sales}/{tgl}/{customer}', 'ListPenjualanDompulController@penjualanData');
 Route::put('/invoice_dompul/verify/{id}', 'ListPenjualanDompulController@verif');
+Route::put('/invoice_dompul/all/verify', 'ListPenjualanDompulController@verifAll');
 Route::put('/invoice_dompul/delete', 'ListPenjualanDompulController@delete');
 
 Route::get('/penjualan/sp/invoice-sp', 'PenjualanSPController@index');
@@ -277,6 +278,7 @@ Route::get('/stok-sp/data/{tgl_awal}/{tgl_akhir}', 'StokSpController@data');
 Route::get('/upload/{transfer}/{upload}', 'UploadDompulController@data');
 Route::get('upload/dompul', 'UploadDompulController@index');
 Route::put('/upload/aktifasi/{tgl_transfer}/{tgl_upload}', 'UploadDompulController@aktifasi');
+Route::put('/upload/delete', 'UploadDompulController@delete');
 Route::get('downloadExcel/{type}', 'UploadDompulController@downloadExcel');
 Route::post('importExcel', 'UploadDompulController@importExcel');
 Route::get('/upload/tgl', 'UploadDompulController@uploadData');

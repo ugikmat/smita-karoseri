@@ -14,7 +14,7 @@ use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Faker\Factory as Faker;
+// use Faker\Factory as Faker;
 
 class UploadDompulController extends Controller {
     /**
@@ -41,7 +41,7 @@ class UploadDompulController extends Controller {
     }
     public
     function importExcel(Request $request) {
-        $faker = Faker::create();
+        // $faker = Faker::create();
         // Get data from database
         $db_sub_master = Dompul::select('nama_sub_master_dompul')->get();
         $db_downline = Customer::select('nm_cust')->get();
@@ -52,6 +52,12 @@ class UploadDompulController extends Controller {
         $downline = [];
         $kanvacer = [];
         $faktur = [];
+        $tambah=0;
+        $datasa=0;
+        $masuk=0;
+        $ada=0;
+        $bro=0;
+        $sis=0;
         //Add data to array
         foreach ($db_sub_master as $key => $value) {
             $sub_master[]=$value->nama_sub_master_dompul;
@@ -65,24 +71,29 @@ class UploadDompulController extends Controller {
         foreach ($db_faktur as $key => $value) {
             $faktur[]=$value->no_faktur;
         }
-
+        
         if ($request->hasFile('import_file')) {
             $path = $request->file('import_file')->getRealPath();
             $data = Excel::load($path, function ($reader) {
                 $reader->ignoreEmpty();
             })->get();
-            if (!empty($data) && $data->count()) {
+            if (!empty($data)) {
+                $ada++;
+            // if (!empty($data) && $data->count()) {
                 foreach($data as $key => $value) {
+                    $datasa++;
                     if (!empty($value) && $value->count()) {
+                        $bro++;
                         if (!empty($value->hp_sub_master)) {
-                            if (in_array($value->no_faktur, $faktur)) {
-                                // continue;
-                            }else{
+                            $sis++;
+                            // if (in_array($value->no_faktur, $faktur)) {
+                            //     // continue;
+                            // }else{
                                 $uploadDompul[] = ['no_hp_sub_master_dompul' => $value->hp_sub_master,
                                 'nama_sub_master_dompul' => $value->nama_sub_master,
                                 'id_user' => Auth::user()->id_user,
-                                'id_lokasi' => Auth::user()->id_lokasi,
-                                'tanggal_transfer' => $value->tanggal_trx,
+                                'id_lokasi' => $request->get('id_lokasi'),
+                                'tanggal_transfer' => Carbon::parse($value->tanggal_trx)->format('Y-m-d'),
                                 'tanggal_upload' => Carbon::now('Asia/Jakarta')->toDateString(),
                                 'inbox' => ($value->inbox==null) ? 0 : $value->inbox ,
                                 'no_faktur' => $value->no_faktur,
@@ -103,14 +114,16 @@ class UploadDompulController extends Controller {
                                 'bayar' => $value->bayar,
                                 'qty_program' => 0
                                 // 'tipe_dompul' => ''
+                                
                             ];
+                            $tambah++;
                             // $faktur[] = $value->no_faktur;
-                            }
+                            // }
 
                             if (in_array($value->nama_sub_master, $sub_master)) {
                                 // continue;
                             }else{
-                                $dompul[] = ['no_hp_master_dompul' => $faker->phoneNumber,
+                                $dompul[] = ['no_hp_master_dompul' => '09',
                                 'no_hp_sub_master_dompul' => $value->hp_sub_master,
                                 'nama_sub_master_dompul' => $value->nama_sub_master,
                                 'tipe_dompul' => substr($value->nama_sub_master, 0, 3),
@@ -139,9 +152,9 @@ class UploadDompulController extends Controller {
                                 // continue;
                             }else{
                                 $customer[] = ['nm_cust' => $value->nama_downline,
-                                'alamat_cust' => $faker->address,
+                                'alamat_cust' => '-',
                                 'no_hp' => $value->hp_downline,
-                                'jabatan' => $faker->jobTitle
+                                'jabatan' => '-'
                             ];
                                 $downline[] = $value->nama_downline;
                             }
@@ -150,7 +163,7 @@ class UploadDompulController extends Controller {
                                 // continue;
                             }else{
                                 $sales[] = ['nm_sales' => $value->nama_kanvacer,
-                                'alamat_sales' => $faker->address,
+                                'alamat_sales' => '-',
                                 'id_lokasi' => 0,
                                 'no_hp' => $value->hp_kanvacer
                             ];
@@ -160,31 +173,33 @@ class UploadDompulController extends Controller {
                     }
                 }
                 try {
-                if (!empty($bo)) {
-                    DB::table('bos')->insert($bo);
-                }
-                if (!empty($uploadDompul)) {
-                    DB::table('upload_dompuls')->insert($uploadDompul);
-                }
-                if(!empty($dompul)){
-                    DB::table('master_dompuls')->insert($dompul);
-                }
-                // if(!empty($hargaDompul)){
-                //     DB::table('master_harga_dompuls')->insert($hargaDompul);
-                // }
-                if(!empty($customer)){
-                    DB::table('master_customers')->insert($customer);
-                }
-                if(!empty($sales)){
-                    DB::table('master_saless')->insert($sales);
-                }
+                    if (!empty($bo)) {
+                        DB::table('bos')->insert($bo);
+                    }
+                    if (!empty($uploadDompul)) {
+                        DB::table('upload_dompuls')->insert($uploadDompul);
+                        $masuk++;
+                    }
+                    if(!empty($dompul)){
+                        DB::table('master_dompuls')->insert($dompul);
+                    }
+                    // if(!empty($hargaDompul)){
+                    //     DB::table('master_harga_dompuls')->insert($hargaDompul);
+                    // }
+                    if(!empty($customer)){
+                        DB::table('master_customers')->insert($customer);
+                    }
+                    if(!empty($sales)){
+                        DB::table('master_saless')->insert($sales);
+                    }
+                    $data = "Berhasil melakukan upload {$tambah}, {$masuk} {$datasa} {$ada} {$bro} {$sis}";
                 } catch (Exception $e) {
-
+                    $data = 'Gagal melakukan upload';
                 }
 
             }
         }
-        $request->session()->flash('status','Berhasil melakukan upload!');
+        $request->session()->flash('status',$data);
         return redirect('/upload/dompul');
 
     }
@@ -195,6 +210,15 @@ class UploadDompulController extends Controller {
     public function empty(Request $request) {
         UploadDompul::truncate();
         $request->session()->flash('error','Gagal melakukan upload!');
+        return redirect()->back();
+    }
+    public function delete(Request $request) {
+        $transfer = Carbon::parse($request->get('tgl_transfer'))->format('Y-m-d');
+        $upload = Carbon::parse($request->get('tgl_upload'))->format('Y-m-d');
+        UploadDompul::where('tanggal_transfer',$transfer)
+                        ->where('tanggal_upload',$upload)
+                        ->update([]);
+        $request->session()->flash('status','Berhasil Menghapus data');
         return redirect()->back();
     }
 
@@ -239,7 +263,8 @@ class UploadDompulController extends Controller {
                     return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#detailModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-edit"></i> Lihat Data</a>';
                 } else {
                     return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#detailModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-edit"></i> Lihat Data</a>
-                <a class = "btn btn-xs btn-warning" data-toggle="modal" data-target="#activationModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-remove"></i> Aktifasi</a>';
+                <a class = "btn btn-xs btn-warning" data-toggle="modal" data-target="#activationModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-remove"></i> Aktifasi</a>
+                <a class = "btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal"  data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                 }
             })->make(true);
     }

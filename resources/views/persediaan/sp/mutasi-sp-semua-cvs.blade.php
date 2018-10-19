@@ -24,10 +24,10 @@
 
 @section('content')
 <div class="container-fluid form-inline">
-  <form class="invoice-sp repeater" action="/persediaan/sp/mutasi-sp-semua-cvs/show" method="post">
+  <form class="invoice-sp repeater" action="/operasional/smita/persediaan/sp/mutasi-sp-semua-cvs/show" method="post">
   @csrf
   <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
         <strong>Tanggal Awal :</strong>
         @if(Session::has('tgl_awal_stok_sp'))
           <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_awal" name="tgl_awal" value="{{session('tgl_awal_stok_sp')}}">
@@ -36,7 +36,7 @@
         @endif
     </div>
 
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
         <strong>Tanggal Akhir :</strong>
         @if(Session::has('tgl_akhir_stok_sp'))
           <input class="datepicker form-control" data-date-format="dd-mm-yyyy" id="tgl_akhir" name="tgl_akhir" value="{{session('tgl_akhir_stok_sp')}}">
@@ -45,7 +45,7 @@
         @endif
     </div>
 
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
       <strong>Lokasi :</strong> &nbsp;
       <select name="lokasi" required="required" class="form-control chosen-select" id="lokasi">
         <option value="" disabled selected>Pilih Lokasi</option>
@@ -57,7 +57,7 @@
       </select>
     </div>
 
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
       <button type="submit" class="btn btn-success" ><i class="fa fa-caret-square-o-right"></i>Tampilkan Mutasi SP</button>
     </div>
   </div>

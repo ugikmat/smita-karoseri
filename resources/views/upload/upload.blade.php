@@ -477,8 +477,10 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="" method="POST" id="deleteForm">
-        @csrf @method('delete')
+      <form action="/operasional/smita/upload/delete" method="POST" id="deleteForm">
+        @csrf @method('put')
+        <input type="hidden" name="tgl_transfer" id="tgl_transfer">
+        <input type="hidden" name="tgl_upload" id="tgl_upload">
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -679,6 +681,13 @@
     var transfer = button.data('transfer') // Extract info from data-* attributes
     var upload = button.data('upload')
     $('#activationForm').attr('action',`/operasional/smita/upload/aktifasi/${transfer}/${upload}`);
+  })
+  $('#deleteModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var transfer = button.data('transfer') // Extract info from data-* attributes
+    var upload = button.data('upload')
+    $('#tgl_upload').val(upload);
+    $('#tgl_transfer').val(transfer);
   })
 </script>
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>

@@ -164,8 +164,7 @@ class ListPengembalianSPController extends Controller
                                     '<a class="btn btn-xs btn-primary"
                                     href="/pengembalian/sp/list-invoice-sp/edit/'.$pengembalianSP->id_pengembalian_sp.'/'.$pengembalianSP->nm_sales.'/'.$pengembalianSP->tanggal_pengembalian_sp.'">
                                     <i class="glyphicon glyphicon-edit"></i> Lihat
-                                    </a>
-                                    <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$pengembalianSP->id_pengembalian_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';
+                                    </a>';
                               }
 
                             })
