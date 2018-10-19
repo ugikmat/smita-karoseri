@@ -24,7 +24,7 @@
 
 @section('content')
 <div class="container-fluid form-inline">
-  <form class="invoice-sp repeater" action="/operasional/smita/persediaan/sp/mutasi-sp-semua-cvs/show" method="post">
+  <form class="invoice-sp repeater" action="/persediaan/sp/mutasi-sp-semua-cvs/show" method="post">
   @csrf
   <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
@@ -105,7 +105,7 @@
             stateSave: true,
             scrollX: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-            ajax: `/operasional/smita/stok-sp/all/data/${$tgl_awal}/${$tgl_akhir}`,
+            ajax: `/stok-sp/all/data/${$tgl_awal}/${$tgl_akhir}`,
             columns: [
               // {data: 'indeks'},
               {data: 'nama_produk'},
@@ -124,7 +124,7 @@
           $tgl_akhir = $('#tgl_akhir').val();
         $tgl_awal = $('#tgl_awal').val();
           $sales = $('#sales').val();
-          t.ajax.url(`/operasional/smita/stok-sp/all/data/${$tgl_awal}/${$tgl_akhir}`).load();
+          t.ajax.url(`/stok-sp/all/data/${$tgl_awal}/${$tgl_akhir}`).load();
         });
     });
 </script>

@@ -86,7 +86,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Input Laporan Penjualan SP</h4>
       </div>
@@ -164,7 +164,7 @@
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             scrollX: true,
             stateSave: true,
-            ajax: `/operasional/smita/laporan-penjualan/sp/${$tgl}`,
+            ajax: `/laporan-penjualan/sp/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -176,7 +176,7 @@
                     targets:1,
                     render: function ( data, type, row, meta ) {
                         if(type === 'display'){
-                            data = `<a class="link-post" href="/operasional/smita/penjualan/laporan-penjualan/LPsp-piutang/${data}">` + data + '</a>';
+                            data = `<a class="link-post" href="/penjualan/laporan-penjualan/LPsp-piutang/${data}">` + data + '</a>';
                         }
                         return data;
                     }
@@ -206,7 +206,7 @@
             cell.innerHTML = i+1;
           } );
         } ).draw();
-        $.post(`/operasional/smita/get_laporan_sp/${$tgl}`, function(response){
+        $.post(`/get_laporan_sp/${$tgl}`, function(response){
             if(response.success)
             {
               console.log('Success..');
@@ -225,8 +225,8 @@
         }, 'json');
         $('#save').on('click',function(event) {
           $tgl = $('#tgl').val();
-          t.ajax.url(`/operasional/smita/laporan-penjualan/sp/${$tgl}`).load();
-          $.post(`/operasional/smita/get_laporan_sp/${$tgl}`, function(response){
+          t.ajax.url(`/laporan-penjualan/sp/${$tgl}`).load();
+          $.post(`/get_laporan_sp/${$tgl}`, function(response){
             if(response.success)
             {
               console.log('Success..');

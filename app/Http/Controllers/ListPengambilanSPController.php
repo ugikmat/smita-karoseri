@@ -157,7 +157,7 @@ class ListPengambilanSPController extends Controller
                               } else {
                                   return
                                     '<a class="btn btn-xs btn-primary"
-                                    href="/operasional/smita/pengambilan/sp/list-invoice-sp/edit/'.$pengambilanSP->id_pengambilan_sp.'/'.$pengambilanSP->nm_sales.'/'.$pengambilanSP->tanggal_pengambilan_sp.'">
+                                    href="/pengambilan/sp/list-invoice-sp/edit/'.$pengambilanSP->id_pengambilan_sp.'/'.$pengambilanSP->nm_sales.'/'.$pengambilanSP->tanggal_pengambilan_sp.'">
                                     <i class="glyphicon glyphicon-edit"></i> Lihat
                                     </a>';
                               }

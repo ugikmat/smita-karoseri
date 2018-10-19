@@ -34,7 +34,7 @@
   </tfoot>
 </table> -->
 
-<form class="repeater" action="/operasional/smita/new/user" method="post">
+<form class="repeater" action="/new/user" method="post">
 @csrf
 <div class="container-fluid form-inline">
   <div class="row">
@@ -180,7 +180,7 @@
     $('#user-table').DataTable({
       serverSide: true,
       processing: true,
-      ajax: '/operasional/smita/user-data',
+      ajax: '/user-data',
       columns: [{
           data: 'id_user'
         },
@@ -223,7 +223,7 @@
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    $('#editForm').attr('action', `/operasional/smita/master/supplier/${id}`);
+    $('#editForm').attr('action', `/master/supplier/${id}`);
     modal.find('.modal-body .nama input').val(name)
     modal.find('.modal-body .id input').val(id)
     modal.find('.modal-body .lokasi input').val(lokasi)
@@ -237,7 +237,7 @@
     var id = button.data('id'); // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/operasional/smita/master/user/${id}`);
+    $('#deleteForm').attr('action', `/master/user/${id}`);
   })
 </script>
 @stop

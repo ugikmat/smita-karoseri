@@ -36,7 +36,7 @@
 <div class="modal fade" id="modalTambah">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="/operasional/smita/bank" method="POST">
+      <form action="/bank" method="POST">
         @csrf
         <!-- Modal Header -->
         <div class="modal-header">
@@ -73,7 +73,7 @@
 <div class="modal fade" id="editModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="/operasional/smita/bank" method="POST" id="editForm">
+      <form action="/bank" method="POST" id="editForm">
         @csrf @method('put')
         <!-- Modal Header -->
         <div class="modal-header">
@@ -111,7 +111,7 @@
 <div class="modal fade" id="editModal">
   <div class="modal-dialog">
     <div class="modal-content">
-    <form id="editForm" action="/operasional/smita/bank" method="POST">
+    <form id="editForm" action="/bank" method="POST">
       @csrf
       @method('put')
       <!-- Modal Header -->
@@ -169,7 +169,7 @@
       processing: true,
       responsive: true,
       stateSave: true,
-      ajax: '/operasional/smita/bank-data',
+      ajax: '/bank-data',
       columns: [{
           data: 'id_bank'
         },
@@ -210,7 +210,7 @@
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    $('#editForm').attr('action', `/operasional/smita/bank/${id}`);
+    $('#editForm').attr('action', `/bank/${id}`);
     modal.find('.modal-body .nama input').val(name)
     modal.find('.modal-body .kode input').val(kode)
   })
@@ -221,7 +221,7 @@
     var id = button.data('id') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/operasional/smita/bank/${id}`);
+    $('#deleteForm').attr('action', `/bank/${id}`);
   })
 </script>
 @stop

@@ -40,7 +40,7 @@
 
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true">×</span>
+            <span aria-hidden="true">?</span>
           </button>
           <h4 class="modal-title" id="myModalLabel">Tambah Harga Produk</h4>
         </div>
@@ -55,7 +55,7 @@
                 <div class="x_content">
                   <br />
 
-                  <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/master/harga_produk">
+                  <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/master/harga_produk">
                     @csrf
                     <div class="form-group id-produk">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id-produk">ID Produk
@@ -126,7 +126,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Edit Harga Produk</h4>
       </div>
@@ -224,7 +224,7 @@
       serverSide: true,
       stateSave: true,
       processing: true,
-      ajax: '/operasional/smita/harga-produk-data',
+      ajax: '/harga-produk-data',
       columns: [{
           data: 'id_harga_sp'
         },
@@ -271,7 +271,7 @@
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    $('#editForm').attr('action', `/operasional/smita/master/harga_produk/${id}`);
+    $('#editForm').attr('action', `/master/harga_produk/${id}`);
     modal.find('.modal-body .id input').val(id_produk);
     modal.find(`.modal-body .tipe #${tipe}`).attr('selected','selected');
     modal.find('.modal-body .harga input').val(harga);
@@ -283,7 +283,7 @@
     var id = button.data('id') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/operasional/smita/master/harga_produk/${id}`);
+    $('#deleteForm').attr('action', `/master/harga_produk/${id}`);
   })
 </script>
 @stop

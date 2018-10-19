@@ -8,7 +8,7 @@
 @stop
 
 @section('content')
-<form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/user/reset" id="editForm">
+<form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/user/reset" id="editForm">
     @csrf @method('put')
   <div class="container-fluid form-inline">
   <div class="row">

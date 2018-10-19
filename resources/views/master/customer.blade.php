@@ -39,7 +39,7 @@
 
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true">×</span>
+            <span aria-hidden="true">?</span>
           </button>
           <h4 class="modal-title" id="myModalLabel">Tambah Customer</h4>
         </div>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="x_content">
                   <br />
-                  <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/customer">
+                  <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/customer">
                     @csrf
 
                     <div class="form-group">
@@ -140,7 +140,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Edit Customer</h4>
       </div>
@@ -156,7 +156,7 @@
                 <br />
 
                 <!--Modal EDIT-->
-                <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/customer">
+                <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/customer">
                   @csrf @method('put')
                   <div class="form-group nama_cust">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Customer
@@ -262,7 +262,7 @@ Karoseri
       processing: true,
       lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
       stateSave: true,
-      ajax: '/operasional/smita/master-customer',
+      ajax: '/master-customer',
       columns: [{
           data: 'id_cust'
         },
@@ -309,7 +309,7 @@ Karoseri
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    $('#editForm').attr('action', `/operasional/smita/customer/${id}`);
+    $('#editForm').attr('action', `/customer/${id}`);
     modal.find('.modal-body .nama_cust input').val(name)
     modal.find('.modal-body .alamat_cust input').val(alamat)
     modal.find('.modal-body .no_hp input').val(nohp)
@@ -323,7 +323,7 @@ Karoseri
     var id = button.data('id') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/operasional/smita/customer/${id}`);
+    $('#deleteForm').attr('action', `/customer/${id}`);
   })
 </script>
 @stop

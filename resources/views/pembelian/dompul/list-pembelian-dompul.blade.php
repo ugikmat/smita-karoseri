@@ -40,7 +40,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Input Penjualan Dompul</h4>
       </div>
@@ -94,7 +94,7 @@
 <div class="modal fade" id="verificationModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="/operasional/smita/pembelian/dompul/list/verify" method="POST" id="verificationForm">
+      <form action="/pembelian/dompul/list/verify" method="POST" id="verificationForm">
         @csrf @method('put')
         <input type="hidden" name="id" value="" id="verify_id_pembelian">
         <!-- Modal Header -->
@@ -116,7 +116,7 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="deleteForm" action="/operasional/smita/pembelian/dompul/list/delete" method="POST">
+      <form id="deleteForm" action="/pembelian/dompul/list/delete" method="POST">
         @csrf @method('put')
         <input type="hidden" name="id" value="" id="delete_id_pembelian">
         <!-- Modal Header -->
@@ -150,7 +150,7 @@
             processing: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             stateSave: true,
-            ajax: `/operasional/smita/pembelian_dompul/list-data/${$tgl_pembelian}`,
+            ajax: `/pembelian_dompul/list-data/${$tgl_pembelian}`,
             columns: [
                 // {data: 'indeks'},
                 {data: 'id_pembelian_dompul'},
@@ -165,7 +165,7 @@
           $tgl = $('#tgl').val();
           console.log($tgl);
           console.log('Loading Data...');
-          t.ajax.url(`/operasional/smita/pembelian_dompul/list-data/${$tgl}`).load();
+          t.ajax.url(`/pembelian_dompul/list-data/${$tgl}`).load();
           console.log('Loaded');
         });
         $('#deleteModal').on('show.bs.modal', function (event) {

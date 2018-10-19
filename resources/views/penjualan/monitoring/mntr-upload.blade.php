@@ -105,7 +105,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Input Monitoring Penjualan Upload Dompul</h4>
       </div>
@@ -120,7 +120,7 @@
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/penjualan/monitoring/mntr-upload/show">
+                <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/penjualan/monitoring/mntr-upload/show">
                   @csrf @method('get')
                   <div class="form-group kode">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Pilih Tanggal
@@ -175,7 +175,7 @@
             processing: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             stateSave: true,
-            ajax: `/operasional/smita/monitor-data/${tgl}`,
+            ajax: `/monitor-data/${tgl}`,
             columns: [
                 {data: 'index'},
                 {data: 'nama'},

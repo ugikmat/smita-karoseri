@@ -46,7 +46,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Input Pengembalian SP</h4>
       </div>
@@ -212,7 +212,7 @@
             processing: true,
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-            ajax: `/operasional/smita/pengembalian_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`,
+            ajax: `/pengembalian_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`,
             // "columnDefs": [ {
             // "searchable": false,
             // "orderable": false,
@@ -239,7 +239,7 @@
         $lokasi = $('#lokasi').val();
         $sales = $('#sales').val();
           console.log('Loading Data...');
-          t.ajax.url(`/operasional/smita/pengembalian_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`).load();
+          t.ajax.url(`/pengembalian_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`).load();
           console.log('Loaded');
         });
         $('#deleteModal').on('show.bs.modal', function (event) {
@@ -250,7 +250,7 @@
         $('#verificationModal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget) // Button that triggered the modal
           var id = button.data('id'); // Extract info from data-* attributes
-          $('#verificationForm').attr('action',`/operasional/smita/pengembalian_sp/verify/${id}`);
+          $('#verificationForm').attr('action',`/pengembalian_sp/verify/${id}`);
         });
     });
 </script>
