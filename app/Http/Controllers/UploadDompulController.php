@@ -212,6 +212,15 @@ class UploadDompulController extends Controller {
         $request->session()->flash('error','Gagal melakukan upload!');
         return redirect()->back();
     }
+    public function delete(Request $request) {
+        $transfer = Carbon::parse($request->get('tgl_transfer'))->format('Y-m-d');
+        $upload = Carbon::parse($request->get('tgl_upload'))->format('Y-m-d');
+        UploadDompul::where('tanggal_transfer',$transfer)
+                        ->where('tanggal_upload',$upload)
+                        ->update([]);
+        $request->session()->flash('status','Berhasil Menghapus data');
+        return redirect()->back();
+    }
 
     public function aktifasi($tgl_transfer, $tgl_upload, Request $request){
         uploadDompul::where('tanggal_transfer',$tgl_transfer)
@@ -254,7 +263,8 @@ class UploadDompulController extends Controller {
                     return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#detailModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-edit"></i> Lihat Data</a>';
                 } else {
                     return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#detailModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-edit"></i> Lihat Data</a>
-                <a class = "btn btn-xs btn-warning" data-toggle="modal" data-target="#activationModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-remove"></i> Aktifasi</a>';
+                <a class = "btn btn-xs btn-warning" data-toggle="modal" data-target="#activationModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-remove"></i> Aktifasi</a>
+                <a class = "btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal"  data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                 }
             })->make(true);
     }
