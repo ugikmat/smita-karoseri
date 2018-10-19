@@ -61,7 +61,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Input Tanggal</h4>
       </div>
@@ -139,7 +139,7 @@
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             scrollX: true,
             stateSave: true,
-            ajax: `/operasional/smita/laporan-piutang/sp/${$tgl}`,
+            ajax: `/laporan-piutang/sp/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -191,7 +191,7 @@
         // }, 'json');
         $('#save').on('click',function(event) {
           $tgl = $('#tgl').val();
-          t.ajax.url(`/operasional/smita/laporan-piutang/sp/${$tgl}`).load();
+          t.ajax.url(`/laporan-piutang/sp/${$tgl}`).load();
         //   $.post(`/get_laporan_sp/${$tgl}`, function(response){
         //     if(response.success)
         //     {

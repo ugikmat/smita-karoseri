@@ -259,7 +259,7 @@
             <div class="x_panel">
               <div class="x_content">
         <!-- Form -->
-        <form method='post' action='/operasional/smita/importExcel' enctype="multipart/form-data">
+        <form method='post' action='/importExcel' enctype="multipart/form-data">
           @csrf
           <div class="form-group row">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Lokasi
@@ -311,7 +311,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Edit Data</h4>
       </div>
@@ -477,7 +477,7 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="/operasional/smita/upload/delete" method="POST" id="deleteForm">
+      <form action="/upload/delete" method="POST" id="deleteForm">
         @csrf @method('put')
         <input type="hidden" name="tgl_transfer" id="tgl_transfer">
         <input type="hidden" name="tgl_upload" id="tgl_upload">
@@ -539,7 +539,7 @@
       processing: true,
       stateSave: true,
       lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-      ajax: '/operasional/smita/upload/tgl',
+      ajax: '/upload/tgl',
       columns: [
         {
           data: 'tanggal_transfer'
@@ -590,7 +590,7 @@
       stateSave: true,
       lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
       //Just Dummy Date
-      ajax: '/operasional/smita/upload/null/null',
+      ajax: '/upload/null/null',
       columns: [{
           data: 'id_upload'
         },
@@ -674,13 +674,13 @@
     var button = $(event.relatedTarget) // Button that triggered the modal
     var transfer = button.data('transfer') // Extract info from data-* attributes
     var upload = button.data('upload')
-    table.ajax.url(`/operasional/smita/upload/${transfer}/${upload}`).load();
+    table.ajax.url(`/upload/${transfer}/${upload}`).load();
   })
   $('#activationModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var transfer = button.data('transfer') // Extract info from data-* attributes
     var upload = button.data('upload')
-    $('#activationForm').attr('action',`/operasional/smita/upload/aktifasi/${transfer}/${upload}`);
+    $('#activationForm').attr('action',`/upload/aktifasi/${transfer}/${upload}`);
   })
   $('#deleteModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal

@@ -33,7 +33,7 @@
 <div class="modal fade" id="modalTambah">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="/operasional/smita/ppn" method="POST">
+      <form action="/ppn" method="POST">
         @csrf
         <!-- Modal Header -->
         <div class="modal-header">
@@ -121,7 +121,7 @@
       serverSide: true,
       processing: true,
       responsive: true,
-      ajax: '/operasional/smita/master-ppn',
+      ajax: '/master-ppn',
       columns: [{
           data: 'id_ppn'
         },

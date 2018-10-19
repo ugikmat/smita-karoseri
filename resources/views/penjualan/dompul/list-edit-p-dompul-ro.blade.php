@@ -74,7 +74,7 @@
   </div>
 </div>
 <br>
-<form action="/operasional/smita/list_invoice_dompul/update" method="post" class="repeater">
+<form action="/list_invoice_dompul/update" method="post" class="repeater">
   @csrf
   <input type="hidden" name="id" id="id" value="{{$datas->id_penjualan_dompul}}">
   <div id="deleted">
@@ -258,7 +258,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Edit Penjualan Dompul</h4>
       </div>
@@ -468,7 +468,7 @@
             processing: true,
             searching:  false,
             stateSave: true,
-            ajax: `/operasional/smita/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
+            ajax: `/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
             columns: [
               {data: 'produk'},
               {data: 'tipe_dompul'},
@@ -487,7 +487,7 @@
           {
             console.log('success')
             console.log(response.total);
-            t.ajax.url(`/operasional/smita/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`).load();
+            t.ajax.url(`/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`).load();
             $('#total').val(response.total.toLocaleString('id-ID'));
             $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
           }
@@ -499,7 +499,7 @@
             processing: true,
             stateSave: true,
             searching:  false,
-            ajax: `/operasional/smita/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
+            ajax: `/edit_list_invoice_dompul/${sales}/${tgl}/${customer}`,
             columns: [
               {data: 'produk'},
               {data: 'tipe_dompul'},
@@ -544,7 +544,7 @@
     tipe.value=tipe_dompul;
     $('#qty_program').val(qty.toLocaleString('id-ID'));
     console.log(produk);
-    $('#link').val(`/operasional/smita/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
+    $('#link').val(`/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
   })
 </script>
 @stop

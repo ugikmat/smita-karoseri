@@ -81,7 +81,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Input Laporan Pembelian Dompul</h4>
       </div>
@@ -158,7 +158,7 @@
             processing: true,
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-            ajax: `/operasional/smita/pembelian/laporan-pembelian/dompul/data/${$tgl}`,
+            ajax: `/pembelian/laporan-pembelian/dompul/data/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -198,7 +198,7 @@
             cell.innerHTML = i+1;
           } );
         } ).draw();
-        $.post(`/operasional/smita/pembelian/get_laporan_dompul/${$tgl}`, function(response){
+        $.post(`/pembelian/get_laporan_dompul/${$tgl}`, function(response){
             if(response.success)
             {
               console.log('Success..');
@@ -219,8 +219,8 @@
         }, 'json');
         $('#save').on('click',function(event) {
           $tgl = $('#tgl').val();
-          t.ajax.url(`/operasional/smita/pembelian/laporan-pembelian/dompul/data/${$tgl}`).load();
-          $.post(`/operasional/smita/pembelian/get_laporan_dompul/${$tgl}`, function(response){
+          t.ajax.url(`/pembelian/laporan-pembelian/dompul/data/${$tgl}`).load();
+          $.post(`/pembelian/get_laporan_dompul/${$tgl}`, function(response){
             if(response.success)
             {
               console.log('Success..');

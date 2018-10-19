@@ -33,7 +33,7 @@
 
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true">×</span>
+            <span aria-hidden="true">?</span>
           </button>
           <h4 class="modal-title" id="myModalLabel">Tambah Lokasi</h4>
         </div>
@@ -48,7 +48,7 @@
                 <div class="x_content">
                   <br />
 
-                  <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/lokasi">
+                  <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/lokasi">
                     @csrf
 
                     <div class="form-group">
@@ -91,7 +91,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Edit Lokasi</h4>
       </div>
@@ -106,7 +106,7 @@
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/lokasi">
+                <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/lokasi">
                   @csrf @method('put')
 
                   <div class="form-group nama_lokasi">
@@ -167,7 +167,7 @@
       serverSide: true,
       stateSave: true,
       processing: true,
-      ajax: '/operasional/smita/master-lokasi',
+      ajax: '/master-lokasi',
       columns: [{
           data: 'id_lokasi'
         },
@@ -202,7 +202,7 @@
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    $('#editForm').attr('action', `/operasional/smita/lokasi/${id}`);
+    $('#editForm').attr('action', `/lokasi/${id}`);
     modal.find('.modal-body .nama_lokasi input').val(name)
   })
 </script>
@@ -213,7 +213,7 @@
     var id = button.data('id') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/operasional/smita/lokasi/${id}`);
+    $('#deleteForm').attr('action', `/lokasi/${id}`);
   })
 </script>
 @stop
