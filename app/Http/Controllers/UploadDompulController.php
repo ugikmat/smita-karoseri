@@ -5,6 +5,8 @@ use App\UploadDompul;
 use App\Dompul;
 use App\Sales;
 use App\Customer;
+use App\User;
+use App\Lokasi;
 use App\DataTables\PrintOutTableDataTable;
 use App\HargaDompul;
 use DB;
@@ -215,9 +217,13 @@ class UploadDompulController extends Controller {
     public function delete(Request $request) {
         $transfer = Carbon::parse($request->get('tgl_transfer'))->format('Y-m-d');
         $upload = Carbon::parse($request->get('tgl_upload'))->format('Y-m-d');
+        $id_user = User::where('name',$request->get('name'))->first()->id_user;
+        $id_lokasi = User::where('nm_lokasi',$request->get('lokasi'))->first()->id_lokasi;
         UploadDompul::where('tanggal_transfer',$transfer)
                         ->where('tanggal_upload',$upload)
-                        ->update([]);
+                        ->where('id_user',$id_user)
+                        ->where('id_lokasi',$id_lokasi)
+                        ->update(['deleted'=>1]);
         $request->session()->flash('status','Berhasil Menghapus data');
         return redirect()->back();
     }
@@ -257,14 +263,15 @@ class UploadDompulController extends Controller {
         return $datatables->dataTable(UploadDompul::select(DB::raw('tanggal_transfer,tanggal_upload, IF(status_active=1, "Aktif", "Tidak Aktif") as status_active, COUNT(no_faktur) as jumlah_transaksi, name,nm_lokasi'))
         ->groupBy('tanggal_transfer','tanggal_upload','status_active','name','nm_lokasi')
         ->join('users','users.id_user','=','upload_dompuls.id_user')
-        ->join('master_lokasis','master_lokasis.id_lokasi','=','upload_dompuls.id_lokasi'))
+        ->join('master_lokasis','master_lokasis.id_lokasi','=','upload_dompuls.id_lokasi')
+        ->where('upload_dompuls.deleted',0))
        ->addColumn('action', function ($uploadDompul) {
                 if ($uploadDompul->status_active=='Aktif') {
                     return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#detailModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-edit"></i> Lihat Data</a>';
                 } else {
                     return '<a class="btn btn-xs btn-primary" data-toggle="modal" data-target="#detailModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-edit"></i> Lihat Data</a>
                 <a class = "btn btn-xs btn-warning" data-toggle="modal" data-target="#activationModal" data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-remove"></i> Aktifasi</a>
-                <a class = "btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal"  data-transfer="'.$uploadDompul->tanggal_transfer.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
+                <a class = "btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal"  data-transfer="'.$uploadDompul->tanggal_transfer.'" data-name="'.$uploadDompul->name.'" data-lokasi="'.$uploadDompul->nm_lokasi.'" data-upload="'.$uploadDompul->tanggal_upload.'"><i class="glyphicon glyphicon-remove"></i> Delete</a>';
                 }
             })->make(true);
     }

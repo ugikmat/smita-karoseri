@@ -58,7 +58,7 @@
 
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true">×</span>
+            <span aria-hidden="true">?</span>
           </button>
           <h4 class="modal-title" id="myModalLabel">Tambah Produk</h4>
         </div>
@@ -73,7 +73,7 @@
                 <div class="x_content">
                   <br />
 
-                  <form id="tambahForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/master/produk">
+                  <form id="tambahForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/smita/master/produk">
                     @csrf
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kode Produk
@@ -200,7 +200,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Edit Produk</h4>
       </div>
@@ -360,7 +360,7 @@
       stateSave: true,
       processing: true,
       lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-      ajax: '/operasional/smita/produk-data',
+      ajax: '/smita/produk-data',
       columns: [{
           data: 'id_produk'
         },
@@ -436,7 +436,7 @@
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    $('#editForm').attr('action', `/operasional/smita/master/produk/${id}`);
+    $('#editForm').attr('action', `/smita/master/produk/${id}`);
     modal.find('.modal-body .nama input').val(name)
     modal.find('.modal-body .id input').val(id)
     modal.find('.modal-body .kode input').val(kode)
@@ -457,7 +457,7 @@
     var id = button.data('id') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/operasional/smita/master/produk/${id}`);
+    $('#deleteForm').attr('action', `/smita/master/produk/${id}`);
   })
 </script>
 @stop

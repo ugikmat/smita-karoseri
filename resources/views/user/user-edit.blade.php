@@ -9,7 +9,7 @@
     }
 </style>
 @stop @section('content')
-<form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/update/user" id="editForm">
+<form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/smita/update/user" id="editForm">
     @csrf @method('put')
     <input type="hidden" name="id" id="id" value="{{$data->id_user}}">
     <div id="deleted">

@@ -259,7 +259,7 @@
             <div class="x_panel">
               <div class="x_content">
         <!-- Form -->
-        <form method='post' action='/operasional/smita/importExcel' enctype="multipart/form-data">
+        <form method='post' action='/smita/importExcel' enctype="multipart/form-data">
           @csrf
           <div class="form-group row">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Lokasi
@@ -288,7 +288,7 @@
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
               <button class="btn btn-warning" type="reset">Reset</button>
-              <input type='submit' class='btn btn-info' value='Upload' id='upload' onclick="move()"> 
+              <input type='submit' class='btn btn-info' value='Upload' id='upload' onclick="move()">
             </div>
           </div>
         </form>
@@ -311,7 +311,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Edit Data</h4>
       </div>
@@ -477,10 +477,12 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="/operasional/smita/upload/delete" method="POST" id="deleteForm">
+      <form action="/smita/upload/delete" method="POST" id="deleteForm">
         @csrf @method('put')
         <input type="hidden" name="tgl_transfer" id="tgl_transfer">
         <input type="hidden" name="tgl_upload" id="tgl_upload">
+        <input type="hidden" name="name" id="name">
+        <input type="hidden" name="lokasi" id="lokasi">
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -539,7 +541,7 @@
       processing: true,
       stateSave: true,
       lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-      ajax: '/operasional/smita/upload/tgl',
+      ajax: '/smita/upload/tgl',
       columns: [
         {
           data: 'tanggal_transfer'
@@ -590,7 +592,7 @@
       stateSave: true,
       lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
       //Just Dummy Date
-      ajax: '/operasional/smita/upload/null/null',
+      ajax: '/smita/upload/null/null',
       columns: [{
           data: 'id_upload'
         },
@@ -674,20 +676,24 @@
     var button = $(event.relatedTarget) // Button that triggered the modal
     var transfer = button.data('transfer') // Extract info from data-* attributes
     var upload = button.data('upload')
-    table.ajax.url(`/operasional/smita/upload/${transfer}/${upload}`).load();
+    table.ajax.url(`/smita/upload/${transfer}/${upload}`).load();
   })
   $('#activationModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var transfer = button.data('transfer') // Extract info from data-* attributes
     var upload = button.data('upload')
-    $('#activationForm').attr('action',`/operasional/smita/upload/aktifasi/${transfer}/${upload}`);
+    $('#activationForm').attr('action',`/smita/upload/aktifasi/${transfer}/${upload}`);
   })
   $('#deleteModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var transfer = button.data('transfer') // Extract info from data-* attributes
     var upload = button.data('upload')
+    var name = button.data('name')
+    var lokasi = button.data('lokasi')
     $('#tgl_upload').val(upload);
     $('#tgl_transfer').val(transfer);
+    $('#lokasi').val(lokasi);
+    $('#name').val(name);
   })
 </script>
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>

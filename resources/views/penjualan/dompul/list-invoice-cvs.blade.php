@@ -3,7 +3,7 @@
 @section('title', 'List Invoice')
 
 @section('content_header')
-    <h1>List Penjualan Dompul</h1>
+    <h1>List Penjualan Dompul per CVS</h1>
 @stop
 
 @section('css')
@@ -19,17 +19,15 @@
 {{-- @if (session('tgl'))
   <input type="hidden" id="tgl"value={{ session('tgl')}}></input>
 @endif --}}
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput">Input Tanggal Penjualan</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalInput">Input Data Penjualan</button>
 <br><br>
 <form action="" method="post">
-<table id="list-invoice-table" class="table responsive" width="100%">
+<table id="list-invoice-cvs-table" class="table responsive" width="100%">
     <thead>
     <tr>
         {{-- <th>No</th> --}}
         <th>No Penjualan</th>
-        <th>Sales</th>
-        <th>Hp Kios</th>
-        <th>Nama Kios</th>
+        <th>Nama Canvasser</th>
         <th>Tanggal Penjualan</th>
         <th>Status Verifikasi</th>
         <th>Action</th>
@@ -37,7 +35,7 @@
     </thead>
 </table>
 </form>
-<a class="btn btn-xs btn-warning" data-toggle="modal" data-target="#verificationAllModal" data-id="1"><i class="glyphicon glyphicon-edit"></i> Verifikasi Semua</a>
+
 <!--Modal input-->
 <div class="modal fade bs-example-modal-lg" id='modalInput' tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
@@ -87,25 +85,6 @@
                       @endif
                     </div>
                   </div>
-
-                  <div class="form-group row">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Canvasser
-                      <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select name="sales" required="required" class="form-control col-md-7 col-xs-12" id="sales" value='{{session('dompul_sales_id')}}'>
-
-                          @isset($saless)
-                          @if($saless->count()>1)
-                            <option value="all" id="all">- Semua Canvaser -</option>
-                          @endif
-                            @foreach($saless as $sales)
-                              <option value="{{$sales->id_sales}}" id="{{$sales->nm_sales}}">{{$sales->nm_sales}}</option>
-                            @endforeach
-                          @endisset
-                        </select>
-                      </div>
-                    </div>
 
                   <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Lokasi
@@ -166,31 +145,6 @@
   </div>
 </div>
 
-<!--Modal Verifikasi All-->
-<div class="modal fade" id="verificationAllModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form action="/smita/invoice_dompul/all/verify" method="POST" id="verificationAllForm">
-        @csrf @method('put')
-        <input type="hidden" name="verif_tgl_awal" value="" id="verif_tgl_awal">
-        <input type="hidden" name="verif_tgl_akhir" value="" id="verif_tgl_akhir">
-        <input type="hidden" name="verif_canvaser" value="" id="verif_canvaser">
-        <input type="hidden" name="verif_lokasi" value="" id="verif_lokasi">
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Apakah Anda Yakin ingin memverifikasi semua transaksi didaftar?</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
-          <button type="submit" class="btn btn-success">Verifikasi</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
 <!--Modal Hapus-->
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
@@ -233,7 +187,7 @@
         $tgl_akhir = ($('#tgl_akhir').val()=='') ? 'null' : $('#tgl_akhir').val();
         $lokasi = $('#lokasi').val();
         $sales = $('#sales').val();
-        var t = $('#list-invoice-table').DataTable({
+        var t = $('#list-invoice-cvs-table').DataTable({
             serverSide: true,
             processing: true,
             stateSave: true,
@@ -249,8 +203,6 @@
                 // {data: 'indeks'},
                 {data: 'id_penjualan_dompul'},
                 {data: 'nm_sales'},
-                {data: 'no_hp_kios'},
-                {data: 'nm_cust'},
                 {data: 'tanggal_penjualan_dompul'},
                 {data: 'status_verif'},
                 {data: 'action', orderable: false, searchable: false}
@@ -273,12 +225,6 @@
           var button = $(event.relatedTarget) // Button that triggered the modal
           var id = button.data('id');
           $('#verificationForm').attr('action',`/smita/invoice_dompul/verify/${id}`);
-        });
-        $('#verificationAllModal').on('show.bs.modal', function (event) {
-          $('#verif_tgl_awal').val($('#tgl_awal').val());
-          $('#verif_tgl_akhir').val($('#tgl_akhir').val());
-          $('#verif_canvaser').val($('#sales').val());
-          $('#verif_lokasi').val($('#lokasi').val());
         });
         $('#deleteModal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget) // Button that triggered the modal

@@ -15,7 +15,7 @@ td{
 @stop
 
 @section('content')
-<form class="invoice-sp repeater" action="/operasional/smita/invoice_sp/verify" method="post">
+<form class="invoice-sp repeater" action="/smita/invoice_sp/verify" method="post">
   @csrf
   <input type="hidden" name="id" id="id" value="{{$penjualanSp->id_temp_penjualan_sp}}">
   <input type="hidden" name="lokasi" value="{{$lokasi}}">
@@ -202,7 +202,7 @@ td{
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Edit Tipe</h4>
       </div>
@@ -330,7 +330,7 @@ $.ajaxSetup({
                   serverSide: true,
                   processing: true,
                   stateSave: true,
-                  ajax: `/operasional/smita/edit_invoice_sp/${id}`,
+                  ajax: `/smita/edit_invoice_sp/${id}`,
                   columns: [
                       {data: 'nama_produk'},
                       {data: 'tipe_harga'},
@@ -351,7 +351,7 @@ $.ajaxSetup({
         console.log($('#total').val());
         $('#total').val(response.total);
         console.log($('#total').val());
-        t.ajax.url(`/operasional/smita/edit_invoice_sp/${id}`).load();
+        t.ajax.url(`/smita/edit_invoice_sp/${id}`).load();
 
         // console.log($('#total').val(response.total));
 
@@ -384,7 +384,7 @@ $.ajaxSetup({
       tipe.appendChild(opt);
     });
     // $('#editForm').attr('action', `/invoice_sp/update/${id}`);
-    $('#link').val(`/operasional/smita/invoice_sp/update/${id}`);
+    $('#link').val(`/smita/invoice_sp/update/${id}`);
   })
 </script>
 @stop

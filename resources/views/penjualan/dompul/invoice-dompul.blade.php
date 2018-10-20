@@ -96,7 +96,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Input Penjualan Dompul</h4>
       </div>
@@ -111,7 +111,7 @@
               <div class="x_content">
                 <br />
 
-              <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/operasional/smita/penjualan/dompul/invoice-dompul">
+              <form id="editForm" method="POST" data-parsley-validate class="form-horizontal form-label-left" action="/smita/penjualan/dompul/invoice-dompul">
                   @csrf
                   <div class="form-group row">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Pilih Lokasi
@@ -225,7 +225,7 @@
             processing: true,
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-            ajax: `/operasional/smita/invoice_dompul/${canvaser}/${tgl}`,
+            ajax: `/smita/invoice_dompul/${canvaser}/${tgl}`,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -237,7 +237,7 @@
                     targets:1,
                     render: function ( data, type, row, meta ) {
                         if(type === 'display'){
-                            data = `<a class="link-post" href="/operasional/smita/penjualan/dompul/${canvaser}/${tgl}/${data}/${lokasi}">` + data + '</a>';
+                            data = `<a class="link-post" href="/smita/penjualan/dompul/${canvaser}/${tgl}/${data}/${lokasi}">` + data + '</a>';
                         }
                         return data;
                     }

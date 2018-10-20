@@ -16,7 +16,7 @@
 @stop
 
 @section('content')
-<form class="invoice-dompul repeater" action="/operasional/smita/pembelian/dompul/verify" method="post">
+<form class="invoice-dompul repeater" action="/smita/pembelian/dompul/verify" method="post">
   @if (Session::has('status'))
   <div class="alert alert-success">
     <strong>Berhasil!</strong> Transaksi pembelian Dompul selesai
@@ -339,7 +339,7 @@ console.log(`total Harga`);
 for (let index = 0; index < {{$dompuls->count()}}; index++) {
   $(`#tipe${index+1}`).on('change',function (event) {
     //ajax call
-    $.post('/operasional/smita/dompul/get_harga/'+$(this).val()+'/'+$(`#nama${index+1}`).val(), function(response){
+    $.post('/smita/dompul/get_harga/'+$(this).val()+'/'+$(`#nama${index+1}`).val(), function(response){
     if(response.success)
     {
       totalHarga-=parseFloat(harga[index]);
