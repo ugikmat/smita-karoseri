@@ -481,6 +481,8 @@
         @csrf @method('put')
         <input type="hidden" name="tgl_transfer" id="tgl_transfer">
         <input type="hidden" name="tgl_upload" id="tgl_upload">
+        <input type="hidden" name="name" id="name">
+        <input type="hidden" name="lokasi" id="lokasi">
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Apakah Anda Yakin ingin menghapus?</h4>
@@ -686,8 +688,12 @@
     var button = $(event.relatedTarget) // Button that triggered the modal
     var transfer = button.data('transfer') // Extract info from data-* attributes
     var upload = button.data('upload')
+    var name = button.data('name')
+    var lokasi = button.data('lokasi')
     $('#tgl_upload').val(upload);
     $('#tgl_transfer').val(transfer);
+    $('#lokasi').val(lokasi);
+    $('#name').val(name);
   })
 </script>
 <script src="{{ asset('/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
