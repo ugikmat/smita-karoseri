@@ -16,7 +16,7 @@
 @stop
 
 @section('content')
-<form class="invoice-sp repeater" action="/operasional/smita/pembelian/sp/verify" method="post">
+<form class="invoice-sp repeater" action="/smita/pembelian/sp/verify" method="post">
   @if (Session::has('status'))
   <div class="alert alert-success">
     <strong>Berhasil!</strong> Transaksi pembelian SP selesai

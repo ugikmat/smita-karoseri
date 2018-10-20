@@ -48,7 +48,7 @@
     </div>
   </div>
 </div>
-<form action="/operasional/smita/list_invoice_SP/store" method="post" class="">
+<form action="/smita/list_invoice_SP/store" method="post" class="">
   @csrf
   <div id="deleted">
 
@@ -94,7 +94,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Edit Penjualan SP</h4>
       </div>
@@ -222,7 +222,7 @@
             processing: true,
             stateSave: true,
             searching:  false,
-            ajax: `/operasional/smita/pengambilan_sp/detail/${id}`,
+            ajax: `/smita/pengambilan_sp/detail/${id}`,
             columns: [
               {data: 'nama_produk'},
                       {data: 'tipe_harga'},
@@ -236,7 +236,7 @@
             processing: true,
             searching:  false,
             stateSave: true,
-            ajax: `/operasional/smita/pengambilan_sp/detail/${id}`,
+            ajax: `/smita/pengambilan_sp/detail/${id}`,
             columns: [
               {data: 'nama_produk'},
                       {data: 'tipe_harga'},
@@ -252,7 +252,7 @@
           {
             console.log('success')
 
-            t.ajax.url(`/operasional/smita/pengambilan_sp/detail/${id}`).load();
+            t.ajax.url(`/smita/pengambilan_sp/detail/${id}`).load();
           }
           }, 'json');
         });
@@ -289,7 +289,7 @@
     });
     console.log(produk);
     // $('#editForm').attr('action', `/invoice_sp/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
-    $('#link').val(`/operasional/smita/pengambilan_sp/update/${id}/${id_detail}`);
+    $('#link').val(`/smita/pengambilan_sp/update/${id}/${id_detail}`);
   })
 </script>
 @stop

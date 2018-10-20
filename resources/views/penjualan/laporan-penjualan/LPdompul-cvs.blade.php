@@ -87,7 +87,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Input Penjualan CVS Dompul</h4>
       </div>
@@ -195,7 +195,7 @@
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             stateSave: true,
             scrollX: true,
-            ajax: `/operasional/smita/laporan-penjualan/dompul-cvs/${$tgl}/${$sales}`,
+            ajax: `/smita/laporan-penjualan/dompul-cvs/${$tgl}/${$sales}`,
             // columnDefs: [
             //     {
             //         targets:0,
@@ -226,7 +226,7 @@
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
         });
-        $.post(`/operasional/smita/get_laporan_dompul_cvs/${$tgl}/${$sales}`, function(response){
+        $.post(`/smita/get_laporan_dompul_cvs/${$tgl}/${$sales}`, function(response){
             if(response.success)
             {
               console.log('Success..');
@@ -247,8 +247,8 @@
         $('#save').on('click',function(event) {
           $tgl = $('#tgl').val();
           $sales = $('#sales').val();
-          t.ajax.url(`/operasional/smita/laporan-penjualan/dompul-cvs/${$tgl}/${$sales}`).load();
-          $.post(`/operasional/smita/get_laporan_dompul_cvs/${$tgl}/${$sales}`, function(response){
+          t.ajax.url(`/smita/laporan-penjualan/dompul-cvs/${$tgl}/${$sales}`).load();
+          $.post(`/smita/get_laporan_dompul_cvs/${$tgl}/${$sales}`, function(response){
             if(response.success)
             {
               console.log('Success..');

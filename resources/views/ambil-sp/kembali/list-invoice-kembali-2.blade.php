@@ -49,7 +49,7 @@
     </div>
   </div>
 </div>
-<form action="/operasional/smita/list_invoice_SP/store" method="post" class="">
+<form action="/smita/list_invoice_SP/store" method="post" class="">
   @csrf
   <div id="deleted">
 
@@ -93,7 +93,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Edit Penjualan SP</h4>
       </div>
@@ -221,7 +221,7 @@
             processing: true,
             stateSave: true,
             searching:  false,
-            ajax: `/operasional/smita/edit_list_invoice_sp/${id}`,
+            ajax: `/smita/edit_list_invoice_sp/${id}`,
             columns: [
               {data: 'nama_produk'},
                       {data: 'tipe_harga'},
@@ -237,7 +237,7 @@
             processing: true,
             searching:  false,
             stateSave: true,
-            ajax: `/operasional/smita/edit_list_invoice_sp/${id}`,
+            ajax: `/smita/edit_list_invoice_sp/${id}`,
             columns: [
               {data: 'nama_produk'},
                       {data: 'tipe_harga'},
@@ -258,7 +258,7 @@
             console.log($('#total').val());
             $('#total').val(response.total);
             console.log($('#total').val());
-            t.ajax.url(`/operasional/smita/edit_list_invoice_sp/${id}`).load();
+            t.ajax.url(`/smita/edit_list_invoice_sp/${id}`).load();
             $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
 
             // console.log($('#total').val(response.total));
@@ -299,7 +299,7 @@
     });
     console.log(produk);
     // $('#editForm').attr('action', `/invoice_sp/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
-    $('#link').val(`/operasional/smita/list_invoice_sp/update/${id}/${id_detail}`);
+    $('#link').val(`/smita/list_invoice_sp/update/${id}/${id_detail}`);
   })
 </script>
 @stop

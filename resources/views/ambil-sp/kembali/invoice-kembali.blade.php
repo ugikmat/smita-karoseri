@@ -27,7 +27,7 @@
 
 <!-- sama kayak invoice ambil garis besarnya -->
 
-<form class="invoice-kembali-sp repeater" action="/operasional/smita//kembali-sp/verify" method="post">
+<form class="invoice-kembali-sp repeater" action="/smita//kembali-sp/verify" method="post">
   @csrf
 <div class="container-fluid  form-inline">
 
@@ -200,7 +200,7 @@ for (let index = 0; index < {{$jumlah}}; index++) {
 
   $(`#tipe${index+1}`).on('change',function (event) {
     //ajax call
-    $.post('/operasional/smita/get_harga/'+$(this).val()+'/'+$(`#kode${index+1}`).val(), function(response){
+    $.post('/smita/get_harga/'+$(this).val()+'/'+$(`#kode${index+1}`).val(), function(response){
     if(response.success)
     {
       totalHarga-=parseFloat(harga[index]);

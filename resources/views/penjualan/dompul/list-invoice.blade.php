@@ -45,7 +45,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Input Penjualan Dompul</h4>
       </div>
@@ -170,7 +170,7 @@
 <div class="modal fade" id="verificationAllModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="/operasional/smita/invoice_dompul/all/verify" method="POST" id="verificationAllForm">
+      <form action="/smita/invoice_dompul/all/verify" method="POST" id="verificationAllForm">
         @csrf @method('put')
         <input type="hidden" name="verif_tgl_awal" value="" id="verif_tgl_awal">
         <input type="hidden" name="verif_tgl_akhir" value="" id="verif_tgl_akhir">
@@ -195,7 +195,7 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="deleteForm" action="/operasional/smita/invoice_dompul/delete" method="POST">
+      <form id="deleteForm" action="/smita/invoice_dompul/delete" method="POST">
         @csrf @method('put')
         <!-- Modal Header -->
         <input type="hidden" name="id" value="" id="id_penjualan">
@@ -238,7 +238,7 @@
             processing: true,
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-            ajax: `/operasional/smita/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`,
+            ajax: `/smita/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`,
             // "columnDefs": [ {
             // "searchable": false,
             // "orderable": false,
@@ -266,13 +266,13 @@
           $tgl_awal = ($('#tgl_awal').val()=='') ? 'null' : $('#tgl_awal').val();
           $tgl_akhir = ($('#tgl_akhir').val()=='') ? 'null' : $('#tgl_akhir').val();
           $sales = $('#sales').val();
-          t.ajax.url(`/operasional/smita/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`).load();
+          t.ajax.url(`/smita/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`).load();
         }
         $('#show').on('click',loadData);
         $('#verificationModal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget) // Button that triggered the modal
           var id = button.data('id');
-          $('#verificationForm').attr('action',`/operasional/smita/invoice_dompul/verify/${id}`);
+          $('#verificationForm').attr('action',`/smita/invoice_dompul/verify/${id}`);
         });
         $('#verificationAllModal').on('show.bs.modal', function (event) {
           $('#verif_tgl_awal').val($('#tgl_awal').val());

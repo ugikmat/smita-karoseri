@@ -24,7 +24,7 @@
 @stop
 
 @section('content')
-<form class="invoice-ambil-sp repeater" action="/operasional/smita/ambil-sp/verify" method="post">
+<form class="invoice-ambil-sp repeater" action="/smita/ambil-sp/verify" method="post">
 <div class="container-fluid  form-inline">
 
   <!-- alert biasa -->
@@ -231,7 +231,7 @@ for (let index = 0; index < {{$jumlah}}; index++) {
 
   $(`#tipe${index+1}`).on('change',function (event) {
     //ajax call
-    $.post('/operasional/smita/get_harga/'+$(this).val()+'/'+$(`#kode${index+1}`).val(), function(response){
+    $.post('/smita/get_harga/'+$(this).val()+'/'+$(`#kode${index+1}`).val(), function(response){
     if(response.success)
     {
       totalHarga-=parseFloat(harga[index]);

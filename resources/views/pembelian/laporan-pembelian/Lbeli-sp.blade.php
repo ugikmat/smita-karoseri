@@ -78,7 +78,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Input Laporan Pembelian SP</h4>
       </div>
@@ -155,7 +155,7 @@
             processing: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             stateSave: true,
-            ajax: `/operasional/smita/pembelian/laporan-pembelian/sp/data/${$tgl}`,
+            ajax: `/smita/pembelian/laporan-pembelian/sp/data/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -193,7 +193,7 @@
             cell.innerHTML = i+1;
           } );
         } ).draw();
-        $.post(`/operasional/smita/pembelian/get_laporan_sp/${$tgl}`, function(response){
+        $.post(`/smita/pembelian/get_laporan_sp/${$tgl}`, function(response){
             if(response.success)
             {
               console.log('Success..');
@@ -212,8 +212,8 @@
         }, 'json');
         $('#save').on('click',function(event) {
           $tgl = $('#tgl').val();
-          t.ajax.url(`/operasional/smita/pembelian/laporan-pembelian/sp/data/${$tgl}`).load();
-          $.post(`/operasional/smita/pembelian/get_laporan_sp/${$tgl}`, function(response){
+          t.ajax.url(`/smita/pembelian/laporan-pembelian/sp/data/${$tgl}`).load();
+          $.post(`/smita/pembelian/get_laporan_sp/${$tgl}`, function(response){
             if(response.success)
             {
               console.log('Success..');

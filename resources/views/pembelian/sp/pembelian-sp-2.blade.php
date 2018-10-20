@@ -16,7 +16,7 @@ td{
 
 
 @section('content')
-<form class="invoice-sp repeater" action="/operasional/smita/pembelian/sp/store" method="post">
+<form class="invoice-sp repeater" action="/smita/pembelian/sp/store" method="post">
   @csrf
 <input type="hidden" name="id" id="id" value="{{$pembelianSp->id_temp_pembelian_sp}}">
 <input type="hidden" name="id_lokasi" value="{{$lokasi->id_lokasi}}">
@@ -231,7 +231,7 @@ function goBack() {
                   serverSide: true,
                   processing: true,
                   searching:  false,
-                  ajax: `/operasional/smita/pembelian_sp_data/${id}`,
+                  ajax: `/smita/pembelian_sp_data/${id}`,
                   columns: [
                       {data: 'nama_produk'},
                       {data: 'tipe_harga'},

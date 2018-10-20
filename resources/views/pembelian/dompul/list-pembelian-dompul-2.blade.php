@@ -35,7 +35,7 @@
   </div>
 </div>
 <br>
-<form action="/operasional/smita/pembelian/dompul/list/store" method="post" class="repeater">
+<form action="/smita/pembelian/dompul/list/store" method="post" class="repeater">
   @csrf
   <input type="hidden" name="id_pembelian" id="id_pembelian" value="{{$pembelianDompul->id_pembelian_dompul}}">
   <div id="deleted">
@@ -216,7 +216,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true">?</span>
         </button>
         <h4 class="modal-title" id="myModalLabel">Edit Penjualan Dompul</h4>
       </div>
@@ -404,7 +404,7 @@
             serverSide: true,
             processing: true,
             searching:  false,
-            ajax: `/operasional/smita/pembelian_dompul/detail/${id_pembelian}`,
+            ajax: `/smita/pembelian_dompul/detail/${id_pembelian}`,
             columns: [
               {data: 'produk'},
               {data: 'tipe_harga'},
@@ -422,7 +422,7 @@
           {
             console.log('success')
             console.log(response.total);
-            t.ajax.url(`/operasional/smita/pembelian_dompul/detail/${id_pembelian}`).load();
+            t.ajax.url(`/smita/pembelian_dompul/detail/${id_pembelian}`).load();
             $('#total').val(response.total.toLocaleString('id-ID'));
             $('#selisih').val((parseFloat($('#total').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))).toLocaleString('id-ID'));
           }
@@ -434,7 +434,7 @@
             processing: true,
             stateSave: true,
             searching:  false,
-            ajax: `/operasional/smita/pembelian_dompul/detail/${id_pembelian}`,
+            ajax: `/smita/pembelian_dompul/detail/${id_pembelian}`,
             columns: [
               {data: 'produk'},
               {data: 'tipe_harga'},
@@ -478,7 +478,7 @@
     tipe.value=tipe_dompul;
     // $('#qty_program').val(qty.toLocaleString('id-ID'));
     console.log(produk);
-    $('#link').val(`/operasional/smita/pembelian/dompul/list/update/${id}`);
+    $('#link').val(`/smita/pembelian/dompul/list/update/${id}`);
   })
 </script>
 @stop
