@@ -56,7 +56,7 @@ class ListPengambilanSPController extends Controller
     public function edit($id_pengambilan_sp, $sales, $tgl){
         $sales = Sales::where('nm_sales',$sales)->first();
         $pengambilanSP = PengambilanProduk::where('id_pengambilan_sp',$id_pengambilan_sp)->first();
-        return view('ambil-sp/ambil/list-invoice-ambil-2',['sales'=>$sales,'pengambilanSP'=>$pengambilanSP]);
+        return view('ambil-sp/kembali/list-invoice-kembali-2',['sales'=>$sales,'pengambilanSP'=>$pengambilanSP]);
     }
     public function delete(Request $request){
         PengambilanProduk::where('id_pengambilan_sp',$request->get('id'))->update(['deleted'=>1]);
