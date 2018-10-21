@@ -308,7 +308,7 @@ class PenjualanDompulController extends Controller
                         ->where('tanggal_transfer',$tgl)
                         ->where('status_penjualan',0)
                         ->where('status_active',1)
-                        ->where('deleted',1)
+                        ->where('deleted',0)
                         ->groupBy('nama_downline'))
                         ->addColumn('indeks', function ($uploadDompul) {
                               return '';
