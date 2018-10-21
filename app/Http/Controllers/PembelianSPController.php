@@ -98,7 +98,7 @@ class PembelianSPController extends Controller
             $table->tinyInteger('status_detail_psp')->default(1);
         });
 
-        for ($i=0; $i <$produks ; $i++) {
+        for ($i=0; $i <=$produks ; $i++) {
             if (!empty($request->get("jumlah{$i}"))) {
                 DB::table('temp_detail_pembelian_sps')->insert(['id_pembelian_sp'=>$id,
                 'id_supplier'=>$request->get('supplier'),

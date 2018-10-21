@@ -51,9 +51,9 @@ FROM kartu_stok_sps awal WHERE awal.tanggal_transaksi BETWEEN '{$tgl_awal}' AND 
 (sum(masuk)-sum(keluar)) AS jumlah_stok"))
                         ->whereRaw("tanggal_transaksi <= '{$tgl_akhir}'")
                         ->where(function ($query) {
-                            $query->where('keterangan', 'PENGAMBILAN')
-                                  ->orWhere('keterangan', 'PEMBELIAN')
-                                  ->orWhere('keterangan', 'PENGEMBALIAN');
+                            $query->where('jenis_transaksi', 'PENGAMBILAN')
+                                  ->orWhere('jenis_transaksi', 'PEMBELIAN')
+                                  ->orWhere('jenis_transaksi', 'PENGEMBALIAN');
                         })
                         ->groupBy('nama');
         $produk = produk::select('kode_produk','nama_produk','stok_awal','stok_masuk','stok_keluar','jumlah_stok')

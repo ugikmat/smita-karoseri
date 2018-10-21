@@ -218,7 +218,7 @@ class UploadDompulController extends Controller {
         $transfer = Carbon::parse($request->get('tgl_transfer'))->format('Y-m-d');
         $upload = Carbon::parse($request->get('tgl_upload'))->format('Y-m-d');
         $id_user = User::where('name',$request->get('name'))->first()->id_user;
-        $id_lokasi = User::where('nm_lokasi',$request->get('lokasi'))->first()->id_lokasi;
+        $id_lokasi = Lokasi::where('nm_lokasi',$request->get('lokasi'))->first()->id_lokasi;
         UploadDompul::where('tanggal_transfer',$transfer)
                         ->where('tanggal_upload',$upload)
                         ->where('id_user',$id_user)

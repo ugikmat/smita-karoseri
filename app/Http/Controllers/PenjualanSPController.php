@@ -273,7 +273,7 @@ class PenjualanSPController extends Controller
             // $table->temporary();
         });
 
-        for ($i=0; $i <$produks ; $i++) {
+        for ($i=0; $i <=$produks ; $i++) {
             if (!empty($request->get("jumlah{$i}"))) {
                 DB::table('temp_detail_penjualan_sps')->insert(['id_penjualan_sp'=>$id,
                 'id_customer'=>$request->get('customer'),

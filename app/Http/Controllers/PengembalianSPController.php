@@ -93,7 +93,7 @@ class PengembalianSPController extends Controller
             $table->tinyInteger('status_detail_psp')->default(1);
         });
 
-        for ($i=0; $i <$produks ; $i++) {
+        for ($i=0; $i <=$produks ; $i++) {
             if (!empty($request->get("jumlah{$i}"))) {
                 DB::table('temp_detail_pengembalian_sps')->insert(['id_pengembalian_sp'=>$id,
                 'id_produk'=>$request->get("kode{$i}"),
