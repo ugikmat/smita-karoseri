@@ -168,6 +168,7 @@ class PengembalianSPController extends Controller
         Schema::dropIfExists('temp_pengembalian_sps');
         Schema::dropIfExists('temp_detail_pengembalian_sps');
         $request->session()->flash('status','');
+        session(['lokasi_penjualan'=>$request->get('lokasi')]);
         return redirect('/smita/ambil-sp/ambil/invoice-kembali');
     }
 

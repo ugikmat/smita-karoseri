@@ -137,11 +137,11 @@ return [
                             'url'   => '/penjualan/dompul/list-invoice',
                             'icon'  => 'file',
                         ],
-                        [
-                            'text'  => 'List Invoice Dompul CVS',
-                            'url'   => '/penjualan/dompul/list-invoice-cvs',
-                            'icon'  => 'user',
-                        ],
+                        // [
+                        //     'text'  => 'List Invoice Dompul CVS',
+                        //     'url'   => '/penjualan/dompul/list-invoice-cvs',
+                        //     'icon'  => 'user',
+                        // ],
                       ],
                   ],
                   [

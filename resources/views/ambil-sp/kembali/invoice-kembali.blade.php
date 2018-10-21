@@ -27,7 +27,7 @@
 
 <!-- sama kayak invoice ambil garis besarnya -->
 
-<form class="invoice-kembali-sp repeater" action="/smita//kembali-sp/verify" method="post">
+<form class="invoice-kembali-sp repeater" action="/smita/kembali-sp/verify" method="post">
   @csrf
 <div class="container-fluid  form-inline">
 
