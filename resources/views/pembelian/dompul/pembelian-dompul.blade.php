@@ -254,13 +254,13 @@
             // will be deleted.
             hide: function (deleteElement) {
                 if(confirm('Are you sure you want to delete this element?')) {
-                    $(this).slideUp(deleteElement);
-                }
-                var n = parseFloat($('#trf', $(this)).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'));
+                  var n = parseFloat($('#trf', $(this)).val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'));
                 var total = parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-n;
                 console.log(total);
                 $('#total_pembayaran').val((total).toLocaleString('id-ID'));
                 $('#selisih').val((parseFloat($('#total').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))-parseFloat($('#total_pembayaran').val().replace(/[ .]/g, '').replace(/[ ,]/g, '.'))).toLocaleString('id-ID'));
+                    $(this).slideUp(deleteElement);
+                }
             },
             // (Optional)
             // You can use this if you need to manually re-index the list
