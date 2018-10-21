@@ -336,7 +336,8 @@ class PenjualanDompulController extends Controller
                         ->where('tanggal_transfer',$tgl)
                         ->where('nama_downline',$downline)
                         ->where('status_penjualan',0)
-                        ->where('status_active',1))
+                        ->where('status_active',1)
+                        ->where('deleted',0))
                         ->addColumn('jumlah', function ($uploadDompul) {
                               return number_format($uploadDompul->qty,0,",",".");
                             })
