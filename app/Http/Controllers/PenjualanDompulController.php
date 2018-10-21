@@ -70,7 +70,7 @@ class PenjualanDompulController extends Controller
                         ->where('nama_canvasser',$canvaser)
                         ->where('status_penjualan',0)
                         ->where('status_active',1)
-                        ->where(DB::raw('tanggal_transfer=DATE_FORMAT('.$tgl.',"%d/%m/%Y")'))
+                        ->where('tanggal_transfer',$tgl)
                         ->where('nama_downline',$downline)->first();
         if(empty($datas->tipe_dompul)){
             $tipe = 'CVS';
