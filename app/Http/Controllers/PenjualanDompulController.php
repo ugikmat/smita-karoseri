@@ -66,11 +66,13 @@ class PenjualanDompulController extends Controller
      * Display a list of transaction
      */
     public function edit($canvaser,$tgl,$downline,$lokasi)
-    {   $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser','produk','tanggal_transfer')
+    {   
+        $tgl_transfer = Carbon::parse($tgl)->format('Y-m-d');
+        $datas =UploadDompul::select('nama_downline','nama_canvasser','no_hp_downline','no_hp_canvasser','produk','tanggal_transfer')
                         ->where('nama_canvasser',$canvaser)
                         ->where('status_penjualan',0)
                         ->where('status_active',1)
-                        ->where('tanggal_transfer',$tgl)
+                        ->where('tanggal_transfer',$tgl_transfer)
                         ->where('nama_downline',$downline)->first();
         if(empty($datas->tipe_dompul)){
             $tipe = 'CVS';
