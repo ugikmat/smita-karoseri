@@ -139,7 +139,7 @@
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             scrollX: true,
             stateSave: true,
-            ajax: `/smita/laporan-piutang/dompul/${$tgl}`,
+            ajax: `{{ url('/') }}/laporan-piutang/dompul/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -191,7 +191,7 @@
         // }, 'json');
         $('#save').on('click',function(event) {
           $tgl = $('#tgl').val();
-          t.ajax.url(`/smita/laporan-piutang/dompul/${$tgl}`).load();
+          t.ajax.url(`{{ url('/') }}/laporan-piutang/dompul/${$tgl}`).load();
         //   $.post(`/get_laporan_sp/${$tgl}`, function(response){
         //     if(response.success)
         //     {

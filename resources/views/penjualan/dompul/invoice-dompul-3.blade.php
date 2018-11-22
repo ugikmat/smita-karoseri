@@ -68,7 +68,7 @@ td{
     </div>
   </div>
 </div>
-<form class="invoice-dompul repeater" action="/smita/penjualan/dompul/verify/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}" method="post">
+<form class="invoice-dompul repeater" action="{{ url('/') }}/penjualan/dompul/verify/{{$datas->nama_canvasser}}/{{$datas->tanggal_transfer}}/{{$datas->nama_downline}}" method="post">
   @csrf
   <input type="hidden" name="lokasi" value="{{$lokasi}}">
 <table id="invoice-dompul-table" class="table responsive"  width="100%">
@@ -340,7 +340,7 @@ td{
                   serverSide: true,
                   processing: true,
                   stateSave: true,
-                  ajax: `/smita/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`,
+                  ajax: `{{ url('/') }}/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`,
                   columns: [
                       {data: 'produk'},
                       {data: 'tipe_dompul'},
@@ -359,7 +359,7 @@ td{
       {
         console.log('success')
         console.log(response.total);
-        t.ajax.url(`/smita/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`).load();
+        t.ajax.url(`{{ url('/') }}/edit_invoice_dompul/${canvaser}/${tgl}/${downline}`).load();
         $('#total').val(response.total.toLocaleString('id-ID'));
         $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
       }
@@ -435,7 +435,7 @@ td{
     tipe.value=tipe_dompul;
     $('#qty_program').val(qty.toLocaleString('id-ID'));
     console.log(produk);
-    $('#link').val(`/smita/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/0`);
+    $('#link').val(`{{ url('/') }}/invoice_dompul/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/0`);
   })
 </script>
 @stop

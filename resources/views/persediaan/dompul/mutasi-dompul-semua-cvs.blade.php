@@ -92,7 +92,7 @@
             stateSave: true,
             scrollX: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-            ajax: `/smita/stok-dompul/all/data/${$tgl_awal}/${$tgl_akhir}`,
+            ajax: `{{ url('/') }}/stok-dompul/all/data/${$tgl_awal}/${$tgl_akhir}`,
             columns: [
               // {data: 'indeks'},
               {data: 'produk'},
@@ -111,7 +111,7 @@
           $tgl_akhir = $('#tgl_akhir').val();
         $tgl_awal = $('#tgl_awal').val();
           $sales = $('#sales').val();
-          t.ajax.url(`/smita/stok-dompul/all/data/${$tgl_awal}/${$tgl_akhir}`).load();
+          t.ajax.url(`{{ url('/') }}/stok-dompul/all/data/${$tgl_awal}/${$tgl_akhir}`).load();
         });
     });
 </script>

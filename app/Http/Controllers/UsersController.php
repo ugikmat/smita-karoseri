@@ -155,7 +155,7 @@ class UsersController extends Controller
                           })
                           ->addColumn('action', function ($user) {
                               $lokasi = UserLokasi::where('id_user',$user->id_user)->get();
-                              return "<a class='btn btn-xs btn-primary' href='/smita/user/edit/$user->id_user'><i class='glyphicon glyphicon-edit'></i> Edit</a>
+                              return "<a class='btn btn-xs btn-primary' href='{{ url('/') }}/user/edit/$user->id_user'><i class='glyphicon glyphicon-edit'></i> Edit</a>
                               <a class='btn btn-xs btn-danger' data-toggle='modal' data-target='#deleteModal' data-id='$user->id_user'><i class='glyphicon glyphicon-remove'></i> Hapus</a>";
                             })
                           ->rawColumns(['name', 'action'])

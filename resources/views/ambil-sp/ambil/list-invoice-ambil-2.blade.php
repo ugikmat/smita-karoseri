@@ -48,7 +48,7 @@
     </div>
   </div>
 </div>
-<form action="/smita/list_invoice_SP/store" method="post" class="">
+<form action="{{ url('/') }}/list_invoice_SP/store" method="post" class="">
   @csrf
   <div id="deleted">
 
@@ -222,7 +222,7 @@
             processing: true,
             stateSave: true,
             searching:  false,
-            ajax: `/smita/pengambilan_sp/detail/${id}`,
+            ajax: `{{ url('/') }}/pengambilan_sp/detail/${id}`,
             columns: [
               {data: 'nama_produk'},
                       {data: 'tipe_harga'},
@@ -236,7 +236,7 @@
             processing: true,
             searching:  false,
             stateSave: true,
-            ajax: `/smita/pengambilan_sp/detail/${id}`,
+            ajax: `{{ url('/') }}/pengambilan_sp/detail/${id}`,
             columns: [
               {data: 'nama_produk'},
                       {data: 'tipe_harga'},
@@ -252,7 +252,7 @@
           {
             console.log('success')
 
-            t.ajax.url(`/smita/pengambilan_sp/detail/${id}`).load();
+            t.ajax.url(`{{ url('/') }}/pengambilan_sp/detail/${id}`).load();
           }
           }, 'json');
         });
@@ -289,7 +289,7 @@
     });
     console.log(produk);
     // $('#editForm').attr('action', `/invoice_sp/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
-    $('#link').val(`/smita/pengambilan_sp/update/${id}/${id_detail}`);
+    $('#link').val(`{{ url('/') }}/pengambilan_sp/update/${id}/${id_detail}`);
   })
 </script>
 @stop

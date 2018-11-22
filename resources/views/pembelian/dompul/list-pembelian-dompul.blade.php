@@ -94,7 +94,7 @@
 <div class="modal fade" id="verificationModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="/smita/pembelian/dompul/list/verify" method="POST" id="verificationForm">
+      <form action="{{ url('/') }}/pembelian/dompul/list/verify" method="POST" id="verificationForm">
         @csrf @method('put')
         <input type="hidden" name="id" value="" id="verify_id_pembelian">
         <!-- Modal Header -->
@@ -116,7 +116,7 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="deleteForm" action="/smita/pembelian/dompul/list/delete" method="POST">
+      <form id="deleteForm" action="{{ url('/') }}/pembelian/dompul/list/delete" method="POST">
         @csrf @method('put')
         <input type="hidden" name="id" value="" id="delete_id_pembelian">
         <!-- Modal Header -->
@@ -150,7 +150,7 @@
             processing: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             stateSave: true,
-            ajax: `/smita/pembelian_dompul/list-data/${$tgl_pembelian}`,
+            ajax: `{{ url('/') }}/pembelian_dompul/list-data/${$tgl_pembelian}`,
             columns: [
                 // {data: 'indeks'},
                 {data: 'id_pembelian_dompul'},
@@ -165,7 +165,7 @@
           $tgl = $('#tgl').val();
           console.log($tgl);
           console.log('Loading Data...');
-          t.ajax.url(`/smita/pembelian_dompul/list-data/${$tgl}`).load();
+          t.ajax.url(`{{ url('/') }}/pembelian_dompul/list-data/${$tgl}`).load();
           console.log('Loaded');
         });
         $('#deleteModal').on('show.bs.modal', function (event) {

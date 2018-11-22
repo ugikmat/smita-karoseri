@@ -259,7 +259,7 @@
             <div class="x_panel">
               <div class="x_content">
         <!-- Form -->
-        <form method='post' action='/smita/importExcel' enctype="multipart/form-data">
+        <form method='post' action='{{ url('/') }}/importExcel' enctype="multipart/form-data">
           @csrf
           <div class="form-group row">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Lokasi
@@ -477,7 +477,7 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="/smita/upload/delete" method="POST" id="deleteForm">
+      <form action="{{ url('/') }}/upload/delete" method="POST" id="deleteForm">
         @csrf @method('put')
         <input type="hidden" name="tgl_transfer" id="tgl_transfer">
         <input type="hidden" name="tgl_upload" id="tgl_upload">
@@ -541,7 +541,7 @@
       processing: true,
       stateSave: true,
       lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-      ajax: '/smita/upload/tgl',
+      ajax: '{{ url('/') }}/upload/tgl',
       columns: [
         {
           data: 'tanggal_transfer'
@@ -592,7 +592,7 @@
       stateSave: true,
       lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
       //Just Dummy Date
-      ajax: '/smita/upload/null/null',
+      ajax: '{{ url('/') }}/upload/null/null',
       columns: [{
           data: 'id_upload'
         },
@@ -676,13 +676,13 @@
     var button = $(event.relatedTarget) // Button that triggered the modal
     var transfer = button.data('transfer') // Extract info from data-* attributes
     var upload = button.data('upload')
-    table.ajax.url(`/smita/upload/${transfer}/${upload}`).load();
+    table.ajax.url(`{{ url('/') }}/upload/${transfer}/${upload}`).load();
   })
   $('#activationModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var transfer = button.data('transfer') // Extract info from data-* attributes
     var upload = button.data('upload')
-    $('#activationForm').attr('action',`/smita/upload/aktifasi/${transfer}/${upload}`);
+    $('#activationForm').attr('action',`{{ url('/') }}/upload/aktifasi/${transfer}/${upload}`);
   })
   $('#deleteModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal

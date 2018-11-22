@@ -169,7 +169,7 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="deleteForm" action="/smita/pengambilan_sp/delete" method="POST">
+      <form id="deleteForm" action="{{ url('/') }}/pengambilan_sp/delete" method="POST">
         @csrf @method('put')
         <input type="hidden" name="id" id="id_pengambilan" value="">
         <!-- Modal Header -->
@@ -212,7 +212,7 @@
             processing: true,
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-            ajax: `/smita/pengambilan_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`,
+            ajax: `{{ url('/') }}/pengambilan_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`,
             // "columnDefs": [ {
             // "searchable": false,
             // "orderable": false,
@@ -239,7 +239,7 @@
         $lokasi = $('#lokasi').val();
         $sales = $('#sales').val();
           console.log('Loading Data...');
-          t.ajax.url(`/smita/pengambilan_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`).load();
+          t.ajax.url(`{{ url('/') }}/pengambilan_sp/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`).load();
           console.log('Loaded');
         });
         $('#deleteModal').on('show.bs.modal', function (event) {
@@ -250,7 +250,7 @@
         $('#verificationModal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget) // Button that triggered the modal
           var id = button.data('id'); // Extract info from data-* attributes
-          $('#verificationForm').attr('action',`/smita/pengambilan_sp/verify/${id}`);
+          $('#verificationForm').attr('action',`{{ url('/') }}/pengambilan_sp/verify/${id}`);
         });
     });
 </script>

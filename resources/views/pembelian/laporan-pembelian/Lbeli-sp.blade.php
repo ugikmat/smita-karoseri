@@ -155,7 +155,7 @@
             processing: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
             stateSave: true,
-            ajax: `/smita/pembelian/laporan-pembelian/sp/data/${$tgl}`,
+            ajax: `{{ url('/') }}/pembelian/laporan-pembelian/sp/data/${$tgl}`,
             "columnDefs": [ {
             "searchable": false,
             "orderable": false,
@@ -193,7 +193,7 @@
             cell.innerHTML = i+1;
           } );
         } ).draw();
-        $.post(`/smita/pembelian/get_laporan_sp/${$tgl}`, function(response){
+        $.post(`{{ url('/') }}/pembelian/get_laporan_sp/${$tgl}`, function(response){
             if(response.success)
             {
               console.log('Success..');
@@ -212,8 +212,8 @@
         }, 'json');
         $('#save').on('click',function(event) {
           $tgl = $('#tgl').val();
-          t.ajax.url(`/smita/pembelian/laporan-pembelian/sp/data/${$tgl}`).load();
-          $.post(`/smita/pembelian/get_laporan_sp/${$tgl}`, function(response){
+          t.ajax.url(`{{ url('/') }}/pembelian/laporan-pembelian/sp/data/${$tgl}`).load();
+          $.post(`{{ url('/') }}/pembelian/get_laporan_sp/${$tgl}`, function(response){
             if(response.success)
             {
               console.log('Success..');

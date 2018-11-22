@@ -154,7 +154,7 @@ class ListPengembalianSPController extends Controller
                                   }else {
                                     return
                                     '<a class="btn btn-xs btn-primary"
-                                    href="/smita/pengembalian/sp/list-invoice-sp/edit/'.$pengembalianSP->id_pengembalian_sp.'/'.$pengembalianSP->nm_sales.'/'.$pengembalianSP->tanggal_pengembalian_sp.'">
+                                    href="{{ url('/') }}/pengembalian/sp/list-invoice-sp/edit/'.$pengembalianSP->id_pengembalian_sp.'/'.$pengembalianSP->nm_sales.'/'.$pengembalianSP->tanggal_pengembalian_sp.'">
                                     <i class="glyphicon glyphicon-edit"></i> Edit
                                     </a>
                                     <a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#deleteModal" data-id='.$pengembalianSP->id_pengembalian_sp.'><i class="glyphicon glyphicon-remove"></i> Hapus</a>';

@@ -149,7 +149,7 @@
 <div class="modal fade" id="deleteModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="deleteForm" action="/smita/invoice_dompul/delete" method="POST">
+      <form id="deleteForm" action="{{ url('/') }}/invoice_dompul/delete" method="POST">
         @csrf @method('put')
         <!-- Modal Header -->
         <input type="hidden" name="id" value="" id="id_penjualan">
@@ -192,7 +192,7 @@
             processing: true,
             stateSave: true,
             lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-            ajax: `/smita/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`,
+            ajax: `{{ url('/') }}/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`,
             // "columnDefs": [ {
             // "searchable": false,
             // "orderable": false,
@@ -218,13 +218,13 @@
           $tgl_awal = ($('#tgl_awal').val()=='') ? 'null' : $('#tgl_awal').val();
           $tgl_akhir = ($('#tgl_akhir').val()=='') ? 'null' : $('#tgl_akhir').val();
           $sales = $('#sales').val();
-          t.ajax.url(`/smita/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`).load();
+          t.ajax.url(`{{ url('/') }}/invoice_dompul/list/${$tgl_awal}/${$tgl_akhir}/${$lokasi}/${$sales}`).load();
         }
         $('#show').on('click',loadData);
         $('#verificationModal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget) // Button that triggered the modal
           var id = button.data('id');
-          $('#verificationForm').attr('action',`/smita/invoice_dompul/verify/${id}`);
+          $('#verificationForm').attr('action',`{{ url('/') }}/invoice_dompul/verify/${id}`);
         });
         $('#deleteModal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget) // Button that triggered the modal

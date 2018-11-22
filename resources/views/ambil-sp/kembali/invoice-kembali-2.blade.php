@@ -18,7 +18,7 @@ td{
 @section('content')
 
 <!-- sama kayak invoice-ambil-2 -->
-<form class="invoice-kembali-sp" action="/smita/kembali-sp/store" method="post">
+<form class="invoice-kembali-sp" action="{{ url('/') }}/kembali-sp/store" method="post">
   @csrf
   <input type="hidden" name="lokasi" value="{{$lokasi}}">
 <input type="hidden" name="id" id="id" value="{{$pengembalianSp->id_pengembalian_sp}}">
@@ -120,7 +120,7 @@ function goBack() {
                   processing: true,
                   stateSave: true,
                   searching:  false,
-                  ajax: `/smita/kembali-sp/data/${id}`,
+                  ajax: `{{ url('/') }}/kembali-sp/data/${id}`,
                   columns: [
                       {data: 'nama_produk'},
                       {data: 'tipe_harga'},

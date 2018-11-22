@@ -57,7 +57,7 @@
       <div class="x_content">
         <br />
 
-        <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/smita/supervisor">
+        <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="{{ url('/') }}/supervisor">
           @csrf
 
           <div class="form-group">
@@ -207,7 +207,7 @@
         $('#spv-table').DataTable({
             serverSide: true,
             processing: true,
-            ajax: '/smita/master-supervisor',
+            ajax: '{{ url('/') }}/master-supervisor',
             columns: [
                 {data: 'id_spv'},
                 {data: 'nm_spv'},
@@ -238,7 +238,7 @@
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this)
-  $('#editForm').attr('action', `/smita/supervisor/${id}`);
+  $('#editForm').attr('action', `{{ url('/') }}/supervisor/${id}`);
   modal.find('.modal-body .nama_spv input').val(name)
   modal.find('.modal-body .alamat_spv input').val(alamat)
   modal.find('.modal-body .nohp input').val(nohp)
@@ -250,7 +250,7 @@
   var id = button.data('id')// Extract info from data-* attributes
   // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  $('#deleteForm').attr('action', `/smita/supervisor/${id}`);
+  $('#deleteForm').attr('action', `{{ url('/') }}/supervisor/${id}`);
   })
 </script>
 @stop

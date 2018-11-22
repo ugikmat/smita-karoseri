@@ -168,7 +168,7 @@ class PengambilanSPController extends Controller
         Schema::dropIfExists('temp_pengambilan_sps');
         Schema::dropIfExists('temp_detail_pengambilan_sps');
         $request->session()->flash('status','');
-        return redirect('/smita/ambil-sp/ambil/invoice-ambil');
+        return redirect('{{ url('/') }}/ambil-sp/ambil/invoice-ambil');
     }
 
     /**

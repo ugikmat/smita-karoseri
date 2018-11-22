@@ -72,7 +72,7 @@
     </div>
   </div>
 </div>
-<form action="/smita/list_invoice_SP/store" method="post" class="repeater">
+<form action="{{ url('/') }}/list_invoice_SP/store" method="post" class="repeater">
   @csrf
   <div id="deleted">
 
@@ -412,7 +412,7 @@
             processing: true,
             stateSave: true,
             searching:  false,
-            ajax: `/smita/edit_list_invoice_sp/${id}`,
+            ajax: `{{ url('/') }}/edit_list_invoice_sp/${id}`,
             columns: [
               {data: 'nama_produk'},
                       {data: 'tipe_harga'},
@@ -428,7 +428,7 @@
             processing: true,
             searching:  false,
             stateSave: true,
-            ajax: `/smita/edit_list_invoice_sp/${id}`,
+            ajax: `{{ url('/') }}/edit_list_invoice_sp/${id}`,
             columns: [
               {data: 'nama_produk'},
                       {data: 'tipe_harga'},
@@ -449,7 +449,7 @@
             console.log($('#total').val());
             $('#total').val(response.total);
             console.log($('#total').val());
-            t.ajax.url(`/smita/edit_list_invoice_sp/${id}`).load();
+            t.ajax.url(`{{ url('/') }}/edit_list_invoice_sp/${id}`).load();
             $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
 
             // console.log($('#total').val(response.total));
@@ -490,7 +490,7 @@
     });
     console.log(produk);
     // $('#editForm').attr('action', `/invoice_sp/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
-    $('#link').val(`/smita/list_invoice_sp/update/${id}/${id_detail}`);
+    $('#link').val(`{{ url('/') }}/list_invoice_sp/update/${id}/${id_detail}`);
   })
 </script>
 @stop

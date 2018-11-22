@@ -48,7 +48,7 @@
                 <div class="x_content">
                   <br />
 
-                  <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/smita/lokasi">
+                  <form method="post" data-parsley-validate class="form-horizontal form-label-left" action="{{ url('/') }}/lokasi">
                     @csrf
 
                     <div class="form-group">
@@ -106,7 +106,7 @@
               <div class="x_content">
                 <br />
 
-                <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/smita/lokasi">
+                <form id="editForm" method="post" data-parsley-validate class="form-horizontal form-label-left" action="{{ url('/') }}/lokasi">
                   @csrf @method('put')
 
                   <div class="form-group nama_lokasi">
@@ -167,7 +167,7 @@
       serverSide: true,
       stateSave: true,
       processing: true,
-      ajax: '/smita/master-lokasi',
+      ajax: '{{ url('/') }}/master-lokasi',
       columns: [{
           data: 'id_lokasi'
         },
@@ -202,7 +202,7 @@
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    $('#editForm').attr('action', `/smita/lokasi/${id}`);
+    $('#editForm').attr('action', `{{ url('/') }}/lokasi/${id}`);
     modal.find('.modal-body .nama_lokasi input').val(name)
   })
 </script>
@@ -213,7 +213,7 @@
     var id = button.data('id') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/smita/lokasi/${id}`);
+    $('#deleteForm').attr('action', `{{ url('/') }}/lokasi/${id}`);
   })
 </script>
 @stop

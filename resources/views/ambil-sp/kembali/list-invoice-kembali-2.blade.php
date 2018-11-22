@@ -48,7 +48,7 @@
     </div>
   </div>
 </div>
-<form action="/smita/list_invoice_SP/store" method="post" class="">
+<form action="{{ url('/') }}/list_invoice_SP/store" method="post" class="">
   @csrf
   <div id="deleted">
 
@@ -222,7 +222,7 @@
             processing: true,
             stateSave: true,
             searching:  false,
-            ajax: `/smita/pengembalian_sp/detail/${id}`,
+            ajax: `{{ url('/') }}/pengembalian_sp/detail/${id}`,
             columns: [
                       {data: 'nama_produk'},
                       {data: 'tipe_harga'},
@@ -238,7 +238,7 @@
             processing: true,
             searching:  false,
             stateSave: true,
-            ajax: `/smita/pengembalian_sp/detail/${id}`,
+            ajax: `{{ url('/') }}/pengembalian_sp/detail/${id}`,
             columns: [
                       {data: 'nama_produk'},
                       {data: 'tipe_harga'},
@@ -259,7 +259,7 @@
             console.log($('#total').val());
             $('#total').val(response.total);
             console.log($('#total').val());
-            t.ajax.url(`/smita/pengembalian_sp/detail/${id}`).load();
+            t.ajax.url(`{{ url('/') }}/pengembalian_sp/detail/${id}`).load();
             $('#selisih').val((parseInt($('#total').val().replace(/\D/g,''),10)-parseInt($('#total_pembayaran').val().replace(/\D/g,''),10)).toLocaleString('id-ID'));
 
             // console.log($('#total').val(response.total));
@@ -305,7 +305,7 @@
     });
     console.log(produk);
     // $('#editForm').attr('action', `/invoice_sp/update/${canvaser}/${tgl}/${downline}/${produk}/${no_faktur}/1`);
-    $('#link').val(`/smita/pengembalian_sp/update/${id}/${id_detail}`);
+    $('#link').val(`{{ url('/') }}/pengembalian_sp/update/${id}/${id_detail}`);
   })
 </script>
 @stop

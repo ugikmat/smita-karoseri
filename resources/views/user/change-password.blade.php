@@ -8,7 +8,7 @@
 @stop
 
 @section('content')
-<form method="post" data-parsley-validate class="form-horizontal form-label-left" action="/smita/user/reset" id="editForm">
+<form method="post" data-parsley-validate class="form-horizontal form-label-left" action="{{ url('/') }}/user/reset" id="editForm">
     @csrf @method('put')
   <div class="container-fluid form-inline">
   <div class="row">

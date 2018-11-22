@@ -16,7 +16,7 @@ td{
 
 
 @section('content')
-<form class="invoice-sp repeater" action="/smita/invoice_sp/store" method="post">
+<form class="invoice-sp repeater" action="{{ url('/') }}/invoice_sp/store" method="post">
   @csrf
   <input type="hidden" name="lokasi" value="{{$lokasi}}">
 <input type="hidden" name="id" id="id" value="{{$penjualanSp->id_temp_penjualan_sp}}">
@@ -262,7 +262,7 @@ function goBack() {
                   processing: true,
                   stateSave: true,
                   searching:  false,
-                  ajax: `/smita/edit_invoice_sp/${id}`,
+                  ajax: `{{ url('/') }}/edit_invoice_sp/${id}`,
                   columns: [
                       {data: 'nama_produk'},
                       {data: 'tipe_harga'},

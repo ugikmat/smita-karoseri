@@ -59,7 +59,7 @@
                 <div class="x_content">
                   <br />
 
-                  <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="/smita/master/harga_dompul">
+                  <form id="tambah" method="post" data-parsley-validate class="form-horizontal form-label-left" action="{{ url('/') }}/master/harga_dompul">
                     @csrf
                     <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Harga Dompul
@@ -243,7 +243,7 @@
       serverSide: true,
       processing: true,
       stateSave: true,
-      ajax: '/smita/harga-dompul-data',
+      ajax: '{{ url('/') }}/harga-dompul-data',
       columns: [{
           data: 'id_harga_dompul'
         },
@@ -296,7 +296,7 @@
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    $('#editForm').attr('action', `/smita/master/harga_dompul/${id}`);
+    $('#editForm').attr('action', `{{ url('/') }}/master/harga_dompul/${id}`);
     modal.find('.modal-body .nama input').val(nama)
     modal.find(`.modal-body .tipe #${tipe}`).attr('selected','selected');
     modal.find('.modal-body .harga input').val(harga)
@@ -310,7 +310,7 @@
     var id = button.data('id') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/smita/master/harga_dompul/${id}`);
+    $('#deleteForm').attr('action', `{{ url('/') }}/master/harga_dompul/${id}`);
   })
 </script>
 {{--

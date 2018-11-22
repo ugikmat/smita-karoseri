@@ -42,7 +42,7 @@
   </tfoot>
 </table>
 <br>
-<a href="/smita/tambah_user/add-user">
+<a href="{{ url('/') }}/tambah_user/add-user">
   <button type="button" name="button"> <i class="fa fa-user-plus"></i> Tambah User</button>
 </a>
 
@@ -156,7 +156,7 @@
       processing: true,
       stateSave: true,
       lengthMenu: [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
-      ajax: '/smita/user-data',
+      ajax: '{{ url('/') }}/user-data',
       columns: [{
           data: 'id_user'
         },
@@ -205,7 +205,7 @@
     var id = button.data('id'); // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    $('#deleteForm').attr('action', `/smita/delete/user/${id}`);
+    $('#deleteForm').attr('action', `{{ url('/') }}/delete/user/${id}`);
   })
 </script>
 @stop
