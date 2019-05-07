@@ -13,7 +13,7 @@ class BoTableSeeder extends Seeder
     {
       $bo = new BO();
       $bo->id_ho=1;
-      $bo->kode_bo='PMK';
+      $bo->kode_bo='PMN';
       $bo->nama_bo='Pamekasan';
       $bo->no_hp_sub_master_dompul='';
       $bo->status_bo=1;
